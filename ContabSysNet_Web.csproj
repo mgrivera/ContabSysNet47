@@ -1,0 +1,2514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C244B973-2DEB-45B9-8C7B-B63DE9FB7260}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ContabSysNet_Web</RootNamespace>
+    <AssemblyName>ContabSysNet_Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <SilverlightApplicationList>
+    </SilverlightApplicationList>
+    <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\Ajax Control Toolkit Net4\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.75.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\ClosedXML.0.75.0\lib\net40-client\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DalSoft.RestClient, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DalSoft.RestClient.3.2.2\lib\net45\DalSoft.RestClient.dll</HintPath>
+    </Reference>
+    <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
+      <HintPath>packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="JuiceUI">
+      <HintPath>packages\JuiceUI.1.1.1\lib\net40\JuiceUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MongoDB.Bson.2.7.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MongoDB.Driver.2.7.0\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MongoDB.Driver.Core.2.7.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.DomainServices.EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.DomainServices.Server, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="X.PagedList, Version=7.6.0.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
+      <HintPath>packages\X.PagedList.7.6.0\lib\net45\X.PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="X.PagedList.Mvc, Version=7.6.0.0, Culture=neutral, PublicKeyToken=c6e0b5b21f916f4f, processorArchitecture=MSIL">
+      <HintPath>packages\X.PagedList.Mvc.7.6.0\lib\net452\X.PagedList.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="ActivosFijos\Consultas\ConsultaActivosFijos\ActivoFijo_page.aspx" />
+    <Content Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_OpcionesReportes.aspx" />
+    <Content Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_Page.aspx" />
+    <Content Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_Filter.aspx" />
+    <Content Include="myBootstrap.css" />
+    <Content Include="Otros\Control acceso\AsociarUsuariosCompanias.aspx" />
+    <Content Include="Otros\reconversionMonetaria\reconversionMonetaria.aspx" />
+    <Content Include="Otros\reconversionMonetaria\reconversionMonetaria_filter.aspx" />
+    <Content Include="ReportViewer4.aspx" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap-grid.css" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap-grid.min.css" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap-reboot.css" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap-reboot.min.css" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap.css" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap-4.0\js\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap-4.0\js\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap-4.0\js\bootstrap.js" />
+    <Content Include="Scripts\bootstrap-4.0\js\bootstrap.min.js" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark.html" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark\benchmark.js" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark\benchmark_nedb.js" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark\benchmark_pouchdb.js" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark\benchmark_web.html" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark\benchmark_web.js" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark\nedb.js" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark\run.html" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark\taffy.js" />
+    <Content Include="Scripts\bower_components\lokijs\build\loki-indexed-adapter.min.js" />
+    <Content Include="Scripts\bower_components\lokijs\build\lokiIndexedAdapter.min.js" />
+    <Content Include="Scripts\bower_components\lokijs\build\lokijs.min.js" />
+    <Content Include="Scripts\bower_components\lokijs\demos\desktop_app\index.html" />
+    <Content Include="Scripts\bower_components\lokijs\demos\desktop_app\main.css" />
+    <Content Include="Scripts\bower_components\lokijs\examples\example.js" />
+    <Content Include="Scripts\bower_components\lokijs\examples\examples.html" />
+    <Content Include="Scripts\bower_components\lokijs\examples\lokiContinuum.js" />
+    <Content Include="Scripts\bower_components\lokijs\examples\sandbox\jquery-2.1.0.min.js" />
+    <Content Include="Scripts\bower_components\lokijs\examples\sandbox\LokiSandbox.htm" />
+    <Content Include="Scripts\bower_components\lokijs\examples\sandbox\sandbox.min.css" />
+    <Content Include="Scripts\bower_components\lokijs\examples\sandbox\sandbox.min.js" />
+    <Content Include="Scripts\bower_components\lokijs\karma.build.conf.js" />
+    <Content Include="Scripts\bower_components\lokijs\karma.conf.js" />
+    <Content Include="Scripts\bower_components\lokijs\LICENSE.txt" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\changesApi.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\collection.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\eventEmitter.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\joins.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\kv.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\persistence.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\remove.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\stage.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\stats.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\test.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\typed.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\unique.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\helpers\assert-helpers.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\node\cryptedFileAdapter.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\spec\node\nodePersistence.spec.js" />
+    <Content Include="Scripts\bower_components\lokijs\src\jquery-sync-adapter.js" />
+    <Content Include="Scripts\bower_components\lokijs\src\loki-angular.js" />
+    <Content Include="Scripts\bower_components\lokijs\src\loki-crypted-file-adapter.js" />
+    <Content Include="Scripts\bower_components\lokijs\src\loki-indexed-adapter.js" />
+    <Content Include="Scripts\bower_components\lokijs\src\lokijs.js" />
+    <Content Include="Scripts\code\cajaChica\ReposicionesCajaChica\ActualizarReposiciones - Old.js" />
+    <Content Include="Areas\Contabilidad\Reports\ReportViewer.aspx" />
+    <Content Include="Bancos\CierresBancariosEfectuados.aspx" />
+    <Content Include="Bancos\ConciliacionBancaria\ConciliacionBancaria.aspx" />
+    <Content Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_Criterios.aspx" />
+    <Content Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_UploadMovBanco.aspx" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas.aspx" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_Detalles.aspx" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_Filter.aspx" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_ExportarAExcel.aspx" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_MailMergeFile.aspx" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_ObtencionXMLFileISLRRetenido.aspx" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_OpcionesReportes.aspx" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_Cuotas.aspx" />
+    <Content Include="Bancos\Consultas facturas\Pagos\Pagos_OpcionesReportes.aspx" />
+    <Content Include="Bancos\Consultas facturas\Pagos\Pagos_page_Filter.aspx" />
+    <Content Include="Bancos\Consultas facturas\Pagos\Pagos_page.aspx" />
+    <Content Include="Bancos\Consultas facturas\Pagos\Pago_page.aspx" />
+    <Content Include="Bancos\Consultas facturas\VencimientoFacturas\DefinicionPeriodosVencimiento.aspx" />
+    <Content Include="Bancos\Consultas facturas\VencimientoFacturas\VencimientoFacturas.aspx" />
+    <Content Include="Bancos\Consultas facturas\VencimientoFacturas\VencimientoFacturas_Filter.aspx" />
+    <Content Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_OrdenesPago.aspx" />
+    <Content Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_ExportarInfoWord.aspx" />
+    <Content Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_OpcionesReportes.aspx" />
+    <Content Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientoBancario_page.aspx" />
+    <Content Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_page.aspx" />
+    <Content Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_page_Filter.aspx" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad.aspx" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad_Filter.aspx" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\ChequesNoEntregados.aspx" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\ChequesNoEntregados_Filter.aspx" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad_OpcionesReportes.aspx" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos.aspx" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos_Consulta.aspx" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos_Filter.aspx" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos_ReportViewer.aspx" />
+    <Content Include="bower_components\angular-ui-router\release\angular-ui-router.js" />
+    <Content Include="bower_components\angular-ui-router\release\angular-ui-router.min.js" />
+    <Content Include="bower_components\angular-ui-router\src\common.js" />
+    <Content Include="bower_components\angular-ui-router\src\resolve.js" />
+    <Content Include="bower_components\angular-ui-router\src\state.js" />
+    <Content Include="bower_components\angular-ui-router\src\stateDirectives.js" />
+    <Content Include="bower_components\angular-ui-router\src\stateFilters.js" />
+    <Content Include="bower_components\angular-ui-router\src\templateFactory.js" />
+    <Content Include="bower_components\angular-ui-router\src\urlMatcherFactory.js" />
+    <Content Include="bower_components\angular-ui-router\src\urlRouter.js" />
+    <Content Include="bower_components\angular-ui-router\src\view.js" />
+    <Content Include="bower_components\angular-ui-router\src\viewDirective.js" />
+    <Content Include="bower_components\angular-ui-router\src\viewScroll.js" />
+    <Content Include="bower_components\angular\angular-csp.css" />
+    <Content Include="bower_components\angular\angular.js" />
+    <Content Include="bower_components\angular\angular.min.js" />
+    <Content Include="bower_components\angular\index.js" />
+    <Content Include="ClientBin\ContabSysNet_Silverlight.xap" />
+    <Content Include="ContabSysNet_SilverlightTestPage.aspx" />
+    <Content Include="ContabSysNet_SilverlightTestPage.html" />
+    <Content Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion.aspx" />
+    <Content Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_Filter.aspx" />
+    <Content Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_MovimientosContables.aspx" />
+    <Content Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_OpcionesReportes.aspx" />
+    <Content Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_OpcionesReportes.aspx" />
+    <Content Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral.aspx" />
+    <Content Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_Filter.aspx" />
+    <Content Include="Contab\Consultas contables\BalanceGeneral\UltimoMesCerradoContable.aspx" />
+    <Content Include="Contab\Consultas contables\Centros de costo\CentrosCosto_OpcionesReportes.aspx" />
+    <Content Include="Contab\Consultas contables\Centros de costo\CentrosCosto.aspx" />
+    <Content Include="Contab\Consultas contables\Centros de costo\CentrosCosto_Filter.aspx" />
+    <Content Include="Contab\Consultas contables\Comprobantes\ComprobantesContables.aspx" />
+    <Content Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Filter.aspx" />
+    <Content Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Lista.aspx" />
+    <Content Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Funciones.aspx" />
+    <Content Include="Contab\Consultas contables\Comprobantes\OpcionesReportes.aspx" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_OpcionesReportes.aspx" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos.aspx" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_Comprobantes.aspx" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_Filter.aspx" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\Doc\Consulta de cuentas contables y sus movimientos.htm" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\Doc\Screenshot - 001.png" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\Doc\Screenshot - 002.png" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\Doc\Screenshot - 003.png" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\Doc\Screenshot - 004.png" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\Doc\Screenshot - 005.png" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\Doc\Screenshot - 006.png" />
+    <Content Include="Contab\Consultas contables\Cuentas y movimientos\Doc\Screenshot - 007.png" />
+    <Content Include="Contab\Presupuesto\Configuracion\Asociacion codigos cuentas\AsociacionCodigosCuentas.aspx" />
+    <Content Include="Contab\Presupuesto\Configuracion\Codigos de presupuesto\CodigosPresupuesto.aspx" />
+    <Content Include="Contab\Presupuesto\Configuracion\Configuracion.aspx" />
+    <Content Include="Contab\Presupuesto\Configuracion\Copia codigos entre cias\CopiaCodigosPresupuesto.aspx" />
+    <Content Include="Contab\Presupuesto\Configuracion\Montos estimados\Presupuesto_MontosEstimados.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Anual\ConsultaPresupuesto.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Anual\ConsultaPresupuesto_FactoresConversionAplicados.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Anual\ConsultaPresupuesto_Filtro.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_ConsultaCuentasContables.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_ConsultaMovAcum.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_ConsultaMovMes.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_Filtro.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados.aspx" />
+    <Content Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados_Filter.aspx" />
+    <Content Include="Contab\UltimoMesCerradoContable.aspx" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome-4.2.0\css\font-awesome.css" />
+    <Content Include="Content\font-awesome-4.2.0\css\font-awesome.min.css" />
+    <Content Include="Content\font-awesome-4.2.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\mybootstrap.css" />
+    <Content Include="Content\myStyles.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-bg_diagonals-small_25_c9c9c9_40x40.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-bg_flat_0_313f3c_40x100.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-bg_flat_0_4d4d4d_40x100.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-bg_flat_100_f1eeee_40x100.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-bg_highlight-soft_50_f7e17d_1x100.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-bg_highlight-soft_65_e9f245_1x100.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-bg_highlight-soft_75_59c9c0_1x100.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-bg_highlight-soft_75_d8ff94_1x100.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-bg_inset-soft_95_f46f5d_1x100.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-icons_16837f_256x240.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-icons_186764_256x240.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-icons_834916_256x240.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\images\ui-icons_9f1d1d_256x240.png" />
+    <Content Include="Content\themes\Fresh-Squeezed\jquery-ui-1.9.0.custom.css" />
+    <Content Include="Content\themes\Supercharged\images\ui-bg_flat_0_303030_40x100.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-bg_flat_100_383838_40x100.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-bg_flat_75_f2f2f2_40x100.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-bg_inset-hard_5_2b2b2b_1x100.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-bg_inset-soft_15_5e5e5e_1x100.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-bg_inset-soft_45_ffc905_1x100.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-bg_inset-soft_75_ffec52_1x100.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-bg_inset-soft_95_ff6124_1x100.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-icons_1c1c1c_256x240.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-icons_303030_256x240.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-icons_774322_256x240.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-icons_8a4e19_256x240.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-icons_ffbc0f_256x240.png" />
+    <Content Include="Content\themes\Supercharged\images\ui-icons_ffc905_256x240.png" />
+    <Content Include="Content\themes\Supercharged\jquery-ui-1.9.0.custom.css" />
+    <Content Include="DynamicData\EntityTemplates\Default.ascx" />
+    <Content Include="DynamicData\EntityTemplates\Default_Edit.ascx" />
+    <Content Include="DynamicData\EntityTemplates\Default_Insert.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Children_Insert.ascx" />
+    <Content Include="DynamicData\FieldTemplates\EmailAddress.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Enumeration.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Enumeration_Edit.ascx" />
+    <Content Include="DynamicData\FieldTemplates\ManyToMany.ascx" />
+    <Content Include="DynamicData\FieldTemplates\ManyToMany_Edit.ascx" />
+    <Content Include="DynamicData\FieldTemplates\MultilineText_Edit.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Url.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Url_Edit.ascx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Generales\SeleccionarCiaContab\SeleccionarCiaContab.aspx" />
+    <Content Include="MostrarProgreso_1.asmx" />
+    <Content Include="Pictures\actualizarCatalogos_25x25.png" />
+    <Content Include="Pictures\ajaxLoadingIndicator.gif" />
+    <Content Include="Pictures\CargarCatalogos_25x25.png" />
+    <Content Include="Pictures\database_25x25.png" />
+    <Content Include="Pictures\Delete_Gray.png" />
+    <Content Include="Pictures\Excel_25x25.png" />
+    <Content Include="Pictures\FilterApply_25x25.png" />
+    <Content Include="Pictures\FilterDefine_25x25.png" />
+    <Content Include="Pictures\filter_25x25.png" />
+    <Content Include="Pictures\Gears_25x25.png" />
+    <Content Include="Pictures\new_25x25.png" />
+    <Content Include="Pictures\PopupCloseButton.png" />
+    <Content Include="Pictures\print_35x35.png" />
+    <Content Include="Pictures\refreshFiles_25x25.png" />
+    <Content Include="Pictures\reports_25x25.png" />
+    <Content Include="Pictures\SaveToServer_25x25.png" />
+    <Content Include="Pictures\save_25x25.png" />
+    <Content Include="Pictures\SelectRow.png" />
+    <Content Include="Pictures\server_25x25.png" />
+    <Content Include="Pictures\ShowItems_25x25.png" />
+    <Content Include="Bancos\web.config" />
+    <Content Include="ActivosFijos\web.config" />
+    <Content Include="Contab\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Otros\Control acceso\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Contab\Presupuesto\web.config" />
+    <Content Include="MasterPage_Simple_WithBootStrap.Master" />
+    <Content Include="Areas\Contabilidad\Views\web.config" />
+    <Content Include="Areas\Contabilidad\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\CentrosCostoConsulta\Index.cshtml" />
+    <Content Include="Generales\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Bancos\Views\web.config" />
+    <Content Include="Areas\Bancos\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Bancos\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Bancos\Views\ImportarCompaniasDesdeExcel\Index.cshtml" />
+    <Content Include="Areas\CajaChica\Views\web.config" />
+    <Content Include="Areas\CajaChica\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CajaChica\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CajaChica\Views\ReposicionesCajaChica\Index_old.cshtml" />
+    <EntityDeploy Include="ModelosDatos_EF\CajaChica\ControlCajaChicaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ControlCajaChicaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Areas\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Excel\Plantillas\LibroVentas\LibroVentas.xlsx" />
+    <Content Include="Excel\Plantillas\LibroCompras\LibroCompras.xlsx" />
+    <Content Include="Areas\Bancos\Views\ImportarFacturasDesdeExcel\Index.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\web.config" />
+    <Content Include="Areas\Presupuesto\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\CodigosPresupuesto\Index.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\font-awesome-4.2.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\font-awesome-4.2.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\font-awesome-4.2.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\font-awesome-4.2.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\font-awesome-4.2.0\less\bordered-pulled.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\core.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\fixed-width.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\font-awesome.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\icons.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\larger.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\list.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\mixins.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\path.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\rotated-flipped.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\spinning.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\stacked.less" />
+    <Content Include="Content\font-awesome-4.2.0\less\variables.less" />
+    <Content Include="Content\font-awesome-4.2.0\scss\font-awesome.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_bordered-pulled.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_core.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_fixed-width.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_icons.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_larger.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_list.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_mixins.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_path.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_rotated-flipped.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_spinning.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_stacked.scss" />
+    <Content Include="Content\font-awesome-4.2.0\scss\_variables.scss" />
+    <Content Include="Areas\Presupuesto\Views\CodigosPresupuesto\MontosEstimados.cshtml" />
+    <Content Include="Otros\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Generales\SeleccionarCiaContab\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Main\Views\web.config" />
+    <Content Include="Areas\Main\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Main\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Main\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Bancos\Views\FacturasConsultasExportarExcel\Index.cshtml" />
+    <Content Include="Areas\Bancos\Views\Companias\Index.cshtml" />
+    <Content Include="Areas\Bancos\Views\RelacionMontosAPagar\Index.cshtml" />
+    <Content Include="bower_components\angular-ui-router\.bower.json" />
+    <Content Include="bower_components\angular-ui-router\bower.json" />
+    <Content Include="bower_components\angular-ui-router\CHANGELOG.md" />
+    <Content Include="bower_components\angular-ui-router\CONTRIBUTING.md" />
+    <Content Include="bower_components\angular-ui-router\LICENSE" />
+    <Content Include="bower_components\angular-ui-router\README.md" />
+    <Content Include="bower_components\angular\.bower.json" />
+    <Content Include="bower_components\angular\angular.min.js.gzip" />
+    <Content Include="bower_components\angular\angular.min.js.map" />
+    <Content Include="bower_components\angular\bower.json" />
+    <Content Include="bower_components\angular\package.json" />
+    <Content Include="bower_components\angular\README.md" />
+    <Content Include="Areas\CajaChica\Views\ReposicionesCajaChica\Index.cshtml" />
+    <EmbeddedResource Include="contabm\reports\bancos_cajaChica_reposiciones_webReport.rdlc" />
+    <EmbeddedResource Include="contabm\reports\contab_asientosContables_webReport.rdlc" />
+    <EmbeddedResource Include="contabm\reports\contab_cuentasYSusMovimientos.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_TotalesTodosLosDetalles.rdlc" />
+    <EntityDeploy Include="ModelosDatos_EF\Users\UsersModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UsersModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="MasterPage_Simple_With_BS40.Master" />
+    <Content Include="Areas\Bancos\Views\islr_pagoAnticipado\Index.cshtml" />
+    <Content Include="Areas\Bancos\Views\Shared\_Layout2_Bootstrap4.cshtml" />
+    <Content Include="MasterPage_1_With_BS4.Master" />
+    <Content Include="Areas\Bancos\Views\islr_pagoAnticipado\InformarPagoImpuesto.cshtml" />
+    <Content Include="Areas\Bancos\Views\islr_pagoAnticipado\ConsultarPagosRegistrados.cshtml" />
+    <Content Include="Areas\Bancos\Views\islr_pagoAnticipado\Bancos_PrepagoIslr_Doc.cshtml" />
+    <None Include="Scripts\amplify-vsdoc.js" />
+    <Content Include="Pictures\table_25x25.png" />
+    <Content Include="Scripts\amplify.js" />
+    <Content Include="Scripts\amplify.min.js" />
+    <Content Include="Scripts\angular\angular-locale_en-us.js" />
+    <Content Include="Scripts\angular\angular-locale_es.js" />
+    <Content Include="Scripts\angular\angular-pagination\dirPagination.js" />
+    <Content Include="Scripts\angular\angular-pagination\dirPagination.tpl.html" />
+    <Content Include="Scripts\angular-xeditable-0.1.8\xeditable.css" />
+    <Content Include="Scripts\angular-xeditable-0.1.8\xeditable.min.js" />
+    <Content Include="Scripts\angular\angular.js" />
+    <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\ui-grid\ui-grid.js" />
+    <Content Include="Scripts\angular\ui-grid\ui-grid.min.css" />
+    <Content Include="Scripts\angular\ui-grid\ui-grid.svg" />
+    <Content Include="Scripts\async\async.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Scripts\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap_pagination\jquery.bootpag.min.js" />
+    <Content Include="Scripts\code\bancos\facturas\RelacionMontosAPagar.js" />
+    <Content Include="Scripts\code\bancos\facturas\facturasConsultasExportarExcel.js" />
+    <Content Include="Scripts\code\bancos\ImportarFacturasDesdeExcel.js" />
+    <Content Include="Scripts\code\bancos\ImportarCompaniasDesdeExcel.js" />
+    <Content Include="Scripts\code\bancos\companias.js" />
+    <Content Include="Scripts\code\cajaChica\ReposicionesCajaChica\ActualizarReposiciones.js" />
+    <Content Include="Scripts\code\common\angularFilters.js" />
+    <Content Include="Scripts\code\common\idb.js" />
+    <Content Include="Scripts\code\contab\CentrosCostoConsulta.js" />
+    <Content Include="Scripts\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Scripts\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\angular\ui-grid\ui-grid.eot" />
+    <Content Include="Scripts\angular\ui-grid\ui-grid.ttf" />
+    <Content Include="Scripts\angular\ui-grid\ui-grid.woff" />
+    <Content Include="Scripts\font-awesome-4.2.0\css\font-awesome.css" />
+    <Content Include="Scripts\font-awesome-4.2.0\css\font-awesome.min.css" />
+    <Content Include="Scripts\font-awesome-4.2.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Scripts\font-awesome-4.2.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\font-awesome-4.2.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Scripts\font-awesome-4.2.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Scripts\font-awesome-4.2.0\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\bordered-pulled.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\core.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\fixed-width.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\font-awesome.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\icons.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\larger.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\list.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\mixins.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\path.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\rotated-flipped.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\spinning.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\stacked.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\less\variables.less" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\font-awesome.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_bordered-pulled.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_core.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_fixed-width.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_icons.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_larger.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_list.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_mixins.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_path.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_rotated-flipped.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_spinning.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_stacked.scss" />
+    <Content Include="Scripts\font-awesome-4.2.0\scss\_variables.scss" />
+    <Content Include="Scripts\bower_components\lokijs\.bower.json" />
+    <Content Include="Scripts\bower_components\lokijs\benchmark\package.json" />
+    <Content Include="Scripts\bower_components\lokijs\bower.json" />
+    <Content Include="Scripts\bower_components\lokijs\CHANGELOG.md" />
+    <Content Include="Scripts\bower_components\lokijs\CONTRIBUTING.md" />
+    <Content Include="Scripts\bower_components\lokijs\demos\desktop_app\demo.json" />
+    <Content Include="Scripts\bower_components\lokijs\demos\desktop_app\package.json" />
+    <Content Include="Scripts\bower_components\lokijs\docs\lokijs.odp" />
+    <Content Include="Scripts\bower_components\lokijs\docs\lokijs.pptx" />
+    <Content Include="Scripts\bower_components\lokijs\package.json" />
+    <Content Include="Scripts\bower_components\lokijs\README.md" />
+    <Content Include="Scripts\bower_components\lokijs\spec\browser\README.md" />
+    <Content Include="Scripts\bower_components\lokijs\spec\generic\README.md" />
+    <Content Include="Scripts\bower_components\lokijs\spec\node\README.md" />
+    <Content Include="Scripts\bower_components\lokijs\spec\support\jasmine.json" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap-grid.css.map" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap-grid.min.css.map" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap-reboot.css.map" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap-4.0\css\bootstrap.min.css.map" />
+    <Content Include="Scripts\bootstrap-4.0\js\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bootstrap-4.0\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap-4.0\js\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap-4.0\js\bootstrap.min.js.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\code\presupuesto\MontosEstimados.js" />
+    <Content Include="Scripts\code\presupuesto\CodigosPresupuesto.js" />
+    <Content Include="Scripts\jqgrid\css\ui.jqgrid.css" />
+    <Content Include="Scripts\jqgrid\js\Changes.txt" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ar.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-bg.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-bg1251.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-cat.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-cn.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-cs.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-da.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-de.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-dk.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-el.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-es.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-fa.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-fi.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-fr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-gl.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-he.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-hr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-hr1250.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-hu.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-id.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-is.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-it.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ja.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-kr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-lt.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-mne.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-nl.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-no.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-pl.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-pt-br.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-pt.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ro.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ru.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sk.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sr-latin.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sv.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-th.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-tr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-tw.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ua.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-vi.js" />
+    <Content Include="Scripts\jqgrid\js\install.txt" />
+    <Content Include="Scripts\jqgrid\js\jquery-1.11.0.min.js" />
+    <Content Include="Scripts\jqgrid\js\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jqgrid\js\jquery.jqGrid.src.js" />
+    <Content Include="Scripts\jqgrid\plugins\grid.addons.js" />
+    <Content Include="Scripts\jqgrid\plugins\grid.postext.js" />
+    <Content Include="Scripts\jqgrid\plugins\grid.setcolumns.js" />
+    <Content Include="Scripts\jqgrid\plugins\jquery.contextmenu.js" />
+    <Content Include="Scripts\jqgrid\plugins\jquery.searchFilter.js" />
+    <Content Include="Scripts\jqgrid\plugins\jquery.tablednd.js" />
+    <Content Include="Scripts\jqgrid\plugins\searchFilter.css" />
+    <Content Include="Scripts\jqgrid\plugins\ui.multiselect.css" />
+    <Content Include="Scripts\jqgrid\plugins\ui.multiselect.js" />
+    <Content Include="Scripts\jquery-dialog-service\dialog-service.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\animated-overlay.gif" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\jquery-ui-1.10.4.custom.css" />
+    <Content Include="Scripts\jqueryui\css\ui-lightness\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="Scripts\jqueryui\external\jquery\jquery.js" />
+    <Content Include="Scripts\jqueryui\images\animated-overlay.gif" />
+    <Content Include="Scripts\jqueryui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jqueryui\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Scripts\jqueryui\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Scripts\jqueryui\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Scripts\jqueryui\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\jqueryui\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Scripts\jqueryui\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Scripts\jqueryui\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Scripts\jqueryui\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Scripts\jqueryui\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\jqueryui\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Scripts\jqueryui\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Scripts\jqueryui\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\jqueryui\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Scripts\jqueryui\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Scripts\jqueryui\index.html" />
+    <Content Include="Scripts\jqueryui\jquery-ui.css" />
+    <Content Include="Scripts\jqueryui\jquery-ui.js" />
+    <Content Include="Scripts\jqueryui\jquery-ui.min.css" />
+    <Content Include="Scripts\jqueryui\jquery-ui.min.js" />
+    <Content Include="Scripts\jqueryui\jquery-ui.structure.css" />
+    <Content Include="Scripts\jqueryui\jquery-ui.structure.min.css" />
+    <Content Include="Scripts\jqueryui\jquery-ui.theme.css" />
+    <Content Include="Scripts\jqueryui\jquery-ui.theme.min.css" />
+    <Content Include="Scripts\jqueryui\js\jquery-ui-1.10.4.custom.js" />
+    <Content Include="Scripts\jqueryui\js\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\jquery\jmenu-master\css\jmenu.css" />
+    <Content Include="Scripts\jquery\jmenu-master\css\jmenuOriginal.css" />
+    <Content Include="Scripts\jquery\jmenu-master\js\jMenu.jquery.min.js" />
+    <Content Include="Scripts\jquery\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery\jquery-ui-1.10.4.min.css" />
+    <Content Include="Scripts\jquery\jquery-ui-1.10.4.min.js" />
+    <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\json2.min.js" />
+    <Content Include="Scripts\juice.js" />
+    <Content Include="Scripts\juice.min.js" />
+    <Content Include="Scripts\knockout-3.2.0.js" />
+    <Content Include="Scripts\knockoutCustomHandlers.js" />
+    <Content Include="Scripts\lo-dash-2.4.1.js" />
+    <Content Include="Scripts\lodash-v3\lodash.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\mongoObjectId\Objectid.js" />
+    <Content Include="Scripts\nedb.min.js" />
+    <Content Include="Scripts\numeral.js\languages.min.js" />
+    <Content Include="Scripts\numeral.js\numeral.min.js" />
+    <Content Include="Scripts\popper\popper.min.js" />
+    <Content Include="Scripts\pouchdb-3.0.6.min.js" />
+    <Content Include="Scripts\angular\ui-bootstrap-tpls-0.12.0.min.js" />
+    <Content Include="Scripts\underscore_1_7_0.js" />
+    <Content Include="Scripts\xlsx.js\jszip.js" />
+    <Content Include="Scripts\xlsx.js\shim.js" />
+    <Content Include="Scripts\xlsx.js\xlsx.js" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Styles\ajaxControlToolkit.css" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\css\bootstrap-theme.css" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\css\bootstrap-theme.min.css" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\css\bootstrap.css" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\css\bootstrap.min.css" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\js\bootstrap.js" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\js\bootstrap.min.js" />
+    <Content Include="Styles\GridViewStyles\GridViewStyles.css" />
+    <Content Include="Styles\GridViewStyles\printstyles.css" />
+    <Content Include="Styles\GridViewStyles\styles.css" />
+    <Content Include="Styles\GridViewStyles\styles2.css" />
+    <Content Include="Pictures\MailMerge.png" />
+    <Content Include="Pictures\NewWindow.png" />
+    <Content Include="ReportViewer3.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="DynamicData\Content\FilterUserControl.ascx" />
+    <Content Include="DynamicData\Content\GridViewPager.ascx" />
+    <Content Include="DynamicData\Content\Images\Back.gif" />
+    <Content Include="DynamicData\Content\Images\PgFirst.gif" />
+    <Content Include="DynamicData\Content\Images\PgLast.gif" />
+    <Content Include="DynamicData\Content\Images\PgNext.gif" />
+    <Content Include="DynamicData\Content\Images\PgPrev.gif" />
+    <Content Include="DynamicData\CustomPages\readme.txt" />
+    <Content Include="DynamicData\FieldTemplates\Boolean.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Boolean_Edit.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Children.ascx" />
+    <Content Include="DynamicData\FieldTemplates\DateTime.ascx" />
+    <Content Include="DynamicData\FieldTemplates\DateTime_Edit.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Decimal_Edit.ascx" />
+    <Content Include="DynamicData\FieldTemplates\ForeignKey.ascx" />
+    <Content Include="DynamicData\FieldTemplates\ForeignKey_Edit.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Integer_Edit.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Text.ascx" />
+    <Content Include="DynamicData\FieldTemplates\TextArea_Edit.ascx" />
+    <Content Include="DynamicData\FieldTemplates\Text_Edit.ascx" />
+    <Content Include="general.css" />
+    <Content Include="LoginForm.aspx" />
+    <Content Include="MostrarProgreso.asmx" />
+    <Content Include="Otros\CambiarPassword.aspx" />
+    <Content Include="Otros\Control acceso\AgregarUsuario.aspx" />
+    <Content Include="Otros\Control acceso\AsociarFuncionesRoles.aspx" />
+    <Content Include="Otros\Control acceso\AsociarRolesUsuarios.aspx" />
+    <Content Include="Otros\Control acceso\Roles.aspx" />
+    <Content Include="Pictures\application_16x16.gif" />
+    <Content Include="Pictures\arrow_left.png" />
+    <Content Include="Pictures\arrow_left_20x20.png" />
+    <Content Include="Pictures\arrow_left_25x25.png" />
+    <Content Include="Pictures\arrow_left_35x35.png" />
+    <Content Include="Pictures\arrow_right.jpg" />
+    <Content Include="Pictures\arrow_right.png" />
+    <Content Include="Pictures\arrow_right_13x11.png" />
+    <Content Include="Pictures\back.jpg" />
+    <Content Include="Pictures\back2.jpg" />
+    <Content Include="Pictures\back3.jpg" />
+    <Content Include="Pictures\back4.jpg" />
+    <Content Include="Pictures\Calendar.png" />
+    <Content Include="Pictures\check.jpg" />
+    <Content Include="Pictures\download.png" />
+    <Content Include="Pictures\download_25x25.png" />
+    <Content Include="Pictures\error_16x16.gif" />
+    <Content Include="Pictures\Excel.gif" />
+    <Content Include="Pictures\Excel_16x16.gif" />
+    <Content Include="Pictures\filter_16x16.gif" />
+    <Content Include="Pictures\filter_gray_16x16.gif" />
+    <Content Include="Pictures\first_16x16.gif" />
+    <Content Include="Pictures\gears.jpg" />
+    <Content Include="Pictures\help_20x20.png" />
+    <Content Include="Pictures\home.jpg" />
+    <Content Include="Pictures\home2.jpg" />
+    <Content Include="Pictures\home3.jpg" />
+    <Content Include="Pictures\home4.jpg" />
+    <Content Include="Pictures\home4.png" />
+    <Content Include="Pictures\house.png" />
+    <Content Include="Pictures\house_20x20.png" />
+    <Content Include="Pictures\house_25x25.png" />
+    <Content Include="Pictures\house_35x35.png" />
+    <Content Include="Pictures\img\circle-ball-dark-antialiased.gif" />
+    <Content Include="Pictures\img\dot-net-green.gif" />
+    <Content Include="Pictures\img\rotating_arrow.gif" />
+    <Content Include="Pictures\img\simple.gif" />
+    <Content Include="Pictures\last_16x16.gif" />
+    <Content Include="Pictures\left_16x16.gif" />
+    <Content Include="Pictures\ListView_Buttons\add_14x14.png" />
+    <Content Include="Pictures\ListView_Buttons\Backup\add_14x14.png" />
+    <Content Include="Pictures\ListView_Buttons\Backup\delete_14x14.png" />
+    <Content Include="Pictures\ListView_Buttons\Backup\edit_14x14.png" />
+    <Content Include="Pictures\ListView_Buttons\Backup\ok_14x14.png" />
+    <Content Include="Pictures\ListView_Buttons\Backup\select.png" />
+    <Content Include="Pictures\ListView_Buttons\Backup\selected.png" />
+    <Content Include="Pictures\ListView_Buttons\Backup\undo1_14x14.png" />
+    <Content Include="Pictures\ListView_Buttons\check.jpg" />
+    <Content Include="Pictures\ListView_Buttons\check_fondogris.jpg" />
+    <Content Include="Pictures\ListView_Buttons\delete.jpg" />
+    <Content Include="Pictures\ListView_Buttons\delete_14x14.png" />
+    <Content Include="Pictures\ListView_Buttons\delete_fondogris.jpg" />
+    <Content Include="Pictures\ListView_Buttons\edit_14x14.png" />
+    <Content Include="Pictures\ListView_Buttons\ok_14x14.png" />
+    <Content Include="Pictures\ListView_Buttons\PgFirst.gif" />
+    <Content Include="Pictures\ListView_Buttons\PgLast.gif" />
+    <Content Include="Pictures\ListView_Buttons\PgNext.gif" />
+    <Content Include="Pictures\ListView_Buttons\PgPrev.gif" />
+    <Content Include="Pictures\ListView_Buttons\select.png" />
+    <Content Include="Pictures\ListView_Buttons\select1.gif" />
+    <Content Include="Pictures\ListView_Buttons\selected.png" />
+    <Content Include="Pictures\ListView_Buttons\selected1.gif" />
+    <Content Include="Pictures\ListView_Buttons\undo1_14x14.png" />
+    <Content Include="Pictures\Logos\logo_cia_geh.png" />
+    <Content Include="Pictures\Logos\logo_cia_globex.png" />
+    <Content Include="Pictures\Logos\logo_cia_lacoste.png" />
+    <Content Include="Pictures\Logos\logo_cia_lockton.gif" />
+    <Content Include="Pictures\Logos\logo_cia_lockton.png" />
+    <Content Include="Pictures\Logos\logo_cia_risk.png" />
+    <Content Include="Pictures\logo_cia_usuaria.png" />
+    <Content Include="Pictures\print_16x16.gif" />
+    <Content Include="Pictures\print_gray_20x20.gif" />
+    <Content Include="Pictures\radcalendar\header.gif" />
+    <Content Include="Pictures\radcalendar\next.gif" />
+    <Content Include="Pictures\radcalendar\prev.gif" />
+    <Content Include="Pictures\refresh_16x16.gif" />
+    <Content Include="Pictures\relationships_16x16.gif" />
+    <Content Include="Pictures\right_16x16.gif" />
+    <Content Include="Pictures\safari.gif" />
+    <Content Include="Pictures\upload25x25.png" />
+    <Content Include="Pictures\upload2_16x16.jpg" />
+    <Content Include="Pictures\UploadFile.jpg" />
+    <Content Include="Pictures\UploadFile_16x16.jpg" />
+    <Content Include="Pictures\upload_16x16.jpg" />
+    <Content Include="radcalendar.css" />
+    <Content Include="ReportViewer.aspx" />
+    <Content Include="ReportViewer2.aspx" />
+    <Content Include="Silverlight.js" />
+    <Content Include="Styles\myBootStrap.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Default_old.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="UserControls\ReportOptions.ascx" />
+    <Content Include="Utilitarios\ActivosFijos\ReconversionMonetaria.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Styles\bootstrap-3.1.1-dist\css\bootstrap-theme.css.map" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\css\bootstrap.css.map" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Styles\bootstrap-3.1.1-dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Temp\Facturas_CartasGenericas\CartaModelo.docx" />
+    <Content Include="Scripts\jquery\jmenu-master\css\jmenu.less" />
+    <Content Include="webAppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\ConsultaActivosFijos\ActivoFijo_page.aspx.cs">
+      <DependentUpon>ActivoFijo_page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\ConsultaActivosFijos\ActivoFijo_page.aspx.designer.cs">
+      <DependentUpon>ActivoFijo_page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_OpcionesReportes.aspx.cs">
+      <DependentUpon>DepreciacionMensual_OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>DepreciacionMensual_OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_Page.aspx.cs">
+      <DependentUpon>DepreciacionMensual_Page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_Page.aspx.designer.cs">
+      <DependentUpon>DepreciacionMensual_Page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_Filter.aspx.cs">
+      <DependentUpon>DepreciacionMensual_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_Filter.aspx.designer.cs">
+      <DependentUpon>DepreciacionMensual_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\ReporteDepreciacionMensual_DataSet.cs">
+      <DependentUpon>ReporteDepreciacionMensual_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\ReporteDepreciacionMensual_DataSet.Designer.cs">
+      <DependentUpon>ReporteDepreciacionMensual_DataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Bancos\BancosAreaRegistration.cs" />
+    <Compile Include="Areas\Bancos\Controllers\CompaniasController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\CompaniasWebApiController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\FacturasConsultasExportarExcelController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\FacturasConsultasExportarExcelWebApiController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\ImportarCompaniasDesdeExcelController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\ImportarFacturasDesdeExcelWebApiController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\ImportarCompaniasDesdeExcelWebApiController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\ImportarFacturasDesdeExcelController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\islr_pagoAnticipadoController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\RelacionMontosAPagarController.cs" />
+    <Compile Include="Areas\Bancos\Controllers\RelacionMontosAPagarWebApiController.cs" />
+    <Compile Include="Areas\Bancos\Models\Companias\Compania_ActualizarCuentasBancarias.cs" />
+    <Compile Include="Areas\Bancos\Models\ImportarFacturasSimpleDesdeExcel\FacturaSimpleExcelRow.cs" />
+    <Compile Include="Areas\Bancos\Models\ImportarFacturasDesdeExcel\FacturaExcelRow.cs" />
+    <Compile Include="Areas\Bancos\Models\islr_pagoAnticipado\ErrorInfo.cs" />
+    <Compile Include="Areas\Bancos\Models\islr_pagoAnticipado\EventoPagoAnticipado.cs" />
+    <Compile Include="Areas\Bancos\Models\islr_pagoAnticipado\EventoPagoAnticipado_Config.cs" />
+    <Compile Include="Areas\Bancos\Models\islr_pagoAnticipado\PageGeneralInfo.cs" />
+    <Compile Include="Areas\Bancos\Models\mongodb\CompaniaMongo.cs" />
+    <Compile Include="Areas\Bancos\Models\mongodb\FacturaSeleccionadaConsultas.cs" />
+    <Compile Include="Areas\Bancos\Models\mongodb\ReposicionesCajaChica.cs" />
+    <Compile Include="Areas\Bancos\Models\mongodb\RubroCajaChica.cs" />
+    <Compile Include="Areas\Bancos\Models\mongodb\CajaChica.cs" />
+    <Compile Include="Areas\Bancos\Models\mongodb\Compania.cs" />
+    <Compile Include="Areas\Bancos\Models\mongodb\Temp_FacturaSimpleImportarDesdeExcel.cs" />
+    <Compile Include="Areas\Bancos\Models\mongodb\Temp_FacturaImportarDesdeExcel.cs" />
+    <Compile Include="Areas\Bancos\Models\RelacionMontosAPagar\FacturaSeleccionada.cs" />
+    <Compile Include="Areas\Bancos\Models\RelacionMontosAPagar\ResumenFacturas.cs" />
+    <Compile Include="Areas\CajaChica\CajaChicaAreaRegistration.cs" />
+    <Compile Include="Areas\CajaChica\Controllers\ActualizarReposicionesCajaChicaWebApiController.cs" />
+    <Compile Include="Areas\CajaChica\Controllers\ReposicionesCajaChicaController.cs" />
+    <Compile Include="Areas\CajaChica\Models\FiltroConsultaReposiciones.cs" />
+    <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\CentrosCostoConsultaController.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\CentrosCostoConsultaWebApiController.cs" />
+    <Compile Include="Areas\Contabilidad\Models\CentrosCostoConsulta\jqGridData.cs" />
+    <Compile Include="Areas\Contabilidad\Models\mongodb\CodificacionesContables.cs" />
+    <Compile Include="Areas\Contabilidad\Models\mongodb\dbContab\Temp_CentrosCosto_Consulta.cs" />
+    <Compile Include="Areas\Contabilidad\Models\ProgresoTareaEnCurso.cs" />
+    <Compile Include="Areas\Contabilidad\Reports\ReportViewer.aspx.cs">
+      <DependentUpon>ReportViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Contabilidad\Reports\ReportViewer.aspx.designer.cs">
+      <DependentUpon>ReportViewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Main\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Main\MainAreaRegistration.cs" />
+    <Compile Include="Areas\Presupuesto\Controllers\CodigosPresupuestoController.cs" />
+    <Compile Include="Areas\Presupuesto\Controllers\MontosEstimadosWebApiController.cs" />
+    <Compile Include="Areas\Presupuesto\Controllers\CodigosPresupuestoWebApiController.cs" />
+    <Compile Include="Areas\Presupuesto\Models\CodigoPresupuesto.cs" />
+    <Compile Include="Areas\Presupuesto\Models\CodigoPresupuestoEditado.cs" />
+    <Compile Include="Areas\Presupuesto\Models\FiltroCriterios.cs" />
+    <Compile Include="Areas\Presupuesto\Models\MontoEstimado.cs" />
+    <Compile Include="Areas\Presupuesto\Models\MontosEstimados_Agregar_Parametro.cs" />
+    <Compile Include="Areas\Presupuesto\Models\MontosEstimados_Filtro.cs" />
+    <Compile Include="Areas\Presupuesto\PresupuestoAreaRegistration.cs" />
+    <Compile Include="Bancos\CierresBancariosEfectuados.aspx.cs">
+      <DependentUpon>CierresBancariosEfectuados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\CierresBancariosEfectuados.aspx.designer.cs">
+      <DependentUpon>CierresBancariosEfectuados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_Report_ConsultaMovBanco.cs" />
+    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria.aspx.cs">
+      <DependentUpon>ConciliacionBancaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria.aspx.designer.cs">
+      <DependentUpon>ConciliacionBancaria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_Criterios.aspx.cs">
+      <DependentUpon>ConciliacionBancaria_Criterios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_Criterios.aspx.designer.cs">
+      <DependentUpon>ConciliacionBancaria_Criterios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_UploadMovBanco.aspx.cs">
+      <DependentUpon>ConciliacionBancaria_UploadMovBanco.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_UploadMovBanco.aspx.designer.cs">
+      <DependentUpon>ConciliacionBancaria_UploadMovBanco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_ExportarAExcel.aspx.cs">
+      <DependentUpon>Facturas_ExportarAExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_ExportarAExcel.aspx.designer.cs">
+      <DependentUpon>Facturas_ExportarAExcel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\RetencionesIvaReport_Item.cs" />
+    <Compile Include="Bancos\Consultas facturas\Facturas\ObjetosParaReportes.cs" />
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas.aspx.cs">
+      <DependentUpon>Facturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas.aspx.designer.cs">
+      <DependentUpon>Facturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_Detalles.aspx.cs">
+      <DependentUpon>Facturas_Detalles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_Detalles.aspx.designer.cs">
+      <DependentUpon>Facturas_Detalles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_Filter.aspx.cs">
+      <DependentUpon>Facturas_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_Filter.aspx.designer.cs">
+      <DependentUpon>Facturas_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_MailMergeFile.aspx.cs">
+      <DependentUpon>Facturas_MailMergeFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_MailMergeFile.aspx.designer.cs">
+      <DependentUpon>Facturas_MailMergeFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_ObtencionXMLFileISLRRetenido.aspx.cs">
+      <DependentUpon>Facturas_ObtencionXMLFileISLRRetenido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_ObtencionXMLFileISLRRetenido.aspx.designer.cs">
+      <DependentUpon>Facturas_ObtencionXMLFileISLRRetenido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_OpcionesReportes.aspx.cs">
+      <DependentUpon>Facturas_OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>Facturas_OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_Cuotas.aspx.cs">
+      <DependentUpon>Facturas_Cuotas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_Cuotas.aspx.designer.cs">
+      <DependentUpon>Facturas_Cuotas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Pagos\Bancos_Report_ConsultaMovimientosBancarios.cs" />
+    <Compile Include="Bancos\Consultas facturas\Pagos\Pagos_OpcionesReportes.aspx.cs">
+      <DependentUpon>Pagos_OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Pagos\Pagos_OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>Pagos_OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Pagos\Pagos_page_Filter.aspx.cs">
+      <DependentUpon>Pagos_page_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Pagos\Pagos_page_Filter.aspx.designer.cs">
+      <DependentUpon>Pagos_page_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Pagos\Pagos_page.aspx.cs">
+      <DependentUpon>Pagos_page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Pagos\Pagos_page.aspx.designer.cs">
+      <DependentUpon>Pagos_page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Pagos\Pago_page.aspx.cs">
+      <DependentUpon>Pago_page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\Pagos\Pago_page.aspx.designer.cs">
+      <DependentUpon>Pago_page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\VencimientoFacturas\DefinicionPeriodosVencimiento.aspx.cs">
+      <DependentUpon>DefinicionPeriodosVencimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\VencimientoFacturas\DefinicionPeriodosVencimiento.aspx.designer.cs">
+      <DependentUpon>DefinicionPeriodosVencimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\VencimientoFacturas\Bancos_Report_VencimientoFacturas.cs" />
+    <Compile Include="Bancos\Consultas facturas\VencimientoFacturas\VencimientoFacturas.aspx.cs">
+      <DependentUpon>VencimientoFacturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\VencimientoFacturas\VencimientoFacturas.aspx.designer.cs">
+      <DependentUpon>VencimientoFacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\VencimientoFacturas\VencimientoFacturas_Filter.aspx.cs">
+      <DependentUpon>VencimientoFacturas_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Consultas facturas\VencimientoFacturas\VencimientoFacturas_Filter.aspx.designer.cs">
+      <DependentUpon>VencimientoFacturas_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_OrdenesPago.aspx.cs">
+      <DependentUpon>MovimientosBancarios_OrdenesPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_OrdenesPago.aspx.designer.cs">
+      <DependentUpon>MovimientosBancarios_OrdenesPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_ExportarInfoWord.aspx.cs">
+      <DependentUpon>MovimientosBancarios_ExportarInfoWord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_ExportarInfoWord.aspx.designer.cs">
+      <DependentUpon>MovimientosBancarios_ExportarInfoWord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_OpcionesReportes.aspx.cs">
+      <DependentUpon>MovimientosBancarios_OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>MovimientosBancarios_OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientoBancario_page.aspx.cs">
+      <DependentUpon>MovimientoBancario_page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientoBancario_page.aspx.designer.cs">
+      <DependentUpon>MovimientoBancario_page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_page.aspx.cs">
+      <DependentUpon>MovimientosBancarios_page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_page.aspx.designer.cs">
+      <DependentUpon>MovimientosBancarios_page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_page_Filter.aspx.cs">
+      <DependentUpon>MovimientosBancarios_page_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\MovimientosBancarios_page_Filter.aspx.designer.cs">
+      <DependentUpon>MovimientosBancarios_page_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\ConsultasBancos\MovimientosBancarios\Bancos_Report_ConsultaMovimientosBancarios.cs" />
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad.aspx.cs">
+      <DependentUpon>Bancos_ConsultaDisponibilidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad.aspx.designer.cs">
+      <DependentUpon>Bancos_ConsultaDisponibilidad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad_Filter.aspx.cs">
+      <DependentUpon>Bancos_ConsultaDisponibilidad_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad_Filter.aspx.designer.cs">
+      <DependentUpon>Bancos_ConsultaDisponibilidad_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad_Item.cs" />
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\ChequesNoEntregados.aspx.cs">
+      <DependentUpon>ChequesNoEntregados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\ChequesNoEntregados.aspx.designer.cs">
+      <DependentUpon>ChequesNoEntregados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\ChequesNoEntregados_Filter.aspx.cs">
+      <DependentUpon>ChequesNoEntregados_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\ChequesNoEntregados_Filter.aspx.designer.cs">
+      <DependentUpon>ChequesNoEntregados_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad_OpcionesReportes.aspx.cs">
+      <DependentUpon>Bancos_ConsultaDisponibilidad_OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_ConsultaDisponibilidad_OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>Bancos_ConsultaDisponibilidad_OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos.aspx.cs">
+      <DependentUpon>MontosRestringidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos.aspx.designer.cs">
+      <DependentUpon>MontosRestringidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos_Consulta.aspx.cs">
+      <DependentUpon>MontosRestringidos_Consulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos_Consulta.aspx.designer.cs">
+      <DependentUpon>MontosRestringidos_Consulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos_Filter.aspx.cs">
+      <DependentUpon>MontosRestringidos_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos_Filter.aspx.designer.cs">
+      <DependentUpon>MontosRestringidos_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos_ReportViewer.aspx.cs">
+      <DependentUpon>MontosRestringidos_ReportViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos_ReportViewer.aspx.designer.cs">
+      <DependentUpon>MontosRestringidos_ReportViewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clases\ConstruirListaCompaniasAsignadas.cs" />
+    <Compile Include="Clases\FuncionesBancos.cs" />
+    <Compile Include="Clases\FuncionesContab2.cs" />
+    <Compile Include="Clases\JsonSerialization.cs" />
+    <Compile Include="Clases\PowerTools\DocumentBuilder.cs" />
+    <Compile Include="Clases\PowerTools\MarkupSimplifier.cs" />
+    <Compile Include="Clases\PowerTools\PtOpenXmlDocument.cs" />
+    <Compile Include="Clases\PowerTools\PtOpenXmlUtil.cs" />
+    <Compile Include="Clases\PowerTools\PtUtil.cs" />
+    <Compile Include="Clases\PowerTools\RevisionAccepter.cs" />
+    <Compile Include="Clases\PowerTools\TextReplacer.cs" />
+    <Compile Include="Clases\SendEmail.cs" />
+    <Compile Include="Clases\WriteStringToFile.cs" />
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion.aspx.cs">
+      <DependentUpon>BalanceComprobacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion.aspx.designer.cs">
+      <DependentUpon>BalanceComprobacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_Filter.aspx.cs">
+      <DependentUpon>BalanceComprobacion_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_Filter.aspx.designer.cs">
+      <DependentUpon>BalanceComprobacion_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_MovimientosContables.aspx.cs">
+      <DependentUpon>BalanceComprobacion_MovimientosContables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_MovimientosContables.aspx.designer.cs">
+      <DependentUpon>BalanceComprobacion_MovimientosContables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_OpcionesReportes.aspx.cs">
+      <DependentUpon>BalanceComprobacion_OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion_OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>BalanceComprobacion_OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\Contab_Report_ConsultaBalanceComprobacion.cs" />
+    <Compile Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_OpcionesReportes.aspx.cs">
+      <DependentUpon>BalanceGeneral_OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>BalanceGeneral_OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral.aspx.cs">
+      <DependentUpon>BalanceGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral.aspx.designer.cs">
+      <DependentUpon>BalanceGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_Filter.aspx.cs">
+      <DependentUpon>BalanceGeneral_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_Filter.aspx.designer.cs">
+      <DependentUpon>BalanceGeneral_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_Parametros.cs" />
+    <Compile Include="Contab\Consultas contables\BalanceGeneral\UltimoMesCerradoContable.aspx.cs">
+      <DependentUpon>UltimoMesCerradoContable.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\BalanceGeneral\UltimoMesCerradoContable.aspx.designer.cs">
+      <DependentUpon>UltimoMesCerradoContable.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Centros de costo\CentrosCosto_OpcionesReportes.aspx.cs">
+      <DependentUpon>CentrosCosto_OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Centros de costo\CentrosCosto_OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>CentrosCosto_OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Centros de costo\CentrosCosto.aspx.cs">
+      <DependentUpon>CentrosCosto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Centros de costo\CentrosCosto.aspx.designer.cs">
+      <DependentUpon>CentrosCosto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Centros de costo\CentrosCosto_Filter.aspx.cs">
+      <DependentUpon>CentrosCosto_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Centros de costo\CentrosCosto_Filter.aspx.designer.cs">
+      <DependentUpon>CentrosCosto_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Centros de costo\Contab_Report_ConsultaCentrosCosto.cs" />
+    <Compile Include="Contab\Consultas contables\Comprobantes\ComprobantesContables.aspx.cs">
+      <DependentUpon>ComprobantesContables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Comprobantes\ComprobantesContables.aspx.designer.cs">
+      <DependentUpon>ComprobantesContables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Filter.aspx.cs">
+      <DependentUpon>ComprobantesContables_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Filter.aspx.designer.cs">
+      <DependentUpon>ComprobantesContables_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Lista.aspx.cs">
+      <DependentUpon>ComprobantesContables_Lista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Lista.aspx.designer.cs">
+      <DependentUpon>ComprobantesContables_Lista.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Funciones.aspx.cs">
+      <DependentUpon>ComprobantesContables_Funciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Funciones.aspx.designer.cs">
+      <DependentUpon>ComprobantesContables_Funciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Comprobantes\OpcionesReportes.aspx.cs">
+      <DependentUpon>OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Comprobantes\OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\AsientosContables_Objects.cs" />
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_OpcionesReportes.aspx.cs">
+      <DependentUpon>CuentasYMovimientos_OpcionesReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_OpcionesReportes.aspx.designer.cs">
+      <DependentUpon>CuentasYMovimientos_OpcionesReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos.aspx.cs">
+      <DependentUpon>CuentasYMovimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos.aspx.designer.cs">
+      <DependentUpon>CuentasYMovimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_Comprobantes.aspx.cs">
+      <DependentUpon>CuentasYMovimientos_Comprobantes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_Comprobantes.aspx.designer.cs">
+      <DependentUpon>CuentasYMovimientos_Comprobantes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_Filter.aspx.cs">
+      <DependentUpon>CuentasYMovimientos_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_Filter.aspx.designer.cs">
+      <DependentUpon>CuentasYMovimientos_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\ReporteMayorGeneral_DataSet.cs">
+      <DependentUpon>ReporteMayorGeneral_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Consultas contables\Cuentas y movimientos\ReporteMayorGeneral_DataSet.Designer.cs">
+      <DependentUpon>ReporteMayorGeneral_DataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Asociacion codigos cuentas\AsociacionCodigosCuentas.aspx.cs">
+      <DependentUpon>AsociacionCodigosCuentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Asociacion codigos cuentas\AsociacionCodigosCuentas.aspx.designer.cs">
+      <DependentUpon>AsociacionCodigosCuentas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Codigos de presupuesto\CodigosPresupuesto.aspx.cs">
+      <DependentUpon>CodigosPresupuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Codigos de presupuesto\CodigosPresupuesto.aspx.designer.cs">
+      <DependentUpon>CodigosPresupuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Configuracion.aspx.cs">
+      <DependentUpon>Configuracion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Configuracion.aspx.designer.cs">
+      <DependentUpon>Configuracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Copia codigos entre cias\CopiaCodigosPresupuesto.aspx.cs">
+      <DependentUpon>CopiaCodigosPresupuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Copia codigos entre cias\CopiaCodigosPresupuesto.aspx.designer.cs">
+      <DependentUpon>CopiaCodigosPresupuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Montos estimados\Presupuesto_MontosEstimados.aspx.cs">
+      <DependentUpon>Presupuesto_MontosEstimados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Configuracion\Montos estimados\Presupuesto_MontosEstimados.aspx.designer.cs">
+      <DependentUpon>Presupuesto_MontosEstimados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Anual\ConsultaPresupuesto.aspx.cs">
+      <DependentUpon>ConsultaPresupuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Anual\ConsultaPresupuesto.aspx.designer.cs">
+      <DependentUpon>ConsultaPresupuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Anual\ConsultaPresupuesto_FactoresConversionAplicados.aspx.cs">
+      <DependentUpon>ConsultaPresupuesto_FactoresConversionAplicados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Anual\ConsultaPresupuesto_FactoresConversionAplicados.aspx.designer.cs">
+      <DependentUpon>ConsultaPresupuesto_FactoresConversionAplicados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Anual\ConsultaPresupuesto_Filtro.aspx.cs">
+      <DependentUpon>ConsultaPresupuesto_Filtro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Anual\ConsultaPresupuesto_Filtro.aspx.designer.cs">
+      <DependentUpon>ConsultaPresupuesto_Filtro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto.aspx.cs">
+      <DependentUpon>ConsultaPresupuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto.aspx.designer.cs">
+      <DependentUpon>ConsultaPresupuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_ConsultaCuentasContables.aspx.cs">
+      <DependentUpon>ConsultaPresupuesto_ConsultaCuentasContables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_ConsultaCuentasContables.aspx.designer.cs">
+      <DependentUpon>ConsultaPresupuesto_ConsultaCuentasContables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_ConsultaMovAcum.aspx.cs">
+      <DependentUpon>ConsultaPresupuesto_ConsultaMovAcum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_ConsultaMovAcum.aspx.designer.cs">
+      <DependentUpon>ConsultaPresupuesto_ConsultaMovAcum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_ConsultaMovMes.aspx.cs">
+      <DependentUpon>ConsultaPresupuesto_ConsultaMovMes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_ConsultaMovMes.aspx.designer.cs">
+      <DependentUpon>ConsultaPresupuesto_ConsultaMovMes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_Filtro.aspx.cs">
+      <DependentUpon>ConsultaPresupuesto_Filtro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Mensual\ConsultaPresupuesto_Filtro.aspx.designer.cs">
+      <DependentUpon>ConsultaPresupuesto_Filtro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados.aspx.cs">
+      <DependentUpon>MontosEstimados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados.aspx.designer.cs">
+      <DependentUpon>MontosEstimados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados_Consulta_CuentaContable.cs" />
+    <Compile Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados_Filter.aspx.cs">
+      <DependentUpon>MontosEstimados_Filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados_Filter.aspx.designer.cs">
+      <DependentUpon>MontosEstimados_Filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contab\UltimoMesCerradoContable.aspx.cs">
+      <DependentUpon>UltimoMesCerradoContable.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contab\UltimoMesCerradoContable.aspx.designer.cs">
+      <DependentUpon>UltimoMesCerradoContable.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage_1_With_BS4.Master.cs">
+      <DependentUpon>MasterPage_1_With_BS4.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage_1_With_BS4.Master.designer.cs">
+      <DependentUpon>MasterPage_1_With_BS4.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage_Simple_With_BS40.Master.cs">
+      <DependentUpon>MasterPage_Simple_With_BS40.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage_Simple_With_BS40.Master.designer.cs">
+      <DependentUpon>MasterPage_Simple_With_BS40.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage_Simple_WithBootStrap.Master.cs">
+      <DependentUpon>MasterPage_Simple_WithBootStrap.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage_Simple_WithBootStrap.Master.designer.cs">
+      <DependentUpon>MasterPage_Simple_WithBootStrap.Master</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\EntityTemplates\Default.ascx.cs">
+      <DependentUpon>Default.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\EntityTemplates\Default.ascx.designer.cs">
+      <DependentUpon>Default.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\EntityTemplates\Default_Edit.ascx.cs">
+      <DependentUpon>Default_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\EntityTemplates\Default_Edit.ascx.designer.cs">
+      <DependentUpon>Default_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\EntityTemplates\Default_Insert.ascx.cs">
+      <DependentUpon>Default_Insert.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\EntityTemplates\Default_Insert.ascx.designer.cs">
+      <DependentUpon>Default_Insert.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Children_Insert.ascx.cs">
+      <DependentUpon>Children_Insert.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Children_Insert.ascx.designer.cs">
+      <DependentUpon>Children_Insert.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\EmailAddress.ascx.cs">
+      <DependentUpon>EmailAddress.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\EmailAddress.ascx.designer.cs">
+      <DependentUpon>EmailAddress.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Enumeration.ascx.cs">
+      <DependentUpon>Enumeration.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Enumeration.ascx.designer.cs">
+      <DependentUpon>Enumeration.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Enumeration_Edit.ascx.cs">
+      <DependentUpon>Enumeration_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Enumeration_Edit.ascx.designer.cs">
+      <DependentUpon>Enumeration_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\ManyToMany.ascx.cs">
+      <DependentUpon>ManyToMany.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\ManyToMany.ascx.designer.cs">
+      <DependentUpon>ManyToMany.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\ManyToMany_Edit.ascx.cs">
+      <DependentUpon>ManyToMany_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\ManyToMany_Edit.ascx.designer.cs">
+      <DependentUpon>ManyToMany_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\MultilineText_Edit.ascx.cs">
+      <DependentUpon>MultilineText_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\MultilineText_Edit.ascx.designer.cs">
+      <DependentUpon>MultilineText_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Url.ascx.cs">
+      <DependentUpon>Url.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Url.ascx.designer.cs">
+      <DependentUpon>Url.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Url_Edit.ascx.cs">
+      <DependentUpon>Url_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Url_Edit.ascx.designer.cs">
+      <DependentUpon>Url_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Generales\SeleccionarCiaContab\SeleccionarCiaContab.aspx.cs">
+      <DependentUpon>SeleccionarCiaContab.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Generales\SeleccionarCiaContab\SeleccionarCiaContab.aspx.designer.cs">
+      <DependentUpon>SeleccionarCiaContab.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosDatos\mongodb\consultas\bancos_cajaChica_reposiciones_webReport.cs" />
+    <Compile Include="ModelosDatos\mongodb\consultas\contab_cuentasYSusMovimientos.cs" />
+    <Compile Include="ModelosDatos\mongodb\consultas\contab_asientosContables_webReport.cs" />
+    <Compile Include="ModelosDatos_EF\ActivosFijos\dbContab_ActFijos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbContab_ActFijos.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosDatos_EF\Bancos\BancosEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BancosEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosDatos_EF\CajaChica\ControlCajaChicaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlCajaChicaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosDatos_EF\Contab\dbContab_Contab.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbContab_Contab.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosDatos_EF\Contab\MetaDataClases.cs" />
+    <Compile Include="ModelosDatos_EF\Nomina\NominaEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NominaEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosDatos_EF\Users\UsersModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MostrarProgreso_1.asmx.cs">
+      <DependentUpon>MostrarProgreso_1.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Otros\Control acceso\AsociarUsuariosCompanias.aspx.cs">
+      <DependentUpon>AsociarUsuariosCompanias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Otros\Control acceso\AsociarUsuariosCompanias.aspx.designer.cs">
+      <DependentUpon>AsociarUsuariosCompanias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Otros\reconversionMonetaria\reconversionMonetaria.aspx.cs">
+      <DependentUpon>reconversionMonetaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Otros\reconversionMonetaria\reconversionMonetaria.aspx.designer.cs">
+      <DependentUpon>reconversionMonetaria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Otros\reconversionMonetaria\reconversionMonetaria_filter.aspx.cs">
+      <DependentUpon>reconversionMonetaria_filter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Otros\reconversionMonetaria\reconversionMonetaria_filter.aspx.designer.cs">
+      <DependentUpon>reconversionMonetaria_filter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportViewer3.aspx.cs">
+      <DependentUpon>ReportViewer3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewer3.aspx.designer.cs">
+      <DependentUpon>ReportViewer3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default_old.aspx.cs">
+      <DependentUpon>Default_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default_old.aspx.designer.cs">
+      <DependentUpon>Default_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\Content\FilterUserControl.ascx.cs">
+      <DependentUpon>FilterUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\Content\FilterUserControl.ascx.designer.cs">
+      <DependentUpon>FilterUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\Content\GridViewPager.ascx.cs">
+      <DependentUpon>GridViewPager.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\Content\GridViewPager.ascx.designer.cs">
+      <DependentUpon>GridViewPager.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Boolean.ascx.cs">
+      <DependentUpon>Boolean.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Boolean.ascx.designer.cs">
+      <DependentUpon>Boolean.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Boolean_Edit.ascx.cs">
+      <DependentUpon>Boolean_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Boolean_Edit.ascx.designer.cs">
+      <DependentUpon>Boolean_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Children.ascx.cs">
+      <DependentUpon>Children.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Children.ascx.designer.cs">
+      <DependentUpon>Children.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\DateTime.ascx.cs">
+      <DependentUpon>DateTime.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\DateTime.ascx.designer.cs">
+      <DependentUpon>DateTime.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\DateTime_Edit.ascx.cs">
+      <DependentUpon>DateTime_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\DateTime_Edit.ascx.designer.cs">
+      <DependentUpon>DateTime_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Decimal_Edit.ascx.cs">
+      <DependentUpon>Decimal_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Decimal_Edit.ascx.designer.cs">
+      <DependentUpon>Decimal_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\ForeignKey.ascx.cs">
+      <DependentUpon>ForeignKey.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\ForeignKey.ascx.designer.cs">
+      <DependentUpon>ForeignKey.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\ForeignKey_Edit.ascx.cs">
+      <DependentUpon>ForeignKey_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\ForeignKey_Edit.ascx.designer.cs">
+      <DependentUpon>ForeignKey_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Integer_Edit.ascx.cs">
+      <DependentUpon>Integer_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Integer_Edit.ascx.designer.cs">
+      <DependentUpon>Integer_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Text.ascx.cs">
+      <DependentUpon>Text.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Text.ascx.designer.cs">
+      <DependentUpon>Text.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\TextArea_Edit.ascx.cs">
+      <DependentUpon>TextArea_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\TextArea_Edit.ascx.designer.cs">
+      <DependentUpon>TextArea_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Text_Edit.ascx.cs">
+      <DependentUpon>Text_Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicData\FieldTemplates\Text_Edit.ascx.designer.cs">
+      <DependentUpon>Text_Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginForm.aspx.designer.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage_1.Master.cs">
+      <DependentUpon>MasterPage_1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage_1.Master.designer.cs">
+      <DependentUpon>MasterPage_1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage_Simple.Master.cs">
+      <DependentUpon>MasterPage_Simple.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage_Simple.Master.designer.cs">
+      <DependentUpon>MasterPage_Simple.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage_Simple_WithButtons.master.cs">
+      <DependentUpon>MasterPage_Simple_WithButtons.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage_Simple_WithButtons.master.designer.cs">
+      <DependentUpon>MasterPage_Simple_WithButtons.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosDatos\dbContab.cs">
+      <DependentUpon>dbContab.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosDatos\dbContab.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbContab.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelosDatos_EF\dbContabDFModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbContabDFModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MostrarProgreso.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="old_app_code\AppRoles.cs" />
+    <Compile Include="old_app_code\FuncionesContab.cs" />
+    <Compile Include="old_app_code\BuildSqlCriteria.cs" />
+    <Compile Include="old_app_code\ContabSysNet_TempDB.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContabSysNet_TempDB.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="old_app_code\ContabSysNet_TempDB_Contab.cs">
+      <DependentUpon>ContabSysNet_TempDB_Contab.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="old_app_code\ContabSysNet_TempDB_Contab.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContabSysNet_TempDB_Contab.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="old_app_code\dbBancos.cs">
+      <DependentUpon>dbBancos.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="old_app_code\dbBancos.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbBancos.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="old_app_code\dbGeneral.designer.cs" />
+    <Compile Include="old_app_code\dbGeneral1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbGeneral.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="old_app_code\generales.cs" />
+    <Compile Include="old_app_code\Generales2.cs" />
+    <Compile Include="old_app_code\KeepPageState.cs" />
+    <Compile Include="old_app_code\Usuarios.cs" />
+    <Compile Include="Otros\CambiarPassword.aspx.cs">
+      <DependentUpon>CambiarPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Otros\CambiarPassword.aspx.designer.cs">
+      <DependentUpon>CambiarPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Otros\Control acceso\AgregarUsuario.aspx.cs">
+      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Otros\Control acceso\AgregarUsuario.aspx.designer.cs">
+      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Otros\Control acceso\AsociarFuncionesRoles.aspx.cs">
+      <DependentUpon>AsociarFuncionesRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Otros\Control acceso\AsociarFuncionesRoles.aspx.designer.cs">
+      <DependentUpon>AsociarFuncionesRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Otros\Control acceso\AsociarRolesUsuarios.aspx.cs">
+      <DependentUpon>AsociarRolesUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Otros\Control acceso\AsociarRolesUsuarios.aspx.designer.cs">
+      <DependentUpon>AsociarRolesUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Otros\Control acceso\Roles.aspx.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Otros\Control acceso\Roles.aspx.designer.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presupuesto_MontosEstimados.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Presupuesto_MontosEstimados.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportViewer.aspx.cs">
+      <DependentUpon>ReportViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewer.aspx.designer.cs">
+      <DependentUpon>ReportViewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportViewer2.aspx.cs">
+      <DependentUpon>ReportViewer2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewer2.aspx.designer.cs">
+      <DependentUpon>ReportViewer2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportViewer4.aspx.cs">
+      <DependentUpon>ReportViewer4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewer4.aspx.designer.cs">
+      <DependentUpon>ReportViewer4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Bancos\Disponibilidad_MontosRestringidos.TableAdapters.cs" />
+    <Compile Include="report_datasets\Bancos\Disponibilidad_MontosRestringidos1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Disponibilidad_MontosRestringidos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Bancos\ReporteConciliacion_MovBanco_DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteConciliacion_MovBanco_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Bancos\ReporteDisponibilidad_DataSet.cs">
+      <DependentUpon>ReporteDisponibilidad_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Bancos\ReporteDisponibilidad_DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteDisponibilidad_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Bancos\ReporteFacturas_DataSet.cs">
+      <DependentUpon>ReporteFacturas_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Bancos\ReporteFacturas_DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteFacturas_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Bancos\VencimientoFacturas_DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VencimientoFacturas_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Contab\CajaChica_DataSet.Designer.cs" />
+    <Compile Include="report_datasets\Contab\CajaChica_DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CajaChica_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Contab\ComprobantesContables_DataSet.cs">
+      <DependentUpon>ComprobantesContables_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Contab\ComprobantesContables_DataSet.Designer.cs" />
+    <Compile Include="report_datasets\Contab\ComprobantesContables_DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComprobantesContables_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Contab\Presupuesto_ConsultaAnual.Designer.cs" />
+    <Compile Include="report_datasets\Contab\Presupuesto_ConsultaAnual1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Presupuesto_ConsultaAnual.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Contab\Presupuesto_ConsultaMensual.Designer.cs" />
+    <Compile Include="report_datasets\Contab\Presupuesto_ConsultaMensual1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Presupuesto_ConsultaMensual.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_datasets\Contab\Presupuesto_MontosEstimados.Designer.cs" />
+    <Compile Include="report_datasets\Contab\Presupuesto_MontosEstimados1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Presupuesto_MontosEstimados.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UserControls\ReportOptions.ascx.cs">
+      <DependentUpon>ReportOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ReportOptions.ascx.designer.cs">
+      <DependentUpon>ReportOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilitarios\ActivosFijos\ReconversionMonetaria.aspx.cs">
+      <DependentUpon>ReconversionMonetaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilitarios\ActivosFijos\ReconversionMonetaria.aspx.designer.cs">
+      <DependentUpon>ReconversionMonetaria.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Main\Models\" />
+    <Folder Include="DynamicData\PageTemplates\" />
+    <Folder Include="keepstatefiles\" />
+    <Folder Include="Pictures\GEH\" />
+    <Folder Include="Scripts\BackUp\" />
+    <Folder Include="Temp\Uploaded_Catalogos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Web.config" />
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MasterPage_1.Master" />
+    <Content Include="MasterPage_Simple.Master" />
+    <Content Include="MasterPage_Simple_WithButtons.master" />
+    <None Include="ActivosFijos\Consultas\DepreciacionMensual\ReporteDepreciacionMensual_DataSet.xsc">
+      <DependentUpon>ReporteDepreciacionMensual_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ActivosFijos\Consultas\DepreciacionMensual\ReporteDepreciacionMensual_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReporteDepreciacionMensual_DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ActivosFijos\Consultas\DepreciacionMensual\ReporteDepreciacionMensual_DataSet.xss">
+      <DependentUpon>ReporteDepreciacionMensual_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Contab\Consultas contables\Cuentas y movimientos\ReporteMayorGeneral_DataSet.xsc">
+      <DependentUpon>ReporteMayorGeneral_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Contab\Consultas contables\Cuentas y movimientos\ReporteMayorGeneral_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReporteMayorGeneral_DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Contab\Consultas contables\Cuentas y movimientos\ReporteMayorGeneral_DataSet.xss">
+      <DependentUpon>ReporteMayorGeneral_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ModelosDatos\dbContab.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>dbContab.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="ModelosDatos_EF\dbContabDFModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbContabDFModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="ModelosDatos_EF\ActivosFijos\dbContab_ActFijos.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbContab_ActFijos.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="ModelosDatos_EF\Contab\dbContab_Contab.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbContab_Contab.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="ModelosDatos_EF\Bancos\BancosEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BancosEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="ModelosDatos_EF\Nomina\NominaEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NominaEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="old_app_code\ContabSysNet_TempDB.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ContabSysNet_TempDB.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="old_app_code\ContabSysNet_TempDB_Contab.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ContabSysNet_TempDB_Contab.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="old_app_code\dbBancos.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>dbBancos.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="old_app_code\dbGeneral.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>dbGeneral1.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="packages.config" />
+    <None Include="Pictures\arrow_left_25x25.pdn" />
+    <Content Include="Web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Presupuesto_MontosEstimados.xsc">
+      <DependentUpon>Presupuesto_MontosEstimados.xsd</DependentUpon>
+    </None>
+    <None Include="Presupuesto_MontosEstimados.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Presupuesto_MontosEstimados.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Presupuesto_MontosEstimados.xss">
+      <DependentUpon>Presupuesto_MontosEstimados.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\Disponibilidad_MontosRestringidos.xsc">
+      <DependentUpon>Disponibilidad_MontosRestringidos.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\Disponibilidad_MontosRestringidos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Disponibilidad_MontosRestringidos1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Bancos\Disponibilidad_MontosRestringidos.xss">
+      <DependentUpon>Disponibilidad_MontosRestringidos.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\ReporteConciliacion_MovBanco_DataSet.xsc">
+      <DependentUpon>ReporteConciliacion_MovBanco_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\ReporteConciliacion_MovBanco_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReporteConciliacion_MovBanco_DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Bancos\ReporteConciliacion_MovBanco_DataSet.xss">
+      <DependentUpon>ReporteConciliacion_MovBanco_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\ReporteDisponibilidad_DataSet.xsc">
+      <DependentUpon>ReporteDisponibilidad_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\ReporteDisponibilidad_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReporteDisponibilidad_DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Bancos\ReporteDisponibilidad_DataSet.xss">
+      <DependentUpon>ReporteDisponibilidad_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\ReporteFacturas_DataSet.xsc">
+      <DependentUpon>ReporteFacturas_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\ReporteFacturas_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReporteFacturas_DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Bancos\ReporteFacturas_DataSet.xss">
+      <DependentUpon>ReporteFacturas_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\VencimientoFacturas_DataSet.xsc">
+      <DependentUpon>VencimientoFacturas_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Bancos\VencimientoFacturas_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VencimientoFacturas_DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Bancos\VencimientoFacturas_DataSet.xss">
+      <DependentUpon>VencimientoFacturas_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\CajaChica_DataSet.xsc">
+      <DependentUpon>CajaChica_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\CajaChica_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CajaChica_DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Contab\CajaChica_DataSet.xss">
+      <DependentUpon>CajaChica_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\ComprobantesContables_DataSet.xsc">
+      <DependentUpon>ComprobantesContables_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\ComprobantesContables_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ComprobantesContables_DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Contab\ComprobantesContables_DataSet.xss">
+      <DependentUpon>ComprobantesContables_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\Presupuesto_ConsultaAnual.xsc">
+      <DependentUpon>Presupuesto_ConsultaAnual.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\Presupuesto_ConsultaAnual.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Presupuesto_ConsultaAnual1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Contab\Presupuesto_ConsultaAnual.xss">
+      <DependentUpon>Presupuesto_ConsultaAnual.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\Presupuesto_ConsultaMensual.xsc">
+      <DependentUpon>Presupuesto_ConsultaMensual.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\Presupuesto_ConsultaMensual.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Presupuesto_ConsultaMensual1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Contab\Presupuesto_ConsultaMensual.xss">
+      <DependentUpon>Presupuesto_ConsultaMensual.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\Presupuesto_MontosEstimados.xsc">
+      <DependentUpon>Presupuesto_MontosEstimados.xsd</DependentUpon>
+    </None>
+    <None Include="report_datasets\Contab\Presupuesto_MontosEstimados.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Presupuesto_MontosEstimados1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="report_datasets\Contab\Presupuesto_MontosEstimados.xss">
+      <DependentUpon>Presupuesto_MontosEstimados.xsd</DependentUpon>
+    </None>
+    <Content Include="WebConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="old_app_code\dbGeneral.dbml.layout">
+      <DependentUpon>dbGeneral.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ActivosFijos\Consultas\DepreciacionMensual\ConsultaDepreciacion.rdlc" />
+    <EmbeddedResource Include="Areas\Contabilidad\Reports\CentrosCosto.rdlc" />
+    <EmbeddedResource Include="Bancos\ConciliacionBancaria\MovimientosContables.rdlc" />
+    <EmbeddedResource Include="Bancos\ConciliacionBancaria\MovimientosBancarios.rdlc" />
+    <EmbeddedResource Include="Bancos\ConciliacionBancaria\MovimientosDesdeElBanco.rdlc" />
+    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\ComprobanteRetencionIva.rdlc" />
+    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_Generales.rdlc" />
+    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_Generales2.rdlc" />
+    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\FacturaClientesImpresa.rdlc" />
+    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_LibroCompras.rdlc" />
+    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_LibroVentas.rdlc" />
+    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_RetencionesIVA.rdlc" />
+    <EmbeddedResource Include="Bancos\Consultas facturas\Pagos\ConsultaPagos.rdlc" />
+    <EmbeddedResource Include="Bancos\Consultas facturas\VencimientoFacturas\VencimientoFacturas.rdlc" />
+    <EmbeddedResource Include="Bancos\ConsultasBancos\MovimientosBancarios\ConsultaMovimientosBancarios.rdlc" />
+    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad.rdlc" />
+    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad_Resumen.rdlc" />
+    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad_DosColumnas.rdlc" />
+    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad_DosColumnas2.rdlc" />
+    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_SoloSaldoFinal.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\Centros de costo\CentrosCosto_Landscape.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\Centros de costo\CentrosCosto_Portrait.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Landscape.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Portrait.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Portrait_debeHaber.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Landscape_orderByComprobante.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Portrait_orderByComprobante.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\Comprobantes\ComprobantesContables_Portrait_debeHaber_orderByComprobante.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_Landscape.rdlc" />
+    <EmbeddedResource Include="Contab\Consultas contables\Cuentas y movimientos\CuentasYMovimientos_Portrait.rdlc" />
+    <EmbeddedResource Include="Contab\Presupuesto\Consultas\Anual\ConsultaAnual.rdlc" />
+    <EmbeddedResource Include="Contab\Presupuesto\Consultas\Mensual\ConsultaMensual.rdlc" />
+    <EmbeddedResource Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados.rdlc" />
+    <EmbeddedResource Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados_CuentasContables.rdlc" />
+    <None Include="old_app_code\ContabSysNet_TempDB.dbml.layout">
+      <DependentUpon>ContabSysNet_TempDB.dbml</DependentUpon>
+    </None>
+    <None Include="old_app_code\ContabSysNet_TempDB_Contab.dbml.layout">
+      <DependentUpon>ContabSysNet_TempDB_Contab.dbml</DependentUpon>
+    </None>
+    <None Include="old_app_code\dbBancos.dbml.layout">
+      <DependentUpon>dbBancos.dbml</DependentUpon>
+    </None>
+    <None Include="ModelosDatos\dbContab.dbml.layout">
+      <DependentUpon>dbContab.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bower_components\angular-ui-router\api\angular-ui-router.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>13515</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/ContabSysNet_Web</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

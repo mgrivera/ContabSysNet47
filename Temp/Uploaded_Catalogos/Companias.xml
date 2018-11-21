@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<File>
+  <Item>
+    <Numero>49</Numero>
+    <Nombre>GEH ASESORES VIEJA</Nombre>
+    <NombreCorto>Geh Vieja</NombreCorto>
+    <Abreviatura>GEHV</Abreviatura>
+    <Rif>J-30316001-8</Rif>
+    <Direccion>Av. Bolivar Norte, C.C. Y Prof. El Camoruco, piso 9 oficinas 9-1 al 9-4 . Valencia.</Direccion>
+    <Ciudad>VALENCIA</Ciudad>
+    <EntidadFederal>CARABOBO</EntidadFederal>
+    <ZonaPostal>2002</ZonaPostal>
+    <Telefono1>(041) 820-0000</Telefono1>
+    <Telefono2>0418200000</Telefono2>
+    <Fax>0418200052</Fax>
+    <EmailServerName />
+    <EmailServerPort />
+    <EmailServerSSLFlag />
+    <EmailServerCredentialsUserName />
+    <EmailServerCredentialsPassword />
+  </Item>
+  <Item>
+    <Numero>50</Numero>
+    <Nombre>GEH ASESORES INTEGRALES DE SALUD, C.A</Nombre>
+    <NombreCorto>Geh Asesores</NombreCorto>
+    <Abreviatura>GEH</Abreviatura>
+    <Rif>J-30316001-8</Rif>
+    <Direccion>Av. Bolivar Norte, C.C. Y Prof. El Camoruco, piso 9 oficinas 9-1 al 9-4.</Direccion>
+    <Ciudad>VALENCIA</Ciudad>
+    <EntidadFederal>CARABOBO</EntidadFederal>
+    <ZonaPostal />
+    <Telefono1>(041) 820-0000</Telefono1>
+    <Telefono2>0418200000</Telefono2>
+    <Fax>0418200000</Fax>
+    <EmailServerName />
+    <EmailServerPort />
+    <EmailServerSSLFlag />
+    <EmailServerCredentialsUserName />
+    <EmailServerCredentialsPassword />
+  </Item>
+  <Item>
+    <Numero>54</Numero>
+    <Nombre>ARYS AUTOS C.A.</Nombre>
+    <NombreCorto>ARYS AUTOS</NombreCorto>
+    <Abreviatura>ARYS</Abreviatura>
+    <Rif>J-30992060-0</Rif>
+    <Direccion>Av. Bolivar Norte, C.C. Y Prof. El Camoruco, piso 9 oficinas 9-1 al 9-4.</Direccion>
+    <Ciudad>VALENCIA</Ciudad>
+    <EntidadFederal>CARABOBO</EntidadFederal>
+    <ZonaPostal />
+    <Telefono1>(041) 617-9390</Telefono1>
+    <Telefono2>0416179389</Telefono2>
+    <Fax>0418257321</Fax>
+    <EmailServerName />
+    <EmailServerPort />
+    <EmailServerSSLFlag />
+    <EmailServerCredentialsUserName />
+    <EmailServerCredentialsPassword />
+  </Item>
+  <Item>
+    <Numero>55</Numero>
+    <Nombre>TODO SALUD CONSULTORIA INTEGRAL, C.A.</Nombre>
+    <NombreCorto>TODO SALUD</NombreCorto>
+    <Abreviatura>TODSA</Abreviatura>
+    <Rif>J-31462124-6</Rif>
+    <Direccion>AV. BOLIVAR NORTE CC C. C. Y P. EL CAMORUCO NIVEL 10, OF 10-2. URB. SAN JOSE DE TARBES</Direccion>
+    <Ciudad>VALENCIA</Ciudad>
+    <EntidadFederal>CARABOBO</EntidadFederal>
+    <ZonaPostal>2001</ZonaPostal>
+    <Telefono1>(041) 820-0185</Telefono1>
+    <Telefono2 />
+    <Fax>041820187</Fax>
+    <EmailServerName />
+    <EmailServerPort />
+    <EmailServerSSLFlag />
+    <EmailServerCredentialsUserName />
+    <EmailServerCredentialsPassword />
+  </Item>
+  <Item>
+    <Numero>56</Numero>
+    <Nombre>ADMINDENTAL, C.A.</Nombre>
+    <NombreCorto>ADMIDENTAL</NombreCorto>
+    <Abreviatura>ADMIN</Abreviatura>
+    <Rif>J-31694536-7</Rif>
+    <Direccion>Av. Bolivar Norte Sector San Jose de Tarbes C.C.P. El Camoruco Piso Of 9-1</Direccion>
+    <Ciudad>Valencia</Ciudad>
+    <EntidadFederal>Carabobo</EntidadFederal>
+    <ZonaPostal>2001</ZonaPostal>
+    <Telefono1>(041) 820-0000</Telefono1>
+    <Telefono2 />
+    <Fax />
+    <EmailServerName />
+    <EmailServerPort />
+    <EmailServerSSLFlag />
+    <EmailServerCredentialsUserName />
+    <EmailServerCredentialsPassword />
+  </Item>
+</File>

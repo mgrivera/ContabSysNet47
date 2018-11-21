@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.25, 12" name="ContabSysNet_TempDB">
+  <DataContextMoniker Name="/ContabSysNet_TempDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="dc3d1256-0b67-486b-ad99-61a4a898ce91" absoluteBounds="0.5, 0.75, 3, 2.5401025390625">
+      <DataClassMoniker Name="/ContabSysNet_TempDBDataContext/ConciliacionBancaria_MovimientosAConciliar" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b25af81a-661c-439d-84e7-ad9a679eff2c" absoluteBounds="0.515, 1.21, 2.9699999999999998, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5c02e8c1-d65a-411c-b847-09f64bddc5b7" absoluteBounds="10.125, 0.625, 3.875, 4.6554182942708326">
+      <DataClassMoniker Name="/ContabSysNet_TempDBDataContext/ConciliacionBancaria_MovimientosBancario" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dca121dc-fc26-42c4-bf50-3353f200df9d" absoluteBounds="10.14, 1.085, 3.8449999999999998, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f3096f50-f2d5-4aec-99a9-351164276ba3" absoluteBounds="0.875, 3.875, 2.875, 7.9245426432291648">
+      <DataClassMoniker Name="/ContabSysNet_TempDBDataContext/Bancos_VencimientoFactura" />
+      <nestedChildShapes>
+        <elementListCompartment Id="51ba64c2-5394-431d-85d5-e31d9de5cbdb" absoluteBounds="0.89, 4.335, 2.8449999999999998, 7.3645426432291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

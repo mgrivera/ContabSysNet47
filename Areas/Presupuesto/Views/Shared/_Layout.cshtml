@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- para evitar que el "compatibility mode" afecte esta aplicación "-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Presupuesto</title>
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="~/Content/myStyles.css" rel="stylesheet" />
+
+    <link href="~/Content/mybootstrap.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jqgrid/js/jquery-1.11.0.min.js"></script>
+    <link href="~/Scripts/jqueryui/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jqueryui/jquery-ui.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap_pagination/jquery.bootpag.min.js"></script>
+    @*<script src="~/Scripts/knockout-3.2.0.js"></script>*@
+
+    <script src="~/Scripts/moment.min.js"></script>
+
+    <script src="~/Scripts/numeral.js/numeral.min.js"></script>
+    <script src="~/Scripts/numeral.js/languages.min.js"></script>
+
+    <script src="~/Scripts/lo-dash-2.4.1.js"></script>
+
+    <script src="~/Scripts/angular/angular.min.js"></script>
+    <script src="~/Scripts/angular/angular-locale_en-us.js"></script>
+    <script src="~/Scripts/angular/angular-locale_es.js"></script>
+    <script src="~/Scripts/angular/angular-pagination/dirPagination.js"></script>
+    <script src="~/Scripts/angular/ui-bootstrap-tpls-0.12.0.min.js"></script>
+
+    <link href="~/Content/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/nedb.min.js"></script>
+
+</head>
+<body>
+    <script type="text/javascript">
+        // obtenemos el 'uri' de la aplicación, para usarlo en forma general en la página
+        var path = '@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))';
+    </script>
+
+    <div class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                @{
+                    // nótese como obtenemos la dirección del root de la aplicación; cómo estamos en mvc y queremos ir a WebForms, no podemos usar
+                    // Html.ActionLink, pues no vamos a un controller ...
+
+                    string myDomainRoot = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+                    myDomainRoot += "/Default.aspx";
+
+                    <!-- nótese como, para esta página en particular, no queremos que el 'brand name' sea un link que regrese al home page -->
+                    
+                    @*<a href=@myDomainRoot target="_self" class="navbar-brand">
+                        <p style="color: #777777; font-size: x-large; font-style: italic; ">ContabSysNet</p>
+                    </a>*@
+
+                    
+                    <a href="#" target="_self" class="navbar-brand">
+                        <p style="color: #777777; font-size: x-large; font-style: italic; ">ContabSysNet</p>
+                    </a>
+                }
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="text-align: right; color: #39557F; "><em>Contab ...</em></p>
+        </footer>
+    </div>
+
+    <script>
+        $(function () {
+            // para asociar el jquery datepicker a los inputs que tengan la clase ".datefield"
+            $('.datefield').datepicker({ dateFormat: "dd-mm-y" });
+
+            // default format and lenguage for numeral.js
+            //numeral.language('es');
+            numeral.defaultFormat('0,0.00');
+        });
+
+        // para mostrar un progress indicator cuando la página hace un ajax call
+        $(function () {
+            $(document).ajaxStart(function () {
+                $('.ajaxProgressIndicator').show();
+
+                // activamos el progressbar como indeterminate
+                $(".progressbar").progressbar({ disable: false });
+                $(".progressbar").progressbar({ value: false });
+            }).ajaxStop(function () {
+                $('.ajaxProgressIndicator').hide();
+
+                $(".progressbar").each(function () {
+                    var pb = $(this).progressbar("instance")        // obtenemos el 'instance' del progressbar en el dom element (puede no haber uno)
+                    if (pb)
+                        $(this).progressbar("destroy");
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

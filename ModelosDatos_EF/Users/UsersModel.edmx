@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbContabUsersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="LoweredUserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companias">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Numero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreCorto" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Abreviatura" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Rif" Type="nvarchar" MaxLength="12" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="150" />
+          <Property Name="Ciudad" Type="nvarchar" MaxLength="25" />
+          <Property Name="EntidadFederal" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZonaPostal" Type="nvarchar" MaxLength="15" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="14" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="14" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="14" />
+          <Property Name="EmailServerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailServerPort" Type="int" />
+          <Property Name="EmailServerSSLFlag" Type="bit" />
+          <Property Name="EmailServerCredentialsUserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailServerCredentialsPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="MonedaDefecto" Type="int" />
+          <Property Name="SuspendidoFlag" Type="bit" />
+        </EntityType>
+        <EntityType Name="CompaniasYUsuarios">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Compania" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCiaSeleccionada">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CiaSeleccionada" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreCorto" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Usuario" Type="int" Nullable="false" />
+          <Property Name="UsuarioLS" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_CompaniasYUsuarios_aspnet_Users">
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompaniasYUsuarios" Type="Self.CompaniasYUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CompaniasYUsuarios">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniasYUsuarios_Companias">
+          <End Role="Companias" Type="Self.Companias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompaniasYUsuarios" Type="Self.CompaniasYUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="CompaniasYUsuarios">
+              <PropertyRef Name="Compania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCiaSeleccionada_Companias">
+          <End Role="Companias" Type="Self.Companias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tCiaSeleccionada" Type="Self.tCiaSeleccionada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tCiaSeleccionada">
+              <PropertyRef Name="CiaSeleccionada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbContabUsersModelStoreContainer">
+          <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companias" EntityType="Self.Companias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompaniasYUsuarios" EntityType="Self.CompaniasYUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCiaSeleccionada" EntityType="Self.tCiaSeleccionada" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CompaniasYUsuarios_aspnet_Users" Association="Self.FK_CompaniasYUsuarios_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="CompaniasYUsuarios" EntitySet="CompaniasYUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniasYUsuarios_Companias" Association="Self.FK_CompaniasYUsuarios_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="CompaniasYUsuarios" EntitySet="CompaniasYUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCiaSeleccionada_Companias" Association="Self.FK_tCiaSeleccionada_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="tCiaSeleccionada" EntitySet="tCiaSeleccionada" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbContabUsersModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbContabUsersEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="aspnet_Users" EntityType="dbContabUsersModel.aspnet_Users" />
+          <EntitySet Name="Companias" EntityType="dbContabUsersModel.Compania" />
+          <EntitySet Name="CompaniasYUsuarios" EntityType="dbContabUsersModel.CompaniasYUsuario" />
+          <AssociationSet Name="FK_CompaniasYUsuarios_aspnet_Users" Association="dbContabUsersModel.FK_CompaniasYUsuarios_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="CompaniasYUsuarios" EntitySet="CompaniasYUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniasYUsuarios_Companias" Association="dbContabUsersModel.FK_CompaniasYUsuarios_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="CompaniasYUsuarios" EntitySet="CompaniasYUsuarios" />
+          </AssociationSet>
+          <EntitySet Name="tCiaSeleccionadas" EntityType="dbContabUsersModel.tCiaSeleccionada" />
+          <AssociationSet Name="FK_tCiaSeleccionada_Companias" Association="dbContabUsersModel.FK_tCiaSeleccionada_Companias">
+            <End Role="Compania" EntitySet="Companias" />
+            <End Role="tCiaSeleccionada" EntitySet="tCiaSeleccionadas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="LoweredUserName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="MobileAlias" Type="String" MaxLength="16" Unicode="true" FixedLength="false" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CompaniasYUsuarios" Relationship="dbContabUsersModel.FK_CompaniasYUsuarios_aspnet_Users" FromRole="aspnet_Users" ToRole="CompaniasYUsuarios" />
+        </EntityType>
+        <EntityType Name="Compania">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Numero" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NombreCorto" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="Abreviatura" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="false" />
+          <Property Name="Rif" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
+          <Property Name="Direccion" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="EntidadFederal" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ZonaPostal" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono1" Type="String" MaxLength="14" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono2" Type="String" MaxLength="14" Unicode="true" FixedLength="false" />
+          <Property Name="Fax" Type="String" MaxLength="14" Unicode="true" FixedLength="false" />
+          <Property Name="EmailServerName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="EmailServerPort" Type="Int32" />
+          <Property Name="EmailServerSSLFlag" Type="Boolean" />
+          <Property Name="EmailServerCredentialsUserName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="EmailServerCredentialsPassword" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MonedaDefecto" Type="Int32" />
+          <Property Name="SuspendidoFlag" Type="Boolean" />
+          <NavigationProperty Name="CompaniasYUsuarios" Relationship="dbContabUsersModel.FK_CompaniasYUsuarios_Companias" FromRole="Companias" ToRole="CompaniasYUsuarios" />
+          <NavigationProperty Name="tCiaSeleccionadas" Relationship="dbContabUsersModel.FK_tCiaSeleccionada_Companias" FromRole="Compania" ToRole="tCiaSeleccionada" />
+        </EntityType>
+        <EntityType Name="CompaniasYUsuario">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Compania" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="aspnet_Users" Relationship="dbContabUsersModel.FK_CompaniasYUsuarios_aspnet_Users" FromRole="CompaniasYUsuarios" ToRole="aspnet_Users" />
+          <NavigationProperty Name="Compania1" Relationship="dbContabUsersModel.FK_CompaniasYUsuarios_Companias" FromRole="CompaniasYUsuarios" ToRole="Companias" />
+        </EntityType>
+        <Association Name="FK_CompaniasYUsuarios_aspnet_Users">
+          <End Role="aspnet_Users" Type="dbContabUsersModel.aspnet_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompaniasYUsuarios" Type="dbContabUsersModel.CompaniasYUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CompaniasYUsuarios">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniasYUsuarios_Companias">
+          <End Role="Companias" Type="dbContabUsersModel.Compania" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompaniasYUsuarios" Type="dbContabUsersModel.CompaniasYUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="CompaniasYUsuarios">
+              <PropertyRef Name="Compania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tCiaSeleccionada">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CiaSeleccionada" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCorto" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Usuario" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioLS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Compania" Relationship="dbContabUsersModel.FK_tCiaSeleccionada_Companias" FromRole="tCiaSeleccionada" ToRole="Compania" />
+        </EntityType>
+        <Association Name="FK_tCiaSeleccionada_Companias">
+          <End Type="dbContabUsersModel.Compania" Role="Compania" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbContabUsersModel.tCiaSeleccionada" Role="tCiaSeleccionada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compania">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tCiaSeleccionada">
+              <PropertyRef Name="CiaSeleccionada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbContabUsersModelStoreContainer" CdmEntityContainer="dbContabUsersEntities">
+          <EntitySetMapping Name="aspnet_Users">
+            <EntityTypeMapping TypeName="dbContabUsersModel.aspnet_Users">
+              <MappingFragment StoreEntitySet="aspnet_Users">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+                <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companias">
+            <EntityTypeMapping TypeName="dbContabUsersModel.Compania">
+              <MappingFragment StoreEntitySet="Companias">
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NombreCorto" ColumnName="NombreCorto" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Rif" ColumnName="Rif" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="EntidadFederal" ColumnName="EntidadFederal" />
+                <ScalarProperty Name="ZonaPostal" ColumnName="ZonaPostal" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="EmailServerName" ColumnName="EmailServerName" />
+                <ScalarProperty Name="EmailServerPort" ColumnName="EmailServerPort" />
+                <ScalarProperty Name="EmailServerSSLFlag" ColumnName="EmailServerSSLFlag" />
+                <ScalarProperty Name="EmailServerCredentialsUserName" ColumnName="EmailServerCredentialsUserName" />
+                <ScalarProperty Name="EmailServerCredentialsPassword" ColumnName="EmailServerCredentialsPassword" />
+                <ScalarProperty Name="MonedaDefecto" ColumnName="MonedaDefecto" />
+                <ScalarProperty Name="SuspendidoFlag" ColumnName="SuspendidoFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompaniasYUsuarios">
+            <EntityTypeMapping TypeName="dbContabUsersModel.CompaniasYUsuario">
+              <MappingFragment StoreEntitySet="CompaniasYUsuarios">
+                <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="Compania" ColumnName="Compania" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCiaSeleccionadas">
+            <EntityTypeMapping TypeName="dbContabUsersModel.tCiaSeleccionada">
+              <MappingFragment StoreEntitySet="tCiaSeleccionada">
+                <ScalarProperty Name="UsuarioLS" ColumnName="UsuarioLS" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="NombreCorto" ColumnName="NombreCorto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CiaSeleccionada" ColumnName="CiaSeleccionada" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="3ebdb9a58f6b40988faf30c54eaa0c5b" Name="Diagram1">
+        <EntityTypeShape EntityType="dbContabUsersModel.aspnet_Users" Width="2" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbContabUsersModel.Compania" Width="2.625" PointX="7.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbContabUsersModel.CompaniasYUsuario" Width="2.375" PointX="3.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="dbContabUsersModel.FK_CompaniasYUsuarios_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="dbContabUsersModel.FK_CompaniasYUsuarios_Companias" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbContabUsersModel.tCiaSeleccionada" Width="1.875" PointX="10.875" PointY="1" />
+        <AssociationConnector Association="dbContabUsersModel.FK_tCiaSeleccionada_Companias" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

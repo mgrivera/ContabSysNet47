@@ -1,0 +1,820 @@
+﻿@{
+    ViewBag.Title = "Contab - Presupuesto - Registro de montos estimados";
+}
+
+<div ng-app="myApp" ng-controller="MainController">
+
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-1" style="font-style: italic; ">
+                <h4>Códigos de presupuesto - Registro de montos estimados</h4>
+            </div>
+            <div class="col-sm-2" style="text-align: center; vertical-align: middle; ">
+                <i style="color: #428BCA" class="fa fa-circle-o-notch fa-spin fa-2x" ng-show="showProgress"></i>
+            </div>
+            <div id="nombreCiaSeleccionada_Div"
+                 style="text-align: right; font-size: small; color: #004080; font-style: italic; "
+                 class="col-sm-5">
+                <span style="padding-right: 15px; ">{{ ciaContabSeleccionada.ciaContabSeleccionadaNombre }}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-11 col-sm-offset-1">
+                <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                    <!-- nótese lo que sigue pues muchas veces viene html en el mensaje (ej: errores: error1<br />error2 ... ) -->
+                    <span ng-bind-html="alert.msg | unsafe"></span>
+                </alert>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-1 left-side-bar" style="padding: 20px 0 30px 0; border: solid 1px lightgray; text-align: center; ">
+
+                <!-- 1) leemos el documento Excel  -->
+                <a href='#' ng-click="openModalFiltro('lg')">
+                    <img src='@Url.Content("~/Pictures/filter_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' ng-click="openModalFiltro('lg')">Aplicar<br />un filtro</a>
+
+                <br />
+                <hr />
+
+                <!-- grabamos las facturas  -->
+                <a href='#' ng-click="grabarDatosAlServidor()" ng-disabled="editMode || !formHasBeenEdited()" class="btn btn-link">
+                    <img src='@Url.Content("~/Pictures/save_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' ng-click="grabarDatosAlServidor()" ng-disabled="editMode || !formHasBeenEdited()" class="btn btn-link">Grabar</a>
+
+                <br />
+                <hr />
+
+                <a href='#' ng-click="openFuncionesModal('lg')" class="btn btn-link">
+                    <img src='@Url.Content("~/Pictures/Gears_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' ng-click="openFuncionesModal('lg')" class="btn btn-link">Funciones</a>
+
+                <br />
+                <hr />
+            </div>
+
+            <div class="col-md-11">
+
+                <form name="myForm" ng-submit="submitMyForm()" novalidate>
+
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div>
+                                <dir-pagination-controls boundary-links="true"
+                                                         template-url="~/Scripts/angular/angular-pagination/dirPagination.tpl.html"
+                                                         class="navigation-bar">
+                                </dir-pagination-controls>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                                <input ng-model="filterUser"
+                                       class="form-control"
+                                       type="text"
+                                       placeholder="buscar ..." />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="input-group input-group-sm" style="text-align: right; width: 100%; ">
+                                <input type="number" min="1" max="100" class="form-control pull-right" ng-model="pageSize" style="width: 50%; ">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-2" style="text-align: right; ">
+                            <div ng-show="!editMode">
+                                <button ng-click="toggleEditMode()"
+                                        type="button">
+                                    <span class="glyphicon glyphicon-edit"></span> editar
+                                </button>
+                            </div>
+                            <div ng-show="editMode">
+                                <button type="submit">
+                                    <span class="glyphicon glyphicon-ok-sign"></span> fin edición
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div style="overflow: auto; ">
+                        <table class="table table-condensed table-striped table-bordered table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th colspan="5"></th>
+                                    <th colspan="12" style="text-align: center; ">Montos estimados para los meses del año fiscal</th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center; width: 10px; "></th>
+                                    <th style="text-align: left; width: 10px; ">Código</th>
+                                    <th style="text-align: left; ">Descripción</th>
+                                    <th style="text-align: center; ">Mon</thstyle>
+                                    <th style="text-align: center; ">Año</th>
+                                    <th style="text-align: right; ">01</th>
+                                    <th style="text-align: right; ">02</th>
+                                    <th style="text-align: right; ">03</th>
+                                    <th style="text-align: right; ">04</th>
+                                    <th style="text-align: right; ">05</th>
+                                    <th style="text-align: right; ">06</th>
+                                    <th style="text-align: right; ">07</th>
+                                    <th style="text-align: right; ">08</th>
+                                    <th style="text-align: right; ">09</th>
+                                    <th style="text-align: right; ">10</th>
+                                    <th style="text-align: right; ">11</th>
+                                    <th style="text-align: right; ">12</th>
+                                    <th style="width: 8px; "></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="monto in montosEstimados | filter:filterUser | itemsPerPage: pageSize"
+                                    current-page="currentPage"
+                                    ng-form="innerTableForm">
+
+                                    <td style="text-align: center; ">
+                                        <span ng-show="monto.isEdited" class="fa fa-pencil" style="color: cornflowerblue; font: xx-small; "></span>
+                                        <span ng-show="monto.isNew" class="fa fa-asterisk" style="color: cornflowerblue; font: xx-small; "></span>
+                                        <span ng-show="monto.isDeleted" class="fa fa-trash" style="color: #E78E8E; font: xx-small; "></span>
+                                    </td>
+
+                                    <td style="text-align: left; ">
+                                        <span>{{ monto.codigo }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span>{{ monto.descripcion }}</span>
+                                    </td>
+
+                                    <td style="text-align: center; ">
+                                        <span>{{ monto.monedaSimbolo }}</span>
+                                    </td>
+
+                                    <td style="text-align: center; ">
+                                        <span>{{ monto.ano }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       style="min-width: 85px; "
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes01_est"
+                                                       ng-model="monto.mes01_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes01_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes01_est.$invalid && !innerTableForm.mes01_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes01_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       style="min-width: 85px; "
+                                                       name="mes02_est"
+                                                       ng-model="monto.mes02_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes02_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes02_est.$invalid && !innerTableForm.mes02_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes02_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       style="min-width: 85px; "
+                                                       name="mes03_est"
+                                                       ng-model="monto.mes03_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes03_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes03_est.$invalid && !innerTableForm.mes03_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes03_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       style="min-width: 85px; "
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes04_est"
+                                                       ng-model="monto.mes04_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes04_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes04_est.$invalid && !innerTableForm.mes04_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes04_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       style="min-width: 85px; "
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes05_est"
+                                                       ng-model="monto.mes05_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes05_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes05_est.$invalid && !innerTableForm.mes05_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes05_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       style="min-width: 85px; "
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes06_est"
+                                                       ng-model="monto.mes06_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes06_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes06_est.$invalid && !innerTableForm.mes06_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes06_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       style="min-width: 85px; "
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes07_est"
+                                                       ng-model="monto.mes07_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes07_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes07_est.$invalid && !innerTableForm.mes07_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes07_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       style="min-width: 85px; "
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes08_est"
+                                                       ng-model="monto.mes08_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes08_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes08_est.$invalid && !innerTableForm.mes08_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes08_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       style="min-width: 85px; "
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes09_est"
+                                                       ng-model="monto.mes09_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes09_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes09_est.$invalid && !innerTableForm.mes09_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes09_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       style="min-width: 85px; "
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes10_est"
+                                                       ng-model="monto.mes10_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes10_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes10_est.$invalid && !innerTableForm.mes10_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes10_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       style="min-width: 85px; "
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes11_est"
+                                                       ng-model="monto.mes11_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes11_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes11_est.$invalid && !innerTableForm.mes11_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes11_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: right; ">
+                                        <div ng-show="editMode && !monto.isDeleted">
+                                            <div>
+                                                <input type="number"
+                                                       class="form-control input-sm tableInputs noSpinButton"
+                                                       name="mes12_est"
+                                                       style="min-width: 85px; "
+                                                       ng-model="monto.mes12_est"
+                                                       ng-change="setIsEdited(monto)"
+                                                       ng-model-options="{ updateOn: 'blur' }"
+                                                       required />
+
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes12_est.$error.required">
+                                                    Indique un valor
+                                                </span>
+                                                <span class="validation-message"
+                                                      ng-show="submitted && innerTableForm.mes12_est.$invalid && !innerTableForm.mes12_est.$error.required">
+                                                    Aparentemente, el valor indicado no es válido
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span ng-show="!editMode || (editMode && monto.isDeleted)">{{ monto.mes12_est | number:2 }}</span>
+                                    </td>
+
+                                    <td style="text-align: center; ">
+                                        <span ng-click="deleteItem(monto)" class="fa fa-times" style="color: #E78E8E"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ---------------------------------------------------------- -->
+    <!-- modal para permitir al usuario definir y aplicar un filtro -->
+    <script type="text/ng-template" id="modalFiltro.html">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Indique un criterio de selección y haga un click en Ok ...</h4>
+        </div>
+
+        <div class="modal-body">
+            <form class="form-horizontal" role="form" style="font-size: small; ">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label for="codigoInput" class="col-sm-2 control-label">Código: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="codigoInput" ng-model="filtro.codigo" style="width: 200px; ">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label for="descripcionInput" class="col-sm-4 control-label">Descripción: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="descripcionInput" ng-model="filtro.descripcion">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Monedas:</label>
+                                <div>
+                                    <select ng-model="filtro.monedas"
+                                            size="8"
+                                            class="form-control input-sm"
+                                            multiple="multiple"
+                                            ng-options="moneda.Simbolo for moneda in monedas"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Años:</label>
+                                <div>
+                                    <select ng-model="filtro.anos"
+                                            size="8"
+                                            class="form-control input-sm"
+                                            multiple="multiple"
+                                            ng-options="ano for ano in anos"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-link" ng-click="limpiarFiltro()">Limpiar filtro</button>
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+
+
+    <!-- ---------------------------------------------------------- -->
+    <!-- modal para permitir al usuario ejecutar funciones          -->
+    <script type="text/ng-template" id="funcionesModalTemplate.html">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Presupuesto - Montos estimados - Funciones</h4>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="row">
+                    <div class="col-sm-11 col-sm-offset-1" style="text-align: center; vertical-align: middle; ">
+                        <i style="color: #428BCA" class="fa fa-circle-o-notch fa-spin fa-2x" ng-show="showProgress"></i>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <alert style="font-size: small; " ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                            <!-- nótese lo que sigue pues muchas veces viene html en el mensaje (ej: errores: error1<br />error2 ... ) -->
+                            <span ng-bind-html="alert.msg | unsafe"></span>
+                        </alert>
+                    </div>
+                </div>
+            </div>
+
+            <tabset justified="true">
+                <tab heading="Agregar montos estimados para un año">
+
+                    <form class="form-horizontal"
+                          name="agregarMontosEstimadosForm"
+                          role="form"
+                          style="font-size: small; margin-top: 15px; "
+                          novalidate
+                          ng-submit="agregarMontosEstimadosForm_submit(agregarMontosEstimadosForm)">
+
+                        <div class="container-fluid">
+
+                            <p style="color: blue; ">1) Agregar montos estimados a códigos de presupuesto de este año y moneda: </p>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group form-group-sm">
+                                        <label for="anoInput" class="col-sm-2 control-label">Año: </label>
+                                        <div class="col-sm-10">
+                                            <input type="number"
+                                                   class="form-control input-sm"
+                                                   id="anoInput"
+                                                   required
+                                                   ng-model="agregarMontos_Parametros.ano"
+                                                   style="width: 80px; " />
+                                            <span class="validation-message"
+                                                  ng-show="agregarMontosEstimadosForm_submitted && agregarMontosEstimadosForm.anoInput.$invalid">
+                                                Ud. debe indicar una valor válido
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group form-group-sm">
+                                        <label for="monedaSelect" class="col-sm-2 control-label">Moneda: </label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control input-sm"
+                                                    style="width: 230px; "
+                                                    required
+                                                    ng-model="agregarMontos_Parametros.moneda"
+                                                    ng-options="moneda.Descripcion for moneda in monedas"
+                                                    id="monedaSelect"></select>
+                                            <span class="validation-message"
+                                                  ng-show="agregarMontosEstimadosForm_submitted && agregarMontosEstimadosForm.monedaSelect.$invalid">
+                                                Ud. debe indicar una valor válido
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-1" style="text-align: center; ">
+                                    <span class="fa fa-question-circle" style="font: small; " ng-click="agregarMontos_helpInfo = !agregarMontos_helpInfo">
+                                    </span>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <p style="color: blue; ">2) Usar como base (copiar desde ...) montos de presupuesto grabados para este año: </p>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group form-group-sm">
+                                        <label for="anoSelect" class="col-sm-2 control-label">Año: </label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control input-sm"
+                                                    style="width: 100px; "
+                                                    ng-model="agregarMontos_Parametros.anoCopiarDesde"
+                                                    ng-options="ano for ano in anos"
+                                                    id="anoSelect"></select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group form-group-sm">
+                                        <label for="tipoMonto" class="col-sm-2 control-label">Usar: </label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control input-sm"
+                                                    style="width: 230px; "
+                                                    ng-model="agregarMontos_Parametros.montosEjecutadosEstimados"
+                                                    id="tipoMonto">
+                                                <option value="ejecutados">Ejecutados</option>
+                                                <option value="estimados">Estimados</option>
+                                            </select>
+                                            <span class="validation-message"
+                                                  ng-show="agregarMontosEstimadosForm_submitted && agregarMontosEstimadosForm.tipoMonto.$invalid">
+                                                Ud. debe indicar una valor válido
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <p style="color: blue; ">3) Actualizar también los montos estimados que ahora puedan existir: </p>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-2">
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"
+                                                       ng-model="agregarMontos_Parametros.actualizarMontosSiExisten" />
+                                                actualizar montos si ya existen
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+                        </div>
+
+                        <div collapse="agregarMontos_helpInfo">
+                            <div class="well well-lg">
+                                <p>
+                                    Este proceso agrega registros de <em>montos estimados</em> para el año y moneda que se indique.
+                                </p>
+                                <p>
+                                    Al ser ejecutado, este proceso lee los códigos de presupuesto y agrega un
+                                    registro de monto estimado para cada uno de estos códigos, que no lo tenga
+                                    aún.
+                                </p>
+                                <p>
+                                    Si, por ejemplo, existen 10 códigos de presupuesto y solo cinco de ellos tienen
+                                    un registro de monto estimado para el año y moneda indicadas, este proceso agregará cinco
+                                    registros, para los códigos de presupuesto que no los tienen aún.
+                                </p>
+                                <p>
+                                    Ud. puede indicar un año 'base', usado para inicializar los montos que se agreguen.
+                                    Además, y solo si Ud. 'marca' la opción específica, este proceso puede actualizar montos
+                                    estimados <em>que existan para el año que se inique</em>.
+                                </p>
+                                <p>
+                                    <em><b>Nota importante:</em></b> este proceso leerá y tratará <em><b>todos</em></b> los códigos de
+                                    presupuesto que se hayan registrado y no solo aquellos que se han seleccionado mediante
+                                    la aplicación de un filtro.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="text-align: right; margin-top: 15px; ">
+                            <button type="submit" class="btn btn-primary">Agregar montos estimados</button>
+                        </div>
+                    </form>
+                </tab>
+
+                <tab heading="Ajustar los montos estimados seleccionados">
+
+                    <form class="form-horizontal"
+                          name="ajustarMontosEstimadosForm"
+                          role="form"
+                          style="font-size: small; margin-top: 15px; "
+                          novalidate
+                          ng-submit="ajustarMontosEstimadosForm_submit(ajustarMontosEstimadosForm)">
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group form-group-sm">
+                                        <label for="porcentajeInput" class="col-sm-6 control-label">Porcentaje(%): </label>
+                                        <div class="col-sm-6">
+                                            <input type="number"
+                                                   required
+                                                   class="form-control input-sm"
+                                                   id="porcentajeInput"
+                                                   ng-model="ajustarMontos_Parametros.porcentaje"
+                                                   style="width: 80px; ">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                </div>
+
+                                <div class="col-sm-1" style="text-align: center; ">
+                                    <span class="fa fa-question-circle" style="font: small; " ng-click="ajustarMontos_helpInfo = !ajustarMontos_helpInfo">
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div collapse="ajustarMontos_helpInfo" style="margin-top: 15px; ">
+                            <div class="well well-lg">
+                                <p>
+                                    Este proceso ajusta los montos estimados seleccionados, según el porcentaje que
+                                    indique el usuario.
+                                </p>
+                                <p>
+                                    <em><b>Notas:</em></b>
+                                    <ul>
+                                        <li>
+                                            El proceso ajustará <b>solo</b> los montos que se han seleccionado
+                                            mediante la aplicación de un filtro. Si Ud. quiere ajustar todos los
+                                            montos que existen, por ejemplo, para un año determinado, debe seleccionarlos
+                                            primero y luego ajustarlos usando esta función.
+                                        </li>
+                                        <li>
+                                            Ud. puede indicar un porcentaje negativo (ej: -10.75), para disminuir los montos
+                                            estimados, en vez de aumentarlos.
+                                        </li>
+
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="text-align: right; margin-top: 15px; ">
+                            <button type="submit" class="btn btn-primary">Ajustar montos estimados</button>
+                        </div>
+                    </form>
+                </tab>
+            </tabset>
+
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-warning" ng-click="cancel()">Cerrar</button>
+        </div>
+    </script>
+
+</div>
+
+<script src="~/Scripts/code/presupuesto/MontosEstimados.js"></script>
+

@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Contab - Presupuesto - Registro de montos estimados";
+}
+
+<div ng-app="myApp">
+
+    <div ng-controller="MainController">
+
+        <input type="hidden"
+               value="@Html.Encode(ViewData["cuentaBancariaID"])"
+               id="cuentaBancariaID" />
+
+        <div class="container">
+
+            <div class="row" style="margin-top: 10px; ">
+                <div class="col-sm-5 col-sm-offset-1" style="font-style: italic; ">
+                    <h4>Obtención, para el banco, del archivo de montos a pagar</h4>
+                </div>
+                <div class="col-sm-2" style="text-align: center; vertical-align: middle; ">
+                    <i style="color: #428BCA" class="fa fa-circle-o-notch fa-spin fa-2x" ng-show="showProgress"></i>
+                </div>
+                <div id="nombreCiaSeleccionada_Div"
+                     style="text-align: center; font-size: small; color: #004080; font-style: italic; padding-top: 10px; "
+                     class="col-sm-4">
+                    <span style="padding-right: 15px; ">{{ ciaContabSeleccionada.nombre }}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                        <!-- nótese lo que sigue pues muchas veces viene html en el mensaje (ej: errores: error1<br />error2 ... ) -->
+                        <span ng-bind-html="alert.msg | unsafe"></span>
+                    </alert>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-1 left-side-bar" style="padding: 20px 0 30px 0; border: solid 1px lightgray; text-align: center; ">
+
+                    <!-- 1) leemos el documento Excel  -->
+                    <a href='#' ng-click="leerFacturasSeleccionadas()">
+                        <img src='@Url.Content("~/Pictures/server_25x25.png")' />
+                    </a>
+                    <br />
+                    <a href='#' ng-click="leerFacturasSeleccionadas()">Leer facturas<br />seleccionadas</a>
+
+                    <br />
+                    <hr />
+
+                </div>
+
+                <div class="col-md-11">
+
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#tabs-1">Facturas seleccionadas por el usuario</a></li>
+                            <li><a href="#tabs-2">Sumarizar montos a pagar</a></li>
+                        </ul>
+
+                        <div id="tabs-1">
+
+                            <nav class="navbar navbar-default navbar_custom_small" role="navigation">
+                                <div class="container-fluid">
+                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav navbar-nav">
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle navbar_custom_small_node" data-toggle="dropdown">Seleccionar <b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#" ng-click="seleccionarTodasLasFacturas()" class="navbar_custom_small_node">Seleccionar todo</a></li>
+                                                    <li><a href="#" ng-click="quitarSeleccionFacturas()" class="navbar_custom_small_node">Quitar selección</a></li>
+                                                </ul>
+                                            </li>
+
+                                            <li><a href="#" ng-click="resumirFacturasArray()" class="navbar_custom_small_node">Resumir (por compañía) </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+
+                            <div class="ui-gridHeader">Detalle de facturas seleccionadas</div>
+                            <div ui-grid="facturas_ui_grid_Options"
+                                 ui-grid-edit
+                                 ui-grid-cellnav
+                                 ui-grid-resize-columns
+                                 class="angularGrid">
+                            </div>
+                        </div>
+
+                        <div id="tabs-2">
+
+                            <nav class="navbar navbar-default navbar_custom_small" role="navigation">
+                                <div class="container-fluid">
+                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav navbar-nav">
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle navbar_custom_small_node" data-toggle="dropdown">Acciones <b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#" ng-click="leerDatosCompanias()" class="navbar_custom_small_node">Leer y agregar datos de compañías</a></li>
+                                                    <li><a href="#" ng-click="convertirExcel()" class="navbar_custom_small_node">Convertir a Excel</a></li>
+                                                    <li><a href="{{ uriFileDownload }}" ng-click="downloadDocExcel()" class="navbar_custom_small_node">Descargar (download) documento Excel</a></li>
+                                                    <li><a href="#" ng-click="crearArchivoTexto(true)" class="navbar_custom_small_node">Crear archivo de texto (describir campos)</a></li>
+                                                    <li><a href="#" ng-click="crearArchivoTexto(false)" class="navbar_custom_small_node">Crear archivo de texto</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+
+                            <div class="ui-gridHeader">Registro inicial (Datos de la compañía)</div>
+                            <div ui-grid="registroCiaContab_ui_grid_Options"
+                                 ui-grid-edit
+                                 ui-grid-cellnav
+                                 ui-grid-resize-columns
+                                 class="angularGridOneRow">
+                            </div>
+
+                            <br />
+
+                            <div class="ui-gridHeader">Resumen de pagos (facturas resumidas por proveedor)</div>
+                            <div ui-grid="facturasResumidas_ui_grid_Options"
+                                 ui-grid-edit
+                                 ui-grid-cellnav
+                                 ui-grid-resize-columns
+                                 class="angularGrid">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--
+            template para mostrar un mensaje 'genérico' al usuario
+        -->
+        <script type="text/ng-template" id="mensajeAlUsuario.html">
+            <div id="mensajeAlUsuario" style="font-size: small; " ng-controller="MensajeAlUsuarioController" title="Bancos - Relación de montos a pagar">
+
+                <div style="margin-top: 15px; ">
+                    <p>
+                        <span ng-bind-html="model.mensaje | unsafe" />
+                    </p>
+                </div>
+
+                <div style="text-align: right; ">
+                    <button ng-click="cancelClick()" class="btn-warning" style="min-width: 80px; " ng-show="model.showCancelButton">Cancel</button>
+                    <button ng-click="saveClick()" class="btn-primary" style="min-width: 80px; margin-left: 10px; ">Ok</button>
+                </div>
+            </div>
+        </script>
+    </div>
+
+</div>
+
+<script src="~/Scripts/code/bancos/facturas/RelacionMontosAPagar.js"></script>
+

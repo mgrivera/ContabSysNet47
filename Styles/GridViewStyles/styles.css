@@ -1,0 +1,60 @@
+H1
+{
+	font-size: medium;
+	color: peru;
+	font-family: Arial;
+}
+
+.Grid
+{
+	border: solid 0px Tan;
+}
+
+.Grid td
+{
+	border: solid 3px #FFFFFF;
+	margin: 3px 3px 3px 3px;
+	font-family: Arial;
+	padding: 5px 5px 5px 5px;
+	text-align: center;
+}
+
+.GridHeader
+{
+	font-weight: bold;
+	background-color: Tan;
+}
+
+.GridHeader a
+{
+	text-decoration: none;
+	color: LightGoldenrodYellow;
+	padding: 0px 15px 0px 15px;
+}
+
+.GridHeader a:hover
+{
+	text-decoration: underline;
+	background: Tan url(images/spin.gif) no-repeat 0 100%;
+}
+
+.GridItem, .GridAltItem
+{
+	font-size: smaller;
+}
+
+.GridItem
+{
+	background-color: LightGoldenrodYellow;
+}
+
+.GridAltItem
+{
+	background-color: PaleGoldenrod;
+}
+
+.GridPager
+{
+	font-size: small;
+	background-color: LightGoldenrodYellow;
+}

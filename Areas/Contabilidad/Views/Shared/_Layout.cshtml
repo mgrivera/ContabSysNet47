@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- para evitar que el "compatibility mode" afecte esta aplicación "-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Contab</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="~/Content/myStyles.css" rel="stylesheet" />
+
+    <link href="~/Content/mybootstrap.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jqgrid/js/jquery-1.11.0.min.js"></script>
+
+    <link href="~/Scripts/jqueryui/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jqueryui/jquery-ui.js"></script>
+
+    <link href="~/Scripts/jqgrid/css/ui.jqgrid.css" rel="stylesheet" />
+    <!-- para mostrar el jqGrid en español -->
+    <script src="~/Scripts/jqgrid/js/i18n/grid.locale-es.js"></script>
+
+
+    <script src="~/Scripts/jqgrid/js/jquery.jqGrid.min.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/knockout-3.2.0.js"></script>
+
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/numeral.js/languages.min.js"></script>
+    <script src="~/Scripts/numeral.js/numeral.min.js"></script>
+
+</head>
+<body>
+    <script type="text/javascript">
+        // obtenemos el 'uri' de la aplicación, para usarlo en forma general en la página
+        var path = '@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))';
+    </script>
+
+    <div class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("ContabSysNet", "Index", "Home", new { Area = "Main" }, new { @class = "navbar-brand", style = "font-style: italic;" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="text-align: right; color: #39557F; "><em>Contab ...</em></p>
+        </footer>
+    </div>
+
+    <script>
+        $(function () {
+            // para asociar el jquery datepicker a los inputs que tengan la clase ".datefield" 
+            $('.datefield').datepicker({ dateFormat: "dd-mm-y" });
+
+            // default format for numeral.js 
+            numeral.defaultFormat('0,0.00');
+        });
+
+        // para mostrar un progress indicator cuando la página hace un ajax call
+        $(function () {
+            $(document).ajaxStart(function () {
+                $('.ajaxProgressIndicator').show();
+
+                // activamos el progressbar como indeterminate 
+                $(".progressbar").progressbar({ disable: false });
+                $(".progressbar").progressbar({ value: false });
+            }).ajaxStop(function () {
+                $('.ajaxProgressIndicator').hide();
+
+                $(".progressbar").each(function () {
+                    var pb = $(this).progressbar("instance")        // obtenemos el 'instance' del progressbar en el dom element (puede no haber uno) 
+                    if (pb)
+                        $(this).progressbar("destroy");
+                }); 
+            });
+        });
+    </script>
+
+</body>
+</html>

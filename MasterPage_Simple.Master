@@ -1,0 +1,80 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage_Simple.master.cs" Inherits="ContabSysNetWeb.MasterPage_Simple" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!doctype html>
+<html lang="en">
+  <head runat="server">
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Untitled Page</title>
+
+    <link href="general.css" rel="stylesheet" type="text/css" />
+   
+    <link href="Styles/ajaxControlToolkit.css" rel="stylesheet" />
+    <link href="Styles/GridViewStyles/styles2.css" rel="stylesheet" />
+    <link href="radcalendar.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="Scripts/jquery/jquery-ui-1.10.4.min.css" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+  </head>
+<body>
+    <form id="form1" runat="server" method="post" enctype="multipart/form-data">
+
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+        </asp:ToolkitScriptManager>
+
+        <div style="text-align: center;">
+            <!-- 
+                    nota: aquí necesitabamos un container que ajustara su width al contenido; como, al menos por ahora, este app corre en 'compatibility mode' 
+                    resultaba muy complicado hacerlo con otro container (ej: div) y css; por eso, resultó más sencillo usar un table ...
+                -->
+            <table style="border: 1px solid #A2A2A2;">
+                <tr>
+                    <td>
+                        <div style="background-color: #d5ddf3; border: 1px solid #A2A2A2;">
+                            <table style="width: 100%;">
+                                <colgroup>
+                                    <col span="1" style="width: 15%;" />
+                                    <col span="1" style="width: 70%;" />
+                                    <col span="1" style="width: 15%;" />
+                                </colgroup>
+                                <tr>
+                                    <td style="text-align: left; padding-left: 15px;">
+                                        <span style="border: 1px;" class="FontMediumBoldNavy"><b><i>ContabSysNet</i></b></span>
+                                    </td>
+                                    <td>
+                                        <span id="PageTitle_TableCell" runat="server" class="Font14BoldNavy"></span>
+                                    </td>
+                                    <td>
+                                        <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" DynamicLayout="True">
+                                            <ProgressTemplate>
+                                                <span style="margin-right: 15px;">
+                                                    <img id="Img1" runat="server" alt="...loading" src="Pictures/img/circle-ball-dark-antialiased.gif" />
+                                                </span>
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div style="display: inline-block;">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+    </form>
+
+    <!-- cargamos jquery -->
+    <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/jquery/jquery-1.10.2.js") %>"></script>
+    <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/jquery/jquery-ui-1.10.4.min.js") %>"></script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+﻿@{
+    ViewBag.Title = "Contab - Presupuesto - Actualización de códigos de presupuesto";
+}
+
+<div ng-app="myApp" ng-controller="MainController">
+
+    <div class="row">
+
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-1" style="font-style: italic; ">
+                <h4>Actualización de códigos de presupuesto</h4>
+            </div>
+            <div class="col-sm-2" style="text-align: center; vertical-align: middle; ">
+                <i style="color: #428BCA" class="fa fa-circle-o-notch fa-spin fa-2x" ng-show="showProgress"></i>
+            </div>
+            <div id="nombreCiaSeleccionada_Div"
+                 style="text-align: right; font-size: small; color: #004080; font-style: italic; "
+                 class="col-sm-5">
+                <span style="padding-right: 15px; ">{{ ciaContabSeleccionada.nombre }}</span>
+            </div>
+        </div>
+
+        <div class="col-sm-11 col-sm-offset-1">
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                @*{{alert.msg}}*@
+                <!-- nótese lo que sigue pues muchas veces viene html en el mensaje (ej: errores: error1<br />error2 ... ) -->
+                <span ng-bind-html="alert.msg | unsafe"></span>
+            </alert>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-1 left-side-bar" style="padding: 20px 0 30px 0; border: solid 1px lightgray; text-align: center; ">
+
+                <!-- 1) leemos el documento Excel  -->
+                <a href='#' ng-click="openModalFiltro('lg')">
+                    <img src='@Url.Content("~/Pictures/filter_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' ng-click="openModalFiltro('lg')">Aplicar<br />un filtro</a>
+
+                <br />
+                <hr />
+
+                <!-- grabamos las facturas  -->
+                <a href='#' ng-click="grabarDatosAlServidor()" ng-disabled="editMode || !formHasBeenEdited()" class="btn btn-link">
+                    <img src='@Url.Content("~/Pictures/save_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' ng-click="grabarDatosAlServidor()" ng-disabled="editMode || !formHasBeenEdited()" class="btn btn-link">Grabar</a>
+
+                <br />
+                <hr />
+
+                <a href='#' ng-click="actualizarCatalogos()" class="btn btn-link">
+                    <img src='@Url.Content("~/Pictures/actualizarCatalogos_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' ng-click="actualizarCatalogos()" class="btn btn-link">Actualizar<br />catálogos</a>
+
+                <br />
+                <hr />
+
+                <a href='#' ng-click="asociarCuentasContables('lg')" class="btn btn-link">
+                    <img src='@Url.Content("~/Pictures/table_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' ng-click="asociarCuentasContables('lg')" class="btn btn-link">Cuentas<br />contables</a>
+            </div>
+
+            <div class="col-md-11">
+
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div>
+                            <dir-pagination-controls boundary-links="true"
+                                                     template-url="~/Scripts/angular/angular-pagination/dirPagination.tpl.html"
+                                                     class="navigation-bar">
+                            </dir-pagination-controls>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input ng-model="filterUser"
+                                   class="form-control"
+                                   type="text"
+                                   placeholder="buscar ..." />
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="input-group input-group-sm" style="text-align: right; width: 100%; ">
+                            <input type="number" min="1" max="100" class="form-control pull-right" ng-model="pageSize" style="width: 50%; ">
+                        </div>
+                    </div>
+                </div>
+
+                <form name="myForm" ng-submit="submitMyForm()" novalidate>
+                    <table class="table table-condensed table-striped table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center; width: 10px; "></th>
+                                <th style="text-align: left; ">Código</th>
+                                <th>Descripción</th>
+                                <th style="text-align: center; ">Cant<br />niveles</th>
+                                <th style="text-align: center; ">Grupo</th>
+                                <th style="text-align: center; ">Suspendido</th>
+                                <th style="width: 8px; "></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="codigo in codigosPresupuesto | filter:filterUser | itemsPerPage: pageSize"
+                                current-page="currentPage"
+                                ng-form="innerTableForm">
+
+                                <td style="text-align: center; ">
+                                    <span ng-show="codigo.isEdited" class="fa fa-pencil" style="color: cornflowerblue; font: xx-small; "></span>
+                                    <span ng-show="codigo.isNew" class="fa fa-asterisk" style="color: cornflowerblue; font: xx-small; "></span>
+                                    <span ng-show="codigo.isDeleted" class="fa fa-trash" style="color: #E78E8E; font: xx-small; "></span>
+                                </td>
+
+                                <td>
+                                    <!-- nótese como impedimos cambiar códigos de registros que existen ... -->
+                                    <div ng-show="editMode && codigo.isNew">
+                                        <div>
+                                            <input type="text"
+                                                   name="codigo"
+                                                   class="form-control input-sm tableInputs"
+                                                   ng-model="codigo.codigo"
+                                                   ng-change="setIsEdited(codigo)"
+                                                   ng-model-options="{ updateOn: 'blur' }"
+                                                   required />
+
+                                            <span class="validation-message"
+                                                  ng-show="submitted && innerTableForm.codigo.$error.required">
+                                                Indique un valor
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span ng-show="!editMode || (editMode && !codigo.isNew)">{{ codigo.codigo }}</span>
+                                </td>
+
+                                <td>
+                                    <div ng-show="editMode && !codigo.isDeleted">
+                                        <div>
+                                            <input type="text"
+                                                   name="descripcion"
+                                                   class="form-control input-sm tableInputs"
+                                                   ng-model="codigo.descripcion"
+                                                   ng-change="setIsEdited(codigo)"
+                                                   ng-model-options="{ updateOn: 'blur' }"
+                                                   required />
+
+                                            <span class="validation-message"
+                                                  ng-show="submitted && innerTableForm.descripcion.$error.required">
+                                                Indique un valor
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span ng-show="!editMode || (editMode && codigo.isDeleted)">{{ codigo.descripcion }}</span>
+                                </td>
+
+                                <td style="text-align: center; ">
+                                    <span>{{ codigo.cantNiveles }}</span>
+                                </td>
+
+                                <td style="text-align: center; ">
+                                    <div ng-show="editMode && !codigo.isDeleted">
+                                        <div class="checkbox tableRadiosChecks">
+                                            <input type="checkbox"
+                                                   name="suspendido"
+                                                   ng-model="codigo.grupo"
+                                                   ng-change="setIsEdited(codigo)" />
+                                        </div>
+                                    </div>
+                                    <input ng-show="!editMode || (editMode && codigo.isDeleted)" type="checkbox" ng-model="codigo.grupo" ng-disabled="true" />
+                                </td>
+
+                                <td style="text-align: center; ">
+                                    <div ng-show="editMode && !codigo.isDeleted">
+                                        <div class="checkbox tableRadiosChecks">
+                                            <input type="checkbox"
+                                                   name="grupo"
+                                                   ng-model="codigo.suspendido"
+                                                   ng-change="setIsEdited(codigo)" />
+                                        </div>
+                                    </div>
+                                    <input ng-show="!editMode || (editMode && codigo.isDeleted)" type="checkbox" ng-model="codigo.suspendido" ng-disabled="true" />
+                                </td>
+
+                                <td style="text-align: center; ">
+                                    <span ng-click="deleteItem(codigo)" class="fa fa-times" style="color: #E78E8E"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <ul class="nav nav-pills">
+                        <li ng-show="!editMode">
+                            <button ng-click="toggleEditMode()"
+                                    type="button">
+                                <span class="glyphicon glyphicon-edit"></span> editar
+                            </button>
+                        </li>
+                        <li ng-show="editMode">
+                            <button type="submit">
+                                <span class="glyphicon glyphicon-ok-sign"></span> fin edición
+                            </button>
+                        </li>
+                        <li ng-show="!editMode">
+                            <button ng-click="addItem()"
+                                    type="button">
+                                <span class="glyphicon glyphicon-plus-sign"></span> nuevo
+                            </button>
+                        </li>
+                    </ul>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- modal para permitir al usuario definir y aplicar un filtro -->
+    <script type="text/ng-template" id="modalFiltro.html">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Indique un criterio de selección y haga un click en Ok ...</h4>
+        </div>
+
+        <div class="modal-body">
+            <form class="form-horizontal" role="form" style="font-size: small; ">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label for="codigoInput" class="col-sm-2 control-label">Código: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="codigoInput" ng-model="filtro.codigo" style="width: 200px; ">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label for="descripcionInput" class="col-sm-4 control-label">Descripción: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="descripcionInput" ng-model="filtro.descripcion" style="width: 200px; ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label for="codigoInput" class="col-sm-6 control-label">Cantidad de niveles: </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="codigoInput" ng-model="filtro.cantNiveles" style="width: 50px; ">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label class="radio-inline control-label" style="font-weight: bold; ">El código es un grupo: </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="si" ng-model="filtro.grupo"> Si
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="no" ng-model="filtro.grupo"> No
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="todos" ng-model="filtro.grupo"> Todos
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label class="radio-inline control-label" style="font-weight: bold; ">El código está suspendido: </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="si" ng-model="filtro.suspendido"> Si
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="no" ng-model="filtro.suspendido"> No
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="todos" ng-model="filtro.suspendido"> Todos
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-link" ng-click="limpiarFiltro()">Limpiar filtro</button>
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <!-- modal para asociar cuentas contables a códigos de presupuesto -->
+    <script type="text/ng-template" id="asociarCuentasContables.html">
+
+        <div class="bootStrapModalHigherWider">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Cuentas contables asociadas a los códigos de presupuesto</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-sm-4">
+
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                                <input ng-model="filterUser_CodigosPresupuesto"
+                                       class="form-control"
+                                       type="search"
+                                       placeholder="buscar ..." />
+                            </div>
+                            <div style="height:200px; overflow-y: scroll;">
+                                <table class="table table-condensed table-striped table-bordered table-hover table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th style="text-align: left; ">Código</th>
+                                            <th style="text-align: left; ">Descripción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="codigo in codigosPresupuesto | filter:filterUser_CodigosPresupuesto">
+
+                                            <td style="text-align: left; ">
+                                                <span style="color: #428BCA" class="fa fa-arrow-right" ng-click="seleccionarCodigoPresupuesto(codigo)"></span>
+                                            </td>
+
+                                            <td style="text-align: left; ">
+                                                <span>{{ codigo.codigo }}</span>
+                                            </td>
+
+                                            <td style="text-align: left; ">
+                                                <span>{{ codigo.descripcion }}</span>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+
+                            <div style="height: 30px; font-size: xx-small; font-weight: bold; padding-top: 10px; font-style: italic; ">
+                                <span ng-show="codigoPresupuestoSeleccionado.codigo">
+                                    {{codigoPresupuestoSeleccionado.codigo + " - " + codigoPresupuestoSeleccionado.descripcion }}
+                                </span>
+                            </div>
+
+                            <table class="table table-condensed table-striped table-bordered table-hover table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left; ">Código</th>
+                                        <th style="text-align: left; ">Descripción</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="cuentaContable in codigoPresupuestoSeleccionado.cuentasContables">
+
+                                        <td style="text-align: left; ">
+                                            <span>{{ cuentaContable.cuenta }}</span>
+                                        </td>
+
+                                        <td style="text-align: left; ">
+                                            <span>{{ cuentaContable.descripcion }}</span>
+                                        </td>
+
+                                        <td style="text-align: center; ">
+                                            <span class="fa fa-times" style="color: #E78E8E" ng-click="eliminarCuentaContableAsociada(cuentaContable)"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-sm-4">
+
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                                <input ng-model="filterUser_CuentasContables"
+                                       class="form-control"
+                                       type="search"
+                                       placeholder="buscar ..." />
+                            </div>
+
+                            <div style="height:200px; overflow-y: scroll;">
+                                <table class="table table-condensed table-striped table-bordered table-hover table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th style="text-align: left; ">Cuenta</th>
+                                            <th style="text-align: left; ">Descripción</th>
+                                            <th style="text-align: left; ">Cia</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="cuentaContable in cuentasContables | filter:filterUser_CuentasContables">
+
+                                            <td style="text-align: left; ">
+                                                <span style="color: #428BCA" class="fa fa-plus" ng-click="asociarCuentaContable(cuentaContable)"></span>
+                                            </td>
+
+                                            <td style="text-align: left; ">
+                                                <span>{{ cuentaContable.cuentaContable }}</span>
+                                            </td>
+
+                                            <td style="text-align: left; ">
+                                                <span>{{ cuentaContable.descripcion }}</span>
+                                            </td>
+
+                                            <td style="text-align: left; ">
+                                                <span>{{ cuentaContable.ciaContabAbreviatura }}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">Cerrar</button>
+                @*<button class="btn btn-warning" ng-click="cancel()">Cancel</button>*@
+            </div>
+        </div>
+
+    </script>
+
+</div>
+
+<!-- jquery ui dialog (filter)-->
+@*<div id="popUpDialog" title="El proceso en ejecución se ha completado ...">
+        <div id="popUpDialog_MensajeAlUsuario_Div" class="mensajeAlUsuario" style="font-size: small; "></div>
+    </div>*@
+
+<script src="~/Scripts/code/presupuesto/CodigosPresupuesto.js"></script>

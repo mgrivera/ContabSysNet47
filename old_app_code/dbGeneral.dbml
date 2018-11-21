@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="dbContabRisk" Class="dbGeneralDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=INTEL-DUAL-CORE\SQLEXPRESS;Initial Catalog=dbContabRisk;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="dbContabConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Roles_FuncionesAplicacion" Member="Roles_FuncionesAplicacions">
+    <Type Name="Roles_FuncionesAplicacion">
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FunctionName" Type="System.String" DbType="NVarChar(250) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

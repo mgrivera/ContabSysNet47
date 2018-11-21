@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 23.75, 22.5" name="dbContab">
+  <DataContextMoniker Name="/dbContabDataContext" />
+  <nestedChildShapes>
+    <classShape Id="8764e0bc-8244-4720-a197-c499b7f98bbe" absoluteBounds="11.125, 4.5, 2.75, 1.9631982421874996">
+      <DataClassMoniker Name="/dbContabDataContext/MesesDelAnoFiscal" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ea6d151c-8242-40cb-a140-5a64e86a55e3" absoluteBounds="11.14, 4.96, 2.7199999999999998, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cdbd10de-ffb1-439d-ba17-9fb265c0b361" absoluteBounds="7.75, 6.5, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/dbContabDataContext/Compania_Contab" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f269ed50-0194-4c66-ad0f-bc9bf83ee72e" absoluteBounds="7.7650000000000006, 6.96, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c0938924-3d47-4a0a-aefc-13769a2a38dc" absoluteBounds="5.75, 1.625, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/dbContabDataContext/Moneda_Contab" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f3c84b8b-3cfe-43e6-a634-5c301df813fd" absoluteBounds="5.7650000000000006, 2.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="288507f0-20c4-421c-abe3-4ec9d1a4d41f" isExpanded="false" absoluteBounds="0.75, 8.75, 3.125, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/tTempWebReport_PresupuestoConsultaAnual" />
+      <nestedChildShapes>
+        <elementListCompartment Id="507e8a63-2a79-4592-8eac-0d8539119bb1" absoluteBounds="0.765, 9.21, 3.0949999999999998, 7.556844075520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="30eb4668-0ca1-4351-97b9-c97373b8de0c" isExpanded="false" absoluteBounds="0.75, 9.75, 3.25, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/tTempWebReport_PresupuestoConsultaMensual" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e01f1046-99e0-4096-9815-3712ecc9ee41" absoluteBounds="0.76500000000000057, 10.21, 3.2199999999999998, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="40eb2fe7-22df-42bc-9771-011ad97802f5" isExpanded="false" absoluteBounds="8.125, 4.75, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/DefinicionCuentasContable" />
+      <nestedChildShapes>
+        <elementListCompartment Id="17b30cdb-6126-407a-a16e-90175cd9bd89" absoluteBounds="8.14, 5.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f48833c9-d199-4a26-90ae-05e774184307" isExpanded="false" absoluteBounds="15.125, 5.5, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/CambiosMoneda" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e94c8e54-2e70-4f12-bb34-61abfd28e103" absoluteBounds="15.14, 5.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.75 : 3.32919840494792); (16.1875 : 3.32919840494792); (16.1875 : 5.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Moneda_Contab/Moneda_Contab_CambiosMoneda" />
+      <nodes>
+        <classShapeMoniker Id="c0938924-3d47-4a0a-aefc-13769a2a38dc" />
+        <classShapeMoniker Id="f48833c9-d199-4a26-90ae-05e774184307" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c96d0ff0-fefc-4bb5-958a-6abfda578429" isExpanded="false" absoluteBounds="15.125, 6.5, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/TiposDeAsiento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b866099d-f421-44a1-82ea-055bcd8a40f6" absoluteBounds="15.14, 6.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6538be13-09df-4509-984f-19a540a47f81" isExpanded="false" absoluteBounds="15.25, 7.75, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/AsientosIdPorGrupo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eee26c3c-a2e8-4362-9960-2cd7dc52224f" absoluteBounds="15.265, 8.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2eb06515-5eb0-473e-848d-483bdd1cf81f" isExpanded="false" absoluteBounds="15.375, 8.625, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/tGruposDeTiposDeAsiento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ad4d5b32-5fb0-45ad-ae4a-a21f799c5ae0" absoluteBounds="15.39, 9.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b1c8b25e-0279-4d03-bf8a-f3eb32fa2c2b" isExpanded="false" absoluteBounds="17.625, 4.625, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/UltimoMesCerradoContab" />
+      <nestedChildShapes>
+        <elementListCompartment Id="562ad745-eca4-4fc1-9dd1-cf09b74fe003" absoluteBounds="17.64, 5.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5070650a-fa56-4daa-8522-17e1038bd7f4" isExpanded="false" absoluteBounds="18.375, 6, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/AsientosNegativosId" />
+      <nestedChildShapes>
+        <elementListCompartment Id="05911d83-3b5d-41e9-b275-aa48b41b2709" absoluteBounds="18.39, 6.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="49c663df-26f9-401e-bd94-638b64744152" absoluteBounds="18.5, 7.125, 2, 1.0016910807291666">
+      <DataClassMoniker Name="/dbContabDataContext/AsientosClaveUnicaId" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1a275856-4c26-48ac-8afe-a4ea2e7aa2cd" absoluteBounds="18.515, 7.585, 1.9700000000000002, 0.44169108072916663" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8897c7a2-922a-4287-9a75-1dd98e0f437d" isExpanded="false" absoluteBounds="18.5, 8.5, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/AsientosId" />
+      <nestedChildShapes>
+        <elementListCompartment Id="50b68a15-768b-45cb-91cb-df1666bcf190" absoluteBounds="18.515, 8.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="63f9a74a-0da8-41cb-98df-12cefe80999d" isExpanded="false" absoluteBounds="16.5, 2.75, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/tTemp_AsientosContable" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3feaea12-e1f5-4d47-abcc-1ef26571c62f" absoluteBounds="16.515, 3.2100000000000009, 1.9700000000000002, 1.7878011067708333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6ffb497a-5967-43d5-b962-358e993c684a" absoluteBounds="6.375, 11.5, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/dbContabDataContext/Presupuesto_Codigo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2117cb5f-0b97-4914-96e3-c98778edbdf3" absoluteBounds="6.39, 11.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="71d6b6b6-4a00-45b2-aed0-0bd26420a8bd" absoluteBounds="6.625, 14.25, 2, 6.1938297526041666">
+      <DataClassMoniker Name="/dbContabDataContext/Presupuesto_Monto" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5b6d5258-24ac-465a-99d0-94852d929518" absoluteBounds="6.6400000000000006, 14.71, 1.9700000000000002, 5.6338297526041661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.375 : 11.5); (6 : 11.125); (6 : 9.975); (4 : 9.975)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Presupuesto_Codigo/Presupuesto_Codigo_tTempWebReport_PresupuestoConsultaMensual" />
+      <nodes>
+        <classShapeMoniker Id="6ffb497a-5967-43d5-b962-358e993c684a" />
+        <classShapeMoniker Id="30eb4668-0ca1-4351-97b9-c97373b8de0c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.0625 : 10.5785139973958); (8.0625 : 11.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Compania_Contab/Compania_Contab_Presupuesto_Codigo" />
+      <nodes>
+        <classShapeMoniker Id="cdbd10de-ffb1-439d-ba17-9fb265c0b361" />
+        <classShapeMoniker Id="6ffb497a-5967-43d5-b962-358e993c684a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.718748 : 3.39589680989583); (6.718748 : 8.875); (7.125 : 8.875); (7.125 : 11.25); (6.125 : 11.25); (6.125 : 17.3469148763021); (6.625 : 17.3469148763021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Moneda_Contab/Moneda_Contab_Presupuesto_Monto" />
+      <nodes>
+        <classShapeMoniker Id="c0938924-3d47-4a0a-aefc-13769a2a38dc" />
+        <classShapeMoniker Id="71d6b6b6-4a00-45b2-aed0-0bd26420a8bd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.5 : 13.4631982421875); (7.5 : 14.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Presupuesto_Codigo/Presupuesto_Codigo_Presupuesto_Monto" />
+      <nodes>
+        <classShapeMoniker Id="6ffb497a-5967-43d5-b962-358e993c684a" />
+        <classShapeMoniker Id="71d6b6b6-4a00-45b2-aed0-0bd26420a8bd" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9f289cdc-3f52-4ad4-bf5f-df9af5fe7135" isExpanded="false" absoluteBounds="0.625, 11.125, 3.875, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/tTempWebReport_PresupuestoConsultaAnual1" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7a0600fc-51ce-416f-b7ca-6cd8e636e5b0" absoluteBounds="0.64, 11.585, 3.8449999999999998, 7.556844075520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b74e0b21-1c6e-4190-b33e-0c238b084f91" absoluteBounds="0.75, 12.75, 3.75, 4.8477197265625023">
+      <DataClassMoniker Name="/dbContabDataContext/tTempWebReport_PresupuestoConsultaMensual1" />
+      <nestedChildShapes>
+        <elementListCompartment Id="14acb820-a42e-40e5-aed0-bfc72ea3319e" absoluteBounds="0.765, 13.21, 3.7199999999999998, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8d77bdac-c11b-499b-95c6-fe6062419332" isExpanded="false" absoluteBounds="0.75, 11.875, 3.75, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/tTempWebReport_PresupuestoConsultaMontosEstimado" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6362472d-04a7-4fa0-a746-a5860ae7f9f0" absoluteBounds="0.765, 12.335, 3.7199999999999998, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.375 : 13.1065991210938); (6.20833333333333 : 13.1065991210938 : JumpStart); (6.04166666666667 : 13.1065991210938 : JumpEnd); (4.5 : 13.1065991210938)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Presupuesto_Codigo/Presupuesto_Codigo_tTempWebReport_PresupuestoConsultaMensual1" />
+      <nodes>
+        <classShapeMoniker Id="6ffb497a-5967-43d5-b962-358e993c684a" />
+        <classShapeMoniker Id="b74e0b21-1c6e-4190-b33e-0c238b084f91" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="18721938-0b8a-40d4-a78c-6978e4f80623" isExpanded="false" absoluteBounds="20.375, 3.625, 2.125, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/FactoresConversionAnoMe" />
+      <nestedChildShapes>
+        <elementListCompartment Id="92aaba22-dc09-4fc1-8031-1346a7f20375" absoluteBounds="20.39, 4.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b5323320-155a-4a62-aafe-77b9e6b9c6da" absoluteBounds="20.75, 5.375, 2.75, 2.1554996744791666">
+      <DataClassMoniker Name="/dbContabDataContext/FactoresConversionAnoMes_Aplicado" />
+      <nestedChildShapes>
+        <elementListCompartment Id="33904880-50e7-4f8c-b81b-f7f73f3970f3" absoluteBounds="20.765, 5.835, 2.7199999999999998, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="302a1c59-1544-49d4-b4e9-41eeba00db2c" isExpanded="false" absoluteBounds="4.875, 9.125, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/Proveedore_Contab" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3e88c621-d41e-41de-8ba4-8e7ac1add576" absoluteBounds="4.89, 9.585, 1.9700000000000002, 6.7876383463541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.171874 : 3.39589680989583); (6.171874 : 9.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Moneda_Contab/Moneda_Contab_Proveedore_Contab" />
+      <nodes>
+        <classShapeMoniker Id="c0938924-3d47-4a0a-aefc-13769a2a38dc" />
+        <classShapeMoniker Id="302a1c59-1544-49d4-b4e9-41eeba00db2c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="86d747d1-1572-4bea-9d4b-d58e2f595a9a" absoluteBounds="0.625, 0.5, 2, 4.6554182942708326">
+      <DataClassMoniker Name="/dbContabDataContext/Asiento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a6c957d2-e0fb-4a22-b26b-08e5db7311d2" absoluteBounds="0.64000000000000057, 0.96, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.75 : 8.381249); (6.25520733333333 : 8.381249 : JumpStart); (6.08854066666667 : 8.381249 : JumpEnd); (2.5625 : 8.381249); (2.5625 : 6.1875); (2.156252 : 6.1875); (2.156252 : 5.15541829427083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Compania_Contab/Compania_Contab_Asiento" />
+      <nodes>
+        <classShapeMoniker Id="cdbd10de-ffb1-439d-ba17-9fb265c0b361" />
+        <classShapeMoniker Id="86d747d1-1572-4bea-9d4b-d58e2f595a9a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 2.51044840494792); (5.70833333333333 : 2.51044840494792 : JumpStart); (5.41666666666667 : 2.51044840494792 : JumpEnd); (5.375 : 2.51044840494792); (5.375 : 5.5977197265625); (5.13715475104756 : 5.5977197265625 : JumpStart); (4.85416416666667 : 5.5977197265625 : JumpEnd); (2.95833333333333 : 5.5977197265625 : JumpStart); (2.79166666666667 : 5.5977197265625 : JumpEnd); (2.23958533333333 : 5.5977197265625 : JumpStart); (2.07291866666667 : 5.5977197265625 : JumpEnd); (1.625 : 5.5977197265625); (1.625 : 5.15541829427083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Moneda_Contab/Moneda_Contab_Asiento" />
+      <nodes>
+        <classShapeMoniker Id="c0938924-3d47-4a0a-aefc-13769a2a38dc" />
+        <classShapeMoniker Id="86d747d1-1572-4bea-9d4b-d58e2f595a9a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 2.03647220247396); (5.70833333333333 : 2.03647220247396 : JumpStart); (5.54166666666667 : 2.03647220247396 : JumpEnd); (5.5 : 2.03647220247396); (5.5 : 5.4727197265625); (5.45833333333333 : 5.4727197265625 : JumpStart); (5.29166666666667 : 5.4727197265625 : JumpEnd); (5.15711904219045 : 5.4727197265625 : JumpStart); (4.85416416666667 : 5.4727197265625 : JumpEnd); (2.95833333333333 : 5.4727197265625 : JumpStart); (2.79166666666667 : 5.4727197265625 : JumpEnd); (2.156252 : 5.4727197265625); (2.156252 : 5.15541829427083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Moneda_Contab/Moneda_Contab_Asiento1" />
+      <nodes>
+        <classShapeMoniker Id="c0938924-3d47-4a0a-aefc-13769a2a38dc" />
+        <classShapeMoniker Id="86d747d1-1572-4bea-9d4b-d58e2f595a9a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(15.125 : 6.725); (11.0537169487179 : 6.725 : JumpStart); (10.6666666666667 : 6.725 : JumpEnd); (10 : 6.725); (10 : 5.75); (8.02083333333333 : 5.75 : JumpStart); (7.85416666666667 : 5.75 : JumpEnd); (6.80208133333333 : 5.75 : JumpStart); (6.63541466666667 : 5.75 : JumpEnd); (6.25520733333333 : 5.75 : JumpStart); (6.08854066666667 : 5.75 : JumpEnd); (5.11283340933376 : 5.75 : JumpStart); (4.85416416666667 : 5.75 : JumpEnd); (2.95833333333333 : 5.75 : JumpStart); (2.79166666666667 : 5.75 : JumpEnd); (2.23958533333333 : 5.75 : JumpStart); (2.07291866666667 : 5.75 : JumpEnd); (1.093748 : 5.75); (1.093748 : 5.15541829427083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/TiposDeAsiento/TiposDeAsiento_Asiento" />
+      <nodes>
+        <classShapeMoniker Id="c96d0ff0-fefc-4bb5-958a-6abfda578429" />
+        <classShapeMoniker Id="86d747d1-1572-4bea-9d4b-d58e2f595a9a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="6a91b716-3488-431b-a4f1-891f2bb64f08" absoluteBounds="3.125, 0.5, 2, 4.8477197265625">
+      <DataClassMoniker Name="/dbContabDataContext/CuentasContable" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ebb458f2-2de6-4a30-b5ed-89491b875751" absoluteBounds="3.1399999999999997, 0.96, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.9375 : 6.5); (7.9375 : 4.74158606575521); (6.80208133333333 : 4.74158606575521 : JumpStart); (6.63541466666667 : 4.74158606575521 : JumpEnd); (6.25520733333333 : 4.74158606575521 : JumpStart); (6.08854066666667 : 4.74158606575521 : JumpEnd); (5.58333333333333 : 4.74158606575521 : JumpStart); (5.29166666666667 : 4.74158606575521 : JumpEnd); (5.125 : 4.74158606575521)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbContabDataContext/Compania_Contab/Compania_Contab_CuentasContable" />
+      <nodes>
+        <classShapeMoniker Id="cdbd10de-ffb1-439d-ba17-9fb265c0b361" />
+        <classShapeMoniker Id="6a91b716-3488-431b-a4f1-891f2bb64f08" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="658a9f38-1b1c-43eb-b694-5ad7a4a5d4e3" isExpanded="false" absoluteBounds="2.625, 6.5, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/ParametrosContab" />
+      <nestedChildShapes>
+        <elementListCompartment Id="70c03149-7102-4811-a58c-dd616e6e8da0" absoluteBounds="2.64, 6.96, 1.9700000000000002, 8.9029541015625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.75 : 6.725); (5.02083083333333 : 6.725 : JumpStart); (4.66666666666667 : 6.725 : JumpEnd); (4.625 : 6.725)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Compania_Contab/Compania_Contab_ParametrosContab" />
+      <nodes>
+        <classShapeMoniker Id="cdbd10de-ffb1-439d-ba17-9fb265c0b361" />
+        <classShapeMoniker Id="658a9f38-1b1c-43eb-b694-5ad7a4a5d4e3" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="26c18422-c9f4-412d-9770-10d21a76a097" isExpanded="false" absoluteBounds="19, 2.75, 2.75, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/tTemp_AsientosContables_Partida" />
+      <nestedChildShapes>
+        <elementListCompartment Id="24c8b2dd-76e3-4823-9e96-64d4bfe75098" absoluteBounds="19.015, 3.21, 2.7199999999999998, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a04c51a7-0164-47f6-8693-59a06ec00565" isExpanded="false" absoluteBounds="2.75, 7.5, 2, 0.45">
+      <DataClassMoniker Name="/dbContabDataContext/dAsiento1" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eec91107-ae0c-41ef-b85e-45f1f688a978" absoluteBounds="2.765, 7.9600000000000009, 1.9700000000000002, 1.7878011067708333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.625 : 2.82770914713542); (2.875 : 2.82770914713542); (2.875 : 6.25); (4.75 : 6.25); (4.75 : 7.125); (3.75 : 7.125); (3.75 : 7.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Asiento/Asiento_dAsiento1" />
+      <nodes>
+        <classShapeMoniker Id="86d747d1-1572-4bea-9d4b-d58e2f595a9a" />
+        <classShapeMoniker Id="a04c51a7-0164-47f6-8693-59a06ec00565" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.09375 : 5.3477197265625); (4.95064045339933 : 6.24375421118565 : JumpStart); (4.92435454660067 : 6.40833497823196 : JumpEnd); (4.75 : 7.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/CuentasContable/CuentasContable_dAsiento1" />
+      <nodes>
+        <classShapeMoniker Id="6a91b716-3488-431b-a4f1-891f2bb64f08" />
+        <classShapeMoniker Id="a04c51a7-0164-47f6-8693-59a06ec00565" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="bc7d67ce-fd9e-448b-89e1-d7e4b7c16f86" absoluteBounds="16.875, 9.5, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/dbContabDataContext/CajaChica_CajasChica" />
+      <nestedChildShapes>
+        <elementListCompartment Id="22b04de8-8373-4c4f-985f-b8103b680f4c" absoluteBounds="16.89, 9.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="55748855-a631-4051-adea-1771e1a219eb" absoluteBounds="19.625, 9.375, 2, 1.7708968098958318">
+      <DataClassMoniker Name="/dbContabDataContext/CajaChica_Reposicione" />
+      <nestedChildShapes>
+        <elementListCompartment Id="06e27542-43ad-4807-84f7-ab33391b3dfe" absoluteBounds="19.64, 9.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="313c4248-a7aa-4cf0-8026-546e371d0985" absoluteBounds="17.125, 11.625, 2, 4.0785139973958309">
+      <DataClassMoniker Name="/dbContabDataContext/CajaChica_Reposiciones_Gasto" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5f26a8ab-442c-4654-a47d-d7c60f1c0d63" absoluteBounds="17.14, 12.085, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.75 : 7.0375); (10.6666666666667 : 7.0375 : JumpStart); (11.0537169487179 : 7.0375 : JumpEnd); (17.9375 : 7.0375); (17.9375 : 9.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Compania_Contab/Compania_Contab_CajaChica_CajasChica" />
+      <nodes>
+        <classShapeMoniker Id="cdbd10de-ffb1-439d-ba17-9fb265c0b361" />
+        <classShapeMoniker Id="bc7d67ce-fd9e-448b-89e1-d7e4b7c16f86" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(18.875 : 10.1931469726563); (19.625 : 10.1931469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/CajaChica_CajasChica/CajaChica_CajasChica_CajaChica_Reposicione" />
+      <nodes>
+        <classShapeMoniker Id="bc7d67ce-fd9e-448b-89e1-d7e4b7c16f86" />
+        <classShapeMoniker Id="55748855-a631-4051-adea-1771e1a219eb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(19.625 : 11.1458968098958); (19.125 : 11.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/CajaChica_Reposicione/CajaChica_Reposicione_CajaChica_Reposiciones_Gasto" />
+      <nodes>
+        <classShapeMoniker Id="55748855-a631-4051-adea-1771e1a219eb" />
+        <classShapeMoniker Id="313c4248-a7aa-4cf0-8026-546e371d0985" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.875 : 9.35); (7.04166666666667 : 9.35 : JumpStart); (7.20833333333333 : 9.35 : JumpEnd); (7.5 : 9.35); (7.5 : 10.8285139973958); (7.97916666666667 : 10.8285139973958 : JumpStart); (8.14583333333333 : 10.8285139973958 : JumpEnd); (10.625 : 10.8285139973958); (10.625 : 12.2227197265625); (10.6666666666667 : 12.2227197265625 : JumpStart); (10.8333333333333 : 12.2227197265625 : JumpEnd); (16.625 : 12.2227197265625); (16.625 : 11.1362939453125); (18.125 : 11.1362939453125); (18.125 : 11.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Proveedore_Contab/Proveedore_Contab_CajaChica_Reposiciones_Gasto" />
+      <nodes>
+        <classShapeMoniker Id="302a1c59-1544-49d4-b4e9-41eeba00db2c" />
+        <classShapeMoniker Id="313c4248-a7aa-4cf0-8026-546e371d0985" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="04fd2f21-0dc4-4bf9-8435-4ebddd72ddbe" absoluteBounds="10.875, 7.125, 2, 4.8477197265625">
+      <DataClassMoniker Name="/dbContabDataContext/SaldosContable" />
+      <nestedChildShapes>
+        <elementListCompartment Id="83b6d3a3-81b3-4058-aa0e-2f71e10095ed" absoluteBounds="10.89, 7.585, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 4.07294840494792); (5.29166666666667 : 4.07294840494791 : JumpStart); (5.70833333333333 : 4.07294840494792 : JumpEnd); (6.08854066666667 : 4.07294840494792 : JumpStart); (6.25520733333333 : 4.07294840494792 : JumpEnd); (6.63541466666667 : 4.07294840494792 : JumpStart); (6.80208133333333 : 4.07294840494792 : JumpEnd); (10.9057682307692 : 4.07294840494792); (10.9057682307692 : 7.125)]" fixedFrom="Algorithm" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/CuentasContable/CuentasContable_SaldosContable" />
+      <nodes>
+        <classShapeMoniker Id="6a91b716-3488-431b-a4f1-891f2bb64f08" />
+        <classShapeMoniker Id="04fd2f21-0dc4-4bf9-8435-4ebddd72ddbe" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.75 : 3.30871319771635); (10.9703836153846 : 3.30871319771635); (10.9703836153846 : 7.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Moneda_Contab/Moneda_Contab_SaldosContable" />
+      <nodes>
+        <classShapeMoniker Id="c0938924-3d47-4a0a-aefc-13769a2a38dc" />
+        <classShapeMoniker Id="04fd2f21-0dc4-4bf9-8435-4ebddd72ddbe" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.75 : 3.39453358158053); (10.875 : 3.39453358158053); (10.875 : 7.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Moneda_Contab/Moneda_Contab_SaldosContable1" />
+      <nodes>
+        <classShapeMoniker Id="c0938924-3d47-4a0a-aefc-13769a2a38dc" />
+        <classShapeMoniker Id="04fd2f21-0dc4-4bf9-8435-4ebddd72ddbe" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b7aa51e4-5afd-4fd5-9509-6c98320f6bfc" absoluteBounds="8.25, 0.75, 2.875, 1.7708968098958329">
+      <DataClassMoniker Name="/dbContabDataContext/Contab_ConsultaCuentasYMovimiento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="44ef14d3-22b3-4f95-bd31-98d933e8b641" absoluteBounds="8.265, 1.21, 2.8449999999999998, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cfb1f611-9f27-45c8-87eb-864c7cc679f6" absoluteBounds="11.875, 0.5, 4, 2.5401025390625">
+      <DataClassMoniker Name="/dbContabDataContext/Contab_ConsultaCuentasYMovimientos_Movimiento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ef1daa52-5809-4522-917e-6ab1458bfd4e" absoluteBounds="11.89, 0.96, 3.9699999999999998, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.125 : 1.63544840494792); (11.875 : 1.63544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Contab_ConsultaCuentasYMovimiento/Contab_ConsultaCuentasYMovimiento_Contab_ConsultaCuentasYMovimientos_Movimiento" />
+      <nodes>
+        <classShapeMoniker Id="b7aa51e4-5afd-4fd5-9509-6c98320f6bfc" />
+        <classShapeMoniker Id="cfb1f611-9f27-45c8-87eb-864c7cc679f6" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="637c1133-7031-4bd1-9201-eda19d452785" absoluteBounds="0.5, 6.25, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/dbContabDataContext/dAsiento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3d6e89f9-bf0e-428a-a460-b84ae3db46d0" absoluteBounds="0.515, 6.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.0625 : 5.15541829427083); (1.0625 : 6.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/Asiento/Asiento_dAsiento" />
+      <nodes>
+        <classShapeMoniker Id="86d747d1-1572-4bea-9d4b-d58e2f595a9a" />
+        <classShapeMoniker Id="637c1133-7031-4bd1-9201-eda19d452785" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.9374975 : 5.3477197265625); (4.9374975 : 8.1968745); (2.5 : 8.1968745)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/CuentasContable/CuentasContable_dAsiento" />
+      <nodes>
+        <classShapeMoniker Id="6a91b716-3488-431b-a4f1-891f2bb64f08" />
+        <classShapeMoniker Id="637c1133-7031-4bd1-9201-eda19d452785" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="2d369ee6-d1da-4717-98c3-a46075295cf4" absoluteBounds="9.625, 17.75, 3.875, 2.5401025390625">
+      <DataClassMoniker Name="/dbContabDataContext/tTempWebReport_ConsultaComprobantesContables_Partida" />
+      <nestedChildShapes>
+        <elementListCompartment Id="788d80e6-4697-49f9-82cc-21665c3736fd" absoluteBounds="9.64, 18.21, 3.8449999999999998, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e8e4aa3d-1046-4715-a42c-4e3ff07e671c" absoluteBounds="1, 18.375, 3.25, 3.8862125651041666">
+      <DataClassMoniker Name="/dbContabDataContext/tTempWebReport_ConsultaComprobantesContable" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bc609a8e-546a-4d9b-8678-a110e0796c73" absoluteBounds="1.0150000000000001, 18.835, 3.2199999999999998, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.25 : 21.3837711588542); (11.5625 : 21.3837711588542); (11.5625 : 20.2901025390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbContabDataContext/tTempWebReport_ConsultaComprobantesContable/tTempWebReport_ConsultaComprobantesContable_tTempWebReport_ConsultaComprobantesContables_Partida" />
+      <nodes>
+        <classShapeMoniker Id="e8e4aa3d-1046-4715-a42c-4e3ff07e671c" />
+        <classShapeMoniker Id="2d369ee6-d1da-4717-98c3-a46075295cf4" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e1d0ceca-b18b-4ff9-ac99-4a766b4d467c" absoluteBounds="10.375, 14.625, 3, 1.3862939453125">
+      <DataClassMoniker Name="/dbContabDataContext/Presupuesto_AsociacionCodigosCuenta" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c84e56be-7064-49a8-b0a5-e7ecbc73b705" absoluteBounds="10.39, 15.085, 2.9699999999999998, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 1.26823660123698); (5.625 : 1.26823660123698); (5.625 : 4.25); (6.08854066666667 : 4.25 : JumpStart); (6.25520733333333 : 4.25 : JumpEnd); (6.63541466666667 : 4.25 : JumpStart); (6.80208133333333 : 4.25 : JumpEnd); (10.75 : 4.25); (10.75 : 14.25); (11.9374995 : 14.25); (11.9374995 : 14.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbContabDataContext/CuentasContable/CuentasContable_Presupuesto_AsociacionCodigosCuenta" />
+      <nodes>
+        <classShapeMoniker Id="6a91b716-3488-431b-a4f1-891f2bb64f08" />
+        <classShapeMoniker Id="e1d0ceca-b18b-4ff9-ac99-4a766b4d467c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.375 : 12.842958984375); (10.6666666666667 : 12.842958984375 : JumpStart); (10.8333333333333 : 12.842958984375 : JumpEnd); (13.15625 : 12.842958984375); (13.15625 : 14.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbContabDataContext/Presupuesto_Codigo/Presupuesto_Codigo_Presupuesto_AsociacionCodigosCuenta" />
+      <nodes>
+        <classShapeMoniker Id="6ffb497a-5967-43d5-b962-358e993c684a" />
+        <classShapeMoniker Id="e1d0ceca-b18b-4ff9-ac99-4a766b4d467c" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

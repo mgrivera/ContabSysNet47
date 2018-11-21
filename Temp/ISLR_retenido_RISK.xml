@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<RelacionRetencionesISLR RifAgente="J002450789" Periodo="201601">
+  <DetalleRetencion>
+    <RifRetenido>J003274445</RifRetenido>
+    <NumeroFactura>3621200</NumeroFactura>
+    <NumeroControl>05296334</NumeroControl>
+    <FechaOperacion>26/01/2016</FechaOperacion>
+    <CodigoConcepto>020</CodigoConcepto>
+    <MontoOperacion>3240.00</MontoOperacion>
+    <PorcentajeRetencion>5.00</PorcentajeRetencion>
+  </DetalleRetencion>
+</RelacionRetencionesISLR>

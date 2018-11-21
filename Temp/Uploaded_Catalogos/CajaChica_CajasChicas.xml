@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<File>
+  <Item>
+    <CajaChica>1</CajaChica>
+    <Descripcion>Valencia</Descripcion>
+    <CiaContab>50</CiaContab>
+  </Item>
+  <Item>
+    <CajaChica>2</CajaChica>
+    <Descripcion>Caracas</Descripcion>
+    <CiaContab>50</CiaContab>
+  </Item>
+  <Item>
+    <CajaChica>3</CajaChica>
+    <Descripcion>Maracaibo</Descripcion>
+    <CiaContab>50</CiaContab>
+  </Item>
+  <Item>
+    <CajaChica>4</CajaChica>
+    <Descripcion>VALENCIA </Descripcion>
+    <CiaContab>54</CiaContab>
+  </Item>
+  <Item>
+    <CajaChica>5</CajaChica>
+    <Descripcion>OFICINA </Descripcion>
+    <CiaContab>55</CiaContab>
+  </Item>
+  <Item>
+    <CajaChica>6</CajaChica>
+    <Descripcion>UNIDAD</Descripcion>
+    <CiaContab>55</CiaContab>
+  </Item>
+  <Item>
+    <CajaChica>7</CajaChica>
+    <Descripcion>UNIDAD GMV</Descripcion>
+    <CiaContab>55</CiaContab>
+  </Item>
+</File>

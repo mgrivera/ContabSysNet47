@@ -1,0 +1,1922 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbContabModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="dbContabModelStoreContainer">
+          <EntitySet Name="CajaChica_Parametros" EntityType="dbContabModel.Store.CajaChica_Parametros" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Companias" EntityType="dbContabModel.Store.Companias" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Facturas" EntityType="dbContabModel.Store.Facturas" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="FormasDePago" EntityType="dbContabModel.Store.FormasDePago" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ParametrosBancos" EntityType="dbContabModel.Store.ParametrosBancos" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ParametrosNomina" EntityType="dbContabModel.Store.ParametrosNomina" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Proveedores" EntityType="dbContabModel.Store.Proveedores" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="tCiudades" EntityType="dbContabModel.Store.tCiudades" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Temp_Nomina_Report_ConsultaEmpleados" EntityType="dbContabModel.Store.Temp_Nomina_Report_ConsultaEmpleados" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="tEmpleados" EntityType="dbContabModel.Store.tEmpleados" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="TiposProveedor" EntityType="dbContabModel.Store.TiposProveedor" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="tMaestraRubros" EntityType="dbContabModel.Store.tMaestraRubros" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="tNomina" EntityType="dbContabModel.Store.tNomina" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="tPaises" EntityType="dbContabModel.Store.tPaises" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="tTempWebReport_ConsultaFacturas" EntityType="dbContabModel.Store.tTempWebReport_ConsultaFacturas" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="vwTemp_Nomina_Report_ConsultaEmpleados" EntityType="dbContabModel.Store.vwTemp_Nomina_Report_ConsultaEmpleados" store:Type="Views" store:Schema="dbo" store:Name="vwTemp_Nomina_Report_ConsultaEmpleados" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+            <DefiningQuery>SELECT 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[Empleado] AS [Empleado], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[Nombre] AS [Nombre], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[Cedula] AS [Cedula], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[NombreStatus] AS [NombreStatus], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[NombreSituacionActual] AS [NombreSituacionActual], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[FechaNacimiento] AS [FechaNacimiento], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[NombreDepartamento] AS [NombreDepartamento], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[NombreCargo] AS [NombreCargo], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[FechaIngreso] AS [FechaIngreso], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[SueldoBasico] AS [SueldoBasico], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[FechaRetiro] AS [FechaRetiro], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[NombreCia] AS [NombreCia], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[AbreviaturaCia] AS [AbreviaturaCia], 
+      [vwTemp_Nomina_Report_ConsultaEmpleados].[Usuario] AS [Usuario]
+      FROM [dbo].[vwTemp_Nomina_Report_ConsultaEmpleados] AS [vwTemp_Nomina_Report_ConsultaEmpleados]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CajaChica_Parametros_Companias" Association="dbContabModel.Store.FK_CajaChica_Parametros_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="CajaChica_Parametros" EntitySet="CajaChica_Parametros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Companias" Association="dbContabModel.Store.FK_Facturas_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_FormasDePago" Association="dbContabModel.Store.FK_Facturas_FormasDePago">
+            <End Role="FormasDePago" EntitySet="FormasDePago" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Proveedores" Association="dbContabModel.Store.FK_Facturas_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_TiposProveedor" Association="dbContabModel.Store.FK_Facturas_TiposProveedor">
+            <End Role="TiposProveedor" EntitySet="TiposProveedor" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParametrosBancos_Companias" Association="dbContabModel.Store.FK_ParametrosBancos_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="ParametrosBancos" EntitySet="ParametrosBancos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParametrosNomina_Companias" Association="dbContabModel.Store.FK_ParametrosNomina_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="ParametrosNomina" EntitySet="ParametrosNomina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_FormasDePago" Association="dbContabModel.Store.FK_Proveedores_FormasDePago">
+            <End Role="FormasDePago" EntitySet="FormasDePago" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_tCiudades" Association="dbContabModel.Store.FK_Proveedores_tCiudades">
+            <End Role="tCiudades" EntitySet="tCiudades" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_TiposProveedor" Association="dbContabModel.Store.FK_Proveedores_TiposProveedor">
+            <End Role="TiposProveedor" EntitySet="TiposProveedor" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCiudades_tPaises" Association="dbContabModel.Store.FK_tCiudades_tPaises">
+            <End Role="tPaises" EntitySet="tPaises" />
+            <End Role="tCiudades" EntitySet="tCiudades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmpleados_Companias" Association="dbContabModel.Store.FK_tEmpleados_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmpleados_tCiudades" Association="dbContabModel.Store.FK_tEmpleados_tCiudades">
+            <End Role="tCiudades" EntitySet="tCiudades" />
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNomina_tEmpleados" Association="dbContabModel.Store.FK_tNomina_tEmpleados">
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+            <End Role="tNomina" EntitySet="tNomina" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CajaChica_Parametros">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TipoAsiento" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="CuentaContablePuenteID" Type="int" Nullable="false" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companias">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Numero" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NombreCorto" Type="nvarchar" Nullable="false" MaxLength="25" />
+          <Property Name="Abreviatura" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="Rif" Type="nvarchar" MaxLength="12" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="150" />
+          <Property Name="Ciudad" Type="nvarchar" MaxLength="25" />
+          <Property Name="EntidadFederal" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZonaPostal" Type="nvarchar" MaxLength="15" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="14" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="14" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="14" />
+          <Property Name="EmailServerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailServerPort" Type="int" />
+          <Property Name="EmailServerSSLFlag" Type="bit" />
+          <Property Name="EmailServerCredentialsUserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailServerCredentialsPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="MonedaDefecto" Type="int" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="ClaveUnica" />
+          </Key>
+          <Property Name="ClaveUnica" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Proveedor" Type="int" Nullable="false" />
+          <Property Name="NumeroFactura" Type="nvarchar" Nullable="false" MaxLength="25" />
+          <Property Name="NumeroControl" Type="nvarchar" MaxLength="20" />
+          <Property Name="NcNdFlag" Type="char" MaxLength="2" />
+          <Property Name="NumeroFacturaAfectada" Type="nvarchar" MaxLength="20" />
+          <Property Name="NumeroComprobante" Type="char" MaxLength="14" />
+          <Property Name="NumeroOperacion" Type="smallint" />
+          <Property Name="ComprobanteSeniat_UsarUnoExistente_Flag" Type="bit" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="NumeroPlanillaImportacion" Type="nvarchar" MaxLength="25" />
+          <Property Name="CondicionesDePago" Type="int" Nullable="false" />
+          <Property Name="FechaEmision" Type="date" Nullable="false" />
+          <Property Name="FechaRecepcion" Type="date" Nullable="false" />
+          <Property Name="Concepto" Type="ntext" />
+          <Property Name="MontoFacturaSinIva" Type="money" />
+          <Property Name="MontoFacturaConIva" Type="money" />
+          <Property Name="TipoAlicuota" Type="char" MaxLength="1" />
+          <Property Name="IvaPorc" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="Iva" Type="money" />
+          <Property Name="TotalFactura" Type="money" Nullable="false" />
+          <Property Name="CodigoConceptoRetencion" Type="nvarchar" MaxLength="6" />
+          <Property Name="MontoSujetoARetencion" Type="money" />
+          <Property Name="ImpuestoRetenidoPorc" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="ImpuestoRetenidoISLRAntesSustraendo" Type="money" />
+          <Property Name="ImpuestoRetenidoISLRSustraendo" Type="money" />
+          <Property Name="ImpuestoRetenido" Type="money" />
+          <Property Name="FRecepcionRetencionISLR" Type="date" />
+          <Property Name="RetencionSobreIvaPorc" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="RetencionSobreIva" Type="money" />
+          <Property Name="FRecepcionRetencionIVA" Type="date" />
+          <Property Name="TotalAPagar" Type="money" Nullable="false" />
+          <Property Name="Anticipo" Type="money" />
+          <Property Name="Saldo" Type="money" Nullable="false" />
+          <Property Name="Estado" Type="smallint" Nullable="false" />
+          <Property Name="ClaveUnicaUltimoPago" Type="int" />
+          <Property Name="Moneda" Type="int" Nullable="false" />
+          <Property Name="CxCCxPFlag" Type="smallint" Nullable="false" />
+          <Property Name="Comprobante" Type="int" />
+          <Property Name="ImportacionFlag" Type="bit" />
+          <Property Name="ModificadoPor" Type="nvarchar" MaxLength="10" />
+          <Property Name="Ingreso" Type="datetime2" Nullable="false" />
+          <Property Name="UltAct" Type="datetime2" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="25" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormasDePago">
+          <Key>
+            <PropertyRef Name="FormaDePago" />
+          </Key>
+          <Property Name="FormaDePago" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="NumeroDeCuotas" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParametrosBancos">
+          <Key>
+            <PropertyRef Name="Cia" />
+          </Key>
+          <Property Name="RetencionSobreIvaFlag" Type="bit" />
+          <Property Name="RetencionSobreIvaPorc" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="FooterFacturaImpresa_L1" Type="nvarchar" MaxLength="100" />
+          <Property Name="FooterFacturaImpresa_L2" Type="nvarchar" MaxLength="100" />
+          <Property Name="FooterFacturaImpresa_L3" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParametrosNomina">
+          <Key>
+            <PropertyRef Name="Cia" />
+          </Key>
+          <Property Name="LimiteProrrateoVacaciones" Type="real" />
+          <Property Name="AgregarAsientosContables" Type="bit" />
+          <Property Name="OrganizarPartidasDelAsiento" Type="bit" />
+          <Property Name="TipoAsientoDefault" Type="nvarchar" MaxLength="6" />
+          <Property Name="CuentaContableNomina" Type="int" />
+          <Property Name="MonedaParaElAsiento" Type="int" />
+          <Property Name="SumarizarPartidaAsientoContable" Type="tinyint" />
+          <Property Name="RubroDescuentoDiasAnticipoVacaciones" Type="int" />
+          <Property Name="CodigoConceptoRetencionISLREmpleados" Type="nvarchar" MaxLength="6" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="Proveedor" />
+          </Key>
+          <Property Name="Proveedor" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="70" />
+          <Property Name="Abreviatura" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="Rif" Type="nvarchar" MaxLength="20" />
+          <Property Name="NatJurFlag" Type="smallint" Nullable="false" />
+          <Property Name="Nit" Type="nvarchar" MaxLength="20" />
+          <Property Name="ContribuyenteEspecialFlag" Type="bit" />
+          <Property Name="RetencionSobreIvaPorc" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="NuestraRetencionSobreIvaPorc" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="AfectaLibroComprasFlag" Type="bit" />
+          <Property Name="Beneficiario" Type="nvarchar" MaxLength="50" />
+          <Property Name="Concepto" Type="nvarchar" MaxLength="250" />
+          <Property Name="MontoCheque" Type="money" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="255" />
+          <Property Name="Ciudad" Type="nvarchar" MaxLength="6" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="14" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="14" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="14" />
+          <Property Name="Contacto1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contacto2" Type="nvarchar" MaxLength="50" />
+          <Property Name="NacionalExtranjeroFlag" Type="smallint" />
+          <Property Name="SujetoARetencionFlag" Type="bit" />
+          <Property Name="CodigoConceptoRetencion" Type="nvarchar" MaxLength="6" />
+          <Property Name="RetencionISLRSustraendo" Type="money" />
+          <Property Name="MonedaDefault" Type="int" />
+          <Property Name="FormaDePagoDefault" Type="int" />
+          <Property Name="ProveedorClienteFlag" Type="smallint" />
+          <Property Name="PorcentajeDeRetencion" Type="real" />
+          <Property Name="AplicaIvaFlag" Type="bit" />
+          <Property Name="CategoriaProveedor" Type="int" />
+          <Property Name="MontoChequeEnMonExtFlag" Type="bit" />
+          <Property Name="Ingreso" Type="datetime" Nullable="false" />
+          <Property Name="UltAct" Type="datetime" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tCiudades">
+          <Key>
+            <PropertyRef Name="Ciudad" />
+          </Key>
+          <Property Name="Ciudad" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="Pais" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Temp_Nomina_Report_ConsultaEmpleados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Empleado" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Cedula" Type="nvarchar" Nullable="false" MaxLength="12" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="SituacionActual" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Departamento" Type="int" Nullable="false" />
+          <Property Name="Cargo" Type="int" Nullable="false" />
+          <Property Name="FechaIngreso" Type="date" Nullable="false" />
+          <Property Name="SueldoBasico" Type="money" />
+          <Property Name="FechaRetiro" Type="date" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tEmpleados">
+          <Key>
+            <PropertyRef Name="Empleado" />
+          </Key>
+          <Property Name="Empleado" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="nvarchar" Nullable="false" MaxLength="12" />
+          <Property Name="Rif" Type="nvarchar" MaxLength="20" />
+          <Property Name="EscribirArchivoXMLRetencionesISLR" Type="bit" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="EdoCivil" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Sexo" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="Nacionalidad" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="CiudadOrigen" Type="nvarchar" MaxLength="6" />
+          <Property Name="DireccionHabitacion" Type="ntext" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="25" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="25" />
+          <Property Name="SituacionActual" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Departamento" Type="int" Nullable="false" />
+          <Property Name="Cargo" Type="int" Nullable="false" />
+          <Property Name="FechaIngreso" Type="date" Nullable="false" />
+          <Property Name="FechaRetiro" Type="date" />
+          <Property Name="BancoDepositosNomina" Type="int" />
+          <Property Name="TipoCuentaDepositosNomina" Type="int" />
+          <Property Name="CuentaBancariaDepositosNomina" Type="nvarchar" MaxLength="30" />
+          <Property Name="BancoCuentaPrestacionesSociales" Type="int" />
+          <Property Name="NumeroCuentaBancariaPrestacionesSociales" Type="nvarchar" MaxLength="30" />
+          <Property Name="Contacto1" Type="nvarchar" MaxLength="250" />
+          <Property Name="Parentesco1" Type="int" />
+          <Property Name="TelefonoCon1" Type="nvarchar" MaxLength="25" />
+          <Property Name="Contacto2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Parentesco2" Type="int" />
+          <Property Name="TelefonoCon2" Type="nvarchar" MaxLength="25" />
+          <Property Name="Contacto3" Type="nvarchar" MaxLength="250" />
+          <Property Name="Parentesco3" Type="int" />
+          <Property Name="TelefonoCon3" Type="nvarchar" MaxLength="25" />
+          <Property Name="EmpleadoObreroFlag" Type="smallint" />
+          <Property Name="SueldoPromedio" Type="money" />
+          <Property Name="SueldoBasico" Type="money" />
+          <Property Name="MontoCestaTickets" Type="money" />
+          <Property Name="BonoVacAgregarSueldoFlag" Type="bit" />
+          <Property Name="BonoVacAgregarMontoCestaTicketsFlag" Type="bit" />
+          <Property Name="BonoVacacionalMontoAdicional" Type="money" />
+          <Property Name="BonoVacAgregarMontoAdicionalFlag" Type="bit" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TiposProveedor">
+          <Key>
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Tipo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tMaestraRubros">
+          <Key>
+            <PropertyRef Name="Rubro" />
+          </Key>
+          <Property Name="Rubro" Type="int" Nullable="false" />
+          <Property Name="NombreCortoRubro" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Tipo" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="TipoNomina" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Periodicidad" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Desde" Type="datetime" />
+          <Property Name="Hasta" Type="datetime" />
+          <Property Name="Siempre" Type="bit" />
+          <Property Name="MontoAAplicar" Type="money" />
+          <Property Name="RubroAAplicar" Type="int" />
+          <Property Name="GrupoAAplicar" Type="int" />
+          <Property Name="DeLaNomina" Type="nvarchar" MaxLength="2" />
+          <Property Name="DeLaNominaDesde" Type="smalldatetime" />
+          <Property Name="DeLaNominaHasta" Type="smalldatetime" />
+          <Property Name="VariableAAplicar" Type="tinyint" />
+          <Property Name="BaseCalculoVariableFlag" Type="char" MaxLength="2" />
+          <Property Name="Factor1" Type="float" />
+          <Property Name="Factor2" Type="float" />
+          <Property Name="Divisor1" Type="float" />
+          <Property Name="Divisor2" Type="float" />
+          <Property Name="Porcentaje" Type="float" />
+          <Property Name="PorcentajeMas" Type="float" />
+          <Property Name="PorcentajeMas2" Type="float" />
+          <Property Name="LunesDelMes" Type="bit" />
+          <Property Name="Tope" Type="money" />
+          <Property Name="Categoria" Type="smallint" />
+          <Property Name="MostrarEnElReciboFlag" Type="bit" />
+          <Property Name="SSOFlag" Type="bit" />
+          <Property Name="ISRFlag" Type="bit" />
+        </EntityType>
+        <EntityType Name="tNomina">
+          <Key>
+            <PropertyRef Name="NumeroUnico" />
+          </Key>
+          <Property Name="NumeroUnico" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GrupoNomina" Type="int" Nullable="false" />
+          <Property Name="Empleado" Type="int" Nullable="false" />
+          <Property Name="FechaNomina" Type="smalldatetime" Nullable="false" />
+          <Property Name="Rubro" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Monto" Type="money" Nullable="false" />
+          <Property Name="FechaEjecucion" Type="datetime" Nullable="false" />
+          <Property Name="AplicaPrestacionesFlag" Type="bit" />
+          <Property Name="TipoNomina" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="MostrarEnElReciboFlag" Type="bit" />
+          <Property Name="MontoBase" Type="money" />
+          <Property Name="CantDias" Type="tinyint" />
+          <Property Name="VacFraccionFlag" Type="char" MaxLength="1" />
+          <Property Name="FraccionarFlag" Type="bit" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tPaises">
+          <Key>
+            <PropertyRef Name="Pais" />
+          </Key>
+          <Property Name="Pais" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tTempWebReport_ConsultaFacturas">
+          <Key>
+            <PropertyRef Name="Moneda" />
+            <PropertyRef Name="CiaContab" />
+            <PropertyRef Name="Compania" />
+            <PropertyRef Name="NumeroFactura" />
+            <PropertyRef Name="NombreUsuario" />
+          </Key>
+          <Property Name="Moneda" Type="int" Nullable="false" />
+          <Property Name="CiaContab" Type="int" Nullable="false" />
+          <Property Name="Compania" Type="int" Nullable="false" />
+          <Property Name="CiaContabNombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CiaContabDireccion" Type="nvarchar" MaxLength="200" />
+          <Property Name="CiaContabRif" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="CiaContabTelefono1" Type="nvarchar" MaxLength="15" />
+          <Property Name="CiaContabTelefono2" Type="nvarchar" MaxLength="15" />
+          <Property Name="CiaContabFax" Type="nvarchar" MaxLength="15" />
+          <Property Name="CiaContabCiudad" Type="nvarchar" MaxLength="25" />
+          <Property Name="NombreCompania" Type="nvarchar" MaxLength="70" />
+          <Property Name="RifCompania" Type="nvarchar" MaxLength="20" />
+          <Property Name="NitCompania" Type="nvarchar" MaxLength="20" />
+          <Property Name="CompaniaDomicilio" Type="nvarchar" MaxLength="400" />
+          <Property Name="CompaniaTelefono" Type="nvarchar" MaxLength="15" />
+          <Property Name="CompaniaFax" Type="nvarchar" MaxLength="15" />
+          <Property Name="CompaniaCiudad" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodigoConceptoRetencion" Type="nvarchar" MaxLength="6" />
+          <Property Name="NumeroFactura" Type="nvarchar" Nullable="false" MaxLength="25" />
+          <Property Name="NumeroControl" Type="nvarchar" MaxLength="20" />
+          <Property Name="ImportacionFlag" Type="bit" />
+          <Property Name="Importacion_CompraNacional" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClaveUnicaFactura" Type="int" Nullable="false" />
+          <Property Name="NcNdFlag" Type="char" MaxLength="2" />
+          <Property Name="Compra_NotaCredito" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumeroFacturaAfectada" Type="nvarchar" MaxLength="20" />
+          <Property Name="NumeroComprobante" Type="char" MaxLength="14" />
+          <Property Name="NumeroOperacion" Type="smallint" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="NombreTipo" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CondicionesDePago" Type="int" Nullable="false" />
+          <Property Name="CondicionesDePagoNombre" Type="nvarchar" MaxLength="30" />
+          <Property Name="FechaEmision" Type="datetime" Nullable="false" />
+          <Property Name="FechaRecepcion" Type="datetime" Nullable="false" />
+          <Property Name="Concepto" Type="ntext" />
+          <Property Name="NotasFactura1" Type="nvarchar" MaxLength="100" />
+          <Property Name="NotasFactura2" Type="nvarchar" MaxLength="100" />
+          <Property Name="NotasFactura3" Type="nvarchar" MaxLength="100" />
+          <Property Name="MontoFacturaSinIva" Type="money" />
+          <Property Name="MontoFacturaConIva" Type="money" />
+          <Property Name="BaseImponible_Reducido" Type="money" />
+          <Property Name="BaseImponible_General" Type="money" />
+          <Property Name="BaseImponible_Adicional" Type="money" />
+          <Property Name="TipoAlicuota" Type="char" MaxLength="1" />
+          <Property Name="IvaPorc" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="IvaPorc_Reducido" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="IvaPorc_General" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="IvaPorc_Adicional" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="Iva" Type="money" />
+          <Property Name="Iva_Reducido" Type="money" />
+          <Property Name="Iva_General" Type="money" />
+          <Property Name="Iva_Adicional" Type="money" />
+          <Property Name="TotalFactura" Type="money" Nullable="false" />
+          <Property Name="MontoSujetoARetencion" Type="money" />
+          <Property Name="ImpuestoRetenidoPorc" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="ImpuestoRetenidoISLRAntesSustraendo" Type="money" />
+          <Property Name="ImpuestoRetenidoISLRSustraendo" Type="money" />
+          <Property Name="ImpuestoRetenido" Type="money" />
+          <Property Name="ImpuestoRetenido_Reducido" Type="money" />
+          <Property Name="ImpuestoRetenido_General" Type="money" />
+          <Property Name="ImpuestoRetenido_Adicional" Type="money" />
+          <Property Name="FRecepcionRetencionISLR" Type="datetime" />
+          <Property Name="RetencionSobreIvaPorc" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="RetencionSobreIva" Type="money" />
+          <Property Name="FRecepcionRetencionIVA" Type="datetime" />
+          <Property Name="TotalAPagar" Type="money" Nullable="false" />
+          <Property Name="Anticipo" Type="money" />
+          <Property Name="Saldo" Type="money" Nullable="false" />
+          <Property Name="Estado" Type="smallint" Nullable="false" />
+          <Property Name="NombreEstado" Type="nchar" MaxLength="10" />
+          <Property Name="CxCCxPFlag" Type="smallint" Nullable="false" />
+          <Property Name="NombreCxCCxPFlag" Type="char" Nullable="false" MaxLength="4" />
+          <Property Name="Comprobante" Type="int" />
+          <Property Name="FechaPago" Type="datetime" />
+          <Property Name="MontoPagado" Type="money" />
+          <Property Name="NombreUsuario" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'dbContabGeh.dbo.vwTemp_Nomina_Report_ConsultaEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vwTemp_Nomina_Report_ConsultaEmpleados">
+          <Key>
+            <PropertyRef Name="Empleado" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="NombreStatus" />
+            <PropertyRef Name="NombreSituacionActual" />
+            <PropertyRef Name="FechaNacimiento" />
+            <PropertyRef Name="FechaIngreso" />
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="Empleado" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Cedula" Type="nvarchar" Nullable="false" MaxLength="12" />
+          <Property Name="NombreStatus" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="NombreSituacionActual" Type="varchar" Nullable="false" MaxLength="11" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="NombreDepartamento" Type="nvarchar" MaxLength="30" />
+          <Property Name="NombreCargo" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaIngreso" Type="date" Nullable="false" />
+          <Property Name="SueldoBasico" Type="money" />
+          <Property Name="FechaRetiro" Type="date" />
+          <Property Name="NombreCia" Type="nvarchar" MaxLength="50" />
+          <Property Name="AbreviaturaCia" Type="nvarchar" MaxLength="6" />
+          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <Association Name="FK_CajaChica_Parametros_Companias">
+          <End Role="Companias" Type="dbContabModel.Store.Companias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Parametros" Type="dbContabModel.Store.CajaChica_Parametros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="CajaChica_Parametros">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Companias">
+          <End Role="Companias" Type="dbContabModel.Store.Companias" Multiplicity="1" />
+          <End Role="Facturas" Type="dbContabModel.Store.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_FormasDePago">
+          <End Role="FormasDePago" Type="dbContabModel.Store.FormasDePago" Multiplicity="1" />
+          <End Role="Facturas" Type="dbContabModel.Store.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormasDePago">
+              <PropertyRef Name="FormaDePago" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="CondicionesDePago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Proveedores">
+          <End Role="Proveedores" Type="dbContabModel.Store.Proveedores" Multiplicity="1" />
+          <End Role="Facturas" Type="dbContabModel.Store.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Proveedor" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_TiposProveedor">
+          <End Role="TiposProveedor" Type="dbContabModel.Store.TiposProveedor" Multiplicity="1" />
+          <End Role="Facturas" Type="dbContabModel.Store.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposProveedor">
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParametrosBancos_Companias">
+          <End Role="Companias" Type="dbContabModel.Store.Companias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ParametrosBancos" Type="dbContabModel.Store.ParametrosBancos" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="ParametrosBancos">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParametrosNomina_Companias">
+          <End Role="Companias" Type="dbContabModel.Store.Companias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ParametrosNomina" Type="dbContabModel.Store.ParametrosNomina" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="ParametrosNomina">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_FormasDePago">
+          <End Role="FormasDePago" Type="dbContabModel.Store.FormasDePago" Multiplicity="0..1" />
+          <End Role="Proveedores" Type="dbContabModel.Store.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormasDePago">
+              <PropertyRef Name="FormaDePago" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="FormaDePagoDefault" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_tCiudades">
+          <End Role="tCiudades" Type="dbContabModel.Store.tCiudades" Multiplicity="0..1" />
+          <End Role="Proveedores" Type="dbContabModel.Store.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCiudades">
+              <PropertyRef Name="Ciudad" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="Ciudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_TiposProveedor">
+          <End Role="TiposProveedor" Type="dbContabModel.Store.TiposProveedor" Multiplicity="1" />
+          <End Role="Proveedores" Type="dbContabModel.Store.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposProveedor">
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCiudades_tPaises">
+          <End Role="tPaises" Type="dbContabModel.Store.tPaises" Multiplicity="1" />
+          <End Role="tCiudades" Type="dbContabModel.Store.tCiudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPaises">
+              <PropertyRef Name="Pais" />
+            </Principal>
+            <Dependent Role="tCiudades">
+              <PropertyRef Name="Pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmpleados_Companias">
+          <End Role="Companias" Type="dbContabModel.Store.Companias" Multiplicity="1" />
+          <End Role="tEmpleados" Type="dbContabModel.Store.tEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tEmpleados">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmpleados_tCiudades">
+          <End Role="tCiudades" Type="dbContabModel.Store.tCiudades" Multiplicity="0..1" />
+          <End Role="tEmpleados" Type="dbContabModel.Store.tEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCiudades">
+              <PropertyRef Name="Ciudad" />
+            </Principal>
+            <Dependent Role="tEmpleados">
+              <PropertyRef Name="CiudadOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNomina_tEmpleados">
+          <End Role="tEmpleados" Type="dbContabModel.Store.tEmpleados" Multiplicity="1" />
+          <End Role="tNomina" Type="dbContabModel.Store.tNomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleados">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="tNomina">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbContabModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbContabEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="Proveedores" EntityType="dbContabModel.Proveedore" />
+          <EntitySet Name="tCiudades" EntityType="dbContabModel.tCiudade" />
+          <EntitySet Name="TiposProveedors" EntityType="dbContabModel.TiposProveedor" />
+          <EntitySet Name="tPaises" EntityType="dbContabModel.tPais" />
+          <AssociationSet Name="FK_Proveedores_tCiudades" Association="dbContabModel.FK_Proveedores_tCiudades">
+            <End Role="tCiudade" EntitySet="tCiudades" />
+            <End Role="Proveedore" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_TiposProveedor" Association="dbContabModel.FK_Proveedores_TiposProveedor">
+            <End Role="TiposProveedor" EntitySet="TiposProveedors" />
+            <End Role="Proveedore" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCiudades_tPaises" Association="dbContabModel.FK_tCiudades_tPaises">
+            <End Role="tPais" EntitySet="tPaises" />
+            <End Role="tCiudade" EntitySet="tCiudades" />
+          </AssociationSet>
+          <EntitySet Name="ParametrosBancos" EntityType="dbContabModel.ParametrosBanco" />
+          <EntitySet Name="FormasDePagoes" EntityType="dbContabModel.FormasDePago" />
+          <EntitySet Name="tMaestraRubros" EntityType="dbContabModel.tMaestraRubro" />
+          <EntitySet Name="tNominas" EntityType="dbContabModel.tNomina" />
+          <AssociationSet Name="FK_Proveedores_FormasDePago" Association="dbContabModel.FK_Proveedores_FormasDePago">
+            <End Role="FormasDePago" EntitySet="FormasDePagoes" />
+            <End Role="Proveedore" EntitySet="Proveedores" />
+          </AssociationSet>
+          <EntitySet Name="ParametrosNominas" EntityType="dbContabModel.ParametrosNomina" />
+          <EntitySet Name="CajaChica_Parametros" EntityType="dbContabModel.CajaChica_Parametros" />
+          <EntitySet Name="Facturas" EntityType="dbContabModel.Factura" />
+          <AssociationSet Name="FK_Facturas_FormasDePago" Association="dbContabModel.FK_Facturas_FormasDePago">
+            <End Role="FormasDePago" EntitySet="FormasDePagoes" />
+            <End Role="Factura" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Proveedores" Association="dbContabModel.FK_Facturas_Proveedores">
+            <End Role="Proveedore" EntitySet="Proveedores" />
+            <End Role="Factura" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_TiposProveedor" Association="dbContabModel.FK_Facturas_TiposProveedor">
+            <End Role="TiposProveedor" EntitySet="TiposProveedors" />
+            <End Role="Factura" EntitySet="Facturas" />
+          </AssociationSet>
+          <EntitySet Name="tEmpleados" EntityType="dbContabModel.tEmpleado" />
+          <AssociationSet Name="FK_tEmpleados_tCiudades" Association="dbContabModel.FK_tEmpleados_tCiudades">
+            <End Role="tCiudade" EntitySet="tCiudades" />
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNomina_tEmpleados" Association="dbContabModel.FK_tNomina_tEmpleados">
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+            <End Role="tNomina" EntitySet="tNominas" />
+          </AssociationSet>
+          <EntitySet Name="Companias" EntityType="dbContabModel.Compania" />
+          <AssociationSet Name="FK_CajaChica_Parametros_Companias" Association="dbContabModel.FK_CajaChica_Parametros_Companias">
+            <End Role="Compania" EntitySet="Companias" />
+            <End Role="CajaChica_Parametros" EntitySet="CajaChica_Parametros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Companias" Association="dbContabModel.FK_Facturas_Companias">
+            <End Role="Compania" EntitySet="Companias" />
+            <End Role="Factura" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParametrosBancos_Companias" Association="dbContabModel.FK_ParametrosBancos_Companias">
+            <End Role="Compania" EntitySet="Companias" />
+            <End Role="ParametrosBanco" EntitySet="ParametrosBancos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParametrosNomina_Companias" Association="dbContabModel.FK_ParametrosNomina_Companias">
+            <End Role="Compania" EntitySet="Companias" />
+            <End Role="ParametrosNomina" EntitySet="ParametrosNominas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmpleados_Companias" Association="dbContabModel.FK_tEmpleados_Companias">
+            <End Role="Compania" EntitySet="Companias" />
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <EntitySet Name="Temp_Nomina_Report_ConsultaEmpleados" EntityType="dbContabModel.Temp_Nomina_Report_ConsultaEmpleados" />
+          <EntitySet Name="vwTemp_Nomina_Report_ConsultaEmpleados" EntityType="dbContabModel.vwTemp_Nomina_Report_ConsultaEmpleados" />
+          <EntitySet Name="tTempWebReport_ConsultaFacturas" EntityType="dbContabModel.tTempWebReport_ConsultaFacturas" />
+          </EntityContainer>
+        <EntityType Name="Proveedore">
+          <Key>
+            <PropertyRef Name="Proveedor" />
+          </Key>
+          <Property Type="Int32" Name="Proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Tipo" Nullable="false" />
+          <Property Type="String" Name="Rif" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Byte" Name="NatJurFlag" Nullable="false" />
+          <Property Type="String" Name="Nit" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ContribuyenteEspecialFlag" />
+          <Property Type="Decimal" Name="RetencionSobreIvaPorc" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="NuestraRetencionSobreIvaPorc" Precision="5" Scale="2" />
+          <Property Type="Boolean" Name="AfectaLibroComprasFlag" />
+          <Property Type="String" Name="Beneficiario" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Concepto" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="MontoCheque" Precision="19" Scale="4" />
+          <Property Type="String" Name="Direccion" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Ciudad" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefono1" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefono2" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Fax" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Contacto1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Contacto2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="NacionalExtranjeroFlag" />
+          <Property Type="Boolean" Name="SujetoARetencionFlag" />
+          <Property Type="String" Name="CodigoConceptoRetencion" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="RetencionISLRSustraendo" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="MonedaDefault" />
+          <Property Type="Int32" Name="FormaDePagoDefault" />
+          <Property Type="Int16" Name="ProveedorClienteFlag" />
+          <Property Type="Single" Name="PorcentajeDeRetencion" />
+          <Property Type="Boolean" Name="AplicaIvaFlag" />
+          <Property Type="Int16" Name="CategoriaProveedor" />
+          <Property Type="Boolean" Name="MontoChequeEnMonExtFlag" />
+          <Property Type="DateTime" Name="Ingreso" Nullable="false" />
+          <Property Type="DateTime" Name="UltAct" Nullable="false" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCiudade" Relationship="dbContabModel.FK_Proveedores_tCiudades" FromRole="Proveedore" ToRole="tCiudade" />
+          <NavigationProperty Name="TiposProveedor" Relationship="dbContabModel.FK_Proveedores_TiposProveedor" FromRole="Proveedore" ToRole="TiposProveedor" />
+          <NavigationProperty Name="FormasDePago" Relationship="dbContabModel.FK_Proveedores_FormasDePago" FromRole="Proveedore" ToRole="FormasDePago" />
+          <Property Type="String" Name="Abreviatura" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Facturas" Relationship="dbContabModel.FK_Facturas_Proveedores" FromRole="Proveedore" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="tCiudade">
+          <Key>
+            <PropertyRef Name="Ciudad" />
+          </Key>
+          <Property Type="String" Name="Ciudad" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Pais" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Proveedores" Relationship="dbContabModel.FK_Proveedores_tCiudades" FromRole="tCiudade" ToRole="Proveedore" />
+          <NavigationProperty Name="tPais" Relationship="dbContabModel.FK_tCiudades_tPaises" FromRole="tCiudade" ToRole="tPais" />
+          <NavigationProperty Name="tEmpleados" Relationship="dbContabModel.FK_tEmpleados_tCiudades" FromRole="tCiudade" ToRole="tEmpleado" />
+        </EntityType>
+        <EntityType Name="TiposProveedor">
+          <Key>
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Type="Int32" Name="Tipo" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Proveedores" Relationship="dbContabModel.FK_Proveedores_TiposProveedor" FromRole="TiposProveedor" ToRole="Proveedore" />
+          <NavigationProperty Name="Facturas" Relationship="dbContabModel.FK_Facturas_TiposProveedor" FromRole="TiposProveedor" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="tPais">
+          <Key>
+            <PropertyRef Name="Pais" />
+          </Key>
+          <Property Type="String" Name="Pais" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCiudades" Relationship="dbContabModel.FK_tCiudades_tPaises" FromRole="tPais" ToRole="tCiudade" />
+        </EntityType>
+        <Association Name="FK_Proveedores_tCiudades">
+          <End Type="dbContabModel.tCiudade" Role="tCiudade" Multiplicity="0..1" />
+          <End Type="dbContabModel.Proveedore" Role="Proveedore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCiudade">
+              <PropertyRef Name="Ciudad" />
+            </Principal>
+            <Dependent Role="Proveedore">
+              <PropertyRef Name="Ciudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_TiposProveedor">
+          <End Type="dbContabModel.TiposProveedor" Role="TiposProveedor" Multiplicity="1" />
+          <End Type="dbContabModel.Proveedore" Role="Proveedore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposProveedor">
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="Proveedore">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCiudades_tPaises">
+          <End Type="dbContabModel.tPais" Role="tPais" Multiplicity="1" />
+          <End Type="dbContabModel.tCiudade" Role="tCiudade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPais">
+              <PropertyRef Name="Pais" />
+            </Principal>
+            <Dependent Role="tCiudade">
+              <PropertyRef Name="Pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ParametrosBanco">
+          <Key>
+            <PropertyRef Name="Cia" />
+          </Key>
+          <Property Type="Boolean" Name="RetencionSobreIvaFlag" />
+          <Property Type="Decimal" Name="RetencionSobreIvaPorc" Precision="5" Scale="2" />
+          <Property Type="String" Name="FooterFacturaImpresa_L1" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FooterFacturaImpresa_L2" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FooterFacturaImpresa_L3" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <NavigationProperty Name="Compania" Relationship="dbContabModel.FK_ParametrosBancos_Companias" FromRole="ParametrosBanco" ToRole="Compania" />
+        </EntityType>
+        <EntityType Name="FormasDePago">
+          <Key>
+            <PropertyRef Name="FormaDePago" />
+          </Key>
+          <Property Type="Int32" Name="FormaDePago" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="NumeroDeCuotas" Nullable="false" />
+          <NavigationProperty Name="Proveedores" Relationship="dbContabModel.FK_Proveedores_FormasDePago" FromRole="FormasDePago" ToRole="Proveedore" />
+          <NavigationProperty Name="Facturas" Relationship="dbContabModel.FK_Facturas_FormasDePago" FromRole="FormasDePago" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="tMaestraRubro">
+          <Key>
+            <PropertyRef Name="Rubro" />
+          </Key>
+          <Property Type="Int32" Name="Rubro" Nullable="false" />
+          <Property Type="String" Name="NombreCortoRubro" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TipoNomina" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Periodicidad" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Desde" />
+          <Property Type="DateTime" Name="Hasta" />
+          <Property Type="Boolean" Name="Siempre" />
+          <Property Type="Decimal" Name="MontoAAplicar" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="RubroAAplicar" />
+          <Property Type="Int32" Name="GrupoAAplicar" />
+          <Property Type="String" Name="DeLaNomina" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DeLaNominaDesde" />
+          <Property Type="DateTime" Name="DeLaNominaHasta" />
+          <Property Type="Byte" Name="VariableAAplicar" />
+          <Property Type="String" Name="BaseCalculoVariableFlag" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="Double" Name="Factor1" />
+          <Property Type="Double" Name="Factor2" />
+          <Property Type="Double" Name="Divisor1" />
+          <Property Type="Double" Name="Divisor2" />
+          <Property Type="Double" Name="Porcentaje" />
+          <Property Type="Double" Name="PorcentajeMas" />
+          <Property Type="Double" Name="PorcentajeMas2" />
+          <Property Type="Boolean" Name="LunesDelMes" />
+          <Property Type="Decimal" Name="Tope" Precision="19" Scale="4" />
+          <Property Type="Int16" Name="Categoria" />
+          <Property Type="Boolean" Name="MostrarEnElReciboFlag" />
+          <Property Type="Boolean" Name="SSOFlag" />
+          <Property Type="Boolean" Name="ISRFlag" />
+        </EntityType>
+        <EntityType Name="tNomina">
+          <Key>
+            <PropertyRef Name="NumeroUnico" />
+          </Key>
+          <Property Type="Int32" Name="NumeroUnico" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="GrupoNomina" Nullable="false" />
+          <Property Type="Int32" Name="Empleado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaNomina" Nullable="false" />
+          <Property Type="Int32" Name="Rubro" Nullable="false" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Monto" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="FechaEjecucion" Nullable="false" />
+          <Property Type="Boolean" Name="AplicaPrestacionesFlag" />
+          <Property Type="String" Name="TipoNomina" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="MostrarEnElReciboFlag" />
+          <Property Type="Decimal" Name="MontoBase" Precision="19" Scale="4" />
+          <Property Type="Byte" Name="CantDias" />
+          <Property Type="String" Name="VacFraccionFlag" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Boolean" Name="FraccionarFlag" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <NavigationProperty Name="tEmpleado" Relationship="dbContabModel.FK_tNomina_tEmpleados" FromRole="tNomina" ToRole="tEmpleado" />
+        </EntityType>
+        <Association Name="FK_Proveedores_FormasDePago">
+          <End Type="dbContabModel.FormasDePago" Role="FormasDePago" Multiplicity="0..1" />
+          <End Type="dbContabModel.Proveedore" Role="Proveedore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormasDePago">
+              <PropertyRef Name="FormaDePago" />
+            </Principal>
+            <Dependent Role="Proveedore">
+              <PropertyRef Name="FormaDePagoDefault" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ParametrosNomina">
+          <Key>
+            <PropertyRef Name="Cia" />
+          </Key>
+          <Property Type="Single" Name="LimiteProrrateoVacaciones" />
+          <Property Type="Boolean" Name="AgregarAsientosContables" />
+          <Property Type="Boolean" Name="OrganizarPartidasDelAsiento" />
+          <Property Type="String" Name="TipoAsientoDefault" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CuentaContableNomina" />
+          <Property Type="Int32" Name="MonedaParaElAsiento" />
+          <Property Type="Byte" Name="SumarizarPartidaAsientoContable" />
+          <Property Type="Int32" Name="RubroDescuentoDiasAnticipoVacaciones" />
+          <Property Type="String" Name="CodigoConceptoRetencionISLREmpleados" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <NavigationProperty Name="Compania" Relationship="dbContabModel.FK_ParametrosNomina_Companias" FromRole="ParametrosNomina" ToRole="Compania" />
+        </EntityType>
+        <EntityType Name="CajaChica_Parametros">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="TipoAsiento" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CuentaContablePuenteID" Nullable="false" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <NavigationProperty Name="Compania" Relationship="dbContabModel.FK_CajaChica_Parametros_Companias" FromRole="CajaChica_Parametros" ToRole="Compania" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="ClaveUnica" />
+          </Key>
+          <Property Type="Int32" Name="ClaveUnica" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="Proveedor" Nullable="false" />
+          <Property Type="String" Name="NumeroFactura" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NumeroControl" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NcNdFlag" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="NumeroFacturaAfectada" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NumeroComprobante" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Type="Int16" Name="NumeroOperacion" />
+          <Property Type="Boolean" Name="ComprobanteSeniat_UsarUnoExistente_Flag" />
+          <Property Type="Int32" Name="Tipo" Nullable="false" />
+          <Property Type="String" Name="NumeroPlanillaImportacion" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CondicionesDePago" Nullable="false" />
+          <Property Type="DateTime" Name="FechaEmision" Nullable="false" />
+          <Property Type="DateTime" Name="FechaRecepcion" Nullable="false" />
+          <Property Type="String" Name="Concepto" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="MontoFacturaSinIva" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="MontoFacturaConIva" Precision="19" Scale="4" />
+          <Property Type="String" Name="TipoAlicuota" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Decimal" Name="IvaPorc" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="Iva" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="TotalFactura" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="CodigoConceptoRetencion" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="MontoSujetoARetencion" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ImpuestoRetenidoPorc" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="ImpuestoRetenidoISLRAntesSustraendo" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ImpuestoRetenidoISLRSustraendo" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ImpuestoRetenido" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="FRecepcionRetencionISLR" />
+          <Property Type="Decimal" Name="RetencionSobreIvaPorc" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="RetencionSobreIva" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="FRecepcionRetencionIVA" />
+          <Property Type="Decimal" Name="TotalAPagar" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Anticipo" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Saldo" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int16" Name="Estado" Nullable="false" />
+          <Property Type="Int32" Name="ClaveUnicaUltimoPago" />
+          <Property Type="Int32" Name="Moneda" Nullable="false" />
+          <Property Type="Int16" Name="CxCCxPFlag" Nullable="false" />
+          <Property Type="Int32" Name="Comprobante" />
+          <Property Type="Boolean" Name="ImportacionFlag" />
+          <Property Type="String" Name="ModificadoPor" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Ingreso" Nullable="false" />
+          <Property Type="DateTime" Name="UltAct" Nullable="false" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <NavigationProperty Name="FormasDePago" Relationship="dbContabModel.FK_Facturas_FormasDePago" FromRole="Factura" ToRole="FormasDePago" />
+          <NavigationProperty Name="Proveedore" Relationship="dbContabModel.FK_Facturas_Proveedores" FromRole="Factura" ToRole="Proveedore" />
+          <NavigationProperty Name="TiposProveedor" Relationship="dbContabModel.FK_Facturas_TiposProveedor" FromRole="Factura" ToRole="TiposProveedor" />
+          <NavigationProperty Name="Compania" Relationship="dbContabModel.FK_Facturas_Companias" FromRole="Factura" ToRole="Compania" />
+        </EntityType>
+        <Association Name="FK_Facturas_FormasDePago">
+          <End Type="dbContabModel.FormasDePago" Role="FormasDePago" Multiplicity="1" />
+          <End Type="dbContabModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormasDePago">
+              <PropertyRef Name="FormaDePago" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="CondicionesDePago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Proveedores">
+          <End Type="dbContabModel.Proveedore" Role="Proveedore" Multiplicity="1" />
+          <End Type="dbContabModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedore">
+              <PropertyRef Name="Proveedor" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_TiposProveedor">
+          <End Type="dbContabModel.TiposProveedor" Role="TiposProveedor" Multiplicity="1" />
+          <End Type="dbContabModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposProveedor">
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tEmpleado">
+          <Key>
+            <PropertyRef Name="Empleado" />
+          </Key>
+          <Property Type="Int32" Name="Empleado" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Rif" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="EscribirArchivoXMLRetencionesISLR" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EdoCivil" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Sexo" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nacionalidad" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" />
+          <Property Type="String" Name="CiudadOrigen" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DireccionHabitacion" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefono1" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefono2" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SituacionActual" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Departamento" Nullable="false" />
+          <Property Type="Int32" Name="Cargo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="false" />
+          <Property Type="DateTime" Name="FechaRetiro" />
+          <Property Type="Int32" Name="BancoDepositosNomina" />
+          <Property Type="Int32" Name="TipoCuentaDepositosNomina" />
+          <Property Type="String" Name="CuentaBancariaDepositosNomina" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BancoCuentaPrestacionesSociales" />
+          <Property Type="String" Name="NumeroCuentaBancariaPrestacionesSociales" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Contacto1" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Parentesco1" />
+          <Property Type="String" Name="TelefonoCon1" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Contacto2" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Parentesco2" />
+          <Property Type="String" Name="TelefonoCon2" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Contacto3" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Parentesco3" />
+          <Property Type="String" Name="TelefonoCon3" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="EmpleadoObreroFlag" />
+          <Property Type="Decimal" Name="SueldoPromedio" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="SueldoBasico" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="MontoCestaTickets" Precision="19" Scale="4" />
+          <Property Type="Boolean" Name="BonoVacAgregarSueldoFlag" />
+          <Property Type="Boolean" Name="BonoVacAgregarMontoCestaTicketsFlag" />
+          <Property Type="Decimal" Name="BonoVacacionalMontoAdicional" Precision="19" Scale="4" />
+          <Property Type="Boolean" Name="BonoVacAgregarMontoAdicionalFlag" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <NavigationProperty Name="tCiudade" Relationship="dbContabModel.FK_tEmpleados_tCiudades" FromRole="tEmpleado" ToRole="tCiudade" />
+          <NavigationProperty Name="tNominas" Relationship="dbContabModel.FK_tNomina_tEmpleados" FromRole="tEmpleado" ToRole="tNomina" />
+          <NavigationProperty Name="Compania" Relationship="dbContabModel.FK_tEmpleados_Companias" FromRole="tEmpleado" ToRole="Compania" />
+        </EntityType>
+        <Association Name="FK_tEmpleados_tCiudades">
+          <End Type="dbContabModel.tCiudade" Role="tCiudade" Multiplicity="0..1" />
+          <End Type="dbContabModel.tEmpleado" Role="tEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCiudade">
+              <PropertyRef Name="Ciudad" />
+            </Principal>
+            <Dependent Role="tEmpleado">
+              <PropertyRef Name="CiudadOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNomina_tEmpleados">
+          <End Type="dbContabModel.tEmpleado" Role="tEmpleado" Multiplicity="1" />
+          <End Type="dbContabModel.tNomina" Role="tNomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleado">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="tNomina">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Compania">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Type="Int32" Name="Numero" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NombreCorto" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Abreviatura" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Rif" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Direccion" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Ciudad" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EntidadFederal" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ZonaPostal" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefono1" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefono2" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Fax" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmailServerName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="EmailServerPort" />
+          <Property Type="Boolean" Name="EmailServerSSLFlag" />
+          <Property Type="String" Name="EmailServerCredentialsUserName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmailServerCredentialsPassword" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="MonedaDefecto" />
+          <NavigationProperty Name="CajaChica_Parametros" Relationship="dbContabModel.FK_CajaChica_Parametros_Companias" FromRole="Compania" ToRole="CajaChica_Parametros" />
+          <NavigationProperty Name="Facturas" Relationship="dbContabModel.FK_Facturas_Companias" FromRole="Compania" ToRole="Factura" />
+          <NavigationProperty Name="ParametrosBanco" Relationship="dbContabModel.FK_ParametrosBancos_Companias" FromRole="Compania" ToRole="ParametrosBanco" />
+          <NavigationProperty Name="ParametrosNomina" Relationship="dbContabModel.FK_ParametrosNomina_Companias" FromRole="Compania" ToRole="ParametrosNomina" />
+          <NavigationProperty Name="tEmpleados" Relationship="dbContabModel.FK_tEmpleados_Companias" FromRole="Compania" ToRole="tEmpleado" />
+        </EntityType>
+        <Association Name="FK_CajaChica_Parametros_Companias">
+          <End Type="dbContabModel.Compania" Role="Compania" Multiplicity="1" />
+          <End Type="dbContabModel.CajaChica_Parametros" Role="CajaChica_Parametros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compania">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="CajaChica_Parametros">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Companias">
+          <End Type="dbContabModel.Compania" Role="Compania" Multiplicity="1" />
+          <End Type="dbContabModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compania">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParametrosBancos_Companias">
+          <End Type="dbContabModel.Compania" Role="Compania" Multiplicity="1" />
+          <End Type="dbContabModel.ParametrosBanco" Role="ParametrosBanco" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Compania">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="ParametrosBanco">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParametrosNomina_Companias">
+          <End Type="dbContabModel.Compania" Role="Compania" Multiplicity="1" />
+          <End Type="dbContabModel.ParametrosNomina" Role="ParametrosNomina" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Compania">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="ParametrosNomina">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmpleados_Companias">
+          <End Type="dbContabModel.Compania" Role="Compania" Multiplicity="1" />
+          <End Type="dbContabModel.tEmpleado" Role="tEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compania">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tEmpleado">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Temp_Nomina_Report_ConsultaEmpleados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="Empleado" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SituacionActual" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" />
+          <Property Type="Int32" Name="Departamento" Nullable="false" />
+          <Property Type="Int32" Name="Cargo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="false" />
+          <Property Type="Decimal" Name="SueldoBasico" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="FechaRetiro" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwTemp_Nomina_Report_ConsultaEmpleados">
+          <Key>
+            <PropertyRef Name="Empleado" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="NombreStatus" />
+            <PropertyRef Name="NombreSituacionActual" />
+            <PropertyRef Name="FechaNacimiento" />
+            <PropertyRef Name="FechaIngreso" />
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Type="Int32" Name="Empleado" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NombreStatus" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NombreSituacionActual" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" />
+          <Property Type="String" Name="NombreDepartamento" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NombreCargo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="false" />
+          <Property Type="Decimal" Name="SueldoBasico" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="FechaRetiro" />
+          <Property Type="String" Name="NombreCia" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AbreviaturaCia" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tTempWebReport_ConsultaFacturas">
+          <Key>
+            <PropertyRef Name="Moneda" />
+            <PropertyRef Name="CiaContab" />
+            <PropertyRef Name="Compania" />
+            <PropertyRef Name="NumeroFactura" />
+            <PropertyRef Name="NombreUsuario" />
+          </Key>
+          <Property Type="Int32" Name="Moneda" Nullable="false" />
+          <Property Type="Int32" Name="CiaContab" Nullable="false" />
+          <Property Type="Int32" Name="Compania" Nullable="false" />
+          <Property Type="String" Name="CiaContabNombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CiaContabDireccion" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CiaContabRif" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CiaContabTelefono1" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CiaContabTelefono2" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CiaContabFax" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CiaContabCiudad" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NombreCompania" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RifCompania" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NitCompania" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CompaniaDomicilio" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CompaniaTelefono" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CompaniaFax" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CompaniaCiudad" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CodigoConceptoRetencion" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NumeroFactura" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NumeroControl" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ImportacionFlag" />
+          <Property Type="String" Name="Importacion_CompraNacional" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ClaveUnicaFactura" Nullable="false" />
+          <Property Type="String" Name="NcNdFlag" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Compra_NotaCredito" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NumeroFacturaAfectada" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NumeroComprobante" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Type="Int16" Name="NumeroOperacion" />
+          <Property Type="Int32" Name="Tipo" Nullable="false" />
+          <Property Type="String" Name="NombreTipo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CondicionesDePago" Nullable="false" />
+          <Property Type="String" Name="CondicionesDePagoNombre" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaEmision" Nullable="false" />
+          <Property Type="DateTime" Name="FechaRecepcion" Nullable="false" />
+          <Property Type="String" Name="Concepto" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NotasFactura1" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NotasFactura2" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NotasFactura3" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="MontoFacturaSinIva" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="MontoFacturaConIva" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="BaseImponible_Reducido" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="BaseImponible_General" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="BaseImponible_Adicional" Precision="19" Scale="4" />
+          <Property Type="String" Name="TipoAlicuota" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Decimal" Name="IvaPorc" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="IvaPorc_Reducido" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="IvaPorc_General" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="IvaPorc_Adicional" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="Iva" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Iva_Reducido" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Iva_General" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Iva_Adicional" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="TotalFactura" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="MontoSujetoARetencion" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ImpuestoRetenidoPorc" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="ImpuestoRetenidoISLRAntesSustraendo" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ImpuestoRetenidoISLRSustraendo" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ImpuestoRetenido" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ImpuestoRetenido_Reducido" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ImpuestoRetenido_General" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ImpuestoRetenido_Adicional" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="FRecepcionRetencionISLR" />
+          <Property Type="Decimal" Name="RetencionSobreIvaPorc" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="RetencionSobreIva" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="FRecepcionRetencionIVA" />
+          <Property Type="Decimal" Name="TotalAPagar" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Anticipo" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Saldo" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int16" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="NombreEstado" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Int16" Name="CxCCxPFlag" Nullable="false" />
+          <Property Type="String" Name="NombreCxCCxPFlag" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="Comprobante" />
+          <Property Type="DateTime" Name="FechaPago" />
+          <Property Type="Decimal" Name="MontoPagado" Precision="19" Scale="4" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbContabModelStoreContainer" CdmEntityContainer="dbContabEntities">
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="dbContabModel.Proveedore">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="UltAct" ColumnName="UltAct" />
+                <ScalarProperty Name="Ingreso" ColumnName="Ingreso" />
+                <ScalarProperty Name="MontoChequeEnMonExtFlag" ColumnName="MontoChequeEnMonExtFlag" />
+                <ScalarProperty Name="CategoriaProveedor" ColumnName="CategoriaProveedor" />
+                <ScalarProperty Name="AplicaIvaFlag" ColumnName="AplicaIvaFlag" />
+                <ScalarProperty Name="PorcentajeDeRetencion" ColumnName="PorcentajeDeRetencion" />
+                <ScalarProperty Name="ProveedorClienteFlag" ColumnName="ProveedorClienteFlag" />
+                <ScalarProperty Name="FormaDePagoDefault" ColumnName="FormaDePagoDefault" />
+                <ScalarProperty Name="MonedaDefault" ColumnName="MonedaDefault" />
+                <ScalarProperty Name="RetencionISLRSustraendo" ColumnName="RetencionISLRSustraendo" />
+                <ScalarProperty Name="CodigoConceptoRetencion" ColumnName="CodigoConceptoRetencion" />
+                <ScalarProperty Name="SujetoARetencionFlag" ColumnName="SujetoARetencionFlag" />
+                <ScalarProperty Name="NacionalExtranjeroFlag" ColumnName="NacionalExtranjeroFlag" />
+                <ScalarProperty Name="Contacto2" ColumnName="Contacto2" />
+                <ScalarProperty Name="Contacto1" ColumnName="Contacto1" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="MontoCheque" ColumnName="MontoCheque" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="AfectaLibroComprasFlag" ColumnName="AfectaLibroComprasFlag" />
+                <ScalarProperty Name="NuestraRetencionSobreIvaPorc" ColumnName="NuestraRetencionSobreIvaPorc" />
+                <ScalarProperty Name="RetencionSobreIvaPorc" ColumnName="RetencionSobreIvaPorc" />
+                <ScalarProperty Name="ContribuyenteEspecialFlag" ColumnName="ContribuyenteEspecialFlag" />
+                <ScalarProperty Name="Nit" ColumnName="Nit" />
+                <ScalarProperty Name="NatJurFlag" ColumnName="NatJurFlag" />
+                <ScalarProperty Name="Rif" ColumnName="Rif" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCiudades">
+            <EntityTypeMapping TypeName="dbContabModel.tCiudade">
+              <MappingFragment StoreEntitySet="tCiudades">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposProveedors">
+            <EntityTypeMapping TypeName="dbContabModel.TiposProveedor">
+              <MappingFragment StoreEntitySet="TiposProveedor">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tPaises">
+            <EntityTypeMapping TypeName="dbContabModel.tPais">
+              <MappingFragment StoreEntitySet="tPaises">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParametrosBancos">
+            <EntityTypeMapping TypeName="dbContabModel.ParametrosBanco">
+              <MappingFragment StoreEntitySet="ParametrosBancos">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="FooterFacturaImpresa_L3" ColumnName="FooterFacturaImpresa_L3" />
+                <ScalarProperty Name="FooterFacturaImpresa_L2" ColumnName="FooterFacturaImpresa_L2" />
+                <ScalarProperty Name="FooterFacturaImpresa_L1" ColumnName="FooterFacturaImpresa_L1" />
+                <ScalarProperty Name="RetencionSobreIvaPorc" ColumnName="RetencionSobreIvaPorc" />
+                <ScalarProperty Name="RetencionSobreIvaFlag" ColumnName="RetencionSobreIvaFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormasDePagoes">
+            <EntityTypeMapping TypeName="dbContabModel.FormasDePago">
+              <MappingFragment StoreEntitySet="FormasDePago">
+                <ScalarProperty Name="NumeroDeCuotas" ColumnName="NumeroDeCuotas" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FormaDePago" ColumnName="FormaDePago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMaestraRubros">
+            <EntityTypeMapping TypeName="dbContabModel.tMaestraRubro">
+              <MappingFragment StoreEntitySet="tMaestraRubros">
+                <ScalarProperty Name="ISRFlag" ColumnName="ISRFlag" />
+                <ScalarProperty Name="SSOFlag" ColumnName="SSOFlag" />
+                <ScalarProperty Name="MostrarEnElReciboFlag" ColumnName="MostrarEnElReciboFlag" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Tope" ColumnName="Tope" />
+                <ScalarProperty Name="LunesDelMes" ColumnName="LunesDelMes" />
+                <ScalarProperty Name="PorcentajeMas2" ColumnName="PorcentajeMas2" />
+                <ScalarProperty Name="PorcentajeMas" ColumnName="PorcentajeMas" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="Divisor2" ColumnName="Divisor2" />
+                <ScalarProperty Name="Divisor1" ColumnName="Divisor1" />
+                <ScalarProperty Name="Factor2" ColumnName="Factor2" />
+                <ScalarProperty Name="Factor1" ColumnName="Factor1" />
+                <ScalarProperty Name="BaseCalculoVariableFlag" ColumnName="BaseCalculoVariableFlag" />
+                <ScalarProperty Name="VariableAAplicar" ColumnName="VariableAAplicar" />
+                <ScalarProperty Name="DeLaNominaHasta" ColumnName="DeLaNominaHasta" />
+                <ScalarProperty Name="DeLaNominaDesde" ColumnName="DeLaNominaDesde" />
+                <ScalarProperty Name="DeLaNomina" ColumnName="DeLaNomina" />
+                <ScalarProperty Name="GrupoAAplicar" ColumnName="GrupoAAplicar" />
+                <ScalarProperty Name="RubroAAplicar" ColumnName="RubroAAplicar" />
+                <ScalarProperty Name="MontoAAplicar" ColumnName="MontoAAplicar" />
+                <ScalarProperty Name="Siempre" ColumnName="Siempre" />
+                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="Periodicidad" ColumnName="Periodicidad" />
+                <ScalarProperty Name="TipoNomina" ColumnName="TipoNomina" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NombreCortoRubro" ColumnName="NombreCortoRubro" />
+                <ScalarProperty Name="Rubro" ColumnName="Rubro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNominas">
+            <EntityTypeMapping TypeName="dbContabModel.tNomina">
+              <MappingFragment StoreEntitySet="tNomina">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="FraccionarFlag" ColumnName="FraccionarFlag" />
+                <ScalarProperty Name="VacFraccionFlag" ColumnName="VacFraccionFlag" />
+                <ScalarProperty Name="CantDias" ColumnName="CantDias" />
+                <ScalarProperty Name="MontoBase" ColumnName="MontoBase" />
+                <ScalarProperty Name="MostrarEnElReciboFlag" ColumnName="MostrarEnElReciboFlag" />
+                <ScalarProperty Name="TipoNomina" ColumnName="TipoNomina" />
+                <ScalarProperty Name="AplicaPrestacionesFlag" ColumnName="AplicaPrestacionesFlag" />
+                <ScalarProperty Name="FechaEjecucion" ColumnName="FechaEjecucion" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Rubro" ColumnName="Rubro" />
+                <ScalarProperty Name="FechaNomina" ColumnName="FechaNomina" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="GrupoNomina" ColumnName="GrupoNomina" />
+                <ScalarProperty Name="NumeroUnico" ColumnName="NumeroUnico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParametrosNominas">
+            <EntityTypeMapping TypeName="dbContabModel.ParametrosNomina">
+              <MappingFragment StoreEntitySet="ParametrosNomina">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="CodigoConceptoRetencionISLREmpleados" ColumnName="CodigoConceptoRetencionISLREmpleados" />
+                <ScalarProperty Name="RubroDescuentoDiasAnticipoVacaciones" ColumnName="RubroDescuentoDiasAnticipoVacaciones" />
+                <ScalarProperty Name="SumarizarPartidaAsientoContable" ColumnName="SumarizarPartidaAsientoContable" />
+                <ScalarProperty Name="MonedaParaElAsiento" ColumnName="MonedaParaElAsiento" />
+                <ScalarProperty Name="CuentaContableNomina" ColumnName="CuentaContableNomina" />
+                <ScalarProperty Name="TipoAsientoDefault" ColumnName="TipoAsientoDefault" />
+                <ScalarProperty Name="OrganizarPartidasDelAsiento" ColumnName="OrganizarPartidasDelAsiento" />
+                <ScalarProperty Name="AgregarAsientosContables" ColumnName="AgregarAsientosContables" />
+                <ScalarProperty Name="LimiteProrrateoVacaciones" ColumnName="LimiteProrrateoVacaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaChica_Parametros">
+            <EntityTypeMapping TypeName="dbContabModel.CajaChica_Parametros">
+              <MappingFragment StoreEntitySet="CajaChica_Parametros">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="CuentaContablePuenteID" ColumnName="CuentaContablePuenteID" />
+                <ScalarProperty Name="TipoAsiento" ColumnName="TipoAsiento" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="dbContabModel.Factura">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="UltAct" ColumnName="UltAct" />
+                <ScalarProperty Name="Ingreso" ColumnName="Ingreso" />
+                <ScalarProperty Name="ModificadoPor" ColumnName="ModificadoPor" />
+                <ScalarProperty Name="ImportacionFlag" ColumnName="ImportacionFlag" />
+                <ScalarProperty Name="Comprobante" ColumnName="Comprobante" />
+                <ScalarProperty Name="CxCCxPFlag" ColumnName="CxCCxPFlag" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="ClaveUnicaUltimoPago" ColumnName="ClaveUnicaUltimoPago" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="Anticipo" ColumnName="Anticipo" />
+                <ScalarProperty Name="TotalAPagar" ColumnName="TotalAPagar" />
+                <ScalarProperty Name="FRecepcionRetencionIVA" ColumnName="FRecepcionRetencionIVA" />
+                <ScalarProperty Name="RetencionSobreIva" ColumnName="RetencionSobreIva" />
+                <ScalarProperty Name="RetencionSobreIvaPorc" ColumnName="RetencionSobreIvaPorc" />
+                <ScalarProperty Name="FRecepcionRetencionISLR" ColumnName="FRecepcionRetencionISLR" />
+                <ScalarProperty Name="ImpuestoRetenido" ColumnName="ImpuestoRetenido" />
+                <ScalarProperty Name="ImpuestoRetenidoISLRSustraendo" ColumnName="ImpuestoRetenidoISLRSustraendo" />
+                <ScalarProperty Name="ImpuestoRetenidoISLRAntesSustraendo" ColumnName="ImpuestoRetenidoISLRAntesSustraendo" />
+                <ScalarProperty Name="ImpuestoRetenidoPorc" ColumnName="ImpuestoRetenidoPorc" />
+                <ScalarProperty Name="MontoSujetoARetencion" ColumnName="MontoSujetoARetencion" />
+                <ScalarProperty Name="CodigoConceptoRetencion" ColumnName="CodigoConceptoRetencion" />
+                <ScalarProperty Name="TotalFactura" ColumnName="TotalFactura" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="IvaPorc" ColumnName="IvaPorc" />
+                <ScalarProperty Name="TipoAlicuota" ColumnName="TipoAlicuota" />
+                <ScalarProperty Name="MontoFacturaConIva" ColumnName="MontoFacturaConIva" />
+                <ScalarProperty Name="MontoFacturaSinIva" ColumnName="MontoFacturaSinIva" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="FechaRecepcion" ColumnName="FechaRecepcion" />
+                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+                <ScalarProperty Name="CondicionesDePago" ColumnName="CondicionesDePago" />
+                <ScalarProperty Name="NumeroPlanillaImportacion" ColumnName="NumeroPlanillaImportacion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="ComprobanteSeniat_UsarUnoExistente_Flag" ColumnName="ComprobanteSeniat_UsarUnoExistente_Flag" />
+                <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+                <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
+                <ScalarProperty Name="NumeroFacturaAfectada" ColumnName="NumeroFacturaAfectada" />
+                <ScalarProperty Name="NcNdFlag" ColumnName="NcNdFlag" />
+                <ScalarProperty Name="NumeroControl" ColumnName="NumeroControl" />
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="ClaveUnica" ColumnName="ClaveUnica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEmpleados">
+            <EntityTypeMapping TypeName="dbContabModel.tEmpleado">
+              <MappingFragment StoreEntitySet="tEmpleados">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="BonoVacAgregarMontoAdicionalFlag" ColumnName="BonoVacAgregarMontoAdicionalFlag" />
+                <ScalarProperty Name="BonoVacacionalMontoAdicional" ColumnName="BonoVacacionalMontoAdicional" />
+                <ScalarProperty Name="BonoVacAgregarMontoCestaTicketsFlag" ColumnName="BonoVacAgregarMontoCestaTicketsFlag" />
+                <ScalarProperty Name="BonoVacAgregarSueldoFlag" ColumnName="BonoVacAgregarSueldoFlag" />
+                <ScalarProperty Name="MontoCestaTickets" ColumnName="MontoCestaTickets" />
+                <ScalarProperty Name="SueldoBasico" ColumnName="SueldoBasico" />
+                <ScalarProperty Name="SueldoPromedio" ColumnName="SueldoPromedio" />
+                <ScalarProperty Name="EmpleadoObreroFlag" ColumnName="EmpleadoObreroFlag" />
+                <ScalarProperty Name="TelefonoCon3" ColumnName="TelefonoCon3" />
+                <ScalarProperty Name="Parentesco3" ColumnName="Parentesco3" />
+                <ScalarProperty Name="Contacto3" ColumnName="Contacto3" />
+                <ScalarProperty Name="TelefonoCon2" ColumnName="TelefonoCon2" />
+                <ScalarProperty Name="Parentesco2" ColumnName="Parentesco2" />
+                <ScalarProperty Name="Contacto2" ColumnName="Contacto2" />
+                <ScalarProperty Name="TelefonoCon1" ColumnName="TelefonoCon1" />
+                <ScalarProperty Name="Parentesco1" ColumnName="Parentesco1" />
+                <ScalarProperty Name="Contacto1" ColumnName="Contacto1" />
+                <ScalarProperty Name="NumeroCuentaBancariaPrestacionesSociales" ColumnName="NumeroCuentaBancariaPrestacionesSociales" />
+                <ScalarProperty Name="BancoCuentaPrestacionesSociales" ColumnName="BancoCuentaPrestacionesSociales" />
+                <ScalarProperty Name="CuentaBancariaDepositosNomina" ColumnName="CuentaBancariaDepositosNomina" />
+                <ScalarProperty Name="TipoCuentaDepositosNomina" ColumnName="TipoCuentaDepositosNomina" />
+                <ScalarProperty Name="BancoDepositosNomina" ColumnName="BancoDepositosNomina" />
+                <ScalarProperty Name="FechaRetiro" ColumnName="FechaRetiro" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="SituacionActual" ColumnName="SituacionActual" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="DireccionHabitacion" ColumnName="DireccionHabitacion" />
+                <ScalarProperty Name="CiudadOrigen" ColumnName="CiudadOrigen" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="EdoCivil" ColumnName="EdoCivil" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EscribirArchivoXMLRetencionesISLR" ColumnName="EscribirArchivoXMLRetencionesISLR" />
+                <ScalarProperty Name="Rif" ColumnName="Rif" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companias">
+            <EntityTypeMapping TypeName="dbContabModel.Compania">
+              <MappingFragment StoreEntitySet="Companias">
+                <ScalarProperty Name="MonedaDefecto" ColumnName="MonedaDefecto" />
+                <ScalarProperty Name="EmailServerCredentialsPassword" ColumnName="EmailServerCredentialsPassword" />
+                <ScalarProperty Name="EmailServerCredentialsUserName" ColumnName="EmailServerCredentialsUserName" />
+                <ScalarProperty Name="EmailServerSSLFlag" ColumnName="EmailServerSSLFlag" />
+                <ScalarProperty Name="EmailServerPort" ColumnName="EmailServerPort" />
+                <ScalarProperty Name="EmailServerName" ColumnName="EmailServerName" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="ZonaPostal" ColumnName="ZonaPostal" />
+                <ScalarProperty Name="EntidadFederal" ColumnName="EntidadFederal" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Rif" ColumnName="Rif" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="NombreCorto" ColumnName="NombreCorto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Temp_Nomina_Report_ConsultaEmpleados">
+            <EntityTypeMapping TypeName="dbContabModel.Temp_Nomina_Report_ConsultaEmpleados">
+              <MappingFragment StoreEntitySet="Temp_Nomina_Report_ConsultaEmpleados">
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="FechaRetiro" ColumnName="FechaRetiro" />
+                <ScalarProperty Name="SueldoBasico" ColumnName="SueldoBasico" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="SituacionActual" ColumnName="SituacionActual" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwTemp_Nomina_Report_ConsultaEmpleados">
+            <EntityTypeMapping TypeName="dbContabModel.vwTemp_Nomina_Report_ConsultaEmpleados">
+              <MappingFragment StoreEntitySet="vwTemp_Nomina_Report_ConsultaEmpleados">
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="AbreviaturaCia" ColumnName="AbreviaturaCia" />
+                <ScalarProperty Name="NombreCia" ColumnName="NombreCia" />
+                <ScalarProperty Name="FechaRetiro" ColumnName="FechaRetiro" />
+                <ScalarProperty Name="SueldoBasico" ColumnName="SueldoBasico" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="NombreCargo" ColumnName="NombreCargo" />
+                <ScalarProperty Name="NombreDepartamento" ColumnName="NombreDepartamento" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="NombreSituacionActual" ColumnName="NombreSituacionActual" />
+                <ScalarProperty Name="NombreStatus" ColumnName="NombreStatus" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tTempWebReport_ConsultaFacturas">
+            <EntityTypeMapping TypeName="dbContabModel.tTempWebReport_ConsultaFacturas">
+              <MappingFragment StoreEntitySet="tTempWebReport_ConsultaFacturas">
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Comprobante" ColumnName="Comprobante" />
+                <ScalarProperty Name="NombreCxCCxPFlag" ColumnName="NombreCxCCxPFlag" />
+                <ScalarProperty Name="CxCCxPFlag" ColumnName="CxCCxPFlag" />
+                <ScalarProperty Name="NombreEstado" ColumnName="NombreEstado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="Anticipo" ColumnName="Anticipo" />
+                <ScalarProperty Name="TotalAPagar" ColumnName="TotalAPagar" />
+                <ScalarProperty Name="FRecepcionRetencionIVA" ColumnName="FRecepcionRetencionIVA" />
+                <ScalarProperty Name="RetencionSobreIva" ColumnName="RetencionSobreIva" />
+                <ScalarProperty Name="RetencionSobreIvaPorc" ColumnName="RetencionSobreIvaPorc" />
+                <ScalarProperty Name="FRecepcionRetencionISLR" ColumnName="FRecepcionRetencionISLR" />
+                <ScalarProperty Name="ImpuestoRetenido_Adicional" ColumnName="ImpuestoRetenido_Adicional" />
+                <ScalarProperty Name="ImpuestoRetenido_General" ColumnName="ImpuestoRetenido_General" />
+                <ScalarProperty Name="ImpuestoRetenido_Reducido" ColumnName="ImpuestoRetenido_Reducido" />
+                <ScalarProperty Name="ImpuestoRetenido" ColumnName="ImpuestoRetenido" />
+                <ScalarProperty Name="ImpuestoRetenidoISLRSustraendo" ColumnName="ImpuestoRetenidoISLRSustraendo" />
+                <ScalarProperty Name="ImpuestoRetenidoISLRAntesSustraendo" ColumnName="ImpuestoRetenidoISLRAntesSustraendo" />
+                <ScalarProperty Name="ImpuestoRetenidoPorc" ColumnName="ImpuestoRetenidoPorc" />
+                <ScalarProperty Name="MontoSujetoARetencion" ColumnName="MontoSujetoARetencion" />
+                <ScalarProperty Name="TotalFactura" ColumnName="TotalFactura" />
+                <ScalarProperty Name="Iva_Adicional" ColumnName="Iva_Adicional" />
+                <ScalarProperty Name="Iva_General" ColumnName="Iva_General" />
+                <ScalarProperty Name="Iva_Reducido" ColumnName="Iva_Reducido" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="IvaPorc_Adicional" ColumnName="IvaPorc_Adicional" />
+                <ScalarProperty Name="IvaPorc_General" ColumnName="IvaPorc_General" />
+                <ScalarProperty Name="IvaPorc_Reducido" ColumnName="IvaPorc_Reducido" />
+                <ScalarProperty Name="IvaPorc" ColumnName="IvaPorc" />
+                <ScalarProperty Name="TipoAlicuota" ColumnName="TipoAlicuota" />
+                <ScalarProperty Name="BaseImponible_Adicional" ColumnName="BaseImponible_Adicional" />
+                <ScalarProperty Name="BaseImponible_General" ColumnName="BaseImponible_General" />
+                <ScalarProperty Name="BaseImponible_Reducido" ColumnName="BaseImponible_Reducido" />
+                <ScalarProperty Name="MontoFacturaConIva" ColumnName="MontoFacturaConIva" />
+                <ScalarProperty Name="MontoFacturaSinIva" ColumnName="MontoFacturaSinIva" />
+                <ScalarProperty Name="NotasFactura3" ColumnName="NotasFactura3" />
+                <ScalarProperty Name="NotasFactura2" ColumnName="NotasFactura2" />
+                <ScalarProperty Name="NotasFactura1" ColumnName="NotasFactura1" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="FechaRecepcion" ColumnName="FechaRecepcion" />
+                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+                <ScalarProperty Name="CondicionesDePagoNombre" ColumnName="CondicionesDePagoNombre" />
+                <ScalarProperty Name="CondicionesDePago" ColumnName="CondicionesDePago" />
+                <ScalarProperty Name="NombreTipo" ColumnName="NombreTipo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+                <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
+                <ScalarProperty Name="NumeroFacturaAfectada" ColumnName="NumeroFacturaAfectada" />
+                <ScalarProperty Name="Compra_NotaCredito" ColumnName="Compra_NotaCredito" />
+                <ScalarProperty Name="NcNdFlag" ColumnName="NcNdFlag" />
+                <ScalarProperty Name="ClaveUnicaFactura" ColumnName="ClaveUnicaFactura" />
+                <ScalarProperty Name="Importacion_CompraNacional" ColumnName="Importacion_CompraNacional" />
+                <ScalarProperty Name="ImportacionFlag" ColumnName="ImportacionFlag" />
+                <ScalarProperty Name="NumeroControl" ColumnName="NumeroControl" />
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="CodigoConceptoRetencion" ColumnName="CodigoConceptoRetencion" />
+                <ScalarProperty Name="CompaniaCiudad" ColumnName="CompaniaCiudad" />
+                <ScalarProperty Name="CompaniaFax" ColumnName="CompaniaFax" />
+                <ScalarProperty Name="CompaniaTelefono" ColumnName="CompaniaTelefono" />
+                <ScalarProperty Name="CompaniaDomicilio" ColumnName="CompaniaDomicilio" />
+                <ScalarProperty Name="NitCompania" ColumnName="NitCompania" />
+                <ScalarProperty Name="RifCompania" ColumnName="RifCompania" />
+                <ScalarProperty Name="NombreCompania" ColumnName="NombreCompania" />
+                <ScalarProperty Name="CiaContabCiudad" ColumnName="CiaContabCiudad" />
+                <ScalarProperty Name="CiaContabFax" ColumnName="CiaContabFax" />
+                <ScalarProperty Name="CiaContabTelefono2" ColumnName="CiaContabTelefono2" />
+                <ScalarProperty Name="CiaContabTelefono1" ColumnName="CiaContabTelefono1" />
+                <ScalarProperty Name="CiaContabRif" ColumnName="CiaContabRif" />
+                <ScalarProperty Name="CiaContabDireccion" ColumnName="CiaContabDireccion" />
+                <ScalarProperty Name="CiaContabNombre" ColumnName="CiaContabNombre" />
+                <ScalarProperty Name="Compania" ColumnName="Compania" />
+                <ScalarProperty Name="CiaContab" ColumnName="CiaContab" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="dbContabDFModel" ZoomLevel="75">
+        <EntityTypeShape EntityType="dbContabModel.Proveedore" Width="2.375" PointX="6.625" PointY="1.5" Height="8.5185351562500014" />
+        <EntityTypeShape EntityType="dbContabModel.tCiudade" Width="1.5" PointX="5" PointY="10.625" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="dbContabModel.TiposProveedor" Width="1.875" PointX="8.125" PointY="11.375" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="dbContabModel.tPais" Width="1.5" PointX="5" PointY="13.75" Height="1.5956835937500031" />
+        <AssociationConnector Association="dbContabModel.FK_Proveedores_tCiudades">
+          <ConnectorPoint PointX="6.5" PointY="10.625" />
+          <ConnectorPoint PointX="6.625" PointY="10.018535156250001" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContabModel.FK_Proveedores_TiposProveedor">
+          <ConnectorPoint PointX="8.5625" PointY="11.375" />
+          <ConnectorPoint PointX="8.5625" PointY="10.018535156250001" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContabModel.FK_tCiudades_tPaises">
+          <ConnectorPoint PointX="5.75" PointY="13.75" />
+          <ConnectorPoint PointX="5.75" PointY="12.797587890625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContabModel.ParametrosBanco" Width="2.125" PointX="0.75" PointY="8.75" Height="1.9210009765625031" />
+        <EntityTypeShape EntityType="dbContabModel.FormasDePago" Width="3.625" PointX="11.625" PointY="1.5" Height="1.9802864583333335" />
+        <EntityTypeShape EntityType="dbContabModel.tMaestraRubro" Width="2.125" PointX="4.75" PointY="23.875" Height="6.7878222656250031" />
+        <EntityTypeShape EntityType="dbContabModel.tNomina" Width="2.125" PointX="11.75" PointY="15.5" Height="4.4802050781250031" />
+        <AssociationConnector Association="dbContabModel.FK_Proveedores_FormasDePago">
+          <ConnectorPoint PointX="11.625" PointY="2.4901432291666667" />
+          <ConnectorPoint PointX="11.333333333333334" PointY="2.4901432291666663" />
+          <ConnectorPoint PointX="11.166666666666666" PointY="2.4901432291666667" />
+          <ConnectorPoint PointX="10.255205833333333" PointY="2.4901432291666663" />
+          <ConnectorPoint PointX="10.088539166666665" PointY="2.4901432291666667" />
+          <ConnectorPoint PointX="9" PointY="2.4901432291666667" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContabModel.ParametrosNomina" Width="2.125" PointX="4.75" PointY="20" Height="2.5783902994791674" />
+        <EntityTypeShape EntityType="dbContabModel.CajaChica_Parametros" Width="1.5" PointX="18.25" PointY="10.125" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="dbContabModel.Factura" Width="3.625" PointX="11.625" PointY="4.5" Height="10.441549479166667" />
+        <AssociationConnector Association="dbContabModel.FK_Facturas_FormasDePago">
+          <ConnectorPoint PointX="13.4375" PointY="3.4802864583333335" />
+          <ConnectorPoint PointX="13.4375" PointY="4.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContabModel.FK_Facturas_Proveedores">
+          <ConnectorPoint PointX="9" PointY="7.2592675781250016" />
+          <ConnectorPoint PointX="10.088539166666665" PointY="7.2592675781250007" />
+          <ConnectorPoint PointX="10.255205833333333" PointY="7.2592675781250016" />
+          <ConnectorPoint PointX="11.166666666666666" PointY="7.2592675781250007" />
+          <ConnectorPoint PointX="11.333333333333334" PointY="7.2592675781250016" />
+          <ConnectorPoint PointX="11.625" PointY="7.2592675781250016" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContabModel.FK_Facturas_TiposProveedor">
+          <ConnectorPoint PointX="10" PointY="12.268992513020834" />
+          <ConnectorPoint PointX="10.088539166666665" PointY="12.268992513020834" />
+          <ConnectorPoint PointX="10.255205833333333" PointY="12.268992513020834" />
+          <ConnectorPoint PointX="10.260416666666666" PointY="12.268992513020834" />
+          <ConnectorPoint PointX="10.427083333333334" PointY="12.268992513020834" />
+          <ConnectorPoint PointX="11.625" PointY="12.268992513020834" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContabModel.tEmpleado" Width="2.25" PointX="8.375" PointY="14.5" Height="9.67234375000001" />
+        <AssociationConnector Association="dbContabModel.FK_tEmpleados_tCiudades">
+          <ConnectorPoint PointX="6.5" PointY="11.0000025" />
+          <ConnectorPoint PointX="8.4791666666666661" PointY="11.0000025" />
+          <ConnectorPoint PointX="8.6458333333333339" PointY="11.0000025" />
+          <ConnectorPoint PointX="10.088539166666665" PointY="11.0000025" />
+          <ConnectorPoint PointX="10.255205833333333" PointY="11.0000025" />
+          <ConnectorPoint PointX="10.34375" PointY="11.0000025" />
+          <ConnectorPoint PointX="10.34375" PointY="14.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContabModel.FK_tNomina_tEmpleados">
+          <ConnectorPoint PointX="10.625" PointY="17.7401025390625" />
+          <ConnectorPoint PointX="11.75" PointY="17.7401025390625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContabModel.Compania" Width="2.25" PointX="1" PointY="0.5" Height="5.8263151041666674" />
+        <AssociationConnector Association="dbContabModel.FK_CajaChica_Parametros_Companias">
+          <ConnectorPoint PointX="3.25" PointY="1.0894490219884034" />
+          <ConnectorPoint PointX="4.760416666666667" PointY="1.0894490219884028" />
+          <ConnectorPoint PointX="4.927083333333333" PointY="1.0894490219884034" />
+          <ConnectorPoint PointX="11.166666666666666" PointY="1.0894490219884028" />
+          <ConnectorPoint PointX="11.333333333333334" PointY="1.0894490219884034" />
+          <ConnectorPoint PointX="19" PointY="1.0894490219884034" />
+          <ConnectorPoint PointX="19" PointY="10.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContabModel.FK_Facturas_Companias">
+          <ConnectorPoint PointX="2.125" PointY="0.5" />
+          <ConnectorPoint PointX="2.125" PointY="0.25" />
+          <ConnectorPoint PointX="11.25" PointY="0.25" />
+          <ConnectorPoint PointX="11.25" PointY="11.131660528645828" />
+          <ConnectorPoint PointX="11.625" PointY="11.131660528645828" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContabModel.FK_ParametrosBancos_Companias">
+          <ConnectorPoint PointX="1.9375" PointY="6.3263151041666674" />
+          <ConnectorPoint PointX="1.9375" PointY="8.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContabModel.FK_ParametrosNomina_Companias">
+          <ConnectorPoint PointX="3.25" PointY="0.763472010994208" />
+          <ConnectorPoint PointX="4.84375" PointY="0.763472010994208" />
+          <ConnectorPoint PointX="4.84375" PointY="20" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContabModel.FK_tEmpleados_Companias">
+          <ConnectorPoint PointX="3.25" PointY="1.2947270109941953" />
+          <ConnectorPoint PointX="4.760416666666667" PointY="1.2947270109941946" />
+          <ConnectorPoint PointX="4.927083333333333" PointY="1.2947270109941953" />
+          <ConnectorPoint PointX="10.1718725" PointY="1.2947270109941953" />
+          <ConnectorPoint PointX="10.1718725" PointY="14.5" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContabModel.Temp_Nomina_Report_ConsultaEmpleados" Width="3.75" PointX="11.875" PointY="20.625" Height="3.7109993489583246" />
+        <EntityTypeShape EntityType="dbContabModel.vwTemp_Nomina_Report_ConsultaEmpleados" Width="3.875" PointX="14.375" PointY="15.75" Height="3.7109993489583388" />
+        <EntityTypeShape EntityType="dbContabModel.tTempWebReport_ConsultaFacturas" Width="2.75" PointX="0.75" PointY="13.25" Height="15.633688151041667" />
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

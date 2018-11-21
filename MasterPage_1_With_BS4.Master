@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage_1_With_BS4.Master.cs" Inherits="ContabSysNetWeb.MasterPage_1_With_BS4" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!doctype html>
+
+<html lang="en">
+    <head runat="server">
+    
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>Untitled Page</title>
+
+        <link href="general.css" rel="stylesheet" type="text/css" />
+   
+        <link href="Styles/ajaxControlToolkit.css" rel="stylesheet" />
+        <link href="Styles/GridViewStyles/styles2.css" rel="stylesheet" />
+        <link href="radcalendar.css" rel="stylesheet" />
+
+        <link rel="stylesheet" type="text/css" href="Scripts/jquery/jquery-ui-1.10.4.min.css" />
+        <link rel="stylesheet" type="text/css" href="Scripts/bootstrap-4.0/css/bootstrap.min.css" />
+        
+    </head>
+
+    <body>
+       <form id="form1" runat="server" enctype="multipart/form-data">
+
+        <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>--%>
+
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+            <Scripts>
+            </Scripts>
+            <Services>
+                <asp:ServiceReference Path="~/MostrarProgreso_1.asmx" />
+            </Services>
+        </asp:ToolkitScriptManager>
+
+         <div id="header" style="border-bottom-style: solid; border-bottom: 1px #36c; background-color: #d5ddf3; padding-left: 10px; padding-right: 10px; ">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="padding: 5px; vertical-align: central; width:15%; ">
+                            <span class="FontMediumBoldNavy" style="font-style: italic; ">ContabSysNet</span><br />
+                            <span  id="AppName_Span" runat="server" class="FontMediumBoldNavy">App name</span>
+                        </td>
+                        <td style="width:70%; vertical-align: central; padding-top:5px; text-align:center; ">
+                            <h4 id="PageTitle_TableCell" runat="server" style="margin: 0">Page Title</h4>
+                            <span  id="PageSubTitle_Span" runat="server" class="FontMediumBoldNavy"></span>
+                        </td>
+                        <td style="width:5%; text-align:right; ">
+                            <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" DynamicLayout="True">
+                                <ProgressTemplate>
+                                    <span style="margin-right: 15px;">
+                                        <img runat="server" alt="...loading" src="Pictures/img/circle-ball-dark-antialiased.gif" /></span>
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                        </td>
+                        <td style="text-align: right; padding-top: 5px; width: 10%;">
+                            <a id="A1" href="~/Main/Home" runat="server">
+                                <img id="Img2" alt="home" runat="server" src="Pictures/house_20x20.png" style="margin-right: 10px;
+                                    border: none;" /></a> 
+                            <a href="javascript:javascript:history.go(-1)">
+                                        <img id="Img3" alt="back" runat="server" src="Pictures/arrow_left_20x20.png" style="margin-right: 10px;
+                                            border: none;" /></a>
+                            <a id="Help_HyperLink" href="#" runat="server">
+                                <img id="Img1" alt="home" runat="server" src="Pictures/help_20x20.png" style="border: none;" /></a>   
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <div style="min-height: 30%;">
+        
+                <asp:ContentPlaceHolder ID="PanelCentral_ContentPlaceHolder" runat="server">
+                </asp:ContentPlaceHolder>
+        
+            </div>
+        
+            <div style="margin: 0px; background-color: #d5ddf3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #36c">
+                <asp:ContentPlaceHolder ID="Footer_ContentPlaceHolder" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        
+        </form>
+
+        <!-- (bootstrap) Optional JavaScript -->
+        <!-- (bootstrap) jQuery first, then Popper.js, then Bootstrap JS -->
+        <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/jquery/jquery-1.10.2.js") %>"></script>
+        <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/jquery/jquery-ui-1.10.4.min.js") %>"></script>
+
+        <%--bootstrap 4.0 CSS--%>
+        <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/popper/popper.min.js") %>"></script>
+        <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/bootstrap-4.0/js/bootstrap.min.js") %>"></script>
+    </body>
+</html>

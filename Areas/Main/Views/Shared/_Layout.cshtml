@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- para evitar que el "compatibility mode" afecte esta página "-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ContabSysNet</title>
+
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jqgrid/js/jquery-1.11.0.min.js"></script>
+    <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap/js/bootstrap.min.js"></script>
+    <link href="~/Content/mybootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <script>
+        // para que se abran los 'sub-menues' en el Bootstrap navbar ...
+        (function ($) {
+            $(document).ready(function () {
+                $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    $(this).parent().siblings().removeClass('open');
+                    $(this).parent().toggleClass('open');
+                });
+            });
+        })(jQuery);
+    </script>
+
+    <div class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ContabSysNet", "Index", "Home", null, new { @class = "navbar-brand", style = "font-style: italic;" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <!-- mostramos el menú, solo si el usuario está authenticado ... -->
+                    @if (Request.IsAuthenticated)
+                    {
+                        // nótese que dejamos de usar este 'base uri (path)' más abajo, pues, por ejemplo, en el caso de lacoste, no trae el número de puerto 
+                        // pudimos usar, simplemente, '~', que funciona perfecto para abrir las páginas web forms ... 
+                        
+                        string path = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+                        if (!path.EndsWith("/")) { path += "/"; }
+
+
+                        if (User.IsInRole("Bancos"))
+                        {
+                           <!--  Bancos  -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bancos <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas</a>
+                                        <ul class="dropdown-menu">
+
+                                            <li class="dropdown dropdown-submenu">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Facturas y pagos</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href='~/Bancos/Consultas facturas/Facturas/Facturas.aspx'>Facturas</a></li>
+                                                    <li><a href='~/Bancos/Consultas facturas/VencimientoFacturas/VencimientoFacturas.aspx'>Vencimientos de saldos de facturas</a></li>
+                                                    <li><a href='~/Bancos/Consultas facturas/Pagos/Pagos_page.aspx'>Pagos</a></li>
+                                                </ul>
+                                            </li>
+
+                                            <li class="dropdown dropdown-submenu">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Disponibilidad en bancos</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="~/Bancos/Disponibilidad en bancos/Disponibilidad/Bancos_ConsultaDisponibilidad.aspx">Consulta de disponibilidad</a></li>
+                                                    <li><a href="~/Bancos/Disponibilidad en bancos/Disponibilidad/MontosRestringidos.aspx">Montos restringidos</a></li>
+                                                    <li><a href="~/Bancos/Disponibilidad en bancos/Disponibilidad/ChequesNoEntregados.aspx">Cheques no entregados</a></li>
+                                                </ul>
+                                            </li>
+
+                                            <li><a href="~/Bancos/ConsultasBancos/MovimientosBancarios/MovimientosBancarios_page.aspx">Movimientos bancarios</a></li>
+                                            <li><a href='~/Bancos/Companias/Index'>Compañías</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conciliación</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="~/Bancos/ConciliacionBancaria/ConciliacionBancaria.aspx">Conciliación de cuentas bancarias</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Importar desde Excel</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="~/Bancos/ImportarCompaniasDesdeExcel">Importar compañías y facturas</a></li>
+                                            <li><a href="~/Bancos/ImportarFacturasDesdeExcel">Importar facturas</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li role="separator" class="divider"></li>
+
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Otros ...</a>
+                                        <ul class="dropdown-menu">
+                                            @if (User.IsInRole("Bancos"))
+                                            {
+                                                <li><a href="~/Bancos/islr_pagoAnticipado">Islr - pago anticipado</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        if (User.IsInRole("Contab") || User.IsInRole("Presupuesto"))
+                        {
+                            <!--  Contab  -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contab <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+
+                                    @if (User.IsInRole("Contab"))
+                                    {
+                                        <li class="dropdown dropdown-submenu">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas contables</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="~/Contab/Consultas contables/Cuentas y movimientos/CuentasYMovimientos.aspx">Cuentas contables y sus movimientos</a></li>
+                                                <li><a href="~/Contab/Consultas contables/Comprobantes/ComprobantesContables.aspx">Comprobantes contables</a></li>
+                                                <li><a href="~/Contab/Consultas contables/BalanceComprobacion/BalanceComprobacion.aspx">Balance de comprobación</a></li>
+                                                <li><a href="~/Contab/Consultas contables/Centros de costo/CentrosCosto.aspx">Centros de costo</a></li>
+                                                <li><a href="~/Contabilidad/CentrosCostoConsulta">Centros de costo (2)</a></li>
+                                                <li><a href="~/Contab/Consultas contables/BalanceGeneral/BalanceGeneral.aspx">Balance General y GyP</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+
+                                    @if (User.IsInRole("Presupuesto"))
+                                    {
+                                        <li class="dropdown dropdown-submenu">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Presupuesto</a>
+                                            <ul class="dropdown-menu">
+
+                                                <li><a href='~/Contab/Presupuesto/Configuracion/Configuracion.aspx'>Configuración</a></li>
+
+                                                <li class="dropdown dropdown-submenu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="~/Contab/Presupuesto/Consultas/Mensual/ConsultaPresupuesto.aspx">Consulta de un mes</a></li>
+                                                        <li><a href="~/Contab/Presupuesto/Consultas/Anual/ConsultaPresupuesto.aspx">Consulta de un año</a></li>
+                                                        <li><a href="~/Contab/Presupuesto/Consultas/Montos estimados/MontosEstimados.aspx">Montos estimados</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                        if (User.IsInRole("AF"))
+                        {
+                            <!--  Activos fijos  -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Activos fijos <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href='~/ActivosFijos/Consultas/DepreciacionMensual/DepreciacionMensual_Page.aspx'>Depreciación mensual</a></li>
+                                        </ul>
+                                </ul>
+                            </li>
+                        }
+
+                        if (User.IsInRole("CajaChica"))
+                        {
+                            <!--  Caja chica  -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Caja chica <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href='~/CajaChica/ReposicionesCajaChica/Index'>Reposiciones de caja chica</a></li>
+                                </ul>
+                            </li>
+                        }
+
+
+                        if (User.IsInRole("Generales"))
+                        {
+                            <!--  Generales  -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Generales <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href='~/Generales/SeleccionarCiaContab/SeleccionarCiaContab.aspx'>Seleccionar una compañía</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href=@System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_address"] target="_blank">
+                                            <span style="font-style: italic; ">Contab2</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        <!-- si el usuairo es administrador, pero no tiene Generales, se debe abrir este menú, para que se tenga acceso al próximo -->
+                        if (User.IsInRole("Generales") || User.IsInRole("Administradores") || User.IsInRole("Admin"))
+                        {
+                            <!--  Otros  -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Otros <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href='~/Otros/CambiarPassword.aspx'>Cambiar password</a></li>
+
+                                    @if (User.IsInRole("Administradores") || User.IsInRole("Admin"))
+                                    {
+                                        <li class="dropdown dropdown-submenu">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Control de acceso</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="~/Otros/Control acceso/AgregarUsuario.aspx">Agregar/actualizar usuarios</a></li>
+                                                <li><a href="~/Otros/Control acceso/Roles.aspx">Agregar/actualizar roles</a></li>
+                                                <li><a href="~/Otros/Control acceso/AsociarRolesUsuarios.aspx">Asociar roles y usuarios</a></li>
+                                                <li><a href="~/Otros/Control acceso/AsociarUsuariosCompanias.aspx">Asociar usuarios y compañías</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+
+                                    <li><a href='~/Otros/reconversionMonetaria/reconversionMonetaria.aspx'>Reconversión monetaria</a></li>
+                                </ul>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4" style="text-align: center; ">
+                            
+                            @if (Request.IsAuthenticated)
+                            {
+                                <span style="font-style: italic; ">@User.Identity.Name</span>
+                                @:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @Html.ActionLink("logout", "logout", "Home")
+                            }
+
+                        </div>
+                        <div class="col-md-4"><p class="pull-right">&copy; @DateTime.Now.Year - ContabSysNet ...</p></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+
+</body>
+</html>

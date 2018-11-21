@@ -1,0 +1,103 @@
+﻿
+@using ContabSysNet_Web.Areas.Bancos.Models.islr_pagoAnticipado
+@model EventoPagoAnticipado
+
+@{
+    ViewBag.Title = "InformarPagoImpuesto";
+    Layout = "~/Areas/Bancos/Views/Shared/_Layout2_Bootstrap4.cshtml";
+}
+
+<div class="container">
+
+    <div class="row" style="padding-top: 45px; margin-bottom: 30px; ">
+        <div class="col-sm-9">
+            <h4>Informar pago del impuesto al Seniat</h4>
+        </div>
+        <div class="col-sm-3 text-right">
+            @Html.ActionLink("Regresar ...", "Index", "islr_pagoAnticipado", new { Area = "Bancos" }, new { })
+        </div>
+    </div>
+    
+    @if (ViewBag.ErrorInfo != null && @ViewBag.ErrorInfo.error)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Html.Raw(@ViewBag.ErrorInfo.message)
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (@ViewBag.PageInfo != null)
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            @Html.Raw(@ViewBag.PageInfo.message)
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @using (Html.BeginForm("InformarPagoImpuesto", "islr_pagoAnticipado", FormMethod.Post, new { @style = "border: solid 1px lightgray; padding: 20px; " }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model._id)
+        @Html.HiddenFor(model => model.FechaRegistro)
+        @Html.HiddenFor(model => model.Usuario)
+        @Html.HiddenFor(model => model.Cia)
+
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group form-control-sm">
+                    @Html.LabelFor(model => model.Rif)
+
+                    <div class="input-group input-group-sm mb-3">
+                        @Html.TextBoxFor(model => model.Rif, new { @class = "form-control", @placeholder = "Número del rif" })
+                    </div>
+                    <small class="form-text text-muted">Recuerde que el Rif no debe contener guiones y debe ser de 10 chars.</small>
+                    <small class="form-text text-muted">@Html.ValidationMessageFor(model => model.Rif, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group form-control-sm">
+                    @Html.LabelFor(model => model.Fecha)
+
+                    <div class="input-group input-group-sm mb-3">
+                        @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" }, })
+                    </div>
+                  
+                    <small class="form-text text-muted">Esta es la fecha del impuesto, no la del día de registro.</small>
+                    <small class="form-text text-muted">@Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group form-control-sm">
+                    @Html.LabelFor(model => model.Monto)
+
+                    <div class="input-group input-group-sm mb-3">
+                        @Html.TextBoxFor(model => model.Monto, new { @class = "form-control", @placeholder = "Monto base a informar" })
+                    </div>
+                   
+                    <small class="form-text text-muted">Para montos, el separador de decimales debe ser punto (.) y solo si es necesario.</small>
+                    <small class="form-text text-muted">@Html.ValidationMessageFor(model => model.Monto, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                <div class="form-group form-control-sm text-center">
+                    <input type="submit" value="Registrar" class="btn btn-default" style="min-width: 120px; " />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

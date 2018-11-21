@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<File>
+  <Item>
+    <Tipo>-100</Tipo>
+    <Descripcion>Normal</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>1</Tipo>
+    <Descripcion>Papelería</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>2</Tipo>
+    <Descripcion>Artículos de Oficina</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>3</Tipo>
+    <Descripcion>Equipos de Computación</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>4</Tipo>
+    <Descripcion>Insumos de Computación</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>5</Tipo>
+    <Descripcion>Artículos de Cafetería y Aseo</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>6</Tipo>
+    <Descripcion>Mobiliario</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>7</Tipo>
+    <Descripcion>Equipos Telefónicos</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>8</Tipo>
+    <Descripcion>Servicios</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>9</Tipo>
+    <Descripcion>Agencia de Viajes</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>10</Tipo>
+    <Descripcion>Corredor de Seguros</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>11</Tipo>
+    <Descripcion>Tipografía</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>12</Tipo>
+    <Descripcion>Empleados</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>13</Tipo>
+    <Descripcion>Honorarios Médicos</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>14</Tipo>
+    <Descripcion>Contratados</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>15</Tipo>
+    <Descripcion>Impuestos Municipales</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>16</Tipo>
+    <Descripcion>Insumos de Papeleria</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>17</Tipo>
+    <Descripcion>Consulta de 2DA. Opinion</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>18</Tipo>
+    <Descripcion>Insumos Material de Limpieza</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>19</Tipo>
+    <Descripcion>Comisiones</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>20</Tipo>
+    <Descripcion>Agencia de Viajes</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>21</Tipo>
+    <Descripcion>Honorarios Varios</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>22</Tipo>
+    <Descripcion>Caja De Ahorro</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>23</Tipo>
+    <Descripcion>Servicios De Mensajeria</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>24</Tipo>
+    <Descripcion>Asesor de Informatica</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>25</Tipo>
+    <Descripcion>GUARDERIAS</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>26</Tipo>
+    <Descripcion>Taller Mecanico</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>27</Tipo>
+    <Descripcion>Cia de Seguros</Descripcion>
+  </Item>
+  <Item>
+    <Tipo>28</Tipo>
+    <Descripcion>Impuestos</Descripcion>
+  </Item>
+</File>

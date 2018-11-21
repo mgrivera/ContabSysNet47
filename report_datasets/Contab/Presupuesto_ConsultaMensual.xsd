@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Presupuesto_ConsultaMensual" targetNamespace="http://tempuri.org/Presupuesto_ConsultaMensual.xsd" xmlns:mstns="http://tempuri.org/Presupuesto_ConsultaMensual.xsd" xmlns="http://tempuri.org/Presupuesto_ConsultaMensual.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="dbContabConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="dbContabConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.dbContabConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PresupuestoMensualTableAdapter" GeneratorDataComponentClassName="PresupuestoMensualTableAdapter" Name="PresupuestoMensual" UserDataComponentName="PresupuestoMensualTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="dbContabConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByNombreUsuario" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="FillByNombreUsuario" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillByNombreUsuario">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT     Monedas.Simbolo AS SimboloMoneda, Companias.Nombre AS NombreCiaContab, tTempWebReport_PresupuestoConsultaMensual.MesCalendario, 
+                      tTempWebReport_PresupuestoConsultaMensual.NombreMes, tTempWebReport_PresupuestoConsultaMensual.CodigoPresupuesto, 
+                      tTempWebReport_PresupuestoConsultaMensual.MontoEstimado, tTempWebReport_PresupuestoConsultaMensual.MontoEjecutado, 
+                      tTempWebReport_PresupuestoConsultaMensual.Variacion, tTempWebReport_PresupuestoConsultaMensual.MontoEstimadoAcum, 
+                      tTempWebReport_PresupuestoConsultaMensual.MontoEjecutadoAcum, tTempWebReport_PresupuestoConsultaMensual.VariacionAcum, 
+                      Presupuesto_Codigos.Descripcion AS NombreCodigoPresupuesto, tTempWebReport_PresupuestoConsultaMensual.Codigo1erNivel, 
+                      tTempWebReport_PresupuestoConsultaMensual.Codigo2doNivel, tTempWebReport_PresupuestoConsultaMensual.Codigo3erNivel, 
+                      tTempWebReport_PresupuestoConsultaMensual.Codigo4toNivel, tTempWebReport_PresupuestoConsultaMensual.Codigo5toNivel, 
+                      tTempWebReport_PresupuestoConsultaMensual.Codigo6toNivel, Presupuesto_Codigos_1.Descripcion AS NombreCodigo1erNivel, 
+                      Presupuesto_Codigos_2.Descripcion AS NombreCodigo2doNivel, Presupuesto_Codigos_3.Descripcion AS NombreCodigo3erNivel, 
+                      Presupuesto_Codigos_4.Descripcion AS NombreCodigo4toNivel, Presupuesto_Codigos_5.Descripcion AS NombreCodigo5toNivel, 
+                      Presupuesto_Codigos_6.Descripcion AS NombreCodigo6toNivel
+FROM         tTempWebReport_PresupuestoConsultaMensual INNER JOIN
+                      Monedas ON tTempWebReport_PresupuestoConsultaMensual.Moneda = Monedas.Moneda INNER JOIN
+                      Companias ON tTempWebReport_PresupuestoConsultaMensual.CiaContab = Companias.Numero INNER JOIN
+                      Presupuesto_Codigos ON tTempWebReport_PresupuestoConsultaMensual.CodigoPresupuesto = Presupuesto_Codigos.Codigo AND 
+                      tTempWebReport_PresupuestoConsultaMensual.CiaContab = Presupuesto_Codigos.CiaContab INNER JOIN
+                      Presupuesto_Codigos AS Presupuesto_Codigos_1 ON 
+                      tTempWebReport_PresupuestoConsultaMensual.Codigo1erNivel = Presupuesto_Codigos_1.Codigo AND 
+                      tTempWebReport_PresupuestoConsultaMensual.CiaContab = Presupuesto_Codigos_1.CiaContab LEFT OUTER JOIN
+                      Presupuesto_Codigos AS Presupuesto_Codigos_6 ON 
+                      tTempWebReport_PresupuestoConsultaMensual.Codigo6toNivel = Presupuesto_Codigos_6.Codigo AND 
+                      tTempWebReport_PresupuestoConsultaMensual.CiaContab = Presupuesto_Codigos_6.CiaContab LEFT OUTER JOIN
+                      Presupuesto_Codigos AS Presupuesto_Codigos_5 ON 
+                      tTempWebReport_PresupuestoConsultaMensual.Codigo5toNivel = Presupuesto_Codigos_5.Codigo AND 
+                      tTempWebReport_PresupuestoConsultaMensual.CiaContab = Presupuesto_Codigos_5.CiaContab LEFT OUTER JOIN
+                      Presupuesto_Codigos AS Presupuesto_Codigos_4 ON 
+                      tTempWebReport_PresupuestoConsultaMensual.Codigo4toNivel = Presupuesto_Codigos_4.Codigo AND 
+                      tTempWebReport_PresupuestoConsultaMensual.CiaContab = Presupuesto_Codigos_4.CiaContab LEFT OUTER JOIN
+                      Presupuesto_Codigos AS Presupuesto_Codigos_3 ON 
+                      tTempWebReport_PresupuestoConsultaMensual.Codigo3erNivel = Presupuesto_Codigos_3.Codigo AND 
+                      tTempWebReport_PresupuestoConsultaMensual.CiaContab = Presupuesto_Codigos_3.CiaContab LEFT OUTER JOIN
+                      Presupuesto_Codigos AS Presupuesto_Codigos_2 ON 
+                      tTempWebReport_PresupuestoConsultaMensual.Codigo2doNivel = Presupuesto_Codigos_2.Codigo AND 
+                      tTempWebReport_PresupuestoConsultaMensual.CiaContab = Presupuesto_Codigos_2.CiaContab
+WHERE     (tTempWebReport_PresupuestoConsultaMensual.NombreUsuario = @NombreUsuario)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="NombreUsuario" ColumnName="NombreUsuario" DataSourceName="dbContabRisk.dbo.tTempWebReport_PresupuestoConsultaMensual" DataTypeServer="nvarchar(256)" DbType="String" Direction="Input" ParameterName="@NombreUsuario" Precision="0" ProviderType="NVarChar" Scale="0" Size="256" SourceColumn="NombreUsuario" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="SimboloMoneda" DataSetColumn="SimboloMoneda" />
+              <Mapping SourceColumn="NombreCiaContab" DataSetColumn="NombreCiaContab" />
+              <Mapping SourceColumn="MesCalendario" DataSetColumn="MesCalendario" />
+              <Mapping SourceColumn="NombreMes" DataSetColumn="NombreMes" />
+              <Mapping SourceColumn="CodigoPresupuesto" DataSetColumn="CodigoPresupuesto" />
+              <Mapping SourceColumn="NombreCodigoPresupuesto" DataSetColumn="NombreCodigoPresupuesto" />
+              <Mapping SourceColumn="MontoEstimado" DataSetColumn="MontoEstimado" />
+              <Mapping SourceColumn="MontoEjecutado" DataSetColumn="MontoEjecutado" />
+              <Mapping SourceColumn="Variacion" DataSetColumn="Variacion" />
+              <Mapping SourceColumn="MontoEstimadoAcum" DataSetColumn="MontoEstimadoAcum" />
+              <Mapping SourceColumn="MontoEjecutadoAcum" DataSetColumn="MontoEjecutadoAcum" />
+              <Mapping SourceColumn="VariacionAcum" DataSetColumn="VariacionAcum" />
+              <Mapping SourceColumn="Codigo1erNivel" DataSetColumn="Codigo1erNivel" />
+              <Mapping SourceColumn="Codigo2doNivel" DataSetColumn="Codigo2doNivel" />
+              <Mapping SourceColumn="Codigo3erNivel" DataSetColumn="Codigo3erNivel" />
+              <Mapping SourceColumn="Codigo4toNivel" DataSetColumn="Codigo4toNivel" />
+              <Mapping SourceColumn="Codigo5toNivel" DataSetColumn="Codigo5toNivel" />
+              <Mapping SourceColumn="Codigo6toNivel" DataSetColumn="Codigo6toNivel" />
+              <Mapping SourceColumn="NombreCodigo1erNivel" DataSetColumn="NombreCodigo1erNivel" />
+              <Mapping SourceColumn="NombreCodigo2doNivel" DataSetColumn="NombreCodigo2doNivel" />
+              <Mapping SourceColumn="NombreCodigo3erNivel" DataSetColumn="NombreCodigo3erNivel" />
+              <Mapping SourceColumn="NombreCodigo4toNivel" DataSetColumn="NombreCodigo4toNivel" />
+              <Mapping SourceColumn="NombreCodigo5toNivel" DataSetColumn="NombreCodigo5toNivel" />
+              <Mapping SourceColumn="NombreCodigo6toNivel" DataSetColumn="NombreCodigo6toNivel" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Presupuesto_ConsultaMensual" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="Presupuesto_ConsultaMensual" msprop:Generator_DataSetName="Presupuesto_ConsultaMensual">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PresupuestoMensual" msprop:Generator_UserTableName="PresupuestoMensual" msprop:Generator_RowDeletedName="PresupuestoMensualRowDeleted" msprop:Generator_RowChangedName="PresupuestoMensualRowChanged" msprop:Generator_RowClassName="PresupuestoMensualRow" msprop:Generator_RowChangingName="PresupuestoMensualRowChanging" msprop:Generator_RowEvArgName="PresupuestoMensualRowChangeEvent" msprop:Generator_RowEvHandlerName="PresupuestoMensualRowChangeEventHandler" msprop:Generator_TableClassName="PresupuestoMensualDataTable" msprop:Generator_TableVarName="tablePresupuestoMensual" msprop:Generator_RowDeletingName="PresupuestoMensualRowDeleting" msprop:Generator_TablePropName="PresupuestoMensual">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SimboloMoneda" msprop:Generator_UserColumnName="SimboloMoneda" msprop:Generator_ColumnVarNameInTable="columnSimboloMoneda" msprop:Generator_ColumnPropNameInRow="SimboloMoneda" msprop:Generator_ColumnPropNameInTable="SimboloMonedaColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCiaContab" msprop:Generator_UserColumnName="NombreCiaContab" msprop:Generator_ColumnVarNameInTable="columnNombreCiaContab" msprop:Generator_ColumnPropNameInRow="NombreCiaContab" msprop:Generator_ColumnPropNameInTable="NombreCiaContabColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MesCalendario" msprop:Generator_UserColumnName="MesCalendario" msprop:Generator_ColumnVarNameInTable="columnMesCalendario" msprop:Generator_ColumnPropNameInRow="MesCalendario" msprop:Generator_ColumnPropNameInTable="MesCalendarioColumn" type="xs:short" />
+              <xs:element name="NombreMes" msprop:Generator_UserColumnName="NombreMes" msprop:Generator_ColumnVarNameInTable="columnNombreMes" msprop:Generator_ColumnPropNameInRow="NombreMes" msprop:Generator_ColumnPropNameInTable="NombreMesColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodigoPresupuesto" msprop:Generator_UserColumnName="CodigoPresupuesto" msprop:Generator_ColumnVarNameInTable="columnCodigoPresupuesto" msprop:Generator_ColumnPropNameInRow="CodigoPresupuesto" msprop:Generator_ColumnPropNameInTable="CodigoPresupuestoColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCodigoPresupuesto" msprop:Generator_UserColumnName="NombreCodigoPresupuesto" msprop:Generator_ColumnVarNameInTable="columnNombreCodigoPresupuesto" msprop:Generator_ColumnPropNameInRow="NombreCodigoPresupuesto" msprop:Generator_ColumnPropNameInTable="NombreCodigoPresupuestoColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MontoEstimado" msprop:Generator_UserColumnName="MontoEstimado" msprop:Generator_ColumnVarNameInTable="columnMontoEstimado" msprop:Generator_ColumnPropNameInRow="MontoEstimado" msprop:Generator_ColumnPropNameInTable="MontoEstimadoColumn" type="xs:decimal" />
+              <xs:element name="MontoEjecutado" msprop:Generator_UserColumnName="MontoEjecutado" msprop:Generator_ColumnVarNameInTable="columnMontoEjecutado" msprop:Generator_ColumnPropNameInRow="MontoEjecutado" msprop:Generator_ColumnPropNameInTable="MontoEjecutadoColumn" type="xs:decimal" />
+              <xs:element name="Variacion" msprop:Generator_UserColumnName="Variacion" msprop:Generator_ColumnVarNameInTable="columnVariacion" msprop:Generator_ColumnPropNameInRow="Variacion" msprop:Generator_ColumnPropNameInTable="VariacionColumn" type="xs:float" />
+              <xs:element name="MontoEstimadoAcum" msprop:Generator_UserColumnName="MontoEstimadoAcum" msprop:Generator_ColumnVarNameInTable="columnMontoEstimadoAcum" msprop:Generator_ColumnPropNameInRow="MontoEstimadoAcum" msprop:Generator_ColumnPropNameInTable="MontoEstimadoAcumColumn" type="xs:decimal" />
+              <xs:element name="MontoEjecutadoAcum" msprop:Generator_UserColumnName="MontoEjecutadoAcum" msprop:Generator_ColumnVarNameInTable="columnMontoEjecutadoAcum" msprop:Generator_ColumnPropNameInRow="MontoEjecutadoAcum" msprop:Generator_ColumnPropNameInTable="MontoEjecutadoAcumColumn" type="xs:decimal" />
+              <xs:element name="VariacionAcum" msprop:Generator_UserColumnName="VariacionAcum" msprop:Generator_ColumnVarNameInTable="columnVariacionAcum" msprop:Generator_ColumnPropNameInRow="VariacionAcum" msprop:Generator_ColumnPropNameInTable="VariacionAcumColumn" type="xs:float" />
+              <xs:element name="Codigo1erNivel" msprop:Generator_UserColumnName="Codigo1erNivel" msprop:Generator_ColumnPropNameInRow="Codigo1erNivel" msprop:Generator_ColumnVarNameInTable="columnCodigo1erNivel" msprop:Generator_ColumnPropNameInTable="Codigo1erNivelColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Codigo2doNivel" msprop:Generator_UserColumnName="Codigo2doNivel" msprop:Generator_ColumnPropNameInRow="Codigo2doNivel" msprop:Generator_ColumnVarNameInTable="columnCodigo2doNivel" msprop:Generator_ColumnPropNameInTable="Codigo2doNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Codigo3erNivel" msprop:Generator_UserColumnName="Codigo3erNivel" msprop:Generator_ColumnPropNameInRow="Codigo3erNivel" msprop:Generator_ColumnVarNameInTable="columnCodigo3erNivel" msprop:Generator_ColumnPropNameInTable="Codigo3erNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Codigo4toNivel" msprop:Generator_UserColumnName="Codigo4toNivel" msprop:Generator_ColumnPropNameInRow="Codigo4toNivel" msprop:Generator_ColumnVarNameInTable="columnCodigo4toNivel" msprop:Generator_ColumnPropNameInTable="Codigo4toNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Codigo5toNivel" msprop:Generator_UserColumnName="Codigo5toNivel" msprop:Generator_ColumnPropNameInRow="Codigo5toNivel" msprop:Generator_ColumnVarNameInTable="columnCodigo5toNivel" msprop:Generator_ColumnPropNameInTable="Codigo5toNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Codigo6toNivel" msprop:Generator_UserColumnName="Codigo6toNivel" msprop:Generator_ColumnPropNameInRow="Codigo6toNivel" msprop:Generator_ColumnVarNameInTable="columnCodigo6toNivel" msprop:Generator_ColumnPropNameInTable="Codigo6toNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCodigo1erNivel" msprop:Generator_UserColumnName="NombreCodigo1erNivel" msprop:Generator_ColumnPropNameInRow="NombreCodigo1erNivel" msprop:Generator_ColumnVarNameInTable="columnNombreCodigo1erNivel" msprop:Generator_ColumnPropNameInTable="NombreCodigo1erNivelColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCodigo2doNivel" msprop:Generator_UserColumnName="NombreCodigo2doNivel" msprop:Generator_ColumnPropNameInRow="NombreCodigo2doNivel" msprop:Generator_ColumnVarNameInTable="columnNombreCodigo2doNivel" msprop:Generator_ColumnPropNameInTable="NombreCodigo2doNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCodigo3erNivel" msprop:Generator_UserColumnName="NombreCodigo3erNivel" msprop:Generator_ColumnPropNameInRow="NombreCodigo3erNivel" msprop:Generator_ColumnVarNameInTable="columnNombreCodigo3erNivel" msprop:Generator_ColumnPropNameInTable="NombreCodigo3erNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCodigo4toNivel" msprop:Generator_UserColumnName="NombreCodigo4toNivel" msprop:Generator_ColumnPropNameInRow="NombreCodigo4toNivel" msprop:Generator_ColumnVarNameInTable="columnNombreCodigo4toNivel" msprop:Generator_ColumnPropNameInTable="NombreCodigo4toNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCodigo5toNivel" msprop:Generator_UserColumnName="NombreCodigo5toNivel" msprop:Generator_ColumnPropNameInRow="NombreCodigo5toNivel" msprop:Generator_ColumnVarNameInTable="columnNombreCodigo5toNivel" msprop:Generator_ColumnPropNameInTable="NombreCodigo5toNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCodigo6toNivel" msprop:Generator_UserColumnName="NombreCodigo6toNivel" msprop:Generator_ColumnPropNameInRow="NombreCodigo6toNivel" msprop:Generator_ColumnVarNameInTable="columnNombreCodigo6toNivel" msprop:Generator_ColumnPropNameInTable="NombreCodigo6toNivelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

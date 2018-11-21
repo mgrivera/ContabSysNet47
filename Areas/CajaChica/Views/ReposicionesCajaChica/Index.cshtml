@@ -1,0 +1,351 @@
+﻿
+@{
+    ViewBag.Title = "Control de cajas chicas - Reposiciones";
+}
+
+<div ng-app="myApp">
+
+    <div ng-controller="CajaChicasReposicionesController">
+        <div ui-view></div>
+    </div>
+    
+
+    <!-- ---------------------------------------------------  -->
+    <!--   reposicion caja chica  -->
+    <!-- ---------------------------------------------------  -->
+
+    <script type="text/ng-template" id="reposicionCajaChica.html">
+
+        <div class="row" style="margin-top: 10px; ">
+            <div class="col-sm-5 col-sm-offset-0" style="font-style: italic; ">
+                <h4>Actualización de reposiciones de caja chica</h4>
+            </div>
+            <div class="col-sm-2" style="text-align: center; vertical-align: middle; ">
+                <i style="color: #428BCA" class="fa fa-circle-o-notch fa-spin fa-2x" ng-show="showProgress"></i>
+            </div>
+            <div id="nombreCiaSeleccionada_Div"
+                 style="text-align: center; font-size: small; color: #004080; font-style: italic; padding-top: 10px; "
+                 class="col-sm-5">
+                <span style="padding-right: 15px; ">{{ ciaContabSeleccionada.nombre }}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1" style="text-align: center; border: solid 1px lightgray; ">
+                <a href="#" ng-click="leerCatalogosDesdeServidor()">Leer<br />catálogos</a>
+            </div>
+
+            <div class="col-sm-10 ui-viewBorder">
+                <div ui-view></div>
+            </div>
+        </div>
+
+    </script>
+
+
+    <!-- ---------------------------------------------------  -->
+    <!--   Filtro template  -->
+    <!-- ---------------------------------------------------  -->
+
+    <script type="text/ng-template" id="reposicionCajaChica.filtro.html">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-0" style="font-size: small; ">
+                    <h4>Welcome to the filter template ... </h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-0" style="font-size: small; ">
+                    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                        <span ng-bind-html="alert.msg | unsafe"></span>
+                    </alert>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: right; ">
+            <button class="btn btn-sm btn-primary" ng-click="aplicarFiltro()">Aplicar filtro</button>
+            <button class="btn btn-sm btn-primary" ng-click="nuevo()">Nuevo</button>
+        </div>
+    </script>
+
+    <!-- ---------------------------------------------------  -->
+    <!--   List template  -->
+    <!-- ---------------------------------------------------  -->
+
+    <script type="text/ng-template" id="reposicionCajaChica.lista.html">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-0" style="font-size: small; ">
+                    <h4>Welcome to the list template ... </h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-0" style="font-size: small; ">
+                    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                        <span ng-bind-html="alert.msg | unsafe"></span>
+                    </alert>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div style="text-align: right; ">
+            <button class="btn btn-sm btn-primary" ng-click="regresarFiltro()">Back to filter ...</button>
+            <button class="btn btn-sm btn-primary" ng-click="nuevo()">Nuevo</button>
+        </div>
+    </script>
+
+    <!-- ---------------------------------------------------  -->
+    <!--   Entity template  -->
+    <!-- ---------------------------------------------------  -->
+
+    <script type="text/ng-template" id="reposicionCajaChica.entidad.html">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-0" style="font-size: small; ">
+                    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                        <span ng-bind-html="alert.msg | unsafe"></span>
+                    </alert>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-0">
+                    <nav class="navbar navbar-inverse navbar_custom_small_fullWidth" role="navigation">
+                        <div class="container-fluid">
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+
+                                    <li><a href="#" class="navbar_custom_small_header" ng-if="reposicionCajaChica.docState"><em>Reposiciones</em> (<span class="fa fa-asterisk"></span>)</a></li>
+                                    <li><a href="#" class="navbar_custom_small_header" ng-if="!reposicionCajaChica.docState"><em>Reposiciones</em></a></li>
+
+                                    <li><a href="#" ng-click="grabar()" class="navbar_custom_small_node">Grabar&nbsp;&nbsp;<span class="fa fa-floppy-o"></span></a></li>
+                                    <li><a href="#" ng-click="refresh()" class="navbar_custom_small_node">Refresh&nbsp;&nbsp;<span class="fa fa-refresh"></span></a></li>
+                                    <li class="divider-vertical-small"></li>
+                                    <li><a href="#" ng-click="imprimir()" class="navbar_custom_small_node">Imprimir&nbsp;&nbsp;<span class="fa fa-print"></span></a></li>
+
+                                    <li class="divider-vertical-small"></li>
+
+                                    <li><a href="#" ng-if="origen=='edicion'" ng-click="nuevo()" class="navbar_custom_small_node">Nuevo&nbsp;&nbsp;<span class="fa fa-file-o"></span></a></li>
+                                    <li><a href="#" ng-if="origen=='edicion'" ng-click="eliminar()" class="navbar_custom_small_node">Eliminar&nbsp;&nbsp;<span class="fa fa-times"></span></a></li>
+                                </ul>
+
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="#" ng-click="regresarALista()" class="navbar_custom_small_node">Regresar ...</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 15px; ">
+                <div class="col-sm-12 col-sm-offset-0">
+
+                    <form class="form-horizontal"
+                          role="form"
+                          name="form.reposicionCajaChicaForm"
+                          ng-submit="reposicionCajaChicaForm_Submit()"
+                          novalidate
+                          style="margin-top: 15px; ">
+
+                        <div class="container-fluid">
+
+                            <div class="row">
+
+                                <!-- número -->
+
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-4 control-label input-label">Número: </label>
+                                        <div class="col-sm-8" style="color: #337AB7; padding-left: 30px; ">
+                                            <p class="form-control-static pull-left">{{ reposicionCajaChica.reposicionID }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Fecha -->
+
+                                <div class="col-sm-5 col-sm-offset-0">
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-4 control-label input-label">Fecha: </label>
+                                        <div class="col-sm-8">
+                                            <input type="date"
+                                                   name="fecha"
+                                                   class="form-control input-sm myinput-sm"
+                                                   ng-model="reposicionCajaChica.fecha"
+                                                   ng-change="setIsEdited()"
+                                                   ng-required="true" />
+
+                                            <span class="validation-message"
+                                                  ng-show="submitted && form.reposicionCajaChicaForm.fecha.$error.required">
+                                                Indique un valor.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <!-- Estado -->
+
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-4 control-label input-label">Estado: </label>
+                                        <div class="col-sm-8" style="color: #337AB7; padding-left: 30px; ">
+                                            <p class="form-control-static pull-left">{{ reposicionCajaChica.estado }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Caja chica -->
+
+                                <div class="col-sm-5 col-sm-offset-0">
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-4 control-label input-label">Caja chica: </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control input-sm myinput-sm"
+                                                    name="cajaChicaID"
+                                                    ng-model="reposicionCajaChica.cajaChicaID"
+                                                    ng-change="setIsEdited()"
+                                                    ng-options="item.Id as item.descripcion for item in cajasChicas | filter:{ ciaContab : {{ ciaContabSeleccionada.numero }} }"
+                                                    ng-model-options="{ updateOn: 'blur' }"
+                                                    required></select>
+
+                                            <span class="validation-message"
+                                                  ng-show="submitted && form.reposicionCajaChicaForm.cajaChicaID.$error.required">
+                                                Indique un valor.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <!-- Observaciones -->
+
+                                <div class="col-sm-8 col-sm-offset-1">
+                                    <div class="form-group form-group-sm">
+                                        <span class="col-sm-12 textarea-label">Observaciones: </span>
+                                        <br />
+                                        <div class="col-sm-12">
+                                            <textarea class="input-sm myinput-sm wide-textarea"
+                                                      name="observaciones"
+                                                      ng-model="reposicionCajaChica.observaciones"
+                                                      ng-change="setIsEdited()"
+                                                      ng-model-options="{ updateOn: 'blur' }"
+                                                      required
+                                                      rows="3"></textarea>
+                                            <span class="validation-message"
+                                                  ng-show="submitted && form.reposicionCajaChicaForm.observaciones.$error.required">
+                                                Indique un valor.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-5 col-sm-offset-1">
+                                </div>
+
+                                <div class="col-sm-5 col-sm-offset-0">
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-4 control-label input-label">Cia: </label>
+                                        <div class="col-sm-8" style="padding-left: 30px; ">
+                                            <p class="form-control-static pull-left">{{ reposicionCajaChica.ciaContabID }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                        </div>
+
+                        <button id="submitForm_Button" type="submit" ng-show="false">Submit</button>
+
+                    </form>
+
+                </div>
+
+                <div class="col-sm-12">
+                    <nav class="navbar navbar-default navbar_custom_small" role="navigation">
+                        <div class="container-fluid navbar-nopaddingleft">
+                            <div class="collapse navbar-collapse navbar-nopaddingleft" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="#" class="navbar_custom_small_header">Gastos</a></li>
+
+                                    <li><a href="#" ng-click="agregarGasto()" class="navbar_custom_xsmall_node">Nuevo <i class="fa fa-plus-circle"></i></a></li>
+                                    <li><a href="#" ng-click="eliminarGasto()" class="navbar_custom_xsmall_node">Eliminar <i style="color: red; " class="fa fa-remove"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div ui-grid="rubros_ui_grid"
+                         ui-grid-edit
+                         ui-grid-cellnav
+                         ui-grid-resize-columns
+                         ui-grid-selection
+                         class="angularGridWide"
+                         style="height: 150px; ">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </script>
+
+
+
+    <script type="text/ng-template" id="genericUIBootstrapModal.html">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                <span ng-bind-html="dialogData.titulo | unsafe"></span>
+            </h5>
+        </div>
+
+        <div class="modal-body">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-sm-12 col-sm-offset-0">
+                        <span ng-bind-html="dialogData.mensaje | unsafe"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-sm btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-sm btn-warning" ng-click="cancel()" ng-show="dialogData.showCancelButton">Cancel</button>
+        </div>
+    </script>
+
+</div>
+
+
+<script src="~/Scripts/code/cajaChica/ReposicionesCajaChica/ActualizarReposiciones.js"></script>
+<script src="~/Scripts/code/common/angularFilters.js"></script>
+
+
+

@@ -1,0 +1,1058 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbContabNominaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="dbContabNominaModelStoreContainer">
+          <EntitySet Name="DeduccionesISLR" EntityType="dbContabNominaModel.Store.DeduccionesISLR" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Empleados_Faltas" EntityType="dbContabNominaModel.Store.Empleados_Faltas" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Empleados_Sueldo" EntityType="dbContabNominaModel.Store.Empleados_Sueldo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ParametrosNomina" EntityType="dbContabNominaModel.Store.ParametrosNomina" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tCargos" EntityType="dbContabNominaModel.Store.tCargos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Temp_Nomina_Report_ConsultaEmpleados" EntityType="dbContabNominaModel.Store.Temp_Nomina_Report_ConsultaEmpleados" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tEmpleados" EntityType="dbContabNominaModel.Store.tEmpleados" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tGruposEmpleados" EntityType="dbContabNominaModel.Store.tGruposEmpleados" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tMaestraRubros" EntityType="dbContabNominaModel.Store.tMaestraRubros" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tNomina" EntityType="dbContabNominaModel.Store.tNomina" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tNominaHeaders" EntityType="dbContabNominaModel.Store.tNominaHeaders" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_DeduccionesISLR_tEmpleados" Association="dbContabNominaModel.Store.FK_DeduccionesISLR_tEmpleados">
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+            <End Role="DeduccionesISLR" EntitySet="DeduccionesISLR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeduccionesISLR_tGruposEmpleados" Association="dbContabNominaModel.Store.FK_DeduccionesISLR_tGruposEmpleados">
+            <End Role="tGruposEmpleados" EntitySet="tGruposEmpleados" />
+            <End Role="DeduccionesISLR" EntitySet="DeduccionesISLR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Faltas_tEmpleados" Association="dbContabNominaModel.Store.FK_Empleados_Faltas_tEmpleados">
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+            <End Role="Empleados_Faltas" EntitySet="Empleados_Faltas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Sueldo_tEmpleados" Association="dbContabNominaModel.Store.FK_Empleados_Sueldo_tEmpleados">
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+            <End Role="Empleados_Sueldo" EntitySet="Empleados_Sueldo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmpleados_tCargos" Association="dbContabNominaModel.Store.FK_tEmpleados_tCargos">
+            <End Role="tCargos" EntitySet="tCargos" />
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNomina_tEmpleados" Association="dbContabNominaModel.Store.FK_tNomina_tEmpleados">
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+            <End Role="tNomina" EntitySet="tNomina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNomina_tMaestraRubros" Association="dbContabNominaModel.Store.FK_tNomina_tMaestraRubros">
+            <End Role="tMaestraRubros" EntitySet="tMaestraRubros" />
+            <End Role="tNomina" EntitySet="tNomina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNomina_tNominaHeaders" Association="dbContabNominaModel.Store.FK_tNomina_tNominaHeaders">
+            <End Role="tNominaHeaders" EntitySet="tNominaHeaders" />
+            <End Role="tNomina" EntitySet="tNomina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNominaHeaders_tGruposEmpleados" Association="dbContabNominaModel.Store.FK_tNominaHeaders_tGruposEmpleados">
+            <End Role="tGruposEmpleados" EntitySet="tGruposEmpleados" />
+            <End Role="tNominaHeaders" EntitySet="tNominaHeaders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DeduccionesISLR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GrupoNomina" Type="int" />
+          <Property Name="Empleado" Type="int" />
+          <Property Name="Desde" Type="date" Nullable="false" />
+          <Property Name="TipoNomina" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Periodicidad" Type="nvarchar" MaxLength="2" />
+          <Property Name="Porcentaje" Type="decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="Base" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="SuspendidoFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados_Faltas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Empleado" Type="int" Nullable="false" />
+          <Property Name="Desde" Type="date" Nullable="false" />
+          <Property Name="Hasta" Type="date" Nullable="false" />
+          <Property Name="CantDias" Type="smallint" Nullable="false" />
+          <Property Name="Descontar" Type="bit" Nullable="false" />
+          <Property Name="Observaciones" Type="text" />
+          <Property Name="DescripcionRubroNomina" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Empleados_Sueldo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Empleado" Type="int" Nullable="false" />
+          <Property Name="Desde" Type="date" Nullable="false" />
+          <Property Name="Sueldo" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParametrosNomina">
+          <Key>
+            <PropertyRef Name="Cia" />
+          </Key>
+          <Property Name="LimiteProrrateoVacaciones" Type="real" />
+          <Property Name="AgregarAsientosContables" Type="bit" />
+          <Property Name="OrganizarPartidasDelAsiento" Type="bit" />
+          <Property Name="TipoAsientoDefault" Type="nvarchar" MaxLength="6" />
+          <Property Name="CuentaContableNomina" Type="int" />
+          <Property Name="MonedaParaElAsiento" Type="int" />
+          <Property Name="SumarizarPartidaAsientoContable" Type="smallint" />
+          <Property Name="CodigoConceptoRetencionISLREmpleados" Type="nvarchar" MaxLength="6" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCargos">
+          <Key>
+            <PropertyRef Name="Cargo" />
+          </Key>
+          <Property Name="Cargo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Temp_Nomina_Report_ConsultaEmpleados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Empleado" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Cedula" Type="nvarchar" Nullable="false" MaxLength="12" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="SituacionActual" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Departamento" Type="int" Nullable="false" />
+          <Property Name="Cargo" Type="int" Nullable="false" />
+          <Property Name="FechaIngreso" Type="date" Nullable="false" />
+          <Property Name="SueldoBasico" Type="money" />
+          <Property Name="FechaRetiro" Type="date" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tEmpleados">
+          <Key>
+            <PropertyRef Name="Empleado" />
+          </Key>
+          <Property Name="Empleado" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="nvarchar" Nullable="false" MaxLength="12" />
+          <Property Name="Alias" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="Rif" Type="nvarchar" MaxLength="20" />
+          <Property Name="EscribirArchivoXMLRetencionesISLR" Type="bit" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="EdoCivil" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Sexo" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="Nacionalidad" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="CiudadOrigen" Type="nvarchar" MaxLength="6" />
+          <Property Name="DireccionHabitacion" Type="ntext" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="25" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="25" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="SituacionActual" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Departamento" Type="int" Nullable="false" />
+          <Property Name="Cargo" Type="int" Nullable="false" />
+          <Property Name="FechaIngreso" Type="date" Nullable="false" />
+          <Property Name="FechaRetiro" Type="date" />
+          <Property Name="BancoDepositosNomina" Type="int" />
+          <Property Name="TipoCuentaDepositosNomina" Type="int" />
+          <Property Name="CuentaBancariaDepositosNomina" Type="nvarchar" MaxLength="30" />
+          <Property Name="BancoCuentaPrestacionesSociales" Type="int" />
+          <Property Name="NumeroCuentaBancariaPrestacionesSociales" Type="nvarchar" MaxLength="30" />
+          <Property Name="Contacto1" Type="nvarchar" MaxLength="250" />
+          <Property Name="Parentesco1" Type="int" />
+          <Property Name="TelefonoCon1" Type="nvarchar" MaxLength="25" />
+          <Property Name="Contacto2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Parentesco2" Type="int" />
+          <Property Name="TelefonoCon2" Type="nvarchar" MaxLength="25" />
+          <Property Name="Contacto3" Type="nvarchar" MaxLength="250" />
+          <Property Name="Parentesco3" Type="int" />
+          <Property Name="TelefonoCon3" Type="nvarchar" MaxLength="25" />
+          <Property Name="EmpleadoObreroFlag" Type="smallint" />
+          <Property Name="MontoCestaTickets" Type="money" />
+          <Property Name="BonoVacAgregarSueldoFlag" Type="bit" />
+          <Property Name="BonoVacAgregarMontoCestaTicketsFlag" Type="bit" />
+          <Property Name="BonoVacacionalMontoAdicional" Type="money" />
+          <Property Name="BonoVacAgregarMontoAdicionalFlag" Type="bit" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tGruposEmpleados">
+          <Key>
+            <PropertyRef Name="Grupo" />
+          </Key>
+          <Property Name="Grupo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NombreGrupo" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="GrupoNominaFlag" Type="bit" Nullable="false" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tMaestraRubros">
+          <Key>
+            <PropertyRef Name="Rubro" />
+          </Key>
+          <Property Name="Rubro" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCortoRubro" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Tipo" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="SueldoFlag" Type="bit" />
+          <Property Name="SalarioFlag" Type="bit" />
+          <Property Name="TipoRubro" Type="int" />
+          <Property Name="TipoNomina" Type="nvarchar" MaxLength="10" />
+          <Property Name="Periodicidad" Type="nvarchar" MaxLength="2" />
+          <Property Name="Desde" Type="datetime" />
+          <Property Name="Hasta" Type="datetime" />
+          <Property Name="Siempre" Type="bit" />
+          <Property Name="MontoAAplicar" Type="money" />
+          <Property Name="RubroAAplicar" Type="int" />
+          <Property Name="GrupoAAplicar" Type="int" />
+          <Property Name="DeLaNomina" Type="nvarchar" MaxLength="2" />
+          <Property Name="DeLaNominaDesde" Type="smalldatetime" />
+          <Property Name="DeLaNominaHasta" Type="smalldatetime" />
+          <Property Name="VariableAAplicar" Type="tinyint" />
+          <Property Name="BaseCalculoVariableFlag" Type="char" MaxLength="2" />
+          <Property Name="Factor1" Type="float" />
+          <Property Name="Factor2" Type="float" />
+          <Property Name="Divisor1" Type="float" />
+          <Property Name="Divisor2" Type="float" />
+          <Property Name="Porcentaje" Type="float" />
+          <Property Name="PorcentajeMas" Type="float" />
+          <Property Name="PorcentajeMas2" Type="float" />
+          <Property Name="LunesDelMes" Type="bit" />
+          <Property Name="Tope" Type="money" />
+          <Property Name="Categoria" Type="smallint" />
+          <Property Name="MostrarEnElReciboFlag" Type="bit" />
+          <Property Name="SSOFlag" Type="bit" />
+          <Property Name="ISRFlag" Type="bit" />
+        </EntityType>
+        <EntityType Name="tNomina">
+          <Key>
+            <PropertyRef Name="NumeroUnico" />
+          </Key>
+          <Property Name="NumeroUnico" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="HeaderID" Type="int" Nullable="false" />
+          <Property Name="Empleado" Type="int" Nullable="false" />
+          <Property Name="Rubro" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Monto" Type="money" Nullable="false" />
+          <Property Name="AplicaPrestacionesFlag" Type="bit" />
+          <Property Name="MostrarEnElReciboFlag" Type="bit" />
+          <Property Name="MontoBase" Type="money" />
+          <Property Name="CantDias" Type="tinyint" />
+          <Property Name="Fraccion" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="SueldoFlag" Type="bit" Nullable="false" />
+          <Property Name="SalarioFlag" Type="bit" Nullable="false" />
+          <Property Name="VacFraccionFlag" Type="char" MaxLength="1" />
+          <Property Name="FraccionarFlag" Type="bit" />
+        </EntityType>
+        <EntityType Name="tNominaHeaders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FechaNomina" Type="date" Nullable="false" />
+          <Property Name="FechaEjecucion" Type="datetime2" Nullable="false" />
+          <Property Name="GrupoNomina" Type="int" Nullable="false" />
+          <Property Name="Desde" Type="date" />
+          <Property Name="Hasta" Type="date" />
+          <Property Name="CantidadDias" Type="smallint" />
+          <Property Name="Tipo" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="AgregarSueldo" Type="bit" Nullable="false" />
+          <Property Name="AgregarDeduccionesObligatorias" Type="bit" Nullable="false" />
+          <Property Name="ProvieneDe" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProvieneDe_ID" Type="int" />
+          <Property Name="AsientoContableID" Type="int" />
+        </EntityType>
+        <Association Name="FK_DeduccionesISLR_tEmpleados">
+          <End Role="tEmpleados" Type="dbContabNominaModel.Store.tEmpleados" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeduccionesISLR" Type="dbContabNominaModel.Store.DeduccionesISLR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleados">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="DeduccionesISLR">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeduccionesISLR_tGruposEmpleados">
+          <End Role="tGruposEmpleados" Type="dbContabNominaModel.Store.tGruposEmpleados" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeduccionesISLR" Type="dbContabNominaModel.Store.DeduccionesISLR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGruposEmpleados">
+              <PropertyRef Name="Grupo" />
+            </Principal>
+            <Dependent Role="DeduccionesISLR">
+              <PropertyRef Name="GrupoNomina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Faltas_tEmpleados">
+          <End Role="tEmpleados" Type="dbContabNominaModel.Store.tEmpleados" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Empleados_Faltas" Type="dbContabNominaModel.Store.Empleados_Faltas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleados">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="Empleados_Faltas">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Sueldo_tEmpleados">
+          <End Role="tEmpleados" Type="dbContabNominaModel.Store.tEmpleados" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Empleados_Sueldo" Type="dbContabNominaModel.Store.Empleados_Sueldo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleados">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="Empleados_Sueldo">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmpleados_tCargos">
+          <End Role="tCargos" Type="dbContabNominaModel.Store.tCargos" Multiplicity="1" />
+          <End Role="tEmpleados" Type="dbContabNominaModel.Store.tEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCargos">
+              <PropertyRef Name="Cargo" />
+            </Principal>
+            <Dependent Role="tEmpleados">
+              <PropertyRef Name="Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNomina_tEmpleados">
+          <End Role="tEmpleados" Type="dbContabNominaModel.Store.tEmpleados" Multiplicity="1" />
+          <End Role="tNomina" Type="dbContabNominaModel.Store.tNomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleados">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="tNomina">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNomina_tMaestraRubros">
+          <End Role="tMaestraRubros" Type="dbContabNominaModel.Store.tMaestraRubros" Multiplicity="1" />
+          <End Role="tNomina" Type="dbContabNominaModel.Store.tNomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMaestraRubros">
+              <PropertyRef Name="Rubro" />
+            </Principal>
+            <Dependent Role="tNomina">
+              <PropertyRef Name="Rubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNomina_tNominaHeaders">
+          <End Role="tNominaHeaders" Type="dbContabNominaModel.Store.tNominaHeaders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tNomina" Type="dbContabNominaModel.Store.tNomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNominaHeaders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tNomina">
+              <PropertyRef Name="HeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNominaHeaders_tGruposEmpleados">
+          <End Role="tGruposEmpleados" Type="dbContabNominaModel.Store.tGruposEmpleados" Multiplicity="1" />
+          <End Role="tNominaHeaders" Type="dbContabNominaModel.Store.tNominaHeaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGruposEmpleados">
+              <PropertyRef Name="Grupo" />
+            </Principal>
+            <Dependent Role="tNominaHeaders">
+              <PropertyRef Name="GrupoNomina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NominaModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NominaEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="tCargos" EntityType="NominaModel.tCargo" />
+          <EntitySet Name="tEmpleados" EntityType="NominaModel.tEmpleado" />
+          <AssociationSet Name="FK_tEmpleados_tCargos" Association="NominaModel.FK_tEmpleados_tCargos">
+            <End Role="tCargos" EntitySet="tCargos" />
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <EntitySet Name="Empleados_Faltas" EntityType="NominaModel.Empleados_Faltas" />
+          <EntitySet Name="Empleados_Sueldo" EntityType="NominaModel.Empleados_Sueldo" />
+          <AssociationSet Name="FK_Empleados_Faltas_tEmpleados" Association="NominaModel.FK_Empleados_Faltas_tEmpleados">
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+            <End Role="Empleados_Faltas" EntitySet="Empleados_Faltas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Sueldo_tEmpleados" Association="NominaModel.FK_Empleados_Sueldo_tEmpleados">
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+            <End Role="Empleados_Sueldo" EntitySet="Empleados_Sueldo" />
+          </AssociationSet>
+          <EntitySet Name="Temp_Nomina_Report_ConsultaEmpleados" EntityType="NominaModel.Temp_Nomina_Report_ConsultaEmpleados" />
+          <EntitySet Name="tNominas" EntityType="NominaModel.tNomina" />
+          <AssociationSet Name="FK_tNomina_tEmpleados" Association="NominaModel.FK_tNomina_tEmpleados">
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+            <End Role="tNomina" EntitySet="tNominas" />
+          </AssociationSet>
+          <EntitySet Name="tNominaHeaders" EntityType="NominaModel.tNominaHeader" />
+          <AssociationSet Name="FK_tNomina_tNominaHeaders" Association="NominaModel.FK_tNomina_tNominaHeaders">
+            <End Role="tNominaHeader" EntitySet="tNominaHeaders" />
+            <End Role="tNomina" EntitySet="tNominas" />
+          </AssociationSet>
+          <EntitySet Name="tGruposEmpleados" EntityType="NominaModel.tGruposEmpleado" />
+          <AssociationSet Name="FK_tNominaHeaders_tGruposEmpleados" Association="NominaModel.FK_tNominaHeaders_tGruposEmpleados">
+            <End Role="tGruposEmpleado" EntitySet="tGruposEmpleados" />
+            <End Role="tNominaHeader" EntitySet="tNominaHeaders" />
+          </AssociationSet>
+          <EntitySet Name="ParametrosNominas" EntityType="NominaModel.ParametrosNomina" />
+          <EntitySet Name="DeduccionesISLRs" EntityType="NominaModel.DeduccionesISLR" />
+          <AssociationSet Name="FK_DeduccionesISLR_tEmpleados" Association="NominaModel.FK_DeduccionesISLR_tEmpleados">
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+            <End Role="DeduccionesISLR" EntitySet="DeduccionesISLRs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeduccionesISLR_tGruposEmpleados" Association="NominaModel.FK_DeduccionesISLR_tGruposEmpleados">
+            <End Role="tGruposEmpleado" EntitySet="tGruposEmpleados" />
+            <End Role="DeduccionesISLR" EntitySet="DeduccionesISLRs" />
+          </AssociationSet>
+          <EntitySet Name="tMaestraRubros" EntityType="NominaModel.tMaestraRubro" />
+          <AssociationSet Name="FK_tNomina_tMaestraRubros" Association="NominaModel.FK_tNomina_tMaestraRubros">
+            <End Role="tMaestraRubro" EntitySet="tMaestraRubros" />
+            <End Role="tNomina" EntitySet="tNominas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tCargo">
+          <Key>
+            <PropertyRef Name="Cargo" />
+          </Key>
+          <Property Name="Cargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tEmpleados" Relationship="NominaModel.FK_tEmpleados_tCargos" FromRole="tCargos" ToRole="tEmpleados" />
+        </EntityType>
+        <EntityType Name="tEmpleado">
+          <Key>
+            <PropertyRef Name="Empleado" />
+          </Key>
+          <Property Name="Empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Cedula" Type="String" Nullable="false" MaxLength="12" Unicode="true" FixedLength="false" />
+          <Property Name="Rif" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="EscribirArchivoXMLRetencionesISLR" Type="Boolean" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="EdoCivil" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="Nacionalidad" Type="String" Nullable="false" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CiudadOrigen" Type="String" MaxLength="6" Unicode="true" FixedLength="false" />
+          <Property Name="DireccionHabitacion" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono1" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono2" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="SituacionActual" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="Departamento" Type="Int32" Nullable="false" />
+          <Property Name="Cargo" Type="Int32" Nullable="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaRetiro" Type="DateTime" Precision="0" />
+          <Property Name="BancoDepositosNomina" Type="Int32" />
+          <Property Name="TipoCuentaDepositosNomina" Type="Int32" />
+          <Property Name="CuentaBancariaDepositosNomina" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="BancoCuentaPrestacionesSociales" Type="Int32" />
+          <Property Name="NumeroCuentaBancariaPrestacionesSociales" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Contacto1" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Parentesco1" Type="Int32" />
+          <Property Name="TelefonoCon1" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="Contacto2" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Parentesco2" Type="Int32" />
+          <Property Name="TelefonoCon2" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="Contacto3" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Parentesco3" Type="Int32" />
+          <Property Name="TelefonoCon3" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="EmpleadoObreroFlag" Type="Int16" />
+          <Property Name="MontoCestaTickets" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BonoVacAgregarSueldoFlag" Type="Boolean" />
+          <Property Name="BonoVacAgregarMontoCestaTicketsFlag" Type="Boolean" />
+          <Property Name="BonoVacacionalMontoAdicional" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BonoVacAgregarMontoAdicionalFlag" Type="Boolean" />
+          <Property Name="Cia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tCargo" Relationship="NominaModel.FK_tEmpleados_tCargos" FromRole="tEmpleados" ToRole="tCargos" />
+          <NavigationProperty Name="Empleados_Faltas" Relationship="NominaModel.FK_Empleados_Faltas_tEmpleados" FromRole="tEmpleado" ToRole="Empleados_Faltas" />
+          <NavigationProperty Name="Empleados_Sueldo" Relationship="NominaModel.FK_Empleados_Sueldo_tEmpleados" FromRole="tEmpleado" ToRole="Empleados_Sueldo" />
+          <NavigationProperty Name="tNominas" Relationship="NominaModel.FK_tNomina_tEmpleados" FromRole="tEmpleado" ToRole="tNomina" />
+          <Property Type="String" Name="Alias" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="email" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DeduccionesISLRs" Relationship="NominaModel.FK_DeduccionesISLR_tEmpleados" FromRole="tEmpleado" ToRole="DeduccionesISLR" />
+        </EntityType>
+        <Association Name="FK_tEmpleados_tCargos">
+          <End Role="tCargos" Type="NominaModel.tCargo" Multiplicity="1" />
+          <End Role="tEmpleados" Type="NominaModel.tEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCargos">
+              <PropertyRef Name="Cargo" />
+            </Principal>
+            <Dependent Role="tEmpleados">
+              <PropertyRef Name="Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Empleados_Faltas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="Empleado" Nullable="false" />
+          <Property Type="DateTime" Name="Desde" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="Hasta" Nullable="false" Precision="0" />
+          <Property Type="Int16" Name="CantDias" Nullable="false" />
+          <Property Type="Boolean" Name="Descontar" Nullable="false" />
+          <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DescripcionRubroNomina" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tEmpleado" Relationship="NominaModel.FK_Empleados_Faltas_tEmpleados" FromRole="Empleados_Faltas" ToRole="tEmpleado" />
+        </EntityType>
+        <EntityType Name="Empleados_Sueldo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="Empleado" Nullable="false" />
+          <Property Type="DateTime" Name="Desde" Nullable="false" Precision="0" />
+          <Property Type="Decimal" Name="Sueldo" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="tEmpleado" Relationship="NominaModel.FK_Empleados_Sueldo_tEmpleados" FromRole="Empleados_Sueldo" ToRole="tEmpleado" />
+        </EntityType>
+        <Association Name="FK_Empleados_Faltas_tEmpleados">
+          <End Type="NominaModel.tEmpleado" Role="tEmpleado" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NominaModel.Empleados_Faltas" Role="Empleados_Faltas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleado">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="Empleados_Faltas">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Sueldo_tEmpleados">
+          <End Type="NominaModel.tEmpleado" Role="tEmpleado" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NominaModel.Empleados_Sueldo" Role="Empleados_Sueldo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleado">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="Empleados_Sueldo">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Temp_Nomina_Report_ConsultaEmpleados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="Empleado" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SituacionActual" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="Departamento" Nullable="false" />
+          <Property Type="Int32" Name="Cargo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="false" Precision="0" />
+          <Property Type="Decimal" Name="SueldoBasico" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="FechaRetiro" Precision="0" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tNomina">
+          <Key>
+            <PropertyRef Name="NumeroUnico" />
+          </Key>
+          <Property Type="Int32" Name="NumeroUnico" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="HeaderID" Nullable="false" />
+          <Property Type="Int32" Name="Empleado" Nullable="false" />
+          <Property Type="Int32" Name="Rubro" Nullable="false" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Monto" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Boolean" Name="AplicaPrestacionesFlag" />
+          <Property Type="Boolean" Name="MostrarEnElReciboFlag" />
+          <Property Type="Decimal" Name="MontoBase" Precision="19" Scale="4" />
+          <Property Type="Byte" Name="CantDias" />
+          <Property Type="Decimal" Name="Fraccion" Precision="6" Scale="3" />
+          <Property Type="Boolean" Name="SueldoFlag" Nullable="false" />
+          <Property Type="Boolean" Name="SalarioFlag" Nullable="false" />
+          <Property Type="String" Name="VacFraccionFlag" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Boolean" Name="FraccionarFlag" />
+          <NavigationProperty Name="tEmpleado" Relationship="NominaModel.FK_tNomina_tEmpleados" FromRole="tNomina" ToRole="tEmpleado" />
+          <NavigationProperty Name="tNominaHeader" Relationship="NominaModel.FK_tNomina_tNominaHeaders" FromRole="tNomina" ToRole="tNominaHeader" />
+          <NavigationProperty Name="tMaestraRubro" Relationship="NominaModel.FK_tNomina_tMaestraRubros" FromRole="tNomina" ToRole="tMaestraRubro" />
+        </EntityType>
+        <Association Name="FK_tNomina_tEmpleados">
+          <End Type="NominaModel.tEmpleado" Role="tEmpleado" Multiplicity="1" />
+          <End Type="NominaModel.tNomina" Role="tNomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleado">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="tNomina">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tNominaHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="DateTime" Name="FechaNomina" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="FechaEjecucion" Nullable="false" Precision="7" />
+          <Property Type="Int32" Name="GrupoNomina" Nullable="false" />
+          <Property Type="DateTime" Name="Desde" Precision="0" />
+          <Property Type="DateTime" Name="Hasta" Precision="0" />
+          <Property Type="Int16" Name="CantidadDias" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="AgregarSueldo" Nullable="false" />
+          <Property Type="Boolean" Name="AgregarDeduccionesObligatorias" Nullable="false" />
+          <Property Type="String" Name="ProvieneDe" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ProvieneDe_ID" />
+          <Property Type="Int32" Name="AsientoContableID" />
+          <NavigationProperty Name="tNominas" Relationship="NominaModel.FK_tNomina_tNominaHeaders" FromRole="tNominaHeader" ToRole="tNomina" />
+          <NavigationProperty Name="tGruposEmpleado" Relationship="NominaModel.FK_tNominaHeaders_tGruposEmpleados" FromRole="tNominaHeader" ToRole="tGruposEmpleado" />
+        </EntityType>
+        <Association Name="FK_tNomina_tNominaHeaders">
+          <End Type="NominaModel.tNominaHeader" Role="tNominaHeader" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NominaModel.tNomina" Role="tNomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNominaHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tNomina">
+              <PropertyRef Name="HeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tGruposEmpleado">
+          <Key>
+            <PropertyRef Name="Grupo" />
+          </Key>
+          <Property Type="Int32" Name="Grupo" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="NombreGrupo" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="GrupoNominaFlag" Nullable="false" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <NavigationProperty Name="tNominaHeaders" Relationship="NominaModel.FK_tNominaHeaders_tGruposEmpleados" FromRole="tGruposEmpleado" ToRole="tNominaHeader" />
+          <NavigationProperty Name="DeduccionesISLRs" Relationship="NominaModel.FK_DeduccionesISLR_tGruposEmpleados" FromRole="tGruposEmpleado" ToRole="DeduccionesISLR" />
+        </EntityType>
+        <Association Name="FK_tNominaHeaders_tGruposEmpleados">
+          <End Type="NominaModel.tGruposEmpleado" Role="tGruposEmpleado" Multiplicity="1" />
+          <End Type="NominaModel.tNominaHeader" Role="tNominaHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGruposEmpleado">
+              <PropertyRef Name="Grupo" />
+            </Principal>
+            <Dependent Role="tNominaHeader">
+              <PropertyRef Name="GrupoNomina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ParametrosNomina">
+          <Key>
+            <PropertyRef Name="Cia" />
+          </Key>
+          <Property Type="Single" Name="LimiteProrrateoVacaciones" />
+          <Property Type="Boolean" Name="AgregarAsientosContables" />
+          <Property Type="Boolean" Name="OrganizarPartidasDelAsiento" />
+          <Property Type="String" Name="TipoAsientoDefault" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CuentaContableNomina" />
+          <Property Type="Int32" Name="MonedaParaElAsiento" />
+          <Property Type="Int16" Name="SumarizarPartidaAsientoContable" />
+          <Property Type="String" Name="CodigoConceptoRetencionISLREmpleados" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeduccionesISLR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="GrupoNomina" />
+          <Property Type="Int32" Name="Empleado" />
+          <Property Type="DateTime" Name="Desde" Nullable="false" Precision="0" />
+          <Property Type="String" Name="TipoNomina" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Periodicidad" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Porcentaje" Nullable="false" Precision="9" Scale="6" />
+          <Property Type="String" Name="Base" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="SuspendidoFlag" Nullable="false" />
+          <NavigationProperty Name="tEmpleado" Relationship="NominaModel.FK_DeduccionesISLR_tEmpleados" FromRole="DeduccionesISLR" ToRole="tEmpleado" />
+          <NavigationProperty Name="tGruposEmpleado" Relationship="NominaModel.FK_DeduccionesISLR_tGruposEmpleados" FromRole="DeduccionesISLR" ToRole="tGruposEmpleado" />
+        </EntityType>
+        <Association Name="FK_DeduccionesISLR_tEmpleados">
+          <End Type="NominaModel.tEmpleado" Role="tEmpleado" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NominaModel.DeduccionesISLR" Role="DeduccionesISLR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleado">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="DeduccionesISLR">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeduccionesISLR_tGruposEmpleados">
+          <End Type="NominaModel.tGruposEmpleado" Role="tGruposEmpleado" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NominaModel.DeduccionesISLR" Role="DeduccionesISLR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGruposEmpleado">
+              <PropertyRef Name="Grupo" />
+            </Principal>
+            <Dependent Role="DeduccionesISLR">
+              <PropertyRef Name="GrupoNomina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tMaestraRubro">
+          <Key>
+            <PropertyRef Name="Rubro" />
+          </Key>
+          <Property Type="Int32" Name="Rubro" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="NombreCortoRubro" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="SueldoFlag" />
+          <Property Type="Boolean" Name="SalarioFlag" />
+          <Property Type="Int32" Name="TipoRubro" />
+          <Property Type="String" Name="TipoNomina" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Periodicidad" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Desde" Precision="3" />
+          <Property Type="DateTime" Name="Hasta" Precision="3" />
+          <Property Type="Boolean" Name="Siempre" />
+          <Property Type="Decimal" Name="MontoAAplicar" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="RubroAAplicar" />
+          <Property Type="Int32" Name="GrupoAAplicar" />
+          <Property Type="String" Name="DeLaNomina" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DeLaNominaDesde" Precision="0" />
+          <Property Type="DateTime" Name="DeLaNominaHasta" Precision="0" />
+          <Property Type="Byte" Name="VariableAAplicar" />
+          <Property Type="String" Name="BaseCalculoVariableFlag" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="Double" Name="Factor1" />
+          <Property Type="Double" Name="Factor2" />
+          <Property Type="Double" Name="Divisor1" />
+          <Property Type="Double" Name="Divisor2" />
+          <Property Type="Double" Name="Porcentaje" />
+          <Property Type="Double" Name="PorcentajeMas" />
+          <Property Type="Double" Name="PorcentajeMas2" />
+          <Property Type="Boolean" Name="LunesDelMes" />
+          <Property Type="Decimal" Name="Tope" Precision="19" Scale="4" />
+          <Property Type="Int16" Name="Categoria" />
+          <Property Type="Boolean" Name="MostrarEnElReciboFlag" />
+          <Property Type="Boolean" Name="SSOFlag" />
+          <Property Type="Boolean" Name="ISRFlag" />
+          <NavigationProperty Name="tNominas" Relationship="NominaModel.FK_tNomina_tMaestraRubros" FromRole="tMaestraRubro" ToRole="tNomina" />
+        </EntityType>
+        <Association Name="FK_tNomina_tMaestraRubros">
+          <End Type="NominaModel.tMaestraRubro" Role="tMaestraRubro" Multiplicity="1" />
+          <End Type="NominaModel.tNomina" Role="tNomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMaestraRubro">
+              <PropertyRef Name="Rubro" />
+            </Principal>
+            <Dependent Role="tNomina">
+              <PropertyRef Name="Rubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbContabNominaModelStoreContainer" CdmEntityContainer="NominaEntities">
+          <EntitySetMapping Name="tCargos">
+            <EntityTypeMapping TypeName="NominaModel.tCargo">
+              <MappingFragment StoreEntitySet="tCargos">
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEmpleados">
+            <EntityTypeMapping TypeName="NominaModel.tEmpleado">
+              <MappingFragment StoreEntitySet="tEmpleados">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Rif" ColumnName="Rif" />
+                <ScalarProperty Name="EscribirArchivoXMLRetencionesISLR" ColumnName="EscribirArchivoXMLRetencionesISLR" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EdoCivil" ColumnName="EdoCivil" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="CiudadOrigen" ColumnName="CiudadOrigen" />
+                <ScalarProperty Name="DireccionHabitacion" ColumnName="DireccionHabitacion" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="SituacionActual" ColumnName="SituacionActual" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="FechaRetiro" ColumnName="FechaRetiro" />
+                <ScalarProperty Name="BancoDepositosNomina" ColumnName="BancoDepositosNomina" />
+                <ScalarProperty Name="TipoCuentaDepositosNomina" ColumnName="TipoCuentaDepositosNomina" />
+                <ScalarProperty Name="CuentaBancariaDepositosNomina" ColumnName="CuentaBancariaDepositosNomina" />
+                <ScalarProperty Name="BancoCuentaPrestacionesSociales" ColumnName="BancoCuentaPrestacionesSociales" />
+                <ScalarProperty Name="NumeroCuentaBancariaPrestacionesSociales" ColumnName="NumeroCuentaBancariaPrestacionesSociales" />
+                <ScalarProperty Name="Contacto1" ColumnName="Contacto1" />
+                <ScalarProperty Name="Parentesco1" ColumnName="Parentesco1" />
+                <ScalarProperty Name="TelefonoCon1" ColumnName="TelefonoCon1" />
+                <ScalarProperty Name="Contacto2" ColumnName="Contacto2" />
+                <ScalarProperty Name="Parentesco2" ColumnName="Parentesco2" />
+                <ScalarProperty Name="TelefonoCon2" ColumnName="TelefonoCon2" />
+                <ScalarProperty Name="Contacto3" ColumnName="Contacto3" />
+                <ScalarProperty Name="Parentesco3" ColumnName="Parentesco3" />
+                <ScalarProperty Name="TelefonoCon3" ColumnName="TelefonoCon3" />
+                <ScalarProperty Name="EmpleadoObreroFlag" ColumnName="EmpleadoObreroFlag" />
+                <ScalarProperty Name="MontoCestaTickets" ColumnName="MontoCestaTickets" />
+                <ScalarProperty Name="BonoVacAgregarSueldoFlag" ColumnName="BonoVacAgregarSueldoFlag" />
+                <ScalarProperty Name="BonoVacAgregarMontoCestaTicketsFlag" ColumnName="BonoVacAgregarMontoCestaTicketsFlag" />
+                <ScalarProperty Name="BonoVacacionalMontoAdicional" ColumnName="BonoVacacionalMontoAdicional" />
+                <ScalarProperty Name="BonoVacAgregarMontoAdicionalFlag" ColumnName="BonoVacAgregarMontoAdicionalFlag" />
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados_Faltas">
+            <EntityTypeMapping TypeName="NominaModel.Empleados_Faltas">
+              <MappingFragment StoreEntitySet="Empleados_Faltas">
+                <ScalarProperty Name="DescripcionRubroNomina" ColumnName="DescripcionRubroNomina" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Descontar" ColumnName="Descontar" />
+                <ScalarProperty Name="CantDias" ColumnName="CantDias" />
+                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados_Sueldo">
+            <EntityTypeMapping TypeName="NominaModel.Empleados_Sueldo">
+              <MappingFragment StoreEntitySet="Empleados_Sueldo">
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Temp_Nomina_Report_ConsultaEmpleados">
+            <EntityTypeMapping TypeName="NominaModel.Temp_Nomina_Report_ConsultaEmpleados">
+              <MappingFragment StoreEntitySet="Temp_Nomina_Report_ConsultaEmpleados">
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="FechaRetiro" ColumnName="FechaRetiro" />
+                <ScalarProperty Name="SueldoBasico" ColumnName="SueldoBasico" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="SituacionActual" ColumnName="SituacionActual" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNominas">
+            <EntityTypeMapping TypeName="NominaModel.tNomina">
+              <MappingFragment StoreEntitySet="tNomina">
+                <ScalarProperty Name="FraccionarFlag" ColumnName="FraccionarFlag" />
+                <ScalarProperty Name="VacFraccionFlag" ColumnName="VacFraccionFlag" />
+                <ScalarProperty Name="SalarioFlag" ColumnName="SalarioFlag" />
+                <ScalarProperty Name="SueldoFlag" ColumnName="SueldoFlag" />
+                <ScalarProperty Name="Fraccion" ColumnName="Fraccion" />
+                <ScalarProperty Name="CantDias" ColumnName="CantDias" />
+                <ScalarProperty Name="MontoBase" ColumnName="MontoBase" />
+                <ScalarProperty Name="MostrarEnElReciboFlag" ColumnName="MostrarEnElReciboFlag" />
+                <ScalarProperty Name="AplicaPrestacionesFlag" ColumnName="AplicaPrestacionesFlag" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Rubro" ColumnName="Rubro" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="HeaderID" ColumnName="HeaderID" />
+                <ScalarProperty Name="NumeroUnico" ColumnName="NumeroUnico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNominaHeaders">
+            <EntityTypeMapping TypeName="NominaModel.tNominaHeader">
+              <MappingFragment StoreEntitySet="tNominaHeaders">
+                <ScalarProperty Name="AsientoContableID" ColumnName="AsientoContableID" />
+                <ScalarProperty Name="ProvieneDe_ID" ColumnName="ProvieneDe_ID" />
+                <ScalarProperty Name="ProvieneDe" ColumnName="ProvieneDe" />
+                <ScalarProperty Name="AgregarDeduccionesObligatorias" ColumnName="AgregarDeduccionesObligatorias" />
+                <ScalarProperty Name="AgregarSueldo" ColumnName="AgregarSueldo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="CantidadDias" ColumnName="CantidadDias" />
+                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="GrupoNomina" ColumnName="GrupoNomina" />
+                <ScalarProperty Name="FechaEjecucion" ColumnName="FechaEjecucion" />
+                <ScalarProperty Name="FechaNomina" ColumnName="FechaNomina" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tGruposEmpleados">
+            <EntityTypeMapping TypeName="NominaModel.tGruposEmpleado">
+              <MappingFragment StoreEntitySet="tGruposEmpleados">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="GrupoNominaFlag" ColumnName="GrupoNominaFlag" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NombreGrupo" ColumnName="NombreGrupo" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParametrosNominas">
+            <EntityTypeMapping TypeName="NominaModel.ParametrosNomina">
+              <MappingFragment StoreEntitySet="ParametrosNomina">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="CodigoConceptoRetencionISLREmpleados" ColumnName="CodigoConceptoRetencionISLREmpleados" />
+                <ScalarProperty Name="SumarizarPartidaAsientoContable" ColumnName="SumarizarPartidaAsientoContable" />
+                <ScalarProperty Name="MonedaParaElAsiento" ColumnName="MonedaParaElAsiento" />
+                <ScalarProperty Name="CuentaContableNomina" ColumnName="CuentaContableNomina" />
+                <ScalarProperty Name="TipoAsientoDefault" ColumnName="TipoAsientoDefault" />
+                <ScalarProperty Name="OrganizarPartidasDelAsiento" ColumnName="OrganizarPartidasDelAsiento" />
+                <ScalarProperty Name="AgregarAsientosContables" ColumnName="AgregarAsientosContables" />
+                <ScalarProperty Name="LimiteProrrateoVacaciones" ColumnName="LimiteProrrateoVacaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeduccionesISLRs">
+            <EntityTypeMapping TypeName="NominaModel.DeduccionesISLR">
+              <MappingFragment StoreEntitySet="DeduccionesISLR">
+                <ScalarProperty Name="SuspendidoFlag" ColumnName="SuspendidoFlag" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="Periodicidad" ColumnName="Periodicidad" />
+                <ScalarProperty Name="TipoNomina" ColumnName="TipoNomina" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="GrupoNomina" ColumnName="GrupoNomina" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMaestraRubros">
+            <EntityTypeMapping TypeName="NominaModel.tMaestraRubro">
+              <MappingFragment StoreEntitySet="tMaestraRubros">
+                <ScalarProperty Name="ISRFlag" ColumnName="ISRFlag" />
+                <ScalarProperty Name="SSOFlag" ColumnName="SSOFlag" />
+                <ScalarProperty Name="MostrarEnElReciboFlag" ColumnName="MostrarEnElReciboFlag" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Tope" ColumnName="Tope" />
+                <ScalarProperty Name="LunesDelMes" ColumnName="LunesDelMes" />
+                <ScalarProperty Name="PorcentajeMas2" ColumnName="PorcentajeMas2" />
+                <ScalarProperty Name="PorcentajeMas" ColumnName="PorcentajeMas" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="Divisor2" ColumnName="Divisor2" />
+                <ScalarProperty Name="Divisor1" ColumnName="Divisor1" />
+                <ScalarProperty Name="Factor2" ColumnName="Factor2" />
+                <ScalarProperty Name="Factor1" ColumnName="Factor1" />
+                <ScalarProperty Name="BaseCalculoVariableFlag" ColumnName="BaseCalculoVariableFlag" />
+                <ScalarProperty Name="VariableAAplicar" ColumnName="VariableAAplicar" />
+                <ScalarProperty Name="DeLaNominaHasta" ColumnName="DeLaNominaHasta" />
+                <ScalarProperty Name="DeLaNominaDesde" ColumnName="DeLaNominaDesde" />
+                <ScalarProperty Name="DeLaNomina" ColumnName="DeLaNomina" />
+                <ScalarProperty Name="GrupoAAplicar" ColumnName="GrupoAAplicar" />
+                <ScalarProperty Name="RubroAAplicar" ColumnName="RubroAAplicar" />
+                <ScalarProperty Name="MontoAAplicar" ColumnName="MontoAAplicar" />
+                <ScalarProperty Name="Siempre" ColumnName="Siempre" />
+                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="Periodicidad" ColumnName="Periodicidad" />
+                <ScalarProperty Name="TipoNomina" ColumnName="TipoNomina" />
+                <ScalarProperty Name="TipoRubro" ColumnName="TipoRubro" />
+                <ScalarProperty Name="SalarioFlag" ColumnName="SalarioFlag" />
+                <ScalarProperty Name="SueldoFlag" ColumnName="SueldoFlag" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NombreCortoRubro" ColumnName="NombreCortoRubro" />
+                <ScalarProperty Name="Rubro" ColumnName="Rubro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="NominaEntities" ZoomLevel="75">
+        <EntityTypeShape EntityType="NominaModel.tCargo" Width="1.5" PointX="0.75" PointY="5.125" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="NominaModel.tEmpleado" Width="4.125" PointX="5.375" PointY="1.25" Height="9.2877408854166656" IsExpanded="true" />
+        <AssociationConnector Association="NominaModel.FK_tEmpleados_tCargos" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.922841796875" />
+          <ConnectorPoint PointX="5.375" PointY="5.922841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="NominaModel.Empleados_Faltas" Width="2.125" PointX="11.5" PointY="2" />
+        <EntityTypeShape EntityType="NominaModel.Empleados_Sueldo" Width="2.25" PointX="11.375" PointY="5.25" />
+        <AssociationConnector Association="NominaModel.FK_Empleados_Faltas_tEmpleados" />
+        <AssociationConnector Association="NominaModel.FK_Empleados_Sueldo_tEmpleados" />
+        <EntityTypeShape EntityType="NominaModel.Temp_Nomina_Report_ConsultaEmpleados" Width="3.25" PointX="11.5" PointY="7.625" />
+        <EntityTypeShape EntityType="NominaModel.tNomina" Width="2.875" PointX="11.625" PointY="12.125" />
+        <AssociationConnector Association="NominaModel.FK_tNomina_tEmpleados" />
+        <EntityTypeShape EntityType="NominaModel.tNominaHeader" Width="2.375" PointX="15.75" PointY="12.125" />
+        <AssociationConnector Association="NominaModel.FK_tNomina_tNominaHeaders" />
+        <EntityTypeShape EntityType="NominaModel.tGruposEmpleado" Width="2.25" PointX="19.125" PointY="12.75" />
+        <AssociationConnector Association="NominaModel.FK_tNominaHeaders_tGruposEmpleados" />
+        <EntityTypeShape EntityType="NominaModel.ParametrosNomina" Width="3.25" PointX="1.5" PointY="12.625" />
+        <EntityTypeShape EntityType="NominaModel.DeduccionesISLR" Width="2.375" PointX="1.625" PointY="7.5" />
+        <AssociationConnector Association="NominaModel.FK_DeduccionesISLR_tEmpleados" />
+        <AssociationConnector Association="NominaModel.FK_DeduccionesISLR_tGruposEmpleados" />
+        <EntityTypeShape EntityType="NominaModel.tMaestraRubro" Width="3.625" PointX="5.5" PointY="12.625" />
+        <AssociationConnector Association="NominaModel.FK_tNomina_tMaestraRubros" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

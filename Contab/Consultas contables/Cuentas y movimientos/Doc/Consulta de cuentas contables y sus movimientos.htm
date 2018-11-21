@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Consulta de cuentas contables y sus movimientos</title>
+<style type="text/css">
+<!--
+h1, h2, h3, h4, h5           { color: #3366CC }
+.objetoApp {
+	font-style: italic;
+	color: #808000;
+}
+.nota {
+	font-weight: bold;
+	color: #000080;
+}
+.italics {
+	font-style: italic;
+}
+-->
+</style>
+
+</head>
+
+<body>
+
+<h1>Consulta de Cuentas Contables y sus Movimientos&nbsp;</h1>
+
+<h2>Introducción</h2>
+<p>
+La consulta de cuentas contables y sus movimientos le permite al usuario 
+seleccionar una o varias cuentas contables para un período determinado y 
+consultar sus movimientos. En general, la consulta funciona así: el usuario abre 
+la página y aplica un filtro; la página regresa las cuentas contables que 
+cumplan con el criterio indicado en el filtro y las muestra en una lista en la 
+página original de la consulta; 
+el usuario puede hacer un click en cada cuenta contable mostrada para revisar sus movimientos 
+en el período indicado en el filtro.
+</p>
+<p>
+El usuario puede obtener un reporte de la información consultada, el cual 
+mostrará todas las cuentas filtradas y sus movimientos contables. También puede 
+revisar el último mes cerrado para cada compañía.
+</p>
+<p>
+A continuación vamos a describir las acciones que debe efectuar el usuario para 
+ejecutar la consulta.
+</p>
+<h2>
+Consulta de Cuentas y sus Movimientos
+</h2>
+<p>
+Al abrir la página en forma inicial, la consulta se muestra vacía; es decir, sin 
+cuentas contables en su contenido. El usuario debe aplicar un filtro para 
+seleccionar las cuentas contables a consultar.
+</p>
+<p>
+Para definir y aplicar un filtro, basta con hacer un click en 
+<span class="objetoApp">Definir y aplicar 
+un filtro</span>.
+</p>
+<p>
+<img src="Screenshot%20-%20001.png" width="690" height="299" alt="img" />
+</p>
+<p>La página que se abre le permite al usuario definir y aplicar un filtro. </p>
+<p><span class="nota">Nota: </span>el filtro que defina el usuario es guardado y 
+mantenido. La próxima vez que el usuario abra la página, verá el filtro que 
+definió antes. El filtro puede ser limpiado si se hace un click a
+<span class="objetoApp">Limpiar filtro</span>. </p>
+<p>
+<img src="Screenshot%20-%20002.png" width="668" height="417" alt="img" />
+</p>
+<p>Cuando el usuario define y aplica el filtro, las cuentas contables que tengan 
+movimientos para el criterio indicado son leídas en la base de datos y mostradas 
+en una lista en la página. El usuario puede hacer un click en la pequeña flecha 
+que se muestra al lado de cada cuenta para consultar sus movimientos. </p>
+
+<p>
+<img src="Screenshot%20-%20003.png" width="690" height="341" alt="img" />
+</p>
+<p>Los movimientos para una cuenta contable específica son mostrados en una 
+lista en la derecha. El primer movimiento será siempre el saldo inicial de la 
+cuenta, para el período indicado. Si, por ejemplo, el período que se ha indicado 
+en el filtro es: 1-1-2007 a 31-1-2007, el primer movimiento para cada cuenta 
+será siempre el saldo a la fecha 31-12-2006. </p>
+<p>Además, el último movimiento será siempre el saldo actual de la cuenta 
+contable para el período indicado. En el ejemplo anterior, el último movimiento 
+de cada cuenta será el saldo de la misma para la fecha 31-1-2007. </p>
+<p><span class="nota">Nota: </span>si al consultar los movimientos de una cuenta 
+contable, el usuario hace un click en el item <span class="italics">número de 
+comprobante</span>, el proceso abrirá una página que muestra los detalles del 
+comprobante. </p>
+
+<p>
+<img src="Screenshot%20-%20004.png" width="690" height="406" alt="img" />
+</p>
+<p>El usuario puede consultar el comprobante contable si hace un click en el 
+número de comprobante de un movimiento contable</p>
+<p>A continuación mostramos la página que permite al usuario consultar los datos 
+de un comprobante contable específico. </p>
+
+<p>
+<img src="Screenshot%20-%20005.png" width="627" height="324" alt="img" />
+</p>
+<p>El usuario puede obtener un listado para las cuentas y sus movimientos 
+seleccionados, si hace un click en <span class="objetoApp">Reporte de cuentas y 
+movimientos</span>. </p>
+
+<p>
+<img src="Screenshot%20-%20006.png" width="567" height="442" alt="img" />
+</p>
+<p>El usuario puede consultar el último mes cerrado para cada compañía, si hace 
+un click en <span class="objetoApp">Fechas de último cierre contable</span>. </p>
+
+<p>
+<img src="Screenshot%20-%20007.png" width="350" height="153" alt="img" />
+</p>
+
+<p>La consulta del último mes cerrado en Contab para cada compañía es muy 
+importante, pues nos permite saber hasta cual mes se ha aplicado el cierre 
+contable para cada compañía. Los cierres contables son los que construyen y 
+registran los saldos mensuales de las cuentas. Estos saldos no serán correctos 
+si los cierres contables no se han aplicado en forma adecuada. </p>
+<hr />
+
+</body>
+
+</html>

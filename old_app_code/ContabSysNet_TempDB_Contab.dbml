@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbContabRisk" Class="ContabSysNet_TempDB_ContabDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=dbContabRisk;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="dbContabConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Contab_BalanceComprobacion" Member="Contab_BalanceComprobacions">
+    <Type Name="Contab_BalanceComprobacion">
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NombreCiaContab" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="GrupoContable" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreGrupoContable" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OrdenGrupoContable" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NombreMoneda" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SimboloMoneda" Type="System.String" DbType="NVarChar(6)" CanBeNull="true" />
+      <Column Name="CuentaContable_NivelPrevio" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="CuentaContable_NivelPrevio_Descripcion" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="CuentaContableID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuentaContable" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="CuentaContableEditada" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CuentaContable_Nombre" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="SaldoAnterior" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Debe" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Haber" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SaldoActual" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CantidadMovimientos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

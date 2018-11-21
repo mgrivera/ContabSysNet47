@@ -1,0 +1,696 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbContabGeh" Class="dbContabDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=dbContabLacoste;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="dbContabConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.MesesDelAnoFiscal" Member="MesesDelAnoFiscals">
+    <Type Name="MesesDelAnoFiscal">
+      <Column Name="ClaveUnica" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MesFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Mes" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMes" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Ano" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Cia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Companias" Member="Compania_Contabs">
+    <Type Name="Compania_Contab">
+      <Column Name="Numero" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreCorto" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Abreviatura" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="Rif" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Ciudad" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="EntidadFederal" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ZonaPostal" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="Telefono1" Type="System.String" DbType="NVarChar(14)" CanBeNull="true" />
+      <Column Name="Telefono2" Type="System.String" DbType="NVarChar(14)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(14)" CanBeNull="true" />
+      <Column Name="EmailServerName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="EmailServerPort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmailServerSSLFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EmailServerCredentialsUserName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="EmailServerCredentialsPassword" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Compania_Contab_Presupuesto_Codigo" Member="Presupuesto_Codigos" ThisKey="Numero" OtherKey="CiaContab" Type="Presupuesto_Codigo" />
+      <Association Name="Compania_Contab_Asiento" Member="Asientos" ThisKey="Numero" OtherKey="Cia" Type="Asiento" />
+      <Association Name="Compania_Contab_CuentasContable" Member="CuentasContables" ThisKey="Numero" OtherKey="Cia" Type="CuentasContable" />
+      <Association Name="Compania_Contab_ParametrosContab" Member="ParametrosContab" ThisKey="Numero" OtherKey="Cia" Type="ParametrosContab" Cardinality="One" />
+      <Association Name="Compania_Contab_CajaChica_CajasChica" Member="CajaChica_CajasChicas" ThisKey="Numero" OtherKey="CiaContab" Type="CajaChica_CajasChica" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Monedas" Member="Moneda_Contabs">
+    <Type Name="Moneda_Contab">
+      <Column Name="Moneda" Member="Moneda1" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Simbolo" Type="System.String" DbType="NVarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="NacionalFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DefaultFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Moneda_Contab_CambiosMoneda" Member="CambiosMonedas" ThisKey="Moneda1" OtherKey="Moneda" Type="CambiosMoneda" />
+      <Association Name="Moneda_Contab_Presupuesto_Monto" Member="Presupuesto_Montos" ThisKey="Moneda1" OtherKey="Moneda" Type="Presupuesto_Monto" />
+      <Association Name="Moneda_Contab_Proveedore_Contab" Member="Proveedore_Contabs" ThisKey="Moneda1" OtherKey="MonedaDefault" Type="Proveedore_Contab" />
+      <Association Name="Moneda_Contab_Asiento" Member="Asientos" ThisKey="Moneda1" OtherKey="Moneda" Type="Asiento" />
+      <Association Name="Moneda_Contab_Asiento1" Member="Asientos1" ThisKey="Moneda1" OtherKey="MonedaOriginal" Type="Asiento" />
+      <Association Name="Moneda_Contab_SaldosContable" Member="SaldosContables" ThisKey="Moneda1" OtherKey="Moneda" Type="SaldosContable" />
+      <Association Name="Moneda_Contab_SaldosContable1" Member="SaldosContables1" ThisKey="Moneda1" OtherKey="MonedaOriginal" Type="SaldosContable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTempWebReport_PresupuestoConsultaAnual" Member="tTempWebReport_PresupuestoConsultaAnuals">
+    <Type Name="tTempWebReport_PresupuestoConsultaAnual">
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnoFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CodigoPresupuesto" Type="System.String" DbType="NVarChar(70) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codigo1erNivel" Type="System.String" DbType="NVarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="Codigo2doNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo3erNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo4toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo5toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo6toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Mes01_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes01_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes02_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes02_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes03_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes03_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes04_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes04_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes05_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes05_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes06_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes06_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes07_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes07_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes08_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes08_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes09_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes09_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes10_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes10_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes11_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes11_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes12_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes12_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="TotalEjecutado" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TotalPresupuestado" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Variacion" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTempWebReport_PresupuestoConsultaMensual" Member="tTempWebReport_PresupuestoConsultaMensuals">
+    <Type Name="tTempWebReport_PresupuestoConsultaMensual">
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnoFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MesFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="MesCalendario" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NombreMes" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoPresupuesto" Type="System.String" DbType="NVarChar(70) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codigo1erNivel" Type="System.String" DbType="NVarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="Codigo2doNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo3erNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo4toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo5toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo6toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="FactorConversion" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="MontoEstimado" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="MontoEjecutado" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Variacion" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="MontoEstimadoAcum" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="MontoEjecutadoAcum" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="VariacionAcum" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Presupuesto_Codigo_tTempWebReport_PresupuestoConsultaMensual" Member="Presupuesto_Codigo" ThisKey="CodigoPresupuesto,CiaContab" OtherKey="Codigo,CiaContab" Type="Presupuesto_Codigo" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DefinicionCuentasContables" Member="DefinicionCuentasContables">
+    <Type Name="DefinicionCuentasContable">
+      <Column Name="ClaveUnica" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Rubro" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Compania" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Concepto" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GrupoCondominio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CodigoInmueble" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="CuentaContable" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CambiosMonedas" Member="CambiosMonedas">
+    <Type Name="CambiosMoneda">
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Cambio" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnoMesDia" Type="System.String" DbType="NVarChar(8) NOT NULL" CanBeNull="false" />
+      <Association Name="Moneda_Contab_CambiosMoneda" Member="Moneda_Contab" ThisKey="Moneda" OtherKey="Moneda1" Type="Moneda_Contab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TiposDeAsiento" Member="TiposDeAsientos">
+    <Type Name="TiposDeAsiento">
+      <Column Name="Grupo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(6) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="TiposDeAsiento_Asiento" Member="Asientos" ThisKey="Tipo" OtherKey="Tipo" Type="Asiento" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AsientosIdPorGrupo" Member="AsientosIdPorGrupos">
+    <Type Name="AsientosIdPorGrupo">
+      <Column Name="Grupo" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Mes" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ano" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Numero" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Cia" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tGruposDeTiposDeAsiento" Member="tGruposDeTiposDeAsientos">
+    <Type Name="tGruposDeTiposDeAsiento">
+      <Column Name="Grupo" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NumeroInicial" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UltimoMesCerradoContab" Member="UltimoMesCerradoContabs">
+    <Type Name="UltimoMesCerradoContab">
+      <Column Name="Mes" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Ano" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="UltAct" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ManAuto" Type="System.String" DbType="NVarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Cia" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Usuario" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AsientosNegativosId" Member="AsientosNegativosIds">
+    <Type Name="AsientosNegativosId">
+      <Column Name="Mes" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ano" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Numero" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cia" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AsientosClaveUnicaId" Member="AsientosClaveUnicaIds">
+    <Type Name="AsientosClaveUnicaId">
+      <Column Name="Numero" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AsientosId" Member="AsientosIds">
+    <Type Name="AsientosId">
+      <Column Name="Mes" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ano" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Numero" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cia" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTemp_AsientosContables" Member="tTemp_AsientosContables">
+    <Type Name="tTemp_AsientosContable">
+      <Column Name="Numero" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FactorDeCambio" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Presupuesto_Codigos" Member="Presupuesto_Codigos">
+    <Type Name="Presupuesto_Codigo">
+      <Column Name="Codigo" Type="System.String" DbType="NVarChar(70) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CantNiveles" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="GrupoFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SuspendidoFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Presupuesto_Codigo_tTempWebReport_PresupuestoConsultaMensual" Member="tTempWebReport_PresupuestoConsultaMensuals" ThisKey="Codigo,CiaContab" OtherKey="CodigoPresupuesto,CiaContab" Type="tTempWebReport_PresupuestoConsultaMensual" />
+      <Association Name="Presupuesto_Codigo_Presupuesto_Monto" Member="Presupuesto_Montos" ThisKey="Codigo,CiaContab" OtherKey="CodigoPresupuesto,CiaContab" Type="Presupuesto_Monto" />
+      <Association Name="Presupuesto_Codigo_tTempWebReport_PresupuestoConsultaMensual1" Member="tTempWebReport_PresupuestoConsultaMensual1s" ThisKey="Codigo,CiaContab" OtherKey="CodigoPresupuesto,CiaContab" Type="tTempWebReport_PresupuestoConsultaMensual1" />
+      <Association Name="Presupuesto_Codigo_Presupuesto_AsociacionCodigosCuenta" Member="Presupuesto_AsociacionCodigosCuentas" ThisKey="Codigo,CiaContab" OtherKey="CodigoPresupuesto,CiaContab" Type="Presupuesto_AsociacionCodigosCuenta" />
+      <Association Name="Compania_Contab_Presupuesto_Codigo" Member="Compania_Contab" ThisKey="CiaContab" OtherKey="Numero" Type="Compania_Contab" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Presupuesto_Montos" Member="Presupuesto_Montos">
+    <Type Name="Presupuesto_Monto">
+      <Column Name="CodigoPresupuesto" Type="System.String" DbType="NVarChar(70) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ano" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Mes01_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes01_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes02_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes02_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes03_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes03_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes04_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes04_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes05_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes05_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes06_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes06_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes07_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes07_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes08_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes08_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes09_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes09_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes10_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes10_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes11_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes11_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes12_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes12_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="Moneda_Contab_Presupuesto_Monto" Member="Moneda_Contab" ThisKey="Moneda" OtherKey="Moneda1" Type="Moneda_Contab" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Presupuesto_Codigo_Presupuesto_Monto" Member="Presupuesto_Codigo" ThisKey="CodigoPresupuesto,CiaContab" OtherKey="Codigo,CiaContab" Type="Presupuesto_Codigo" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTempWebReport_PresupuestoConsultaAnual" Member="tTempWebReport_PresupuestoConsultaAnual1s">
+    <Type Name="tTempWebReport_PresupuestoConsultaAnual1">
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnoFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CodigoPresupuesto" Type="System.String" DbType="NVarChar(70) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codigo1erNivel" Type="System.String" DbType="NVarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="Codigo2doNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo3erNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo4toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo5toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo6toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Mes01_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes01_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes02_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes02_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes03_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes03_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes04_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes04_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes05_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes05_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes06_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes06_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes07_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes07_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes08_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes08_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes09_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes09_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes10_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes10_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes11_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes11_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Mes12_Eje" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes12_Eje_Porc" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="TotalEjecutado" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TotalPresupuestado" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Variacion" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTempWebReport_PresupuestoConsultaMensual" Member="tTempWebReport_PresupuestoConsultaMensual1s">
+    <Type Name="tTempWebReport_PresupuestoConsultaMensual1">
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnoFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MesFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="MesCalendario" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NombreMes" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoPresupuesto" Type="System.String" DbType="NVarChar(70) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codigo1erNivel" Type="System.String" DbType="NVarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="Codigo2doNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo3erNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo4toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo5toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Codigo6toNivel" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="FactorConversion" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="MontoEstimado" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="MontoEjecutado" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Variacion" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="MontoEstimadoAcum" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="MontoEjecutadoAcum" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="VariacionAcum" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Presupuesto_Codigo_tTempWebReport_PresupuestoConsultaMensual1" Member="Presupuesto_Codigo" ThisKey="CodigoPresupuesto,CiaContab" OtherKey="Codigo,CiaContab" Type="Presupuesto_Codigo" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTempWebReport_PresupuestoConsultaMontosEstimados" Member="tTempWebReport_PresupuestoConsultaMontosEstimados">
+    <Type Name="tTempWebReport_PresupuestoConsultaMontosEstimado">
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnoFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CodigoPresupuesto" Type="System.String" DbType="NVarChar(70) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Mes01_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes02_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes03_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes04_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes05_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes06_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes07_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes08_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes09_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes10_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes11_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes12_Est" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FactoresConversionAnoMes" Member="FactoresConversionAnoMes">
+    <Type Name="FactoresConversionAnoMe">
+      <Column Name="Mes" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ano" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FactorConversion" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FactoresConversionAnoMes_Aplicados" Member="FactoresConversionAnoMes_Aplicados">
+    <Type Name="FactoresConversionAnoMes_Aplicado">
+      <Column Name="MesCalendario" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnoCalendario" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NombreMes" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MesFiscal" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="AnoFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="FactorConversion" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Proveedores" Member="Proveedore_Contabs">
+    <Type Name="Proveedore_Contab">
+      <Column Name="Proveedor" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rif" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="NatJurFlag" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Nit" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ContribuyenteEspecialFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RetencionSobreIvaPorc" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="NuestraRetencionSobreIvaPorc" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="AfectaLibroComprasFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Beneficiario" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Concepto" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="MontoCheque" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Ciudad" Type="System.String" DbType="NVarChar(6)" CanBeNull="true" />
+      <Column Name="Telefono1" Type="System.String" DbType="NVarChar(14)" CanBeNull="true" />
+      <Column Name="Telefono2" Type="System.String" DbType="NVarChar(14)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(14)" CanBeNull="true" />
+      <Column Name="Contacto1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Contacto2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NacionalExtranjeroFlag" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="SujetoARetencionFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CodigoConceptoRetencion" Type="System.String" DbType="NVarChar(6)" CanBeNull="true" />
+      <Column Name="RetencionISLRSustraendo" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MonedaDefault" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FormaDePagoDefault" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProveedorClienteFlag" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="PorcentajeDeRetencion" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="AplicaIvaFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CategoriaProveedor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MontoChequeEnMonExtFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Ingreso" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UltAct" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Usuario" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Association Name="Proveedore_Contab_CajaChica_Reposiciones_Gasto" Member="CajaChica_Reposiciones_Gastos" ThisKey="Proveedor" OtherKey="Proveedor" Type="CajaChica_Reposiciones_Gasto" />
+      <Association Name="Moneda_Contab_Proveedore_Contab" Member="Moneda_Contab" ThisKey="MonedaDefault" OtherKey="Moneda1" Type="Moneda_Contab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Asientos" Member="Asientos">
+    <Type Name="Asiento">
+      <Column Name="NumeroAutomatico" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Numero" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Mes" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Ano" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MonedaOriginal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ConvertirFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="FactorDeCambio" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ProvieneDe" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="Ingreso" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UltAct" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CopiableFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AsientoTipoCierreAnualFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MesFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="AnoFiscal" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Usuario" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Cia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Asiento_dAsiento1" Member="dAsiento1s" ThisKey="NumeroAutomatico" OtherKey="NumeroAutomatico" Type="dAsiento1" />
+      <Association Name="Asiento_dAsiento" Member="dAsientos" ThisKey="NumeroAutomatico" OtherKey="NumeroAutomatico" Type="dAsiento" />
+      <Association Name="Compania_Contab_Asiento" Member="Compania_Contab" ThisKey="Cia" OtherKey="Numero" Type="Compania_Contab" IsForeignKey="true" />
+      <Association Name="Moneda_Contab_Asiento" Member="Moneda_Contab" ThisKey="Moneda" OtherKey="Moneda1" Type="Moneda_Contab" IsForeignKey="true" />
+      <Association Name="Moneda_Contab_Asiento1" Member="Moneda_Contab1" ThisKey="MonedaOriginal" OtherKey="Moneda1" Type="Moneda_Contab" IsForeignKey="true" />
+      <Association Name="TiposDeAsiento_Asiento" Member="TiposDeAsiento" ThisKey="Tipo" OtherKey="Tipo" Type="TiposDeAsiento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CuentasContables" Member="CuentasContables">
+    <Type Name="CuentasContable">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Cuenta" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="Nivel1" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Nivel2" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Nivel3" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Nivel4" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Nivel5" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Nivel6" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Nivel7" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="NumNiveles" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="TotDet" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="ActSusp" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="Estructura" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CuentaEditada" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Modelo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Grupo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NivelAgrupacion" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="GrupoNivelAgrupacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PresupuestarFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Cia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="CuentasContable_dAsiento1" Member="dAsiento1s" ThisKey="ID" OtherKey="CuentaContableID" Type="dAsiento1" />
+      <Association Name="CuentasContable_SaldosContable" Member="SaldosContables" ThisKey="ID" OtherKey="CuentaContableID" Type="SaldosContable" />
+      <Association Name="CuentasContable_dAsiento" Member="dAsientos" ThisKey="ID" OtherKey="CuentaContableID" Type="dAsiento" />
+      <Association Name="CuentasContable_Presupuesto_AsociacionCodigosCuenta" Member="Presupuesto_AsociacionCodigosCuentas" ThisKey="ID" OtherKey="CuentaContableID" Type="Presupuesto_AsociacionCodigosCuenta" />
+      <Association Name="Compania_Contab_CuentasContable" Member="Compania_Contab" ThisKey="Cia" OtherKey="Numero" Type="Compania_Contab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ParametrosContab" Member="ParametrosContabs">
+    <Type Name="ParametrosContab">
+      <Column Name="Activo1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pasivo1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pasivo2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pasivo3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pasivo4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pasivo5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pasivo6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Capital1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Capital2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Capital3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Capital4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Capital5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Capital6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ingresos1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ingresos2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ingresos3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ingresos4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ingresos5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ingresos6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Egresos1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Egresos2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Egresos3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Egresos4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Egresos5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Egresos6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CuentaGyP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MultiMoneda" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Moneda1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Moneda2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Moneda3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Moneda4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Moneda5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CambiarFactorAlAgregarFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CambiarFactorAlModFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NumeracionAsientosSeparadaFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OrganizarPartidasDelAsiento" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CargarAsientosConNumeroNegativoFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DirectorioAsientosOtrasAplicaciones" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="CuentaPuenteCajaChica" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Cia" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Compania_Contab_ParametrosContab" Member="Compania_Contab" ThisKey="Cia" OtherKey="Numero" Type="Compania_Contab" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTemp_AsientosContables_Partidas" Member="tTemp_AsientosContables_Partidas">
+    <Type Name="tTemp_AsientosContables_Partida">
+      <Column Name="Partida" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuentaContableID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Referencia" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Debe" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Haber" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.dAsientos" Member="dAsiento1s">
+    <Type Name="dAsiento1">
+      <Column Name="NumeroAutomatico" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Partida" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuentaContableID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Referencia" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Debe" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Haber" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CentroCosto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Asiento_dAsiento1" Member="Asiento" ThisKey="NumeroAutomatico" OtherKey="NumeroAutomatico" Type="Asiento" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="CuentasContable_dAsiento1" Member="CuentasContable" ThisKey="CuentaContableID" OtherKey="ID" Type="CuentasContable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CajaChica_CajasChicas" Member="CajaChica_CajasChicas">
+    <Type Name="CajaChica_CajasChica">
+      <Column Name="CajaChica" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="CajaChica_CajasChica_CajaChica_Reposicione" Member="CajaChica_Reposiciones" ThisKey="CajaChica" OtherKey="CajaChica" Type="CajaChica_Reposicione" />
+      <Association Name="Compania_Contab_CajaChica_CajasChica" Member="Compania_Contab" ThisKey="CiaContab" OtherKey="Numero" Type="Compania_Contab" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CajaChica_Reposiciones" Member="CajaChica_Reposiciones">
+    <Type Name="CajaChica_Reposicione">
+      <Column Name="Reposicion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="CajaChica" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Observaciones" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="EstadoActual" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Association Name="CajaChica_Reposicione_CajaChica_Reposiciones_Gasto" Member="CajaChica_Reposiciones_Gastos" ThisKey="Reposicion" OtherKey="Reposicion" Type="CajaChica_Reposiciones_Gasto" />
+      <Association Name="CajaChica_CajasChica_CajaChica_Reposicione" Member="CajaChica_CajasChica" ThisKey="CajaChica" OtherKey="CajaChica" Type="CajaChica_CajasChica" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CajaChica_Reposiciones_Gastos" Member="CajaChica_Reposiciones_Gastos">
+    <Type Name="CajaChica_Reposiciones_Gasto">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Reposicion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rubro" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="MontoNoImponible" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Monto" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="IvaPorc" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="Iva" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="FechaDocumento" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NumeroDocumento" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="NumeroControl" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Proveedor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Rif" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AfectaLibroCompras" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="CajaChica_Reposicione_CajaChica_Reposiciones_Gasto" Member="CajaChica_Reposicione" ThisKey="Reposicion" OtherKey="Reposicion" Type="CajaChica_Reposicione" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Proveedore_Contab_CajaChica_Reposiciones_Gasto" Member="Proveedore_Contab" ThisKey="Proveedor" OtherKey="Proveedor" Type="Proveedore_Contab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SaldosContables" Member="SaldosContables">
+    <Type Name="SaldosContable">
+      <Column Name="CuentaContableID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ano" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MonedaOriginal" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Inicial" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes01" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes02" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes03" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes04" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes05" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes06" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes07" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes08" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes09" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes10" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes11" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Mes12" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Anual" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TieneAsientosEnElMes" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SaldoAntAgregadoFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Cia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="CuentasContable_SaldosContable" Member="CuentasContable" ThisKey="CuentaContableID" OtherKey="ID" Type="CuentasContable" IsForeignKey="true" />
+      <Association Name="Moneda_Contab_SaldosContable" Member="Moneda_Contab" ThisKey="Moneda" OtherKey="Moneda1" Type="Moneda_Contab" IsForeignKey="true" />
+      <Association Name="Moneda_Contab_SaldosContable1" Member="Moneda_Contab1" ThisKey="MonedaOriginal" OtherKey="Moneda1" Type="Moneda_Contab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Contab_ConsultaCuentasYMovimientos" Member="Contab_ConsultaCuentasYMovimientos">
+    <Type Name="Contab_ConsultaCuentasYMovimiento">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CuentaContableID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CantMovtos" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="Contab_ConsultaCuentasYMovimiento_Contab_ConsultaCuentasYMovimientos_Movimiento" Member="Contab_ConsultaCuentasYMovimientos_Movimientos" ThisKey="ID" OtherKey="ParentID" Type="Contab_ConsultaCuentasYMovimientos_Movimiento" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Contab_ConsultaCuentasYMovimientos_Movimientos" Member="Contab_ConsultaCuentasYMovimientos_Movimientos">
+    <Type Name="Contab_ConsultaCuentasYMovimientos_Movimiento">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ParentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Secuencia" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="AsientoID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CuentaContableID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Partida" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Referencia" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(75) NOT NULL" CanBeNull="false" />
+      <Column Name="Monto" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Contab_ConsultaCuentasYMovimiento_Contab_ConsultaCuentasYMovimientos_Movimiento" Member="Contab_ConsultaCuentasYMovimiento" ThisKey="ParentID" OtherKey="ID" Type="Contab_ConsultaCuentasYMovimiento" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.dAsientos" Member="dAsientos">
+    <Type Name="dAsiento">
+      <Column Name="NumeroAutomatico" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Partida" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuentaContableID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(75) NOT NULL" CanBeNull="false" />
+      <Column Name="Referencia" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Debe" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Haber" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CentroCosto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Asiento_dAsiento" Member="Asiento" ThisKey="NumeroAutomatico" OtherKey="NumeroAutomatico" Type="Asiento" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="CuentasContable_dAsiento" Member="CuentasContable" ThisKey="CuentaContableID" OtherKey="ID" Type="CuentasContable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTempWebReport_ConsultaComprobantesContables_Partidas" Member="tTempWebReport_ConsultaComprobantesContables_Partidas">
+    <Type Name="tTempWebReport_ConsultaComprobantesContables_Partida">
+      <Column Name="NumeroAutomatico" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuentaContable" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Partida" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(75)" CanBeNull="true" />
+      <Column Name="Referencia" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Debe" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Haber" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tTempWebReport_ConsultaComprobantesContable_tTempWebReport_ConsultaComprobantesContables_Partida" Member="tTempWebReport_ConsultaComprobantesContable" ThisKey="NumeroAutomatico,CiaContab,NombreUsuario" OtherKey="NumeroAutomatico,CiaContab,NombreUsuario" Type="tTempWebReport_ConsultaComprobantesContable" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTempWebReport_ConsultaComprobantesContables" Member="tTempWebReport_ConsultaComprobantesContables">
+    <Type Name="tTempWebReport_ConsultaComprobantesContable">
+      <Column Name="NumeroAutomatico" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Numero" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="NumPartidas" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="TotalDebe" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="TotalHaber" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MonedaOriginal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FactorDeCambio" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ProvieneDe" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="AsientoTipoCierreAnualFlag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Usuario" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tTempWebReport_ConsultaComprobantesContable_tTempWebReport_ConsultaComprobantesContables_Partida" Member="tTempWebReport_ConsultaComprobantesContables_Partidas" ThisKey="NumeroAutomatico,CiaContab,NombreUsuario" OtherKey="NumeroAutomatico,CiaContab,NombreUsuario" Type="tTempWebReport_ConsultaComprobantesContables_Partida" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Presupuesto_AsociacionCodigosCuentas" Member="Presupuesto_AsociacionCodigosCuentas">
+    <Type Name="Presupuesto_AsociacionCodigosCuenta">
+      <Column Name="CodigoPresupuesto" Type="System.String" DbType="NVarChar(70) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuentaContableID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CuentasContable_Presupuesto_AsociacionCodigosCuenta" Member="CuentasContable" ThisKey="CuentaContableID" OtherKey="ID" Type="CuentasContable" IsForeignKey="true" />
+      <Association Name="Presupuesto_Codigo_Presupuesto_AsociacionCodigosCuenta" Member="Presupuesto_Codigo" ThisKey="CodigoPresupuesto,CiaContab" OtherKey="Codigo,CiaContab" Type="Presupuesto_Codigo" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>

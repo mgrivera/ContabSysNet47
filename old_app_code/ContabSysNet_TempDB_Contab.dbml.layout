@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ContabSysNet_TempDB_Contab">
+  <DataContextMoniker Name="/ContabSysNet_TempDB_ContabDataContext" />
+  <nestedChildShapes>
+    <classShape Id="7e7f9edd-6c70-46bd-90cf-582132b2eadd" absoluteBounds="2.5, 0.75, 3.125, 4.6554182942708326">
+      <DataClassMoniker Name="/ContabSysNet_TempDB_ContabDataContext/Contab_BalanceComprobacion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3ad052d6-ac04-4a90-89a2-0739f1061be2" absoluteBounds="2.515, 1.21, 3.0949999999999998, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

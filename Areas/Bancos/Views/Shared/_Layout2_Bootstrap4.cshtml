@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- para evitar que el "compatibility mode" afecte esta aplicación -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Bancos</title>
+
+    <link rel="stylesheet" href="~/Content/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/bootstrap-4.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <script type="text/javascript">
+        // obtenemos el 'uri' de la aplicación, para usarlo en forma general en la página
+        var path = '@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))';
+    </script>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="padding-left: 70px; ">
+                <a class="nav-item nav-link" href="#">
+                    @Html.ActionLink("ContabSysNet", "Index", "Home", new { Area = "Main" }, new { @class = "navbar-brand", style = "font-style: italic;" })
+                </a>
+                <a class="nav-item nav-link" href="#">ContabSysNet</a>
+                <a class="nav-item nav-link disabled" href="#">Disabled</a>
+            </div>
+        </div>
+    </nav>
+
+    <div style="margin-top: 55px; ">
+        @RenderBody()
+    </div>
+
+    <div>
+        <hr />
+        <footer>
+            <p class="pr-5"style="text-align: right; color: #39557F; "><em>Contab ...</em></p>
+        </footer>
+    </div>
+
+    <!-- (bootstrap) Optional JavaScript -->
+    <!-- (bootstrap) jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="~/Scripts/jquery/jquery-1.10.2.js" ) %>"></script>
+
+    <!-- bootstrap 4.0 CSS -->
+    <script type="text/javascript" src="~/Scripts/popper/popper.min.js" ) %>"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-4.0/js/bootstrap.min.js" ) %>"></script>
+</body>
+</html>

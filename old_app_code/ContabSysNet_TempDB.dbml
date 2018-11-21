@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbContabGeh" Class="ContabSysNet_TempDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=dbContabGeh;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="dbContabConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ConciliacionBancaria_MovimientosAConciliar" Member="ConciliacionBancaria_MovimientosAConciliars">
+    <Type Name="ConciliacionBancaria_MovimientosAConciliar">
+      <Column Name="ClaveUnica" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Transaccion" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaOperacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Concepto" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Monto" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ConciliadoFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ConciliacionBancaria_MovimientosBancarios" Member="ConciliacionBancaria_MovimientosBancarios">
+    <Type Name="ConciliacionBancaria_MovimientosBancario">
+      <Column Name="CuentaInterna" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuentaBancaria" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Transaccion" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Beneficiario" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NombreProveedorCliente" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NombreBanco" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SimboloMoneda" Type="System.String" DbType="NVarChar(6)" CanBeNull="true" />
+      <Column Name="NombreMoneda" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Concepto" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Monto" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="FechaEntregado" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Conciliacion_FechaEjecucion" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Conciliacion_MovimientoBanco_Fecha" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Conciliacion_MovimientoBanco_Numero" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Conciliacion_MovimientoBanco_Tipo" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="Conciliacion_MovimientoBanco_FechaProceso" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Conciliacion_MovimientoBanco_Monto" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Bancos_VencimientoFacturas" Member="Bancos_VencimientoFacturas">
+    <Type Name="Bancos_VencimientoFactura">
+      <Column Name="CxCCxPFlag" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CxCCxPFlag_Descripcion" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMoneda" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SimboloMoneda" Type="System.String" DbType="NVarChar(6)" CanBeNull="true" />
+      <Column Name="CiaContab" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreCiaContab" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="Compania" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NombreCompania" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreCompaniaAbreviatura" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="NumeroFactura" Type="System.String" DbType="NVarChar(25) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NumeroCuota" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FechaEmision" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaRecepcion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaVencimiento" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DiasVencimiento" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="MontoCuota" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Iva" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MontoCuotaDespuesIva" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="RetencionSobreISLR" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="FRecepcionRetencionISLR" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="RetencionSobreISLRAplica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RetencionSobreIva" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="FRecepcionRetencionIva" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="RetencionSobreIvaAplica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TotalAntesAnticipo" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Anticipo" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="MontoPagado" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SaldoPendiente" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="DiasPorVencerOVencidos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SaldoPendiente_0" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SaldoPendiente_1" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SaldoPendiente_2" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SaldoPendiente_3" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SaldoPendiente_4" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="NombreUsuario" Type="System.String" DbType="NVarChar(256) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

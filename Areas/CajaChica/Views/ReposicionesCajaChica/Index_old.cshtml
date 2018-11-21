@@ -1,0 +1,413 @@
+﻿@{
+    ViewBag.Title = "Control de cajas chicas - Reposiciones";
+}
+
+<div style="padding-top: 5px; ">
+    <div class="progressbar" style="height: 15px; width: 10%; margin: 0 auto; "></div>
+</div>
+
+<div class="row" style="margin-top: 5px; ">
+    <div class="col-md-6">
+        <span style="text-align: left; font-size: large; color: #004080; font-style: italic; padding-left: 110px; ">Actualización de reposiciones de caja chica</span>
+    </div>
+    <div class="col-md-6" style="text-align: right;">
+        <span style="text-align: right; font-size: small; color: #004080; font-style: italic; " data-bind="text: ciaContabSeleccionadaNombre"></span>
+    </div>
+</div>
+
+<!-- espacio para mostrar mensajes desde el servidor o cliente ... -->
+<div class="mensajeAlUsuario col-md-11 col-md-offset-1"></div>
+
+<div class="row">
+    <div class="col-md-11 col-md-offset-1">
+        <div class="pagination-sm">
+            <div id="page-selection"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1 left-side-bar" style="padding: 20px 0px 30px 0px; border: solid 1px lightgray; text-align: center; ">
+
+            <!-- aplicar un filtro  -->
+            <a href='#' data-bind="click: aplicarFiltroAbrirModal">
+                <img src='@Url.Content("~/Pictures/filter_25x25.png")' />
+            </a>
+            <br />
+            <a href='#' data-bind="click: aplicarFiltroAbrirModal">Aplicar<br />filtro</a>
+
+            <br />
+            <hr />
+
+            <!-- agregar una nueva reposición  -->
+            <a href='#' data-bind="click: agregarNuevoRegistro">
+                <img src='@Url.Content("~/Pictures/new_25x25.png")' />
+            </a>
+            <br />
+            <a href='#' data-bind="click: agregarNuevoRegistro">Nuevo</a>
+
+            <br />
+            <hr />
+
+            <!-- Exportar a Excel  -->
+            @*<a href='#' data-bind="click: exportarAExcel">
+                    <img src='@Url.Content("~/Pictures/Excel_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' data-bind="click: exportarAExcel">Exportar a Excel</a>
+
+                <br />
+                <hr />*@
+
+            <!-- Cargar catálogos  -->
+            <a href='#' data-bind="click: refreshCatalogos">
+                <img src='@Url.Content("~/Pictures/refreshFiles_25x25.png")' />
+            </a>
+            <br />
+            <a href='#' data-bind="click: refreshCatalogos">Actualizar<br />catálogos</a>
+
+        </div>
+
+        <div class="col-md-11">
+
+            <div class="pagination-sm"><div id="page-selection"></div></div>
+
+            <table class="table table-condensed table-striped table-bordered table-hover table-responsive">
+                <thead>
+                    @*<tr>
+                            <th />
+                            <th colspan="3">Proveedor</th>
+                            <th colspan="3">Documento</th>
+                            <th colspan="5">Montos</th>
+                            <th />
+                        </tr>*@
+                    <tr>
+                        <th style="text-align: center; ">Fecha</th>
+                        <th style="text-align: center; ">Número</th>
+                        <th style="text-align: left; ">Caja chica</th>
+                        <th style="text-align: center; ">Estado</th>
+                        <th style="text-align: center; ">Cant<br />lineas</th>
+                        <th style="text-align: right; ">Monto no<br />imponible</th>
+                        <th style="text-align: right; ">Monto<br />imponible</th>
+                        <th style="text-align: right; ">Iva</th>
+                        <th style="text-align: right; ">Total</th>
+                        <th style="text-align: center; " />
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: pageData.itemsPage">
+                    <tr>
+                        <td data-bind="text: moment(fecha()).format('DD-MM-YYYY')" style="text-align: center; "></td>
+                        <td style="text-align: center; ">
+                            <a href="#" data-bind="text: reposicionID, click: editarReposicion"></a>
+                        </td>
+                        <td data-bind="text: nombreCajaChica" style="text-align: left; "></td>
+                        <td data-bind="text: estado" style="text-align: center; "></td>
+                        <td data-bind="text: cantLineas" style="text-align: center; "></td>
+                        <td data-bind="currencyNoSimbolSpanish: totalMontoNoImponible" style="text-align: right; "></td>
+                        <td data-bind="currencyNoSimbolSpanish: totalMontoImponible" style="text-align: right; "></td>
+                        <td data-bind="currencyNoSimbolSpanish: totalIva" style="text-align: right; "></td>
+                        <td data-bind="currencyNoSimbolSpanish: totalReposicion" style="text-align: right; "></td>
+                        <td style="text-align: center; ">
+                            <a href="#">
+                                <img src="~/Pictures/Delete_Gray.png" data-bind="click: deleteItemFromList_Confirmar" />
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- especie de dialog box  -->
+<div id="mensajeAlUsuarioDialog" title="El proceso en ejecución se ha completado ...">
+    <div class="mensajeAlUsuario" style="font-size: small; "></div>
+</div>
+
+<!-- mensaje en popup, pero con Ok y Cancel   -->
+<div id="mensajeEliminarItem_Dialog" title="Cancelar para no eliminar el registro">
+    <div style="font-size: small; ">Haga un click en <em>Ok</em> para eliminar el registro.</div>
+</div>
+
+<!-- filtro  -->
+<div id="filtroModal" title="indique un criterio de selección y haga un click en Ok ...">
+
+    <div style="padding-top: 5px; ">
+        <div class="progressbar" style="height: 15px; width: 10%; margin: 0 auto; "></div>
+    </div>
+
+    <form class="form-horizontal" role="form" style="font-size: small; ">
+
+        <div class="container-fluid">
+
+            <div class="row verticalOffset">
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="control-label col-sm-4">Tipo:</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" data-bind="value: filtro.estadoReposiciones">
+                                <option value="todas">Todas</option>
+                                <option value="abiertas">Abiertas</option>
+                                <option value="cerradas">Cerradas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" data-bind="checked: filtro.cualquierUsuario"> Registradas por cualquier usuario
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+<!-- forma (modal) para que el usuario agregue/edite un registro  -->
+<div id="nuevoRegistroModal" title="Reposición de caja chica">
+
+    <nav class="navbar navbar-default navbar_custom_small" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            @*<div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>*@
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" data-bind="click: grabarItemAlServidor" class="navbar_custom_small_node">Grabar</a></li>
+                    <li><a href="#" data-bind="click: agregarNuevoRegistro" class="navbar_custom_small_node">Nuevo</a></li>
+                    <li><a href="#" data-bind="click: cerrarReposicion" class="navbar_custom_small_node">Cerrar y pasar a Contab</a></li>
+                    <li><a href="#" data-bind="click: notificarViaEmail" class="navbar_custom_small_node">Notificar vía e-mail</a></li>
+                    <li><a href="#" data-bind="click: exportarAExcel" class="navbar_custom_small_node">Exportar a Excel</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div style="padding-top: 5px; ">
+        <div class="progressbar" style="height: 15px; width: 10%; margin: 0 auto; "></div>
+    </div>
+
+    <form class="form-horizontal" role="form" style="font-size: small; " data-bind="with: reposicion">
+
+        <div class="container-fluid">
+
+            <div class="row verticalOffset" style="margin-bottom: 10px; ">
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="col-sm-4 control-label">Número:</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static" data-bind="text: reposicionID"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label typeof="" class="control-label col-sm-4">Fecha:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control datefield" data-bind="value: fecha" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row verticalOffset" style="margin-bottom: 10px; ">
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="col-sm-4 control-label">Estado:</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static" data-bind="text: estado"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="control-label col-sm-4" style="white-space: nowrap; ">Caja chica:</label>
+                        <div class="col-sm-8">
+                            <select class="form-control"
+                                    data-bind="options: viewModel.cajasChicas, optionsText: 'descripcion', optionsValue: 'id', value: cajaChicaID"
+                                    autofocus></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row verticalOffset" style="margin-bottom: 10px; ">
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="col-sm-4 control-label">Observaciones: </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" data-bind="value: observaciones" />
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="col-sm-6">
+                        <div class="form-group" style="margin-bottom: 0px; ">
+                            <label class="col-sm-4 control-label">Fecha futura:</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" data-bind="text: fechaEdited"></p>
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+
+        </div>
+
+
+        <table class="table table-condensed table-striped table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <a href="#" data-bind="click: $root.gastosCajaChica_agregar">Nuevo</a>
+                    </th>
+                    <th colspan="13"></th>
+                </tr>
+                <tr>
+                    <th colspan="2" />
+                    <th colspan="3" style="text-align: center; ">P r o v e e d o r</th>
+                    <th colspan="3" style="text-align: center; ">D o c u m e n t o</th>
+                    <th colspan="5" style="text-align: center; ">M o n t o s</th>
+                    <th />
+                    <th />
+                </tr>
+                <tr>
+                    <th style="text-align: left; ">Rubro</th>
+                    <th style="text-align: left; ">Descripcion</th>
+                    <th style="text-align: left; ">Contab</th>
+                    <th style="text-align: left; ">Eventual</th>
+                    <th style="text-align: left; ">Rif</th>
+                    <th style="text-align: center; ">Fecha</th>
+                    <th style="text-align: left; ">Número</th>
+                    <th style="text-align: left; ">Control</th>
+                    <th style="text-align: right; ">No imp</th>
+                    <th style="text-align: right; ">Imponible</th>
+                    <th style="text-align: center; ">Iva(%)</th>
+                    <th style="text-align: right; ">Iva</th>
+                    <th style="text-align: right; ">Total</th>
+                    <th style="text-align: center; ">Libro<br />compras</th>
+                    <th />
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: gastos">
+                <tr data-bind="hasFocus: $root.tableRowFocus">
+                    <td style="text-align: left; ">
+                        <select data-bind="options: viewModel.rubrosCajaChica, optionsText: 'descripcion', optionsValue: 'id', value: rubroID"
+                                autofocus></select>
+                    </td>
+                    <td><input data-bind="value: descripcion" /></td>
+                    <td style="text-align: left; ">
+                        <select data-bind="options: viewModel.companias, optionsText: 'abreviatura', optionsValue: 'id', value: proveedorID"
+                                autofocus></select>
+                    </td>
+                    <td><input data-bind="value: proveedor2" /></td>
+                    <td><input style="text-align: left; width: 50px; " data-bind="value: rif" /></td>
+                    <td><input style="text-align: center; width: 50px; " class="datefield" data-bind="value: fechaDoc" placeholder="dd-mm-aa" /></td>
+
+                    <td><input style="text-align: left; width: 80px; " data-bind="value: numeroDoc" /></td>
+                    <td><input style="text-align: left; width: 80px; " data-bind="value: numeroControl" /></td>
+
+                    <td style="text-align: right; "><input style="text-align: right; width: 80px; " data-bind="value: montoNoImponible" /></td>
+                    <td style="text-align: right; "><input style="text-align: right; width: 80px; " data-bind="value: montoImponible" /></td>
+                    <td><input style="text-align: center; width: 40px; " data-bind="value: ivaPorc" /></td>
+                    <td data-bind="currencyNoSimbolSpanish: iva" style="text-align: right; width: 80px;"></td>
+                    <td data-bind="currencyNoSimbolSpanish: total" style="text-align: right; width: 80px;"></td>
+                    <td style="text-align: center; "><input type="checkbox" data-bind="checked: afectaLibroCompras" /></td>
+                    <td style="text-align: center; ">
+                        <a href="#">
+                            <img src="~/Pictures/Delete_Gray.png" data-bind="click: $root.gastosCajaChica_eliminar" />
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr style="background-color: lightgray; font-weight: bold; ">
+                    <td colspan="8" style="text-align: center; ">cantidad de gastos: <span data-bind="text: cantidadLineas"></span></td>
+                    <td data-bind="currencyNoSimbolSpanish: totalMontoNoImponible" style="text-align: right; "></td>
+                    <td data-bind="currencyNoSimbolSpanish: totalMontoImponible" style="text-align: right; "></td>
+                    <td></td>
+                    <td data-bind="currencyNoSimbolSpanish: totalMontoIva" style="text-align: right; "></td>
+                    <td data-bind="currencyNoSimbolSpanish: totalMontoTotal" style="text-align: right; "></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </form>
+</div>
+
+
+<div id="notificarViaEmailModal" title="Notificación vía e-mail">
+
+    <div style="padding-top: 5px; ">
+        <div class="progressbar" style="height: 15px; width: 10%; margin: 0 auto; "></div>
+    </div>
+
+    <form class="form-horizontal" role="form" style="font-size: small; ">
+
+        <div class="container-fluid">
+
+            <div class="row verticalOffset" style="margin-bottom: 10px; ">
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="control-label col-sm-4" style="white-space: nowrap; ">Usuarios:</label>
+                        <div class="col-sm-8">
+                            <select class="form-control"
+                                    data-bind="options: usuarios, value: usuarioEmail"
+                                    autofocus></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+<div id="downloadExcelFile" title="Descargar archivo">
+
+    <div style="padding-top: 5px; ">
+        <div class="progressbar" style="height: 15px; width: 10%; margin: 0 auto; "></div>
+    </div>
+
+    <p>Ok, el documento Excel requerido se ha construido en forma satisfactoria.</p>
+    <p>Haga un click en el botón que sigue, para descargar el documento a su PC.</p>
+
+    <!-- los parámetros son para que asp.net web api diferencia e identifique la ruta; de otra forma, no diferncia
+         entre rutas con el mismo verbo (get) y el mismo controller (ActualizarReposicionesCajaChicaWebApi);
+         ésto debe ser resuelto (???!!!)     -->
+
+    <br />
+
+    <div style="text-align: right; ">
+        <a href="~/api/ActualizarReposicionesCajaChicaWebApi/DownloadExcelFile?param1=999&param2=999" class="btn btn-primary btn-sm">
+            Descargar archivo
+        </a>
+    </div>
+   
+</div>
+
+<script src="~/Scripts/nedb.min.js"></script>                           <!--  mongo like local database -->
+@*<script src="~/Scripts/underscore_1_7_0.js"></script>*@
+<script src="~/Scripts/lo-dash-2.4.1.js"></script>
+<script src="~/Scripts/code/cajaChica/ActualizarReposiciones.js"></script>
+

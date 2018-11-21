@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<File>
+  <Item>
+    <Rubro>3</Rubro>
+    <Descripcion>TRASLADO VARIOS</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>4</Rubro>
+    <Descripcion>ESTACIONAMIENTO</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>5</Rubro>
+    <Descripcion>ARTICULO DE OFICINA</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>6</Rubro>
+    <Descripcion>AGUA POTABLE</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>7</Rubro>
+    <Descripcion>TRABAJOS REALIZADO</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>8</Rubro>
+    <Descripcion>MENSAJERIA</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>9</Rubro>
+    <Descripcion>ALMUERZO</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>10</Rubro>
+    <Descripcion>ARTICULO LIMPIEZA</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>11</Rubro>
+    <Descripcion>GASTO REGISTRO</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>12</Rubro>
+    <Descripcion>ATENCION AL PERSONAL</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>13</Rubro>
+    <Descripcion>CONSUMO CELULAR</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>14</Rubro>
+    <Descripcion>CONSUMO LUZ </Descripcion>
+  </Item>
+  <Item>
+    <Rubro>15</Rubro>
+    <Descripcion>MEDICINA</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>16</Rubro>
+    <Descripcion>CONSUMO CANTV</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>17</Rubro>
+    <Descripcion>VALIJAS </Descripcion>
+  </Item>
+  <Item>
+    <Rubro>18</Rubro>
+    <Descripcion>CERRAJERIA </Descripcion>
+  </Item>
+  <Item>
+    <Rubro>19</Rubro>
+    <Descripcion>ADMIDENTAL</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>20</Rubro>
+    <Descripcion>COMPRAS VARIAS</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>21</Rubro>
+    <Descripcion>LIMPIEZA DE OFICINA</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>22</Rubro>
+    <Descripcion>CONTRIBUCIONES INCE</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>23</Rubro>
+    <Descripcion>MTTO. REP. EQUIPOS</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>24</Rubro>
+    <Descripcion>SERV. CONTADORES</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>25</Rubro>
+    <Descripcion>PASANTIAS</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>26</Rubro>
+    <Descripcion>ARTICULO INFORMATICA</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>27</Rubro>
+    <Descripcion>GASTOS DE REPRESENTACION</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>28</Rubro>
+    <Descripcion>GASTO REPREST. PEDRO</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>29</Rubro>
+    <Descripcion>GASTO REPREST. MA ANGELICA</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>30</Rubro>
+    <Descripcion>GASTO REPREST. MA ISABEL</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>31</Rubro>
+    <Descripcion>RETENCIONES ISLR</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>32</Rubro>
+    <Descripcion>INSUMOS DE CAFETERIA</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>33</Rubro>
+    <Descripcion>VALES</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>34</Rubro>
+    <Descripcion>SELLOS</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>35</Rubro>
+    <Descripcion>RIFAS (PROAGRO)</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>36</Rubro>
+    <Descripcion>CONSULTAS Y TERAPIAS </Descripcion>
+  </Item>
+  <Item>
+    <Rubro>37</Rubro>
+    <Descripcion>INSUMOS SERV. MEDICOS</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>38</Rubro>
+    <Descripcion>PLANILLAS, ESTAMPILLAS</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>39</Rubro>
+    <Descripcion>EVAL. MEDICAS</Descripcion>
+  </Item>
+  <Item>
+    <Rubro>40</Rubro>
+    <Descripcion>AUMENTO DE CAJA CHICA</Descripcion>
+  </Item>
+</File>

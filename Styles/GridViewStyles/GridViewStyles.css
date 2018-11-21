@@ -1,0 +1,73 @@
+/*H1
+{
+	font-size: small;
+	color: #4A3C8C;
+	font-family: Arial;
+}*/
+
+.Grid
+{
+	border: solid 1px #E7E7FF;
+}
+
+.Grid th {
+    padding: 5px 5px 5px 5px;
+}
+
+.Grid td
+{
+	border: solid 1px #FFFFFF;
+	margin: 1px;
+	font-family: Arial;
+    padding: 5px 5px 5px 5px;
+}
+
+.GridHeader
+{
+    font-weight: bold;
+    /*padding: 4px 50px 4px 4px;*/
+    color: #F7F7F7;
+    background-color: #4A3C8C;
+    font-size: 12px;
+}
+
+.GridHeader a
+{
+	text-decoration: none;
+	color: #F7F7F7;
+	padding: 15px;
+}
+
+.GridHeader a:hover
+{
+	text-decoration: underline;
+	background: #4A3C8C url(images/spin.gif) no-repeat 0 100%;
+}
+
+.GridItem, .GridAltItem
+{
+	font-size: 9px;
+	color: #4A3C8C;
+}
+
+.GridItem
+{
+	background-color: #E7E7FF;
+}
+
+.GridAltItem
+{
+	background-color: #F7F7F7;
+}
+
+.GridPager
+{
+	font-size: 10px;
+	background-color: #E7E7FF;
+}
+
+.GridEmptyData
+{
+	font-size: 12px;
+	background-color: #F7F7F7;
+}

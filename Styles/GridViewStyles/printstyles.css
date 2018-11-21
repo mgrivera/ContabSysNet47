@@ -1,0 +1,40 @@
+H1
+{
+	font-size: medium;
+	font-family: Arial;
+}
+
+.Grid
+{
+	border: solid 1px Tan;
+}
+
+.Grid td
+{
+	border: solid 3px #FFFFFF;
+	margin: 3px 3px 3px 3px;
+	font-family: Arial;
+	padding: 5px 5px 5px 5px;
+	text-align: center;
+}
+
+.GridHeader
+{
+	font-weight: bold;
+}
+
+.GridHeader a
+{
+	text-decoration: none;
+	padding: 0px 15px 0px 15px;
+}
+
+.GridItem, .GridAltItem
+{
+	font-size: smaller;
+}
+
+.GridPager
+{
+	font-size: small;
+}

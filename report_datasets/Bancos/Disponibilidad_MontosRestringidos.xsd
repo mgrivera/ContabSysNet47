@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Disponibilidad_MontosRestringidos" targetNamespace="http://tempuri.org/Disponibilidad_MontosRestringidos.xsd" xmlns:mstns="http://tempuri.org/Disponibilidad_MontosRestringidos.xsd" xmlns="http://tempuri.org/Disponibilidad_MontosRestringidos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="dbContabConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="dbContabConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.dbContabConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Disponibilidad_MontosRestringidosTableAdapter" GeneratorDataComponentClassName="Disponibilidad_MontosRestringidosTableAdapter" Name="Disponibilidad_MontosRestringidos" UserDataComponentName="Disponibilidad_MontosRestringidosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="dbContabConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Companias.Nombre AS NombreCiaContab, Monedas.Descripcion AS NombreMoneda, CuentasBancarias.CuentaBancaria, Bancos.Abreviatura AS NombreBanco, Disponibilidad_MontosRestringidos.Monto, CASE Disponibilidad_MontosRestringidos.SuspendidoFlag WHEN 0 THEN '' WHEN 1 THEN 'Si' END AS SuspendidoFlag, Disponibilidad_MontosRestringidos.DesactivarEl, Disponibilidad_MontosRestringidos.Comentarios, Disponibilidad_MontosRestringidos.Fecha FROM Disponibilidad_MontosRestringidos INNER JOIN Companias ON Disponibilidad_MontosRestringidos.CiaContab = Companias.Numero INNER JOIN CuentasBancarias ON Disponibilidad_MontosRestringidos.CuentaBancaria = CuentasBancarias.CuentaInterna INNER JOIN Bancos ON CuentasBancarias.Banco = Bancos.Banco INNER JOIN Monedas ON Disponibilidad_MontosRestringidos.Moneda = Monedas.Moneda</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="NombreCiaContab" DataSetColumn="NombreCiaContab" />
+              <Mapping SourceColumn="NombreMoneda" DataSetColumn="NombreMoneda" />
+              <Mapping SourceColumn="CuentaBancaria" DataSetColumn="CuentaBancaria" />
+              <Mapping SourceColumn="NombreBanco" DataSetColumn="NombreBanco" />
+              <Mapping SourceColumn="Monto" DataSetColumn="Monto" />
+              <Mapping SourceColumn="SuspendidoFlag" DataSetColumn="SuspendidoFlag" />
+              <Mapping SourceColumn="DesactivarEl" DataSetColumn="DesactivarEl" />
+              <Mapping SourceColumn="Comentarios" DataSetColumn="Comentarios" />
+              <Mapping SourceColumn="Fecha" DataSetColumn="Fecha" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Disponibilidad_MontosRestringidos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="Disponibilidad_MontosRestringidos" msprop:Generator_DataSetName="Disponibilidad_MontosRestringidos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Disponibilidad_MontosRestringidos" msprop:Generator_UserTableName="Disponibilidad_MontosRestringidos" msprop:Generator_RowDeletedName="Disponibilidad_MontosRestringidosRowDeleted" msprop:Generator_RowChangedName="Disponibilidad_MontosRestringidosRowChanged" msprop:Generator_RowClassName="Disponibilidad_MontosRestringidosRow" msprop:Generator_RowChangingName="Disponibilidad_MontosRestringidosRowChanging" msprop:Generator_RowEvArgName="Disponibilidad_MontosRestringidosRowChangeEvent" msprop:Generator_RowEvHandlerName="Disponibilidad_MontosRestringidosRowChangeEventHandler" msprop:Generator_TableClassName="Disponibilidad_MontosRestringidosDataTable" msprop:Generator_TableVarName="tableDisponibilidad_MontosRestringidos" msprop:Generator_RowDeletingName="Disponibilidad_MontosRestringidosRowDeleting" msprop:Generator_TablePropName="_Disponibilidad_MontosRestringidos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NombreCiaContab" msprop:Generator_UserColumnName="NombreCiaContab" msprop:Generator_ColumnPropNameInRow="NombreCiaContab" msprop:Generator_ColumnVarNameInTable="columnNombreCiaContab" msprop:Generator_ColumnPropNameInTable="NombreCiaContabColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreMoneda" msprop:Generator_UserColumnName="NombreMoneda" msprop:Generator_ColumnPropNameInRow="NombreMoneda" msprop:Generator_ColumnVarNameInTable="columnNombreMoneda" msprop:Generator_ColumnPropNameInTable="NombreMonedaColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CuentaBancaria" msprop:Generator_UserColumnName="CuentaBancaria" msprop:Generator_ColumnPropNameInRow="CuentaBancaria" msprop:Generator_ColumnVarNameInTable="columnCuentaBancaria" msprop:Generator_ColumnPropNameInTable="CuentaBancariaColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreBanco" msprop:Generator_UserColumnName="NombreBanco" msprop:Generator_ColumnPropNameInRow="NombreBanco" msprop:Generator_ColumnVarNameInTable="columnNombreBanco" msprop:Generator_ColumnPropNameInTable="NombreBancoColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Monto" msprop:Generator_UserColumnName="Monto" msprop:Generator_ColumnPropNameInRow="Monto" msprop:Generator_ColumnVarNameInTable="columnMonto" msprop:Generator_ColumnPropNameInTable="MontoColumn" type="xs:decimal" />
+              <xs:element name="SuspendidoFlag" msdata:ReadOnly="true" msprop:Generator_UserColumnName="SuspendidoFlag" msprop:Generator_ColumnPropNameInRow="SuspendidoFlag" msprop:Generator_ColumnVarNameInTable="columnSuspendidoFlag" msprop:Generator_ColumnPropNameInTable="SuspendidoFlagColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DesactivarEl" msprop:Generator_UserColumnName="DesactivarEl" msprop:Generator_ColumnPropNameInRow="DesactivarEl" msprop:Generator_ColumnVarNameInTable="columnDesactivarEl" msprop:Generator_ColumnPropNameInTable="DesactivarElColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Comentarios" msprop:Generator_UserColumnName="Comentarios" msprop:Generator_ColumnPropNameInRow="Comentarios" msprop:Generator_ColumnVarNameInTable="columnComentarios" msprop:Generator_ColumnPropNameInTable="ComentariosColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Fecha" msprop:Generator_UserColumnName="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

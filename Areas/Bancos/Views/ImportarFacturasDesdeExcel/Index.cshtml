@@ -1,0 +1,284 @@
+﻿
+@{
+    ViewBag.Title = "Bancos - Agregar facturas desde documento Excel";
+}
+
+<!-- para leer un documento Excel desde el cliente -->
+<script src="~/Scripts/xlsx.js/jszip.js"></script>
+<script src="~/Scripts/xlsx.js/shim.js"></script>
+<script src="~/Scripts/xlsx.js/xlsx.js"></script>
+
+<div style="padding-top: 5px; ">
+    <div class="progressbar" style="height: 15px; width: 10%; margin: 0 auto; "></div>
+</div>
+
+<div class="row" style="margin-top: 5px; ">
+    <div class="col-md-6">
+        <span style="text-align: left; font-size: large; color: #004080; font-style: italic; padding-left: 110px; ">Importar facturas desde documento Excel</span>
+    </div>
+    <div class="col-md-6" style="text-align: right;">
+        <span style="text-align: right; font-size: small; color: #004080; font-style: italic; " data-bind="text: ciaContabSeleccionadaNombre"></span>
+    </div>
+</div>
+
+
+<!-- espacio para mostrar mensajes desde el servidor o cliente ... -->
+<div class="row">
+    <div class="col-md-11 col-md-offset-1">
+        <div class="mensajeAlUsuario"></div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-11 col-md-offset-1">
+        <div class="pagination-sm">
+            <div id="page-selection"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1 left-side-bar" style="padding: 20px 0px 30px 0px; border: solid 1px lightgray; text-align: center; ">
+
+            <!-- 1) leemos el documento Excel  -->
+            <a href='#' id="fake-upload-button">
+                <img src='@Url.Content("~/Pictures/Excel_25x25.png")' />
+            </a>
+            <br />
+            <a href='#' id="fake-upload-button2">Cargar<br />doc Excel</a>
+            <br />
+
+            <input type="file" id="fileInput" onchange="handleFiles(this.files)" style="display: none; " />
+
+            <br />
+            <hr />
+
+            <!-- Grabamos a mongo (temporal...)  -->
+            <a href='#' data-bind="click: grabarAMongo">
+                <img src='@Url.Content("~/Pictures/server_25x25.png")' />
+            </a>
+            <br />
+            <a href='#' data-bind="click: grabarAMongo">Grabar al<br />servidor</a>
+
+            <br />
+            <hr />
+
+            <!-- grabamos las facturas  -->
+            <a href='#' data-bind="click: grabarFacturas_openDialog">
+                <img src='@Url.Content("~/Pictures/database_25x25.png")' />
+            </a>
+            <br />
+            <a href='#' data-bind="click: grabarFacturas_openDialog">Grabar<br />facturas</a>
+
+            <br />
+            <hr />
+
+            <!-- finalmente, grabamos los asientos contables  -->
+            <a href='#' data-bind="click: grabarAsientosContables_openDialog">
+                <img src='@Url.Content("~/Pictures/database_25x25.png")' />
+            </a>
+            <br />
+            <a href='#' data-bind="click: grabarAsientosContables_openDialog">Grabar<br />Asientos contables</a>
+        </div>
+
+        <div class="col-md-11">
+
+            <div class="pagination-sm"><div id="page-selection"></div></div>
+            <table class="table table-condensed table-striped table-bordered table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="text-align: center; ">Cliente</th>
+                        <th colspan="2" style="text-align: center; ">Factura</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center; ">Código</th>
+                        <th>Nombre</th>
+                        <th style="text-align: left; ">Concepto</th>
+                        <th style="text-align: right; ">Monto</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: facturasPage">
+                    <tr>
+                        <td data-bind="text: numeroCliente" style="text-align: center; "></td>
+                        <td data-bind="text: nombreCliente"></td>
+                        <td data-bind="text: conceptoFactura" style="text-align: left; "></td>
+                        <td data-bind="text: montoFactura" style="text-align: right; "></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- diálogo para que el usuario indique algunos parámetros y grabe las facturas  -->
+<div id="grabarFacturasDialog" title="Indique valores para los siguientes parámetros y grabe las facturas a la base de datos">
+
+    <div style="padding-top: 5px; ">
+        <div class="progressbar" style="height: 15px; width: 10%; margin: 0 auto; "></div>
+    </div>
+
+    <form class="form-horizontal" role="form" style="font-size: small; ">
+
+        <div class="container-fluid">
+
+            <div class="row verticalOffset">
+                <p>
+                    Antes de intentar registrar facturas en forma 'masiva', Ud. debe asegurarse de ser el <em>único</em> que está registrando facturas
+                    para la compañía (Contab) seleccionada (
+                    <span data-bind="text: ciaContabSeleccionadaNombre"></span>
+                    ). 
+                </p>
+                <p>
+                    Este proceso determinará el número de la <em>próxima</em> factura, e irá asociando a cada factura un número consecutivo a partir de éste.
+                </p>
+                <p>
+                    Por esta razón, Ud. debe ser el <em>único</em> usuario que agregue facturas a la compañía (Contab) seleccionada, para que los números de
+                    factura no se dupliquen.
+                </p>
+                <p>
+                    <em><b>Nota importante: </b></em>antes de grabar cada factura, este programa leerá la compañía indicada, para asociar a la factura estos items: 
+                    <ul>
+                        <li>moneda</li>
+                        <li>tipo</li>
+                        <li>forma de pago</li>
+                    </ul>
+                    Por este motivo, cada compañía debe existir en la tabla Compañías; además, cada compañía debe tener una moneda, tipo y forma de pago registrada. 
+                </p>
+            </div>
+
+            <div class="row verticalOffset">
+
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label typeof="" class="control-label col-sm-4">Fecha de facturas:</label>
+                        <div class="col-sm-8">
+                            <input autofocus style="display: none; " />
+                            <input class="form-control datefield" data-bind="value: fechaFacturas" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="control-label col-sm-4">Iva (%):</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" data-bind="value: ivaPorc" placeholder="(ej: 50 o 50.75)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row verticalOffset">
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="control-label col-sm-4">Cantidad de facturas a registrar:</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" data-bind="value: cantidadFacturasARegistrar" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p>
+                        Este valor le permite grabar solo algunas facturas, por ejemplo una o dos, para probar este proceso.
+                        Luego puede regresar y ejecutar el proceso en forma definitiva.
+                    </p>
+                    <p>
+                        Para registrar todas las facturas, simplemente deje este valor en blanco; es decir, vacío.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+
+<!-- diálogo para que el usuario indique algunos parámetros y grabe los asientos  -->
+<div id="grabarAsientosDialog" title="Indique valores para los siguientes parámetros y grabe los asientos contables a la base de datos">
+
+    <div style="padding-top: 5px; ">
+        <div class="progressbar" style="height: 15px; width: 10%; margin: 0 auto; "></div>
+    </div>
+
+    <form class="form-horizontal" role="form" style="font-size: small; ">
+
+        <div class="container-fluid">
+
+            <div class="row verticalOffset">
+                <p>
+                    Para registrar los asientos contables que corresponden a las facturas registradas, Ud. debe indicar un factor de cambio (ej: 80.75) y 
+                    seleccionar un tipo de asiento. 
+                </p>
+                <p>
+                    <em><b>Nota: </b></em>el número de lote indicado en esta forma, corresponden al número de lote asignado a las facturas registradas 
+                    mediante el paso anterior en esta página. 
+                </p>
+                <p>
+                    Si Ud. registró las facturas y salió de la página sin grabar los asientos, puede regresar y ejecutar esta función para registrar los asientos
+                    contables, pero debe indicar un número de lote para seleccionar las facturas que correspondan. 
+                </p>
+            </div>
+
+            <div class="row verticalOffset">
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="control-label col-sm-4">Factor de cambio:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" placeholder="(ej: 50 o 50.75)" data-bind="value: parametrosAgregarAsientosContables.factorCambio" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="control-label col-sm-4">Tipo de asiento:</label>
+                        <div class="col-sm-8">
+                            <select class="form-control"
+                                    data-bind="options: tiposAsiento, value: parametrosAgregarAsientosContables.tipoAsientoContable"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row verticalOffset3">
+                <div class="col-sm-6">
+                    <div class="form-group" style="margin-bottom: 0px; ">
+                        <label class="control-label col-sm-4">Número de lote:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" placeholder="número de lote" data-bind="value: numeroLote" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p>
+                        <em>Nota importante: </em> si Ud. necesita, por alguna razón, ejecutar este paso en forma separada, luego de haber cargado las
+                        facturas, debe hacer lo siguiente:
+                    </p>
+                    <ol>
+                        <li>Cargar el documento Excel</li>
+                        <li>Ejecutar el paso 2, 'grabar al servidor'</li>
+                        <li>Ejecutar este proceso, pero indicar el número de lote en forma manual</li>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+<!-- jquery ui dialog (filter)-->
+<div id="popUpDialog" title="El proceso en ejecución se ha completado ...">
+    <div id="popUpDialog_MensajeAlUsuario_Div" class="mensajeAlUsuario" style="font-size: small; "></div>
+</div>
+
+
+<script src="~/Scripts/code/bancos/ImportarFacturasDesdeExcel.js"></script>
+

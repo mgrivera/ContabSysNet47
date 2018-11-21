@@ -1,0 +1,330 @@
+﻿@{
+    ViewBag.Title = "Bancos - Compañías";
+}
+
+<div ng-app="myApp" ng-controller="MainController">
+
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-1" style="font-style: italic; ">
+                <h4>Bancos - Compañías</h4>
+            </div>
+            <div class="col-sm-2" style="text-align: center; vertical-align: middle; ">
+                <i style="color: #428BCA" class="fa fa-circle-o-notch fa-spin fa-2x" ng-show="showProgress"></i>
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-11 col-sm-offset-1">
+                <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                    <!-- nótese lo que sigue pues muchas veces viene html en el mensaje (ej: errores: error1<br />error2 ... ) -->
+                    <span ng-bind-html="alert.msg | unsafe"></span>
+                </alert>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-1 left-side-bar" style="padding: 20px 0 30px 0; border: solid 1px lightgray; text-align: center; ">
+
+                <a href='#' ng-click="leerCompanias()">
+                    <img src='@Url.Content("~/Pictures/server_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' ng-click="leerCompanias()">Leer desde<br />el servidor</a>
+
+                <br />
+                <hr />
+
+                <a href='#' ng-click="grabarDatosAlServidor()" ng-disabled="editMode || !formHasBeenEdited()" class="btn btn-link">
+                    <img src='@Url.Content("~/Pictures/save_25x25.png")' />
+                </a>
+                <br />
+                <a href='#' ng-click="grabarDatosAlServidor()" ng-disabled="editMode || !formHasBeenEdited()" class="btn btn-link">Grabar</a>
+
+                <br />
+                <hr />
+            </div>
+
+            <div class="col-md-11">
+
+                <form name="myForm" ng-submit="submitMyForm()" novalidate>
+
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div>
+                                <dir-pagination-controls boundary-links="true"
+                                                         template-url="~/Scripts/angular/angular-pagination/dirPagination.tpl.html"
+                                                         class="navigation-bar">
+                                </dir-pagination-controls>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                                <input ng-model="filterUser"
+                                       class="form-control"
+                                       type="text"
+                                       placeholder="buscar ..." />
+                            </div>
+                        </div>
+
+                        <div class="col-xs-2" style="text-align: right; ">
+                            <div class="input-group input-group-sm" style="text-align: right; width: 100%; ">
+                                <input type="number" min="1" max="100" class="form-control pull-right" ng-model="pageSize" style="width: 50%; ">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div style="overflow: auto; ">
+                        <table class="table table-condensed table-striped table-bordered table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; width: 10px; "></th>
+                                    <th style="text-align: left; width: 10px; ">Nombre</th>
+                                    <th style="text-align: center; ">Número</th>
+                                    <th style="text-align: left; ">Ciudad</thstyle>
+                                    <th style="text-align: left; ">Tipo</th>
+                                    <th style="text-align: left; ">Tipo</th>
+                                    <th style="text-align: left; ">Rif</th>
+                                    <th style="text-align: left; ">Nat-Jur</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="compania in companias | orderBy : 'nombre' | filter:filterUser | itemsPerPage: pageSize"
+                                    current-page="currentPage"
+                                    ng-form="innerTableForm">
+
+                                    <td style="text-align: center; ">
+                                        <span ng-show="compania.isEdited" class="fa fa-pencil" style="color: cornflowerblue; font: xx-small; "></span>
+                                    </td>
+
+                                    <td style="text-align: left; white-space: nowrap; ">
+                                        <a href="#" ng-click="abrirCuentasBancariasModal(compania)"> {{ compania.nombre }} </a>
+                                    </td>
+
+                                    <td style="text-align: center; ">
+                                        <span>{{ compania.id }}</span>
+                                    </td>
+
+                                    <td style="text-align: left; ">
+                                        <span>{{ compania.ciudad }}</span>
+                                    </td>
+
+                                    <td style="text-align: left; ">
+                                        <span>{{ descripcionTipoCompania(compania) }}</span>
+                                    </td>
+
+                                    <td style="text-align: left; ">
+                                        <span>{{ compania.tipo }}</span>
+                                    </td>
+
+                                    <td style="text-align: left; ">
+                                        <span>{{ compania.rif }}</span>
+                                    </td>
+
+                                    <td style="text-align: left; ">
+                                        <span>{{ descripcionNaturalJuridico(compania) }}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ---------------------------------------------------------------- -->
+    <!-- modal para permitir al usuario actualizar las cuentas bancarias  -->
+    <script type="text/ng-template" id="actualizarCuentasBancariasModal.html">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Cuentas bancarias para la compañía {{ compania.nombre }}</h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="container-fluid">
+
+                <div class="row" style="margin-bottom: 15px; ">
+                    <div class="col-sm-12 col-sm-offset-0">
+                        <div style="background-color: #F2F2F2; border: 1px solid darkgray; ">
+                            <a href="#" class="btn btn-link menu-links-xsm"
+                               ng-show="!editMode"
+                               ng-click="agregarCuentaBancaria()">
+                                <i class="fa fa-file-o"></i> Nuevo
+                            </a>
+
+                            <a href="#" class="btn btn-link menu-links-xsm"
+                               ng-show="!editMode"
+                               ng-click="toggleEditMode()">
+                                <i class="fa fa-pencil-square-o"></i> Editar
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-link menu-links-xsm"
+                                    ng-show="editMode"
+                                    form="movimientosRiesgoForm">
+                                <i class="fa fa-check-square-o"></i> Fin editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div style="max-height: 300px; overflow: auto; " class="col-sm-12">
+                        <form name="movimientosRiesgoForm" id="movimientosRiesgoForm" ng-submit="submitMovimientosRiesgoForm()" novalidate>
+
+                            <table class="table table-condensed table-striped table-bordered table-hover table-responsive" style="font-size: x-small; ">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; width: 10px; "></th>
+
+                                        <th style="text-align: left; ">Cuenta bancaria</th>
+                                        <th style="text-align: left; ">Banco</th>
+                                        <th style="text-align: left; ">Tipo</th>
+                                        <th style="text-align: center; ">Default</th>
+
+                                        <th style="width: 8px; "></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="cuentaBancaria in compania.cuentasBancarias" ng-form="innerTableForm">
+
+                                        <!--  indicadores de estado de row (nuevo, deleted, etc)  -->
+
+                                        <td style="text-align: center; " class="tableTdInputs_small">
+                                            <span ng-show="cuentaBancaria.isEdited" class="fa fa-pencil" style="color: #A5999C; font: xx-small; "></span>
+                                            <span ng-show="cuentaBancaria.isNew" class="fa fa-asterisk" style="color: #A5999C; font: xx-small; "></span>
+                                            <span ng-show="cuentaBancaria.isDeleted" class="fa fa-trash" style="color: #A5999C; font: xx-small; "></span>
+                                        </td>
+
+                                        <!--  número  -->
+
+                                        <td class="tableTdInputs_small" style="text-align: left; ">
+                                            <div ng-show="editMode && !cuentaBancaria.isDeleted">
+                                                <div>
+                                                    <input type="text"
+                                                           name="numero"
+                                                           class="form-control input-sm tableInputs_xsmall"
+                                                           ng-model="cuentaBancaria.numero"
+                                                           ng-change="setIsEdited(cuentaBancaria)"
+                                                           ng-model-options="{ updateOn: 'blur' }"
+                                                           required />
+
+                                                    <span class="validation-message"
+                                                          ng-show="submitted && innerTableForm.numero.$error.required">
+                                                        Indique un valor.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span ng-show="!editMode || (editMode && cuentaBancaria.isDeleted)">{{ cuentaBancaria.numero }}</span>
+                                        </td>
+
+                                        <!--  banco  -->
+
+                                        <td class="tableTdInputs_small" style="text-align: left; ">
+                                            <div ng-show="editMode && !cuentaBancaria.isDeleted">
+                                                <div>
+                                                    <select name="banco"
+                                                            class="form-control input-sm tableInputs_xsmall"
+                                                            ng-model="cuentaBancaria.banco"
+                                                            ng-change="setIsEdited(cuentaBancaria)"
+                                                            ng-options="banco.id as banco.nombre for banco in bancos | orderBy : 'nombre'"
+                                                            ng-model-options="{ updateOn: 'blur' }"
+                                                            required />
+
+                                                    <span class="validation-message"
+                                                          ng-show="submitted && innerTableForm.banco.$error.required">
+                                                        Indique un valor.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span ng-show="!editMode || (editMode && cuentaBancaria.isDeleted)">
+                                                {{ mostrarNombreBanco(cuentaBancaria.banco) }}
+                                            </span>
+                                        </td>
+
+                                        <!--  tipo  -->
+
+                                        <td class="tableTdInputs_small" style="text-align: left; ">
+                                            <div ng-show="editMode && !cuentaBancaria.isDeleted">
+                                                <div>
+                                                    <select name="tipo"
+                                                            class="form-control input-sm tableInputs_xsmall"
+                                                            ng-model="cuentaBancaria.tipo"
+                                                            ng-change="setIsEdited(cuentaBancaria)"
+                                                            ng-options="item.tipo as item.descripcion for item in tiposCuentasBancaria"
+                                                            ng-model-options="{ updateOn: 'blur' }"
+                                                            required></select>
+
+                                                    <span class="validation-message"
+                                                          ng-show="submitted && innerTableForm.tipo.$error.required">
+                                                        Indique un valor.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span ng-show="!editMode || (editMode && cuentaBancaria.isDeleted)">
+                                                {{  mostrarDescripcionTipo(cuentaBancaria.tipo) }}
+                                            </span>
+                                        </td>
+
+                                        <!--  default  -->
+
+                                        <td class="tableTdInputs_small" style="text-align: center; ">
+                                            <div ng-show="editMode && !cuentaBancaria.isDeleted">
+                                                <div class="checkbox tableRadiosChecks">
+                                                    <input type="checkbox"
+                                                           name="default"
+                                                           ng-model="cuentaBancaria.isDefault"
+                                                           ng-change="setIsEdited(cuentaBancaria)" />
+                                                </div>
+                                            </div>
+                                            <span ng-show="!editMode || (editMode && cuentaBancaria.isDeleted)">
+                                                <input type="checkbox" ng-model="cuentaBancaria.isDefault" ng-disabled="true" />
+                                            </span>
+                                        </td>
+
+                                        <!--  delete row   -->
+
+                                        <td style="text-align: center; " class="tableTdInputs_small">
+                                            <span ng-click="deleteItem(cuentaBancaria)" class="fa fa-times" style="color: #A5999C"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            @*<button class="btn btn-primary" ng-click="ok()">OK</button>*@
+            <button class="btn btn-warning" ng-click="cancel()">Cerrar</button>
+        </div>
+    </script>
+
+
+</div>
+
+<script src="~/Scripts/code/bancos/companias.js"></script>

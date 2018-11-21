@@ -1,0 +1,35 @@
+﻿
+/* fieldset: básicamente, para revertir el fieldset a su diseño original (en vez de bootstrap) */
+fieldset.scheduler-border {
+    border: 1px groove #BEE0F3 !important;
+    padding: 0 1.4em 0.5em 1.4em !important;
+    margin: 0.5em 0 1.5em 0 !important;
+    -webkit-box-shadow: 0 0 0 0 #000;
+    box-shadow: 0 0 0 0 #000;
+}
+
+legend.scheduler-border {
+    font-size: small !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    margin-bottom: 5px;
+    border-bottom: none;
+}
+
+legend.scheduler-border-xsm {
+    font-size: x-small !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    margin-bottom: 5px;
+    border-bottom: none;
+}
+
+radioStyle {
+    font-size: 14px;
+    font-weight: normal !important;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}

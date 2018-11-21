@@ -1,0 +1,284 @@
+﻿
+/* para agregar algunos cambios, muy menores al style en tables en bootstrap */
+
+.myJumbotron {  
+	background-image: linear-gradient(to right, #E2E4E4, #8B9896); 
+    /*background-image: linear-gradient(to right, #F3F4F4, #A9B2B1);*/ 
+    /*background-image: url('/Pictures/logo_cia_usuaria.png');*/ 
+	/*color:white;*/ 
+	/*background-attachment: fixed;*/ 
+	/*min-height:400px;*/ 
+	/*margin-top: 0;*/ 
+	/*margin-bottom: 8px;*/ 
+} 
+
+.table {
+     font-size: x-small;
+}
+
+.table th {
+    /*background-color: #B9C9FE;
+    color: white;*/
+    color: #F7F7F7 !important;
+    background-color: #428BCA !important;
+    font-weight: bold !important;
+    border: 1px solid #BBB !important;
+}
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: #eeeeea;
+}
+
+.table>tbody>tr>td {
+    vertical-align: middle; 
+}
+
+
+/* para centrar el contenido de divs en Bootstrap */
+
+.center {
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+
+/* nótese como agregos algunos styles, para mejorar el footer (tomado de bootstrap) */
+
+/*body {
+     Margin bottom by footer height 
+    margin-bottom: 60px;
+}*/
+
+body {
+    padding-top: 70px;              /* the navbar (fixed-top) hides part of the body; this is a solutions proposed by bootstrap */
+    margin-bottom: 60px;            /* Margin bottom by footer height */
+}
+
+#footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+nav {
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
+
+/* para mejorar el dl (definition list: lista con términos y definiciones) pues bs lo justifica a la derecha y no queremos ésto */
+
+.dl-horizontal dt {
+    text-align: left;
+    /*margin-bottom: 1em;*/
+    width: auto;
+    padding-right: 1em;
+}
+
+.dl-horizontal dd {
+    margin-left: 0;
+    /*margin-bottom: 1em;*/
+}
+
+/*.modal-header {
+    background-color: #428BCA;
+}*/
+
+.modal-header {
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #0480be;
+    color: white; 
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+ }
+
+
+/* para hacer el modal (bootstrap y en angular) más ancho y alto */
+.bootStrapModalHigherWider {
+    /*width:970px;*/
+    /*margin-top:-250px;*/
+}
+
+.pagination a {
+    font-size: x-small; 
+}
+
+/* para controlar el gap (vertical) entre rows en bootstrap */
+
+.verticalOffset  { margin-top: 2px; }
+.verticalOffset1 { margin-top: 5px; }
+.verticalOffset2 { margin-top: 10px; }
+.verticalOffset3 { margin-top: 15px; }
+.verticalOffset4 { margin-top: 30px; }
+.verticalOffset5 { margin-top: 40px; }
+.verticalOffset6 { margin-top: 60px; }
+.verticalOffset7 { margin-top: 80px; }
+.verticalOffset8 { margin-top: 100px; }
+.verticalOffset9 { margin-top: 150px; }
+
+
+
+/* para hacer el navbar en bootstrap m�s peque�o; por ejemplo, para usarlo como toolbar en jquery modals ... */
+
+.navbar_custom_small {
+  width: 95%;
+  font-size: small;
+  height: 30px;
+  min-height: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 5px;
+}
+
+.navbar_custom_small_fullWidth {
+  width: 100%;
+  font-size: small;
+  height: 30px;
+  min-height: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 5px;
+}
+
+.navbar_custom_small_toolBar {
+  width: 100%;
+  font-size: small;
+  height: 30px;
+  min-height: 30px;
+  margin-top: 10px;
+  padding-left: 0;
+  padding-right: 5px;
+  margin-bottom: 3px;
+}
+
+nav ul li a.navbar_custom_small_header {
+  font-size: small;
+  font-style: italic;
+  font-weight: bold;
+  color: #E17009 !important;
+  height: 30px;
+  min-height: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+nav ul li a.navbar_custom_small_node {
+  font-size: small;
+  padding: 5px;
+}
+
+nav ul li ul li a.navbar_custom_small_node {
+  padding: 5px;
+  font-size: small;
+}
+
+nav ul li a.navbar_custom_xsmall_node {
+  font-size: 12px;
+  padding: 5px;
+}
+
+nav ul li ul li a.navbar_custom_xsmall_node {
+  padding: 5px;
+  font-size: 12px;
+}
+
+nav ul li a:hover.navbar_custom_small_node {
+  color: #428BCA !important;
+  font-style: italic;
+}
+
+nav ul li a:hover.navbar_custom_xsmall_node {
+  color: #428BCA !important;
+  background-color: #E0E0E0 !important;
+  font-style: italic;
+}
+
+nav ul li a.navbar_custom_small_node_withBackground {
+  padding: 5px;
+}
+
+nav ul li a:hover.navbar_custom_small_node_withBackground {
+  color: #428BCA !important;
+  background-color: #E0E0E0 !important;
+  font-style: italic;
+}
+
+.navbar-nopaddingleft {
+  padding-left: 0;
+}
+
+
+/*para controlar algunos aspectos del estilo cuando los inputs están en rows center una tabla*/ 
+
+.tableInputs {
+    padding: 1px 5px; 
+    height: 26px; 
+    font-size: x-small; 
+}
+
+.tableInputs_small {
+    padding: 2px 10px;
+    font-size: small;
+    height: 24px;
+}
+
+
+.tableInputs_xsmall { 
+    padding: 2px 10px;
+    font-size: x-small;
+    height: 24px !important;
+}
+
+.tableRadiosChecks { 
+    margin-top: 0; 
+    margin-bottom: 0; 
+}
+
+table .radio input[type=radio], 
+table .radio-inline input[type=radio], 
+table .checkbox input[type=checkbox], 
+table .checkbox-inline input[type=checkbox] { 
+    margin: 0; 
+}
+
+/* to add the posibility of sub-menues in navbar */ 
+.marginBottom-0 {margin-bottom:0;}
+
+.dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+.dropdown-submenu:hover>a:after{border-left-color:#555;}
+.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+
+
+.myinput-sm {
+    font-size: small; 
+}
+
+.input-label { 
+    font-size: small !important;
+    font-weight: bold !important;
+}
+
+.textarea-label { 
+    text-align: left; 
+    margin-left: 10px; 
+    font-size: small;
+    font-weight: bold;
+}
+
+textarea.wide-textarea { 
+    width: 100% !important;
+    /*min-width: 300px;*/ 
+}
+

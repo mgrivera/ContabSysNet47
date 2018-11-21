@@ -1,0 +1,102 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.validation-message { 
+    color: red; 
+}
+
+/*  para controlar el font jquery ui tabs  */ 
+.ui-tabs .ui-tabs-nav li a {font-size:8pt !important;}
+
+/*  ui-grid: para controlar el style en el angular  */
+.angularGrid {
+    width: 95%;
+    height: auto;
+    font-size: x-small; 
+  }
+
+.angularGridWide {
+    width: 95%;
+    height: auto;
+    font-size: x-small; 
+  }
+
+.angularGridOneRow {
+    width: 95%;
+    height: 70px;
+    font-size: x-small; 
+  }
+
+/*  ui-grid: para justificar el texto en las celdas  */
+.ui-grid-centerCell { 
+    text-align: center; 
+}
+
+.ui-grid-rightCell { 
+    text-align: right; 
+}
+
+/*  ui-grid: para mejorar el style del botón usado para accedeer al menú en el grid (???)  */
+.my-custom-menu {
+  position: absolute;
+}
+ 
+.my-custom-menu .ui-grid-menu {
+  padding: 0;
+}
+ 
+.my-custom-menu .ui-grid-menu-inner {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ui-grid-menu-button {
+  height: 31px;
+}
+
+.ui-gridHeader { 
+    background-color: #F7F7F7; 
+    border: 1px solid #D4D4D4; 
+    color: #3B3B3B; 
+    padding: 5px 10px; 
+}

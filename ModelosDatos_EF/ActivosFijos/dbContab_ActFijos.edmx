@@ -1,0 +1,1471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbContabRiskModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="dbContabRiskModelStoreContainer">
+          <EntitySet Name="Atributos" EntityType="dbContabRiskModel.Store.Atributos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AtributosAsignados" EntityType="dbContabRiskModel.Store.AtributosAsignados" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Companias" EntityType="dbContabRiskModel.Store.Companias" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="InventarioActivosFijos" EntityType="dbContabRiskModel.Store.InventarioActivosFijos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="InventarioActivosFijos_AntesReconversionMonetaria" EntityType="dbContabRiskModel.Store.InventarioActivosFijos_AntesReconversionMonetaria" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MesesDelAnoFiscal" EntityType="dbContabRiskModel.Store.MesesDelAnoFiscal" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Proveedores" EntityType="dbContabRiskModel.Store.Proveedores" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tDepartamentos" EntityType="dbContabRiskModel.Store.tDepartamentos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tEmpleados" EntityType="dbContabRiskModel.Store.tEmpleados" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TiposDeProducto" EntityType="dbContabRiskModel.Store.TiposDeProducto" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TiposProveedor" EntityType="dbContabRiskModel.Store.TiposProveedor" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tTempActivosFijos_ConsultaDepreciacion" EntityType="dbContabRiskModel.Store.tTempActivosFijos_ConsultaDepreciacion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tTempActivosFijos_DepreciacionMensual" EntityType="dbContabRiskModel.Store.tTempActivosFijos_DepreciacionMensual" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="vtTempActivosFijos_ConsultaDepreciacion" EntityType="dbContabRiskModel.Store.vtTempActivosFijos_ConsultaDepreciacion" store:Type="Views" store:Schema="dbo" store:Name="vtTempActivosFijos_ConsultaDepreciacion">
+            <DefiningQuery>SELECT 
+      [vtTempActivosFijos_ConsultaDepreciacion].[NombreCiaContab] AS [NombreCiaContab], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[AbreviaturaCiaContab] AS [AbreviaturaCiaContab], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[NombreDepartamento] AS [NombreDepartamento], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[NombreTipoProducto] AS [NombreTipoProducto], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[Producto] AS [Producto], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DescripcionProducto] AS [DescripcionProducto], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[FechaCompra] AS [FechaCompra], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[FechaDesincorporacion] AS [FechaDesincorporacion], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepreciarDesde] AS [DepreciarDesde], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepreciarDesdeMes] AS [DepreciarDesdeMes], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepreciarDesdeAno] AS [DepreciarDesdeAno], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepreciarHasta] AS [DepreciarHasta], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepreciarHastaMes] AS [DepreciarHastaMes], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepreciarHastaAno] AS [DepreciarHastaAno], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[CantidadMesesADepreciar] AS [CantidadMesesADepreciar], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepAcum_CantMeses] AS [DepAcum_CantMeses], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepAcum_CantMeses_AnoActual] AS [DepAcum_CantMeses_AnoActual], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[RestaPorDepreciar_Meses] AS [RestaPorDepreciar_Meses], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[CostoTotal] AS [CostoTotal], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[MontoADepreciar] AS [MontoADepreciar], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepreciacionMensual] AS [DepreciacionMensual], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepAcum_AnoActual] AS [DepAcum_AnoActual], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[DepAcum_Total] AS [DepAcum_Total], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[RestaPorDepreciar] AS [RestaPorDepreciar], 
+      [vtTempActivosFijos_ConsultaDepreciacion].[NombreUsuario] AS [NombreUsuario]
+      FROM [dbo].[vtTempActivosFijos_ConsultaDepreciacion] AS [vtTempActivosFijos_ConsultaDepreciacion]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AtributosAsignados_Atributos" Association="dbContabRiskModel.Store.FK_AtributosAsignados_Atributos">
+            <End Role="Atributos" EntitySet="Atributos" />
+            <End Role="AtributosAsignados" EntitySet="AtributosAsignados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AtributosAsignados_InventarioActivosFijos" Association="dbContabRiskModel.Store.FK_AtributosAsignados_InventarioActivosFijos">
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+            <End Role="AtributosAsignados" EntitySet="AtributosAsignados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos" Association="dbContabRiskModel.Store.FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos">
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+            <End Role="InventarioActivosFijos_AntesReconversionMonetaria" EntitySet="InventarioActivosFijos_AntesReconversionMonetaria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioActivosFijos_Companias" Association="dbContabRiskModel.Store.FK_InventarioActivosFijos_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioActivosFijos_Proveedores" Association="dbContabRiskModel.Store.FK_InventarioActivosFijos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioActivosFijos_tDepartamentos" Association="dbContabRiskModel.Store.FK_InventarioActivosFijos_tDepartamentos">
+            <End Role="tDepartamentos" EntitySet="tDepartamentos" />
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioActivosFijos_tEmpleados" Association="dbContabRiskModel.Store.FK_InventarioActivosFijos_tEmpleados">
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioActivosFijos_TiposDeProducto" Association="dbContabRiskModel.Store.FK_InventarioActivosFijos_TiposDeProducto">
+            <End Role="TiposDeProducto" EntitySet="TiposDeProducto" />
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MesesDelAnoFiscal_Companias" Association="dbContabRiskModel.Store.FK_MesesDelAnoFiscal_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="MesesDelAnoFiscal" EntitySet="MesesDelAnoFiscal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_TiposProveedor" Association="dbContabRiskModel.Store.FK_Proveedores_TiposProveedor">
+            <End Role="TiposProveedor" EntitySet="TiposProveedor" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmpleados_Companias" Association="dbContabRiskModel.Store.FK_tEmpleados_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmpleados_tDepartamentos" Association="dbContabRiskModel.Store.FK_tEmpleados_tDepartamentos">
+            <End Role="tDepartamentos" EntitySet="tDepartamentos" />
+            <End Role="tEmpleados" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos" Association="dbContabRiskModel.Store.FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos">
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+            <End Role="tTempActivosFijos_ConsultaDepreciacion" EntitySet="tTempActivosFijos_ConsultaDepreciacion" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Atributos">
+          <Key>
+            <PropertyRef Name="Atributo" />
+          </Key>
+          <Property Name="Atributo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Origen" Type="nvarchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="AtributosAsignados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AtributoID" Type="int" Nullable="false" />
+          <Property Name="ActivoFijoID" Type="int" />
+        </EntityType>
+        <EntityType Name="Companias">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Numero" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NombreCorto" Type="nvarchar" Nullable="false" MaxLength="25" />
+          <Property Name="Abreviatura" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="Rif" Type="nvarchar" MaxLength="12" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="150" />
+          <Property Name="Ciudad" Type="nvarchar" MaxLength="25" />
+          <Property Name="EntidadFederal" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZonaPostal" Type="nvarchar" MaxLength="15" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="14" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="14" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="14" />
+          <Property Name="EmailServerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailServerPort" Type="int" />
+          <Property Name="EmailServerSSLFlag" Type="bit" />
+          <Property Name="EmailServerCredentialsUserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailServerCredentialsPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="MonedaDefecto" Type="int" />
+        </EntityType>
+        <EntityType Name="InventarioActivosFijos">
+          <Key>
+            <PropertyRef Name="ClaveUnica" />
+          </Key>
+          <Property Name="ClaveUnica" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Producto" Type="nvarchar" MaxLength="15" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="Departamento" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="CompradoA" Type="nvarchar" MaxLength="255" />
+          <Property Name="Proveedor" Type="int" />
+          <Property Name="Serial" Type="nvarchar" MaxLength="255" />
+          <Property Name="Modelo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Placa" Type="nvarchar" MaxLength="255" />
+          <Property Name="Factura" Type="nvarchar" MaxLength="255" />
+          <Property Name="FechaCompra" Type="date" Nullable="false" />
+          <Property Name="CostoTotal" Type="money" Nullable="false" />
+          <Property Name="ValorResidual" Type="money" Nullable="false" />
+          <Property Name="MontoADepreciar" Type="money" Nullable="false" />
+          <Property Name="NumeroDeAnos" Type="decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="FechaDesincorporacion" Type="date" />
+          <Property Name="DesincorporadoFlag" Type="bit" />
+          <Property Name="AutorizadoPor" Type="int" />
+          <Property Name="MotivoDesincorporacion" Type="ntext" />
+          <Property Name="DepreciarDesdeMes" Type="smallint" Nullable="false" />
+          <Property Name="DepreciarDesdeAno" Type="smallint" Nullable="false" />
+          <Property Name="DepreciarHastaMes" Type="smallint" Nullable="false" />
+          <Property Name="DepreciarHastaAno" Type="smallint" Nullable="false" />
+          <Property Name="CantidadMesesADepreciar" Type="smallint" Nullable="false" />
+          <Property Name="MontoDepreciacionMensual" Type="money" Nullable="false" />
+          <Property Name="Ingreso" Type="datetime2" Nullable="false" />
+          <Property Name="UltAct" Type="datetime2" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="25" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InventarioActivosFijos_AntesReconversionMonetaria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActivoFijo_ID" Type="int" Nullable="false" />
+          <Property Name="CostoTotal" Type="money" Nullable="false" />
+          <Property Name="ValorResidual" Type="money" Nullable="false" />
+          <Property Name="MontoADepreciar" Type="money" Nullable="false" />
+          <Property Name="MontoDepreciacionMensual" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MesesDelAnoFiscal">
+          <Key>
+            <PropertyRef Name="ClaveUnica" />
+          </Key>
+          <Property Name="ClaveUnica" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MesFiscal" Type="smallint" Nullable="false" />
+          <Property Name="Mes" Type="smallint" Nullable="false" />
+          <Property Name="NombreMes" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Ano" Type="smallint" Nullable="false" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="Proveedor" />
+          </Key>
+          <Property Name="Proveedor" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="70" />
+          <Property Name="Abreviatura" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="Rif" Type="nvarchar" MaxLength="20" />
+          <Property Name="NatJurFlag" Type="smallint" Nullable="false" />
+          <Property Name="Nit" Type="nvarchar" MaxLength="20" />
+          <Property Name="ContribuyenteEspecialFlag" Type="bit" />
+          <Property Name="RetencionSobreIvaPorc" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="NuestraRetencionSobreIvaPorc" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="AfectaLibroComprasFlag" Type="bit" />
+          <Property Name="Beneficiario" Type="nvarchar" MaxLength="50" />
+          <Property Name="Concepto" Type="nvarchar" MaxLength="250" />
+          <Property Name="MontoCheque" Type="money" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="255" />
+          <Property Name="Ciudad" Type="nvarchar" MaxLength="6" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="14" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="14" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="14" />
+          <Property Name="Contacto1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contacto2" Type="nvarchar" MaxLength="50" />
+          <Property Name="NacionalExtranjeroFlag" Type="smallint" />
+          <Property Name="SujetoARetencionFlag" Type="bit" />
+          <Property Name="CodigoConceptoRetencion" Type="nvarchar" MaxLength="6" />
+          <Property Name="RetencionISLRSustraendo" Type="money" />
+          <Property Name="BaseRetencionISLR" Type="smallint" />
+          <Property Name="MonedaDefault" Type="int" />
+          <Property Name="FormaDePagoDefault" Type="int" />
+          <Property Name="ProveedorClienteFlag" Type="smallint" />
+          <Property Name="PorcentajeDeRetencion" Type="real" />
+          <Property Name="AplicaIvaFlag" Type="bit" />
+          <Property Name="CategoriaProveedor" Type="int" />
+          <Property Name="MontoChequeEnMonExtFlag" Type="bit" />
+          <Property Name="Ingreso" Type="datetime2" Nullable="false" />
+          <Property Name="UltAct" Type="datetime2" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tDepartamentos">
+          <Key>
+            <PropertyRef Name="Departamento" />
+          </Key>
+          <Property Name="Departamento" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tEmpleados">
+          <Key>
+            <PropertyRef Name="Empleado" />
+          </Key>
+          <Property Name="Empleado" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="nvarchar" Nullable="false" MaxLength="12" />
+          <Property Name="Alias" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="Rif" Type="nvarchar" MaxLength="20" />
+          <Property Name="TipoNomina" Type="smallint" Nullable="false" />
+          <Property Name="EscribirArchivoXMLRetencionesISLR" Type="bit" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="EdoCivil" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Sexo" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="Nacionalidad" Type="nvarchar" Nullable="false" MaxLength="1" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="CiudadOrigen" Type="nvarchar" MaxLength="6" />
+          <Property Name="DireccionHabitacion" Type="ntext" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="25" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="25" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="SituacionActual" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Departamento" Type="int" Nullable="false" />
+          <Property Name="Cargo" Type="int" Nullable="false" />
+          <Property Name="FechaIngreso" Type="date" Nullable="false" />
+          <Property Name="FechaRetiro" Type="date" />
+          <Property Name="BancoDepositosNomina" Type="int" />
+          <Property Name="TipoCuentaDepositosNomina" Type="int" />
+          <Property Name="CuentaBancariaDepositosNomina" Type="nvarchar" MaxLength="30" />
+          <Property Name="BancoCuentaPrestacionesSociales" Type="int" />
+          <Property Name="NumeroCuentaBancariaPrestacionesSociales" Type="nvarchar" MaxLength="30" />
+          <Property Name="Contacto1" Type="nvarchar" MaxLength="250" />
+          <Property Name="Parentesco1" Type="int" />
+          <Property Name="TelefonoCon1" Type="nvarchar" MaxLength="25" />
+          <Property Name="Contacto2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Parentesco2" Type="int" />
+          <Property Name="TelefonoCon2" Type="nvarchar" MaxLength="25" />
+          <Property Name="Contacto3" Type="nvarchar" MaxLength="250" />
+          <Property Name="Parentesco3" Type="int" />
+          <Property Name="TelefonoCon3" Type="nvarchar" MaxLength="25" />
+          <Property Name="EmpleadoObreroFlag" Type="smallint" />
+          <Property Name="MontoCestaTickets" Type="money" />
+          <Property Name="BonoVacAgregarSueldoFlag" Type="bit" />
+          <Property Name="BonoVacAgregarMontoCestaTicketsFlag" Type="bit" />
+          <Property Name="BonoVacacionalMontoAdicional" Type="money" />
+          <Property Name="BonoVacAgregarMontoAdicionalFlag" Type="bit" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TiposDeProducto">
+          <Key>
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Tipo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="TiposProveedor">
+          <Key>
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Tipo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tTempActivosFijos_ConsultaDepreciacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActivoFijoID" Type="int" Nullable="false" />
+          <Property Name="CantidadMesesADepreciar" Type="smallint" Nullable="false" />
+          <Property Name="MontoADepreciar" Type="money" Nullable="false" />
+          <Property Name="DepreciarHastaMes" Type="smallint" Nullable="false" />
+          <Property Name="DepreciarHastaAno" Type="smallint" Nullable="false" />
+          <Property Name="DepreciacionMensual" Type="money" Nullable="false" />
+          <Property Name="DepAcum_CantMeses" Type="smallint" Nullable="false" />
+          <Property Name="DepAcum_CantMeses_AnoActual" Type="smallint" Nullable="false" />
+          <Property Name="DepAcum_Total" Type="money" Nullable="false" />
+          <Property Name="DepAcum_AnoActual" Type="money" Nullable="false" />
+          <Property Name="NombreUsuario" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="tTempActivosFijos_DepreciacionMensual">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+          <Property Name="Departamento" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="Producto" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="FechaCompra" Type="date" Nullable="false" />
+          <Property Name="Proveedor" Type="int" />
+          <Property Name="MontoADepreciar" Type="money" Nullable="false" />
+          <Property Name="VidaUtil_Anos" Type="decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="MontoDepreciacionMensual" Type="money" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'dbContabGeh.dbo.vtTempActivosFijos_ConsultaDepreciacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vtTempActivosFijos_ConsultaDepreciacion">
+          <Key>
+            <PropertyRef Name="NombreCiaContab" />
+            <PropertyRef Name="AbreviaturaCiaContab" />
+            <PropertyRef Name="FechaCompra" />
+            <PropertyRef Name="DepreciarDesdeMes" />
+            <PropertyRef Name="DepreciarDesdeAno" />
+            <PropertyRef Name="DepreciarHastaMes" />
+            <PropertyRef Name="DepreciarHastaAno" />
+            <PropertyRef Name="CantidadMesesADepreciar" />
+            <PropertyRef Name="DepAcum_CantMeses" />
+            <PropertyRef Name="DepAcum_CantMeses_AnoActual" />
+            <PropertyRef Name="CostoTotal" />
+            <PropertyRef Name="MontoADepreciar" />
+            <PropertyRef Name="DepreciacionMensual" />
+            <PropertyRef Name="DepAcum_AnoActual" />
+            <PropertyRef Name="DepAcum_Total" />
+            <PropertyRef Name="NombreUsuario" />
+            <PropertyRef Name="Producto" />
+            <PropertyRef Name="DescripcionProducto" />
+          </Key>
+          <Property Name="NombreCiaContab" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AbreviaturaCiaContab" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="NombreDepartamento" Type="nvarchar" MaxLength="30" />
+          <Property Name="NombreTipoProducto" Type="nvarchar" MaxLength="30" />
+          <Property Name="Producto" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="DescripcionProducto" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FechaCompra" Type="date" Nullable="false" />
+          <Property Name="FechaDesincorporacion" Type="date" />
+          <Property Name="DepreciarDesde" Type="nvarchar" MaxLength="33" />
+          <Property Name="DepreciarDesdeMes" Type="smallint" Nullable="false" />
+          <Property Name="DepreciarDesdeAno" Type="smallint" Nullable="false" />
+          <Property Name="DepreciarHasta" Type="nvarchar" MaxLength="33" />
+          <Property Name="DepreciarHastaMes" Type="smallint" Nullable="false" />
+          <Property Name="DepreciarHastaAno" Type="smallint" Nullable="false" />
+          <Property Name="CantidadMesesADepreciar" Type="smallint" Nullable="false" />
+          <Property Name="DepAcum_CantMeses" Type="smallint" Nullable="false" />
+          <Property Name="DepAcum_CantMeses_AnoActual" Type="smallint" Nullable="false" />
+          <Property Name="RestaPorDepreciar_Meses" Type="smallint" />
+          <Property Name="CostoTotal" Type="money" Nullable="false" />
+          <Property Name="MontoADepreciar" Type="money" Nullable="false" />
+          <Property Name="DepreciacionMensual" Type="money" Nullable="false" />
+          <Property Name="DepAcum_AnoActual" Type="money" Nullable="false" />
+          <Property Name="DepAcum_Total" Type="money" Nullable="false" />
+          <Property Name="RestaPorDepreciar" Type="money" />
+          <Property Name="NombreUsuario" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <Association Name="FK_AtributosAsignados_Atributos">
+          <End Role="Atributos" Type="dbContabRiskModel.Store.Atributos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AtributosAsignados" Type="dbContabRiskModel.Store.AtributosAsignados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Atributos">
+              <PropertyRef Name="Atributo" />
+            </Principal>
+            <Dependent Role="AtributosAsignados">
+              <PropertyRef Name="AtributoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AtributosAsignados_InventarioActivosFijos">
+          <End Role="InventarioActivosFijos" Type="dbContabRiskModel.Store.InventarioActivosFijos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AtributosAsignados" Type="dbContabRiskModel.Store.AtributosAsignados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioActivosFijos">
+              <PropertyRef Name="ClaveUnica" />
+            </Principal>
+            <Dependent Role="AtributosAsignados">
+              <PropertyRef Name="ActivoFijoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos">
+          <End Role="InventarioActivosFijos" Type="dbContabRiskModel.Store.InventarioActivosFijos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InventarioActivosFijos_AntesReconversionMonetaria" Type="dbContabRiskModel.Store.InventarioActivosFijos_AntesReconversionMonetaria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioActivosFijos">
+              <PropertyRef Name="ClaveUnica" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos_AntesReconversionMonetaria">
+              <PropertyRef Name="ActivoFijo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioActivosFijos_Companias">
+          <End Role="Companias" Type="dbContabRiskModel.Store.Companias" Multiplicity="1" />
+          <End Role="InventarioActivosFijos" Type="dbContabRiskModel.Store.InventarioActivosFijos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioActivosFijos_Proveedores">
+          <End Role="Proveedores" Type="dbContabRiskModel.Store.Proveedores" Multiplicity="0..1" />
+          <End Role="InventarioActivosFijos" Type="dbContabRiskModel.Store.InventarioActivosFijos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Proveedor" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos">
+              <PropertyRef Name="Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioActivosFijos_tDepartamentos">
+          <End Role="tDepartamentos" Type="dbContabRiskModel.Store.tDepartamentos" Multiplicity="1" />
+          <End Role="InventarioActivosFijos" Type="dbContabRiskModel.Store.InventarioActivosFijos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartamentos">
+              <PropertyRef Name="Departamento" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos">
+              <PropertyRef Name="Departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioActivosFijos_tEmpleados">
+          <End Role="tEmpleados" Type="dbContabRiskModel.Store.tEmpleados" Multiplicity="0..1" />
+          <End Role="InventarioActivosFijos" Type="dbContabRiskModel.Store.InventarioActivosFijos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleados">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos">
+              <PropertyRef Name="AutorizadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioActivosFijos_TiposDeProducto">
+          <End Role="TiposDeProducto" Type="dbContabRiskModel.Store.TiposDeProducto" Multiplicity="1" />
+          <End Role="InventarioActivosFijos" Type="dbContabRiskModel.Store.InventarioActivosFijos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDeProducto">
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MesesDelAnoFiscal_Companias">
+          <End Role="Companias" Type="dbContabRiskModel.Store.Companias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MesesDelAnoFiscal" Type="dbContabRiskModel.Store.MesesDelAnoFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="MesesDelAnoFiscal">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_TiposProveedor">
+          <End Role="TiposProveedor" Type="dbContabRiskModel.Store.TiposProveedor" Multiplicity="1" />
+          <End Role="Proveedores" Type="dbContabRiskModel.Store.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposProveedor">
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmpleados_Companias">
+          <End Role="Companias" Type="dbContabRiskModel.Store.Companias" Multiplicity="1" />
+          <End Role="tEmpleados" Type="dbContabRiskModel.Store.tEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tEmpleados">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmpleados_tDepartamentos">
+          <End Role="tDepartamentos" Type="dbContabRiskModel.Store.tDepartamentos" Multiplicity="1" />
+          <End Role="tEmpleados" Type="dbContabRiskModel.Store.tEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartamentos">
+              <PropertyRef Name="Departamento" />
+            </Principal>
+            <Dependent Role="tEmpleados">
+              <PropertyRef Name="Departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos">
+          <End Role="InventarioActivosFijos" Type="dbContabRiskModel.Store.InventarioActivosFijos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tTempActivosFijos_ConsultaDepreciacion" Type="dbContabRiskModel.Store.tTempActivosFijos_ConsultaDepreciacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioActivosFijos">
+              <PropertyRef Name="ClaveUnica" />
+            </Principal>
+            <Dependent Role="tTempActivosFijos_ConsultaDepreciacion">
+              <PropertyRef Name="ActivoFijoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbContab_ActFijos_NS" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbContab_ActFijos_Entities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="Companias" EntityType="dbContab_ActFijos_NS.Compania" />
+          <EntitySet Name="InventarioActivosFijos" EntityType="dbContab_ActFijos_NS.InventarioActivosFijo" />
+          <EntitySet Name="Proveedores" EntityType="dbContab_ActFijos_NS.Proveedore" />
+          <EntitySet Name="TiposDeProductoes" EntityType="dbContab_ActFijos_NS.TiposDeProducto" />
+          <EntitySet Name="TiposProveedors" EntityType="dbContab_ActFijos_NS.TiposProveedor" />
+          <EntitySet Name="tTempActivosFijos_DepreciacionMensual" EntityType="dbContab_ActFijos_NS.tTempActivosFijos_DepreciacionMensual" />
+          <AssociationSet Name="FK_InventarioActivosFijos_Companias" Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioActivosFijos_Proveedores" Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioActivosFijos_TiposDeProducto" Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto">
+            <End Role="TiposDeProducto" EntitySet="TiposDeProductoes" />
+            <End Role="InventarioActivosFijos" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_TiposProveedor" Association="dbContab_ActFijos_NS.FK_Proveedores_TiposProveedor">
+            <End Role="TiposProveedor" EntitySet="TiposProveedors" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <EntitySet Name="AtributosAsignados" EntityType="dbContab_ActFijos_NS.AtributosAsignado" />
+          <AssociationSet Name="FK_AtributosAsignados_InventarioActivosFijos" Association="dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos">
+            <End Role="InventarioActivosFijo" EntitySet="InventarioActivosFijos" />
+            <End Role="AtributosAsignado" EntitySet="AtributosAsignados" />
+          </AssociationSet>
+          <EntitySet Name="tDepartamentos" EntityType="dbContab_ActFijos_NS.tDepartamento" />
+          <AssociationSet Name="FK_InventarioActivosFijos_tDepartamentos" Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_tDepartamentos">
+            <End Role="tDepartamento" EntitySet="tDepartamentos" />
+            <End Role="InventarioActivosFijo" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <EntitySet Name="Atributos" EntityType="dbContab_ActFijos_NS.Atributo" />
+          <AssociationSet Name="FK_AtributosAsignados_Atributos" Association="dbContab_ActFijos_NS.FK_AtributosAsignados_Atributos">
+            <End Role="Atributo" EntitySet="Atributos" />
+            <End Role="AtributosAsignado" EntitySet="AtributosAsignados" />
+          </AssociationSet>
+          <EntitySet Name="InventarioActivosFijos_AntesReconversionMonetaria" EntityType="dbContab_ActFijos_NS.InventarioActivosFijos_AntesReconversionMonetaria" />
+          <AssociationSet Name="FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos" Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos">
+            <End Role="InventarioActivosFijo" EntitySet="InventarioActivosFijos" />
+            <End Role="InventarioActivosFijos_AntesReconversionMonetaria" EntitySet="InventarioActivosFijos_AntesReconversionMonetaria" />
+          </AssociationSet>
+          <EntitySet Name="vtTempActivosFijos_ConsultaDepreciacion" EntityType="dbContab_ActFijos_NS.vtTempActivosFijos_ConsultaDepreciacion" />
+          <EntitySet Name="tTempActivosFijos_ConsultaDepreciacion" EntityType="dbContab_ActFijos_NS.tTempActivosFijos_ConsultaDepreciacion" />
+          <AssociationSet Name="FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos" Association="dbContab_ActFijos_NS.FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos">
+            <End Role="InventarioActivosFijo" EntitySet="InventarioActivosFijos" />
+            <End Role="tTempActivosFijos_ConsultaDepreciacion" EntitySet="tTempActivosFijos_ConsultaDepreciacion" />
+          </AssociationSet>
+          <EntitySet Name="tEmpleados" EntityType="dbContab_ActFijos_NS.tEmpleado" />
+          <AssociationSet Name="FK_tEmpleados_Companias" Association="dbContab_ActFijos_NS.FK_tEmpleados_Companias">
+            <End Role="Compania" EntitySet="Companias" />
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioActivosFijos_tEmpleados" Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados">
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+            <End Role="InventarioActivosFijo" EntitySet="InventarioActivosFijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmpleados_tDepartamentos" Association="dbContab_ActFijos_NS.FK_tEmpleados_tDepartamentos">
+            <End Role="tDepartamento" EntitySet="tDepartamentos" />
+            <End Role="tEmpleado" EntitySet="tEmpleados" />
+          </AssociationSet>
+          <EntitySet Name="MesesDelAnoFiscals" EntityType="dbContab_ActFijos_NS.MesesDelAnoFiscal" />
+          <AssociationSet Name="FK_MesesDelAnoFiscal_Companias" Association="dbContab_ActFijos_NS.FK_MesesDelAnoFiscal_Companias">
+            <End Role="Compania" EntitySet="Companias" />
+            <End Role="MesesDelAnoFiscal" EntitySet="MesesDelAnoFiscals" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Compania">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Numero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NombreCorto" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="Abreviatura" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="false" />
+          <Property Name="Rif" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
+          <Property Name="Direccion" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="EntidadFederal" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ZonaPostal" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono1" Type="String" MaxLength="14" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono2" Type="String" MaxLength="14" Unicode="true" FixedLength="false" />
+          <Property Name="Fax" Type="String" MaxLength="14" Unicode="true" FixedLength="false" />
+          <Property Name="EmailServerName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="EmailServerPort" Type="Int32" />
+          <Property Name="EmailServerSSLFlag" Type="Boolean" />
+          <Property Name="EmailServerCredentialsUserName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="EmailServerCredentialsPassword" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MonedaDefecto" Type="Int32" />
+          <NavigationProperty Name="InventarioActivosFijos" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias" FromRole="Companias" ToRole="InventarioActivosFijos" />
+          <NavigationProperty Name="tEmpleados" Relationship="dbContab_ActFijos_NS.FK_tEmpleados_Companias" FromRole="Compania" ToRole="tEmpleado" />
+          <NavigationProperty Name="MesesDelAnoFiscals" Relationship="dbContab_ActFijos_NS.FK_MesesDelAnoFiscal_Companias" FromRole="Compania" ToRole="MesesDelAnoFiscal" />
+        </EntityType>
+        <EntityType Name="InventarioActivosFijo">
+          <Key>
+            <PropertyRef Name="ClaveUnica" />
+          </Key>
+          <Property Name="ClaveUnica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Producto" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <Property Name="Departamento" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CompradoA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Proveedor" Type="Int32" />
+          <Property Name="Serial" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Modelo" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Placa" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Factura" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CostoTotal" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ValorResidual" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="MontoADepreciar" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="NumeroDeAnos" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="FechaDesincorporacion" Type="DateTime" Precision="0" />
+          <Property Name="DesincorporadoFlag" Type="Boolean" />
+          <Property Name="AutorizadoPor" Type="Int32" />
+          <Property Name="MotivoDesincorporacion" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DepreciarDesdeMes" Type="Int16" Nullable="false" />
+          <Property Name="DepreciarDesdeAno" Type="Int16" Nullable="false" />
+          <Property Name="DepreciarHastaMes" Type="Int16" Nullable="false" />
+          <Property Name="DepreciarHastaAno" Type="Int16" Nullable="false" />
+          <Property Name="CantidadMesesADepreciar" Type="Int16" Nullable="false" />
+          <Property Name="MontoDepreciacionMensual" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Ingreso" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UltAct" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Usuario" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="Cia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Compania" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias" FromRole="InventarioActivosFijos" ToRole="Companias" />
+          <NavigationProperty Name="Proveedore" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores" FromRole="InventarioActivosFijos" ToRole="Proveedores" />
+          <NavigationProperty Name="TiposDeProducto" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto" FromRole="InventarioActivosFijos" ToRole="TiposDeProducto" />
+          <NavigationProperty Name="AtributosAsignados" Relationship="dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos" FromRole="InventarioActivosFijo" ToRole="AtributosAsignado" />
+          <NavigationProperty Name="tDepartamento" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_tDepartamentos" FromRole="InventarioActivosFijo" ToRole="tDepartamento" />
+          <NavigationProperty Name="InventarioActivosFijos_AntesReconversionMonetaria" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos" FromRole="InventarioActivosFijo" ToRole="InventarioActivosFijos_AntesReconversionMonetaria" />
+          <NavigationProperty Name="tTempActivosFijos_ConsultaDepreciacion" Relationship="dbContab_ActFijos_NS.FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos" FromRole="InventarioActivosFijo" ToRole="tTempActivosFijos_ConsultaDepreciacion" />
+          <NavigationProperty Name="tEmpleado" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados" FromRole="InventarioActivosFijo" ToRole="tEmpleado" />
+        </EntityType>
+        <EntityType Name="Proveedore">
+          <Key>
+            <PropertyRef Name="Proveedor" />
+          </Key>
+          <Property Name="Proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="70" Unicode="true" FixedLength="false" />
+          <Property Name="Abreviatura" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <Property Name="Rif" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="NatJurFlag" Type="Int16" Nullable="false" />
+          <Property Name="Nit" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="ContribuyenteEspecialFlag" Type="Boolean" />
+          <Property Name="RetencionSobreIvaPorc" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="NuestraRetencionSobreIvaPorc" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="AfectaLibroComprasFlag" Type="Boolean" />
+          <Property Name="Beneficiario" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Concepto" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="MontoCheque" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Direccion" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="6" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono1" Type="String" MaxLength="14" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono2" Type="String" MaxLength="14" Unicode="true" FixedLength="false" />
+          <Property Name="Fax" Type="String" MaxLength="14" Unicode="true" FixedLength="false" />
+          <Property Name="Contacto1" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Contacto2" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NacionalExtranjeroFlag" Type="Int16" />
+          <Property Name="SujetoARetencionFlag" Type="Boolean" />
+          <Property Name="CodigoConceptoRetencion" Type="String" MaxLength="6" Unicode="true" FixedLength="false" />
+          <Property Name="RetencionISLRSustraendo" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MonedaDefault" Type="Int32" />
+          <Property Name="FormaDePagoDefault" Type="Int32" />
+          <Property Name="ProveedorClienteFlag" Type="Int16" />
+          <Property Name="PorcentajeDeRetencion" Type="Single" />
+          <Property Name="AplicaIvaFlag" Type="Boolean" />
+          <Property Name="CategoriaProveedor" Type="Int32" />
+          <Property Name="MontoChequeEnMonExtFlag" Type="Boolean" />
+          <Property Name="Ingreso" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UltAct" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="InventarioActivosFijos" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores" FromRole="Proveedores" ToRole="InventarioActivosFijos" />
+          <NavigationProperty Name="TiposProveedor" Relationship="dbContab_ActFijos_NS.FK_Proveedores_TiposProveedor" FromRole="Proveedores" ToRole="TiposProveedor" />
+          <Property Type="Int16" Name="BaseRetencionISLR" />
+        </EntityType>
+        <EntityType Name="TiposDeProducto">
+          <Key>
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Descripcion" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="InventarioActivosFijos" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto" FromRole="TiposDeProducto" ToRole="InventarioActivosFijos" />
+        </EntityType>
+        <EntityType Name="TiposProveedor">
+          <Key>
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Proveedores" Relationship="dbContab_ActFijos_NS.FK_Proveedores_TiposProveedor" FromRole="TiposProveedor" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="tTempActivosFijos_DepreciacionMensual">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Cia" Type="Int32" Nullable="false" />
+          <Property Name="Departamento" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <Property Name="Producto" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Proveedor" Type="Int32" />
+          <Property Name="MontoADepreciar" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="VidaUtil_Anos" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="MontoDepreciacionMensual" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <Association Name="FK_InventarioActivosFijos_Companias">
+          <End Role="Companias" Type="dbContab_ActFijos_NS.Compania" Multiplicity="1" />
+          <End Role="InventarioActivosFijos" Type="dbContab_ActFijos_NS.InventarioActivosFijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioActivosFijos_Proveedores">
+          <End Role="Proveedores" Type="dbContab_ActFijos_NS.Proveedore" Multiplicity="0..1" />
+          <End Role="InventarioActivosFijos" Type="dbContab_ActFijos_NS.InventarioActivosFijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Proveedor" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos">
+              <PropertyRef Name="Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioActivosFijos_TiposDeProducto">
+          <End Role="TiposDeProducto" Type="dbContab_ActFijos_NS.TiposDeProducto" Multiplicity="1" />
+          <End Role="InventarioActivosFijos" Type="dbContab_ActFijos_NS.InventarioActivosFijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDeProducto">
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_TiposProveedor">
+          <End Role="TiposProveedor" Type="dbContab_ActFijos_NS.TiposProveedor" Multiplicity="1" />
+          <End Role="Proveedores" Type="dbContab_ActFijos_NS.Proveedore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposProveedor">
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AtributosAsignado">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="AtributoID" Nullable="false" />
+          <Property Type="Int32" Name="ActivoFijoID" />
+          <NavigationProperty Name="InventarioActivosFijo" Relationship="dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos" FromRole="AtributosAsignado" ToRole="InventarioActivosFijo" />
+          <NavigationProperty Name="Atributo" Relationship="dbContab_ActFijos_NS.FK_AtributosAsignados_Atributos" FromRole="AtributosAsignado" ToRole="Atributo" />
+        </EntityType>
+        <Association Name="FK_AtributosAsignados_InventarioActivosFijos">
+          <End Type="dbContab_ActFijos_NS.InventarioActivosFijo" Role="InventarioActivosFijo" Multiplicity="0..1" />
+          <End Type="dbContab_ActFijos_NS.AtributosAsignado" Role="AtributosAsignado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioActivosFijo">
+              <PropertyRef Name="ClaveUnica" />
+            </Principal>
+            <Dependent Role="AtributosAsignado">
+              <PropertyRef Name="ActivoFijoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tDepartamento">
+          <Key>
+            <PropertyRef Name="Departamento" />
+          </Key>
+          <Property Type="Int32" Name="Departamento" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Descripcion" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InventarioActivosFijos" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_tDepartamentos" FromRole="tDepartamento" ToRole="InventarioActivosFijo" />
+          <NavigationProperty Name="tEmpleados" Relationship="dbContab_ActFijos_NS.FK_tEmpleados_tDepartamentos" FromRole="tDepartamento" ToRole="tEmpleado" />
+        </EntityType>
+        <Association Name="FK_InventarioActivosFijos_tDepartamentos">
+          <End Type="dbContab_ActFijos_NS.tDepartamento" Role="tDepartamento" Multiplicity="1" />
+          <End Type="dbContab_ActFijos_NS.InventarioActivosFijo" Role="InventarioActivosFijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartamento">
+              <PropertyRef Name="Departamento" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijo">
+              <PropertyRef Name="Departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Atributo">
+          <Key>
+            <PropertyRef Name="Atributo1" />
+          </Key>
+          <Property Type="Int32" Name="Atributo1" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Origen" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AtributosAsignados" Relationship="dbContab_ActFijos_NS.FK_AtributosAsignados_Atributos" FromRole="Atributo" ToRole="AtributosAsignado" />
+        </EntityType>
+        <Association Name="FK_AtributosAsignados_Atributos">
+          <End Type="dbContab_ActFijos_NS.Atributo" Role="Atributo" Multiplicity="1" />
+          <End Type="dbContab_ActFijos_NS.AtributosAsignado" Role="AtributosAsignado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Atributo">
+              <PropertyRef Name="Atributo1" />
+            </Principal>
+            <Dependent Role="AtributosAsignado">
+              <PropertyRef Name="AtributoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InventarioActivosFijos_AntesReconversionMonetaria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="ActivoFijo_ID" Nullable="false" />
+          <Property Type="Decimal" Name="CostoTotal" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ValorResidual" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="MontoADepreciar" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="MontoDepreciacionMensual" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="InventarioActivosFijo" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos" FromRole="InventarioActivosFijos_AntesReconversionMonetaria" ToRole="InventarioActivosFijo" />
+        </EntityType>
+        <Association Name="FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos">
+          <End Type="dbContab_ActFijos_NS.InventarioActivosFijo" Role="InventarioActivosFijo" Multiplicity="1" />
+          <End Type="dbContab_ActFijos_NS.InventarioActivosFijos_AntesReconversionMonetaria" Role="InventarioActivosFijos_AntesReconversionMonetaria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioActivosFijo">
+              <PropertyRef Name="ClaveUnica" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijos_AntesReconversionMonetaria">
+              <PropertyRef Name="ActivoFijo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vtTempActivosFijos_ConsultaDepreciacion">
+          <Key>
+            <PropertyRef Name="NombreCiaContab" />
+            <PropertyRef Name="AbreviaturaCiaContab" />
+            <PropertyRef Name="Producto" />
+            <PropertyRef Name="DescripcionProducto" />
+            <PropertyRef Name="FechaCompra" />
+            <PropertyRef Name="DepreciarDesdeMes" />
+            <PropertyRef Name="DepreciarDesdeAno" />
+            <PropertyRef Name="DepreciarHastaMes" />
+            <PropertyRef Name="DepreciarHastaAno" />
+            <PropertyRef Name="CantidadMesesADepreciar" />
+            <PropertyRef Name="DepAcum_CantMeses" />
+            <PropertyRef Name="DepAcum_CantMeses_AnoActual" />
+            <PropertyRef Name="MontoADepreciar" />
+            <PropertyRef Name="DepreciacionMensual" />
+            <PropertyRef Name="DepAcum_AnoActual" />
+            <PropertyRef Name="DepAcum_Total" />
+            <PropertyRef Name="NombreUsuario" />
+            <PropertyRef Name="CostoTotal" />
+          </Key>
+          <Property Type="String" Name="NombreCiaContab" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AbreviaturaCiaContab" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NombreDepartamento" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NombreTipoProducto" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Producto" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DescripcionProducto" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaCompra" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="FechaDesincorporacion" Precision="0" />
+          <Property Type="String" Name="DepreciarDesde" MaxLength="33" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="DepreciarDesdeMes" Nullable="false" />
+          <Property Type="Int16" Name="DepreciarDesdeAno" Nullable="false" />
+          <Property Type="String" Name="DepreciarHasta" MaxLength="33" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="DepreciarHastaMes" Nullable="false" />
+          <Property Type="Int16" Name="DepreciarHastaAno" Nullable="false" />
+          <Property Type="Int16" Name="CantidadMesesADepreciar" Nullable="false" />
+          <Property Type="Int16" Name="DepAcum_CantMeses" Nullable="false" />
+          <Property Type="Int16" Name="DepAcum_CantMeses_AnoActual" Nullable="false" />
+          <Property Type="Int16" Name="RestaPorDepreciar_Meses" />
+          <Property Type="Decimal" Name="MontoADepreciar" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="DepreciacionMensual" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="DepAcum_AnoActual" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="DepAcum_Total" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="RestaPorDepreciar" Precision="19" Scale="4" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="CostoTotal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="tTempActivosFijos_ConsultaDepreciacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="ActivoFijoID" Nullable="false" />
+          <Property Type="Int16" Name="CantidadMesesADepreciar" Nullable="false" />
+          <Property Type="Decimal" Name="MontoADepreciar" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int16" Name="DepreciarHastaMes" Nullable="false" />
+          <Property Type="Int16" Name="DepreciarHastaAno" Nullable="false" />
+          <Property Type="Decimal" Name="DepreciacionMensual" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int16" Name="DepAcum_CantMeses" Nullable="false" />
+          <Property Type="Int16" Name="DepAcum_CantMeses_AnoActual" Nullable="false" />
+          <Property Type="Decimal" Name="DepAcum_Total" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="DepAcum_AnoActual" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InventarioActivosFijo" Relationship="dbContab_ActFijos_NS.FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos" FromRole="tTempActivosFijos_ConsultaDepreciacion" ToRole="InventarioActivosFijo" />
+        </EntityType>
+        <Association Name="FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos">
+          <End Type="dbContab_ActFijos_NS.InventarioActivosFijo" Role="InventarioActivosFijo" Multiplicity="1" />
+          <End Type="dbContab_ActFijos_NS.tTempActivosFijos_ConsultaDepreciacion" Role="tTempActivosFijos_ConsultaDepreciacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventarioActivosFijo">
+              <PropertyRef Name="ClaveUnica" />
+            </Principal>
+            <Dependent Role="tTempActivosFijos_ConsultaDepreciacion">
+              <PropertyRef Name="ActivoFijoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tEmpleado">
+          <Key>
+            <PropertyRef Name="Empleado" />
+          </Key>
+          <Property Type="Int32" Name="Empleado" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Alias" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Rif" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="TipoNomina" Nullable="false" />
+          <Property Type="Boolean" Name="EscribirArchivoXMLRetencionesISLR" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EdoCivil" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Sexo" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nacionalidad" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" Precision="0" />
+          <Property Type="String" Name="CiudadOrigen" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DireccionHabitacion" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefono1" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefono2" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="email" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SituacionActual" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Departamento" Nullable="false" />
+          <Property Type="Int32" Name="Cargo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="FechaRetiro" Precision="0" />
+          <Property Type="Int32" Name="BancoDepositosNomina" />
+          <Property Type="Int32" Name="TipoCuentaDepositosNomina" />
+          <Property Type="String" Name="CuentaBancariaDepositosNomina" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BancoCuentaPrestacionesSociales" />
+          <Property Type="String" Name="NumeroCuentaBancariaPrestacionesSociales" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Contacto1" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Parentesco1" />
+          <Property Type="String" Name="TelefonoCon1" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Contacto2" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Parentesco2" />
+          <Property Type="String" Name="TelefonoCon2" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Contacto3" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Parentesco3" />
+          <Property Type="String" Name="TelefonoCon3" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="EmpleadoObreroFlag" />
+          <Property Type="Decimal" Name="MontoCestaTickets" Precision="19" Scale="4" />
+          <Property Type="Boolean" Name="BonoVacAgregarSueldoFlag" />
+          <Property Type="Boolean" Name="BonoVacAgregarMontoCestaTicketsFlag" />
+          <Property Type="Decimal" Name="BonoVacacionalMontoAdicional" Precision="19" Scale="4" />
+          <Property Type="Boolean" Name="BonoVacAgregarMontoAdicionalFlag" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <NavigationProperty Name="Compania" Relationship="dbContab_ActFijos_NS.FK_tEmpleados_Companias" FromRole="tEmpleado" ToRole="Compania" />
+          <NavigationProperty Name="InventarioActivosFijos" Relationship="dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados" FromRole="tEmpleado" ToRole="InventarioActivosFijo" />
+          <NavigationProperty Name="tDepartamento" Relationship="dbContab_ActFijos_NS.FK_tEmpleados_tDepartamentos" FromRole="tEmpleado" ToRole="tDepartamento" />
+        </EntityType>
+        <Association Name="FK_tEmpleados_Companias">
+          <End Type="dbContab_ActFijos_NS.Compania" Role="Compania" Multiplicity="1" />
+          <End Type="dbContab_ActFijos_NS.tEmpleado" Role="tEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compania">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tEmpleado">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioActivosFijos_tEmpleados">
+          <End Type="dbContab_ActFijos_NS.tEmpleado" Role="tEmpleado" Multiplicity="0..1" />
+          <End Type="dbContab_ActFijos_NS.InventarioActivosFijo" Role="InventarioActivosFijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmpleado">
+              <PropertyRef Name="Empleado" />
+            </Principal>
+            <Dependent Role="InventarioActivosFijo">
+              <PropertyRef Name="AutorizadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmpleados_tDepartamentos">
+          <End Type="dbContab_ActFijos_NS.tDepartamento" Role="tDepartamento" Multiplicity="1" />
+          <End Type="dbContab_ActFijos_NS.tEmpleado" Role="tEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartamento">
+              <PropertyRef Name="Departamento" />
+            </Principal>
+            <Dependent Role="tEmpleado">
+              <PropertyRef Name="Departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MesesDelAnoFiscal">
+          <Key>
+            <PropertyRef Name="ClaveUnica" />
+          </Key>
+          <Property Type="Int32" Name="ClaveUnica" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int16" Name="MesFiscal" Nullable="false" />
+          <Property Type="Int16" Name="Mes" Nullable="false" />
+          <Property Type="String" Name="NombreMes" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="Ano" Nullable="false" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+          <NavigationProperty Name="Compania" Relationship="dbContab_ActFijos_NS.FK_MesesDelAnoFiscal_Companias" FromRole="MesesDelAnoFiscal" ToRole="Compania" />
+        </EntityType>
+        <Association Name="FK_MesesDelAnoFiscal_Companias">
+          <End Type="dbContab_ActFijos_NS.Compania" Role="Compania" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbContab_ActFijos_NS.MesesDelAnoFiscal" Role="MesesDelAnoFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compania">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="MesesDelAnoFiscal">
+              <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbContabRiskModelStoreContainer" CdmEntityContainer="dbContab_ActFijos_Entities">
+          <EntitySetMapping Name="Companias">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.Compania">
+              <MappingFragment StoreEntitySet="Companias">
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NombreCorto" ColumnName="NombreCorto" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Rif" ColumnName="Rif" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="EntidadFederal" ColumnName="EntidadFederal" />
+                <ScalarProperty Name="ZonaPostal" ColumnName="ZonaPostal" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="EmailServerName" ColumnName="EmailServerName" />
+                <ScalarProperty Name="EmailServerPort" ColumnName="EmailServerPort" />
+                <ScalarProperty Name="EmailServerSSLFlag" ColumnName="EmailServerSSLFlag" />
+                <ScalarProperty Name="EmailServerCredentialsUserName" ColumnName="EmailServerCredentialsUserName" />
+                <ScalarProperty Name="EmailServerCredentialsPassword" ColumnName="EmailServerCredentialsPassword" />
+                <ScalarProperty Name="MonedaDefecto" ColumnName="MonedaDefecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventarioActivosFijos">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.InventarioActivosFijo">
+              <MappingFragment StoreEntitySet="InventarioActivosFijos">
+                <ScalarProperty Name="ClaveUnica" ColumnName="ClaveUnica" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CompradoA" ColumnName="CompradoA" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Placa" ColumnName="Placa" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="CostoTotal" ColumnName="CostoTotal" />
+                <ScalarProperty Name="ValorResidual" ColumnName="ValorResidual" />
+                <ScalarProperty Name="MontoADepreciar" ColumnName="MontoADepreciar" />
+                <ScalarProperty Name="NumeroDeAnos" ColumnName="NumeroDeAnos" />
+                <ScalarProperty Name="FechaDesincorporacion" ColumnName="FechaDesincorporacion" />
+                <ScalarProperty Name="DesincorporadoFlag" ColumnName="DesincorporadoFlag" />
+                <ScalarProperty Name="AutorizadoPor" ColumnName="AutorizadoPor" />
+                <ScalarProperty Name="MotivoDesincorporacion" ColumnName="MotivoDesincorporacion" />
+                <ScalarProperty Name="DepreciarDesdeMes" ColumnName="DepreciarDesdeMes" />
+                <ScalarProperty Name="DepreciarDesdeAno" ColumnName="DepreciarDesdeAno" />
+                <ScalarProperty Name="DepreciarHastaMes" ColumnName="DepreciarHastaMes" />
+                <ScalarProperty Name="DepreciarHastaAno" ColumnName="DepreciarHastaAno" />
+                <ScalarProperty Name="CantidadMesesADepreciar" ColumnName="CantidadMesesADepreciar" />
+                <ScalarProperty Name="MontoDepreciacionMensual" ColumnName="MontoDepreciacionMensual" />
+                <ScalarProperty Name="Ingreso" ColumnName="Ingreso" />
+                <ScalarProperty Name="UltAct" ColumnName="UltAct" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.Proveedore">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="BaseRetencionISLR" ColumnName="BaseRetencionISLR" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Rif" ColumnName="Rif" />
+                <ScalarProperty Name="NatJurFlag" ColumnName="NatJurFlag" />
+                <ScalarProperty Name="Nit" ColumnName="Nit" />
+                <ScalarProperty Name="ContribuyenteEspecialFlag" ColumnName="ContribuyenteEspecialFlag" />
+                <ScalarProperty Name="RetencionSobreIvaPorc" ColumnName="RetencionSobreIvaPorc" />
+                <ScalarProperty Name="NuestraRetencionSobreIvaPorc" ColumnName="NuestraRetencionSobreIvaPorc" />
+                <ScalarProperty Name="AfectaLibroComprasFlag" ColumnName="AfectaLibroComprasFlag" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="MontoCheque" ColumnName="MontoCheque" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Contacto1" ColumnName="Contacto1" />
+                <ScalarProperty Name="Contacto2" ColumnName="Contacto2" />
+                <ScalarProperty Name="NacionalExtranjeroFlag" ColumnName="NacionalExtranjeroFlag" />
+                <ScalarProperty Name="SujetoARetencionFlag" ColumnName="SujetoARetencionFlag" />
+                <ScalarProperty Name="CodigoConceptoRetencion" ColumnName="CodigoConceptoRetencion" />
+                <ScalarProperty Name="RetencionISLRSustraendo" ColumnName="RetencionISLRSustraendo" />
+                <ScalarProperty Name="MonedaDefault" ColumnName="MonedaDefault" />
+                <ScalarProperty Name="FormaDePagoDefault" ColumnName="FormaDePagoDefault" />
+                <ScalarProperty Name="ProveedorClienteFlag" ColumnName="ProveedorClienteFlag" />
+                <ScalarProperty Name="PorcentajeDeRetencion" ColumnName="PorcentajeDeRetencion" />
+                <ScalarProperty Name="AplicaIvaFlag" ColumnName="AplicaIvaFlag" />
+                <ScalarProperty Name="CategoriaProveedor" ColumnName="CategoriaProveedor" />
+                <ScalarProperty Name="MontoChequeEnMonExtFlag" ColumnName="MontoChequeEnMonExtFlag" />
+                <ScalarProperty Name="Ingreso" ColumnName="Ingreso" />
+                <ScalarProperty Name="UltAct" ColumnName="UltAct" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposDeProductoes">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.TiposDeProducto">
+              <MappingFragment StoreEntitySet="TiposDeProducto">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposProveedors">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.TiposProveedor">
+              <MappingFragment StoreEntitySet="TiposProveedor">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tTempActivosFijos_DepreciacionMensual">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.tTempActivosFijos_DepreciacionMensual">
+              <MappingFragment StoreEntitySet="tTempActivosFijos_DepreciacionMensual">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="MontoADepreciar" ColumnName="MontoADepreciar" />
+                <ScalarProperty Name="VidaUtil_Anos" ColumnName="VidaUtil_Anos" />
+                <ScalarProperty Name="MontoDepreciacionMensual" ColumnName="MontoDepreciacionMensual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AtributosAsignados">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.AtributosAsignado">
+              <MappingFragment StoreEntitySet="AtributosAsignados">
+                <ScalarProperty Name="ActivoFijoID" ColumnName="ActivoFijoID" />
+                <ScalarProperty Name="AtributoID" ColumnName="AtributoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDepartamentos">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.tDepartamento">
+              <MappingFragment StoreEntitySet="tDepartamentos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Atributos">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.Atributo">
+              <MappingFragment StoreEntitySet="Atributos">
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Atributo1" ColumnName="Atributo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventarioActivosFijos_AntesReconversionMonetaria">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.InventarioActivosFijos_AntesReconversionMonetaria">
+              <MappingFragment StoreEntitySet="InventarioActivosFijos_AntesReconversionMonetaria">
+                <ScalarProperty Name="MontoDepreciacionMensual" ColumnName="MontoDepreciacionMensual" />
+                <ScalarProperty Name="MontoADepreciar" ColumnName="MontoADepreciar" />
+                <ScalarProperty Name="ValorResidual" ColumnName="ValorResidual" />
+                <ScalarProperty Name="CostoTotal" ColumnName="CostoTotal" />
+                <ScalarProperty Name="ActivoFijo_ID" ColumnName="ActivoFijo_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vtTempActivosFijos_ConsultaDepreciacion">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.vtTempActivosFijos_ConsultaDepreciacion">
+              <MappingFragment StoreEntitySet="vtTempActivosFijos_ConsultaDepreciacion">
+                <ScalarProperty Name="CostoTotal" ColumnName="CostoTotal" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="RestaPorDepreciar" ColumnName="RestaPorDepreciar" />
+                <ScalarProperty Name="DepAcum_Total" ColumnName="DepAcum_Total" />
+                <ScalarProperty Name="DepAcum_AnoActual" ColumnName="DepAcum_AnoActual" />
+                <ScalarProperty Name="DepreciacionMensual" ColumnName="DepreciacionMensual" />
+                <ScalarProperty Name="MontoADepreciar" ColumnName="MontoADepreciar" />
+                <ScalarProperty Name="RestaPorDepreciar_Meses" ColumnName="RestaPorDepreciar_Meses" />
+                <ScalarProperty Name="DepAcum_CantMeses_AnoActual" ColumnName="DepAcum_CantMeses_AnoActual" />
+                <ScalarProperty Name="DepAcum_CantMeses" ColumnName="DepAcum_CantMeses" />
+                <ScalarProperty Name="CantidadMesesADepreciar" ColumnName="CantidadMesesADepreciar" />
+                <ScalarProperty Name="DepreciarHastaAno" ColumnName="DepreciarHastaAno" />
+                <ScalarProperty Name="DepreciarHastaMes" ColumnName="DepreciarHastaMes" />
+                <ScalarProperty Name="DepreciarHasta" ColumnName="DepreciarHasta" />
+                <ScalarProperty Name="DepreciarDesdeAno" ColumnName="DepreciarDesdeAno" />
+                <ScalarProperty Name="DepreciarDesdeMes" ColumnName="DepreciarDesdeMes" />
+                <ScalarProperty Name="DepreciarDesde" ColumnName="DepreciarDesde" />
+                <ScalarProperty Name="FechaDesincorporacion" ColumnName="FechaDesincorporacion" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="DescripcionProducto" ColumnName="DescripcionProducto" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="NombreTipoProducto" ColumnName="NombreTipoProducto" />
+                <ScalarProperty Name="NombreDepartamento" ColumnName="NombreDepartamento" />
+                <ScalarProperty Name="AbreviaturaCiaContab" ColumnName="AbreviaturaCiaContab" />
+                <ScalarProperty Name="NombreCiaContab" ColumnName="NombreCiaContab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tTempActivosFijos_ConsultaDepreciacion">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.tTempActivosFijos_ConsultaDepreciacion">
+              <MappingFragment StoreEntitySet="tTempActivosFijos_ConsultaDepreciacion">
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="DepAcum_AnoActual" ColumnName="DepAcum_AnoActual" />
+                <ScalarProperty Name="DepAcum_Total" ColumnName="DepAcum_Total" />
+                <ScalarProperty Name="DepAcum_CantMeses_AnoActual" ColumnName="DepAcum_CantMeses_AnoActual" />
+                <ScalarProperty Name="DepAcum_CantMeses" ColumnName="DepAcum_CantMeses" />
+                <ScalarProperty Name="DepreciacionMensual" ColumnName="DepreciacionMensual" />
+                <ScalarProperty Name="DepreciarHastaAno" ColumnName="DepreciarHastaAno" />
+                <ScalarProperty Name="DepreciarHastaMes" ColumnName="DepreciarHastaMes" />
+                <ScalarProperty Name="MontoADepreciar" ColumnName="MontoADepreciar" />
+                <ScalarProperty Name="CantidadMesesADepreciar" ColumnName="CantidadMesesADepreciar" />
+                <ScalarProperty Name="ActivoFijoID" ColumnName="ActivoFijoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEmpleados">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.tEmpleado">
+              <MappingFragment StoreEntitySet="tEmpleados">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="BonoVacAgregarMontoAdicionalFlag" ColumnName="BonoVacAgregarMontoAdicionalFlag" />
+                <ScalarProperty Name="BonoVacacionalMontoAdicional" ColumnName="BonoVacacionalMontoAdicional" />
+                <ScalarProperty Name="BonoVacAgregarMontoCestaTicketsFlag" ColumnName="BonoVacAgregarMontoCestaTicketsFlag" />
+                <ScalarProperty Name="BonoVacAgregarSueldoFlag" ColumnName="BonoVacAgregarSueldoFlag" />
+                <ScalarProperty Name="MontoCestaTickets" ColumnName="MontoCestaTickets" />
+                <ScalarProperty Name="EmpleadoObreroFlag" ColumnName="EmpleadoObreroFlag" />
+                <ScalarProperty Name="TelefonoCon3" ColumnName="TelefonoCon3" />
+                <ScalarProperty Name="Parentesco3" ColumnName="Parentesco3" />
+                <ScalarProperty Name="Contacto3" ColumnName="Contacto3" />
+                <ScalarProperty Name="TelefonoCon2" ColumnName="TelefonoCon2" />
+                <ScalarProperty Name="Parentesco2" ColumnName="Parentesco2" />
+                <ScalarProperty Name="Contacto2" ColumnName="Contacto2" />
+                <ScalarProperty Name="TelefonoCon1" ColumnName="TelefonoCon1" />
+                <ScalarProperty Name="Parentesco1" ColumnName="Parentesco1" />
+                <ScalarProperty Name="Contacto1" ColumnName="Contacto1" />
+                <ScalarProperty Name="NumeroCuentaBancariaPrestacionesSociales" ColumnName="NumeroCuentaBancariaPrestacionesSociales" />
+                <ScalarProperty Name="BancoCuentaPrestacionesSociales" ColumnName="BancoCuentaPrestacionesSociales" />
+                <ScalarProperty Name="CuentaBancariaDepositosNomina" ColumnName="CuentaBancariaDepositosNomina" />
+                <ScalarProperty Name="TipoCuentaDepositosNomina" ColumnName="TipoCuentaDepositosNomina" />
+                <ScalarProperty Name="BancoDepositosNomina" ColumnName="BancoDepositosNomina" />
+                <ScalarProperty Name="FechaRetiro" ColumnName="FechaRetiro" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="SituacionActual" ColumnName="SituacionActual" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="DireccionHabitacion" ColumnName="DireccionHabitacion" />
+                <ScalarProperty Name="CiudadOrigen" ColumnName="CiudadOrigen" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="EdoCivil" ColumnName="EdoCivil" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EscribirArchivoXMLRetencionesISLR" ColumnName="EscribirArchivoXMLRetencionesISLR" />
+                <ScalarProperty Name="TipoNomina" ColumnName="TipoNomina" />
+                <ScalarProperty Name="Rif" ColumnName="Rif" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MesesDelAnoFiscals">
+            <EntityTypeMapping TypeName="dbContab_ActFijos_NS.MesesDelAnoFiscal">
+              <MappingFragment StoreEntitySet="MesesDelAnoFiscal">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="NombreMes" ColumnName="NombreMes" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="MesFiscal" ColumnName="MesFiscal" />
+                <ScalarProperty Name="ClaveUnica" ColumnName="ClaveUnica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="dbContab_ActFijos" ZoomLevel="75">
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.Compania" Width="1.5" PointX="0.875" PointY="0.5" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.InventarioActivosFijo" Width="2.875" PointX="3.5" PointY="0.625" Height="7.5570279947916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.Proveedore" Width="1.5" PointX="0.75" PointY="5" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.TiposDeProducto" Width="2.375" PointX="0.625" PointY="2.25" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.TiposProveedor" Width="1.5" PointX="4.125" PointY="10" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.tTempActivosFijos_DepreciacionMensual" Width="3.625" PointX="11.125" PointY="0.625" Height="3.1340950520833317" IsExpanded="true" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.375" PointY="0.9" />
+          <ConnectorPoint PointX="2.75" PointY="1.275" />
+          <ConnectorPoint PointX="2.75" PointY="0.25000000000000089" />
+          <ConnectorPoint PointX="3.125" PointY="0.25000000000000089" />
+          <ConnectorPoint PointX="3.4999999999999991" PointY="0.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.2" />
+          <ConnectorPoint PointX="3.5" PointY="5.2" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto" ManuallyRouted="false">
+          <ConnectorPoint PointX="3" PointY="2.45" />
+          <ConnectorPoint PointX="3.5" PointY="2.45" />
+        </AssociationConnector>
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_Proveedores_TiposProveedor" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="6.25" />
+          <ConnectorPoint PointX="1.5" PointY="5.4" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.AtributosAsignado" Width="2.25" PointX="7.5" PointY="3.5" Height="1.9802864583333317" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos">
+          <ConnectorPoint PointX="6.375" PointY="4.4901432291666659" />
+          <ConnectorPoint PointX="7.5" PointY="4.4901432291666659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.tDepartamento" Width="1.875" PointX="0.75" PointY="3.25" Height="0.4" IsExpanded="false" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_tDepartamentos">
+          <ConnectorPoint PointX="2.625" PointY="3.45" />
+          <ConnectorPoint PointX="3.5" PointY="3.45" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.Atributo" Width="2" PointX="7.875" PointY="0.625" Height="1.7879850260416745" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_AtributosAsignados_Atributos">
+          <ConnectorPoint PointX="8.8125" PointY="2.4129850260416745" />
+          <ConnectorPoint PointX="8.8125" PointY="3.5" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.InventarioActivosFijos_AntesReconversionMonetaria" Width="4" PointX="7.125" PointY="6.625" Height="2.3648893229166674" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos">
+          <ConnectorPoint PointX="6.375" PointY="7.7881168619791659" />
+          <ConnectorPoint PointX="7.125" PointY="7.7881168619791659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.vtTempActivosFijos_ConsultaDepreciacion" Width="3.375" PointX="15.75" PointY="0.625" Height="5.6340136718750031" />
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.tTempActivosFijos_ConsultaDepreciacion" Width="3.375" PointX="11.875" PointY="4.75" Height="3.5186979166666674" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos">
+          <ConnectorPoint PointX="6.375" PointY="6.0526432291666659" />
+          <ConnectorPoint PointX="11.875" PointY="6.0526432291666659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.tEmpleado" Width="1.5" PointX="0.875" PointY="1.25" IsExpanded="false" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_tEmpleados_Companias" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_tEmpleados_tDepartamentos" />
+        <EntityTypeShape EntityType="dbContab_ActFijos_NS.MesesDelAnoFiscal" Width="2.5" PointX="15.875" PointY="7" />
+        <AssociationConnector Association="dbContab_ActFijos_NS.FK_MesesDelAnoFiscal_Companias" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

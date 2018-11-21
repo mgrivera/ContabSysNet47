@@ -1,0 +1,87 @@
+﻿
+@using ContabSysNet_Web.Areas.Bancos.Models.islr_pagoAnticipado;
+
+@{
+    ViewBag.Title = "Bancos - Prepago del Islr";
+    Layout = "~/Areas/Bancos/Views/Shared/_Layout2_Bootstrap4.cshtml";
+}
+
+<div class="jumbotron p-5">
+    <h3><em>ContabSysNet</em> - Islr - Pago anticipado del impuesto sobre la renta</h3>
+    <p class="lead">
+        Esta página le permite al usuario informar al Seniat el monto sobre el cual se pagará el Islr en forma anticipada.
+    </p>
+    <hr class="my-4">
+    <p>
+        Mediante los <em>links</em> que se muestran abajo, Ud. puede informar los datos al Seniat. También puede revisar (consultar) los pagos que se han
+        hecho antes.
+    </p>
+</div>
+
+<div class="container">
+    
+    @if (@ViewBag.ErrorInfo != null && @ViewBag.ErrorInfo.error)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Html.Raw(@ViewBag.ErrorInfo.message)
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-sm">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Informar</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Para informar al Seniat</h6>
+                    <p class="card-text">
+                        Para informar al Seniat el monto que será usado para determinar el pago del impuesto. 
+                    </p>
+                    @Html.ActionLink("Informar", "InformarPagoImpuesto", "islr_pagoAnticipado", new { Area = "Bancos" }, new { })
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm">
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Consultar</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Para consultar los eventos anteriores</h6>
+                    <p class="card-text">
+                        Use esta sección para consultar los eventos que ha efecuado antes. Cada monto que Ud. informa al Seniat mediante este 
+                        proceso queda registrado en forma permanente. Use esta función para consultar estos registros. 
+                    </p>
+                    @*nótese que *no* usamos el parámetro Area; mvc asume que el controller y method están en el 'current' area (que es Bancos en este caso)*@ 
+                    @Html.ActionLink("Consultar", "ConsultarPagosRegistrados", "islr_pagoAnticipado", new { ciaContabID = ViewBag.ciaContabID }, new { })
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm">
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Notas</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Notas acerca del proceso</h6>
+                    <p class="card-text">
+                        Esta sección intenta documentar este proceso. Haga un <em>click</em> al <em>link</em> que se muestra abajo para revisar algunas notas
+                        que documentan y explican este proceso.
+                    </p>
+                    <p class="card-text">
+                        Además, la dirección del api que usa este proceso, es mostrada en esta sección. Ud. puede modificarla y grabarla en forma
+                        permanente, en caso de que ésta cambie en algun momento.
+                    </p>
+                    @Html.ActionLink("Docs", "Bancos_PrepagoIslr_Doc", "islr_pagoAnticipado", new { ciaContabID = ViewBag.ciaContabID }, new { })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+    

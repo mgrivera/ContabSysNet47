@@ -1,0 +1,137 @@
+﻿
+@using ContabSysNet_Web.Areas.Bancos.Models.islr_pagoAnticipado
+@model EventoPagoAnticipado_Config
+
+@{
+    ViewBag.Title = "Bancos_PrepagoIslr_Doc";
+    Layout = "~/Areas/Bancos/Views/Shared/_Layout2_Bootstrap4.cshtml";
+}
+
+
+<div class="container">
+
+    <div class="row" style="padding-top: 45px; margin-bottom: 30px; ">
+        <div class="col-sm-9">
+            <h4>Seniat - Prepago de montos del Impuesto sobre la renta</h4>
+        </div>
+        <div class="col-sm-3 text-right">
+            @Html.ActionLink("Regresar ...", "Index", "islr_pagoAnticipado", new { Area = "Bancos" }, new { })
+        </div>
+    </div>
+
+    @if (ViewBag.ErrorInfo != null && @ViewBag.ErrorInfo.error)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Html.Raw(@ViewBag.ErrorInfo.message)
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (@ViewBag.PageInfo != null && Convert.ToString(@ViewBag.PageInfo.message).Trim() != "")
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            @Html.Raw(@ViewBag.PageInfo.message)
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <h5>Introducción</h5>
+
+    <p>
+        Esta página describe al usuario el proceso de pago anticipado del impuesto sobre la renta al Seniat.
+    </p>
+
+    <h5>api del Seniat</h5>
+
+    <p>
+        Por instrucciones del Seniat, este proceso informa el monto base del impuesto mediante el uso de un api, que ha implementado este ente
+        del gobierno.
+    </p>
+
+    <p>
+        Un api no es más que una interfase que reside en la Web y que puede ser usada por los programas de software, como éste, para leer y grabar
+        datos. En nuestro caso específico, el api consiste en un comando que le permite a programas como éste registrar, en la base de datos del Seniat,
+        el monto base para el pago anticipado del impuesto.
+    </p>
+
+    <p>
+        Comúnmente, el comando de un api que permite grabar datos, regresa un <em>estado</em> y un <em>mensaje</em>. De resultar un error al  
+        intentar registrar datos mediante el api, el mensaje de error puede ser mostrado al usuario para que éste tome acciones y corrija 
+        esta situación. Este programa, al intentar grabar los datos a la base de datos del Seniat, recibe el estado de éxito o error desde el 
+        api y lo muestra al usuario. Además, este estado y mensaje también serán guardados con cada evento para que puedan ser consultados 
+        por el usuario en un futuro. 
+    </p>
+
+    <p>
+        Un poco más adelante, en este documento, Ud. podrá ver la <em>dirección de este api</em>. Si no existe una, Ud. debe registrarla. 
+        Además, y aunque será algo sumamente improbable, también podrá cambiarla por aquí, de resultar necesario.
+    </p>
+
+    <h5>Registro anticipado del monto base para el impuesto</h5>
+
+    <p>
+        Esta opción del proceso le permite registrar el monto base para el cálculo del impuesto sobre la renta. Además del monto, el usuario debe indicar
+        el Rif de la compañía y la fecha del impuesto.
+    </p>
+
+    <p>
+        Cuando el usuario indica los datos necesarios y hace un <em>click</em> en <em><b>Grabar</b></em>, este proceso intenta grabar el registro 
+        en la base de datos del Seniat, mediante el uso del api ya mencionado. El resultado de esta operación es regresado con la operación y mostrado 
+        por el programa. En general, el resultado será exitoso o no. De no serlo, este proceso recibe un mensaje que explica el error. Este mensaje 
+        es mostrado al usuario.
+    </p>
+
+    <h5>Consulta de eventos de pago que se han registrado</h5>
+
+    <p>
+        Esta opción del programa le permite al usuario consultar los registros que se han grabado antes. Cada uno muestra sus datos básicos, y el resultado
+        del mismo, como un mensaje de éxito o error. Los registros se muestran siempre desde el más reciente hasta el más antiguo.
+    </p>
+
+    <h4>Dirección base para el uso del api</h4>
+
+    @using (Html.BeginForm("Bancos_PrepagoIslr_Doc", "islr_pagoAnticipado", new { ciaContabID = ViewBag.ciaContabID }, FormMethod.Post, 
+            new { @style = "border: solid 1px lightgray; padding: 20px; " }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model._id)
+        @Html.HiddenFor(model => model.Cia)
+
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group form-control-sm">
+                    @Html.LabelFor(model => model.ApiBaseAddress)
+
+                    <div class="input-group input-group-sm mb-3">
+                        @Html.TextBoxFor(model => model.ApiBaseAddress, new { @class = "form-control", @placeholder = "Dirección base del api" })
+                    </div>
+                    <small class="form-text text-muted">
+                        Dirección del api; ejemplo: http://www.web.com:8080/api ... (nótese que no ponemos el método; 
+                        en vez de http://www.seniat.gob.ve:8081/api/registrar_declaracion, <b>solo</b> http://www.seniat.gob.ve:8081/api)
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                <div class="form-group form-control-sm text-center">
+                    <input type="submit" value="Actualizar" class="btn btn-default" style="min-width: 120px; " />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+

@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ControlCajaChicaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ControlCajaChicaModelStoreContainer">
+          <EntitySet Name="CajaChica_CajasChicas" EntityType="ControlCajaChicaModel.Store.CajaChica_CajasChicas" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CajaChica_Parametros" EntityType="ControlCajaChicaModel.Store.CajaChica_Parametros" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CajaChica_Reposiciones" EntityType="ControlCajaChicaModel.Store.CajaChica_Reposiciones" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CajaChica_Reposiciones_Estados" EntityType="ControlCajaChicaModel.Store.CajaChica_Reposiciones_Estados" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CajaChica_Reposiciones_Gastos" EntityType="ControlCajaChicaModel.Store.CajaChica_Reposiciones_Gastos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CajaChica_Rubros" EntityType="ControlCajaChicaModel.Store.CajaChica_Rubros" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CajaChica_RubrosCuentasContables" EntityType="ControlCajaChicaModel.Store.CajaChica_RubrosCuentasContables" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CajaChica_Usuarios" EntityType="ControlCajaChicaModel.Store.CajaChica_Usuarios" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CajaChica_Reposiciones_CajaChica_CajasChicas" Association="ControlCajaChicaModel.Store.FK_CajaChica_Reposiciones_CajaChica_CajasChicas">
+            <End Role="CajaChica_CajasChicas" EntitySet="CajaChica_CajasChicas" />
+            <End Role="CajaChica_Reposiciones" EntitySet="CajaChica_Reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_Reposiciones_Estados_CajaChica_Reposiciones" Association="ControlCajaChicaModel.Store.FK_CajaChica_Reposiciones_Estados_CajaChica_Reposiciones">
+            <End Role="CajaChica_Reposiciones" EntitySet="CajaChica_Reposiciones" />
+            <End Role="CajaChica_Reposiciones_Estados" EntitySet="CajaChica_Reposiciones_Estados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_Reposiciones_Gastos_CajaChica_Reposiciones" Association="ControlCajaChicaModel.Store.FK_CajaChica_Reposiciones_Gastos_CajaChica_Reposiciones">
+            <End Role="CajaChica_Reposiciones" EntitySet="CajaChica_Reposiciones" />
+            <End Role="CajaChica_Reposiciones_Gastos" EntitySet="CajaChica_Reposiciones_Gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_Reposisiones_Gastos_CajaChica_Rubros" Association="ControlCajaChicaModel.Store.FK_CajaChica_Reposisiones_Gastos_CajaChica_Rubros">
+            <End Role="CajaChica_Rubros" EntitySet="CajaChica_Rubros" />
+            <End Role="CajaChica_Reposiciones_Gastos" EntitySet="CajaChica_Reposiciones_Gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_RubrosCuentasContables_CajaChica_Rubros" Association="ControlCajaChicaModel.Store.FK_CajaChica_RubrosCuentasContables_CajaChica_Rubros">
+            <End Role="CajaChica_Rubros" EntitySet="CajaChica_Rubros" />
+            <End Role="CajaChica_RubrosCuentasContables" EntitySet="CajaChica_RubrosCuentasContables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_Usuarios_CajaChica_CajasChicas" Association="ControlCajaChicaModel.Store.FK_CajaChica_Usuarios_CajaChica_CajasChicas">
+            <End Role="CajaChica_CajasChicas" EntitySet="CajaChica_CajasChicas" />
+            <End Role="CajaChica_Usuarios" EntitySet="CajaChica_Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CajaChica_CajasChicas">
+          <Key>
+            <PropertyRef Name="CajaChica" />
+          </Key>
+          <Property Name="CajaChica" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CiaContab" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CajaChica_Parametros">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TipoAsiento" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="CuentaContablePuenteID" Type="int" Nullable="false" />
+          <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CajaChica_Reposiciones">
+          <Key>
+            <PropertyRef Name="Reposicion" />
+          </Key>
+          <Property Name="Reposicion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="CajaChica" Type="smallint" Nullable="false" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="250" />
+          <Property Name="EstadoActual" Type="char" Nullable="false" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="CajaChica_Reposiciones_Estados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Reposicion" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="NombreUsuario" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Estado" Type="char" Nullable="false" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="CajaChica_Reposiciones_Gastos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Reposicion" Type="int" Nullable="false" />
+          <Property Name="Rubro" Type="smallint" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="MontoNoImponible" Type="money" />
+          <Property Name="Monto" Type="money" Nullable="false" />
+          <Property Name="IvaPorc" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Iva" Type="money" />
+          <Property Name="Total" Type="money" Nullable="false" />
+          <Property Name="FechaDocumento" Type="date" />
+          <Property Name="NumeroDocumento" Type="nvarchar" MaxLength="25" />
+          <Property Name="NumeroControl" Type="nvarchar" MaxLength="20" />
+          <Property Name="Proveedor" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rif" Type="nvarchar" MaxLength="20" />
+          <Property Name="AfectaLibroCompras" Type="bit" Nullable="false" />
+          <Property Name="NombreUsuario" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="CajaChica_Rubros">
+          <Key>
+            <PropertyRef Name="Rubro" />
+          </Key>
+          <Property Name="Rubro" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CajaChica_RubrosCuentasContables">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Rubro" Type="smallint" Nullable="false" />
+          <Property Name="CuentaContableID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CajaChica_Usuarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CajaChica" Type="smallint" Nullable="false" />
+          <Property Name="Estado" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="NombreUsuario" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <Association Name="FK_CajaChica_Reposiciones_CajaChica_CajasChicas">
+          <End Role="CajaChica_CajasChicas" Type="ControlCajaChicaModel.Store.CajaChica_CajasChicas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Reposiciones" Type="ControlCajaChicaModel.Store.CajaChica_Reposiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_CajasChicas">
+              <PropertyRef Name="CajaChica" />
+            </Principal>
+            <Dependent Role="CajaChica_Reposiciones">
+              <PropertyRef Name="CajaChica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_Reposiciones_Estados_CajaChica_Reposiciones">
+          <End Role="CajaChica_Reposiciones" Type="ControlCajaChicaModel.Store.CajaChica_Reposiciones" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Reposiciones_Estados" Type="ControlCajaChicaModel.Store.CajaChica_Reposiciones_Estados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_Reposiciones">
+              <PropertyRef Name="Reposicion" />
+            </Principal>
+            <Dependent Role="CajaChica_Reposiciones_Estados">
+              <PropertyRef Name="Reposicion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_Reposiciones_Gastos_CajaChica_Reposiciones">
+          <End Role="CajaChica_Reposiciones" Type="ControlCajaChicaModel.Store.CajaChica_Reposiciones" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Reposiciones_Gastos" Type="ControlCajaChicaModel.Store.CajaChica_Reposiciones_Gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_Reposiciones">
+              <PropertyRef Name="Reposicion" />
+            </Principal>
+            <Dependent Role="CajaChica_Reposiciones_Gastos">
+              <PropertyRef Name="Reposicion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_Reposisiones_Gastos_CajaChica_Rubros">
+          <End Role="CajaChica_Rubros" Type="ControlCajaChicaModel.Store.CajaChica_Rubros" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Reposiciones_Gastos" Type="ControlCajaChicaModel.Store.CajaChica_Reposiciones_Gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_Rubros">
+              <PropertyRef Name="Rubro" />
+            </Principal>
+            <Dependent Role="CajaChica_Reposiciones_Gastos">
+              <PropertyRef Name="Rubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_RubrosCuentasContables_CajaChica_Rubros">
+          <End Role="CajaChica_Rubros" Type="ControlCajaChicaModel.Store.CajaChica_Rubros" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_RubrosCuentasContables" Type="ControlCajaChicaModel.Store.CajaChica_RubrosCuentasContables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_Rubros">
+              <PropertyRef Name="Rubro" />
+            </Principal>
+            <Dependent Role="CajaChica_RubrosCuentasContables">
+              <PropertyRef Name="Rubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_Usuarios_CajaChica_CajasChicas">
+          <End Role="CajaChica_CajasChicas" Type="ControlCajaChicaModel.Store.CajaChica_CajasChicas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Usuarios" Type="ControlCajaChicaModel.Store.CajaChica_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_CajasChicas">
+              <PropertyRef Name="CajaChica" />
+            </Principal>
+            <Dependent Role="CajaChica_Usuarios">
+              <PropertyRef Name="CajaChica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ControlCajaChicaModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ControlCajaChicaEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="CajaChica_CajasChicas" EntityType="ControlCajaChicaModel.CajaChica_CajasChicas" />
+          <EntitySet Name="CajaChica_Reposiciones" EntityType="ControlCajaChicaModel.CajaChica_Reposiciones" />
+          <EntitySet Name="CajaChica_Reposiciones_Estados" EntityType="ControlCajaChicaModel.CajaChica_Reposiciones_Estados" />
+          <EntitySet Name="CajaChica_Reposiciones_Gastos" EntityType="ControlCajaChicaModel.CajaChica_Reposiciones_Gastos" />
+          <EntitySet Name="CajaChica_Rubros" EntityType="ControlCajaChicaModel.CajaChica_Rubros" />
+          <EntitySet Name="CajaChica_RubrosCuentasContables" EntityType="ControlCajaChicaModel.CajaChica_RubrosCuentasContables" />
+          <EntitySet Name="CajaChica_Usuarios" EntityType="ControlCajaChicaModel.CajaChica_Usuarios" />
+          <AssociationSet Name="FK_CajaChica_Reposiciones_CajaChica_CajasChicas" Association="ControlCajaChicaModel.FK_CajaChica_Reposiciones_CajaChica_CajasChicas">
+            <End Role="CajaChica_CajasChicas" EntitySet="CajaChica_CajasChicas" />
+            <End Role="CajaChica_Reposiciones" EntitySet="CajaChica_Reposiciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_Usuarios_CajaChica_CajasChicas" Association="ControlCajaChicaModel.FK_CajaChica_Usuarios_CajaChica_CajasChicas">
+            <End Role="CajaChica_CajasChicas" EntitySet="CajaChica_CajasChicas" />
+            <End Role="CajaChica_Usuarios" EntitySet="CajaChica_Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_Reposiciones_Estados_CajaChica_Reposiciones" Association="ControlCajaChicaModel.FK_CajaChica_Reposiciones_Estados_CajaChica_Reposiciones">
+            <End Role="CajaChica_Reposiciones" EntitySet="CajaChica_Reposiciones" />
+            <End Role="CajaChica_Reposiciones_Estados" EntitySet="CajaChica_Reposiciones_Estados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_Reposiciones_Gastos_CajaChica_Reposiciones" Association="ControlCajaChicaModel.FK_CajaChica_Reposiciones_Gastos_CajaChica_Reposiciones">
+            <End Role="CajaChica_Reposiciones" EntitySet="CajaChica_Reposiciones" />
+            <End Role="CajaChica_Reposiciones_Gastos" EntitySet="CajaChica_Reposiciones_Gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_Reposisiones_Gastos_CajaChica_Rubros" Association="ControlCajaChicaModel.FK_CajaChica_Reposisiones_Gastos_CajaChica_Rubros">
+            <End Role="CajaChica_Rubros" EntitySet="CajaChica_Rubros" />
+            <End Role="CajaChica_Reposiciones_Gastos" EntitySet="CajaChica_Reposiciones_Gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CajaChica_RubrosCuentasContables_CajaChica_Rubros" Association="ControlCajaChicaModel.FK_CajaChica_RubrosCuentasContables_CajaChica_Rubros">
+            <End Role="CajaChica_Rubros" EntitySet="CajaChica_Rubros" />
+            <End Role="CajaChica_RubrosCuentasContables" EntitySet="CajaChica_RubrosCuentasContables" />
+          </AssociationSet>
+          <EntitySet Name="CajaChica_Parametros" EntityType="ControlCajaChicaModel.CajaChica_Parametros" />
+        </EntityContainer>
+        <EntityType Name="CajaChica_CajasChicas">
+          <Key>
+            <PropertyRef Name="CajaChica" />
+          </Key>
+          <Property Name="CajaChica" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CiaContab" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CajaChica_Reposiciones" Relationship="ControlCajaChicaModel.FK_CajaChica_Reposiciones_CajaChica_CajasChicas" FromRole="CajaChica_CajasChicas" ToRole="CajaChica_Reposiciones" />
+          <NavigationProperty Name="CajaChica_Usuarios" Relationship="ControlCajaChicaModel.FK_CajaChica_Usuarios_CajaChica_CajasChicas" FromRole="CajaChica_CajasChicas" ToRole="CajaChica_Usuarios" />
+        </EntityType>
+        <EntityType Name="CajaChica_Reposiciones">
+          <Key>
+            <PropertyRef Name="Reposicion" />
+          </Key>
+          <Property Name="Reposicion" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CajaChica" Type="Int16" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="EstadoActual" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="CajaChica_CajasChicas" Relationship="ControlCajaChicaModel.FK_CajaChica_Reposiciones_CajaChica_CajasChicas" FromRole="CajaChica_Reposiciones" ToRole="CajaChica_CajasChicas" />
+          <NavigationProperty Name="CajaChica_Reposiciones_Estados" Relationship="ControlCajaChicaModel.FK_CajaChica_Reposiciones_Estados_CajaChica_Reposiciones" FromRole="CajaChica_Reposiciones" ToRole="CajaChica_Reposiciones_Estados" />
+          <NavigationProperty Name="CajaChica_Reposiciones_Gastos" Relationship="ControlCajaChicaModel.FK_CajaChica_Reposiciones_Gastos_CajaChica_Reposiciones" FromRole="CajaChica_Reposiciones" ToRole="CajaChica_Reposiciones_Gastos" />
+        </EntityType>
+        <EntityType Name="CajaChica_Reposiciones_Estados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Reposicion" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NombreUsuario" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="CajaChica_Reposiciones" Relationship="ControlCajaChicaModel.FK_CajaChica_Reposiciones_Estados_CajaChica_Reposiciones" FromRole="CajaChica_Reposiciones_Estados" ToRole="CajaChica_Reposiciones" />
+        </EntityType>
+        <EntityType Name="CajaChica_Reposiciones_Gastos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Reposicion" Type="Int32" Nullable="false" />
+          <Property Name="Rubro" Type="Int16" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="MontoNoImponible" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Monto" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="IvaPorc" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Iva" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FechaDocumento" Type="DateTime" Precision="0" />
+          <Property Name="NumeroDocumento" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="NumeroControl" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Proveedor" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Rif" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="AfectaLibroCompras" Type="Boolean" Nullable="false" />
+          <Property Name="NombreUsuario" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CajaChica_Reposiciones" Relationship="ControlCajaChicaModel.FK_CajaChica_Reposiciones_Gastos_CajaChica_Reposiciones" FromRole="CajaChica_Reposiciones_Gastos" ToRole="CajaChica_Reposiciones" />
+          <NavigationProperty Name="CajaChica_Rubros" Relationship="ControlCajaChicaModel.FK_CajaChica_Reposisiones_Gastos_CajaChica_Rubros" FromRole="CajaChica_Reposiciones_Gastos" ToRole="CajaChica_Rubros" />
+        </EntityType>
+        <EntityType Name="CajaChica_Rubros">
+          <Key>
+            <PropertyRef Name="Rubro" />
+          </Key>
+          <Property Name="Rubro" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CajaChica_Reposiciones_Gastos" Relationship="ControlCajaChicaModel.FK_CajaChica_Reposisiones_Gastos_CajaChica_Rubros" FromRole="CajaChica_Rubros" ToRole="CajaChica_Reposiciones_Gastos" />
+          <NavigationProperty Name="CajaChica_RubrosCuentasContables" Relationship="ControlCajaChicaModel.FK_CajaChica_RubrosCuentasContables_CajaChica_Rubros" FromRole="CajaChica_Rubros" ToRole="CajaChica_RubrosCuentasContables" />
+        </EntityType>
+        <EntityType Name="CajaChica_RubrosCuentasContables">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Rubro" Type="Int16" Nullable="false" />
+          <Property Name="CuentaContableID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CajaChica_Rubros" Relationship="ControlCajaChicaModel.FK_CajaChica_RubrosCuentasContables_CajaChica_Rubros" FromRole="CajaChica_RubrosCuentasContables" ToRole="CajaChica_Rubros" />
+        </EntityType>
+        <EntityType Name="CajaChica_Usuarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CajaChica" Type="Int16" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="NombreUsuario" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CajaChica_CajasChicas" Relationship="ControlCajaChicaModel.FK_CajaChica_Usuarios_CajaChica_CajasChicas" FromRole="CajaChica_Usuarios" ToRole="CajaChica_CajasChicas" />
+        </EntityType>
+        <Association Name="FK_CajaChica_Reposiciones_CajaChica_CajasChicas">
+          <End Role="CajaChica_CajasChicas" Type="ControlCajaChicaModel.CajaChica_CajasChicas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Reposiciones" Type="ControlCajaChicaModel.CajaChica_Reposiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_CajasChicas">
+              <PropertyRef Name="CajaChica" />
+            </Principal>
+            <Dependent Role="CajaChica_Reposiciones">
+              <PropertyRef Name="CajaChica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_Usuarios_CajaChica_CajasChicas">
+          <End Role="CajaChica_CajasChicas" Type="ControlCajaChicaModel.CajaChica_CajasChicas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Usuarios" Type="ControlCajaChicaModel.CajaChica_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_CajasChicas">
+              <PropertyRef Name="CajaChica" />
+            </Principal>
+            <Dependent Role="CajaChica_Usuarios">
+              <PropertyRef Name="CajaChica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_Reposiciones_Estados_CajaChica_Reposiciones">
+          <End Role="CajaChica_Reposiciones" Type="ControlCajaChicaModel.CajaChica_Reposiciones" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Reposiciones_Estados" Type="ControlCajaChicaModel.CajaChica_Reposiciones_Estados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_Reposiciones">
+              <PropertyRef Name="Reposicion" />
+            </Principal>
+            <Dependent Role="CajaChica_Reposiciones_Estados">
+              <PropertyRef Name="Reposicion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_Reposiciones_Gastos_CajaChica_Reposiciones">
+          <End Role="CajaChica_Reposiciones" Type="ControlCajaChicaModel.CajaChica_Reposiciones" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Reposiciones_Gastos" Type="ControlCajaChicaModel.CajaChica_Reposiciones_Gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_Reposiciones">
+              <PropertyRef Name="Reposicion" />
+            </Principal>
+            <Dependent Role="CajaChica_Reposiciones_Gastos">
+              <PropertyRef Name="Reposicion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_Reposisiones_Gastos_CajaChica_Rubros">
+          <End Role="CajaChica_Rubros" Type="ControlCajaChicaModel.CajaChica_Rubros" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_Reposiciones_Gastos" Type="ControlCajaChicaModel.CajaChica_Reposiciones_Gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_Rubros">
+              <PropertyRef Name="Rubro" />
+            </Principal>
+            <Dependent Role="CajaChica_Reposiciones_Gastos">
+              <PropertyRef Name="Rubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CajaChica_RubrosCuentasContables_CajaChica_Rubros">
+          <End Role="CajaChica_Rubros" Type="ControlCajaChicaModel.CajaChica_Rubros" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CajaChica_RubrosCuentasContables" Type="ControlCajaChicaModel.CajaChica_RubrosCuentasContables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaChica_Rubros">
+              <PropertyRef Name="Rubro" />
+            </Principal>
+            <Dependent Role="CajaChica_RubrosCuentasContables">
+              <PropertyRef Name="Rubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CajaChica_Parametros">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TipoAsiento" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CuentaContablePuenteID" Nullable="false" />
+          <Property Type="Int32" Name="Cia" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ControlCajaChicaModelStoreContainer" CdmEntityContainer="ControlCajaChicaEntities">
+          <EntitySetMapping Name="CajaChica_CajasChicas">
+            <EntityTypeMapping TypeName="ControlCajaChicaModel.CajaChica_CajasChicas">
+              <MappingFragment StoreEntitySet="CajaChica_CajasChicas">
+                <ScalarProperty Name="CajaChica" ColumnName="CajaChica" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CiaContab" ColumnName="CiaContab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaChica_Reposiciones">
+            <EntityTypeMapping TypeName="ControlCajaChicaModel.CajaChica_Reposiciones">
+              <MappingFragment StoreEntitySet="CajaChica_Reposiciones">
+                <ScalarProperty Name="Reposicion" ColumnName="Reposicion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="CajaChica" ColumnName="CajaChica" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="EstadoActual" ColumnName="EstadoActual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaChica_Reposiciones_Estados">
+            <EntityTypeMapping TypeName="ControlCajaChicaModel.CajaChica_Reposiciones_Estados">
+              <MappingFragment StoreEntitySet="CajaChica_Reposiciones_Estados">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Reposicion" ColumnName="Reposicion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaChica_Reposiciones_Gastos">
+            <EntityTypeMapping TypeName="ControlCajaChicaModel.CajaChica_Reposiciones_Gastos">
+              <MappingFragment StoreEntitySet="CajaChica_Reposiciones_Gastos">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Reposicion" ColumnName="Reposicion" />
+                <ScalarProperty Name="Rubro" ColumnName="Rubro" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="MontoNoImponible" ColumnName="MontoNoImponible" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="IvaPorc" ColumnName="IvaPorc" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="FechaDocumento" ColumnName="FechaDocumento" />
+                <ScalarProperty Name="NumeroDocumento" ColumnName="NumeroDocumento" />
+                <ScalarProperty Name="NumeroControl" ColumnName="NumeroControl" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Rif" ColumnName="Rif" />
+                <ScalarProperty Name="AfectaLibroCompras" ColumnName="AfectaLibroCompras" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaChica_Rubros">
+            <EntityTypeMapping TypeName="ControlCajaChicaModel.CajaChica_Rubros">
+              <MappingFragment StoreEntitySet="CajaChica_Rubros">
+                <ScalarProperty Name="Rubro" ColumnName="Rubro" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaChica_RubrosCuentasContables">
+            <EntityTypeMapping TypeName="ControlCajaChicaModel.CajaChica_RubrosCuentasContables">
+              <MappingFragment StoreEntitySet="CajaChica_RubrosCuentasContables">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Rubro" ColumnName="Rubro" />
+                <ScalarProperty Name="CuentaContableID" ColumnName="CuentaContableID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaChica_Usuarios">
+            <EntityTypeMapping TypeName="ControlCajaChicaModel.CajaChica_Usuarios">
+              <MappingFragment StoreEntitySet="CajaChica_Usuarios">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CajaChica" ColumnName="CajaChica" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaChica_Parametros">
+            <EntityTypeMapping TypeName="ControlCajaChicaModel.CajaChica_Parametros">
+              <MappingFragment StoreEntitySet="CajaChica_Parametros">
+                <ScalarProperty Name="Cia" ColumnName="Cia" />
+                <ScalarProperty Name="CuentaContablePuenteID" ColumnName="CuentaContablePuenteID" />
+                <ScalarProperty Name="TipoAsiento" ColumnName="TipoAsiento" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

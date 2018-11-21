@@ -1,0 +1,70 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="MasterPage_Simple_WithButtons" Codebehind="MasterPage_Simple_WithButtons.master.cs" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Untitled Page</title>
+    <link href="general.css" rel="stylesheet" type="text/css" />
+    <link href="progress_css/css/progress.css" rel="stylesheet" type="text/css" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <%--para que las imagenes (?) más abajo no muestren un borde cuando asignamos el navigateUrl (en code)--%> 
+    <style type="text/css">
+        a img{ border: none; }
+    </style>
+
+</head>
+<body>
+    <form id="form1" runat="server" style="height:100%;">
+    <div>
+        <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>--%>
+
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+        </asp:ToolkitScriptManager>
+
+        <div style="text-align:center; ">
+            <table style="border: 1px solid #A2A2A2" >
+                <tr>
+                    <td>
+                        <div style="border-bottom-style: solid; border-bottom: 1px #36c; background-color: #d5ddf3;
+                            border: 1px solid #A2A2A2; margin-bottom: 15px;">
+                            <table style="width:100%; ">
+                                <tr style="height: 25px; ">
+                                    <td style="width: 49%; text-align: left; ">
+                                        <span class="FontMediumBoldNavy"><b><i>&nbsp;&nbsp;ContabSysNet</i></b></span>
+                                    </td>
+                                    <td style="width: 49%; text-align: right;">
+                                        <a id="A1" href="~/Main/Home" runat="server">
+                                            <img id="Img1" alt="home" runat="server" src="Pictures/house_20x20.png" style="margin-right: 10px;
+                                                border: none;" /></a> <a href="javascript:javascript:history.go(-1)">
+                                                    <img id="Img2" alt="back" runat="server" src="Pictures/arrow_left_20x20.png" style="margin-right: 10px;
+                                                        border: none;" /></a>
+
+                                        <asp:HyperLink ID="Help_HyperLink" 
+                                                       runat="server" 
+                                                       ImageUrl="Pictures/help_20x20.png" 
+                                                       Target="_blank">
+                                        </asp:HyperLink>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<File>
+  <Item>
+    <Ciudad>VAL</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>Valencia</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CCS</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CARACAS</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>MCBO</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>MARACAIBO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>PTO. C</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>PUERTO LA CRUZ</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>BQMTO</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>BARQUISIMETO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>GUAC</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>GUACARA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CORO</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CORO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>S CARL</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>SAN CARLOS</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>COJE</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>COJEDES</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>AMAZO</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>AMAZONAS</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>PTO AY</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>PUERTO AYACUCHO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>ANZOA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>ANZOATEGUI</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>BARCE</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>BARCELONA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>EL TIG</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>EL TIGRE</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>APURE</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>APURE</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>SAN FE</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>SAN FERNANDO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>GUASD</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>GUASDUALITO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>ARAGU</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>ARAGUA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>TURME</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>TURMERO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>LA VIC</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>LA VICTORIA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>BARIN</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>BARINAS</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>BARINI</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>BARINITAS</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>BOLIVA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>BOLIVAR</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>C BOLI</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CIUDAD BOLIVAR</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>C GUAY</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CIUDAD GUAYANA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>UPATA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>UPATA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CARAB</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CARABOBO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>P CABE</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>PUERTO CABELLO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>TINAQ</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>TINAQUILLO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>D AMA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>DELTA AMACURO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>TUCUP</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>TUCUPITA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>DTTO F</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>DISTRITO FEDERAL</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>FALCON</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>FALCON</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>P FIJO</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>PUNTO FIJO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>P CARD</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>PUNTA CARDON</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>GUARI</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>GUARICO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>SJDLM</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>SAN JUAN DE LOS MORROS</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CALAB</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CALABOZO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>VDLP</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>VALLE DE LA PASCUA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>LARA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>LARA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CAROR</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CARORA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CABUD</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CABUDARE</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>MERID</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>MERIDA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>EL VIG</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>EL VIGIA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>EJIDO</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>EJIDO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>MIRAN</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>MIRANDA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>L TEQU</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>LOS TEQUES</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>STA TE</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>SANTA TERESA DEL TUY</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>MONAG</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>MONAGAS</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>MATUR</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>MATURIN</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CARIP</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CARIPITO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>P MATA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>PUNTA DE MATA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>NVA ES</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>NUEVA ESPARTA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>LA ASU</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>LA ASUNCION</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>PORL</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>PORLAMAR</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>PORTU</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>PORTUGUESA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>GUANA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>GUANARE</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>V BRUZ</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>VILLA BRUZUAL</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>SUCRE</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>SUCRE</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CUMAN</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CUMANA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CARUP</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CARUPANO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>GUIRI</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>GUIRIA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>TACHI</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>TACHIRA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>S CRIS</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>SAN CRISTOBAL</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>RUBIO</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>RUBIO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>S ANTO</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>SAN ANTONIO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>TRUJI</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>TRUJILLO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>VALER</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>VALERA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>BONOC</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>BOCONO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>VARGA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>VARGAS</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>L GUAI</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>LA GUAIRA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CLMAR</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CATIA LA MAR</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>MACU</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>MACUTO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>NAIGU</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>NAIGUATA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>YARAC</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>YARACUY</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>S FELI</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>SAN FELIPE</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>YARIT</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>YARITAGUA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CHIVA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CHIVACOA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>ZULIA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>ZULIA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>CABIM</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CABIMAS</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>C OJED</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>CIUDAD OJEDA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>MCY</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>MARACAY</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>SAN</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>SAN DIEGO</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>NAG</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>NAGUANAGUA</Descripcion>
+  </Item>
+  <Item>
+    <Ciudad>GUA</Ciudad>
+    <Pais>VZLA</Pais>
+    <Descripcion>GUARENAS</Descripcion>
+  </Item>
+</File>

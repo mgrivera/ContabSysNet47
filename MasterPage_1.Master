@@ -1,0 +1,258 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage_1.master.cs" Inherits="ContabSysNetWeb.MasterPage_1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <link href="general.css" rel="stylesheet" type="text/css" />
+    <link href="radcalendar.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/GridViewStyles/styles2.css" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="myBootstrap.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="Scripts/jquery/jquery-ui-1.10.4.min.css" />
+    <link href="Content/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <style type="text/css">
+        #dialog-link
+        {
+            padding: .4em 1em .4em 20px;
+            text-decoration: none;
+            position: relative;
+        }
+
+        #dialog-link span.ui-icon
+        {
+            margin: 0 5px 0 0;
+            position: absolute;
+            left: .2em;
+            top: 50%;
+            margin-top: -8px;
+        }
+
+        #icons
+        {
+            margin: 0;
+            padding: 0;
+        }
+
+        #icons li
+        {
+            margin: 2px;
+            position: relative;
+            padding: 4px 0;
+            cursor: pointer;
+            float: left;
+            list-style: none;
+        }
+
+        #icons span.ui-icon
+        {
+            float: left;
+            margin: 0 4px;
+        }
+
+        .fakewindowcontain .ui-widget-overlay
+        {
+            position: absolute;
+        }
+    </style>
+
+    <title id="Title1" runat="server">Untitled Page</title>
+      <style type="text/css">
+          .FontMediumBoldNavy
+          {
+              font-size: 12px;
+              font-weight: bold;
+              color: #000080;
+          }
+          .minheight
+          {
+              min-height: 400px;
+              _height: auto !important;
+              height: 400px;
+          }
+          .miniminheight
+          {
+              min-height: 5px;
+              _height: auto !important;
+              height: 5px;
+          }
+          Table.ListView
+          {
+              font-family: tahoma;
+              font-size: small;
+              padding: 10px;
+          }
+          th.center
+          {
+              text-align: center;
+          }
+          th.right
+          {
+              text-align: right;
+          }
+           th.left td.left
+          {
+              text-align: left;
+          }
+          td.center
+          {
+              text-align: center;
+          }
+          td.right
+          {
+              text-align: right;
+          }
+          th.padded, td.padded
+          {
+              padding-left: 10px;
+              padding-right: 10px;
+          }
+          .padded
+          {
+              padding-left: 10px;
+              padding-right: 10px;
+          }
+          .errmessage
+          {
+              padding-left: 10px;
+              padding-right: 10px;
+              color: #FF0000;
+          }
+           
+          .modalBackground
+          {
+              background-color: #EFEFEF;
+              filter: alpha(opacity=70);
+              opacity: 0.7;
+          }
+          .errmessage_background
+          {
+              background-color: #FFFF9D;
+              border: thin solid #E6E600;
+          }
+      </style>
+      
+       <script type="text/javascript">
+
+           // recibe el id de un elemento html y lo esconde/muestra 
+
+           function showhide(id) {
+               if (document.getElementById) {
+                   obj = document.getElementById(id);
+                   if (obj.style.display == "none") {
+                       obj.style.display = "";
+                   } else {
+                       obj.style.display = "none";
+                   }
+               }
+           }
+
+           // recibe el id de un elemento html y lo muestra 
+
+           function show(id) {
+               if (document.getElementById) {
+                   obj = document.getElementById(id);
+                   obj.style.display = "";
+
+               }
+           }
+
+           // recibe el id de un elemento html y lo esconde 
+
+           function hide(id) {
+               if (document.getElementById) {
+                   obj = document.getElementById(id);
+                   obj.style.display = "none";
+               }
+           } 
+           
+           
+        var clientid;
+        function fnSetFocus(txtClientId)
+        {
+        	clientid=txtClientId;
+        	setTimeout("fnFocus()",800);
+            
+        }
+        function fnFocus()
+        {
+            eval("document.getElementById('"+clientid+"').focus()");
+        }
+        function fnClickOK(sender, e) 
+        { 
+        __doPostBack(sender,e); 
+        } 
+    </script>
+</head>
+<body>
+   <form id="form1" runat="server" enctype="multipart/form-data">
+
+    <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>--%>
+
+    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+        <Scripts>
+         <%--   <asp:ScriptReference Name="jquery" Path="~/Scripts/jquery/jquery-1.10.2.js"/>
+            <asp:ScriptReference Path="~/Scripts/jquery/jquery-ui-1.10.4.min.js"/>
+            <asp:ScriptReference Path="~/Scripts/json2.js"/>--%>
+        </Scripts>
+        <Services>
+            <asp:ServiceReference Path="~/MostrarProgreso_1.asmx" />
+        </Services>
+    </asp:ToolkitScriptManager>
+
+     <div id="header" style="border-bottom-style: solid; border-bottom: 1px #36c; background-color: #d5ddf3; padding-left: 10px; padding-right: 10px; ">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="padding: 5px; vertical-align: top; width:15%; ">
+                        <span class="FontMediumBoldNavy" style="font-style: italic; ">ContabSysNet</span><br />
+                        <span  id="AppName_Span" runat="server" class="FontMediumBoldNavy">App name</span>
+                    </td>
+                    <td style="width:70%; vertical-align: central; padding-top:5px; text-align:center; ">
+                        <h3 id="PageTitle_TableCell" runat="server" style="margin: 0">Page Title</h3>
+                        <span  id="PageSubTitle_Span" runat="server" class="FontMediumBoldNavy"></span>
+                    </td>
+                    <td style="width:5%; text-align:right; ">
+                        <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" DynamicLayout="True">
+                            <ProgressTemplate>
+                                <span style="margin-right: 15px;">
+                                    <img runat="server" alt="...loading" src="Pictures/img/circle-ball-dark-antialiased.gif" /></span>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
+                    </td>
+                    <td style="text-align: right; padding-top: 5px; width: 10%;">
+                        <a id="A1" href="~/Main/Home" runat="server">
+                            <img id="Img2" alt="home" runat="server" src="Pictures/house_20x20.png" style="margin-right: 10px;
+                                border: none;" /></a> 
+                        <a href="javascript:javascript:history.go(-1)">
+                                    <img id="Img3" alt="back" runat="server" src="Pictures/arrow_left_20x20.png" style="margin-right: 10px;
+                                        border: none;" /></a>
+                        <a id="Help_HyperLink" href="#" runat="server">
+                            <img id="Img1" alt="home" runat="server" src="Pictures/help_20x20.png" style="border: none;" /></a>   
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <br />
+        <div style="min-height: 30%;">
+        
+            <asp:ContentPlaceHolder ID="PanelCentral_ContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+        
+        </div>
+        
+        <div style="margin: 0px; background-color: #d5ddf3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #36c">
+            <asp:ContentPlaceHolder ID="Footer_ContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        
+    </form>
+
+    <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/jquery/jquery-1.10.2.js") %>"></script>
+    <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/jquery/jquery-ui-1.10.4.min.js") %>"></script>
+    <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/bootstrap/js/bootstrap.min.js") %>"></script>
+</body>
+</html>

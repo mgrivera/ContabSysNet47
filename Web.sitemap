@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  
+  <siteMapNode url="~/default.aspx" title="ContabSysNet"  description="ContabSysNet - página principal" roles="*">
+      
+      <siteMapNode url="" title="Bancos"  description="Proveedores y control bancario" roles="Bancos">
+
+        <siteMapNode url="" title="Consultas"  description="Consultas genéricas de Bancos" roles="Bancos">
+
+          <siteMapNode url="" title="Facturas y pagos"  description="Consulta general de facturas y sus pagos/cobros" roles="Bancos">
+            <siteMapNode url="~/Bancos/Consultas facturas/Facturas/Facturas.aspx" title="Facturas"  description="Consulta de facturas registradas" roles="Bancos" />
+            <siteMapNode url="~/Bancos/Consultas facturas/VencimientoFacturas/VencimientoFacturas.aspx" title="Vencimientos de saldos de facturas"  description="Consulta de saldos vencidos y su antiguedad" roles="Bancos"/>
+            <siteMapNode url="~/Bancos/Consultas facturas/Pagos/Pagos_page.aspx" title="Pagos"  description="Consulta de pagos"  roles="Bancos"/>
+
+            <siteMapNode url="" title="Disponibilidad en bancos"  description="Consultar disponibilidad en las cuentas bancarias de la empresa" roles="Bancos">
+              <siteMapNode url="~/Bancos/Disponibilidad en bancos/Disponibilidad/Bancos_ConsultaDisponibilidad.aspx" title="Consulta de disponibilidad"  description="Consulta de disponibilidad de cuentas bancarias" roles="Bancos"/>
+              <siteMapNode url="~/Bancos/Disponibilidad en bancos/Disponibilidad/MontosRestringidos.aspx" title="Montos restringidos"  description="Registro de montos restringidos para la disponibilidad" roles="Bancos"/>
+              <siteMapNode url="~/Bancos/Disponibilidad en bancos/Disponibilidad/ChequesNoEntregados.aspx" title="Cheques no entregados"  description="Consulta y actualización de cheques aún no entregados" roles="Bancos"/>
+            </siteMapNode>
+          </siteMapNode>
+
+          <siteMapNode url="~/Bancos/ConsultasBancos/MovimientosBancarios/MovimientosBancarios_page.aspx" title="Movimientos bancarios"  description="Movimientos bancarios - Consulta" roles="Bancos"/>
+
+        </siteMapNode>
+
+        <siteMapNode url="" title="Conciliación"  description="Para efectuar la conciliación de movimientos bancarios" roles="Bancos">
+          <siteMapNode url="~/Bancos/ConciliacionBancaria/ConciliacionBancaria.aspx" title="Conciliación de cuentas bancarias"  description="Conciliación automática de cuentas bancarias" roles="Bancos" />
+        </siteMapNode>
+
+        <siteMapNode url="" title="Importar desde Excel"  description="Para importar compañías y facturas desde un documento Excel" roles="Bancos">
+          <siteMapNode url="~/Bancos/ImportarCompaniasDesdeExcel" title="Importar compañías y facturas"  description="Para importar compañías y facturas desde un documento Excel" roles="Bancos" />
+          <siteMapNode url="~/Bancos/ImportarFacturasDesdeExcel" title="Importar facturas"  description="Para importar facturas desde documento Excel" roles="Bancos" />
+        </siteMapNode>
+
+      </siteMapNode>
+
+    <siteMapNode url="" title="Contab" description="Sistema contable" roles="Contab">
+
+        <siteMapNode url="" title="Consultas contables"  description="Consultas del sistema de contabilidad" roles="Contab">
+            <siteMapNode url="~/Contab/Consultas contables/Cuentas y movimientos/CuentasYMovimientos.aspx" title="Cuentas contables y sus movimientos"  description="Consulta de cuentas contables y sus movimientos asociados" roles="Contab" />
+            <siteMapNode url="~/Contab/Consultas contables/Comprobantes/ComprobantesContables.aspx" title="Comprobantes contables"  description="Consulta de comprobantes contables" roles="Contab" />
+            <siteMapNode url="~/Contab/Consultas contables/BalanceComprobacion/BalanceComprobacion.aspx" title="Balance de comprobación"  description="Balance de comprobación" roles="Contab" />
+            <siteMapNode url="~/Contab/Consultas contables/Centros de costo/CentrosCosto.aspx" title="Centros de costo"  description="Consulta de movimientos contables por centro de costo" roles="Contab" />
+            <siteMapNode url="~/Contabilidad/CentrosCostoConsulta" title="Centros de costo (2)"  description="Consulta de saldos y movimientos por centros de costo" roles="Contab" />
+            <siteMapNode url="~/Contab/Consultas contables/BalanceGeneral/BalanceGeneral.aspx" title="Balance General y GyP"  description="Para obtener las consultas balance general y ganancias y pérdidas" roles="Contab" />
+        </siteMapNode>
+
+        <siteMapNode url="" title="Presupuesto"  description="Control de presupuesto" roles="Presupuesto">
+            <siteMapNode url="~/Contab/Presupuesto/Configuracion/Configuracion.aspx" title="Configuración"  description="Acciones necesarias para la configuración del control presupuestario" roles="Presupuesto" />
+            <siteMapNode url="" title="Consultas"  description="Control de presupuesto - consultas" roles="Presupuesto">
+                <siteMapNode url="~/Contab/Presupuesto/Consultas/Mensual/ConsultaPresupuesto.aspx" title="Consulta de un mes"  description="Consulta de los códigos de presupuesto y sus montos estimados y ejecutados para un mes determinado" roles="Presupuesto" />
+                <siteMapNode url="~/Contab/Presupuesto/Consultas/Anual/ConsultaPresupuesto.aspx" title="Consulta de un año"  description="Consulta de los códigos de presupuesto y sus montos estimados y ejecutados para un año completo" roles="Presupuesto" />
+                <siteMapNode url="~/Contab/Presupuesto/Consultas/Montos estimados/MontosEstimados.aspx" title="Montos estimados"  description="Consulta de los códigos de presupuesto, sus montos estimados y las cuentas contables asociadas" roles="Presupuesto" />
+            </siteMapNode>
+        </siteMapNode>
+        <!-- 
+        <siteMapNode url="" title="Control de caja chica"  description="Control de caja chica">
+            <siteMapNode url="~/Contab/Control caja chica/Consultar/ConsultarReposiciones.aspx" title="Consultar reposiciones"  description="Control de caja chica - consultar reposisiones" />
+        </siteMapNode>
+        -->
+
+    </siteMapNode>
+
+    <siteMapNode url="" title="Activos fijos"  description="" roles="AF">
+      <siteMapNode url="" title="Consultas"  description="Activos fijos - Consultas" roles="AF">
+        <siteMapNode url="~/ActivosFijos/Consultas/DepreciacionMensual/DepreciacionMensual_Page.aspx" title="Depreciación mensual"  description="Activos fijos - Depreciación mensual - Consulta (y reporte)" roles="AF" />
+      </siteMapNode>
+    </siteMapNode>
+
+
+    <siteMapNode url="" title="Caja chica"  description="Control de caja chica" roles="CajaChica">
+      <siteMapNode url="~/CajaChica/ReposicionesCajaChica/Index" title="Reposiciones de caja chica"  description="Actualizar reposiciones de caja chica" roles="CajaChica" />
+    </siteMapNode>
+
+    <siteMapNode url="" title="Generales"  description="Opciones genéricas del programa" roles="*">
+        <siteMapNode url="~/Generales/SeleccionarCiaContab/SeleccionarCiaContab.aspx" title="Seleccionar compañía"  description="Para seleccionar una Cia Contab" roles="*" />
+    </siteMapNode>
+    
+    <siteMapNode title="Otros"  description="" roles="*">
+
+        <siteMapNode url="~/Otros/CambiarPassword.aspx" title="Cambiar password"  description="Para cambiar el password actual del usuario" roles="*" />
+        
+        <siteMapNode url="" title="Control de acceso"  description="Para mantener el control de acceso de los usuarios a las opciones de la aplicación" roles="Administradores">
+            <siteMapNode url="~/Otros/Control acceso/AgregarUsuario.aspx" title="Agregar/actualizar usuarios"  description="Agregar/actualizar usuarios" roles="Administradores" />
+            <siteMapNode url="~/Otros/Control acceso/Roles.aspx" title="Agregar/actualizar roles"  description="Agregar/actualizar roles" roles="Administradores" />
+            <siteMapNode url="~/Otros/Control acceso/AsociarRolesUsuarios.aspx" title="Asociar roles y usuarios"  description="Asociar roles y usuarios" roles="Administradores" />
+            <siteMapNode url="~/Otros/Control acceso/AsociarFuncionesRoles.aspx" title="Asociar funciones a roles"  description="Asociar funciones a roles" />
+        </siteMapNode>
+
+    </siteMapNode>
+
+  </siteMapNode>
+</siteMap>

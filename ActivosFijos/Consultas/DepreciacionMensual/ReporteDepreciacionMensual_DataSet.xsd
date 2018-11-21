@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReporteDepreciacionMensual_DataSet" targetNamespace="http://tempuri.org/ReporteFacturas_DataSet.xsd" xmlns:mstns="http://tempuri.org/ReporteFacturas_DataSet.xsd" xmlns="http://tempuri.org/ReporteFacturas_DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="dbContabConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="dbContabConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.dbContabConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vtTempActivosFijos_ConsultaDepreciacionTableAdapter" GeneratorDataComponentClassName="vtTempActivosFijos_ConsultaDepreciacionTableAdapter" Name="vtTempActivosFijos_ConsultaDepreciacion" UserDataComponentName="vtTempActivosFijos_ConsultaDepreciacionTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="dbContabConnectionString (Web.config)" DbObjectName="dbContabRisk.dbo.vtTempActivosFijos_ConsultaDepreciacion" DbObjectType="View" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT NombreCiaContab, AbreviaturaCiaContab, NombreDepartamento, NombreTipoProducto, Producto, DescripcionProducto, FechaCompra, FechaDesincorporacion, DepreciarDesde, DepreciarDesdeMes, DepreciarDesdeAno, DepreciarHasta, DepreciarHastaMes, DepreciarHastaAno, CantidadMesesADepreciar, DepAcum_CantMeses, DepAcum_CantMeses_AnoActual, RestaPorDepreciar_Meses, CostoTotal, MontoADepreciar, DepreciacionMensual, DepAcum_AnoActual, DepAcum_Total, RestaPorDepreciar, NombreUsuario FROM dbo.vtTempActivosFijos_ConsultaDepreciacion</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="NombreCiaContab" DataSetColumn="NombreCiaContab" />
+              <Mapping SourceColumn="AbreviaturaCiaContab" DataSetColumn="AbreviaturaCiaContab" />
+              <Mapping SourceColumn="NombreDepartamento" DataSetColumn="NombreDepartamento" />
+              <Mapping SourceColumn="NombreTipoProducto" DataSetColumn="NombreTipoProducto" />
+              <Mapping SourceColumn="Producto" DataSetColumn="Producto" />
+              <Mapping SourceColumn="DescripcionProducto" DataSetColumn="DescripcionProducto" />
+              <Mapping SourceColumn="FechaCompra" DataSetColumn="FechaCompra" />
+              <Mapping SourceColumn="DepreciarDesde" DataSetColumn="DepreciarDesde" />
+              <Mapping SourceColumn="DepreciarDesdeMes" DataSetColumn="DepreciarDesdeMes" />
+              <Mapping SourceColumn="DepreciarDesdeAno" DataSetColumn="DepreciarDesdeAno" />
+              <Mapping SourceColumn="DepreciarHasta" DataSetColumn="DepreciarHasta" />
+              <Mapping SourceColumn="DepreciarHastaMes" DataSetColumn="DepreciarHastaMes" />
+              <Mapping SourceColumn="DepreciarHastaAno" DataSetColumn="DepreciarHastaAno" />
+              <Mapping SourceColumn="CantidadMesesADepreciar" DataSetColumn="CantidadMesesADepreciar" />
+              <Mapping SourceColumn="DepAcum_CantMeses" DataSetColumn="DepAcum_CantMeses" />
+              <Mapping SourceColumn="DepAcum_CantMeses_AnoActual" DataSetColumn="DepAcum_CantMeses_AnoActual" />
+              <Mapping SourceColumn="RestaPorDepreciar_Meses" DataSetColumn="RestaPorDepreciar_Meses" />
+              <Mapping SourceColumn="MontoADepreciar" DataSetColumn="MontoADepreciar" />
+              <Mapping SourceColumn="DepreciacionMensual" DataSetColumn="DepreciacionMensual" />
+              <Mapping SourceColumn="DepAcum_AnoActual" DataSetColumn="DepAcum_AnoActual" />
+              <Mapping SourceColumn="DepAcum_Total" DataSetColumn="DepAcum_Total" />
+              <Mapping SourceColumn="RestaPorDepreciar" DataSetColumn="RestaPorDepreciar" />
+              <Mapping SourceColumn="NombreUsuario" DataSetColumn="NombreUsuario" />
+              <Mapping SourceColumn="FechaDesincorporacion" DataSetColumn="FechaDesincorporacion" />
+              <Mapping SourceColumn="CostoTotal" DataSetColumn="CostoTotal" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="dbContabConnectionString (Web.config)" DbObjectName="dbContabRisk.dbo.vtTempActivosFijos_ConsultaDepreciacion" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByNombreUsuario" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByNombreUsuario" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByNombreUsuario">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT AbreviaturaCiaContab, CantidadMesesADepreciar, CostoTotal, DepAcum_AnoActual, DepAcum_CantMeses, DepAcum_CantMeses_AnoActual, DepAcum_Total, DepreciacionMensual, DepreciarDesde, DepreciarDesdeAno, DepreciarDesdeMes, DepreciarHasta, DepreciarHastaAno, DepreciarHastaMes, DescripcionProducto, FechaCompra, FechaDesincorporacion, MontoADepreciar, NombreCiaContab, NombreDepartamento, NombreTipoProducto, NombreUsuario, Producto, RestaPorDepreciar, RestaPorDepreciar_Meses FROM vtTempActivosFijos_ConsultaDepreciacion WHERE (NombreUsuario = @NombreUsuario)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="NombreUsuario" ColumnName="NombreUsuario" DataSourceName="dbContabRisk.dbo.vtTempActivosFijos_ConsultaDepreciacion" DataTypeServer="nvarchar(256)" DbType="String" Direction="Input" ParameterName="@NombreUsuario" Precision="0" ProviderType="NVarChar" Scale="0" Size="256" SourceColumn="NombreUsuario" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReporteDepreciacionMensual_DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="ReporteDepreciacionMensual_DataSet" msprop:Generator_UserDSName="ReporteDepreciacionMensual_DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vtTempActivosFijos_ConsultaDepreciacion" msprop:Generator_TableClassName="vtTempActivosFijos_ConsultaDepreciacionDataTable" msprop:Generator_TableVarName="tablevtTempActivosFijos_ConsultaDepreciacion" msprop:Generator_TablePropName="vtTempActivosFijos_ConsultaDepreciacion" msprop:Generator_RowDeletingName="vtTempActivosFijos_ConsultaDepreciacionRowDeleting" msprop:Generator_RowChangingName="vtTempActivosFijos_ConsultaDepreciacionRowChanging" msprop:Generator_RowEvHandlerName="vtTempActivosFijos_ConsultaDepreciacionRowChangeEventHandler" msprop:Generator_RowDeletedName="vtTempActivosFijos_ConsultaDepreciacionRowDeleted" msprop:Generator_UserTableName="vtTempActivosFijos_ConsultaDepreciacion" msprop:Generator_RowChangedName="vtTempActivosFijos_ConsultaDepreciacionRowChanged" msprop:Generator_RowEvArgName="vtTempActivosFijos_ConsultaDepreciacionRowChangeEvent" msprop:Generator_RowClassName="vtTempActivosFijos_ConsultaDepreciacionRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NombreCiaContab" msprop:Generator_ColumnVarNameInTable="columnNombreCiaContab" msprop:Generator_ColumnPropNameInRow="NombreCiaContab" msprop:Generator_ColumnPropNameInTable="NombreCiaContabColumn" msprop:Generator_UserColumnName="NombreCiaContab">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AbreviaturaCiaContab" msprop:Generator_ColumnVarNameInTable="columnAbreviaturaCiaContab" msprop:Generator_ColumnPropNameInRow="AbreviaturaCiaContab" msprop:Generator_ColumnPropNameInTable="AbreviaturaCiaContabColumn" msprop:Generator_UserColumnName="AbreviaturaCiaContab">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreDepartamento" msprop:Generator_ColumnVarNameInTable="columnNombreDepartamento" msprop:Generator_ColumnPropNameInRow="NombreDepartamento" msprop:Generator_ColumnPropNameInTable="NombreDepartamentoColumn" msprop:Generator_UserColumnName="NombreDepartamento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreTipoProducto" msprop:Generator_ColumnVarNameInTable="columnNombreTipoProducto" msprop:Generator_ColumnPropNameInRow="NombreTipoProducto" msprop:Generator_ColumnPropNameInTable="NombreTipoProductoColumn" msprop:Generator_UserColumnName="NombreTipoProducto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Producto" msprop:Generator_ColumnVarNameInTable="columnProducto" msprop:Generator_ColumnPropNameInRow="Producto" msprop:Generator_ColumnPropNameInTable="ProductoColumn" msprop:Generator_UserColumnName="Producto">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DescripcionProducto" msprop:Generator_ColumnVarNameInTable="columnDescripcionProducto" msprop:Generator_ColumnPropNameInRow="DescripcionProducto" msprop:Generator_ColumnPropNameInTable="DescripcionProductoColumn" msprop:Generator_UserColumnName="DescripcionProducto">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaCompra" msprop:Generator_ColumnVarNameInTable="columnFechaCompra" msprop:Generator_ColumnPropNameInRow="FechaCompra" msprop:Generator_ColumnPropNameInTable="FechaCompraColumn" msprop:Generator_UserColumnName="FechaCompra" type="xs:dateTime" />
+              <xs:element name="DepreciarDesde" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDepreciarDesde" msprop:Generator_ColumnPropNameInRow="DepreciarDesde" msprop:Generator_ColumnPropNameInTable="DepreciarDesdeColumn" msprop:Generator_UserColumnName="DepreciarDesde" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="61" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DepreciarDesdeMes" msprop:Generator_ColumnVarNameInTable="columnDepreciarDesdeMes" msprop:Generator_ColumnPropNameInRow="DepreciarDesdeMes" msprop:Generator_ColumnPropNameInTable="DepreciarDesdeMesColumn" msprop:Generator_UserColumnName="DepreciarDesdeMes" type="xs:short" />
+              <xs:element name="DepreciarDesdeAno" msprop:Generator_ColumnVarNameInTable="columnDepreciarDesdeAno" msprop:Generator_ColumnPropNameInRow="DepreciarDesdeAno" msprop:Generator_ColumnPropNameInTable="DepreciarDesdeAnoColumn" msprop:Generator_UserColumnName="DepreciarDesdeAno" type="xs:short" />
+              <xs:element name="DepreciarHasta" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDepreciarHasta" msprop:Generator_ColumnPropNameInRow="DepreciarHasta" msprop:Generator_ColumnPropNameInTable="DepreciarHastaColumn" msprop:Generator_UserColumnName="DepreciarHasta" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="61" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DepreciarHastaMes" msprop:Generator_ColumnVarNameInTable="columnDepreciarHastaMes" msprop:Generator_ColumnPropNameInRow="DepreciarHastaMes" msprop:Generator_ColumnPropNameInTable="DepreciarHastaMesColumn" msprop:Generator_UserColumnName="DepreciarHastaMes" type="xs:short" />
+              <xs:element name="DepreciarHastaAno" msprop:Generator_ColumnVarNameInTable="columnDepreciarHastaAno" msprop:Generator_ColumnPropNameInRow="DepreciarHastaAno" msprop:Generator_ColumnPropNameInTable="DepreciarHastaAnoColumn" msprop:Generator_UserColumnName="DepreciarHastaAno" type="xs:short" />
+              <xs:element name="CantidadMesesADepreciar" msprop:Generator_ColumnVarNameInTable="columnCantidadMesesADepreciar" msprop:Generator_ColumnPropNameInRow="CantidadMesesADepreciar" msprop:Generator_ColumnPropNameInTable="CantidadMesesADepreciarColumn" msprop:Generator_UserColumnName="CantidadMesesADepreciar" type="xs:short" />
+              <xs:element name="DepAcum_CantMeses" msprop:Generator_ColumnVarNameInTable="columnDepAcum_CantMeses" msprop:Generator_ColumnPropNameInRow="DepAcum_CantMeses" msprop:Generator_ColumnPropNameInTable="DepAcum_CantMesesColumn" msprop:Generator_UserColumnName="DepAcum_CantMeses" type="xs:short" />
+              <xs:element name="DepAcum_CantMeses_AnoActual" msprop:Generator_ColumnVarNameInTable="columnDepAcum_CantMeses_AnoActual" msprop:Generator_ColumnPropNameInRow="DepAcum_CantMeses_AnoActual" msprop:Generator_ColumnPropNameInTable="DepAcum_CantMeses_AnoActualColumn" msprop:Generator_UserColumnName="DepAcum_CantMeses_AnoActual" type="xs:short" />
+              <xs:element name="RestaPorDepreciar_Meses" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnRestaPorDepreciar_Meses" msprop:Generator_ColumnPropNameInRow="RestaPorDepreciar_Meses" msprop:Generator_ColumnPropNameInTable="RestaPorDepreciar_MesesColumn" msprop:Generator_UserColumnName="RestaPorDepreciar_Meses" type="xs:short" minOccurs="0" />
+              <xs:element name="MontoADepreciar" msprop:Generator_ColumnVarNameInTable="columnMontoADepreciar" msprop:Generator_ColumnPropNameInRow="MontoADepreciar" msprop:Generator_ColumnPropNameInTable="MontoADepreciarColumn" msprop:Generator_UserColumnName="MontoADepreciar" type="xs:decimal" />
+              <xs:element name="DepreciacionMensual" msprop:Generator_ColumnVarNameInTable="columnDepreciacionMensual" msprop:Generator_ColumnPropNameInRow="DepreciacionMensual" msprop:Generator_ColumnPropNameInTable="DepreciacionMensualColumn" msprop:Generator_UserColumnName="DepreciacionMensual" type="xs:decimal" />
+              <xs:element name="DepAcum_AnoActual" msprop:Generator_ColumnVarNameInTable="columnDepAcum_AnoActual" msprop:Generator_ColumnPropNameInRow="DepAcum_AnoActual" msprop:Generator_ColumnPropNameInTable="DepAcum_AnoActualColumn" msprop:Generator_UserColumnName="DepAcum_AnoActual" type="xs:decimal" />
+              <xs:element name="DepAcum_Total" msprop:Generator_ColumnVarNameInTable="columnDepAcum_Total" msprop:Generator_ColumnPropNameInRow="DepAcum_Total" msprop:Generator_ColumnPropNameInTable="DepAcum_TotalColumn" msprop:Generator_UserColumnName="DepAcum_Total" type="xs:decimal" />
+              <xs:element name="RestaPorDepreciar" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnRestaPorDepreciar" msprop:Generator_ColumnPropNameInRow="RestaPorDepreciar" msprop:Generator_ColumnPropNameInTable="RestaPorDepreciarColumn" msprop:Generator_UserColumnName="RestaPorDepreciar" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NombreUsuario" msprop:Generator_ColumnVarNameInTable="columnNombreUsuario" msprop:Generator_ColumnPropNameInRow="NombreUsuario" msprop:Generator_ColumnPropNameInTable="NombreUsuarioColumn" msprop:Generator_UserColumnName="NombreUsuario">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="256" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaDesincorporacion" msprop:Generator_ColumnVarNameInTable="columnFechaDesincorporacion" msprop:Generator_ColumnPropNameInRow="FechaDesincorporacion" msprop:Generator_ColumnPropNameInTable="FechaDesincorporacionColumn" msprop:Generator_UserColumnName="FechaDesincorporacion" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CostoTotal" msprop:Generator_ColumnVarNameInTable="columnCostoTotal" msprop:Generator_ColumnPropNameInRow="CostoTotal" msprop:Generator_ColumnPropNameInTable="CostoTotalColumn" msprop:Generator_UserColumnName="CostoTotal" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

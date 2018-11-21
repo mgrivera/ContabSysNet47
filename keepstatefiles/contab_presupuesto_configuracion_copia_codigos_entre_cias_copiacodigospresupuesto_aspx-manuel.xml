@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProcessState>
+  <Values>
+    <CantidadCodigosEliminados>0</CantidadCodigosEliminados>
+    <CantidadCodigosCopiados>0</CantidadCodigosCopiados>
+    <CantidadCuentasContablesAsociadasCopiadas>0</CantidadCuentasContablesAsociadasCopiadas>
+    <CantidadCuentasContablesAsociadasNoCopiadas>0</CantidadCuentasContablesAsociadasNoCopiadas>
+    <CantidadRegistrosMontosCopiados>0</CantidadRegistrosMontosCopiados>
+    <Error>
+      <ErrorFlag>0</ErrorFlag>
+      <ErrorMessage></ErrorMessage>
+    </Error>
+  </Values>
+</ProcessState>

@@ -1,0 +1,201 @@
+﻿.generalfont
+{
+  font-family: tahoma;
+  font-size: small;
+}
+.smallfont
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+}
+.smallfont2
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+}
+.smallfont_blue
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    color: #0000FF;
+}
+.notsosmallfont
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+.notsosmallfont_blue
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #0000FF;
+}
+.errmessage
+{
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #663333;
+	text-align: left;
+}
+.errmessage_background
+{
+	background-color: #FFFCD6;
+	border: 1px solid #ECA67D;
+}
+.infomessage
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #444444;
+    text-align: left;
+}
+.infomessage_background
+{
+    background-color: #F4F4F4;
+    border: 1px solid #808080;
+}
+.FontMediumBoldNavy
+{
+    font-size: 12px;
+    font-weight: bold;
+    color: #000080;
+}
+.Font14BoldNavy
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: #000080;
+}
+ .popup_form_border 
+{
+    border: 1px solid #0063C6;
+}
+ .popup_container
+{
+    padding: 0px 3px 3px 3px;
+    border: 1px solid #808000;
+    background-color: #CFE5FA;
+}
+  .inner_container
+{
+    border: 1px solid #808000;
+    background-color: #FFFFFF;
+}
+.popup_form_content
+{
+    padding: 10px;
+    font-size: small;
+}
+.popup_form_header
+{
+    padding: 3px;
+    font-size: small;
+}
+.popup_form_footer 
+{
+    padding: 10px;
+    background-color: #EEEEEE;
+    text-align: right; 
+}
+.popup_CloseX
+{
+    border: 0px solid #C0C0C0;
+    /*padding: 3px;*/
+    background-color: #BC4740;
+    color: #FFFFFF;
+    font-size: small;
+    width: 10px; 
+    height: 5px; 
+}
+tr.ListViewHeader
+{
+  background-color: #0063C6;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+.ListViewHeader_Suave    
+{
+	background-color: #7A90C3;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.ListViewFooter
+{
+    background-color: gray;
+    color: #000000;
+    font-weight: bold;
+}
+tr.ListViewRow
+{
+  background-color: #FFFFFF;
+}
+tr.ListViewAlternatingRow
+{
+  background-color: #F4F4F4;
+}
+tr.ListViewSelectedRow
+{
+  background-color: #FFFFDF;
+}
+th.ListViewColHeader
+{
+padding-top: 5px; 
+padding-bottom: 5px; 
+padding-left: 15px; 
+}
+td.ListViewNormalCell
+{
+padding-left: 15px; 
+}
+h1, h2, h3, h4, h5, h6
+{
+color: #000080;
+}
+.padded
+{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+a.ListViewColHeader:link    { color:#FFFFFF; text-decoration:underline; font-weight:bold; }
+a.ListViewColHeader:visited { color:#FFFFFF; text-decoration:underline; font-weight:bold; }
+a.ListViewColHeader:hover   { color:#FFFFFF; text-decoration:underline; font-weight:bold; }
+a.ListViewColHeader:active  { color:#FFFFFF; text-decoration:underline; font-weight:bold; }
+
+.myDropdownlist
+{
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    width:250px;
+    border:1px; border-color:#007FAA;
+}
+
+fieldset
+{
+    padding: 20px;
+    border: 1px solid #808080;
+}
+
+legend
+{
+    font-size: small;
+    color: #0000FF;
+}
+
+.MyCalendar .ajax__calendar_container
+{
+    border: 1px solid #646464;
+    background-color: lemonchiffon;
+    color: red;
+    font-size: small;
+}
+
+/*param mostrar un (asp.net) button como un link (a)*/ 
+.ButtonAsLink{
+   background-color:transparent;
+   border:none;
+   color:blue;
+   cursor:pointer;
+   text-decoration:underline;
+   /*font-weight:bold;*/
+   padding: 0;
+ }
+

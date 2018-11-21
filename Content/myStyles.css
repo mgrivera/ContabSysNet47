@@ -1,0 +1,122 @@
+.errorMessage {
+    border: 1px solid #ECA67D; 
+    color: #665B8A; 
+    background: #FFFCD6; 
+    padding: 8px; 
+}
+
+.infoMessage {
+    border: 2px solid #F5F5F6; 
+    color: #3E3F41; 
+    background: #EEF1F8; 
+    padding: 8px; 
+}
+
+/*-------------------------------------------------------------------------------------------------------------*/
+/* found in the web: loading animation markup ... para mostrar un animation cuando se ejecuta un ajax function */
+
+#loading1 {
+    margin-top: 30px;
+    float: left;
+    margin-left: 30px;
+}
+
+.Columns1 {
+    background-color: #39F;
+    border: 1px solid #00F;
+    float: left;
+    height: 30px;
+    margin-left: 5px;
+    width: 8px;
+    -webkit-animation-name: animation1;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: linear;
+    opacity: 0.2;
+    -webkit-transform: scale(0.6);
+}
+
+#Column11 {
+    -webkit-animation-delay: .3s;
+}
+
+#Column22 {
+    -webkit-animation-delay: .4s;
+}
+
+#Column33 {
+    -webkit-animation-delay: .5s;
+}
+
+#Column44 {
+    -webkit-animation-delay: .6s;
+}
+
+#Column55 {
+    -webkit-animation-delay: .7s;
+}
+
+#Column66 {
+    -webkit-animation-delay: .8s;
+}
+
+@-webkit-keyframes animation1 {
+    0% {
+        -webkit-transform: scale(.9);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(.2);
+        opacity: 0.1;
+    }
+}
+/*-------------------------------------------------------------------------------------------------------------*/
+/* jquery ui styling */
+div.ui-datepicker {
+    font-size: 80%;
+}
+
+/* para eliminar el 'spin-button' en input type"number" ... */
+
+input.noSpinButton::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input.noSpinButton::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.menu-links { 
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+    font-size: 16px; 
+    font-weight: 400;
+}
+
+.menu-links-sm { 
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+    font-size: small; 
+    font-weight: 400;
+}
+
+.menu-links-xsm { 
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+    font-size: x-small; 
+    font-weight: 400;
+}
+
+a.menu-links-xsm:hover {
+    background-color: #E5E5E5;
+}
+
+.ui-viewBorder {
+  border-radius: 5px;
+  border: solid 1px lightgray;
+  text-align: center;
+  padding: 10px 40px 10px 40px;
+}
+
+.validation-message {
+  color: red;
+  font-size: small; 
+}

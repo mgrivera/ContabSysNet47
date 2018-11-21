@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container" ng-app="myApp" ng-controller="MainController">
+
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center; vertical-align: middle; ">
+            <i style="color: #428BCA" class="fa fa-circle-o-notch fa-spin fa-2x" ng-show="showProgress"></i>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h4>Libros de Compras y Ventas - Obtener en Excel</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                <span ng-bind-html="alert.msg | unsafe"></span>
+            </alert>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="form-group">
+                <label for="seleccionarOpcionSelect" class="col-sm-4 col-sm-offset-0 control-label myinput-sm">Seleccione una opción: </label>
+                <div class="col-sm-8">
+                    <select id="seleccionarOpcionSelect"
+                            class="form-control input-sm myinput-sm"
+                            ng-model="opcionSeleccionadaPorUsuario"
+                            ng-change="opcionSeleccionada()"
+                            ng-options="item as item.descripcion for item in opcionesPrograma"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="form-group">
+                <label for="seleccionarPlantillaSelect" class="col-sm-4 col-sm-offset-0 control-label myinput-sm">Seleccione una plantilla: </label>
+                <div class="col-sm-8">
+                    <select id="seleccionarPlantillaSelect"
+                            class="form-control input-sm myinput-sm"
+                            ng-model="plantillaSeleccionadaPorUsuario"
+                            ng-options="item as item for item in plantillasListaUsuario"
+                            ng-model-options="{ updateOn: 'blur' }"
+                            multiple
+                            size="8"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <div class="row">
+
+        <div class="col-sm-2 col-sm-offset-3">
+            <button type="button" class="btn btn-primary" ng-click="construirConsulta()">Construir consulta</button>
+        </div>
+
+        <div class="col-sm-3 col-sm-offset-1">
+            <a ng-href="{{ uriFileDownload }}">Descargar (download)</a>
+        </div>
+    </div>
+
+
+    <!-- --------------------------------------------------------------------------- -->
+    <!-- modal para mostrar algún mensaje al usuario y esperar una confirmación ... -->
+
+    <script type="text/ng-template" id="dialogModalContent.html">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 class="modal-title">
+                <span ng-bind-html="dialogData.titulo | unsafe" />
+            </h5>
+        </div>
+
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1" style="font-size: small; ">
+                        <span ng-bind-html="dialogData.mensaje | unsafe"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">Ok</button>
+            <button class="btn btn-warning" ng-click="cancel()" ng-show="mostrarCancelButton">Cancelar</button>
+        </div>
+    </script>
+
+</div>
+
+<script src="~/Scripts/code/bancos/facturas/facturasConsultasExportarExcel.js"></script>
