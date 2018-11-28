@@ -30,13 +30,13 @@ public partial class Bancos_VencimientoFacturas_VencimientoFacturas_Filter {
     protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
     
     /// <summary>
-    /// Desde_TextBox control.
+    /// Hasta_TextBox control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox Desde_TextBox;
+    protected global::System.Web.UI.WebControls.TextBox Hasta_TextBox;
     
     /// <summary>
     /// Desde_TextBox_CalendarExtender control.
@@ -48,13 +48,13 @@ public partial class Bancos_VencimientoFacturas_VencimientoFacturas_Filter {
     protected global::AjaxControlToolkit.CalendarExtender Desde_TextBox_CalendarExtender;
     
     /// <summary>
-    /// DesdeCalendar_PopUpButton control.
+    /// HastaCalendar_PopUpButton control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.ImageButton DesdeCalendar_PopUpButton;
+    protected global::System.Web.UI.WebControls.ImageButton HastaCalendar_PopUpButton;
     
     /// <summary>
     /// RequiredFieldValidator1 control.
@@ -73,6 +73,42 @@ public partial class Bancos_VencimientoFacturas_VencimientoFacturas_Filter {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+    
+    /// <summary>
+    /// Desde_TextBox control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox Desde_TextBox;
+    
+    /// <summary>
+    /// CalendarExtender1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
+    
+    /// <summary>
+    /// ImageButton1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+    
+    /// <summary>
+    /// CompareValidator2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CompareValidator CompareValidator2;
     
     /// <summary>
     /// Sql_Facturas_NumeroFactura_String control.

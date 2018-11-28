@@ -265,9 +265,6 @@
     <Content Include="Scripts\code\cajaChica\ReposicionesCajaChica\ActualizarReposiciones - Old.js" />
     <Content Include="Areas\Contabilidad\Reports\ReportViewer.aspx" />
     <Content Include="Bancos\CierresBancariosEfectuados.aspx" />
-    <Content Include="Bancos\ConciliacionBancaria\ConciliacionBancaria.aspx" />
-    <Content Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_Criterios.aspx" />
-    <Content Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_UploadMovBanco.aspx" />
     <Content Include="Bancos\Consultas facturas\Facturas\Facturas.aspx" />
     <Content Include="Bancos\Consultas facturas\Facturas\Facturas_Detalles.aspx" />
     <Content Include="Bancos\Consultas facturas\Facturas\Facturas_Filter.aspx" />
@@ -1159,28 +1156,6 @@
     </Compile>
     <Compile Include="Bancos\CierresBancariosEfectuados.aspx.designer.cs">
       <DependentUpon>CierresBancariosEfectuados.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_Report_ConsultaMovBanco.cs" />
-    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria.aspx.cs">
-      <DependentUpon>ConciliacionBancaria.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria.aspx.designer.cs">
-      <DependentUpon>ConciliacionBancaria.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_Criterios.aspx.cs">
-      <DependentUpon>ConciliacionBancaria_Criterios.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_Criterios.aspx.designer.cs">
-      <DependentUpon>ConciliacionBancaria_Criterios.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_UploadMovBanco.aspx.cs">
-      <DependentUpon>ConciliacionBancaria_UploadMovBanco.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Bancos\ConciliacionBancaria\ConciliacionBancaria_UploadMovBanco.aspx.designer.cs">
-      <DependentUpon>ConciliacionBancaria_UploadMovBanco.aspx</DependentUpon>
     </Compile>
     <Compile Include="Bancos\Consultas facturas\Facturas\Facturas_ExportarAExcel.aspx.cs">
       <DependentUpon>Facturas_ExportarAExcel.aspx</DependentUpon>
@@ -2422,9 +2397,6 @@
   <ItemGroup>
     <EmbeddedResource Include="ActivosFijos\Consultas\DepreciacionMensual\ConsultaDepreciacion.rdlc" />
     <EmbeddedResource Include="Areas\Contabilidad\Reports\CentrosCosto.rdlc" />
-    <EmbeddedResource Include="Bancos\ConciliacionBancaria\MovimientosContables.rdlc" />
-    <EmbeddedResource Include="Bancos\ConciliacionBancaria\MovimientosBancarios.rdlc" />
-    <EmbeddedResource Include="Bancos\ConciliacionBancaria\MovimientosDesdeElBanco.rdlc" />
     <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\ComprobanteRetencionIva.rdlc" />
     <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_Generales.rdlc" />
     <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_Generales2.rdlc" />

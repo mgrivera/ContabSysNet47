@@ -11,8 +11,7 @@
 
         <h4>Contab - Asientos contables - Funciones</h4>
     
-        <span id="GeneralMessage_Span" runat="server" class="infomessage infomessage_background generalfont"
-           style="display: block;"></span>
+        <span id="GeneralMessage_Span" runat="server" class="infomessage infomessage_background generalfont" style="display: block;"></span>
 
         <asp:ValidationSummary ID="ValidationSummary1" 
                                    runat="server" 

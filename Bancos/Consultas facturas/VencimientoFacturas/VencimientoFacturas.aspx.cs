@@ -147,11 +147,21 @@ private void RefreshAndBindInfo()
                                  "Facturas.NumeroFactura, CuotasFactura.NumeroCuota, Count(*) As UniquePK_Count " +
                                  "FROM CuotasFactura " +
                                  "Inner Join Facturas On CuotasFactura.ClaveUnicaFactura = Facturas.ClaveUnica " +
-                                 "Where (Facturas.FechaRecepcion <= {0}) And " + filtro + " And (CuotasFactura.EstadoCuota <> 4) " +
+                                 "Where (Facturas.FechaRecepcion >= {0}) And (Facturas.FechaRecepcion <= {1}) And " + filtro + 
+                                 " And (CuotasFactura.EstadoCuota <> 4) " +
                                  "Group By Facturas.CxCCxPFlag, Facturas.Proveedor, Facturas.NumeroFactura, CuotasFactura.NumeroCuota " + 
                                  "Having Count(*) > 1";
 
+        DateTime fechaInicial_consulta = new DateTime(1960, 1, 1);
+
+        // la fecha de inicio de la consulta puede o no venir 
+        if (Session["FechaConsulta_Inicio"] != null)
+        {
+            fechaInicial_consulta = DateTime.Parse(Session["FechaConsulta_Inicio"].ToString()); 
+        } 
+
         var queryDuplicados = BancosDB.ExecuteQuery<FacturaDatosPK_Entity>(sSqlQueryString, 
+                                        fechaInicial_consulta.ToString("yyyy-MM-dd"), 
                                        DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("yyyy-MM-dd")).ToList();
 
         if (queryDuplicados.Count() > 0)
@@ -235,7 +245,7 @@ private void RefreshAndBindInfo()
                           "Inner Join Companias ON Facturas.Cia = Companias.Numero " +
                           "Inner Join Monedas ON Facturas.Moneda = Monedas.Moneda " +
                           "Inner Join Proveedores ON Facturas.Proveedor = Proveedores.Proveedor " +
-                          "Where Facturas.FechaRecepcion <= {0} And " + filtro + " And " + "CuotasFactura.EstadoCuota <> 4 "; 
+                          "Where Facturas.FechaRecepcion >= {0} And Facturas.FechaRecepcion <= {1} And " + filtro + " And " + "CuotasFactura.EstadoCuota <> 4 "; 
 
                     // dejamos de excluir cuotas de factura que tengan pagos y cuyo estado sea Pagada; 
                     // leemos los pagos de las cuotas más abajo y excluimos las totalmente pagadas allí 
@@ -246,7 +256,9 @@ private void RefreshAndBindInfo()
                     //"dPagos.ClaveUnicaPago = Pagos.ClaveUnica Inner Join CuotasFactura On " + 
                     //"dPagos.ClaveUnicaCuotaFactura = CuotasFactura.ClaveUnica Where Pagos.Fecha <= {0} And EstadoCuota = 3)";
 
-        var query = BancosDB.ExecuteQuery<CuotaFactura_Entity>(sSqlQueryString, DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("yyyy-MM-dd")); 
+        var query = BancosDB.ExecuteQuery<CuotaFactura_Entity>(sSqlQueryString,
+            fechaInicial_consulta.ToString("yyyy-MM-dd"), 
+            DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("yyyy-MM-dd")); 
 
         List<Bancos_VencimientoFactura> MyVencimientosFactura_List = new List<Bancos_VencimientoFactura>();
         Bancos_VencimientoFactura MyVencimientosFactura; 
