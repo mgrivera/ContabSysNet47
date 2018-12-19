@@ -8,18 +8,22 @@
    <script type="text/javascript">
        function PopupWin(url, w, h) {
            ///Parameters url=page to open, w=width, h=height
-           window.open(url, "_blank", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,top=10px,left=8px");
+           var left = parseInt((screen.availWidth / 2) - (w / 2));
+           var top = parseInt((screen.availHeight / 2) - (h / 2));
+           window.open(url, "external", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top);
        }
        function RefreshPage() {
-           window.document.getElementById("RebindFlagSpan").firstChild.value = "1";
-           window.document.forms(0).submit();
+           // nótese como usamos jquery para asignar el valor al field ... 
+           $("#RebindFlagHiddenField").val("1");
+           $("form").submit();
        }
-</script>
+    </script>
 
-<%--  para refrescar la página cuando el popup se cierra (y saber que el refresh es por eso) --%>
-<span id="RebindFlagSpan">
-    <asp:HiddenField ID="RebindFlagHiddenField" runat="server" Value="0" />
-</span>
+    <%--  para refrescar la página cuando el popup se cierra (y saber que el refresh es por eso) --%>
+    <span id="RebindFlagSpan">
+        <%-- clientIdMode 'static' para que el id permanezca hasta el cliente (browser) --%>
+        <asp:HiddenField ID="RebindFlagHiddenField" runat="server" Value="0" ClientIDMode="Static" />
+    </span>
     
     <table style="width: 100%" class="miniminheight">
     
@@ -28,33 +32,15 @@
             <td style="border: 1px solid #C0C0C0; width: 10%; vertical-align: top; background-color: #F7F7F7; text-align: center; ">
                 <br />
                
-                <a runat="server" 
-                   id="filterLink"
-                   href="javascript:PopupWin('Pagos_page_Filter.aspx', 1000, 600)">
-                        <img id="Img3" 
-                             border="0" 
-                             runat="server"
-                             alt="Para definir y aplicar un filtro que regrese los registros que se desea consultar" 
-                             src="~/Pictures/filter_25x25.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('Pagos_page_Filter.aspx', 1000, 600)">Definir y aplicar<br />un filtro</a>
-
+                <i class="fa fa-filter"></i>
+                <a href="javascript:PopupWin('Pagos_page_Filter.aspx', 1000, 680)">Definir
+                    y <br />aplicar un filtro</a>
                 <hr />
 
-                 <a runat="server" 
-                   id="reportLink"
-                   href="javascript:PopupWin('Pagos_OpcionesReportes.aspx', 1000, 600)">
-                        <img id="Img4" 
-                             runat="server"
-                             border="0" 
-                             alt="Para obtener un reporte que muestre los registros seleccionados" 
-                             src="~/Pictures/print_25x25.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('Pagos_OpcionesReportes.aspx', 1000, 600)">Reporte</a>
-
+                <i class="fa fa-print"></i>
+                <a href="javascript:PopupWin('Pagos_OpcionesReportes.aspx', 1000, 680)">Obtener <br />un reporte</a>
                 <hr />
+
             </td>
 
             <td style="vertical-align: top; ">

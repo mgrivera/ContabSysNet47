@@ -186,19 +186,11 @@ public partial class Bancos_Facturas_Facturas_Filter : System.Web.UI.Page
         KeepPageState MyKeepPageState = new KeepPageState(Membership.GetUser().UserName, this.GetType().Name.ToString());
         MyKeepPageState.SavePageStateInFile(this.Controls);
         MyKeepPageState = null;
-        // ---------------------------------------------------------------------------------------------
-
-        //System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        //sb.Append("window.opener.RefreshPage();");
-        //sb.Append("window.close();");
-
-        //ClientScript.RegisterClientScriptBlock(this.GetType(), "CloseWindowScript", sb.ToString(), true); 
 
         // ------------------------------------------------------------------------------------------------------
         // nótese lo que hacemos aquí para que RegisterStartupScript funcione cuando ejecutamos en Chrome ... 
         ScriptManager.RegisterStartupScript(this, this.GetType(),
             "CloseWindowScript",
             "<script language='javascript'>window.opener.RefreshPage(); window.close();</script>", false); 
-        
     }
 }

@@ -20,7 +20,7 @@
                             <tr>
                                 <td>Número</td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td><asp:TextBox ID="Sql_Asientos_Numero_Numeric" runat="server" Width="105px"></asp:TextBox></td>
+                                <td><asp:TextBox ID="Sql_Asientos_Numero_Numeric" runat="server" /></td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td></td>
                             </tr>
@@ -28,41 +28,17 @@
                                 <td>Período:</td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
-                                    <asp:TextBox ID="Desde_TextBox" runat="server" Width="105px"></asp:TextBox>
-
-                                    <asp:CalendarExtender ID="Desde_TextBox_CalendarExtender" runat="server" Enabled="True"
-                                        Format="dd-MM-yy" PopupButtonID="DesdeCalendar_PopUpButton" CssClass="radcalendar"
-                                        TargetControlID="Desde_TextBox">
-                                    </asp:CalendarExtender>
-
-                                    <asp:ImageButton ID="DesdeCalendar_PopUpButton" runat="server" alt="" src="../../../Pictures/Calendar.png"
-                                        CausesValidation="False" TabIndex="-1" />
+                                    <asp:TextBox ID="Desde_TextBox" runat="server" TextMode="Date" />
 
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Desde_TextBox"
                                         CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="Ud. debe indicar una fecha" Style="color: red; ">*</asp:RequiredFieldValidator>
-
-                                    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="Desde_TextBox"
-                                        CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
-                                        Operator="DataTypeCheck" Type="Date" Style="color: red; ">*</asp:CompareValidator>
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
-                                    <asp:TextBox ID="Hasta_TextBox" runat="server" Width="105px"></asp:TextBox>
-
-                                    <asp:CalendarExtender ID="Hasta_TextBox_CalendarExtender" runat="server" Enabled="True"
-                                        Format="dd-MM-yy" PopupButtonID="HastaCalendar_PopUpButton" CssClass="radcalendar"
-                                        TargetControlID="Hasta_TextBox">
-                                    </asp:CalendarExtender>
-
-                                    <asp:ImageButton ID="HastaCalendar_PopUpButton" runat="server" alt="" src="../../../Pictures/Calendar.png"
-                                        CausesValidation="False" TabIndex="-1" />
+                                    <asp:TextBox ID="Hasta_TextBox" runat="server" TextMode="Date" />
 
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Hasta_TextBox"
                                         CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="Ud. debe indicar una fecha" Style="color: red; ">*</asp:RequiredFieldValidator>
-
-                                    <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="Hasta_TextBox"
-                                        CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
-                                        Operator="DataTypeCheck" Type="Date" Style="color: red; ">*</asp:CompareValidator>
 
                                     <asp:CompareValidator ID="CompareValidator3" runat="server" ControlToValidate="Hasta_TextBox"
                                         CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El intervalo indicado no es válido."
@@ -72,14 +48,14 @@
                             <tr>
                                 <td>Lote:</td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td><asp:TextBox ID="Sql_Asientos_Lote_String" runat="server" Width="105px"></asp:TextBox></td>
+                                <td><asp:TextBox ID="Sql_Asientos_Lote_String" runat="server" /></td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Cuenta contable: </td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td><asp:TextBox ID="Sql_CuentasContables_Cuenta_String" runat="server" Width="105px" /></td>
+                                <td><asp:TextBox ID="Sql_CuentasContables_Cuenta_String" runat="server" /></td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>(nota: puede usar * para generalizar; ej: 30101*)</td>
                             </tr>

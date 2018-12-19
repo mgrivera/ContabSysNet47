@@ -156,9 +156,7 @@ private void RefreshAndBindInfo()
 
         // la fecha de inicio de la consulta puede o no venir 
         if (Session["FechaConsulta_Inicio"] != null)
-        {
             fechaInicial_consulta = DateTime.Parse(Session["FechaConsulta_Inicio"].ToString()); 
-        } 
 
         var queryDuplicados = BancosDB.ExecuteQuery<FacturaDatosPK_Entity>(sSqlQueryString, 
                                         fechaInicial_consulta.ToString("yyyy-MM-dd"), 
@@ -256,9 +254,8 @@ private void RefreshAndBindInfo()
                     //"dPagos.ClaveUnicaPago = Pagos.ClaveUnica Inner Join CuotasFactura On " + 
                     //"dPagos.ClaveUnicaCuotaFactura = CuotasFactura.ClaveUnica Where Pagos.Fecha <= {0} And EstadoCuota = 3)";
 
-        var query = BancosDB.ExecuteQuery<CuotaFactura_Entity>(sSqlQueryString,
-            fechaInicial_consulta.ToString("yyyy-MM-dd"), 
-            DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("yyyy-MM-dd")); 
+        var query = BancosDB.ExecuteQuery<CuotaFactura_Entity>(sSqlQueryString, fechaInicial_consulta.ToString("yyyy-MM-dd"), 
+                                                                                DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("yyyy-MM-dd")); 
 
         List<Bancos_VencimientoFactura> MyVencimientosFactura_List = new List<Bancos_VencimientoFactura>();
         Bancos_VencimientoFactura MyVencimientosFactura; 
@@ -470,22 +467,38 @@ private void RefreshAndBindInfo()
             }
 
         VencimientoSaldosFacturas_SqlDataSource.SelectParameters["NombreUsuario"].DefaultValue = Membership.GetUser().UserName; 
-    this.ListView1.DataBind(); 
+        this.ListView1.DataBind(); 
 
-       // --------------------------------------------------------------------------------
-       // para mostrar el período indicado por el usuario como un subtítulo de la página 
+        // --------------------------------------------------------------------------------
+        // para mostrar el período indicado por el usuario como un subtítulo de la página 
 
          HtmlContainerControl MyHtmlSpan = (HtmlContainerControl)Master.FindControl("PageSubTitle_Span");
          if (MyHtmlSpan != null)
              {
              switch (short.Parse(Session["TipoConsulta"].ToString()))
                  {
-                 case 1:             // análisis de montos por vencer 
-                     MyHtmlSpan.InnerHtml = "Antiguedad de saldos por vencer al: " + DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("dd-MMM-yy");
-                     TipoConsulta_Label.Text = "(Nota: una cantidad de días negativa indica un saldo pendiente ya vencido)"; 
-                     break;
+                 case 1:             // análisis de montos por vencer { 
+
+                    if (fechaInicial_consulta == new DateTime(1960, 1, 1))
+                        MyHtmlSpan.InnerHtml = "Antiguedad de saldos por vencer al: " + DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("dd-MMM-yy");
+                        
+                    else
+                        MyHtmlSpan.InnerHtml = "Antiguedad de saldos por vencer - " +
+                                               fechaInicial_consulta.ToString("dd-MMM-yy") + 
+                                               " al " + DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("dd-MMM-yy"); 
+
+                    TipoConsulta_Label.Text = "(Nota: una cantidad de días negativa indica un saldo pendiente ya vencido)";
+                    break;
                  case 2:             // análisis de montos vencidos 
-                    MyHtmlSpan.InnerHtml = "Antiguedad de saldos vencidos al: " + DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("dd-MMM-yy");
+                   
+                    if (fechaInicial_consulta == new DateTime(1960, 1, 1))
+                        MyHtmlSpan.InnerHtml = "Antiguedad de saldos vencidos al: " + DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("dd-MMM-yy");
+
+                    else
+                        MyHtmlSpan.InnerHtml = "Antiguedad de saldos vencidos - " +
+                                               fechaInicial_consulta.ToString("dd-MMM-yy") +
+                                               " al " + DateTime.Parse(Session["FechaConsulta"].ToString()).ToString("dd-MMM-yy");
+
                     TipoConsulta_Label.Text = "(Nota: una cantidad de días positiva indica un saldo pendiente por vencerse)"; 
                     break;
                  }

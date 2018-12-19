@@ -48,8 +48,10 @@ namespace ContabSysNet_Web.Bancos.ConsultasFacturas.Pagos
                  }
                  // -----------------------------------------------------------------------------------------------------------
 
-                 this.AplicarFiltro_Button.Focus(); 
-             }
+                 this.AplicarFiltro_Button.Focus();
+
+                Session["PagosCosulta_FiltroForma"] = null;
+            }
         }
 
         protected void LimpiarFiltro_Button_Click(object sender, EventArgs e)
@@ -77,43 +79,27 @@ namespace ContabSysNet_Web.Bancos.ConsultasFacturas.Pagos
             MyConstruirCriterioSql = null;
 
 
-            Session["FiltroForma"] = sSqlSelectString;
-
+            Session["PagosCosulta_FiltroForma"] = sSqlSelectString;
             // -------------------------------------------------------------------------------------------------------------------------
             // para guardar el contenido de los controles de la página para recuperar el state cuando se abra la proxima vez 
-
             KeepPageState MyKeepPageState = new KeepPageState(Membership.GetUser().UserName, this.GetType().Name.ToString());
             MyKeepPageState.SavePageStateInFile(this.Controls);
             MyKeepPageState = null;
 
 
             // para cerrar esta página y "refrescar" la que la abrió ... 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("window.opener.RefreshPage();");
-            sb.Append("window.close();");
-            ClientScript.RegisterClientScriptBlock(this.GetType(), "CloseWindowScript", sb.ToString(), true);
-            // ---------------------------------------------------------------------------------------------
+            // ------------------------------------------------------------------------------------------------------
+            // nótese lo que hacemos aquí para que RegisterStartupScript funcione cuando ejecutamos en Chrome ... 
+            ScriptManager.RegisterStartupScript(this, this.GetType(),
+                "CloseWindowScript",
+                "<script language='javascript'>window.opener.RefreshPage(); window.close();</script>", false);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         protected void CompaniasFilter_TextBox_TextChanged(object sender, EventArgs e)
         {
             // para seleccionar en el ListBox los registros que quiere filtrar el usuario 
             SelectListBoxItems();
         }
-
 
         private void SelectListBoxItems()
         {

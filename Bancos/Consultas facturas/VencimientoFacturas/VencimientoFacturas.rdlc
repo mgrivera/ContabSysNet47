@@ -2522,7 +2522,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Iif(Parameters!TipoConsulta.Value=1, "Saldos por vencer al " &amp; Format(Parameters!FechaConsulta.Value, "dd-MMM-yyy"),  "Saldos vencidos al " &amp; Format(Parameters!FechaConsulta.Value, "dd-MMM-yyyy"))</Value>
+                      <Value>=Parameters!SubTitulo.Value</Value>
                       <Style>
                         <FontFamily>Tahoma</FontFamily>
                         <FontSize>11pt</FontSize>
@@ -2668,16 +2668,6 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="TipoConsulta">
-      <DataType>Integer</DataType>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>Report_Parameter_0</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="FechaConsulta">
-      <DataType>DateTime</DataType>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>Report_Parameter_1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="CantDias1">
       <DataType>Integer</DataType>
       <AllowBlank>true</AllowBlank>
@@ -2693,22 +2683,20 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>Report_Parameter_4</Prompt>
     </ReportParameter>
+    <ReportParameter Name="SubTitulo">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TipoConsulta">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>3</NumberOfRows>
+      <NumberOfRows>4</NumberOfRows>
       <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>TipoConsulta</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>FechaConsulta</ParameterName>
-        </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>1</RowIndex>
@@ -2723,6 +2711,16 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>CantDias3</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>SubTitulo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>TipoConsulta</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

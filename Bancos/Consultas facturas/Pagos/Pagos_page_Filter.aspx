@@ -84,8 +84,7 @@
 
             </ContentTemplate>
 
-            </cc1:TabPanel>
-
+        </cc1:TabPanel>
 
         <cc1:TabPanel HeaderText="Listas" runat="server" ID="TabPanel2" >
 

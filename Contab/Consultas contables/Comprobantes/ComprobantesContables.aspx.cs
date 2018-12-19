@@ -36,7 +36,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 
             if (!Page.IsPostBack)
             {
-                Session["FiltroForma"] = null; 
+                Session["filtroForma_consultaAsientosContables"] = null; 
 
                 // Gets a reference to a Label control that is not in a
                 // ContentPlaceHolder control

@@ -54,10 +54,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                 Session["FechaFinal"] = null;
                 Session["CiaContabSeleccionada"] = null;
 
-                Session["SoloAsientosDescuadrados_CheckBox"] = null;
-                Session["ExcluirAsientosDeTipoCierreAnual_CheckBox"] = null;
-                Session["SoloAsientosTipoCierreAnual_CheckBox"] = null;
-                Session["SoloAsientosConMas2Decimales_CheckBox"] = null;                             
+                Session["SoloAsientosDescuadrados"] = null;                           
             }
 
             this.CustomValidator1.IsValid = true;
@@ -134,7 +131,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
             Session["FechaFinal"] = Convert.ToDateTime(Hasta_TextBox.Text);
             Session["CiaContabSeleccionada"] = this.Sql_Asientos_Cia_Numeric.SelectedValue;
 
-            Session["SoloAsientosDescuadrados_CheckBox"] = null;
+            Session["SoloAsientosDescuadrados"] = null;
             if (this.SoloAsientosDescuadrados_CheckBox.Checked)
             {
                 Session["SoloAsientosDescuadrados"] = true;

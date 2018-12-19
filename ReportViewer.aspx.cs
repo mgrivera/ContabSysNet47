@@ -30,6 +30,27 @@ namespace ContabSysNetWeb
 {
     public partial class ReportViewer : System.Web.UI.Page
     {
+        private class AsientoContable_Report_Item
+        {
+            public string NombreMoneda { get; set; }
+            public string NombreCiaContab { get; set; }
+            public DateTime Fecha { get; set; }
+            public int NumeroAutomatico { get; set; }
+            public short Numero { get; set; }
+            public string NombreTipo { get; set; }
+            public string SimboloMonedaOriginal { get; set; }
+            public short Partida { get; set; }
+            public string CuentaContableEditada { get; set; }
+            public string NombreCuentaContable { get; set; }
+            public string DescripcionPartida { get; set; }
+            public string ReferenciaPartida { get; set; }
+
+            public decimal Debe { get; set; }
+            public decimal Haber { get; set; }
+            public string ProvieneDe { get; set; }
+            public string DescripcionAsiento { get; set; }
+        }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!User.Identity.IsAuthenticated) {
@@ -525,7 +546,7 @@ namespace ContabSysNetWeb
                     case "comprobantescontables":
                         {
                             // nótese que en session debe venir el filtro que usó el usuario 
-                            if (Session["FiltroForma"] == null)
+                            if (Session["filtroForma_consultaAsientosContables"] == null)
                             {
                                 ErrMessage_Cell.InnerHtml = "No existe información para mostrar el reporte que Ud. ha requerido. <br /><br />" +
                                     "Probablemente Ud. no ha aplicado un filtro aún, o la sesión ha caducado.";
@@ -595,74 +616,119 @@ namespace ContabSysNetWeb
                                     }
                                 }
                             }
-                                
 
+                            string sSqlQueryString = "";
+                            string sSqlQueryString_subquery_soloAsientosDescuadrados = ""; 
 
-                            string sqlFilter = Session["FiltroForma"].ToString();
+                            if (Session["filtroForma_consultaAsientosContables_subQuery"] == null || Session["filtroForma_consultaAsientosContables_subQuery"].ToString() == "1 = 1")
+                            {
+                                // el usuario no usó criterio por cuenta contable o más de 2 decimales; no usamos sub-query 
+                                sSqlQueryString = "SELECT Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, Asientos.Fecha, Asientos.NumeroAutomatico, " +
+                                                  "Asientos.Numero, " +
+                                                  "TiposDeAsiento.Descripcion AS NombreTipo, Monedas_1.Simbolo AS SimboloMonedaOriginal, dAsientos.Partida, " +
+                                                  "CuentasContables.CuentaEditada AS CuentaContableEditada, CuentasContables.Descripcion AS NombreCuentaContable, " +
+                                                  "dAsientos.Descripcion as DescripcionPartida, dAsientos.Referencia as ReferenciaPartida, " +
+                                                  "dAsientos.Debe, dAsientos.Haber, Asientos.ProvieneDe, Asientos.Descripcion as DescripcionAsiento " +
 
+                                                  "FROM Asientos " +
 
-                            //dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
+                                                  "Left Outer Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
+
+                                                  "INNER JOIN Companias ON Asientos.Cia = Companias.Numero " +
+                                                  "INNER JOIN CuentasContables ON dAsientos.CuentaContableID = CuentasContables.ID " +
+                                                  "INNER JOIN Monedas ON Asientos.Moneda = Monedas.Moneda " +
+                                                  "INNER JOIN TiposDeAsiento ON Asientos.Tipo = TiposDeAsiento.Tipo " +
+                                                  "INNER JOIN Monedas AS Monedas_1 ON Asientos.MonedaOriginal = Monedas_1.Moneda " +
+
+                                                  "Where " + Session["filtroForma_consultaAsientosContables"].ToString();
+
+                                // construimos un subquery que será aplicado solo si el usuario desea fitrar asientos descuadrados 
+                                sSqlQueryString_subquery_soloAsientosDescuadrados = "SELECT Asientos.NumeroAutomatico " +
+                                                  "FROM Asientos " +
+                                                  "Inner Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
+                                                  "INNER JOIN CuentasContables ON dAsientos.CuentaContableID = CuentasContables.ID " +
+                                                  "Where " + Session["filtroForma_consultaAsientosContables"].ToString() + " " + 
+                                                  "Group By Asientos.NumeroAutomatico Having Sum(dAsientos.Debe) <> Sum(dAsientos.Haber)"; 
+
+                            }
+                            else
+                            {
+                                // usamos un subquery para que *solo* asientos con ciertas cuentas *o* partidas con montos con más de 2 decimales sean seleccionados
+                                sSqlQueryString = "SELECT Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, Asientos.Fecha, Asientos.NumeroAutomatico, " +
+                                                  "Asientos.Numero, " +
+                                                  "TiposDeAsiento.Descripcion AS NombreTipo, Monedas_1.Simbolo AS SimboloMonedaOriginal, dAsientos.Partida, " +
+                                                  "CuentasContables.CuentaEditada AS CuentaContableEditada, CuentasContables.Descripcion AS NombreCuentaContable, " +
+                                                  "dAsientos.Descripcion as DescripcionPartida, dAsientos.Referencia as ReferenciaPartida, " +
+                                                  "dAsientos.Debe, dAsientos.Haber, Asientos.ProvieneDe, Asientos.Descripcion as DescripcionAsiento " +
+
+                                                  "FROM Asientos " +
+                                                  "Left Outer Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
+                                                  "Left Outer Join CuentasContables On CuentasContables.ID = dAsientos.CuentaContableID " +
+
+                                                  "INNER JOIN Companias ON Asientos.Cia = Companias.Numero " +
+                                                  "INNER JOIN Monedas ON Asientos.Moneda = Monedas.Moneda " +
+                                                  "INNER JOIN TiposDeAsiento ON Asientos.Tipo = TiposDeAsiento.Tipo " +
+                                                  "INNER JOIN Monedas AS Monedas_1 ON Asientos.MonedaOriginal = Monedas_1.Moneda " +
+
+                                                  "Where " + Session["filtroForma_consultaAsientosContables"].ToString() +
+                                                  " And (Asientos.NumeroAutomatico In (SELECT Asientos.NumeroAutomatico FROM Asientos " +
+                                                  "Left Outer Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
+                                                  "Left Outer Join CuentasContables On CuentasContables.ID = dAsientos.CuentaContableID " +
+                                                  "Where " + Session["filtroForma_consultaAsientosContables"].ToString() + " And " +
+                                                  Session["filtroForma_consultaAsientosContables_subQuery"].ToString() + "))";
+
+                                sSqlQueryString_subquery_soloAsientosDescuadrados = "SELECT Asientos.NumeroAutomatico " +
+                                                  "FROM Asientos " +
+                                                  "Inner Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
+                                                  "INNER JOIN CuentasContables ON dAsientos.CuentaContableID = CuentasContables.ID " +
+                                                  "Where " + Session["filtroForma_consultaAsientosContables"].ToString() +
+                                                  " And (Asientos.NumeroAutomatico In (SELECT Asientos.NumeroAutomatico FROM Asientos " +
+                                                  "Left Outer Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
+                                                  "Left Outer Join CuentasContables On CuentasContables.ID = dAsientos.CuentaContableID " +
+                                                  "Where " + Session["filtroForma_consultaAsientosContables"].ToString() + " And " +
+                                                  Session["filtroForma_consultaAsientosContables_subQuery"].ToString() + ")) " + 
+                                                  "Group By Asientos.NumeroAutomatico Having Sum(dAsientos.Debe) <> Sum(dAsientos.Haber)";
+                            }
+
+                            if (Session["SoloAsientosDescuadrados"] != null && Convert.ToBoolean(Session["SoloAsientosDescuadrados"]))
+                            {
+                                sSqlQueryString = sSqlQueryString +
+                                    $" And Asientos.NumeroAutomatico In ({sSqlQueryString_subquery_soloAsientosDescuadrados})";
+                            }
 
                             List<Asiento2_Report> list = new List<Asiento2_Report>();
 
-                            //var query = from a in contabContext.Asientos.Where(sqlFilter)
-                            //            select a;
+                            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
 
-                            string sqlSelect =
-                                  "SELECT Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, Asientos.Fecha, Asientos.NumeroAutomatico, " + 
-                                  "Asientos.Numero, " +
-                                  "TiposDeAsiento.Descripcion AS NombreTipo, Monedas_1.Simbolo AS SimboloMonedaOriginal, dAsientos.Partida, " +
-                                  "CuentasContables.CuentaEditada AS CuentaContableEditada, CuentasContables.Descripcion AS NombreCuentaContable, " + 
-                                  "dAsientos.Descripcion, dAsientos.Referencia, " +
-                                  "dAsientos.Debe, dAsientos.Haber, Asientos.ProvieneDe, Asientos.Descripcion " +
-                                  "FROM Asientos " +
-                                  "INNER JOIN Companias ON Asientos.Cia = Companias.Numero " +
-                                  "INNER JOIN dAsientos ON Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
-                                  "INNER JOIN CuentasContables ON dAsientos.CuentaContableID = CuentasContables.ID " +
-                                  "INNER JOIN Monedas ON Asientos.Moneda = Monedas.Moneda " +
-                                  "INNER JOIN TiposDeAsiento ON Asientos.Tipo = TiposDeAsiento.Tipo " +
-                                  "INNER JOIN Monedas AS Monedas_1 ON Asientos.MonedaOriginal = Monedas_1.Moneda " +
-                                  "Where " + sqlFilter; 
-
-                            SqlConnection connection = new SqlConnection();
-                            connection.ConnectionString = ConfigurationManager.ConnectionStrings["dbContabConnectionString"].ConnectionString; 
-
-                            using (connection)
+                            using (context)
                             {
-                                SqlCommand command = new SqlCommand(sqlSelect, connection);
-                                connection.Open();
-
-                                SqlDataReader reader = command.ExecuteReader();
-
+                                List<AsientoContable_Report_Item> query = context.ExecuteStoreQuery<AsientoContable_Report_Item>(sSqlQueryString).ToList();
                                 Asiento2_Report asiento;
 
-                                while (reader.Read())
+                                foreach (var partida in query)
                                 {
                                     asiento = new Asiento2_Report();
 
-                                    asiento.NombreMoneda = reader.GetString(0);
-                                    asiento.NombreCiaContab = reader.GetString(1);
-                                    asiento.Fecha = reader.GetDateTime(2);
-                                    asiento.NumeroAutomatico = reader.GetInt32(3);
-                                    asiento.Numero = reader.GetInt16(4);
-                                    asiento.NombreTipo = reader.GetString(5);
-                                    asiento.SimboloMonedaOriginal = reader.GetString(6);
+                                    asiento.NombreMoneda = partida.NombreMoneda; 
+                                    asiento.NombreCiaContab = partida.NombreCiaContab;
+                                    asiento.Fecha = partida.Fecha;
+                                    asiento.NumeroAutomatico = partida.NumeroAutomatico;
+                                    asiento.Numero = partida.Numero;
+                                    asiento.NombreTipo = partida.NombreTipo;
+                                    asiento.SimboloMonedaOriginal = partida.SimboloMonedaOriginal;
 
-                                    asiento.Partida = reader.GetInt16(7);
-                                    asiento.CuentaContableEditada = reader.GetString(8);
-                                    asiento.NombreCuentaContable = reader.GetString(9);
-                                    asiento.Descripcion = reader.GetString(10);
-                                    asiento.Referencia = reader.IsDBNull(11) ? string.Empty : reader.GetString(11);
-                                    asiento.Debe = reader.GetDecimal(12);
-                                    asiento.Haber = reader.GetDecimal(13);
-
-                                    asiento.ProvieneDe = reader.IsDBNull(14) ? string.Empty : reader.GetString(14);
-                                    asiento.DescripcionGeneralAsientoContable = reader.IsDBNull(15) ? string.Empty : reader.GetString(15);
+                                    asiento.Partida = partida.Partida;
+                                    asiento.CuentaContableEditada = partida.CuentaContableEditada;
+                                    asiento.NombreCuentaContable = partida.NombreCuentaContable;
+                                    asiento.Descripcion = partida.DescripcionPartida;
+                                    asiento.Referencia = partida.ReferenciaPartida;
+                                    asiento.Debe = partida.Debe;
+                                    asiento.Haber = partida.Haber; 
+                                    asiento.ProvieneDe = partida.ProvieneDe;
+                                    asiento.DescripcionGeneralAsientoContable = partida.DescripcionAsiento;
 
                                     list.Add(asiento);
                                 }
-                                
-                                reader.Close();
                             }
 
                             if (list.Count == 0)
@@ -706,7 +772,6 @@ namespace ContabSysNetWeb
 
                             this.ReportViewer1.LocalReport.DataSources.Add(myReportDataSource);
 
-
                             ReportParameter FechaInicialPeriodo_ReportParameter;
                             ReportParameter FechaFinalPeriodo_ReportParameter;
 
@@ -719,7 +784,6 @@ namespace ContabSysNetWeb
                                 FechaFinalPeriodo_ReportParameter = new ReportParameter("FechaFinalPeriodo", Session["FechaFinal"].ToString());
                             else
                                 FechaFinalPeriodo_ReportParameter = new ReportParameter("FechaFinalPeriodo", "1960-1-1"); 
-
 
                             ReportParameter subTituloReportParameter = new ReportParameter("subTitulo", subtituloReporte);
                             ReportParameter tituloReportParameter = new ReportParameter("titulo", tituloReporte);
@@ -740,7 +804,6 @@ namespace ContabSysNetWeb
 
                             if (Request.QueryString["saltoPagina"] != null && !string.IsNullOrEmpty(Request.QueryString["saltoPagina"].ToString()))
                                 saltoPagina = Request.QueryString["saltoPagina"].ToString();
-
 
                             ReportParameter saltoPagina_ReportParameter = new ReportParameter("saltoPagina", saltoPagina);
                             // -----------------------------------------------------------------------------------------------------
@@ -1192,20 +1255,40 @@ namespace ContabSysNetWeb
                             this.ReportViewer1.LocalReport.DataSources.Add(myReportDataSource);
 
                             // asociamos valores a los parámetros del reporte
+                            Int16 tipoConsulta = Convert.ToInt16(Session["TipoConsulta"]);
+                            DateTime? fechaInicialConsulta = Session["FechaConsulta_Inicio"] == null ? (DateTime?)null : Convert.ToDateTime(Session["FechaConsulta_Inicio"]);
+                            DateTime fechaConsulta = Convert.ToDateTime(Session["FechaConsulta"]);
+                            string subTituloReporte = "";
 
-                            ReportParameter TipoConsulta_ReportParameter = new ReportParameter("TipoConsulta", Convert.ToInt16(Session["TipoConsulta"]).ToString());
-                            ReportParameter FechaConsulta_ReportParameter = new ReportParameter("FechaConsulta", Convert.ToDateTime(Session["FechaConsulta"]).ToString());
+                            if (tipoConsulta == 1)
+                            {
+                                if (fechaInicialConsulta == null)
+                                    subTituloReporte = $"Saldos por vencer al {fechaConsulta.ToString("dd-MMM-yyy")}";
+                                else
+                                    subTituloReporte = $"Saldos por vencer - {fechaInicialConsulta.Value.ToString("dd-MMM-yyy")} al {fechaConsulta.ToString("dd-MMM-yyy")}";
+                            }
+                            else
+                            {
+                                if (fechaInicialConsulta == null)
+                                    subTituloReporte = $"Saldos vencidos al {fechaConsulta.ToString("dd-MMM-yyy")}";
+                                else
+                                    subTituloReporte = $"Saldos vencidos - {fechaInicialConsulta.Value.ToString("dd-MMM-yyy")} al {fechaConsulta.ToString("dd-MMM-yyy")}";
+                            }
+
+                            ReportParameter SubTitulo_ReportParameter = new ReportParameter("SubTitulo", subTituloReporte);
+                            ReportParameter TipoConsulta_ReportParameter = new ReportParameter("TipoConsulta", tipoConsulta.ToString());
+
                             ReportParameter CantDias1_ReportParameter = new ReportParameter("CantDias1", Convert.ToInt16(Session["CantDias1"]).ToString());
                             ReportParameter CantDias2_ReportParameter = new ReportParameter("CantDias2", Convert.ToInt16(Session["CantDias2"]).ToString());
                             ReportParameter CantDias3_ReportParameter = new ReportParameter("CantDias3", Convert.ToInt16(Session["CantDias3"]).ToString());
 
                             ReportParameter[] MyReportParameters = 
                             { 
-                                TipoConsulta_ReportParameter, 
-                                FechaConsulta_ReportParameter, 
                                 CantDias1_ReportParameter, 
                                 CantDias2_ReportParameter, 
-                                CantDias3_ReportParameter 
+                                CantDias3_ReportParameter,
+                                SubTitulo_ReportParameter,
+                                TipoConsulta_ReportParameter
                             };
 
                             this.ReportViewer1.LocalReport.SetParameters(MyReportParameters);

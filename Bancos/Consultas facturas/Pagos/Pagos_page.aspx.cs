@@ -58,27 +58,14 @@ namespace ContabSysNet_Web.Bancos.ConsultasFacturas.Pagos
                 {
                     RebindFlagHiddenField.Value = "0";
 
-                    string sqlServerWhereString = Session["FiltroForma"].ToString();
-
-                    //short mesConsulta = (short)Session["ActFijos_Consulta_Mes"];
-                    //short anoConsulta = (short)Session["ActFijos_Consulta_Ano"];
-                    //bool excluirActivosTotalmenteDepreciadosAnosAnteiores = (bool)Session["ActFijos_ExcluirDepreciadosAnosAnteriores"];
-                    //bool aplicarInfoDesincorporados = (bool)Session["ActFijos_AplicarInfoDesincorporacion"];
-
-                    //CrearInfoReport(sqlServerWhereString); 
-                                    //mesConsulta, 
-                                    //anoConsulta, 
-                                    //excluirActivosTotalmenteDepreciadosAnosAnteiores, 
-                                    //aplicarInfoDesincorporados);
+                    string sqlServerWhereString = Session["PagosCosulta_FiltroForma"].ToString();
 
                     // ------------------------------------------------------------------------------------------------
                     // por último, refrescamos el ListView con la información preparada por la consulta ... 
-
                     Pagos_EntityDataSource.Where = sqlServerWhereString; 
                     Pagos_ListView.DataBind();
                     this.Pagos_ListView.SelectedIndex = -1; 
                 }
-
             }
         }
 

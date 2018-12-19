@@ -22,42 +22,6 @@ namespace ContabSysNet_Web.Bancos.ConsultasFacturas.Pagos {
         protected global::System.Web.UI.WebControls.HiddenField RebindFlagHiddenField;
         
         /// <summary>
-        /// filterLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor filterLink;
-        
-        /// <summary>
-        /// Img3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img3;
-        
-        /// <summary>
-        /// reportLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor reportLink;
-        
-        /// <summary>
-        /// Img4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img4;
-        
-        /// <summary>
         /// UpdatePanelAnimationExtender1 control.
         /// </summary>
         /// <remarks>

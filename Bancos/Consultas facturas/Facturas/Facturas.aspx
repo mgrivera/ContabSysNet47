@@ -4,10 +4,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="PanelCentral_ContentPlaceHolder" Runat="Server">
 
    <script type="text/javascript">
-        function PopupWin(url, w, h) {
-            ///Parameters url=page to open, w=width, h=height
-            window.open(url, "external2", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,top=10px,left=8px");
-        }
+       function PopupWin(url, w, h) {
+           ///Parameters url=page to open, w=width, h=height
+           var left = parseInt((screen.availWidth / 2) - (w / 2));
+           var top = parseInt((screen.availHeight / 2) - (h / 2));
+           window.open(url, "external", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top);
+       }
         function RefreshPage() {
             // nótese como usamos jquery para asignar el valor al field ... 
             $("#RebindFlagHiddenField").val("1");

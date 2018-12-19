@@ -2,7 +2,7 @@
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">   
-    <link href="../../../radcalendar.css" rel="stylesheet" type="text/css" />
+   
 </asp:Content>
 
 
@@ -18,26 +18,17 @@
     </div>
 
      <div class="row" style="margin-top: 15px; ">
-        <div class="col-sm-4" style="text-align: right; font-weight: bold; ">
+        <div class="col-sm-3" style="text-align: right; font-weight: bold; ">
             Facturas pendientes al:
         </div>
-        <div class="col-sm-2" style="text-align: left; ">
-            <asp:TextBox ID="Hasta_TextBox" runat="server" Width="80px"></asp:TextBox>
-            <cc1:CalendarExtender ID="Desde_TextBox_CalendarExtender" runat="server" Enabled="True"
-                Format="dd-MM-yy" PopupButtonID="DesdeCalendar_PopUpButton" CssClass="radcalendar"
-                TargetControlID="Hasta_TextBox">
-            </cc1:CalendarExtender>
-            <asp:ImageButton ID="HastaCalendar_PopUpButton" runat="server" alt="" src="../../../Pictures/Calendar.png"
-                CausesValidation="False" TabIndex="-1" />
+        <div class="col-sm-3" style="text-align: left; ">
+            <%--por alguna razón, chrome tiene un default que hace que el input-date se vea muy diferente a otros; lo cambiamos aquí ...--%> 
+            <asp:TextBox ID="Hasta_TextBox" runat="server" TextMode="Date" style="border: 1px solid #A9A9A9; " />
+            
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Hasta_TextBox"
                 CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="Ud. debe indicar una fecha">
                 *
             </asp:RequiredFieldValidator>
-            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="Hasta_TextBox"
-                CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
-                Operator="DataTypeCheck" Type="Date">
-                *
-            </asp:CompareValidator>
         </div>
         <div class="col-sm-6" style="text-align: left; ">
             <p>
@@ -48,22 +39,12 @@
     </div>
 
      <div class="row" style="margin-top: 15px; ">
-        <div class="col-sm-4" style="text-align: right; font-weight: bold; ">
+        <div class="col-sm-3" style="text-align: right; font-weight: bold; ">
             Leer facturas a partir de:
         </div>
-        <div class="col-sm-2" style="text-align: left; ">
-            <asp:TextBox ID="Desde_TextBox" runat="server" Width="80px"></asp:TextBox>
-            <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True"
-                Format="dd-MM-yy" PopupButtonID="DesdeCalendar_PopUpButton" CssClass="radcalendar"
-                TargetControlID="Desde_TextBox">
-            </cc1:CalendarExtender>
-            <asp:ImageButton ID="ImageButton1" runat="server" alt="" src="../../../Pictures/Calendar.png"
-                CausesValidation="False" TabIndex="-1" />
-            <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="Desde_TextBox"
-                CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
-                Operator="DataTypeCheck" Type="Date">
-                *
-            </asp:CompareValidator>
+        <div class="col-sm-3" style="text-align: left; ">
+            <%--por alguna razón, chrome tiene un default que hace que el input-date se vea muy diferente a otros; lo cambiamos aquí ...--%> 
+            <asp:TextBox ID="Desde_TextBox" runat="server" TextMode="Date" style="border: 1px solid #A9A9A9; " />
         </div>
         <div class="col-sm-6" style="text-align: left; ">
             <p>

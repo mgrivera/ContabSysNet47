@@ -45,7 +45,7 @@ namespace ContabSysNet_Web.Bancos.ConsultasFacturas.Pagos
 
             Response.Redirect("~/ReportViewer3.aspx?rpt=pagos&tit=" + 
                 TituloReporte_TextBox.Text + "&subtit=" +
-                SubTituloReporte_TextBox.Text + "&filter=" + Session["FiltroForma"].ToString());
+                SubTituloReporte_TextBox.Text + "&filter=" + Session["PagosCosulta_FiltroForma"].ToString());
         }
     }
 }

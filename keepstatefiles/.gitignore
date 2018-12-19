@@ -1,0 +1,4 @@
+# para que git ignore el contenido de keepstatefiles, pero no el directorio mismo 
+*
+*/
+!.gitignore
