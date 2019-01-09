@@ -163,8 +163,6 @@ private class Facturas_Object
                 RebindFlagHiddenField.Value = "0";
                 RefreshAndBindInfo(); 
             }
-
-
             // -------------------------------------------------------------------------
         }
     }
@@ -185,6 +183,8 @@ private class Facturas_Object
 
             return;
         }
+
+        this.cantRegistrosSeleccionados_Label.Text = ""; 
 
         //dbBancosDataContext BancosDB = new dbBancosDataContext();
         BancosEntities BancosDB = new BancosEntities(); 
@@ -561,10 +561,11 @@ private class Facturas_Object
 
             }
 
-            //BancosDB.tTempWebReport_ConsultaFacturas.InsertAllOnSubmit(MyFacturas_List);
+            // agregamos todos los registros leídos y que están ahora en la lista 
             foreach (var f in MyFacturas_List)
-                BancosDB.tTempWebReport_ConsultaFacturas.AddObject(f); 
-
+            {
+                BancosDB.tTempWebReport_ConsultaFacturas.AddObject(f);
+            }
         }
         catch (Exception ex) 
         {
@@ -604,8 +605,8 @@ private class Facturas_Object
         if (Session["FiltroForma_LeerFacturasCCCh"].ToString() == "")
             Session["FiltroForma_LeerFacturasCCCh"] = "1 = 2";
 
-        string filtroFacturasCajaChia = Session["FiltroForma_LeerFacturasCCCh"].ToString();
-        filtroFacturasCajaChia = filtroFacturasCajaChia.Replace("CajaChica_Reposiciones_Gastos.CiaContab", "CiaContab"); 
+        string filtroFacturasCajaChica = Session["FiltroForma_LeerFacturasCCCh"].ToString();
+        filtroFacturasCajaChica = filtroFacturasCajaChica.Replace("CajaChica_Reposiciones_Gastos.CiaContab", "CiaContab"); 
 
          IEnumerable<CajaChica_Reposiciones_Gasto> queryCCCh =
             BancosDB.ExecuteStoreQuery<CajaChica_Reposiciones_Gasto>(
@@ -618,7 +619,7 @@ private class Facturas_Object
             //" And " +
             //"CajaChica_Reposiciones.CajaChica = CajaChica_Reposiciones_Gastos.CajaChica And " +
             //"CajaChica_Reposiciones.CiaContab = CajaChica_Reposiciones_Gastos.CiaContab " + 
-            "Where " + filtroFacturasCajaChia
+            "Where " + filtroFacturasCajaChica
             + " And " + 
             "CajaChica_Reposiciones_Gastos.AfectaLibroCompras = 1 And " + 
             "CajaChica_Reposiciones.EstadoActual <> 'AN'"
@@ -676,9 +677,6 @@ private class Facturas_Object
              MyFactura.MonedaSimbolo = monedaLocal.Simbolo;
              MyFactura.MonedaDescripcion = monedaLocal.Descripcion; 
 
-             //MyFactura.CiaContab = facCCCh.CiaContab;
-             //MyFactura.CiaContab = facCCCh.CajaChica_Reposicione.CajaChica_CajasChica.CiaContab;
-
              var ciaContabID = (from c in ControlCajaChicaContext.CajaChica_Reposiciones
                               where c.Reposicion == facCCCh.Reposicion
                               select new { c.CajaChica_CajasChicas.CiaContab }).FirstOrDefault();
@@ -686,7 +684,6 @@ private class Facturas_Object
              MyFactura.CiaContab = ciaContabID.CiaContab;
 
              // leemos los datos de la compañía Contab 
-
              var ciaContab = (from c in BancosDB.Companias
                               where c.Numero == ciaContabID.CiaContab
                               select new { c.Nombre, 
@@ -712,7 +709,6 @@ private class Facturas_Object
 
              // en el CCCh el usuario puede indicar un proveedor desde la maestra o, simplemente, un 
              // nombre y rif 
-
              if (facCCCh.Proveedor != null)
              {
                  var datosProveedor = (from p in BancosDB.Proveedores
@@ -753,13 +749,11 @@ private class Facturas_Object
              MyFactura.NumeroControl = facCCCh.NumeroControl;
 
              // nótese como asignamos un número único negativo ... 
-
              nClaveUnicaFactura -= 1;
 
              MyFactura.ClaveUnicaFactura = nClaveUnicaFactura;
 
              // asumimos que todas las facturas son compras nacionales 
-
              MyFactura.ImportacionFlag = false;
 
              MyFactura.Importacion_CompraNacional = "Compras nacionales";
@@ -786,10 +780,17 @@ private class Facturas_Object
              MyFactura.MontoFacturaSinIva = facCCCh.MontoNoImponible;
              MyFactura.MontoFacturaConIva = facCCCh.Monto;
 
-             if (facCCCh.IvaPorc != null && facCCCh.IvaPorc != 0)
+            MyFactura.MontoTotalFactura = 0;
+
+            if (MyFactura.MontoFacturaSinIva.HasValue)
+                MyFactura.MontoTotalFactura += MyFactura.MontoFacturaSinIva.Value;
+
+            if (MyFactura.MontoFacturaConIva.HasValue)
+                MyFactura.MontoTotalFactura += MyFactura.MontoFacturaConIva.Value;
+
+            if (facCCCh.IvaPorc != null && facCCCh.IvaPorc != 0)
              {
                  MyFactura.TipoAlicuota = "G";
-
 
                  MyFactura.IvaPorc_General = facCCCh.IvaPorc;
                  MyFactura.BaseImponible_General = facCCCh.Monto;
@@ -818,7 +819,6 @@ private class Facturas_Object
              MyFactura.Anticipo = null;
 
              // asumimos que todas las facturas del CCCh están pagadas 
-
              MyFactura.Saldo = 0;
              MyFactura.Estado = 3;
              MyFactura.NombreEstado = "Pagada";
@@ -834,9 +834,10 @@ private class Facturas_Object
 
          if (MyFacturas_List.Count > 0)
          {
-            //BancosDB.tTempWebReport_ConsultaFacturas.InsertAllOnSubmit(MyFacturas_List);
             foreach (var f in MyFacturas_List)
-                BancosDB.tTempWebReport_ConsultaFacturas.AddObject(f); 
+            {
+                BancosDB.tTempWebReport_ConsultaFacturas.AddObject(f);
+            }
 
              try
              {
@@ -859,7 +860,6 @@ private class Facturas_Object
 
 
                  // intentamos determinar facturas con problemas; deben estar en la lista con números repetidos o con su número en blanco ... 
-
                  string errorMessage2 = ""; 
 
                  if (MyFacturas_List.Where(x => string.IsNullOrEmpty(x.NumeroFactura)).Count() > 0) 
@@ -899,7 +899,6 @@ private class Facturas_Object
 
          // --------------------------------------------------------------------------------------------------------------------------------------
          // ahora que grabamos las facturas a sql server, las grabamos a mongo, pues, en adelante, muchas funciones (consultas) leerán de allí ... 
-
          string resulMessage = "";
          string userName = Membership.GetUser().UserName;
 
@@ -910,11 +909,7 @@ private class Facturas_Object
 
              return;
          }
-
-
          // --------------------------------------------------------------------------------------
-
-
 
         // ------------------------------------------------------------------------------------------------
         // hacemos el databinding de los dos combos 
@@ -945,7 +940,6 @@ private class Facturas_Object
         }
 
         // establecemos los valores de los parámetros en el LinqDataSource 
-
         ConsultaFacturas_LinqDataSource.WhereParameters["CiaContab"].DefaultValue = "-999";
         ConsultaFacturas_LinqDataSource.WhereParameters["Moneda"].DefaultValue = "-99";
         ConsultaFacturas_LinqDataSource.WhereParameters["CxCCxPFlag"].DefaultValue = "-99";
@@ -960,7 +954,13 @@ private class Facturas_Object
             ConsultaFacturas_LinqDataSource.WhereParameters["CxCCxPFlag"].DefaultValue = CxCCxP_DropDownList.SelectedValue.ToString();
 
         ConsultaFacturas_LinqDataSource.WhereParameters["NombreUsuario"].DefaultValue = Membership.GetUser().UserName;
-        
+
+        // leemos la cantidad de registros escritos a la tabla temporal para mostrar al usuario 
+        string nombreUsuario = Membership.GetUser().UserName;
+        sSqlQueryString = $"SELECT Count(*) FROM tTempWebReport_ConsultaFacturas Where NombreUsuario = '{nombreUsuario}'";
+        int cantRegistros = BancosDB.ExecuteStoreQuery<int>(sSqlQueryString).First();
+        this.cantRegistrosSeleccionados_Label.Text = $"({cantRegistros.ToString()} registros seleccionados)"; 
+
         Facturas_ListView.DataBind();
 
         BancosDB.Dispose();

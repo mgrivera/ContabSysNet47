@@ -47,7 +47,7 @@
         <br />
         <br />
 
-         <a runat="server" 
+         <%--<a runat="server" 
             href="javascript:PopupWin('Facturas_Filter.aspx', 1000, 600)">
                 <img id="Img4" 
                         border="0" 
@@ -56,11 +56,21 @@
                         src="~/Pictures/filter_25x25.png" />
                 </a>
                 <br />
-                <a href="javascript:PopupWin('Facturas_Filter.aspx', 1000, 600)">Definir y aplicar<br /> un filtro</a>
+                <a href="javascript:PopupWin('Facturas_Filter.aspx', 1000, 600)">Definir y aplicar<br /> un filtro</a>--%>
+
+
+
+
+
+                <i class="fa fa-filter"></i>
+                <a href="javascript:PopupWin('Facturas_Filter.aspx', 1000, 680)">Definir y aplicar un filtro</a>
+
+                <br />
+                <asp:Label ID="cantRegistrosSeleccionados_Label" runat="server" Text=""></asp:Label>
 
                 <hr />
 
-                <a runat="server" 
+                <%--<a runat="server" 
                    id="reportLink"
                    href="javascript:PopupWin('Facturas_OpcionesReportes.aspx', 1000, 600)">
                         <img id="Img5" 
@@ -70,11 +80,18 @@
                              src="~/Pictures/print_25x25.png" />
                 </a>
                 <br />
-                <a href="javascript:PopupWin('Facturas_OpcionesReportes.aspx', 1000, 600)">Reportes</a>
+                <a href="javascript:PopupWin('Facturas_OpcionesReportes.aspx', 1000, 600)">Reportes</a>--%>
+
+
+
+
+
+                 <i class="fa fa-print"></i>
+                 <a href="javascript:PopupWin('Facturas_OpcionesReportes.aspx', 1000, 600)">Reportes</a>
 
                 <hr />
 
-                <a runat="server" 
+                <%--<a runat="server" 
                    id="mailMergeLink"
                    href="javascript:PopupWin('Facturas_MailMergeFile.aspx', 1000, 600)">
                         <img id="Img1" 
@@ -84,11 +101,14 @@
                              src="~/Pictures/MailMerge_25x25.png" />
                 </a>
                 <br />
+                <a href="javascript:PopupWin('Facturas_MailMergeFile.aspx', 1000, 600)">Exportar a<br />Word</a>--%>
+
+                <i class="fa fa-file-word-o "></i>
                 <a href="javascript:PopupWin('Facturas_MailMergeFile.aspx', 1000, 600)">Exportar a<br />Word</a>
 
                 <hr />
 
-                <a href="javascript:PopupWin('<% = GetFacturasExportarExcel_UriAddress() %>', 1000, 600)">
+                <%--<a href="javascript:PopupWin('<% = GetFacturasExportarExcel_UriAddress() %>', 1000, 600)">
                     <img id="Img3"
                         runat="server"
                         border="0"
@@ -96,11 +116,14 @@
                         src="~/Pictures/Excel_25x25.png" />
                 </a>
                 <br />
+                <a href="javascript:PopupWin('<% = GetFacturasExportarExcel_UriAddress() %>', 1000, 600)">Exportar a<br />Excel</a>--%>
+
+                <i class="fa fa-file-excel-o "></i>
                 <a href="javascript:PopupWin('<% = GetFacturasExportarExcel_UriAddress() %>', 1000, 600)">Exportar a<br />Excel</a>
 
                 <hr />
 
-                <a runat="server" 
+                <%--<a runat="server" 
                    id="A1"
                    href="javascript:PopupWin('Facturas_ObtencionXMLFileISLRRetenido.aspx', 1000, 600)">
                         <img id="Img2" 
@@ -110,6 +133,11 @@
                              src="~/Pictures/Disk.png" />
                 </a>
                 <br />
+                <a href="javascript:PopupWin('Facturas_ObtencionXMLFileISLRRetenido.aspx', 1200, 700)">Exportar a<br />archivos de texto</a>--%>
+
+
+
+                <i class="fa fa-file-text-o"></i>
                 <a href="javascript:PopupWin('Facturas_ObtencionXMLFileISLRRetenido.aspx', 1200, 700)">Exportar a<br />archivos de texto</a>
 
                 <hr />

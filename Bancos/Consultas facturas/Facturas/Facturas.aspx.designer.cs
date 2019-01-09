@@ -21,76 +21,13 @@ public partial class Bancos_Facturas_Facturas {
     protected global::System.Web.UI.WebControls.HiddenField RebindFlagHiddenField;
     
     /// <summary>
-    /// Img4 control.
+    /// cantRegistrosSeleccionados_Label control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Img4;
-    
-    /// <summary>
-    /// reportLink control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlAnchor reportLink;
-    
-    /// <summary>
-    /// Img5 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Img5;
-    
-    /// <summary>
-    /// mailMergeLink control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlAnchor mailMergeLink;
-    
-    /// <summary>
-    /// Img1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Img1;
-    
-    /// <summary>
-    /// Img3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Img3;
-    
-    /// <summary>
-    /// A1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
-    
-    /// <summary>
-    /// Img2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Img2;
+    protected global::System.Web.UI.WebControls.Label cantRegistrosSeleccionados_Label;
     
     /// <summary>
     /// ErrMessage_Span control.
