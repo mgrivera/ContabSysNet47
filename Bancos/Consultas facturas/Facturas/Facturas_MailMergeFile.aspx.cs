@@ -398,6 +398,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_1\"");
             sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_1\"");
+            sb.Append("\t");
             sb.Append("\"FacturaNumero_1\"");
             sb.Append("\t");
             sb.Append("\"FacturaMonto_1\"");
@@ -427,6 +429,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\"FacturaFechaEmision_2\"");
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_2\"");
+            sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_2\"");
             sb.Append("\t");
             sb.Append("\"FacturaNumero_2\"");
             sb.Append("\t");
@@ -458,6 +462,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_3\"");
             sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_3\"");
+            sb.Append("\t");
             sb.Append("\"FacturaNumero_3\"");
             sb.Append("\t");
             sb.Append("\"FacturaMonto_3\"");
@@ -487,6 +493,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\"FacturaFechaEmision_4\"");
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_4\"");
+            sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_4\"");
             sb.Append("\t");
             sb.Append("\"FacturaNumero_4\"");
             sb.Append("\t");
@@ -518,6 +526,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_5\"");
             sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_5\"");
+            sb.Append("\t");
             sb.Append("\"FacturaNumero_5\"");
             sb.Append("\t");
             sb.Append("\"FacturaMonto_5\"");
@@ -547,6 +557,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\"FacturaFechaEmision_6\"");
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_6\"");
+            sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_6\"");
             sb.Append("\t");
             sb.Append("\"FacturaNumero_6\"");
             sb.Append("\t");
@@ -578,6 +590,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_7\"");
             sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_7\"");
+            sb.Append("\t");
             sb.Append("\"FacturaNumero_7\"");
             sb.Append("\t");
             sb.Append("\"FacturaMonto_7\"");
@@ -607,6 +621,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\"FacturaFechaEmision_8\"");
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_8\"");
+            sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_8\"");
             sb.Append("\t");
             sb.Append("\"FacturaNumero_8\"");
             sb.Append("\t");
@@ -638,6 +654,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_9\"");
             sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_9\"");
+            sb.Append("\t");
             sb.Append("\"FacturaNumero_9\"");
             sb.Append("\t");
             sb.Append("\"FacturaMonto_9\"");
@@ -667,6 +685,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\"FacturaFechaEmision_10\"");
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_10\"");
+            sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_10\"");
             sb.Append("\t");
             sb.Append("\"FacturaNumero_10\"");
             sb.Append("\t");
@@ -698,6 +718,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_11\"");
             sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_11\"");
+            sb.Append("\t");
             sb.Append("\"FacturaNumero_11\"");
             sb.Append("\t");
             sb.Append("\"FacturaMonto_11\"");
@@ -727,6 +749,8 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sb.Append("\"FacturaFechaEmision_12\"");
             sb.Append("\t");
             sb.Append("\"FacturaFechaRecepcion_12\"");
+            sb.Append("\t");
+            sb.Append("\"FacturaFechaPago_12\"");
             sb.Append("\t");
             sb.Append("\"FacturaNumero_12\"");
             sb.Append("\t");
@@ -782,7 +806,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             BancosEntities bancosContext = new BancosEntities(); 
 
             // leemos las facturas filtradas por el usuario desde la tabla tTempWebReport_ConsultaFacturas
-
             var facturasPorProveedorQuery = from f in bancosContext.tTempWebReport_ConsultaFacturas
                                             where f.NombreUsuario == User.Identity.Name
                                             orderby f.NombreCompania, f.FechaRecepcion, f.NumeroFactura
@@ -811,7 +834,7 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                                                     Total_RetencionISLRAntesSustraendo = g.Sum(f => f.ImpuestoRetenidoISLRAntesSustraendo),
                                                     Total_ImpuestoISLRSustraendo = g.Sum(f => f.ImpuestoRetenidoISLRSustraendo),
                                                     Total_ImpuestoISLRRetenido = g.Sum(f => f.ImpuestoRetenido),
-                                                    Value = g
+                                                    Value = g       // aquí vienen todas las facturas para el grupo ... 
                                                 };
 
 
@@ -911,7 +934,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                         sw.Write(sw.NewLine);
 
                         // comenzamos una nueva linea ... 
-
                         numeroPagina++;
 
                         sb = new StringBuilder();
@@ -925,7 +947,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
 
                         // -------------------------------------------------------------------------------
                         // datos del proveedor ... 
-
                         if (f.Key.NombreCompania != null)
                             sb.Append("\"" + f.Key.NombreCompania + "\"");
                         sb.Append("\t");
@@ -944,7 +965,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
 
                         // -------------------------------------------------------------------------------
                         // datos de la cia contab ... 
-
                         if (f.Key.CiaContabNombre != null)
                             sb.Append("\"" + f.Key.CiaContabNombre + "\"");
                         sb.Append("\t");
@@ -966,7 +986,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
 
                         // ----------------------------------------------------------------------------
                         // cantidades y montos totales para cada proveedor ... 
-
                         sb.Append("\"" + f.Total_CantidadDocumentos.ToString() + "\"" + "\t");
                         sb.Append("\"" + cantidadPaginas.ToString() + "\"" + "\t");
                         sb.Append("\"" + (f.Total_MontoFactura == null ? "0" : f.Total_MontoFactura.Value.ToString("N2")) + "\"" + "\t");
@@ -978,25 +997,28 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                         sb.Append("\"" + (f.Total_ImpuestoISLRSustraendo == null ? "0" : f.Total_ImpuestoISLRSustraendo.Value.ToString("N2")) + "\"" + "\t");
                         sb.Append("\"" + (f.Total_ImpuestoISLRRetenido == null ? "0" : f.Total_ImpuestoISLRRetenido.Value.ToString("N2")) + "\"" + "\t");
 
-
                         cantidadFacturasPorProveedor = 0;
                     }
 
                     cantidadFacturasPorProveedor++;
 
                     if (factura.FechaEmision != null)
-                        sb.Append("\"" + factura.FechaEmision.ToString("dd-MM-yyyy") + "\"");
+                        sb.Append("\"" + factura.FechaEmision.ToString("dd-MM-yy") + "\"");
                     sb.Append("\t");
                     if (factura.FechaRecepcion != null)
-                        sb.Append("\"" + factura.FechaRecepcion.ToString("dd-MM-yyyy") + "\"");
+                        sb.Append("\"" + factura.FechaRecepcion.ToString("dd-MM-yy") + "\"");
                     sb.Append("\t");
+
+                    if (factura.FechaPago != null)
+                        sb.Append("\"" + factura.FechaPago.Value.ToString("dd-MM-yy") + "\"");
+                    sb.Append("\t");
+
                     if (factura.NumeroFactura != null)
                         sb.Append("\"" + factura.NumeroFactura + "\"");
                     sb.Append("\t");
 
                     // -------------------------------------------------------------------------------
                     // por último, siguen los montos de la factura y del islr retenido  
-
                     decimal montoFactura = factura.MontoFacturaSinIva.Value + factura.MontoFacturaConIva.Value;
 
                     sb.Append("\"" + montoFactura.ToString("N2") + "\"");
@@ -1039,11 +1061,11 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                 }
 
                 // si el proveedor no llegó a las 12 facturas por página, debemos agregar los tabs que falten ... 
-
                 for (int j = cantidadFacturasPorProveedor + 1; j <= 12; j++)
                 {
                     sb.Append("\t");        // f emisión
                     sb.Append("\t");        // f recepción 
+                    sb.Append("\t");        // f pago 
                     sb.Append("\t");        // número de factura
                     sb.Append("\t");        // monto 
                     sb.Append("\t");        // monto no imp

@@ -238,6 +238,10 @@
                                                 padding-top: 8px;">
                                                 Caja<br />Chica
                                             </th>
+                                            <th id="Th11" runat="server" class="padded" style="text-align: center; padding-bottom: 8px;
+                                                padding-top: 8px;">
+                                                F pago
+                                            </th>
                                         </tr>
                                         <tr id="itemPlaceholder" runat="server" />
                                     </table>
@@ -339,6 +343,9 @@
                                             <td class="padded" style="text-align: center; white-space:nowrap; ">
                                                 <asp:Label ID="Label4" runat="server" Text='<%# FacturaCajaChica((int)Eval("Tipo"), Eval("NombreTipo").ToString()) %>' />
                                             </td>
+                                            <td class="padded" style="text-align: center; white-space: nowrap; ">
+                                                <asp:Label ID="Label8" runat="server" Text='<%# Eval("FechaPago", "{0:d-MMM-y}") %>' />
+                                            </td>
                                         </tr>
                                     </ItemTemplate>
                                     
@@ -392,6 +399,9 @@
                                             </td>
                                             <td class="padded" style="text-align: center; white-space:nowrap; ">
                                                 <asp:Label ID="Label4" runat="server" Text='<%# FacturaCajaChica((int)Eval("Tipo"), Eval("NombreTipo").ToString()) %>' />
+                                            </td>
+                                            <td class="padded" style="text-align: center; white-space: nowrap; ">
+                                                <asp:Label ID="Label8" runat="server" Text='<%# Eval("FechaPago", "{0:d-MMM-y}") %>' />
                                             </td>
                                         </tr>
                                     </AlternatingItemTemplate>
