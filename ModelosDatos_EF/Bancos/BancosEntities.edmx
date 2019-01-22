@@ -12,7 +12,6 @@
           <EntitySet Name="Bancos_VencimientoFacturas" EntityType="BancosModel.Store.Bancos_VencimientoFacturas" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Chequeras" EntityType="BancosModel.Store.Chequeras" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Companias" EntityType="BancosModel.Store.Companias" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ConciliacionesBancarias" EntityType="BancosModel.Store.ConciliacionesBancarias" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CuentasBancarias" EntityType="BancosModel.Store.CuentasBancarias" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CuentasContables" EntityType="BancosModel.Store.CuentasContables" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CuotasFactura" EntityType="BancosModel.Store.CuotasFactura" store:Type="Tables" Schema="dbo" />
@@ -25,7 +24,6 @@
           <EntitySet Name="ImpuestosRetencionesDefinicion" EntityType="BancosModel.Store.ImpuestosRetencionesDefinicion" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Monedas" EntityType="BancosModel.Store.Monedas" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MovimientosBancarios" EntityType="BancosModel.Store.MovimientosBancarios" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="MovimientosDesdeBancos" EntityType="BancosModel.Store.MovimientosDesdeBancos" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrdenesPago_DescripcionSoportes" EntityType="BancosModel.Store.OrdenesPago_DescripcionSoportes" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Pagos" EntityType="BancosModel.Store.Pagos" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ParametrosBancos" EntityType="BancosModel.Store.ParametrosBancos" store:Type="Tables" Schema="dbo" />
@@ -63,18 +61,6 @@
             <End Role="Monedas" EntitySet="Monedas" />
             <End Role="Companias" EntitySet="Companias" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConciliacionesBancarias_Companias" Association="BancosModel.Store.FK_ConciliacionesBancarias_Companias">
-            <End Role="Companias" EntitySet="Companias" />
-            <End Role="ConciliacionesBancarias" EntitySet="ConciliacionesBancarias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ConciliacionesBancarias_CuentasBancarias" Association="BancosModel.Store.FK_ConciliacionesBancarias_CuentasBancarias">
-            <End Role="CuentasBancarias" EntitySet="CuentasBancarias" />
-            <End Role="ConciliacionesBancarias" EntitySet="ConciliacionesBancarias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ConciliacionesBancarias_CuentasContables" Association="BancosModel.Store.FK_ConciliacionesBancarias_CuentasContables">
-            <End Role="CuentasContables" EntitySet="CuentasContables" />
-            <End Role="ConciliacionesBancarias" EntitySet="ConciliacionesBancarias" />
-          </AssociationSet>
           <AssociationSet Name="FK_CuentasBancarias_Agencias" Association="BancosModel.Store.FK_CuentasBancarias_Agencias">
             <End Role="Agencias" EntitySet="Agencias" />
             <End Role="CuentasBancarias" EntitySet="CuentasBancarias" />
@@ -109,10 +95,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_dAsientos_CuentasContables1" Association="BancosModel.Store.FK_dAsientos_CuentasContables1">
             <End Role="CuentasContables" EntitySet="CuentasContables" />
-            <End Role="dAsientos" EntitySet="dAsientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dAsientos_MovimientosDesdeBancos" Association="BancosModel.Store.FK_dAsientos_MovimientosDesdeBancos">
-            <End Role="MovimientosDesdeBancos" EntitySet="MovimientosDesdeBancos" />
             <End Role="dAsientos" EntitySet="dAsientos" />
           </AssociationSet>
           <AssociationSet Name="FK_DefinicionCuentasContables_CuentasContables" Association="BancosModel.Store.FK_DefinicionCuentasContables_CuentasContables">
@@ -171,17 +153,9 @@
             <End Role="Chequeras" EntitySet="Chequeras" />
             <End Role="MovimientosBancarios" EntitySet="MovimientosBancarios" />
           </AssociationSet>
-          <AssociationSet Name="FK_MovimientosBancarios_MovimientosDesdeBancos" Association="BancosModel.Store.FK_MovimientosBancarios_MovimientosDesdeBancos">
-            <End Role="MovimientosDesdeBancos" EntitySet="MovimientosDesdeBancos" />
-            <End Role="MovimientosBancarios" EntitySet="MovimientosBancarios" />
-          </AssociationSet>
           <AssociationSet Name="FK_MovimientosBancarios_Proveedores" Association="BancosModel.Store.FK_MovimientosBancarios_Proveedores">
             <End Role="Proveedores" EntitySet="Proveedores" />
             <End Role="MovimientosBancarios" EntitySet="MovimientosBancarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MovimientosDesdeBancos_ConciliacionesBancarias" Association="BancosModel.Store.FK_MovimientosDesdeBancos_ConciliacionesBancarias">
-            <End Role="ConciliacionesBancarias" EntitySet="ConciliacionesBancarias" />
-            <End Role="MovimientosDesdeBancos" EntitySet="MovimientosDesdeBancos" />
           </AssociationSet>
           <AssociationSet Name="FK_Pagos_Companias" Association="BancosModel.Store.FK_Pagos_Companias">
             <End Role="Companias" EntitySet="Companias" />
@@ -371,18 +345,6 @@
           <Property Name="MonedaDefecto" Type="int" />
           <Property Name="SuspendidoFlag" Type="bit" />
         </EntityType>
-        <EntityType Name="ConciliacionesBancarias">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="250" />
-          <Property Name="Desde" Type="date" Nullable="false" />
-          <Property Name="Hasta" Type="date" Nullable="false" />
-          <Property Name="CiaContab" Type="int" Nullable="false" />
-          <Property Name="CuentaBancaria" Type="int" Nullable="false" />
-          <Property Name="CuentaContable" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="CuentasBancarias">
           <Key>
             <PropertyRef Name="CuentaInterna" />
@@ -555,6 +517,7 @@
           <Property Name="Sustraendo" Type="money" />
           <Property Name="Monto" Type="money" Nullable="false" />
           <Property Name="FechaRecepcionPlanilla" Type="date" />
+          <Property Name="ContabilizarAlPagar_flag" Type="bit" />
         </EntityType>
         <EntityType Name="FormasDePago">
           <Key>
@@ -615,17 +578,6 @@
           <Property Name="PagoID" Type="int" />
           <Property Name="ConciliacionMovimientoID" Type="int" />
         </EntityType>
-        <EntityType Name="MovimientosDesdeBancos">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ConciliacionBancariaID" Type="int" Nullable="false" />
-          <Property Name="Fecha" Type="date" Nullable="false" />
-          <Property Name="Referencia" Type="nvarchar" MaxLength="50" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="500" />
-          <Property Name="Monto" Type="money" Nullable="false" />
-        </EntityType>
         <EntityType Name="OrdenesPago_DescripcionSoportes">
           <Key>
             <PropertyRef Name="ID" />
@@ -648,7 +600,7 @@
           <Property Name="MiSuFlag" Type="smallint" Nullable="false" />
           <Property Name="Ingreso" Type="datetime2" Nullable="false" />
           <Property Name="UltAct" Type="datetime2" Nullable="false" />
-          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="25" />
+          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="125" />
           <Property Name="Cia" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ParametrosBancos">
@@ -713,7 +665,7 @@
           <Property Name="DefaultFlag" Type="bit" />
           <Property Name="Ingreso" Type="smalldatetime" Nullable="false" />
           <Property Name="UltAct" Type="smalldatetime" Nullable="false" />
-          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="25" />
+          <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="125" />
         </EntityType>
         <EntityType Name="Proveedores">
           <Key>
@@ -810,6 +762,8 @@
           <Property Name="CompaniaCiudad" Type="nvarchar" MaxLength="50" />
           <Property Name="CodigoConceptoRetencion" Type="nvarchar" MaxLength="20" />
           <Property Name="ContribuyenteFlag" Type="bit" />
+          <Property Name="NatJurFlag" Type="smallint" Nullable="false" />
+          <Property Name="NatJurFlagDescripcion" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="NumeroFactura" Type="nvarchar" Nullable="false" MaxLength="25" />
           <Property Name="NumeroControl" Type="nvarchar" MaxLength="20" />
           <Property Name="ImportacionFlag" Type="bit" />
@@ -926,7 +880,7 @@
           </Key>
           <Property Name="Mes" Type="tinyint" Nullable="false" />
           <Property Name="Ano" Type="smallint" Nullable="false" />
-          <Property Name="UltAct" Type="datetime" Nullable="false" />
+          <Property Name="UltAct" Type="datetime" />
           <Property Name="ManAuto" Type="nvarchar" Nullable="false" MaxLength="1" />
           <Property Name="Cia" Type="int" Nullable="false" />
           <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="125" />
@@ -980,7 +934,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Chequeras_CuentasBancarias">
-          <End Role="CuentasBancarias" Type="BancosModel.Store.CuentasBancarias" Multiplicity="1" />
+          <End Role="CuentasBancarias" Type="BancosModel.Store.CuentasBancarias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Chequeras" Type="BancosModel.Store.Chequeras" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CuentasBancarias">
@@ -1000,42 +956,6 @@
             </Principal>
             <Dependent Role="Companias">
               <PropertyRef Name="MonedaDefecto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ConciliacionesBancarias_Companias">
-          <End Role="Companias" Type="BancosModel.Store.Companias" Multiplicity="1" />
-          <End Role="ConciliacionesBancarias" Type="BancosModel.Store.ConciliacionesBancarias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companias">
-              <PropertyRef Name="Numero" />
-            </Principal>
-            <Dependent Role="ConciliacionesBancarias">
-              <PropertyRef Name="CiaContab" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ConciliacionesBancarias_CuentasBancarias">
-          <End Role="CuentasBancarias" Type="BancosModel.Store.CuentasBancarias" Multiplicity="1" />
-          <End Role="ConciliacionesBancarias" Type="BancosModel.Store.ConciliacionesBancarias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CuentasBancarias">
-              <PropertyRef Name="CuentaInterna" />
-            </Principal>
-            <Dependent Role="ConciliacionesBancarias">
-              <PropertyRef Name="CuentaBancaria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ConciliacionesBancarias_CuentasContables">
-          <End Role="CuentasContables" Type="BancosModel.Store.CuentasContables" Multiplicity="1" />
-          <End Role="ConciliacionesBancarias" Type="BancosModel.Store.ConciliacionesBancarias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CuentasContables">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ConciliacionesBancarias">
-              <PropertyRef Name="CuentaContable" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1151,18 +1071,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dAsientos_MovimientosDesdeBancos">
-          <End Role="MovimientosDesdeBancos" Type="BancosModel.Store.MovimientosDesdeBancos" Multiplicity="0..1" />
-          <End Role="dAsientos" Type="BancosModel.Store.dAsientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientosDesdeBancos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="dAsientos">
-              <PropertyRef Name="ConciliacionMovimientoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DefinicionCuentasContables_CuentasContables">
           <End Role="CuentasContables" Type="BancosModel.Store.CuentasContables" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1192,7 +1100,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DefinicionCuentasContables_Proveedores">
-          <End Role="Proveedores" Type="BancosModel.Store.Proveedores" Multiplicity="0..1" />
+          <End Role="Proveedores" Type="BancosModel.Store.Proveedores" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DefinicionCuentasContables" Type="BancosModel.Store.DefinicionCuentasContables" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedores">
@@ -1218,7 +1128,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dPagos_CuotasFactura">
-          <End Role="CuotasFactura" Type="BancosModel.Store.CuotasFactura" Multiplicity="1" />
+          <End Role="CuotasFactura" Type="BancosModel.Store.CuotasFactura" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="dPagos" Type="BancosModel.Store.dPagos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CuotasFactura">
@@ -1330,7 +1242,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MovimientosBancarios_Chequeras">
-          <End Role="Chequeras" Type="BancosModel.Store.Chequeras" Multiplicity="1" />
+          <End Role="Chequeras" Type="BancosModel.Store.Chequeras" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MovimientosBancarios" Type="BancosModel.Store.MovimientosBancarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Chequeras">
@@ -1338,18 +1252,6 @@
             </Principal>
             <Dependent Role="MovimientosBancarios">
               <PropertyRef Name="ClaveUnicaChequera" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MovimientosBancarios_MovimientosDesdeBancos">
-          <End Role="MovimientosDesdeBancos" Type="BancosModel.Store.MovimientosDesdeBancos" Multiplicity="0..1" />
-          <End Role="MovimientosBancarios" Type="BancosModel.Store.MovimientosBancarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientosDesdeBancos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MovimientosBancarios">
-              <PropertyRef Name="ConciliacionMovimientoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1362,20 +1264,6 @@
             </Principal>
             <Dependent Role="MovimientosBancarios">
               <PropertyRef Name="ProvClte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MovimientosDesdeBancos_ConciliacionesBancarias">
-          <End Role="ConciliacionesBancarias" Type="BancosModel.Store.ConciliacionesBancarias" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="MovimientosDesdeBancos" Type="BancosModel.Store.MovimientosDesdeBancos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConciliacionesBancarias">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MovimientosDesdeBancos">
-              <PropertyRef Name="ConciliacionBancariaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1543,19 +1431,10 @@
             <End Role="Moneda" EntitySet="Monedas" />
             <End Role="Pago" EntitySet="Pagos" />
           </AssociationSet>
-          <EntitySet Name="ConciliacionesBancarias" EntityType="BancosModel.ConciliacionesBancaria" />
-          <AssociationSet Name="FK_ConciliacionesBancarias_Companias" Association="BancosModel.FK_ConciliacionesBancarias_Companias">
-            <End Role="Compania" EntitySet="Companias" />
-            <End Role="ConciliacionesBancaria" EntitySet="ConciliacionesBancarias" />
-          </AssociationSet>
           <EntitySet Name="CuentasContables" EntityType="BancosModel.CuentasContable" />
           <AssociationSet Name="FK_CuentasContables_Companias" Association="BancosModel.FK_CuentasContables_Companias">
             <End Role="Compania" EntitySet="Companias" />
             <End Role="CuentasContable" EntitySet="CuentasContables" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ConciliacionesBancarias_CuentasContables" Association="BancosModel.FK_ConciliacionesBancarias_CuentasContables">
-            <End Role="CuentasContable" EntitySet="CuentasContables" />
-            <End Role="ConciliacionesBancaria" EntitySet="ConciliacionesBancarias" />
           </AssociationSet>
           <EntitySet Name="FormasDePagoes" EntityType="BancosModel.FormasDePago" />
           <EntitySet Name="TiposProveedors" EntityType="BancosModel.TiposProveedor" />
@@ -1569,22 +1448,9 @@
             <End Role="Compania" EntitySet="Companias" />
             <End Role="UltimoMesCerrado" EntitySet="UltimoMesCerradoes" />
           </AssociationSet>
-          <EntitySet Name="MovimientosDesdeBancos" EntityType="BancosModel.MovimientosDesdeBanco" />
-          <AssociationSet Name="FK_MovimientosDesdeBancos_ConciliacionesBancarias" Association="BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias">
-            <End Role="ConciliacionesBancaria" EntitySet="ConciliacionesBancarias" />
-            <End Role="MovimientosDesdeBanco" EntitySet="MovimientosDesdeBancos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MovimientosBancarios_MovimientosDesdeBancos" Association="BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos">
-            <End Role="MovimientosDesdeBanco" EntitySet="MovimientosDesdeBancos" />
-            <End Role="MovimientosBancario" EntitySet="MovimientosBancarios" />
-          </AssociationSet>
           <EntitySet Name="dAsientos" EntityType="BancosModel.dAsiento" />
           <AssociationSet Name="FK_dAsientos_CuentasContables1" Association="BancosModel.FK_dAsientos_CuentasContables1">
             <End Role="CuentasContable" EntitySet="CuentasContables" />
-            <End Role="dAsiento" EntitySet="dAsientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dAsientos_MovimientosDesdeBancos" Association="BancosModel.FK_dAsientos_MovimientosDesdeBancos">
-            <End Role="MovimientosDesdeBanco" EntitySet="MovimientosDesdeBancos" />
             <End Role="dAsiento" EntitySet="dAsientos" />
           </AssociationSet>
           <EntitySet Name="Asientos" EntityType="BancosModel.Asiento" />
@@ -1681,10 +1547,6 @@
           <AssociationSet Name="FK_CuentasBancarias_Companias" Association="BancosModel.FK_CuentasBancarias_Companias">
             <End Role="Compania" EntitySet="Companias" />
             <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ConciliacionesBancarias_CuentasBancarias" Association="BancosModel.FK_ConciliacionesBancarias_CuentasBancarias">
-            <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
-            <End Role="ConciliacionesBancaria" EntitySet="ConciliacionesBancarias" />
           </AssociationSet>
           <AssociationSet Name="FK_CuentasBancarias_CuentasContables" Association="BancosModel.FK_CuentasBancarias_CuentasContables">
             <End Role="CuentasContable" EntitySet="CuentasContables" />
@@ -1804,7 +1666,6 @@
           <Property Name="MonedaDefecto" Type="Int32" />
           <NavigationProperty Name="Moneda" Relationship="BancosModel.FK_Companias_Monedas" FromRole="Companias" ToRole="Monedas" />
           <NavigationProperty Name="Pagos" Relationship="BancosModel.FK_Pagos_Companias" FromRole="Compania" ToRole="Pago" />
-          <NavigationProperty Name="ConciliacionesBancarias" Relationship="BancosModel.FK_ConciliacionesBancarias_Companias" FromRole="Compania" ToRole="ConciliacionesBancaria" />
           <NavigationProperty Name="CuentasContables" Relationship="BancosModel.FK_CuentasContables_Companias" FromRole="Compania" ToRole="CuentasContable" />
           <NavigationProperty Name="UltimoMesCerrado" Relationship="BancosModel.FK_UltimoMesCerrado_Companias" FromRole="Compania" ToRole="UltimoMesCerrado" />
           <NavigationProperty Name="Asientos" Relationship="BancosModel.FK_Asientos_Companias" FromRole="Compania" ToRole="Asiento" />
@@ -1875,7 +1736,7 @@
           <Property Type="Int16" Name="MiSuFlag" Nullable="false" />
           <Property Type="DateTime" Name="Ingreso" Nullable="false" Precision="7" />
           <Property Type="DateTime" Name="UltAct" Nullable="false" Precision="7" />
-          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="125" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Cia" Nullable="false" />
           <NavigationProperty Name="Compania" Relationship="BancosModel.FK_Pagos_Companias" FromRole="Pago" ToRole="Compania" />
           <NavigationProperty Name="dPagos" Relationship="BancosModel.FK_dPagos_Pagos" FromRole="Pago" ToRole="dPago" />
@@ -1919,34 +1780,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ConciliacionesBancaria">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="Desde" Nullable="false" Precision="0" />
-          <Property Type="DateTime" Name="Hasta" Nullable="false" Precision="0" />
-          <Property Type="Int32" Name="CiaContab" Nullable="false" />
-          <Property Type="Int32" Name="CuentaBancaria" Nullable="false" />
-          <Property Type="Int32" Name="CuentaContable" Nullable="false" />
-          <NavigationProperty Name="Compania" Relationship="BancosModel.FK_ConciliacionesBancarias_Companias" FromRole="ConciliacionesBancaria" ToRole="Compania" />
-          <NavigationProperty Name="CuentasContable" Relationship="BancosModel.FK_ConciliacionesBancarias_CuentasContables" FromRole="ConciliacionesBancaria" ToRole="CuentasContable" />
-          <NavigationProperty Name="MovimientosDesdeBancos" Relationship="BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias" FromRole="ConciliacionesBancaria" ToRole="MovimientosDesdeBanco" />
-          <NavigationProperty Name="CuentasBancaria" Relationship="BancosModel.FK_ConciliacionesBancarias_CuentasBancarias" FromRole="ConciliacionesBancaria" ToRole="CuentasBancaria" />
-        </EntityType>
-        <Association Name="FK_ConciliacionesBancarias_Companias">
-          <End Type="BancosModel.Compania" Role="Compania" Multiplicity="1" />
-          <End Type="BancosModel.ConciliacionesBancaria" Role="ConciliacionesBancaria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Compania">
-              <PropertyRef Name="Numero" />
-            </Principal>
-            <Dependent Role="ConciliacionesBancaria">
-              <PropertyRef Name="CiaContab" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CuentasContable">
           <Key>
             <PropertyRef Name="ID" />
@@ -1973,7 +1806,6 @@
           <Property Type="Boolean" Name="PresupuestarFlag" />
           <Property Type="Int32" Name="Cia" Nullable="false" />
           <NavigationProperty Name="Compania" Relationship="BancosModel.FK_CuentasContables_Companias" FromRole="CuentasContable" ToRole="Compania" />
-          <NavigationProperty Name="ConciliacionesBancarias" Relationship="BancosModel.FK_ConciliacionesBancarias_CuentasContables" FromRole="CuentasContable" ToRole="ConciliacionesBancaria" />
           <NavigationProperty Name="dAsientos" Relationship="BancosModel.FK_dAsientos_CuentasContables1" FromRole="CuentasContable" ToRole="dAsiento" />
           <NavigationProperty Name="DefinicionCuentasContables" Relationship="BancosModel.FK_DefinicionCuentasContables_CuentasContables" FromRole="CuentasContable" ToRole="DefinicionCuentasContable" />
           <NavigationProperty Name="CuentasBancarias" Relationship="BancosModel.FK_CuentasBancarias_CuentasContables" FromRole="CuentasContable" ToRole="CuentasBancaria" />
@@ -1988,18 +1820,6 @@
             </Principal>
             <Dependent Role="CuentasContable">
               <PropertyRef Name="Cia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ConciliacionesBancarias_CuentasContables">
-          <End Type="BancosModel.CuentasContable" Role="CuentasContable" Multiplicity="1" />
-          <End Type="BancosModel.ConciliacionesBancaria" Role="ConciliacionesBancaria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CuentasContable">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ConciliacionesBancaria">
-              <PropertyRef Name="CuentaContable" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2052,7 +1872,6 @@
           <Property Type="Int32" Name="PagoID" />
           <Property Type="Int32" Name="ConciliacionMovimientoID" />
           <NavigationProperty Name="Chequera" Relationship="BancosModel.FK_MovimientosBancarios_Chequeras" FromRole="MovimientosBancario" ToRole="Chequera" />
-          <NavigationProperty Name="MovimientosDesdeBanco" Relationship="BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos" FromRole="MovimientosBancario" ToRole="MovimientosDesdeBanco" />
           <Property Type="Boolean" Name="Signo" />
           <NavigationProperty Name="Proveedore" Relationship="BancosModel.FK_MovimientosBancarios_Proveedores" FromRole="MovimientosBancario" ToRole="Proveedore" />
         </EntityType>
@@ -2074,7 +1893,7 @@
           </Key>
           <Property Type="Byte" Name="Mes" Nullable="false" />
           <Property Type="Int16" Name="Ano" Nullable="false" />
-          <Property Type="DateTime" Name="UltAct" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UltAct" Precision="3" />
           <Property Type="String" Name="ManAuto" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Cia" Nullable="false" />
           <Property Type="String" Name="Usuario" Nullable="false" MaxLength="125" FixedLength="false" Unicode="true" />
@@ -2089,46 +1908,6 @@
             </Principal>
             <Dependent Role="UltimoMesCerrado">
               <PropertyRef Name="Cia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="MovimientosDesdeBanco">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Type="Int32" Name="ConciliacionBancariaID" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="0" />
-          <Property Type="String" Name="Referencia" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Descripcion" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="Monto" Nullable="false" Precision="19" Scale="4" />
-          <NavigationProperty Name="ConciliacionesBancaria" Relationship="BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias" FromRole="MovimientosDesdeBanco" ToRole="ConciliacionesBancaria" />
-          <NavigationProperty Name="MovimientosBancarios" Relationship="BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos" FromRole="MovimientosDesdeBanco" ToRole="MovimientosBancario" />
-          <NavigationProperty Name="dAsientos" Relationship="BancosModel.FK_dAsientos_MovimientosDesdeBancos" FromRole="MovimientosDesdeBanco" ToRole="dAsiento" />
-        </EntityType>
-        <Association Name="FK_MovimientosDesdeBancos_ConciliacionesBancarias">
-          <End Type="BancosModel.ConciliacionesBancaria" Role="ConciliacionesBancaria" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="BancosModel.MovimientosDesdeBanco" Role="MovimientosDesdeBanco" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConciliacionesBancaria">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MovimientosDesdeBanco">
-              <PropertyRef Name="ConciliacionBancariaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MovimientosBancarios_MovimientosDesdeBancos">
-          <End Type="BancosModel.MovimientosDesdeBanco" Role="MovimientosDesdeBanco" Multiplicity="0..1" />
-          <End Type="BancosModel.MovimientosBancario" Role="MovimientosBancario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientosDesdeBanco">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MovimientosBancario">
-              <PropertyRef Name="ConciliacionMovimientoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2147,7 +1926,6 @@
           <Property Type="Int32" Name="CentroCosto" />
           <Property Type="Int32" Name="ConciliacionMovimientoID" />
           <NavigationProperty Name="CuentasContable" Relationship="BancosModel.FK_dAsientos_CuentasContables1" FromRole="dAsiento" ToRole="CuentasContable" />
-          <NavigationProperty Name="MovimientosDesdeBanco" Relationship="BancosModel.FK_dAsientos_MovimientosDesdeBancos" FromRole="dAsiento" ToRole="MovimientosDesdeBanco" />
           <NavigationProperty Name="Asiento" Relationship="BancosModel.FK_dAsientos_Asientos" FromRole="dAsiento" ToRole="Asiento" />
         </EntityType>
         <Association Name="FK_dAsientos_CuentasContables1">
@@ -2159,18 +1937,6 @@
             </Principal>
             <Dependent Role="dAsiento">
               <PropertyRef Name="CuentaContableID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dAsientos_MovimientosDesdeBancos">
-          <End Type="BancosModel.MovimientosDesdeBanco" Role="MovimientosDesdeBanco" Multiplicity="0..1" />
-          <End Type="BancosModel.dAsiento" Role="dAsiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientosDesdeBanco">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="dAsiento">
-              <PropertyRef Name="ConciliacionMovimientoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2326,6 +2092,7 @@
           <Property Type="Decimal" Name="Sustraendo" Precision="19" Scale="4" />
           <Property Type="DateTime" Name="FechaRecepcionPlanilla" Precision="0" />
           <NavigationProperty Name="ImpuestosRetencionesDefinicion" Relationship="BancosModel.FK_Facturas_Impuestos_ImpuestosRetencionesDefinicion" FromRole="Facturas_Impuestos" ToRole="ImpuestosRetencionesDefinicion" />
+          <Property Type="Boolean" Name="ContabilizarAlPagar_flag" />
         </EntityType>
         <EntityType Name="Factura">
           <Key>
@@ -2721,7 +2488,6 @@
           <NavigationProperty Name="Agencia1" Relationship="BancosModel.FK_CuentasBancarias_Agencias" FromRole="CuentasBancaria" ToRole="Agencia" />
           <NavigationProperty Name="Chequeras" Relationship="BancosModel.FK_Chequeras_CuentasBancarias" FromRole="CuentasBancaria" ToRole="Chequera" />
           <NavigationProperty Name="Compania" Relationship="BancosModel.FK_CuentasBancarias_Companias" FromRole="CuentasBancaria" ToRole="Compania" />
-          <NavigationProperty Name="ConciliacionesBancarias" Relationship="BancosModel.FK_ConciliacionesBancarias_CuentasBancarias" FromRole="CuentasBancaria" ToRole="ConciliacionesBancaria" />
           <NavigationProperty Name="CuentasContable" Relationship="BancosModel.FK_CuentasBancarias_CuentasContables" FromRole="CuentasBancaria" ToRole="CuentasContable" />
           <NavigationProperty Name="CuentasContable1" Relationship="BancosModel.FK_CuentasBancarias_CuentasContables1" FromRole="CuentasBancaria" ToRole="CuentasContable" />
           <NavigationProperty Name="Moneda1" Relationship="BancosModel.FK_CuentasBancarias_Monedas" FromRole="CuentasBancaria" ToRole="Moneda" />
@@ -2771,18 +2537,6 @@
             </Principal>
             <Dependent Role="CuentasBancaria">
               <PropertyRef Name="Cia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ConciliacionesBancarias_CuentasBancarias">
-          <End Type="BancosModel.CuentasBancaria" Role="CuentasBancaria" Multiplicity="1" />
-          <End Type="BancosModel.ConciliacionesBancaria" Role="ConciliacionesBancaria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CuentasBancaria">
-              <PropertyRef Name="CuentaInterna" />
-            </Principal>
-            <Dependent Role="ConciliacionesBancaria">
-              <PropertyRef Name="CuentaBancaria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2845,7 +2599,7 @@
           <Property Type="Boolean" Name="DefaultFlag" />
           <Property Type="DateTime" Name="Ingreso" Nullable="false" Precision="0" />
           <Property Type="DateTime" Name="UltAct" Nullable="false" Precision="0" />
-          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="125" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tCargo" Relationship="BancosModel.FK_Personas_tCargos" FromRole="Persona" ToRole="tCargo" />
           <NavigationProperty Name="Proveedore" Relationship="BancosModel.FK_Personas_Proveedores" FromRole="Persona" ToRole="Proveedore" />
         </EntityType>
@@ -3053,6 +2807,8 @@
           <Property Type="String" Name="CompaniaCiudad" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="CodigoConceptoRetencion" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="ContribuyenteFlag" />
+          <Property Type="Int16" Name="NatJurFlag" Nullable="false" />
+          <Property Type="String" Name="NatJurFlagDescripcion" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="NumeroFactura" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="NumeroControl" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="ImportacionFlag" />
@@ -3234,19 +2990,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ConciliacionesBancarias">
-            <EntityTypeMapping TypeName="BancosModel.ConciliacionesBancaria">
-              <MappingFragment StoreEntitySet="ConciliacionesBancarias">
-                <ScalarProperty Name="CuentaContable" ColumnName="CuentaContable" />
-                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
-                <ScalarProperty Name="CiaContab" ColumnName="CiaContab" />
-                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
-                <ScalarProperty Name="Desde" ColumnName="Desde" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CuentasContables">
             <EntityTypeMapping TypeName="BancosModel.CuentasContable">
               <MappingFragment StoreEntitySet="CuentasContables">
@@ -3331,18 +3074,6 @@
                 <ScalarProperty Name="UltAct" ColumnName="UltAct" />
                 <ScalarProperty Name="Ano" ColumnName="Ano" />
                 <ScalarProperty Name="Mes" ColumnName="Mes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MovimientosDesdeBancos">
-            <EntityTypeMapping TypeName="BancosModel.MovimientosDesdeBanco">
-              <MappingFragment StoreEntitySet="MovimientosDesdeBancos">
-                <ScalarProperty Name="Monto" ColumnName="Monto" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="ConciliacionBancariaID" ColumnName="ConciliacionBancariaID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3443,6 +3174,7 @@
           <EntitySetMapping Name="Facturas_Impuestos">
             <EntityTypeMapping TypeName="BancosModel.Facturas_Impuestos">
               <MappingFragment StoreEntitySet="Facturas_Impuestos">
+                <ScalarProperty Name="ContabilizarAlPagar_flag" ColumnName="ContabilizarAlPagar_flag" />
                 <ScalarProperty Name="FechaRecepcionPlanilla" ColumnName="FechaRecepcionPlanilla" />
                 <ScalarProperty Name="Sustraendo" ColumnName="Sustraendo" />
                 <ScalarProperty Name="MontoAntesSustraendo" ColumnName="MontoAntesSustraendo" />
@@ -3826,6 +3558,8 @@
                 <ScalarProperty Name="ImportacionFlag" ColumnName="ImportacionFlag" />
                 <ScalarProperty Name="NumeroControl" ColumnName="NumeroControl" />
                 <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="NatJurFlagDescripcion" ColumnName="NatJurFlagDescripcion" />
+                <ScalarProperty Name="NatJurFlag" ColumnName="NatJurFlag" />
                 <ScalarProperty Name="ContribuyenteFlag" ColumnName="ContribuyenteFlag" />
                 <ScalarProperty Name="CodigoConceptoRetencion" ColumnName="CodigoConceptoRetencion" />
                 <ScalarProperty Name="CompaniaCiudad" ColumnName="CompaniaCiudad" />
@@ -3868,7 +3602,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Predeterminado" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
@@ -3912,23 +3646,16 @@
           <ConnectorPoint PointX="16.384768875" PointY="9.5625" />
           <ConnectorPoint PointX="16.384768875" PointY="10" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="BancosModel.ConciliacionesBancaria" Width="2.375" PointX="3.375" PointY="15.5" />
-        <AssociationConnector Association="BancosModel.FK_ConciliacionesBancarias_Companias" />
         <EntityTypeShape EntityType="BancosModel.CuentasContable" Width="2.125" PointX="0.5" PointY="15.5" />
         <AssociationConnector Association="BancosModel.FK_CuentasContables_Companias" />
-        <AssociationConnector Association="BancosModel.FK_ConciliacionesBancarias_CuentasContables" />
         <EntityTypeShape EntityType="BancosModel.FormasDePago" Width="1.5" PointX="6.875" PointY="16" />
         <EntityTypeShape EntityType="BancosModel.TiposProveedor" Width="1.5" PointX="7" PointY="18.875" />
         <EntityTypeShape EntityType="BancosModel.MovimientosBancario" Width="3.25" PointX="14" PointY="0.75" />
         <AssociationConnector Association="BancosModel.FK_MovimientosBancarios_Chequeras" />
         <EntityTypeShape EntityType="BancosModel.UltimoMesCerrado" Width="2" PointX="0.5" PointY="22.75" />
         <AssociationConnector Association="BancosModel.FK_UltimoMesCerrado_Companias" />
-        <EntityTypeShape EntityType="BancosModel.MovimientosDesdeBanco" Width="2.5" PointX="3.375" PointY="20" />
-        <AssociationConnector Association="BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias" />
-        <AssociationConnector Association="BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos" />
         <EntityTypeShape EntityType="BancosModel.dAsiento" Width="2.75" PointX="3.375" PointY="24.375" />
         <AssociationConnector Association="BancosModel.FK_dAsientos_CuentasContables1" />
-        <AssociationConnector Association="BancosModel.FK_dAsientos_MovimientosDesdeBancos" />
         <EntityTypeShape EntityType="BancosModel.Asiento" Width="2" PointX="7.25" PointY="24.375" />
         <AssociationConnector Association="BancosModel.FK_Asientos_Companias" />
         <AssociationConnector Association="BancosModel.FK_Asientos_Monedas" />
@@ -3964,7 +3691,6 @@
         <AssociationConnector Association="BancosModel.FK_CuentasBancarias_Agencias" />
         <AssociationConnector Association="BancosModel.FK_Chequeras_CuentasBancarias" />
         <AssociationConnector Association="BancosModel.FK_CuentasBancarias_Companias" />
-        <AssociationConnector Association="BancosModel.FK_ConciliacionesBancarias_CuentasBancarias" />
         <AssociationConnector Association="BancosModel.FK_CuentasBancarias_CuentasContables" />
         <AssociationConnector Association="BancosModel.FK_CuentasBancarias_CuentasContables1" />
         <AssociationConnector Association="BancosModel.FK_CuentasBancarias_Monedas" />
@@ -3980,7 +3706,7 @@
         <AssociationConnector Association="BancosModel.FK_Personas_Proveedores" />
         <AssociationConnector Association="BancosModel.FK_Proveedores_tCiudades" />
         <AssociationConnector Association="BancosModel.FK_Proveedores_TiposProveedor" />
-        <EntityTypeShape EntityType="BancosModel.tTempWebReport_ConsultaFacturas" Width="4.125" PointX="11.625" PointY="43.25" />
+        <EntityTypeShape EntityType="BancosModel.tTempWebReport_ConsultaFacturas" Width="4.625" PointX="10.375" PointY="43.25" />
         </Diagram>
     </Diagrams>
   </Designer>

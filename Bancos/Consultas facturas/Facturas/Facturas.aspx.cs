@@ -38,6 +38,7 @@ private class Facturas_Object
     public string CompaniaTelefono { get; set; }
     public string CompaniaFax { get; set; }
     public string CompaniaCiudad { get; set; }
+    public short CompaniaNatJurFlag { get; set; }
 
     public string NombreCompania { get; set; }
     public string AbreviaturaCompania { get; set; }
@@ -230,8 +231,8 @@ private class Facturas_Object
 
             "Proveedores.Direccion + ', ' + tCiudades.Descripcion As CompaniaDomicilio, " + 
             "Proveedores.Telefono1 As CompaniaTelefono, " + 
-            "Proveedores.Fax As CompaniaFax, " + 
-            "tCiudades.Descripcion As CompaniaCiudad, " +
+            "Proveedores.Fax As CompaniaFax, " +
+            "tCiudades.Descripcion As CompaniaCiudad, Proveedores.NatJurFlag as CompaniaNatJurFlag, " +
 
             "Proveedores.Nombre As NombreCompania, Proveedores.Abreviatura As AbreviaturaCompania, " +
             "Proveedores.Rif As RifCompania, " +
@@ -303,7 +304,14 @@ private class Facturas_Object
                 MyFactura.CompaniaDomicilio = MyFactura_Object.CompaniaDomicilio;
                 MyFactura.CompaniaTelefono = MyFactura_Object.CompaniaTelefono;
                 MyFactura.CompaniaFax = MyFactura_Object.CompaniaFax;
-                MyFactura.CompaniaCiudad = MyFactura_Object.CompaniaCiudad; 
+                MyFactura.CompaniaCiudad = MyFactura_Object.CompaniaCiudad;
+
+                MyFactura.NatJurFlag = MyFactura_Object.CompaniaNatJurFlag;
+
+                MyFactura.NatJurFlagDescripcion = "Jurídico";
+
+                if (MyFactura.NatJurFlag == 1)
+                    MyFactura.NatJurFlagDescripcion = "Natural";
 
                 MyFactura.NombreCompania = MyFactura_Object.NombreCompania;
                 MyFactura.AbreviaturaCompania = MyFactura_Object.AbreviaturaCompania; 

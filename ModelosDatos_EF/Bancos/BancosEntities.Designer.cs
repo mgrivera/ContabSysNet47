@@ -23,15 +23,10 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_Pagos_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Compania), "Pago", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Pago), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_dPagos_Pagos", "Pago", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Pago), "dPago", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.dPago), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_Pagos_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Moneda), "Pago", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Pago), true)]
-[assembly: EdmRelationshipAttribute("BancosModel", "FK_ConciliacionesBancarias_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Compania), "ConciliacionesBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.ConciliacionesBancaria), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_CuentasContables_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Compania), "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasContable), true)]
-[assembly: EdmRelationshipAttribute("BancosModel", "FK_ConciliacionesBancarias_CuentasContables", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasContable), "ConciliacionesBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.ConciliacionesBancaria), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_MovimientosBancarios_Chequeras", "Chequera", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Chequera), "MovimientosBancario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.MovimientosBancario), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_UltimoMesCerrado_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Compania), "UltimoMesCerrado", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.UltimoMesCerrado), true)]
-[assembly: EdmRelationshipAttribute("BancosModel", "FK_MovimientosDesdeBancos_ConciliacionesBancarias", "ConciliacionesBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.ConciliacionesBancaria), "MovimientosDesdeBanco", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.MovimientosDesdeBanco), true)]
-[assembly: EdmRelationshipAttribute("BancosModel", "FK_MovimientosBancarios_MovimientosDesdeBancos", "MovimientosDesdeBanco", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.MovimientosDesdeBanco), "MovimientosBancario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.MovimientosBancario), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_dAsientos_CuentasContables1", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasContable), "dAsiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.dAsiento), true)]
-[assembly: EdmRelationshipAttribute("BancosModel", "FK_dAsientos_MovimientosDesdeBancos", "MovimientosDesdeBanco", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.MovimientosDesdeBanco), "dAsiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.dAsiento), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_Asientos_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Compania), "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Asiento), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_Asientos_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Moneda), "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Asiento), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_Asientos_Monedas1", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Moneda), "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Asiento), true)]
@@ -52,7 +47,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_CuentasBancarias_Agencias", "Agencia", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Agencia), "CuentasBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasBancaria), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_Chequeras_CuentasBancarias", "CuentasBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasBancaria), "Chequera", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Chequera), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_CuentasBancarias_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Compania), "CuentasBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasBancaria), true)]
-[assembly: EdmRelationshipAttribute("BancosModel", "FK_ConciliacionesBancarias_CuentasBancarias", "CuentasBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasBancaria), "ConciliacionesBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.ConciliacionesBancaria), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_CuentasBancarias_CuentasContables", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasContable), "CuentasBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasBancaria), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_CuentasBancarias_CuentasContables1", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasContable), "CuentasBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasBancaria), true)]
 [assembly: EdmRelationshipAttribute("BancosModel", "FK_CuentasBancarias_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.Moneda), "CuentasBancaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Bancos.CuentasBancaria), true)]
@@ -232,22 +226,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ConciliacionesBancaria> ConciliacionesBancarias
-        {
-            get
-            {
-                if ((_ConciliacionesBancarias == null))
-                {
-                    _ConciliacionesBancarias = base.CreateObjectSet<ConciliacionesBancaria>("ConciliacionesBancarias");
-                }
-                return _ConciliacionesBancarias;
-            }
-        }
-        private ObjectSet<ConciliacionesBancaria> _ConciliacionesBancarias;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<CuentasContable> CuentasContables
         {
             get
@@ -324,22 +302,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
             }
         }
         private ObjectSet<UltimoMesCerrado> _UltimoMesCerradoes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<MovimientosDesdeBanco> MovimientosDesdeBancos
-        {
-            get
-            {
-                if ((_MovimientosDesdeBancos == null))
-                {
-                    _MovimientosDesdeBancos = base.CreateObjectSet<MovimientosDesdeBanco>("MovimientosDesdeBancos");
-                }
-                return _MovimientosDesdeBancos;
-            }
-        }
-        private ObjectSet<MovimientosDesdeBanco> _MovimientosDesdeBancos;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -706,14 +668,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ConciliacionesBancarias EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToConciliacionesBancarias(ConciliacionesBancaria conciliacionesBancaria)
-        {
-            base.AddObject("ConciliacionesBancarias", conciliacionesBancaria);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the CuentasContables EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToCuentasContables(CuentasContable cuentasContable)
@@ -751,14 +705,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         public void AddToUltimoMesCerradoes(UltimoMesCerrado ultimoMesCerrado)
         {
             base.AddObject("UltimoMesCerradoes", ultimoMesCerrado);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the MovimientosDesdeBancos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMovimientosDesdeBancos(MovimientosDesdeBanco movimientosDesdeBanco)
-        {
-            base.AddObject("MovimientosDesdeBancos", movimientosDesdeBanco);
         }
     
         /// <summary>
@@ -4193,28 +4139,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_ConciliacionesBancarias_Companias", "ConciliacionesBancaria")]
-        public EntityCollection<ConciliacionesBancaria> ConciliacionesBancarias
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ConciliacionesBancaria>("BancosModel.FK_ConciliacionesBancarias_Companias", "ConciliacionesBancaria");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ConciliacionesBancaria>("BancosModel.FK_ConciliacionesBancarias_Companias", "ConciliacionesBancaria", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_CuentasContables_Companias", "CuentasContable")]
         public EntityCollection<CuentasContable> CuentasContables
         {
@@ -4369,358 +4293,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<CuentasBancaria>("BancosModel.FK_CuentasBancarias_Companias", "CuentasBancaria", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="BancosModel", Name="ConciliacionesBancaria")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class ConciliacionesBancaria : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new ConciliacionesBancaria object.
-        /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="descripcion">Initial value of the Descripcion property.</param>
-        /// <param name="desde">Initial value of the Desde property.</param>
-        /// <param name="hasta">Initial value of the Hasta property.</param>
-        /// <param name="ciaContab">Initial value of the CiaContab property.</param>
-        /// <param name="cuentaBancaria">Initial value of the CuentaBancaria property.</param>
-        /// <param name="cuentaContable">Initial value of the CuentaContable property.</param>
-        public static ConciliacionesBancaria CreateConciliacionesBancaria(global::System.Int32 id, global::System.String descripcion, global::System.DateTime desde, global::System.DateTime hasta, global::System.Int32 ciaContab, global::System.Int32 cuentaBancaria, global::System.Int32 cuentaContable)
-        {
-            ConciliacionesBancaria conciliacionesBancaria = new ConciliacionesBancaria();
-            conciliacionesBancaria.ID = id;
-            conciliacionesBancaria.Descripcion = descripcion;
-            conciliacionesBancaria.Desde = desde;
-            conciliacionesBancaria.Hasta = hasta;
-            conciliacionesBancaria.CiaContab = ciaContab;
-            conciliacionesBancaria.CuentaBancaria = cuentaBancaria;
-            conciliacionesBancaria.CuentaContable = cuentaContable;
-            return conciliacionesBancaria;
-        }
-
-        #endregion
-
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                if (_ID != value)
-                {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value, "ID");
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Descripcion
-        {
-            get
-            {
-                return _Descripcion;
-            }
-            set
-            {
-                OnDescripcionChanging(value);
-                ReportPropertyChanging("Descripcion");
-                _Descripcion = StructuralObject.SetValidValue(value, false, "Descripcion");
-                ReportPropertyChanged("Descripcion");
-                OnDescripcionChanged();
-            }
-        }
-        private global::System.String _Descripcion;
-        partial void OnDescripcionChanging(global::System.String value);
-        partial void OnDescripcionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime Desde
-        {
-            get
-            {
-                return _Desde;
-            }
-            set
-            {
-                OnDesdeChanging(value);
-                ReportPropertyChanging("Desde");
-                _Desde = StructuralObject.SetValidValue(value, "Desde");
-                ReportPropertyChanged("Desde");
-                OnDesdeChanged();
-            }
-        }
-        private global::System.DateTime _Desde;
-        partial void OnDesdeChanging(global::System.DateTime value);
-        partial void OnDesdeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime Hasta
-        {
-            get
-            {
-                return _Hasta;
-            }
-            set
-            {
-                OnHastaChanging(value);
-                ReportPropertyChanging("Hasta");
-                _Hasta = StructuralObject.SetValidValue(value, "Hasta");
-                ReportPropertyChanged("Hasta");
-                OnHastaChanged();
-            }
-        }
-        private global::System.DateTime _Hasta;
-        partial void OnHastaChanging(global::System.DateTime value);
-        partial void OnHastaChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CiaContab
-        {
-            get
-            {
-                return _CiaContab;
-            }
-            set
-            {
-                OnCiaContabChanging(value);
-                ReportPropertyChanging("CiaContab");
-                _CiaContab = StructuralObject.SetValidValue(value, "CiaContab");
-                ReportPropertyChanged("CiaContab");
-                OnCiaContabChanged();
-            }
-        }
-        private global::System.Int32 _CiaContab;
-        partial void OnCiaContabChanging(global::System.Int32 value);
-        partial void OnCiaContabChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CuentaBancaria
-        {
-            get
-            {
-                return _CuentaBancaria;
-            }
-            set
-            {
-                OnCuentaBancariaChanging(value);
-                ReportPropertyChanging("CuentaBancaria");
-                _CuentaBancaria = StructuralObject.SetValidValue(value, "CuentaBancaria");
-                ReportPropertyChanged("CuentaBancaria");
-                OnCuentaBancariaChanged();
-            }
-        }
-        private global::System.Int32 _CuentaBancaria;
-        partial void OnCuentaBancariaChanging(global::System.Int32 value);
-        partial void OnCuentaBancariaChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CuentaContable
-        {
-            get
-            {
-                return _CuentaContable;
-            }
-            set
-            {
-                OnCuentaContableChanging(value);
-                ReportPropertyChanging("CuentaContable");
-                _CuentaContable = StructuralObject.SetValidValue(value, "CuentaContable");
-                ReportPropertyChanged("CuentaContable");
-                OnCuentaContableChanged();
-            }
-        }
-        private global::System.Int32 _CuentaContable;
-        partial void OnCuentaContableChanging(global::System.Int32 value);
-        partial void OnCuentaContableChanged();
-
-        #endregion
-
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_ConciliacionesBancarias_Companias", "Compania")]
-        public Compania Compania
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Compania>("BancosModel.FK_ConciliacionesBancarias_Companias", "Compania").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Compania>("BancosModel.FK_ConciliacionesBancarias_Companias", "Compania").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Compania> CompaniaReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Compania>("BancosModel.FK_ConciliacionesBancarias_Companias", "Compania");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Compania>("BancosModel.FK_ConciliacionesBancarias_Companias", "Compania", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_ConciliacionesBancarias_CuentasContables", "CuentasContable")]
-        public CuentasContable CuentasContable
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CuentasContable>("BancosModel.FK_ConciliacionesBancarias_CuentasContables", "CuentasContable").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CuentasContable>("BancosModel.FK_ConciliacionesBancarias_CuentasContables", "CuentasContable").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<CuentasContable> CuentasContableReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CuentasContable>("BancosModel.FK_ConciliacionesBancarias_CuentasContables", "CuentasContable");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CuentasContable>("BancosModel.FK_ConciliacionesBancarias_CuentasContables", "CuentasContable", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_MovimientosDesdeBancos_ConciliacionesBancarias", "MovimientosDesdeBanco")]
-        public EntityCollection<MovimientosDesdeBanco> MovimientosDesdeBancos
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MovimientosDesdeBanco>("BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias", "MovimientosDesdeBanco");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MovimientosDesdeBanco>("BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias", "MovimientosDesdeBanco", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_ConciliacionesBancarias_CuentasBancarias", "CuentasBancaria")]
-        public CuentasBancaria CuentasBancaria
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CuentasBancaria>("BancosModel.FK_ConciliacionesBancarias_CuentasBancarias", "CuentasBancaria").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CuentasBancaria>("BancosModel.FK_ConciliacionesBancarias_CuentasBancarias", "CuentasBancaria").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<CuentasBancaria> CuentasBancariaReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CuentasBancaria>("BancosModel.FK_ConciliacionesBancarias_CuentasBancarias", "CuentasBancaria");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CuentasBancaria>("BancosModel.FK_ConciliacionesBancarias_CuentasBancarias", "CuentasBancaria", value);
                 }
             }
         }
@@ -5251,28 +4823,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Compania>("BancosModel.FK_CuentasBancarias_Companias", "Compania", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_ConciliacionesBancarias_CuentasBancarias", "ConciliacionesBancaria")]
-        public EntityCollection<ConciliacionesBancaria> ConciliacionesBancarias
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ConciliacionesBancaria>("BancosModel.FK_ConciliacionesBancarias_CuentasBancarias", "ConciliacionesBancaria");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ConciliacionesBancaria>("BancosModel.FK_ConciliacionesBancarias_CuentasBancarias", "ConciliacionesBancaria", value);
                 }
             }
         }
@@ -5983,28 +5533,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Compania>("BancosModel.FK_CuentasContables_Companias", "Compania", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_ConciliacionesBancarias_CuentasContables", "ConciliacionesBancaria")]
-        public EntityCollection<ConciliacionesBancaria> ConciliacionesBancarias
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ConciliacionesBancaria>("BancosModel.FK_ConciliacionesBancarias_CuentasContables", "ConciliacionesBancaria");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ConciliacionesBancaria>("BancosModel.FK_ConciliacionesBancarias_CuentasContables", "ConciliacionesBancaria", value);
                 }
             }
         }
@@ -6894,44 +6422,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CuentasContable>("BancosModel.FK_dAsientos_CuentasContables1", "CuentasContable", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_dAsientos_MovimientosDesdeBancos", "MovimientosDesdeBanco")]
-        public MovimientosDesdeBanco MovimientosDesdeBanco
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientosDesdeBanco>("BancosModel.FK_dAsientos_MovimientosDesdeBancos", "MovimientosDesdeBanco").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientosDesdeBanco>("BancosModel.FK_dAsientos_MovimientosDesdeBancos", "MovimientosDesdeBanco").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<MovimientosDesdeBanco> MovimientosDesdeBancoReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientosDesdeBanco>("BancosModel.FK_dAsientos_MovimientosDesdeBancos", "MovimientosDesdeBanco");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MovimientosDesdeBanco>("BancosModel.FK_dAsientos_MovimientosDesdeBancos", "MovimientosDesdeBanco", value);
                 }
             }
         }
@@ -9303,6 +8793,30 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         private Nullable<global::System.DateTime> _FechaRecepcionPlanilla;
         partial void OnFechaRecepcionPlanillaChanging(Nullable<global::System.DateTime> value);
         partial void OnFechaRecepcionPlanillaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> ContabilizarAlPagar_flag
+        {
+            get
+            {
+                return _ContabilizarAlPagar_flag;
+            }
+            set
+            {
+                OnContabilizarAlPagar_flagChanging(value);
+                ReportPropertyChanging("ContabilizarAlPagar_flag");
+                _ContabilizarAlPagar_flag = StructuralObject.SetValidValue(value, "ContabilizarAlPagar_flag");
+                ReportPropertyChanged("ContabilizarAlPagar_flag");
+                OnContabilizarAlPagar_flagChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _ContabilizarAlPagar_flag;
+        partial void OnContabilizarAlPagar_flagChanging(Nullable<global::System.Boolean> value);
+        partial void OnContabilizarAlPagar_flagChanged();
 
         #endregion
 
@@ -10786,44 +10300,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_MovimientosBancarios_MovimientosDesdeBancos", "MovimientosDesdeBanco")]
-        public MovimientosDesdeBanco MovimientosDesdeBanco
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientosDesdeBanco>("BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos", "MovimientosDesdeBanco").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientosDesdeBanco>("BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos", "MovimientosDesdeBanco").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<MovimientosDesdeBanco> MovimientosDesdeBancoReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientosDesdeBanco>("BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos", "MovimientosDesdeBanco");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MovimientosDesdeBanco>("BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos", "MovimientosDesdeBanco", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_MovimientosBancarios_Proveedores", "Proveedore")]
         public Proveedore Proveedore
         {
@@ -10852,274 +10328,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Proveedore>("BancosModel.FK_MovimientosBancarios_Proveedores", "Proveedore", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="BancosModel", Name="MovimientosDesdeBanco")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class MovimientosDesdeBanco : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new MovimientosDesdeBanco object.
-        /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="conciliacionBancariaID">Initial value of the ConciliacionBancariaID property.</param>
-        /// <param name="fecha">Initial value of the Fecha property.</param>
-        /// <param name="monto">Initial value of the Monto property.</param>
-        public static MovimientosDesdeBanco CreateMovimientosDesdeBanco(global::System.Int32 id, global::System.Int32 conciliacionBancariaID, global::System.DateTime fecha, global::System.Decimal monto)
-        {
-            MovimientosDesdeBanco movimientosDesdeBanco = new MovimientosDesdeBanco();
-            movimientosDesdeBanco.ID = id;
-            movimientosDesdeBanco.ConciliacionBancariaID = conciliacionBancariaID;
-            movimientosDesdeBanco.Fecha = fecha;
-            movimientosDesdeBanco.Monto = monto;
-            return movimientosDesdeBanco;
-        }
-
-        #endregion
-
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                if (_ID != value)
-                {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value, "ID");
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ConciliacionBancariaID
-        {
-            get
-            {
-                return _ConciliacionBancariaID;
-            }
-            set
-            {
-                OnConciliacionBancariaIDChanging(value);
-                ReportPropertyChanging("ConciliacionBancariaID");
-                _ConciliacionBancariaID = StructuralObject.SetValidValue(value, "ConciliacionBancariaID");
-                ReportPropertyChanged("ConciliacionBancariaID");
-                OnConciliacionBancariaIDChanged();
-            }
-        }
-        private global::System.Int32 _ConciliacionBancariaID;
-        partial void OnConciliacionBancariaIDChanging(global::System.Int32 value);
-        partial void OnConciliacionBancariaIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime Fecha
-        {
-            get
-            {
-                return _Fecha;
-            }
-            set
-            {
-                OnFechaChanging(value);
-                ReportPropertyChanging("Fecha");
-                _Fecha = StructuralObject.SetValidValue(value, "Fecha");
-                ReportPropertyChanged("Fecha");
-                OnFechaChanged();
-            }
-        }
-        private global::System.DateTime _Fecha;
-        partial void OnFechaChanging(global::System.DateTime value);
-        partial void OnFechaChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Referencia
-        {
-            get
-            {
-                return _Referencia;
-            }
-            set
-            {
-                OnReferenciaChanging(value);
-                ReportPropertyChanging("Referencia");
-                _Referencia = StructuralObject.SetValidValue(value, true, "Referencia");
-                ReportPropertyChanged("Referencia");
-                OnReferenciaChanged();
-            }
-        }
-        private global::System.String _Referencia;
-        partial void OnReferenciaChanging(global::System.String value);
-        partial void OnReferenciaChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Descripcion
-        {
-            get
-            {
-                return _Descripcion;
-            }
-            set
-            {
-                OnDescripcionChanging(value);
-                ReportPropertyChanging("Descripcion");
-                _Descripcion = StructuralObject.SetValidValue(value, true, "Descripcion");
-                ReportPropertyChanged("Descripcion");
-                OnDescripcionChanged();
-            }
-        }
-        private global::System.String _Descripcion;
-        partial void OnDescripcionChanging(global::System.String value);
-        partial void OnDescripcionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal Monto
-        {
-            get
-            {
-                return _Monto;
-            }
-            set
-            {
-                OnMontoChanging(value);
-                ReportPropertyChanging("Monto");
-                _Monto = StructuralObject.SetValidValue(value, "Monto");
-                ReportPropertyChanged("Monto");
-                OnMontoChanged();
-            }
-        }
-        private global::System.Decimal _Monto;
-        partial void OnMontoChanging(global::System.Decimal value);
-        partial void OnMontoChanged();
-
-        #endregion
-
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_MovimientosDesdeBancos_ConciliacionesBancarias", "ConciliacionesBancaria")]
-        public ConciliacionesBancaria ConciliacionesBancaria
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ConciliacionesBancaria>("BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias", "ConciliacionesBancaria").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ConciliacionesBancaria>("BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias", "ConciliacionesBancaria").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<ConciliacionesBancaria> ConciliacionesBancariaReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ConciliacionesBancaria>("BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias", "ConciliacionesBancaria");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ConciliacionesBancaria>("BancosModel.FK_MovimientosDesdeBancos_ConciliacionesBancarias", "ConciliacionesBancaria", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_MovimientosBancarios_MovimientosDesdeBancos", "MovimientosBancario")]
-        public EntityCollection<MovimientosBancario> MovimientosBancarios
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MovimientosBancario>("BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos", "MovimientosBancario");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MovimientosBancario>("BancosModel.FK_MovimientosBancarios_MovimientosDesdeBancos", "MovimientosBancario", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BancosModel", "FK_dAsientos_MovimientosDesdeBancos", "dAsiento")]
-        public EntityCollection<dAsiento> dAsientos
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<dAsiento>("BancosModel.FK_dAsientos_MovimientosDesdeBancos", "dAsiento");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<dAsiento>("BancosModel.FK_dAsientos_MovimientosDesdeBancos", "dAsiento", value);
                 }
             }
         }
@@ -14762,6 +13970,8 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         /// <param name="ciaContabRif">Initial value of the CiaContabRif property.</param>
         /// <param name="nombreCompania">Initial value of the NombreCompania property.</param>
         /// <param name="abreviaturaCompania">Initial value of the AbreviaturaCompania property.</param>
+        /// <param name="natJurFlag">Initial value of the NatJurFlag property.</param>
+        /// <param name="natJurFlagDescripcion">Initial value of the NatJurFlagDescripcion property.</param>
         /// <param name="numeroFactura">Initial value of the NumeroFactura property.</param>
         /// <param name="claveUnicaFactura">Initial value of the ClaveUnicaFactura property.</param>
         /// <param name="tipo">Initial value of the Tipo property.</param>
@@ -14777,7 +13987,7 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         /// <param name="cxCCxPFlag">Initial value of the CxCCxPFlag property.</param>
         /// <param name="nombreCxCCxPFlag">Initial value of the NombreCxCCxPFlag property.</param>
         /// <param name="nombreUsuario">Initial value of the NombreUsuario property.</param>
-        public static tTempWebReport_ConsultaFacturas CreatetTempWebReport_ConsultaFacturas(global::System.Int32 moneda, global::System.Int32 ciaContab, global::System.Int32 compania, global::System.String monedaSimbolo, global::System.String monedaDescripcion, global::System.String ciaContabNombre, global::System.String ciaContabRif, global::System.String nombreCompania, global::System.String abreviaturaCompania, global::System.String numeroFactura, global::System.Int32 claveUnicaFactura, global::System.Int32 tipo, global::System.String nombreTipo, global::System.Int32 condicionesDePago, global::System.DateTime fechaEmision, global::System.DateTime fechaRecepcion, global::System.Decimal montoTotalFactura, global::System.Decimal totalFactura, global::System.Decimal totalAPagar, global::System.Decimal saldo, global::System.Int16 estado, global::System.Int16 cxCCxPFlag, global::System.String nombreCxCCxPFlag, global::System.String nombreUsuario)
+        public static tTempWebReport_ConsultaFacturas CreatetTempWebReport_ConsultaFacturas(global::System.Int32 moneda, global::System.Int32 ciaContab, global::System.Int32 compania, global::System.String monedaSimbolo, global::System.String monedaDescripcion, global::System.String ciaContabNombre, global::System.String ciaContabRif, global::System.String nombreCompania, global::System.String abreviaturaCompania, global::System.Int16 natJurFlag, global::System.String natJurFlagDescripcion, global::System.String numeroFactura, global::System.Int32 claveUnicaFactura, global::System.Int32 tipo, global::System.String nombreTipo, global::System.Int32 condicionesDePago, global::System.DateTime fechaEmision, global::System.DateTime fechaRecepcion, global::System.Decimal montoTotalFactura, global::System.Decimal totalFactura, global::System.Decimal totalAPagar, global::System.Decimal saldo, global::System.Int16 estado, global::System.Int16 cxCCxPFlag, global::System.String nombreCxCCxPFlag, global::System.String nombreUsuario)
         {
             tTempWebReport_ConsultaFacturas tTempWebReport_ConsultaFacturas = new tTempWebReport_ConsultaFacturas();
             tTempWebReport_ConsultaFacturas.Moneda = moneda;
@@ -14789,6 +13999,8 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
             tTempWebReport_ConsultaFacturas.CiaContabRif = ciaContabRif;
             tTempWebReport_ConsultaFacturas.NombreCompania = nombreCompania;
             tTempWebReport_ConsultaFacturas.AbreviaturaCompania = abreviaturaCompania;
+            tTempWebReport_ConsultaFacturas.NatJurFlag = natJurFlag;
+            tTempWebReport_ConsultaFacturas.NatJurFlagDescripcion = natJurFlagDescripcion;
             tTempWebReport_ConsultaFacturas.NumeroFactura = numeroFactura;
             tTempWebReport_ConsultaFacturas.ClaveUnicaFactura = claveUnicaFactura;
             tTempWebReport_ConsultaFacturas.Tipo = tipo;
@@ -15347,6 +14559,54 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         private Nullable<global::System.Boolean> _ContribuyenteFlag;
         partial void OnContribuyenteFlagChanging(Nullable<global::System.Boolean> value);
         partial void OnContribuyenteFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 NatJurFlag
+        {
+            get
+            {
+                return _NatJurFlag;
+            }
+            set
+            {
+                OnNatJurFlagChanging(value);
+                ReportPropertyChanging("NatJurFlag");
+                _NatJurFlag = StructuralObject.SetValidValue(value, "NatJurFlag");
+                ReportPropertyChanged("NatJurFlag");
+                OnNatJurFlagChanged();
+            }
+        }
+        private global::System.Int16 _NatJurFlag;
+        partial void OnNatJurFlagChanging(global::System.Int16 value);
+        partial void OnNatJurFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String NatJurFlagDescripcion
+        {
+            get
+            {
+                return _NatJurFlagDescripcion;
+            }
+            set
+            {
+                OnNatJurFlagDescripcionChanging(value);
+                ReportPropertyChanging("NatJurFlagDescripcion");
+                _NatJurFlagDescripcion = StructuralObject.SetValidValue(value, false, "NatJurFlagDescripcion");
+                ReportPropertyChanged("NatJurFlagDescripcion");
+                OnNatJurFlagDescripcionChanged();
+            }
+        }
+        private global::System.String _NatJurFlagDescripcion;
+        partial void OnNatJurFlagDescripcionChanging(global::System.String value);
+        partial void OnNatJurFlagDescripcionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -17842,16 +17102,14 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         /// </summary>
         /// <param name="mes">Initial value of the Mes property.</param>
         /// <param name="ano">Initial value of the Ano property.</param>
-        /// <param name="ultAct">Initial value of the UltAct property.</param>
         /// <param name="manAuto">Initial value of the ManAuto property.</param>
         /// <param name="cia">Initial value of the Cia property.</param>
         /// <param name="usuario">Initial value of the Usuario property.</param>
-        public static UltimoMesCerrado CreateUltimoMesCerrado(global::System.Byte mes, global::System.Int16 ano, global::System.DateTime ultAct, global::System.String manAuto, global::System.Int32 cia, global::System.String usuario)
+        public static UltimoMesCerrado CreateUltimoMesCerrado(global::System.Byte mes, global::System.Int16 ano, global::System.String manAuto, global::System.Int32 cia, global::System.String usuario)
         {
             UltimoMesCerrado ultimoMesCerrado = new UltimoMesCerrado();
             ultimoMesCerrado.Mes = mes;
             ultimoMesCerrado.Ano = ano;
-            ultimoMesCerrado.UltAct = ultAct;
             ultimoMesCerrado.ManAuto = manAuto;
             ultimoMesCerrado.Cia = cia;
             ultimoMesCerrado.Usuario = usuario;
@@ -17913,9 +17171,9 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime UltAct
+        public Nullable<global::System.DateTime> UltAct
         {
             get
             {
@@ -17930,8 +17188,8 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Bancos
                 OnUltActChanged();
             }
         }
-        private global::System.DateTime _UltAct;
-        partial void OnUltActChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _UltAct;
+        partial void OnUltActChanging(Nullable<global::System.DateTime> value);
         partial void OnUltActChanged();
     
         /// <summary>
