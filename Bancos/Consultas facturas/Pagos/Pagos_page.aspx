@@ -31,14 +31,16 @@
              <%--   column en la izquierda con links   --%>
             <td style="border: 1px solid #C0C0C0; width: 10%; vertical-align: top; background-color: #F7F7F7; text-align: center; ">
                 <br />
+                <br />
                
-                <i class="fa fa-filter"></i>
-                <a href="javascript:PopupWin('Pagos_page_Filter.aspx', 1000, 680)">Definir
-                    y <br />aplicar un filtro</a>
+                <a href="javascript:PopupWin('Pagos_page_Filter.aspx', 1000, 680)">Definir y aplicar<br /> un filtro</a><br />
+                <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
+
                 <hr />
 
-                <i class="fa fa-print"></i>
-                <a href="javascript:PopupWin('Pagos_OpcionesReportes.aspx', 1000, 680)">Obtener <br />un reporte</a>
+                <a href="javascript:PopupWin('Pagos_OpcionesReportes.aspx', 1000, 680)">Reporte</a><br />
+                <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
+
                 <hr />
 
             </td>

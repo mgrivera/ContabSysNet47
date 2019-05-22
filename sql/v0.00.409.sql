@@ -5,7 +5,7 @@
 */
 
 
-Delete From Tmp_tTempWebReport_ConsultaFacturas
+Delete From tTempWebReport_ConsultaFacturas
 
 
 BEGIN TRANSACTION

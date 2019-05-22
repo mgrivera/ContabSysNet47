@@ -47,101 +47,33 @@
         <br />
         <br />
 
-         <%--<a runat="server" 
-            href="javascript:PopupWin('Facturas_Filter.aspx', 1000, 600)">
-                <img id="Img4" 
-                        border="0" 
-                        runat="server"
-                        alt="Para definir y aplicar un filtro que regrese los registros que se desea consultar" 
-                        src="~/Pictures/filter_25x25.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('Facturas_Filter.aspx', 1000, 600)">Definir y aplicar<br /> un filtro</a>--%>
+        <a href="javascript:PopupWin('Facturas_Filter.aspx', 1000, 680)">Definir y aplicar<br /> un filtro</a><br />
+        <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
 
+        <br />
+        <asp:Label ID="cantRegistrosSeleccionados_Label" runat="server" Text=""></asp:Label>
 
+        <hr />
 
+        <a href="javascript:PopupWin('Facturas_OpcionesReportes.aspx', 1000, 600)">Reportes</a><br />
+        <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
 
+        <hr />
 
-                <i class="fa fa-filter"></i>
-                <a href="javascript:PopupWin('Facturas_Filter.aspx', 1000, 680)">Definir y aplicar un filtro</a>
+        <a href="javascript:PopupWin('Facturas_MailMergeFile.aspx', 1000, 600)">Exportar a<br />Word</a><br />
+        <i class="far fa-file-word fa-2x" style="margin-top: 5px; "></i>
 
-                <br />
-                <asp:Label ID="cantRegistrosSeleccionados_Label" runat="server" Text=""></asp:Label>
+        <hr />
 
-                <hr />
+        <a href="javascript:PopupWin('<% = GetFacturasExportarExcel_UriAddress() %>', 1000, 600)">Exportar a<br />Excel</a><br />
+        <i class="far fa-file-excel fa-2x" style="margin-top: 5px; "></i>
+                
+        <hr />
 
-                <%--<a runat="server" 
-                   id="reportLink"
-                   href="javascript:PopupWin('Facturas_OpcionesReportes.aspx', 1000, 600)">
-                        <img id="Img5" 
-                             runat="server"
-                             border="0" 
-                             alt="Para obtener diferentes reporte que muestran los registros seleccionados" 
-                             src="~/Pictures/print_25x25.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('Facturas_OpcionesReportes.aspx', 1000, 600)">Reportes</a>--%>
-
-
-
-
-
-                 <i class="fa fa-print"></i>
-                 <a href="javascript:PopupWin('Facturas_OpcionesReportes.aspx', 1000, 600)">Reportes</a>
-
-                <hr />
-
-                <%--<a runat="server" 
-                   id="mailMergeLink"
-                   href="javascript:PopupWin('Facturas_MailMergeFile.aspx', 1000, 600)">
-                        <img id="Img1" 
-                             runat="server"
-                             border="0" 
-                             alt="Para exportar los datos seleccionados a un archivo (txt) que permita efectuar una combinación con Microsoft Word" 
-                             src="~/Pictures/MailMerge_25x25.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('Facturas_MailMergeFile.aspx', 1000, 600)">Exportar a<br />Word</a>--%>
-
-                <i class="fa fa-file-word-o "></i>
-                <a href="javascript:PopupWin('Facturas_MailMergeFile.aspx', 1000, 600)">Exportar a<br />Word</a>
-
-                <hr />
-
-                <%--<a href="javascript:PopupWin('<% = GetFacturasExportarExcel_UriAddress() %>', 1000, 600)">
-                    <img id="Img3"
-                        runat="server"
-                        border="0"
-                        alt="Para obtener documentos Excel, usando las facturas que se han seleccionado"
-                        src="~/Pictures/Excel_25x25.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('<% = GetFacturasExportarExcel_UriAddress() %>', 1000, 600)">Exportar a<br />Excel</a>--%>
-
-                <i class="fa fa-file-excel-o "></i>
-                <a href="javascript:PopupWin('<% = GetFacturasExportarExcel_UriAddress() %>', 1000, 600)">Exportar a<br />Excel</a>
-
-                <hr />
-
-                <%--<a runat="server" 
-                   id="A1"
-                   href="javascript:PopupWin('Facturas_ObtencionXMLFileISLRRetenido.aspx', 1000, 600)">
-                        <img id="Img2" 
-                             runat="server"
-                             border="0" 
-                             alt="Para exportar los datos seleccionados a un archivo de texto" 
-                             src="~/Pictures/Disk.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('Facturas_ObtencionXMLFileISLRRetenido.aspx', 1200, 700)">Exportar a<br />archivos de texto</a>--%>
-
-
-
-                <i class="fa fa-file-text-o"></i>
-                <a href="javascript:PopupWin('Facturas_ObtencionXMLFileISLRRetenido.aspx', 1200, 700)">Exportar a<br />archivos de texto</a>
-
-                <hr />
-
+        <a href="javascript:PopupWin('Facturas_ObtencionXMLFileISLRRetenido.aspx', 1200, 700)">Exportar a<br />archivos de texto</a><br />
+        <i class="far fa-file-alt fa-2x" style="margin-top: 5px; "></i>
+                
+        <hr />
         <br />
     </div>
     

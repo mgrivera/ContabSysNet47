@@ -80,9 +80,12 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             // establecemos una conexión a mongodb; específicamente, a la base de datos del programa contabM; allí se registrará 
             // todo en un futuro; además, ahora ya están registradas las vacaciones ... 
             // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
             string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
 
-            var client = new MongoClient("mongodb://localhost");
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
             var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
             // --------------------------------------------------------------------------------------------------------------------------
 
@@ -229,9 +232,12 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             // establecemos una conexión a mongodb; específicamente, a la base de datos del programa contabM; allí se registrará 
             // todo en un futuro; además, ahora ya están registradas las vacaciones ... 
             // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
             string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
 
-            var client = new MongoClient("mongodb://localhost");
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
             var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
             // --------------------------------------------------------------------------------------------------------------------------
 
@@ -427,9 +433,12 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             // establecemos una conexión a mongodb; específicamente, a la base de datos del programa contabM; allí se registrará 
             // todo en un futuro; además, ahora ya están registradas las vacaciones ... 
             // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
             string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
 
-            var client = new MongoClient("mongodb://localhost");
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
             var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
             // --------------------------------------------------------------------------------------------------------------------------
             var eventos_pagosAnticipadosIslr = mongoDataBase.GetCollection<EventoPagoAnticipado>("eventos_pagosAnticipadosIslr");
@@ -503,9 +512,12 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             // --------------------------------------------------------------------------------------------------------------------------
             // establecemos una conexión a mongodb; específicamente, a la base de datos del programa contabM
             // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
             string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
 
-            var client = new MongoClient("mongodb://localhost");
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
             var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
             // --------------------------------------------------------------------------------------------------------------------------
             var eventos_pagosAnticipadosIslr_config = mongoDataBase.GetCollection<EventoPagoAnticipado_Config>("eventos_pagosAnticipadosIslr_config");
@@ -594,9 +606,12 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             // --------------------------------------------------------------------------------------------------------------------------
             // establecemos una conexión a mongodb; específicamente, a la base de datos del programa contabM
             // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
             string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
 
-            var client = new MongoClient("mongodb://localhost");
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
             var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
             // --------------------------------------------------------------------------------------------------------------------------
             var eventos_pagosAnticipadosIslr_config = mongoDataBase.GetCollection<EventoPagoAnticipado_Config>("eventos_pagosAnticipadosIslr_config");

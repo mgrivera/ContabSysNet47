@@ -6,13 +6,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <link href="general.css" rel="stylesheet" type="text/css" />
+    <link href="fontawesome.css" rel="stylesheet" type="text/css" />
     <link href="radcalendar.css" rel="stylesheet" type="text/css" />
     <link href="Styles/GridViewStyles/styles2.css" rel="stylesheet" />
     <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="myBootstrap.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" type="text/css" href="Scripts/jquery/jquery-ui-1.10.4.min.css" />
-    <link href="Content/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <%--<link href="Content/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />--%>
+    <link href="Content/fontawesome-free-5.8.2-web/css/all.min.css" rel="stylesheet" />
 
     <style type="text/css">
         #dialog-link

@@ -29,42 +29,30 @@
 <%--  --%>
 <%-- div en la izquierda para mostrar funciones de la página --%>
 <%--  --%>
-    <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top;
-        background-color: #F7F7F7; float: left; text-align: center; ">
+    <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top; background-color: #F7F7F7; float: left; text-align: center; ">
         <br />
         <br />
-        <img id="Filter_img" alt="Para filtrar las comprobantes que se desea consultar" runat="server"
-            src="~/Pictures/FilterDefine_25x25.png" />
-        <br />
-        <a href="javascript:PopupWin('ComprobantesContables_Filter.aspx', 1000, 680)">Definir
-            y aplicar<br />un filtro</a>
-        <hr />
-        <img id="Img1" alt="Reporte de comprobantes contables" src="../../../Pictures/print_25x25.png" />
-        <br />
-        <div style="text-align: center;">
-            <a href="javascript:PopupWin('OpcionesReportes.aspx', 1000, 680)" >
-                Reporte
-            </a>
-        </div>
 
-<%--        <br />--%>
+        <a href="javascript:PopupWin('ComprobantesContables_Filter.aspx', 1000, 680)">Definir y aplicar<br /> un filtro</a><br />
+        <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
+
         <hr />
-        <img id="Img4" alt="Consulta de cierres de compañías" src="../../../Pictures/NewWindow_25x25.png" />
-        <br />
-        <a href="javascript:PopupWin('../../UltimoMesCerradoContable.aspx', 1000, 680)">
-            Fechas de último<br />cierre contable</a>
-        <br />
+
+        <a href="javascript:PopupWin('OpcionesReportes.aspx', 1000, 680)" >Reporte</a><br />
+        <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
+
+        <hr />
+
+        <a href="javascript:PopupWin('../../UltimoMesCerradoContable.aspx', 1000, 680)">Fechas de último<br /> cierre contable</a><br />
+        <i class="fas fa-desktop fa-2x" style="margin-top: 5px; "></i>
 
         <div id="SoloUsuariosAutorizados_Div" runat="server">
             <hr />
-            <img id="FuncionesAsientosContables_Img" alt="Funciones" runat="server"
-                src="~/Pictures/Gears_25x25.png" />
-            <br />
-            <a href="javascript:PopupWin('ComprobantesContables_Funciones.aspx', 1000, 680)">Funciones</a>
+            <a href="javascript:PopupWin('ComprobantesContables_Funciones.aspx', 1000, 680)">Funciones</a><br />
+            <i class="fas fa-cog fa-2x" style="margin-top: 5px; "></i>
         </div>
 
         <hr />
-
         <br />
     </div>
 

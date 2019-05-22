@@ -49,15 +49,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion {
         protected global::System.Web.UI.WebControls.HiddenField SelectedRecs_HiddenField;
         
         /// <summary>
-        /// Filter_img control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Filter_img;
-        
-        /// <summary>
         /// ComprobantesContables_Reporte_HyperLink control.
         /// </summary>
         /// <remarks>

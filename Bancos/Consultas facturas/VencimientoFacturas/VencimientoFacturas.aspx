@@ -10,10 +10,7 @@
             var top = parseInt((screen.availHeight / 2) - (h / 2));
             window.open(url, "external", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top);
         }
-        //function RefreshPage() {
-        //    window.document.getElementById("RebindFlagSpan").firstChild.value = "1";
-        //    window.document.forms(0).submit();
-        //}
+      
         function RefreshPage() {
             // nótese como usamos jquery para asignar el valor al field ... 
             $("#RebindFlagHiddenField").val("1");
@@ -28,22 +25,24 @@
     <%--  --%>
     <%-- div en la izquierda para mostrar funciones de la página --%>
     <%--  --%>
-    <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top;
-        background-color: #F7F7F7; float: left; text-align: center; ">
+    <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top; background-color: #F7F7F7; float: left; text-align: center; ">
         <br />
         <br />
-        <i class="fa fa-filter"></i>
-        <a href="javascript:PopupWin('VencimientoFacturas_Filter.aspx', 1000, 680)">Definir
-            y aplicar un filtro</a>
+
+        <a href="javascript:PopupWin('VencimientoFacturas_Filter.aspx', 1000, 680)">Definir y aplicar<br /> un filtro</a><br />
+        <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
+
         <hr />
        
-        <i class="fa fa-print"></i>
         <asp:HyperLink ID="VencimientoFacturas_Reporte_HyperLink" runat="server" CssClass="generalfont"
-            NavigateUrl="~/ReportViewer.aspx?rpt=vencimientofacturas" Target="_blank">Análisis de antiguedad de facturas pendientes</asp:HyperLink>
+            NavigateUrl="~/ReportViewer.aspx?rpt=vencimientofacturas" Target="_blank">Reporte</asp:HyperLink><br />
+        <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
+
         <hr />
-        <i class="fa fa-desktop"></i>
-        <a href="javascript:PopupWin('DefinicionPeriodosVencimiento.aspx', 1000, 680)">
-            Definición de períodos de vencimiento</a>
+
+        <a href="javascript:PopupWin('DefinicionPeriodosVencimiento.aspx', 1000, 680)">Definición de<br /> períodos de<br /> vencimiento</a><br />
+        <i class="fas fa-desktop fa-2x" style="margin-top: 5px; "></i>
+
         <br />
         <br />
     </div>

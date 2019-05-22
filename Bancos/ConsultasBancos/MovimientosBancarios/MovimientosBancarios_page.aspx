@@ -35,46 +35,23 @@
              <%--   column en la izquierda con links   --%>
             <td style="border: 1px solid #C0C0C0; width: 10%; vertical-align: top; background-color: #F7F7F7; text-align: center; ">
                 <br />
-               
-                <a runat="server" 
-                   id="filterLink"
-                   href="javascript:PopupWin('MovimientosBancarios_page_Filter.aspx', 1000, 600)">
-                        <img id="Img3" 
-                             border="0" 
-                             runat="server"
-                             alt="Para definir y aplicar un filtro que regrese los registros que se desea consultar" 
-                             src="~/Pictures/filter_25x25.png" />
-                </a>
                 <br />
-                <a href="javascript:PopupWin('MovimientosBancarios_page_Filter.aspx', 1000, 600)">Definir y aplicar<br />un filtro</a>
+
+                <a href="javascript:PopupWin('MovimientosBancarios_page_Filter.aspx', 1000, 600)">Definir y aplicar<br /> un filtro</a><br />
+                <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
 
                 <hr />
 
-                 <a runat="server" 
-                   id="reportLink"
-                   href="javascript:PopupWin('MovimientosBancarios_OpcionesReportes.aspx', 1000, 600)">
-                        <img id="Img4" 
-                             runat="server"
-                             border="0" 
-                             alt="Para obtener un reporte que muestre los registros seleccionados" 
-                             src="~/Pictures/print_25x25.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('MovimientosBancarios_OpcionesReportes.aspx', 1000, 600)">Reporte</a>
+                <a href="javascript:PopupWin('MovimientosBancarios_OpcionesReportes.aspx', 1000, 600)">Reporte</a><br />
+                <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
 
                 <hr />
 
-                <a runat="server" 
-                   id="mailMergeLink"
-                   href="javascript:PopupWin('MovimientosBancarios_ExportarInfoWord.aspx', 1000, 600)">
-                        <img id="Img2" 
-                             runat="server"
-                             border="0" 
-                             alt="Para exportar los datos seleccionados a un archivo (txt) que permita efectuar una combinación con Microsoft Word" 
-                             src="~/Pictures/MailMerge_25x25.png" />
-                </a>
+                <a href="javascript:PopupWin('MovimientosBancarios_ExportarInfoWord.aspx', 1000, 600)">Combinar con<br />Microsoft Word</a><br />
+                <i class="far fa-file-word fa-2x" style="margin-top: 5px; "></i>
+
+                <hr />
                 <br />
-                <a href="javascript:PopupWin('MovimientosBancarios_ExportarInfoWord.aspx', 1000, 600)">Combinar con<br />Word</a>
             </td>
 
             <td style="vertical-align: top; ">

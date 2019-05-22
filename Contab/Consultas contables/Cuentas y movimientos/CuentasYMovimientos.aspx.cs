@@ -608,9 +608,10 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
             // --------------------------------------------------------------------------------------------------------------------------
             // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config 
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
             string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
 
-            var client = new MongoClient("mongodb://localhost");
+            var client = new MongoClient(contabm_mongodb_connection);
             var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
             // --------------------------------------------------------------------------------------------------------------------------
 

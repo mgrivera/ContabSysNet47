@@ -151,8 +151,13 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
 
             // --------------------------------------------------------------------------------------------------------------------------
             // establecemos una conexión a mongodb 
-            var client = new MongoClient("mongodb://localhost");
-            var mongoDataBase = client.GetDatabase("dbContab");
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
+            string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
+
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
 
             var facturaSimpleImportarDesdeExcel = mongoDataBase.GetCollection<Temp_FacturaSimpleImportarDesdeExcel>("Temp_FacturaSimpleImportarDesdeExcel");
 
@@ -279,259 +284,6 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
-
-        //[HttpGet]
-        //public HttpResponseMessage ValidarExistenciaCompanias()
-        //{
-        //    if (!User.Identity.IsAuthenticated)
-        //    {
-        //        var errorResult = new
-        //        {
-        //            ErrorFlag = true,
-        //            ErrorMessage = "Error: por favor haga un login a esta aplicación, y luego regrese a ejecutar esta función."
-        //        };
-
-        //        return Request.CreateResponse(HttpStatusCode.OK, errorResult);
-        //    }
-
-        //    // --------------------------------------------------------------------------------------------------------------------------
-        //    // establecemos una conexión a mongodb 
-
-        //    var client = new MongoClient("mongodb://localhost");
-        //    var server = client.GetServer();
-        //    var mongoDataBase = server.GetDatabase("dbContab");
-
-        //    var facturasImportarDesdeExcel = mongoDataBase.GetCollection<Temp_FacturaImportarDesdeExcel>("Temp_FacturaImportarDesdeExcel");
-
-        //    var query = facturasImportarDesdeExcel.AsQueryable<Temp_FacturaImportarDesdeExcel>().
-        //                                               Where(f => f.Usuario == User.Identity.Name).
-        //                                               Select(f => f.Rif);
-
-        //    BancosEntities bancosContext = new BancosEntities();
-
-        //    List<string> companiasYaExisten = new List<string>();
-
-        //    try
-        //    {
-        //        foreach (string numeroRif in query)
-        //        {
-        //            Proveedore compania = bancosContext.Proveedores.Where(p => p.Rif == numeroRif || p.Rif == numeroRif.Replace("-", "")).FirstOrDefault();
-
-        //            if (compania != null)
-        //                companiasYaExisten.Add(numeroRif);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string message = ex.Message;
-        //        if (ex.InnerException != null)
-        //            message += "<br />" + ex.InnerException.Message;
-
-        //        var errorResult = new
-        //        {
-        //            ErrorFlag = true,
-        //            ErrorMessage = "Se producido un error mientras se ejecutaba el proceso. El mensaje específico del error es:<br />" + message
-        //        };
-
-        //        return Request.CreateResponse(HttpStatusCode.OK, errorResult);
-        //    }
-
-        //    var result = new
-        //    {
-        //        ErrorFlag = false,
-        //        ErrorMessage = "",
-        //        CompaniasQueExisten = companiasYaExisten,
-        //        ResultMessage = "Ok, la verificación de las compañías en la base de datos en el servidor, ha finalizado.<br />" +
-        //            "De un total de " + query.Count().ToString() + " registros leídos desde Excel, cada uno para una compañía, " +
-        //            "hemos encontrado que ya existen " + companiasYaExisten.Count().ToString() + " compañías registradas.<br />" +
-        //            "Las compañías marcadas en azul fueron encontradas (existen); las mostradas en rojo no existen, y serán grabadas si Ud. " +
-        //            "ejecuta el próximo paso."
-        //    };
-
-        //    return Request.CreateResponse(HttpStatusCode.OK, result);
-        //}
-
-
-        //[HttpPost]
-        //public HttpResponseMessage GrabarCompaniasQueNoExisten(int tipoCompania, int moneda, int cargo, int formaPago, string titulo)
-        //{
-        //    if (!User.Identity.IsAuthenticated)
-        //    {
-        //        var errorResult = new
-        //        {
-        //            ErrorFlag = true,
-        //            ErrorMessage = "Error: por favor haga un login a esta aplicación, y luego regrese a ejecutar esta función."
-        //        };
-
-        //        return Request.CreateResponse(HttpStatusCode.OK, errorResult);
-        //    }
-
-        //    // --------------------------------------------------------------------------------------------------------------------------
-        //    // establecemos una conexión a mongodb 
-
-        //    var client = new MongoClient("mongodb://localhost");
-        //    var server = client.GetServer();
-        //    var mongoDataBase = server.GetDatabase("dbContab");
-
-        //    var facturasImportarDesdeExcel = mongoDataBase.GetCollection<Temp_FacturaImportarDesdeExcel>("Temp_FacturaImportarDesdeExcel");
-
-        //    var query = facturasImportarDesdeExcel.AsQueryable<Temp_FacturaImportarDesdeExcel>().
-        //                                               Where(f => f.Usuario == User.Identity.Name);
-
-        //    BancosEntities bancosContext = new BancosEntities();
-
-        //    Proveedore compania;
-        //    Persona persona; 
-
-
-        //    int cantidadCompaniasGrabadas = 0;
-        //    int cantidadCompaniasYaExistian = 0;
-        //    int cantidadCompaniasLeidas = 0;
-        //    string message; 
-
-        //    // no tenemos los departamentos en EF; simplemente, leemos el primero para asignarlo a todas las personas registradas aquí ... 
-
-        //    int? departamento = bancosContext.Personas.Select(p => p.Departamento).First(); 
-
-        //    try
-        //    {
-        //        foreach (Temp_FacturaImportarDesdeExcel factura in query)
-        //        {
-        //            cantidadCompaniasLeidas++; 
-
-        //            Proveedore ciaExiste = bancosContext.Proveedores.Where(p => p.Rif == factura.Rif || p.Rif == factura.Rif.Replace("-", "")).FirstOrDefault();
-
-        //            if (ciaExiste != null)
-        //            {
-        //                cantidadCompaniasYaExistian++;
-        //                continue; 
-        //            }
-                        
-
-        //            cantidadCompaniasGrabadas++;
-
-        //            // la ciudad debe existir ... 
-
-        //            tCiudade ciudad = bancosContext.tCiudades.Where(c => c.Descripcion == factura.Ciudad).FirstOrDefault();
-
-        //            if (ciudad == null)
-        //            {
-        //                message = "Error: la ciudad '" + factura.Ciudad + "' no existe en la tabla de ciudades.<br />" +
-        //                    "Ud. debe agregar la ciudad a la tabla de ciudades y luego regresar a ejecutar este proceso.";
-
-        //                var errorResult = new
-        //                {
-        //                    ErrorFlag = true,
-        //                    ErrorMessage = message
-        //                };
-
-        //                return Request.CreateResponse(HttpStatusCode.OK, errorResult);
-        //            }
-
-
-        //            // la compañía no existe en Contab; intentamos registrarla ... 
-
-        //            compania = new Proveedore()
-        //            {
-        //                Nombre = factura.NombrePropietario + " " + factura.ApellidoPropietario,
-        //                ProveedorClienteFlag = 2,                           // cliente 
-        //                Tipo = tipoCompania,
-        //                MonedaDefault = moneda,
-        //                Rif = factura.Rif,
-        //                NacionalExtranjeroFlag = 1,                         // nacional 
-        //                NatJurFlag = Convert.ToInt16((factura.Rif.Substring(0, 1) != "J" ? 1 : 2)),       // 1: natural; 2: jurídico 
-        //                Abreviatura = (factura.NombrePropietario.Length >= 10 ? factura.NombrePropietario.Substring(0, 10) : factura.NombrePropietario),
-        //                FormaDePagoDefault = formaPago,
-        //                SujetoARetencionFlag = false,
-        //                CodigoConceptoRetencion = null,
-        //                PorcentajeDeRetencion = null,
-        //                BaseRetencionISLR = null,
-        //                AplicaIvaFlag = null,
-        //                ContribuyenteEspecialFlag = null,
-        //                RetencionSobreIvaPorc = null,
-        //                Beneficiario = factura.NombrePropietario + " " + factura.ApellidoPropietario,
-        //                Concepto = factura.Placa + " - " + factura.MarcaModeloVersion,
-        //                Ciudad = ciudad.Ciudad,
-        //                Direccion = factura.Direccion,
-        //                Telefono1 = factura.Telefono,
-        //                Telefono2 = factura.Celular,
-        //                Ingreso = DateTime.Now,
-        //                UltAct = DateTime.Now,
-        //                Usuario = User.Identity.Name
-        //                //Lote = "TODO: asignar un número de lote ..."
-        //            };
-
-        //            persona = new Persona()
-        //            {
-        //                Nombre = factura.NombrePropietario,
-        //                Apellido = factura.ApellidoPropietario,
-        //                Telefono = factura.Telefono,
-        //                Celular = factura.Celular,
-        //                email = factura.Email,
-        //                DefaultFlag = true,
-        //                Cargo = cargo,
-        //                Departamento = departamento,
-        //                Titulo = titulo,
-        //                Ingreso = DateTime.Now,
-        //                UltAct = DateTime.Now,
-        //                Usuario = User.Identity.Name
-        //            };
-
-        //            compania.Personas.Add(persona);
-        //            bancosContext.Proveedores.AddObject(compania); 
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        message = ex.Message;
-        //        if (ex.InnerException != null)
-        //            message += "<br />" + ex.InnerException.Message;
-
-        //        var errorResult = new
-        //        {
-        //            ErrorFlag = true,
-        //            ErrorMessage = "Se producido un error mientras se ejecutaba el proceso. El mensaje específico del error es:<br />" + message
-        //        };
-
-        //        return Request.CreateResponse(HttpStatusCode.OK, errorResult);
-        //    }
-
-        //    try
-        //    {
-        //        bancosContext.SaveChanges();
-
-        //        message = "Ok, las compañías se han cargado a la base de datos en forma satisfactoria.<br />" +
-        //                  "La cantidad de compañías (líneas del doc Excel) leídas es: " + cantidadCompaniasLeidas.ToString() + "<br />" +
-        //                  "De éstas, ya existían: " + cantidadCompaniasYaExistian.ToString() + "<br />" +
-        //                  "Y fueron cargadas: " + cantidadCompaniasGrabadas.ToString(); 
-        //                  // + "<br />" + "El valor asignado al 'lote' es: '" + lote + "'";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        message = ex.Message;
-        //        if (ex.InnerException != null)
-        //            message += "<br />" + ex.InnerException.Message;
-
-        //        var errorResult = new
-        //        {
-        //            ErrorFlag = true,
-        //            ErrorMessage = "Se producido un error mientras se ejecutaba el proceso. El mensaje específico del error es:<br />" + message
-        //        };
-
-        //        return Request.CreateResponse(HttpStatusCode.OK, errorResult);
-        //    }
-
-
-        //    var result = new
-        //    {
-        //        ErrorFlag = false,
-        //        ErrorMessage = "",
-        //        ResultMessage = message
-        //    };
-
-        //    return Request.CreateResponse(HttpStatusCode.OK, result);
-        //}
-
         [HttpPost]
         public HttpResponseMessage GrabarFacturas(int ciaContabSeleccionadaID, 
                                                   decimal porcentajeImpuestosIva, 
@@ -638,9 +390,13 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
 
             // --------------------------------------------------------------------------------------------------------------------------
             // establecemos una conexión a mongodb 
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
+            string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
 
-            var client = new MongoClient("mongodb://localhost");
-            var mongoDataBase = client.GetDatabase("dbContab");
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
 
             var facturasImportarDesdeExcel = mongoDataBase.GetCollection<Temp_FacturaSimpleImportarDesdeExcel>("Temp_FacturaSimpleImportarDesdeExcel");
 

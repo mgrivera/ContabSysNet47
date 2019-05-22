@@ -22,15 +22,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes {
         protected global::System.Web.UI.WebControls.HiddenField RebindFlagHiddenField;
         
         /// <summary>
-        /// Filter_img control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Filter_img;
-        
-        /// <summary>
         /// SoloUsuariosAutorizados_Div control.
         /// </summary>
         /// <remarks>
@@ -38,15 +29,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl SoloUsuariosAutorizados_Div;
-        
-        /// <summary>
-        /// FuncionesAsientosContables_Img control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage FuncionesAsientosContables_Img;
         
         /// <summary>
         /// ErrMessage_Span control.

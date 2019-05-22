@@ -183,10 +183,15 @@ namespace ContabSysNet_Web.Areas.CajaChica.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK, errorResult);
             }
 
-            FiltroConsultaReposiciones filtro = new FiltroConsultaReposiciones() { Cia = 55 }; 
+            FiltroConsultaReposiciones filtro = new FiltroConsultaReposiciones() { Cia = 55 };
 
-            var client = new MongoClient("mongodb://localhost");
-            var mongoDataBase = client.GetDatabase("dbContab");
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
+            string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
+
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
 
             var reposicionesCajaChica = mongoDataBase.GetCollection<ReposicionCajaChica>("reposicionesCajaChica");
 
@@ -240,9 +245,13 @@ namespace ContabSysNet_Web.Areas.CajaChica.Controllers
 
             // --------------------------------------------------------------------------------------------------------------------------
             // establecemos una conexión a mongodb 
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
+            string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
 
-            var client = new MongoClient("mongodb://localhost");
-            var mongoDataBase = client.GetDatabase("dbContab");
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
 
             var reposicionesMongoCollection = mongoDataBase.GetCollection<ReposicionCajaChica>("reposicionesCajaChica");
 
@@ -302,9 +311,13 @@ namespace ContabSysNet_Web.Areas.CajaChica.Controllers
 
             // --------------------------------------------------------------------------------------------------------------------------
             // establecemos una conexión a mongodb 
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
+            string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
 
-            var client = new MongoClient("mongodb://localhost");
-            var mongoDataBase = client.GetDatabase("dbContab");
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
 
             var reposicionesMongoCollection = mongoDataBase.GetCollection<ReposicionCajaChica>("reposicionesCajaChica");
 
@@ -372,8 +385,13 @@ namespace ContabSysNet_Web.Areas.CajaChica.Controllers
             // --------------------------------------------------------------------------------------------------------------------------
             // establecemos una conexión a mongodb 
 
-            var client = new MongoClient("mongodb://localhost");
-            var mongoDataBase = client.GetDatabase("dbContab");
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
+            string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
+
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
 
             var reposicionesMongoCollection = mongoDataBase.GetCollection<ReposicionCajaChica>("reposicionesCajaChica");
 
@@ -522,8 +540,13 @@ namespace ContabSysNet_Web.Areas.CajaChica.Controllers
 
             // --------------------------------------------------------------------------------------------------------------------------
             // establecemos una conexión a mongodb 
-            var client = new MongoClient("mongodb://localhost");
-            var mongoDataBase = client.GetDatabase("dbContab");
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
+            string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
+
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
 
             var reposicionesMongoCollection = mongoDataBase.GetCollection<ReposicionCajaChica>("reposicionesCajaChica");
 
@@ -798,8 +821,13 @@ namespace ContabSysNet_Web.Areas.CajaChica.Controllers
 
             // --------------------------------------------------------------------------------------------------------------------------
             // establecemos una conexión a mongodb 
-            var client = new MongoClient("mongodb://localhost");
-            var mongoDataBase = client.GetDatabase("dbContab");
+            string contabm_mongodb_connection = System.Web.Configuration.WebConfigurationManager.AppSettings["contabm_mongodb_connectionString"];
+            string contabM_mongodb_name = System.Web.Configuration.WebConfigurationManager.AppSettings["contabM_mongodb_name"];
+
+            var client = new MongoClient(contabm_mongodb_connection);
+            // var server = client.GetServer();
+            // nótese como el nombre de la base de datos mongo (de contabM) está en el archivo webAppSettings.config; en este db se registran las vacaciones 
+            var mongoDataBase = client.GetDatabase(contabM_mongodb_name);
 
             var reposicionesMongoCollection = mongoDataBase.GetCollection<ReposicionCajaChica>("reposicionesCajaChica");
 

@@ -35,55 +35,25 @@
         </asp:UpdatePanel>
     </div>
 
-    <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top;
-        background-color: #F7F7F7; float: left; text-align: center; ">
+    <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top; background-color: #F7F7F7; float: left; text-align: center; ">
         <br />
         <br />
-               
-                <a runat="server" 
-                   id="filterLink"
-                   href="javascript:PopupWin('BalanceGeneral_Filter.aspx', 1000, 600)">
-                        <img id="Img3" 
-                             border="0" 
-                             runat="server"
-                             alt="Para definir el filtro a usar para determinar cuales registro se desea consultar ..." 
-                             src="~/Pictures/FilterDefine_25x25.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('BalanceGeneral_Filter.aspx', 1000, 600)">Definir<br />un filtro</a>
 
-                <hr />
+        <a href="javascript:PopupWin('BalanceGeneral_Filter.aspx', 1000, 600)">Definir y aplicar<br /> un filtro</a><br />
+        <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
 
-                 <a runat="server" 
-                   id="reportLink"
-                   href="javascript:PopupWin('BalanceGeneral_OpcionesReportes.aspx', 1000, 600)">
-                        <img id="Img4" 
-                             runat="server"
-                             border="0" 
-                             alt="Para obtener un reporte que muestre los registros seleccionados" 
-                             src="~/Pictures/print_35x35.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('BalanceGeneral_OpcionesReportes.aspx', 1000, 600)">Reportes</a>
+        <hr />
 
-                <hr />
+        <a href="javascript:PopupWin('BalanceGeneral_OpcionesReportes.aspx', 1000, 600)">Reporte</a><br />
+        <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
 
-                <a runat="server" 
-                   id="mailMergeLink"
-                   href="javascript:PopupWin('UltimoMesCerradoContable.aspx', 1000, 600)">
-                        <img id="Img2" 
-                             runat="server"
-                             border="0" 
-                             alt="Para consultar el último mes cerrado para la Cia Contab seleccionada en el filtro." 
-                             src="~/Pictures/NewWindow_25x25.png" />
-                </a>
-                <br />
-                <a href="javascript:PopupWin('UltimoMesCerradoContable.aspx', 1000, 600)">Cierres de<br />compañías</a>
-                <br /><br />
-<%--            </td>
+        <hr />
 
-            <td style="vertical-align: top; ">--%>
+        <a href="javascript:PopupWin('UltimoMesCerradoContable.aspx', 1000, 600)">Fechas de último<br /> cierre contable</a><br />
+        <i class="fas fa-desktop fa-2x" style="margin-top: 5px; "></i>
 
+        <hr />
+        <br />
     </div>
     
     <div style="text-align: left; float: right; width: 88%;">
