@@ -14,7 +14,8 @@
     <link href="Styles/ajaxControlToolkit.css" rel="stylesheet" />
     <link href="Styles/GridViewStyles/styles2.css" rel="stylesheet" />
     <link href="radcalendar.css" rel="stylesheet" />
-
+    <link href="fontawesome.css" rel="stylesheet" type="text/css" />
+    <link href="Content/fontawesome-free-5.8.2-web/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="Scripts/jquery/jquery-ui-1.10.4.min.css" />
 
     <asp:ContentPlaceHolder id="head" runat="server">

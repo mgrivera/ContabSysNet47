@@ -3227,134 +3227,126 @@ namespace ContabSysNetWeb
 
                             BalanceGeneral_Parametros parametros = Session["BalanceGeneral_Parametros"] as BalanceGeneral_Parametros;
 
-                            bool mostrarResumenGyP = false;
-
-                            if (Request.QueryString["mostrarGyP"] != null && Request.QueryString["mostrarGyP"].ToString() == "si")
-                                mostrarResumenGyP = true; 
-
                             if (parametros.BalGen_GyP == "BG")
                             {
-                                if (mostrarResumenGyP)
+                                string errorMessage = "";
+
+                                // determinamos el mes y año fiscal, pues lo necesitamos para ejecutar el sp que sigue ... 
+
+                                var mesFiscal_ObjectParmeter = new ObjectParameter("mesFiscal", typeof(short));
+                                var anoFiscal_ObjectParmeter = new ObjectParameter("anoFiscal", typeof(short));
+                                var nombreMes_ObjectParmeter = new ObjectParameter("nombreMes", typeof(string));
+                                var errorMessage_ObjectParmeter = new ObjectParameter("errorMessage", typeof(string));
+
+                                // nótese como obtenemos el mes fiscal para el mes *anterior* al mes de inicio del período; la idea es obtener (luego) los saldos del mes 
+                                // *anterior* al inicio del período; por ejemplo: si el usuario intenta obtener la consulta para Abril, debemos obtener los saldos para 
+                                // Marzo, que serán los iniciales para Abril .... 
+
+                                int result = db.spDeterminarMesFiscal(parametros.Desde,
+                                                                        parametros.CiaContab,
+                                                                        mesFiscal_ObjectParmeter,
+                                                                        anoFiscal_ObjectParmeter,
+                                                                        nombreMes_ObjectParmeter,
+                                                                        errorMessage_ObjectParmeter);
+
+                                if (!string.IsNullOrEmpty(errorMessage_ObjectParmeter.Value.ToString()))
                                 {
-                                    string errorMessage = "";
+                                    string functionErrorMessage = errorMessage_ObjectParmeter.Value.ToString();
+                                    errorMessage = "Hemos obtenido un error, al intentar obtener obtener el mes y año fiscal para la fecha indicada como criterio de ejecución.<br /> " +
+                                            "A continuación, mostramos el mensaje específico de error:<br /> " + functionErrorMessage;
 
-                                    // determinamos el mes y año fiscal, pues lo necesitamos para ejecutar el sp que sigue ... 
+                                    ErrMessage_Cell.InnerHtml = errorMessage;
+                                    return;
+                                }
 
-                                    var mesFiscal_ObjectParmeter = new ObjectParameter("mesFiscal", typeof(short));
-                                    var anoFiscal_ObjectParmeter = new ObjectParameter("anoFiscal", typeof(short));
-                                    var nombreMes_ObjectParmeter = new ObjectParameter("nombreMes", typeof(string));
-                                    var errorMessage_ObjectParmeter = new ObjectParameter("errorMessage", typeof(string));
+                                short mesFiscal = Convert.ToInt16(mesFiscal_ObjectParmeter.Value);
+                                short anoFiscal = Convert.ToInt16(anoFiscal_ObjectParmeter.Value);
+                                string nombreMes = nombreMes_ObjectParmeter.Value.ToString();
 
-                                    // nótese como obtenemos el mes fiscal para el mes *anterior* al mes de inicio del período; la idea es obtener (luego) los saldos del mes 
-                                    // *anterior* al inicio del período; por ejemplo: si el usuario intenta obtener la consulta para Abril, debemos obtener los saldos para 
-                                    // Marzo, que serán los iniciales para Abril .... 
+                                // la función que sigue lee y regresa en una lista el ID de las cuentas GyP ... 
 
-                                    int result = db.spDeterminarMesFiscal(parametros.Desde,
-                                                                          parametros.CiaContab,
-                                                                          mesFiscal_ObjectParmeter,
-                                                                          anoFiscal_ObjectParmeter,
-                                                                          nombreMes_ObjectParmeter,
-                                                                          errorMessage_ObjectParmeter);
+                                List<int> cuentasContablesGyP_List;
+                                cuentasContablesGyP_List = ConstruirListaCuentasGyP(parametros.CiaContab, db, out errorMessage);
+
+                                if (errorMessage != "")
+                                {
+                                    ErrMessage_Cell.InnerHtml = errorMessage;
+                                    return;
+                                }
+
+                                // pasamos cada 1er. nivel de cuentas (gyp) a un stored procedure, para que determine su resumen ... 
+
+                                foreach (int cuentaContable in cuentasContablesGyP_List)
+                                {
+                                    // para cada cuenta, ejecutamos un sp que determina los montos que corresponden 
+                                    // (nóetese que el sp lee y regresa una sumarización para las cuentas contables subordinadas (ie: 5 ->> 5*) 
+
+                                    var nombreCuentaContable_ObjectParmeter = new ObjectParameter("nombreCuentaContable", typeof(string));
+                                    var nombreGrupoContable_ObjectParmeter = new ObjectParameter("nombreGrupoContable", typeof(string));
+
+                                    var saldoInicial_ObjectParmeter = new ObjectParameter("saldoInicial", typeof(decimal));
+                                    var montoAntesDesde_ObjectParmeter = new ObjectParameter("montoAntesDesde", typeof(decimal));
+                                    var debe_ObjectParmeter = new ObjectParameter("debe", typeof(decimal));
+                                    var haber_ObjectParmeter = new ObjectParameter("haber", typeof(decimal));
+                                    var saldoActual_ObjectParmeter = new ObjectParameter("saldoActual", typeof(decimal));
+
+                                    var cantidadMovimientos_ObjectParmeter = new ObjectParameter("cantidadMovimientos", typeof(short));
+                                    var ordenBalanceGeneral_ObjectParmeter = new ObjectParameter("ordenBalanceGeneral", typeof(short));
+
+                                    // nótese como obtenemos el mes fiscal para el mes *anterior* al mes de inicio del período; la idea es obtener (luego) 
+                                    // los saldos del mes *anterior* al inicio del período; por ejemplo: si el usuario intenta obtener la consulta para Abril, 
+                                    // debemos obtener los saldos para Marzo, que serán los iniciales para Abril .... 
+
+                                    var result2 = db.spGetSaldoAnteriorDebeYHaber(cuentaContable, 
+                                                                                    parametros.Moneda, 
+                                                                                    parametros.MonedaOriginal, 
+                                                                                    mesFiscal, anoFiscal, 
+                                                                                    parametros.Desde, 
+                                                                                    parametros.Hasta, true, 
+                                                                                    parametros.ExcluirAsientosContablesTipoCierreAnual, 
+                                                                                    nombreCuentaContable_ObjectParmeter,
+                                                                                    nombreGrupoContable_ObjectParmeter,
+                                                                                    saldoInicial_ObjectParmeter,
+                                                                                    montoAntesDesde_ObjectParmeter,
+                                                                                    debe_ObjectParmeter,
+                                                                                    haber_ObjectParmeter,
+                                                                                    saldoActual_ObjectParmeter,
+                                                                                    cantidadMovimientos_ObjectParmeter,
+                                                                                    ordenBalanceGeneral_ObjectParmeter,
+                                                                                    errorMessage_ObjectParmeter);
+
+                                    // nota: si no materializamos aquí, los outputs parameters no son siempre accesibles !!! 
+
+                                    var spResul = result2.Single(); 
+
 
                                     if (!string.IsNullOrEmpty(errorMessage_ObjectParmeter.Value.ToString()))
                                     {
                                         string functionErrorMessage = errorMessage_ObjectParmeter.Value.ToString();
-                                        errorMessage = "Hemos obtenido un error, al intentar obtener obtener el mes y año fiscal para la fecha indicada como criterio de ejecución.<br /> " +
-                                             "A continuación, mostramos el mensaje específico de error:<br /> " + functionErrorMessage;
+                                        errorMessage = "Hemos obtenido un error, al intentar obtener obtener el saldo anterior, debe y haber " + 
+                                            "para alguna de las cuentas contables.<br /> " +
+                                            "A continuación, mostramos el mensaje específico de error:<br /> " + functionErrorMessage;
 
                                         ErrMessage_Cell.InnerHtml = errorMessage;
-                                        return;
+                                        //return;
                                     }
 
-                                    short mesFiscal = Convert.ToInt16(mesFiscal_ObjectParmeter.Value);
-                                    short anoFiscal = Convert.ToInt16(anoFiscal_ObjectParmeter.Value);
-                                    string nombreMes = nombreMes_ObjectParmeter.Value.ToString();
+                                    itemResumen = new Contab_Report_BalanceGeneral_Resumen();
 
-                                    // la función que sigue lee y regresa en una lista el ID de las cuentas GyP ... 
+                                    itemResumen.SimboloMoneda = nombreMoneda;
+                                    itemResumen.TipoCuenta = 1;             // bal gen: para dar un sub total para cuentas cuentas: reales / gyp 
 
-                                    List<int> cuentasContablesGyP_List;
-                                    cuentasContablesGyP_List = ConstruirListaCuentasGyP(parametros.CiaContab, db, out errorMessage);
+                                    itemResumen.NombreNivel1 = nombreCuentaContable_ObjectParmeter.Value.ToString();
+                                    itemResumen.SaldoInicial = Convert.ToDecimal(saldoInicial_ObjectParmeter.Value) +
+                                                                Convert.ToDecimal(montoAntesDesde_ObjectParmeter.Value);
+                                    itemResumen.Debe = Convert.ToDecimal(debe_ObjectParmeter.Value);
+                                    itemResumen.Haber = Convert.ToDecimal(haber_ObjectParmeter.Value);
+                                    itemResumen.SaldoActual = Convert.ToDecimal(saldoActual_ObjectParmeter.Value);
 
-                                    if (errorMessage != "")
-                                    {
-                                        ErrMessage_Cell.InnerHtml = errorMessage;
-                                        return;
-                                    }
+                                    itemResumen.CantidadMovimientos = Convert.ToInt16(cantidadMovimientos_ObjectParmeter.Value);
+                                    itemResumen.OrdenBalanceGeneral = Convert.ToInt16(ordenBalanceGeneral_ObjectParmeter.Value);
 
-                                    // pasamos cada 1er. nivel de cuentas (gyp) a un stored procedure, para que determine su resumen ... 
-
-                                    foreach (int cuentaContable in cuentasContablesGyP_List)
-                                    {
-                                        // para cada cuenta, ejecutamos un sp que determina los montos que corresponden 
-                                        // (nóetese que el sp lee y regresa una sumarización para las cuentas contables subordinadas (ie: 5 ->> 5*) 
-
-                                        var nombreCuentaContable_ObjectParmeter = new ObjectParameter("nombreCuentaContable", typeof(string));
-                                        var nombreGrupoContable_ObjectParmeter = new ObjectParameter("nombreGrupoContable", typeof(string));
-
-                                        var saldoInicial_ObjectParmeter = new ObjectParameter("saldoInicial", typeof(decimal));
-                                        var montoAntesDesde_ObjectParmeter = new ObjectParameter("montoAntesDesde", typeof(decimal));
-                                        var debe_ObjectParmeter = new ObjectParameter("debe", typeof(decimal));
-                                        var haber_ObjectParmeter = new ObjectParameter("haber", typeof(decimal));
-                                        var saldoActual_ObjectParmeter = new ObjectParameter("saldoActual", typeof(decimal));
-
-                                        var cantidadMovimientos_ObjectParmeter = new ObjectParameter("cantidadMovimientos", typeof(short));
-                                        var ordenBalanceGeneral_ObjectParmeter = new ObjectParameter("ordenBalanceGeneral", typeof(short));
-
-                                        // nótese como obtenemos el mes fiscal para el mes *anterior* al mes de inicio del período; la idea es obtener (luego) 
-                                        // los saldos del mes *anterior* al inicio del período; por ejemplo: si el usuario intenta obtener la consulta para Abril, 
-                                        // debemos obtener los saldos para Marzo, que serán los iniciales para Abril .... 
-
-                                        var result2 = db.spGetSaldoAnteriorDebeYHaber(cuentaContable, 
-                                                                                     parametros.Moneda, 
-                                                                                     parametros.MonedaOriginal, 
-                                                                                     mesFiscal, anoFiscal, 
-                                                                                     parametros.Desde, 
-                                                                                     parametros.Hasta, true, 
-                                                                                     parametros.ExcluirAsientosContablesTipoCierreAnual, 
-                                                                                     nombreCuentaContable_ObjectParmeter,
-                                                                                     nombreGrupoContable_ObjectParmeter,
-                                                                                     saldoInicial_ObjectParmeter,
-                                                                                     montoAntesDesde_ObjectParmeter,
-                                                                                     debe_ObjectParmeter,
-                                                                                     haber_ObjectParmeter,
-                                                                                     saldoActual_ObjectParmeter,
-                                                                                     cantidadMovimientos_ObjectParmeter,
-                                                                                     ordenBalanceGeneral_ObjectParmeter,
-                                                                                     errorMessage_ObjectParmeter);
-
-                                        // nota: si no materializamos aquí, los outputs parameters no son siempre accesibles !!! 
-
-                                        var spResul = result2.Single(); 
-
-
-                                        if (!string.IsNullOrEmpty(errorMessage_ObjectParmeter.Value.ToString()))
-                                        {
-                                            string functionErrorMessage = errorMessage_ObjectParmeter.Value.ToString();
-                                            errorMessage = "Hemos obtenido un error, al intentar obtener obtener el saldo anterior, debe y haber " + 
-                                                "para alguna de las cuentas contables.<br /> " +
-                                                "A continuación, mostramos el mensaje específico de error:<br /> " + functionErrorMessage;
-
-                                            ErrMessage_Cell.InnerHtml = errorMessage;
-                                            //return;
-                                        }
-
-                                        itemResumen = new Contab_Report_BalanceGeneral_Resumen();
-
-                                        itemResumen.SimboloMoneda = nombreMoneda;
-                                        itemResumen.TipoCuenta = 1;             // bal gen: para dar un sub total para cuentas cuentas: reales / gyp 
-
-                                        itemResumen.NombreNivel1 = nombreCuentaContable_ObjectParmeter.Value.ToString();
-                                        itemResumen.SaldoInicial = Convert.ToDecimal(saldoInicial_ObjectParmeter.Value) +
-                                                                   Convert.ToDecimal(montoAntesDesde_ObjectParmeter.Value);
-                                        itemResumen.Debe = Convert.ToDecimal(debe_ObjectParmeter.Value);
-                                        itemResumen.Haber = Convert.ToDecimal(haber_ObjectParmeter.Value);
-                                        itemResumen.SaldoActual = Convert.ToDecimal(saldoActual_ObjectParmeter.Value);
-
-                                        itemResumen.CantidadMovimientos = Convert.ToInt16(cantidadMovimientos_ObjectParmeter.Value);
-                                        itemResumen.OrdenBalanceGeneral = Convert.ToInt16(ordenBalanceGeneral_ObjectParmeter.Value);
-
-                                        listaResumen.Add(itemResumen); 
-                                    }
+                                    listaResumen.Add(itemResumen); 
                                 }
                             }
 
@@ -3366,17 +3358,11 @@ namespace ContabSysNetWeb
 
                             if (soloSaldoFinal) 
                             {
-                                if (orientation == "v")
-                                    this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/BalanceGeneral/BalanceGeneral_SoloSaldoFinal.rdlc";
-                                else
-                                    this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/BalanceGeneral/BalanceGeneral_SoloSaldoFinal.rdlc";
+                                this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/BalanceGeneral/BalanceGeneral_SoloSaldoFinal.rdlc";
                             }
                             else 
                             {
-                                if (orientation == "v")
-                                    this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/BalanceGeneral/BalanceGeneral.rdlc";
-                                else
-                                    this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/BalanceGeneral/BalanceGeneral.rdlc";
+                                this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/BalanceGeneral/BalanceGeneral.rdlc";
                             }
 
                             
@@ -3399,8 +3385,6 @@ namespace ContabSysNetWeb
                             ReportParameter soloTotalesReportParameter = new ReportParameter("soloTotales", soloTotales);
 
                             ReportParameter tipoReporte_ReportParameter = new ReportParameter("TipoReporte", parametros.BalGen_GyP);
-                            ReportParameter mostrarResumenGyP_ReportParameter = new ReportParameter("MostrarResumenGyP", mostrarResumenGyP.ToString());
-
                             // -----------------------------------------------------------------------------------------------------
                             // leemos un 'flag' en la tabla Parametros, que permite al usuario indicar si quiere mostrar o 
                             // no la fecha del día en los reportes de contabilidad ... 
@@ -3433,7 +3417,6 @@ namespace ContabSysNetWeb
                                 simpleFontReportParameter, 
                                 soloTotalesReportParameter,
                                 tipoReporte_ReportParameter, 
-                                mostrarResumenGyP_ReportParameter, 
                                 noMostrarFechaDia_ReportParameter
                             };
 

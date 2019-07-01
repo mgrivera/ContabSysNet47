@@ -418,7 +418,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
                 // nótese como obtenemos el mes fiscal para el mes *anterior* al mes de inicio del período; la idea es obtener (luego) los saldos del mes 
                 // *anterior* al inicio del período; por ejemplo: si el usuario intenta obtener la consulta para Abril, debemos obtener los saldos para 
                 // Marzo, que serán los iniciales para Abril .... 
-
                 var resultadoFuncion = dbContab.spBalanceGeneral(
                     cuentaContableID, 
                     mesFiscal, 
@@ -429,6 +428,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
                     parametros.MonedaOriginal,
                     usuario, 
                     parametros.ExcluirCuentasSaldoYMovtosCero, 
+                    parametros.ExcluirCuentasSaldosFinalCero, 
                     parametros.ExcluirCuentasSinMovimientos, 
                     parametros.ExcluirAsientosContablesTipoCierreAnual, 
                     errorMessage_ObjectParmeter);
@@ -436,7 +436,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
                 if (!string.IsNullOrEmpty(errorMessage_ObjectParmeter.Value.ToString()))
                 {
                     errorMessage = errorMessage_ObjectParmeter.Value.ToString();
-
                     return;
                 }
 
@@ -475,103 +474,97 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             // en esta función leemos usamos el contenido de la tabla ParametrosContab para determinar y seleccionar solo las cuentas 
             // contables del grupo que corresponde, de acuerdo al tipo de consulta indicada. Por ejemplo: 
             // si el usuario quiere GyP, debemos excluir activos, pasivos y capital; justo a la inversa para Balance General 
-
             filtroConsulta = "";
 
             if (parametros.BalGen_GyP == "BG")
             {
-                if (parametros.BalGen_ExcluirGYP)
+                if (parametrosContab.Ingresos1 != null)
                 {
-                    if (parametrosContab.Ingresos1 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos1).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Ingresos2 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos2).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Ingresos3 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos3).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Ingresos4 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos4).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Ingresos5 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos5).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Ingresos6 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos6).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Egresos1 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos1).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Egresos2 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos2).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Egresos3 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos3).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Egresos4 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos4).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Egresos5 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos5).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
-
-                    if (parametrosContab.Egresos6 != null)
-                    {
-                        string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos6).Select(c => c.Cuenta).FirstOrDefault();
-                        if (cuenta != "")
-                            filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
-                    }
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos1).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
                 }
 
+                if (parametrosContab.Ingresos2 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos2).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Ingresos3 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos3).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Ingresos4 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos4).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Ingresos5 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos5).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Ingresos6 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Ingresos6).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Egresos1 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos1).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Egresos2 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos2).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Egresos3 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos3).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Egresos4 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos4).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Egresos5 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos5).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
+
+                if (parametrosContab.Egresos6 != null)
+                {
+                    string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Egresos6).Select(c => c.Cuenta).FirstOrDefault();
+                    if (cuenta != "")
+                        filtroConsulta += " And (it.Cuenta Not Like '" + cuenta + "%')";
+                }
             }
             else
             {
                 // para GyP siempre excluimos cuentas reales (activo, pasivo, capital) 
-
                 if (parametrosContab.Activo1 != null)
                 {
                     string cuenta = dbContab.CuentasContables.Where(c => c.ID == parametrosContab.Activo1).Select(c => c.Cuenta).FirstOrDefault();

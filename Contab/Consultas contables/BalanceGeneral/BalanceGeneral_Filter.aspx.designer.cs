@@ -166,15 +166,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         protected global::System.Web.UI.WebControls.RadioButton BalanceGeneral_RadioButton;
         
         /// <summary>
-        /// BalGen_ExcluirGastosIngresos_CheckBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox BalGen_ExcluirGastosIngresos_CheckBox;
-        
-        /// <summary>
         /// GyP_RadioButton control.
         /// </summary>
         /// <remarks>
@@ -193,6 +184,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         protected global::System.Web.UI.WebControls.CheckBox ExcluirCuentasSinSaldoNiMovtos_CheckBox;
         
         /// <summary>
+        /// ExcluirCuentasConSaldoFinalCero_CheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ExcluirCuentasConSaldoFinalCero_CheckBox;
+        
+        /// <summary>
         /// ExcluirCuentasSinMovimientos_CheckBox control.
         /// </summary>
         /// <remarks>
@@ -200,15 +200,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox ExcluirCuentasSinMovimientos_CheckBox;
-        
-        /// <summary>
-        /// ExcluirAsientosContablesTipoCierreAnual_CheckBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ExcluirAsientosContablesTipoCierreAnual_CheckBox;
         
         /// <summary>
         /// Sql_it_Cuenta_String control.
@@ -256,51 +247,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         protected global::System.Web.UI.WebControls.ListBox MonedasOriginales_ListBox;
         
         /// <summary>
-        /// TabPanel3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TabPanel TabPanel3;
-        
-        /// <summary>
-        /// CuentasContablesFilter_TextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CuentasContablesFilter_TextBox;
-        
-        /// <summary>
-        /// TextBoxWaterMarkExtender3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWaterMarkExtender3;
-        
-        /// <summary>
-        /// Sql_it_ID_Numeric control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_it_ID_Numeric;
-        
-        /// <summary>
-        /// Sql_it_Grupo_Numeric control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_it_Grupo_Numeric;
-        
-        /// <summary>
         /// LimpiarFiltro_Button control.
         /// </summary>
         /// <remarks>
@@ -326,23 +272,5 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource Monedas_SqlDataSource;
-        
-        /// <summary>
-        /// CuentasContables_SqlDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource CuentasContables_SqlDataSource;
-        
-        /// <summary>
-        /// GruposContables_SqlDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GruposContables_SqlDataSource;
     }
 }

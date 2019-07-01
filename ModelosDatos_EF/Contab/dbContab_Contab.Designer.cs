@@ -699,136 +699,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         /// No Metadata Documentation available.
         /// </summary>
         /// <param name="cuentaContableID">No Metadata Documentation available.</param>
-        /// <param name="mesFiscal">No Metadata Documentation available.</param>
-        /// <param name="anoFiscal">No Metadata Documentation available.</param>
-        /// <param name="desde">No Metadata Documentation available.</param>
-        /// <param name="hasta">No Metadata Documentation available.</param>
-        /// <param name="moneda">No Metadata Documentation available.</param>
-        /// <param name="monedaOriginal">No Metadata Documentation available.</param>
-        /// <param name="nombreUsuario">No Metadata Documentation available.</param>
-        /// <param name="excluirSaldoInicialDebeHaberCero">No Metadata Documentation available.</param>
-        /// <param name="excluirSinMovimientosPeriodo">No Metadata Documentation available.</param>
-        /// <param name="excluirAsientoTipoCierreAnual">No Metadata Documentation available.</param>
-        /// <param name="errorMessage">No Metadata Documentation available.</param>
-        public ObjectResult<Nullable<global::System.Int32>> spBalanceGeneral(Nullable<global::System.Int32> cuentaContableID, Nullable<global::System.Int16> mesFiscal, Nullable<global::System.Int16> anoFiscal, Nullable<global::System.DateTime> desde, Nullable<global::System.DateTime> hasta, Nullable<global::System.Int32> moneda, Nullable<global::System.Int32> monedaOriginal, global::System.String nombreUsuario, Nullable<global::System.Boolean> excluirSaldoInicialDebeHaberCero, Nullable<global::System.Boolean> excluirSinMovimientosPeriodo, Nullable<global::System.Boolean> excluirAsientoTipoCierreAnual, ObjectParameter errorMessage)
-        {
-            ObjectParameter cuentaContableIDParameter;
-            if (cuentaContableID.HasValue)
-            {
-                cuentaContableIDParameter = new ObjectParameter("cuentaContableID", cuentaContableID);
-            }
-            else
-            {
-                cuentaContableIDParameter = new ObjectParameter("cuentaContableID", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter mesFiscalParameter;
-            if (mesFiscal.HasValue)
-            {
-                mesFiscalParameter = new ObjectParameter("mesFiscal", mesFiscal);
-            }
-            else
-            {
-                mesFiscalParameter = new ObjectParameter("mesFiscal", typeof(global::System.Int16));
-            }
-    
-            ObjectParameter anoFiscalParameter;
-            if (anoFiscal.HasValue)
-            {
-                anoFiscalParameter = new ObjectParameter("anoFiscal", anoFiscal);
-            }
-            else
-            {
-                anoFiscalParameter = new ObjectParameter("anoFiscal", typeof(global::System.Int16));
-            }
-    
-            ObjectParameter desdeParameter;
-            if (desde.HasValue)
-            {
-                desdeParameter = new ObjectParameter("desde", desde);
-            }
-            else
-            {
-                desdeParameter = new ObjectParameter("desde", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter hastaParameter;
-            if (hasta.HasValue)
-            {
-                hastaParameter = new ObjectParameter("hasta", hasta);
-            }
-            else
-            {
-                hastaParameter = new ObjectParameter("hasta", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter monedaParameter;
-            if (moneda.HasValue)
-            {
-                monedaParameter = new ObjectParameter("moneda", moneda);
-            }
-            else
-            {
-                monedaParameter = new ObjectParameter("moneda", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter monedaOriginalParameter;
-            if (monedaOriginal.HasValue)
-            {
-                monedaOriginalParameter = new ObjectParameter("monedaOriginal", monedaOriginal);
-            }
-            else
-            {
-                monedaOriginalParameter = new ObjectParameter("monedaOriginal", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter nombreUsuarioParameter;
-            if (nombreUsuario != null)
-            {
-                nombreUsuarioParameter = new ObjectParameter("nombreUsuario", nombreUsuario);
-            }
-            else
-            {
-                nombreUsuarioParameter = new ObjectParameter("nombreUsuario", typeof(global::System.String));
-            }
-    
-            ObjectParameter excluirSaldoInicialDebeHaberCeroParameter;
-            if (excluirSaldoInicialDebeHaberCero.HasValue)
-            {
-                excluirSaldoInicialDebeHaberCeroParameter = new ObjectParameter("excluirSaldoInicialDebeHaberCero", excluirSaldoInicialDebeHaberCero);
-            }
-            else
-            {
-                excluirSaldoInicialDebeHaberCeroParameter = new ObjectParameter("excluirSaldoInicialDebeHaberCero", typeof(global::System.Boolean));
-            }
-    
-            ObjectParameter excluirSinMovimientosPeriodoParameter;
-            if (excluirSinMovimientosPeriodo.HasValue)
-            {
-                excluirSinMovimientosPeriodoParameter = new ObjectParameter("excluirSinMovimientosPeriodo", excluirSinMovimientosPeriodo);
-            }
-            else
-            {
-                excluirSinMovimientosPeriodoParameter = new ObjectParameter("excluirSinMovimientosPeriodo", typeof(global::System.Boolean));
-            }
-    
-            ObjectParameter excluirAsientoTipoCierreAnualParameter;
-            if (excluirAsientoTipoCierreAnual.HasValue)
-            {
-                excluirAsientoTipoCierreAnualParameter = new ObjectParameter("excluirAsientoTipoCierreAnual", excluirAsientoTipoCierreAnual);
-            }
-            else
-            {
-                excluirAsientoTipoCierreAnualParameter = new ObjectParameter("excluirAsientoTipoCierreAnual", typeof(global::System.Boolean));
-            }
-    
-            return base.ExecuteFunction<Nullable<global::System.Int32>>("spBalanceGeneral", cuentaContableIDParameter, mesFiscalParameter, anoFiscalParameter, desdeParameter, hastaParameter, monedaParameter, monedaOriginalParameter, nombreUsuarioParameter, excluirSaldoInicialDebeHaberCeroParameter, excluirSinMovimientosPeriodoParameter, excluirAsientoTipoCierreAnualParameter, errorMessage);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="cuentaContableID">No Metadata Documentation available.</param>
         /// <param name="moneda">No Metadata Documentation available.</param>
         /// <param name="monedaOriginal">No Metadata Documentation available.</param>
         /// <param name="mesFiscal">No Metadata Documentation available.</param>
@@ -940,6 +810,147 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
             }
     
             return base.ExecuteFunction<Nullable<global::System.Int32>>("spGetSaldoAnteriorDebeYHaber", cuentaContableIDParameter, monedaParameter, monedaOriginalParameter, mesFiscalParameter, anoFiscalParameter, desdeParameter, hastaParameter, resumenTodosSusDetallesParameter, excluirAsientoTipoCierreAnualParameter, nombreCuentaContable, nombreGrupoContable, saldoInicial, montoAntesDesde, debe, haber, saldoActual, cantidadMovimientos, ordenBalanceGeneral, errorMessage);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="cuentaContableID">No Metadata Documentation available.</param>
+        /// <param name="mesFiscal">No Metadata Documentation available.</param>
+        /// <param name="anoFiscal">No Metadata Documentation available.</param>
+        /// <param name="desde">No Metadata Documentation available.</param>
+        /// <param name="hasta">No Metadata Documentation available.</param>
+        /// <param name="moneda">No Metadata Documentation available.</param>
+        /// <param name="monedaOriginal">No Metadata Documentation available.</param>
+        /// <param name="nombreUsuario">No Metadata Documentation available.</param>
+        /// <param name="excluirSaldoInicialDebeHaberCero">No Metadata Documentation available.</param>
+        /// <param name="excluirSaldoFinalCero">No Metadata Documentation available.</param>
+        /// <param name="excluirSinMovimientosPeriodo">No Metadata Documentation available.</param>
+        /// <param name="excluirAsientoTipoCierreAnual">No Metadata Documentation available.</param>
+        /// <param name="errorMessage">No Metadata Documentation available.</param>
+        public ObjectResult<Nullable<global::System.Int32>> spBalanceGeneral(Nullable<global::System.Int32> cuentaContableID, Nullable<global::System.Int16> mesFiscal, Nullable<global::System.Int16> anoFiscal, Nullable<global::System.DateTime> desde, Nullable<global::System.DateTime> hasta, Nullable<global::System.Int32> moneda, Nullable<global::System.Int32> monedaOriginal, global::System.String nombreUsuario, Nullable<global::System.Boolean> excluirSaldoInicialDebeHaberCero, Nullable<global::System.Boolean> excluirSaldoFinalCero, Nullable<global::System.Boolean> excluirSinMovimientosPeriodo, Nullable<global::System.Boolean> excluirAsientoTipoCierreAnual, ObjectParameter errorMessage)
+        {
+            ObjectParameter cuentaContableIDParameter;
+            if (cuentaContableID.HasValue)
+            {
+                cuentaContableIDParameter = new ObjectParameter("cuentaContableID", cuentaContableID);
+            }
+            else
+            {
+                cuentaContableIDParameter = new ObjectParameter("cuentaContableID", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter mesFiscalParameter;
+            if (mesFiscal.HasValue)
+            {
+                mesFiscalParameter = new ObjectParameter("mesFiscal", mesFiscal);
+            }
+            else
+            {
+                mesFiscalParameter = new ObjectParameter("mesFiscal", typeof(global::System.Int16));
+            }
+    
+            ObjectParameter anoFiscalParameter;
+            if (anoFiscal.HasValue)
+            {
+                anoFiscalParameter = new ObjectParameter("anoFiscal", anoFiscal);
+            }
+            else
+            {
+                anoFiscalParameter = new ObjectParameter("anoFiscal", typeof(global::System.Int16));
+            }
+    
+            ObjectParameter desdeParameter;
+            if (desde.HasValue)
+            {
+                desdeParameter = new ObjectParameter("desde", desde);
+            }
+            else
+            {
+                desdeParameter = new ObjectParameter("desde", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter hastaParameter;
+            if (hasta.HasValue)
+            {
+                hastaParameter = new ObjectParameter("hasta", hasta);
+            }
+            else
+            {
+                hastaParameter = new ObjectParameter("hasta", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter monedaParameter;
+            if (moneda.HasValue)
+            {
+                monedaParameter = new ObjectParameter("moneda", moneda);
+            }
+            else
+            {
+                monedaParameter = new ObjectParameter("moneda", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter monedaOriginalParameter;
+            if (monedaOriginal.HasValue)
+            {
+                monedaOriginalParameter = new ObjectParameter("monedaOriginal", monedaOriginal);
+            }
+            else
+            {
+                monedaOriginalParameter = new ObjectParameter("monedaOriginal", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter nombreUsuarioParameter;
+            if (nombreUsuario != null)
+            {
+                nombreUsuarioParameter = new ObjectParameter("nombreUsuario", nombreUsuario);
+            }
+            else
+            {
+                nombreUsuarioParameter = new ObjectParameter("nombreUsuario", typeof(global::System.String));
+            }
+    
+            ObjectParameter excluirSaldoInicialDebeHaberCeroParameter;
+            if (excluirSaldoInicialDebeHaberCero.HasValue)
+            {
+                excluirSaldoInicialDebeHaberCeroParameter = new ObjectParameter("excluirSaldoInicialDebeHaberCero", excluirSaldoInicialDebeHaberCero);
+            }
+            else
+            {
+                excluirSaldoInicialDebeHaberCeroParameter = new ObjectParameter("excluirSaldoInicialDebeHaberCero", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter excluirSaldoFinalCeroParameter;
+            if (excluirSaldoFinalCero.HasValue)
+            {
+                excluirSaldoFinalCeroParameter = new ObjectParameter("excluirSaldoFinalCero", excluirSaldoFinalCero);
+            }
+            else
+            {
+                excluirSaldoFinalCeroParameter = new ObjectParameter("excluirSaldoFinalCero", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter excluirSinMovimientosPeriodoParameter;
+            if (excluirSinMovimientosPeriodo.HasValue)
+            {
+                excluirSinMovimientosPeriodoParameter = new ObjectParameter("excluirSinMovimientosPeriodo", excluirSinMovimientosPeriodo);
+            }
+            else
+            {
+                excluirSinMovimientosPeriodoParameter = new ObjectParameter("excluirSinMovimientosPeriodo", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter excluirAsientoTipoCierreAnualParameter;
+            if (excluirAsientoTipoCierreAnual.HasValue)
+            {
+                excluirAsientoTipoCierreAnualParameter = new ObjectParameter("excluirAsientoTipoCierreAnual", excluirAsientoTipoCierreAnual);
+            }
+            else
+            {
+                excluirAsientoTipoCierreAnualParameter = new ObjectParameter("excluirAsientoTipoCierreAnual", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction<Nullable<global::System.Int32>>("spBalanceGeneral", cuentaContableIDParameter, mesFiscalParameter, anoFiscalParameter, desdeParameter, hastaParameter, monedaParameter, monedaOriginalParameter, nombreUsuarioParameter, excluirSaldoInicialDebeHaberCeroParameter, excluirSaldoFinalCeroParameter, excluirSinMovimientosPeriodoParameter, excluirAsientoTipoCierreAnualParameter, errorMessage);
         }
 
         #endregion
@@ -2668,6 +2679,30 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         private Nullable<global::System.Int32> _MonedaDefecto;
         partial void OnMonedaDefectoChanging(Nullable<global::System.Int32> value);
         partial void OnMonedaDefectoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> SuspendidoFlag
+        {
+            get
+            {
+                return _SuspendidoFlag;
+            }
+            set
+            {
+                OnSuspendidoFlagChanging(value);
+                ReportPropertyChanging("SuspendidoFlag");
+                _SuspendidoFlag = StructuralObject.SetValidValue(value, "SuspendidoFlag");
+                ReportPropertyChanged("SuspendidoFlag");
+                OnSuspendidoFlagChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _SuspendidoFlag;
+        partial void OnSuspendidoFlagChanging(Nullable<global::System.Boolean> value);
+        partial void OnSuspendidoFlagChanged();
 
         #endregion
 
@@ -6871,6 +6906,30 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         private global::System.Int32 _Cia;
         partial void OnCiaChanging(global::System.Int32 value);
         partial void OnCiaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> CierreContabPermitirAsientosDescuadrados
+        {
+            get
+            {
+                return _CierreContabPermitirAsientosDescuadrados;
+            }
+            set
+            {
+                OnCierreContabPermitirAsientosDescuadradosChanging(value);
+                ReportPropertyChanging("CierreContabPermitirAsientosDescuadrados");
+                _CierreContabPermitirAsientosDescuadrados = StructuralObject.SetValidValue(value, "CierreContabPermitirAsientosDescuadrados");
+                ReportPropertyChanged("CierreContabPermitirAsientosDescuadrados");
+                OnCierreContabPermitirAsientosDescuadradosChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _CierreContabPermitirAsientosDescuadrados;
+        partial void OnCierreContabPermitirAsientosDescuadradosChanging(Nullable<global::System.Boolean> value);
+        partial void OnCierreContabPermitirAsientosDescuadradosChanged();
 
         #endregion
 

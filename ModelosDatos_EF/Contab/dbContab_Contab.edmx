@@ -241,6 +241,7 @@
           <Property Name="EmailServerCredentialsUserName" Type="nvarchar" MaxLength="100" />
           <Property Name="EmailServerCredentialsPassword" Type="nvarchar" MaxLength="50" />
           <Property Name="MonedaDefecto" Type="int" />
+          <Property Name="SuspendidoFlag" Type="bit" />
         </EntityType>
         <EntityType Name="Contab_BalanceComprobacion">
           <Key>
@@ -394,6 +395,7 @@
           <Property Name="CambiarFactorAlAgregarFlag" Type="bit" />
           <Property Name="CambiarFactorAlModFlag" Type="bit" />
           <Property Name="NumeracionAsientosSeparadaFlag" Type="bit" />
+          <Property Name="CierreContabPermitirAsientosDescuadrados" Type="bit" />
           <Property Name="OrganizarPartidasDelAsiento" Type="bit" />
           <Property Name="CargarAsientosConNumeroNegativoFlag" Type="bit" />
           <Property Name="DirectorioAsientosOtrasAplicaciones" Type="nvarchar" MaxLength="250" />
@@ -571,7 +573,7 @@
           </Key>
           <Property Name="Mes" Type="tinyint" Nullable="false" />
           <Property Name="Ano" Type="smallint" Nullable="false" />
-          <Property Name="UltAct" Type="datetime" Nullable="false" />
+          <Property Name="UltAct" Type="datetime2" Nullable="false" />
           <Property Name="ManAuto" Type="nvarchar" Nullable="false" MaxLength="1" />
           <Property Name="Cia" Type="int" Nullable="false" />
           <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="125" />
@@ -809,7 +811,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Presupuesto_AsociacionCodigosCuentas_CuentasContables1">
-          <End Role="CuentasContables" Type="dbContab_Contab_NS.Store.CuentasContables" Multiplicity="1" />
+          <End Role="CuentasContables" Type="dbContab_Contab_NS.Store.CuentasContables" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Presupuesto_AsociacionCodigosCuentas" Type="dbContab_Contab_NS.Store.Presupuesto_AsociacionCodigosCuentas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CuentasContables">
@@ -881,7 +885,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SaldosContables_CuentasContables1">
-          <End Role="CuentasContables" Type="dbContab_Contab_NS.Store.CuentasContables" Multiplicity="1" />
+          <End Role="CuentasContables" Type="dbContab_Contab_NS.Store.CuentasContables" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SaldosContables" Type="dbContab_Contab_NS.Store.SaldosContables" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CuentasContables">
@@ -1008,6 +1014,7 @@
           <Parameter Name="monedaOriginal" Type="int" Mode="In" />
           <Parameter Name="nombreUsuario" Type="nvarchar" Mode="In" />
           <Parameter Name="excluirSaldoInicialDebeHaberCero" Type="bit" Mode="In" />
+          <Parameter Name="excluirSaldoFinalCero" Type="bit" Mode="In" />
           <Parameter Name="excluirSinMovimientosPeriodo" Type="bit" Mode="In" />
           <Parameter Name="excluirAsientoTipoCierreAnual" Type="bit" Mode="In" />
           <Parameter Name="errorMessage" Type="nvarchar" Mode="InOut" />
@@ -1119,20 +1126,6 @@
             <Parameter Name="nombreMes" Mode="InOut" Type="String" />
             <Parameter Name="errorMessage" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="spBalanceGeneral" ReturnType="Collection(Int32)">
-            <Parameter Name="cuentaContableID" Mode="In" Type="Int32" />
-            <Parameter Name="mesFiscal" Mode="In" Type="Int16" />
-            <Parameter Name="anoFiscal" Mode="In" Type="Int16" />
-            <Parameter Name="desde" Mode="In" Type="DateTime" />
-            <Parameter Name="hasta" Mode="In" Type="DateTime" />
-            <Parameter Name="moneda" Mode="In" Type="Int32" />
-            <Parameter Name="monedaOriginal" Mode="In" Type="Int32" />
-            <Parameter Name="nombreUsuario" Mode="In" Type="String" />
-            <Parameter Name="excluirSaldoInicialDebeHaberCero" Mode="In" Type="Boolean" />
-            <Parameter Name="excluirSinMovimientosPeriodo" Mode="In" Type="Boolean" />
-            <Parameter Name="excluirAsientoTipoCierreAnual" Mode="In" Type="Boolean" />
-            <Parameter Name="errorMessage" Mode="InOut" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Temp_Contab_Report_BalanceGeneral" EntityType="dbContab_Contab_NS.Temp_Contab_Report_BalanceGeneral" />
           <AssociationSet Name="FK_Temp_Contab_Report_BalanceGeneral_CuentasContables" Association="dbContab_Contab_NS.FK_Temp_Contab_Report_BalanceGeneral_CuentasContables">
             <End Role="CuentasContable" EntitySet="CuentasContables" />
@@ -1236,6 +1229,21 @@
             <Parameter Name="ordenBalanceGeneral" Mode="InOut" Type="Int16" />
             <Parameter Name="errorMessage" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="spBalanceGeneral" ReturnType="Collection(Int32)">
+            <Parameter Name="cuentaContableID" Mode="In" Type="Int32" />
+            <Parameter Name="mesFiscal" Mode="In" Type="Int16" />
+            <Parameter Name="anoFiscal" Mode="In" Type="Int16" />
+            <Parameter Name="desde" Mode="In" Type="DateTime" />
+            <Parameter Name="hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="moneda" Mode="In" Type="Int32" />
+            <Parameter Name="monedaOriginal" Mode="In" Type="Int32" />
+            <Parameter Name="nombreUsuario" Mode="In" Type="String" />
+            <Parameter Name="excluirSaldoInicialDebeHaberCero" Mode="In" Type="Boolean" />
+            <Parameter Name="excluirSaldoFinalCero" Mode="In" Type="Boolean" />
+            <Parameter Name="excluirSinMovimientosPeriodo" Mode="In" Type="Boolean" />
+            <Parameter Name="excluirAsientoTipoCierreAnual" Mode="In" Type="Boolean" />
+            <Parameter Name="errorMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Asiento">
           <Key>
@@ -1300,6 +1308,7 @@
           <NavigationProperty Name="tCiaSeleccionadas" Relationship="dbContab_Contab_NS.FK_tCiaSeleccionada_Companias" FromRole="Compania" ToRole="tCiaSeleccionada" />
           <NavigationProperty Name="Presupuesto_Codigos" Relationship="dbContab_Contab_NS.FK_Presupuesto_Codigos_Companias" FromRole="Compania" ToRole="Presupuesto_Codigos" />
           <NavigationProperty Name="ParametrosContab" Relationship="dbContab_Contab_NS.FK_ParametrosContab_Companias" FromRole="Compania" ToRole="ParametrosContab" />
+          <Property Type="Boolean" Name="SuspendidoFlag" />
         </EntityType>
         <EntityType Name="CuentasContable">
           <Key>
@@ -1684,7 +1693,7 @@
           </Key>
           <Property Type="Byte" Name="Mes" Nullable="false" />
           <Property Type="Int16" Name="Ano" Nullable="false" />
-          <Property Type="DateTime" Name="UltAct" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UltAct" Nullable="false" Precision="7" />
           <Property Type="String" Name="ManAuto" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Cia" Nullable="false" />
           <Property Type="String" Name="Usuario" Nullable="false" MaxLength="125" FixedLength="false" Unicode="true" />
@@ -1969,6 +1978,7 @@
           <Property Type="Boolean" Name="ReportesContab_NoMostrarFechaDia" />
           <Property Type="Int32" Name="Cia" Nullable="false" />
           <NavigationProperty Name="Compania" Relationship="dbContab_Contab_NS.FK_ParametrosContab_Companias" FromRole="ParametrosContab" ToRole="Compania" />
+          <Property Type="Boolean" Name="CierreContabPermitirAsientosDescuadrados" />
         </EntityType>
         <Association Name="FK_ParametrosContab_Companias">
           <End Type="dbContab_Contab_NS.Compania" Role="Compania" Multiplicity="1">
@@ -2141,6 +2151,7 @@
           <EntitySetMapping Name="Companias">
             <EntityTypeMapping TypeName="dbContab_Contab_NS.Compania">
               <MappingFragment StoreEntitySet="Companias">
+                <ScalarProperty Name="SuspendidoFlag" ColumnName="SuspendidoFlag" />
                 <ScalarProperty Name="Numero" ColumnName="Numero" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="NombreCorto" ColumnName="NombreCorto" />
@@ -2271,7 +2282,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spDeterminarMesFiscal" FunctionName="dbContab_Contab_NS.Store.spDeterminarMesFiscal" />
-          <FunctionImportMapping FunctionImportName="spBalanceGeneral" FunctionName="dbContab_Contab_NS.Store.spBalanceGeneral" />
           <EntitySetMapping Name="Temp_Contab_Report_BalanceGeneral">
             <EntityTypeMapping TypeName="dbContab_Contab_NS.Temp_Contab_Report_BalanceGeneral">
               <MappingFragment StoreEntitySet="Temp_Contab_Report_BalanceGeneral">
@@ -2433,6 +2443,7 @@
           <EntitySetMapping Name="ParametrosContabs">
             <EntityTypeMapping TypeName="dbContab_Contab_NS.ParametrosContab">
               <MappingFragment StoreEntitySet="ParametrosContab">
+                <ScalarProperty Name="CierreContabPermitirAsientosDescuadrados" ColumnName="CierreContabPermitirAsientosDescuadrados" />
                 <ScalarProperty Name="Cia" ColumnName="Cia" />
                 <ScalarProperty Name="ReportesContab_NoMostrarFechaDia" ColumnName="ReportesContab_NoMostrarFechaDia" />
                 <ScalarProperty Name="DirectorioAsientosOtrasAplicaciones" ColumnName="DirectorioAsientosOtrasAplicaciones" />
@@ -2539,6 +2550,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spGetSaldoAnteriorDebeYHaber" FunctionName="dbContab_Contab_NS.Store.spGetSaldoAnteriorDebeYHaber" />
+          <FunctionImportMapping FunctionImportName="spBalanceGeneral" FunctionName="dbContab_Contab_NS.Store.spBalanceGeneral" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

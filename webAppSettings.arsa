@@ -1,0 +1,6 @@
+﻿<appSettings>
+  <add key="contabM_address" value="http://contabmprc.meteorapp.com/" />
+  <add key="contabm_mongodb_connectionString" value="mongodb://scrwebm_admin:isabel@cluster0-shard-00-00-lwzxe.mongodb.net:27017,cluster0-shard-00-01-lwzxe.mongodb.net:27017,cluster0-shard-00-02-lwzxe.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true" />
+  <add key="contabM_mongodb_name" value="contabm_arsa" />
+  <add key="ValidationSettings:UnobtrusiveValidationMode" value="None" />
+</appSettings>

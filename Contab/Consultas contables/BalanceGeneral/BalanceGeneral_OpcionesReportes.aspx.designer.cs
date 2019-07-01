@@ -40,15 +40,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         protected global::ContabSysNet_Web.UserControls.ReportOptions reportOptionsUserControl;
         
         /// <summary>
-        /// BalGenMostrarResumenGyP_CheckBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox BalGenMostrarResumenGyP_CheckBox;
-        
-        /// <summary>
         /// CantidadNiveles_DropDownList control.
         /// </summary>
         /// <remarks>

@@ -1,7 +1,7 @@
 ﻿/*    
 	  Lunes, 16 de Mayo de 2.019  -   v0.00.412.sql 
 	  
-	  Cambiamos el tipo de la columna UltAct a datetime2 en UltimoMesCerrado y UltimoMesCerradoContab
+	  Cambiamos el tipo de la columna UltAct a datetime2 en Chequeras
 */
 
 

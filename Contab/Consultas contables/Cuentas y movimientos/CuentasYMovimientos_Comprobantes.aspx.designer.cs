@@ -22,22 +22,13 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor ImprimirAsientoContable_HyperLink;
         
         /// <summary>
-        /// Img1 control.
+        /// anchorShowModal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Img1;
-        
-        /// <summary>
-        /// btnShow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnShow;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor anchorShowModal;
         
         /// <summary>
         /// pnlPopup control.

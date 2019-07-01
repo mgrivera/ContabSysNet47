@@ -9,11 +9,11 @@
     <script type="text/javascript">
         function PopupWin(url, w, h) {
             ///Parameters url=page to open, w=width, h=height
-            /// nótese el nombre del window (external2) para que, como se abre ya desde un subwindow, no lo haga
-            /// sobre el mismo sino uno nuevo
-
-            window.open(url, "_blank", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,top=10px,left=8px");
+            var left = parseInt((screen.availWidth / 2) - (w / 2));
+            var top = parseInt((screen.availHeight / 2) - (h / 2));
+            window.open(url, "_blank", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top);
         }
+
         function RefreshPage() {
             window.document.getElementById("RebindFlagSpan").firstChild.value = "1";
             window.document.forms(0).submit();
@@ -21,27 +21,24 @@
     </script>
 
     <div style="text-align: right; padding: 0 16px 10px 10px; ">
-        <table style="width: auto; margin-right: 0px; margin-left: auto; ">
+        <table style="width: auto; margin-right: 0px; margin-left: auto; " class="notsosmallfont">
             <tr>
                 <td style="width: auto; text-align: center; ">
-                    <a runat="server" id="ImprimirAsientoContable_HyperLink" 
-                        href="javascript:PopupWin('../../../ReportViewer.aspx?rpt=unasientocontable', 1000, 680)">
-                        <img id="Img1" 
-                             border="0" 
-                             runat="server" 
-                             alt="Click para mostrar el asiento contable asociado" 
-                             src="~/Pictures/print_25x25.png" />
+                    <a runat="server" id="ImprimirAsientoContable_HyperLink" href="javascript:PopupWin('../../../ReportViewer.aspx?rpt=unasientocontable', 1000, 680)">
+                        Reporte
                     </a>
                 </td>
-                <td style="width: auto; ">
-                    &nbsp;<asp:Button ID="btnShow" runat="server" Text="Modificaciones" CssClass="ButtonAsLink" />
+                <td style="width: auto; padding-left: 10px; ">
+                    <%--&nbsp;<asp:Button ID="btnShow" runat="server" Text="Modificaciones" CssClass="ButtonAsLink" />--%>
+                    <a runat="server" id="anchorShowModal" href="#">Modificaciones</a>
                 </td>
             </tr>
             <tr>
-                <td style="color: #4F4F4F; text-align: center; font-size: small; width: auto; ">
-                    Reporte
+                <td style="width: auto; padding-top: 5px; text-align: center; ">
+                    <i class="fas fa-print"></i>
                 </td>
-                <td style="width: auto; ">
+                <td style="width: auto; padding-left: 10px; padding-top: 5px; text-align: center; ">
+                    <i class="fas fa-edit"></i>
                 </td>
             </tr>
         </table>
@@ -191,7 +188,7 @@
     <ajaxtoolkit:modalpopupextender id="ModalPopupExtender1"
         runat="server"
         behaviorid="popup"
-        targetcontrolid="btnShow"
+        targetcontrolid="anchorShowModal"
         popupcontrolid="pnlPopup"
         backgroundcssclass="modalBackground"
         popupdraghandlecontrolid="ModalPopupTitle_div"

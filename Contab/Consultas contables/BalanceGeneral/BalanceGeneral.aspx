@@ -12,10 +12,7 @@
            window.open(url, "external", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top);
        }
        function RefreshPage()
-       {
-           //window.document.getElementById("RebindFlagSpan").firstChild.value = "1";
-           //window.document.forms(0).submit();
-
+       { 
            // nótese como usamos jquery para asignar el valor al field ... 
            $("#RebindFlagHiddenField").val("1");
            $("form").submit();

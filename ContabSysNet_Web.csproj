@@ -2216,6 +2216,7 @@
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff2" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\Risk Solutions Settings.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Pictures\table_25x25.png" />
     <Content Include="Scripts\amplify.js" />
@@ -2631,6 +2632,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="webAppSettings.arsa">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WebConnectionString.config.risk_smarterAspNet">
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.config.geh">

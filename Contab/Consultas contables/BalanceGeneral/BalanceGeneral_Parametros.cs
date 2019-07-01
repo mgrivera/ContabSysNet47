@@ -13,8 +13,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
         public DateTime Desde { get; set; }
         public DateTime Hasta { get; set; }
         public string BalGen_GyP { get; set; }
-        public bool BalGen_ExcluirGYP { get; set; }
         public bool ExcluirCuentasSaldoYMovtosCero { get; set; }
+        public bool ExcluirCuentasSaldosFinalCero { get; set; }
         public bool ExcluirCuentasSinMovimientos { get; set; }
         public bool ExcluirAsientosContablesTipoCierreAnual { get; set; }
         public string Filtro { get; set; }

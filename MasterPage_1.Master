@@ -228,12 +228,15 @@
                     <td style="text-align: right; padding-top: 5px; width: 10%;">
                         <a id="A1" href="~/Main/Home" runat="server">
                             <img id="Img2" alt="home" runat="server" src="Pictures/house_20x20.png" style="margin-right: 10px;
-                                border: none;" /></a> 
+                                border: none;" />
+                        </a> 
                         <a href="javascript:javascript:history.go(-1)">
                                     <img id="Img3" alt="back" runat="server" src="Pictures/arrow_left_20x20.png" style="margin-right: 10px;
-                                        border: none;" /></a>
+                                        border: none;" />
+                        </a>
                         <a id="Help_HyperLink" href="#" runat="server">
-                            <img id="Img1" alt="home" runat="server" src="Pictures/help_20x20.png" style="border: none;" /></a>   
+                            <img id="Img1" alt="home" runat="server" src="Pictures/help_20x20.png" style="border: none;" />
+                        </a>   
                     </td>
                 </tr>
             </table>

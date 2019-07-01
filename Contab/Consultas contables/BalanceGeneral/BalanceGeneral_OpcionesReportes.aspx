@@ -19,12 +19,6 @@
         <fieldset style="margin: 0px 25px 5px 25px; padding: 15px; text-align: center; " class="generalfont">
             <legend>Otras opciones: </legend>
             <div style="padding: 5px; text-align: left; ">
-                <asp:CheckBox ID="BalGenMostrarResumenGyP_CheckBox" 
-                              runat="server" 
-                              Checked="true" 
-                              Text="(solo Bal Gen) Mostrar resumen final de cuentas contables<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nóminales (gastos/ingresos)" />
-
-                <br />
                 Cantidad de niveles a mostrar en el reporte:&nbsp; 
                 <asp:DropDownList ID="CantidadNiveles_DropDownList" runat="server">
                     <asp:ListItem Enabled="True" Text="Todos (hasta nivel detalle)" Value="-1" />
@@ -35,11 +29,11 @@
                     <asp:ListItem Enabled="True" Text="4 niveles" Value="4" />
                     <asp:ListItem Enabled="True" Text="5 niveles" Value="5" />
                 </asp:DropDownList>
-                <br />
+                <br /><br />
                 <asp:CheckBox ID="SoloColumnaSaldoFinal_CheckBox" 
                               runat="server" 
                               Checked="false" 
-                              Text="Mostrar solo coulumna de saldo final (no saldo inicial, ni debe ni haber)" />
+                              Text="Mostrar <b>solo</b> coulumna de saldo final (sin saldo inicial, debe o haber)" />
                 
             </div>
         </fieldset>

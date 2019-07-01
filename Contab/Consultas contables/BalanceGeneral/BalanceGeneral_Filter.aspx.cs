@@ -32,8 +32,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
                 // pareciera que si no hacemos el databind para los listboxes aquí, la clase que regresa el state
                 // encuentra estos controles sin sus datos
                 Sql_it_Cia_Numeric.DataBind();
-                Sql_it_ID_Numeric.DataBind();
-                Sql_it_Grupo_Numeric.DataBind();
                 Monedas_ListBox.DataBind();
                 MonedasOriginales_ListBox.DataBind(); 
 
@@ -118,7 +116,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 
             // ---------------------------------------------------------------------------------------------
             // registramos los parámetros en un objeto y los persistimos en Session ... 
-
             BalanceGeneral_Parametros parametros = new BalanceGeneral_Parametros();
 
             parametros.CiaContab = Convert.ToInt32(this.Sql_it_Cia_Numeric.SelectedValue);
@@ -131,10 +128,18 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             parametros.Desde = Convert.ToDateTime(this.Desde_TextBox.Text);
             parametros.Hasta = Convert.ToDateTime(this.Hasta_TextBox.Text);
             parametros.BalGen_GyP = this.BalanceGeneral_RadioButton.Checked ? "BG" : "GyP"; 
-            parametros.BalGen_ExcluirGYP = this.BalGen_ExcluirGastosIngresos_CheckBox.Checked;
+
             parametros.ExcluirCuentasSaldoYMovtosCero = this.ExcluirCuentasSinSaldoNiMovtos_CheckBox.Checked;
+            parametros.ExcluirCuentasSaldosFinalCero = this.ExcluirCuentasConSaldoFinalCero_CheckBox.Checked; 
             parametros.ExcluirCuentasSinMovimientos = this.ExcluirCuentasSinMovimientos_CheckBox.Checked;
-            parametros.ExcluirAsientosContablesTipoCierreAnual = this.ExcluirAsientosContablesTipoCierreAnual_CheckBox.Checked; 
+
+            // excluímos siempre estos asientos y dejamos de preguntar al usuario. Debemos quitar este parametro del sp y 
+            // también de la definición del sp en el Entity Framework; mientras tanto, debemos conformarnos con hacerlo así ... 
+            // POR AHORA, dejemos ésto así, pues tal vez haya que revisar esto en un futuro. Veamos si todo queda bien o hay \
+            // que revisar en un futuro. Este tema es algo complicado ... NOTESE que la idea es excluir *solo* los asientos 
+            // de cierre anual automáticos (mes 12) y no los que pueda agregar el usuario (mes 13). En otros meses del año fiscal 
+            // *no debe* haber asientos del tipo cierre anual
+            parametros.ExcluirAsientosContablesTipoCierreAnual = true; 
 
             parametros.Filtro = sSqlSelectString; 
 
@@ -144,93 +149,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             // la página que muestra los movimientos contables para una cuenta (seleccionada en la lista) 
             // corresponde al proceso que permite obtener el balance de comprobación; esta página usa 
             // estas session variables para delimitar el período; por lo tanto, las inicializamos también aquí ... 
-
             Session["FechaInicialPeriodo"] = Convert.ToDateTime(Desde_TextBox.Text);
             Session["FechaFinalPeriodo"] = Convert.ToDateTime(Hasta_TextBox.Text);
 
             // ---------------------------------------------------------------------------------------------
             // lo que sigue son instrucciones para ejecutar una función javascript en el parent page. La
             // función pone un hidden field en 1 y hace un submit (refresh) de la página
-
-            //StringBuilder sb = new StringBuilder();
-            //sb.Append("window.opener.RefreshPage();");
-            //sb.Append("window.close();");
-
-            //ClientScript.RegisterClientScriptBlock(this.GetType(), "CloseWindowScript", sb.ToString(), true);
-
             ScriptManager.RegisterStartupScript(this, this.GetType(),
                 "CloseWindowScript",
                 "<script language='javascript'>window.opener.RefreshPage(); window.close();</script>", false); 
-        }
-
-        protected void Sql_Asientos_Cia_Numeric_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // para mostrar en el listbox de cuentas contables solo las que corresponden a las cia contab 
-            // seleccionada  
-
-            SeleccionarCuentasContables(); 
-        }
-
-        private void SeleccionarCuentasContables()
-        {
-            // para mostrar en el ListBox de cuentas contables solo las que correspondan a la cia 
-            // seleccionada
-
-            String MyWhereString = "";
-
-            foreach (ListItem MyListItem in Sql_it_Cia_Numeric.Items)
-            {
-                if (MyListItem.Selected)
-                    if (MyWhereString == "")
-                        MyWhereString = " CuentasContables.Cia In (" + MyListItem.Value;
-                    else
-                        MyWhereString = MyWhereString + ", " + MyListItem.Value;
-            }
-
-            if (MyWhereString != "")
-                MyWhereString = MyWhereString + ")";
-            else
-                MyWhereString = "1 = 1";
-
-            // nótese como aplicamos el filtro que sigue: si el usuario indica '*', lo usamos en la forma usual; si no lo usa, 
-            // siempre hacemos una busqueda genérica usando el texto indicado ... 
-
-            if (!string.IsNullOrEmpty(this.CuentasContablesFilter_TextBox.Text.ToString().Trim()))
-            {
-                string value = this.CuentasContablesFilter_TextBox.Text.Trim(); 
-
-                if (value.IndexOf("*") >= 0) 
-                {
-                    // si el usuario indica "*", hacemos la búsqueda genérica en la forma usual ... 
-                    value = value.Replace("*", "%");
-                    MyWhereString += " And ((CuentasContables.Cuenta Like '" + value + "') Or " +
-                                           "(CuentasContables.Descripcion Like '" + value + "'))";
-                }
-                else 
-                    // si el usuario no usa "*", siempre hacemos busqueda genérica para el texto indicado ... 
-                    MyWhereString += " And (" +
-                        "(CuentasContables.Cuenta Like '%" + this.CuentasContablesFilter_TextBox.Text.ToString().Trim() + "%') Or " +
-                        "(CuentasContables.Descripcion Like '%" + this.CuentasContablesFilter_TextBox.Text.ToString().Trim() + "%'))";
-            }
-
-            // nótese como reconstruímos todo el select command del listbox de monedas 
-
-            CuentasContables_SqlDataSource.SelectCommand =
-                "SELECT ID, CuentasContables.Cuenta + ' - ' + CuentasContables.Descripcion + ' (' + Companias.Abreviatura + ')' AS " +
-                "CuentaContableYNombre FROM CuentasContables " + 
-                "INNER JOIN Companias ON CuentasContables.Cia = Companias.Numero " +
-                "WHERE (CuentasContables.TotDet = 'D' And CuentasContables.ActSusp = 'A') And " + MyWhereString + " " +
-                "ORDER BY Companias.NombreCorto, CuentasContables.Cuenta + N' ' + CuentasContables.Descripcion";
-
-            Sql_it_Cuenta_String.DataBind();
-        }
-
-        protected void CuentasContablesFilter_TextBox_TextChanged(object sender, EventArgs e)
-        {
-            // para mostrar en el listbox de cuentas contables solo las que corresponden a las cia contab 
-            // seleccionada  
-
-            SeleccionarCuentasContables(); 
         }
     }
 }

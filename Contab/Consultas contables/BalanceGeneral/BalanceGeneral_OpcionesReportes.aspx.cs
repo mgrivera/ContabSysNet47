@@ -75,7 +75,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             pageParams.Append("&simpleFont=" + this.reportOptionsUserControl.MatrixPrinter.ToString());
             pageParams.Append("&st=" + this.reportOptionsUserControl.MostrarSoloTotales.ToString());
             pageParams.Append("&cantniveles=" + this.CantidadNiveles_DropDownList.SelectedValue.ToString());
-            pageParams.Append("&mostrarGyP=" + (this.BalGenMostrarResumenGyP_CheckBox.Checked ? "si" : "no"));
             pageParams.Append("&soloSaldoFinal=" + (this.SoloColumnaSaldoFinal_CheckBox.Checked ? "si" : "no"));
 
             Response.Redirect("~/ReportViewer.aspx?" + pageParams.ToString());
