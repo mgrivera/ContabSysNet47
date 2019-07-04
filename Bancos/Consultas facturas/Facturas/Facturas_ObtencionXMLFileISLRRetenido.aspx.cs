@@ -20,7 +20,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
         if (!User.Identity.IsAuthenticated)
         {
             FormsAuthentication.SignOut();
@@ -294,7 +293,7 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                                    new XElement("RifRetenido", f.RifCompania.ToString().Replace("-", "")),
                                    new XElement("NumeroFactura", factura.NumeroFactura),
                                    new XElement("NumeroControl", sNumeroControlDefinitivo),
-                                   new XElement("FechaOperacion", factura.FechaRecepcion.ToString("dd/MM/yyyy")),
+                                   new XElement("FechaOperacion", factura.FechaRecepcion.ToString("dd/MM/yyyy").Replace("-", "/")),
                                    new XElement("CodigoConcepto", codigoConceptoRetencion_islr),
 
                                    new XElement("MontoOperacion", retencion.MontoBase != null ? 
