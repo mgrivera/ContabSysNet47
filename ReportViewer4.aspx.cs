@@ -305,7 +305,14 @@ namespace ContabSysNet_Web
                 return false;
             }
 
-            ReportViewer1.LocalReport.ReportPath = "contabm/reports/contab_asientosContables_webReport.rdlc";
+            if (reportConfig.reportConfig.unaColumnaParaDebeYHaber)
+            {
+                ReportViewer1.LocalReport.ReportPath = "contabm/reports/contab_asientosContables_DebeHaberUnaColumna_webReport.rdlc";
+            } else {
+                ReportViewer1.LocalReport.ReportPath = "contabm/reports/contab_asientosContables_webReport.rdlc";
+            }
+
+            
 
             ReportDataSource myReportDataSource = new ReportDataSource();
 

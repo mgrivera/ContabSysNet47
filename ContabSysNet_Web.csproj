@@ -4066,6 +4066,7 @@
     <Content Include="Contab\Presupuesto\Consultas\Mensual\ConsultaMensual.rdlc" />
     <Content Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados.rdlc" />
     <Content Include="Contab\Presupuesto\Consultas\Montos estimados\MontosEstimados_CuentasContables.rdlc" />
+    <Content Include="contabm\reports\contab_asientosContables_DebeHaberUnaColumna_webReport.rdlc" />
     <None Include="old_app_code\ContabSysNet_TempDB.dbml.layout">
       <DependentUpon>ContabSysNet_TempDB.dbml</DependentUpon>
     </None>

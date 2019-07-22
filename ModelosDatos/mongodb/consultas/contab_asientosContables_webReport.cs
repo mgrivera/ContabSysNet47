@@ -26,6 +26,8 @@ namespace ContabSysNet_Web.ModelosDatos.mongodb.consultas
         public decimal debe { get; set; }
         [BsonRepresentation(BsonType.Double, AllowTruncation = true)]
         public decimal haber { get; set; }
+        [BsonRepresentation(BsonType.Double, AllowTruncation = true)]
+        public decimal monto { get; set; }
 
         public string user { get; set; }
 
@@ -51,6 +53,7 @@ namespace ContabSysNet_Web.ModelosDatos.mongodb.consultas
         public DateTime hasta { get; set; }
         public DateTime? fecha { get; set; }
         public bool saltoPaginaPorFecha { get; set; }
+        public bool unaColumnaParaDebeYHaber { get; set; }
         public string titulo { get; set; }
         public int ciaNumero { get; set; }
         public string ciaNombre { get; set; }
