@@ -18,6 +18,13 @@
     <link href="Content/fontawesome-free-5.8.2-web/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="Scripts/jquery/jquery-ui-1.10.4.min.css" />
 
+    <%--para evitar el error siguiente y poder usar Page.ResolveUrl en page.header ... 
+    The Controls collection cannot be modified because the control contains code blocks (i.e. <% ... %>)--%>
+    <asp:placeholder runat="server">
+        <%--cargamos jquery antes pues es necesario para la función: $(document).ready(function () {})--%>
+        <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/jquery/jquery-1.10.2.js") %>"></script>
+    </asp:placeholder>
+
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
   </head>
@@ -74,8 +81,7 @@
 
     </form>
 
-    <!-- cargamos jquery -->
-    <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/jquery/jquery-1.10.2.js") %>"></script>
     <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/jquery/jquery-ui-1.10.4.min.js") %>"></script>
+    <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/select2-4.0.8/select2.min.js") %>"></script>
 </body>
 </html>

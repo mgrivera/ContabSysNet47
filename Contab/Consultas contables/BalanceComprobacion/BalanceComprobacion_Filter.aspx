@@ -3,7 +3,121 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link href="../../../radcalendar.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../Scripts/select2-4.0.8/select2.min.css" />
+
+    <script type="text/javascript">
+        // todas las funciones en este script, corresponden a la funcionalidad necesaria para agregar el select2 
+        // para la selección de cuentas contables ... 
+        function formatState(state) {
+            if (state.id && state.text) {
+                return state.id + " - " + state.text; 
+            } else {
+                return null; 
+            }
+        }
+
+        $(document).ready(function () { 
+            $(".select2-input").select2({
+                minimumInputLength: 3,                              // minimumInputLength for sending ajax request to server
+                width: 'resolve',                                   // to use the width set in the style clause in the select, if one exists 
+                closeOnSelect: false, 
+                params: {
+                    contentType: 'application/json; charset=utf-8'
+                },
+                templateResult: formatState,                        // para cambiar lo que se muestra en la lista; el default es text ... 
+                templateSelection: formatState,                     // para cambiar lo que se muestra en la selección; el default es text ... 
+                ajax: {
+                    url: "/webServices/Select2_GetData.asmx/AccessRemoteData",        // Webservice  - WCSelect2 and WebMethod -AccessRemoteData
+                    dataType: 'json', 
+                    method: "get",
+                    data: function (params) {
+
+                        // antes de que el control ejecute su busqueda en el server, intentamos obtener un referencia al control que contiene 
+                        // la lista de companias. La idea es asegurarnos que el usuario haya seleccioanado una ... 
+                        var selected = []; 
+                        
+                        $('.ciaListBox').children('option:selected').each(function () {
+                            var $this = $(this);
+                            selected.push(parseInt( $this.val() )); 
+                        });
+
+                        if (selected.length != 1) {
+                            alert("Por favor seleccione una compañía Contab, y solo una, antes de intentar buscar sus cuentas contables."); 
+                            return; 
+                        }
+
+                        var query = {
+                            search: params.term,
+                            page: params.page || 1, 
+                            cia: selected.length == 1 ? selected[0] : -999
+                        }
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        return query;
+                    }, 
+                    processResults: function (result) {
+                        // desde el web service recibimos el object result con sus propiedades como siguen ... 
+                        return {
+                                results: result.items,
+                                pagination: {
+                                    more: (result.resultParams.page * 20) < result.resultParams.count_filtered
+                            }
+                        };
+                    },
+                    delay: 250, // wait 250 milliseconds before triggering the request
+                    cache: true
+                }, 
+                debug: true, 
+                placeholder: "Busqueda de cuentas contables ..."
+            })
+
+
+            $('.select2-input').on('select2:select', function (e) {
+                // cuando el usuario selecciona una opción en select2
+                // en data tenemos la opción seleccionada 
+                var data = e.params.data;
+
+                // intentamos agregar la cuenta seleccionada al textbox de cuentas contables 
+                var textbox = $('.cuentas-contables-text-area'); 
+
+                var text = textbox.val();       // contenido del textbox 
+
+                if (text.indexOf(data.id) == -1) {
+                    // ok, la cuenta *no* existe en el textbox; la agregamos 
+                    if (!text) {
+                        text = data.id; 
+                    } else {
+                        text = text + ", " + data.id; 
+                    }
+                    
+                    textbox.val(text);
+                }
+            })
+
+            $('.select2-input').on('select2:unselect', function (e) {
+                // cuando el usuario de-selecciona una opción en select2 
+                var data = e.params.data;
+
+                // intentamos quitar la cuenta seleccionada del textbox de cuentas contables 
+                var textbox = $('.cuentas-contables-text-area'); 
+
+                var text = textbox.val();       // contenido del textbox 
+
+                if (text.indexOf(data.id) != -1) {
+                    // ok, la cuenta *existe* en el textbox; la quitamos 
+                    text = text.replace(", " + data.id, ""); 
+                    text = text.replace(data.id, ""); 
+
+                    textbox.val(text);
+                }
+            })
+
+            // para asignar una clase a la lista del select ... 
+            $("#select1").select2({ dropdownCssClass: "smallfont" });
+        })
+    </script>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="notsosmallfont" style="padding-left: 25px; padding-right: 25px; padding-bottom: 25px;">
         
@@ -111,7 +225,7 @@
                                                Height="193px" 
                                                SelectionMode="Single"
                                                Width="200px" 
-                                               CssClass="notsosmallfont" />
+                                               CssClass="notsosmallfont ciaListBox" />
                             </td>
                             <td>
                                 &nbsp;&nbsp;
@@ -130,39 +244,35 @@
             </cc1:TabPanel>
             <cc1:TabPanel HeaderText="Cuentas contables" runat="server" ID="TabPanel3">
                 <ContentTemplate>
-                <table>
+                    <table style="min-width: 700px; ">
                         <tr>
-                            <td class="ListViewHeader_Suave generalfont">
-                                Cuentas contables
+                            <td class="ListViewHeader_Suave generalfont" style="width: 49%; ">Cuentas contables
+                            </td>
+                            <td style="width: 2%; "></td>
+                            <td class="ListViewHeader_Suave generalfont" style="width: 49%; ">Cuentas contables
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <asp:ListBox ID="Sql_CuentasContables_Cuenta_String" 
-                                             runat="server" 
-                                             DataSourceID="CuentasContables_SqlDataSource"
-                                             DataTextField="CuentaContableYNombre" 
-                                             DataValueField="Cuenta" 
-                                             Height="193px"
-                                             SelectionMode="Multiple" 
-                                             Width="350px" 
-                                             CssClass="smallfont" />
-
-
-                                <cc1:ListSearchExtender ID="ListSearchExtender1" 
-                                                        runat="server" 
-                                                        TargetControlID="Sql_CuentasContables_Cuenta_String" 
-                                                        PromptText="Escriba para buscar ..." 
-                                                        QueryPattern="Contains" 
-                                                        PromptPosition="Bottom" 
-                                                        PromptCssClass="smallfont_blue" />
-
+                            <td style="text-align: left; vertical-align: top; " class="generalfont">
+                                <asp:TextBox ID="Sql_CuentasContables2_Cuenta_String"
+                                            runat="server"
+                                            Rows="2"
+                                            width="98%"
+                                            TextMode="MultiLine"
+                                            CssClass="cuentas-contables-text-area"
+                                            placeholder="(Separe varias cuentas así: 5010202, 5010203, 5010204; además use * para generalizar: 203*; también: 206*, 4021300, 301*)">
+                                </asp:TextBox>
                             </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;" class="generalfont">
-                                <br />
-                                Cuenta contable:&nbsp;&nbsp;<asp:TextBox ID="Sql_CuentasContables2_Cuenta_String" runat="server" />
+                            <td></td>
+                            <td style="vertical-align: top; text-align: left; " class="generalfont">
+                                Typee para iniciar una búsqueda de cuentas contables<br /> 
+                                <select id="select1"
+                                        name="select1"
+                                        runat="server"
+                                        multiple="true"
+                                        class="select2-input"
+                                        style="width: 99%; ">
+                                </select>
                             </td>
                         </tr>
                     </table>
@@ -194,10 +304,6 @@
             SelectCommand="SELECT Descripcion, Moneda FROM Monedas ORDER BY Descripcion">
         </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="CuentasContables_SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>"
-            SelectCommand="SELECT CuentasContables.Cuenta + ' - ' + CuentasContables.Descripcion + ' (' + Companias.Abreviatura + ')' AS CuentaContableYNombre, CuentasContables.Cuenta FROM CuentasContables INNER JOIN Companias ON CuentasContables.Cia = Companias.Numero WHERE (CuentasContables.TotDet = 'D' And CuentasContables.ActSusp = 'A') ORDER BY Companias.NombreCorto, CuentasContables.Cuenta + N' ' + CuentasContables.Descripcion">
-        </asp:SqlDataSource>
-
         <asp:SqlDataSource ID="TiposAsiento_SqlDataSource" runat="server" 
             ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>" 
             SelectCommand="SELECT Tipo, Descripcion FROM TiposDeAsiento ORDER BY Tipo">
@@ -207,6 +313,9 @@
             ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>" 
             SelectCommand="Select Distinct ProvieneDe From Asientos Where ProvieneDe &lt;&gt; '' And ProvieneDe Is Not Null Order By ProvieneDe">
         </asp:SqlDataSource>
-        
+
+        <div>
+            <script type="text/javascript" src="<%= this.Page.ResolveUrl("~/Scripts/select2-4.0.8/select2.min.js") %>"></script>
+        </div>
     </div>
 </asp:Content>

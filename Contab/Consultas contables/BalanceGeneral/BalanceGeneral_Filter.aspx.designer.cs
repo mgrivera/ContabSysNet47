@@ -202,15 +202,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         protected global::System.Web.UI.WebControls.CheckBox ExcluirCuentasSinMovimientos_CheckBox;
         
         /// <summary>
-        /// Sql_it_Cuenta_String control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Sql_it_Cuenta_String;
-        
-        /// <summary>
         /// TabPanel2 control.
         /// </summary>
         /// <remarks>
@@ -245,6 +236,33 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox MonedasOriginales_ListBox;
+        
+        /// <summary>
+        /// TabPanel3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel TabPanel3;
+        
+        /// <summary>
+        /// Sql_it_Cuenta_String control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Sql_it_Cuenta_String;
+        
+        /// <summary>
+        /// select1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect select1;
         
         /// <summary>
         /// LimpiarFiltro_Button control.

@@ -238,24 +238,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion {
         protected global::AjaxControlToolkit.TabPanel TabPanel3;
         
         /// <summary>
-        /// Sql_CuentasContables_Cuenta_String control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_CuentasContables_Cuenta_String;
-        
-        /// <summary>
-        /// ListSearchExtender1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ListSearchExtender ListSearchExtender1;
-        
-        /// <summary>
         /// Sql_CuentasContables2_Cuenta_String control.
         /// </summary>
         /// <remarks>
@@ -263,6 +245,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Sql_CuentasContables2_Cuenta_String;
+        
+        /// <summary>
+        /// select1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect select1;
         
         /// <summary>
         /// LimpiarFiltro_Button control.
@@ -290,15 +281,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource Monedas_SqlDataSource;
-        
-        /// <summary>
-        /// CuentasContables_SqlDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource CuentasContables_SqlDataSource;
         
         /// <summary>
         /// TiposAsiento_SqlDataSource control.

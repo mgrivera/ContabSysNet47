@@ -6,7 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Text;
-using ContabSysNet_Web.Clases; 
+using ContabSysNet_Web.Clases;
+using System.Data;
 
 namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 {
@@ -48,7 +49,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 }
 
                 Session["codigoCondi"] = null;
-                Session["ciaContabSeleccionada"] = null; 
+                Session["ciaContabSeleccionada"] = null;
             }
         }
 
@@ -61,6 +62,19 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
         protected void AplicarFiltro_Button_Click(object sender, EventArgs e)
         {
+            // GET SELECTED ITEMS
+            //List<string> myList = new List<string>(); 
+
+            //for (int i = 0; i <= select1.Items.Count - 1; i++)
+            //{
+            //    if (select1.Items[i].Selected)
+            //        myList.Add(select1.Items[i].Text + " | " + select1.Items[i].Value); 
+            //}
+
+            // SET SELECTED ITEMS
+            //select1.Items[2].Selected = true;
+            //select1.Items[4].Selected = true;
+
             if (Sql_Asientos_Cia_Numeric.SelectedIndex == -1)
             {
                 // el usuario debe siempre seleccionar, al menos, una compañía en la lista 

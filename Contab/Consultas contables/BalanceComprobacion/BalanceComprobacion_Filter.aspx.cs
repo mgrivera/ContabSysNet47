@@ -32,7 +32,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                 // pareciera que si no hacemos el databind para los listboxes aquí, la clase que regresa el state
                 // encuentra estos controles sin sus datos
                 Sql_CuentasContables_Cia_Numeric.DataBind();
-                Sql_CuentasContables_Cuenta_String.DataBind();
                 Sql_SaldosContables_Moneda_Numeric.DataBind();
 
                 // intentamos recuperar el state de esta página; en general, lo intentamos con popups filtros

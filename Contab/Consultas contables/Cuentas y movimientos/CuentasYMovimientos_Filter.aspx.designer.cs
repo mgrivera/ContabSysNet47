@@ -94,6 +94,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         protected global::System.Web.UI.WebControls.ListBox Sql_CuentasContables_Grupo_Numeric;
         
         /// <summary>
+        /// select1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect select1;
+        
+        /// <summary>
         /// Sql_CuentasContables2_Cuenta_String control.
         /// </summary>
         /// <remarks>

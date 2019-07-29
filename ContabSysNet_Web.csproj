@@ -149,6 +149,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -2072,6 +2073,7 @@
     <Content Include="Areas\CajaChica\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CajaChica\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\CajaChica\Views\ReposicionesCajaChica\Index_old.cshtml" />
+    <Content Include="webServices\Select2_GetData.asmx" />
     <EntityDeploy Include="ModelosDatos_EF\CajaChica\ControlCajaChicaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ControlCajaChicaModel.Designer.cs</LastGenOutput>
@@ -2451,6 +2453,8 @@
     <Content Include="Scripts\popper\popper.min.js" />
     <Content Include="Scripts\pouchdb-3.0.6.min.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-0.12.0.min.js" />
+    <Content Include="Scripts\select2-4.0.8\select2.min.css" />
+    <Content Include="Scripts\select2-4.0.8\select2.min.js" />
     <Content Include="Scripts\underscore_1_7_0.js" />
     <Content Include="Scripts\xlsx.js\jszip.js" />
     <Content Include="Scripts\xlsx.js\shim.js" />
@@ -3801,6 +3805,10 @@
     </Compile>
     <Compile Include="Utilitarios\ActivosFijos\ReconversionMonetaria.aspx.designer.cs">
       <DependentUpon>ReconversionMonetaria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="webServices\Select2_GetData.asmx.cs">
+      <DependentUpon>Select2_GetData.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

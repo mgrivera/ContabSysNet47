@@ -121,15 +121,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes {
         protected global::System.Web.UI.WebControls.TextBox Sql_Asientos_Lote_String;
         
         /// <summary>
-        /// Sql_CuentasContables_Cuenta_String control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Sql_CuentasContables_Cuenta_String;
-        
-        /// <summary>
         /// ExcluirAsientosDeTipoCierreAnual_CheckBox control.
         /// </summary>
         /// <remarks>
@@ -200,6 +191,33 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox Sql_Asientos_Tipo_String;
+        
+        /// <summary>
+        /// TabPanel4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel TabPanel4;
+        
+        /// <summary>
+        /// Sql_CuentasContables_Cuenta_String control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Sql_CuentasContables_Cuenta_String;
+        
+        /// <summary>
+        /// select1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect select1;
         
         /// <summary>
         /// TabPanel3 control.
