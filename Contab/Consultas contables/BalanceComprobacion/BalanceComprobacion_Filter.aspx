@@ -27,7 +27,7 @@
                 templateResult: formatState,                        // para cambiar lo que se muestra en la lista; el default es text ... 
                 templateSelection: formatState,                     // para cambiar lo que se muestra en la selección; el default es text ... 
                 ajax: {
-                    url: "/webServices/Select2_GetData.asmx/AccessRemoteData",        // Webservice  - WCSelect2 and WebMethod -AccessRemoteData
+                    url: "../../../webServices/Select2_GetData.asmx/AccessRemoteData",        // Webservice  - WCSelect2 and WebMethod -AccessRemoteData
                     dataType: 'json', 
                     method: "get",
                     data: function (params) {
