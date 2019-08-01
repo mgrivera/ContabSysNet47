@@ -56,7 +56,7 @@ namespace ContabSysNet_Web.webServices
                 // 1) leemos la página de items seleccionados 
                 var query =
                     "Select Cuenta as id, Descripcion as text From CuentasContables " +
-                    "Where (Cuenta Like '%' + @search + '%' Or Descripcion Like '%' + @search + '%') And Cia = @cia " +
+                    "Where (Cuenta Like '%' + @search + '%' Or Descripcion Like '%' + @search + '%') And TotDet = 'D' And Cia = @cia " +
                     "Order by Cuenta, Descripcion Offset @offset Rows Fetch Next 20 Rows Only"; 
 
                 var args = new DbParameter[] { new SqlParameter { ParameterName = "cia", Value = cia },
@@ -69,7 +69,7 @@ namespace ContabSysNet_Web.webServices
                 // 2) leemos la cantidad de registros que corresonden a la selección 
                 query =
                     "Select Count(*) as count_filtered From CuentasContables " +
-                    "Where (Cuenta Like '%' + @search + '%' Or Descripcion Like '%' + @search + '%') And Cia = @cia ";
+                    "Where (Cuenta Like '%' + @search + '%' Or Descripcion Like '%' + @search + '%') And TotDet = 'D' And Cia = @cia ";
 
                 args = new DbParameter[] { new SqlParameter { ParameterName = "cia", Value = cia },
                                                new SqlParameter { ParameterName = "search", Value = search }
