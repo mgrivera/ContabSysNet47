@@ -107,7 +107,7 @@
         <%-- divs para mostrar el progress bar --%>
         <div id="Progressbar_div" style="visibility: hidden; height: 0px;">
             <div id="ProgressbarBorder_div" style="margin-left: 5px; margin-right: 5px; border: 1px solid #808080; height: 10px; text-align: left;">
-                <div id="ProgressbarProgress_div" style="background: url(../../../Pictures/safari.gif) 0% 0% repeat-x; height: 10px; width: 0%;">
+                <div id="ProgressbarProgress_div" style="background: url(../../../Pictures/safari.gif) 0% 0% repeat-x; height: 8px; width: 0%;">
                 </div>
             </div>
             <div id="ProgressbarMessage_div" style="text-align: center;">
@@ -208,19 +208,38 @@
                         <table id="Table1" runat="server">
                             <tr id="Tr1" runat="server">
                                 <td id="Td1" runat="server">
-                                    <table id="itemPlaceholderContainer" runat="server" border="0" style="border: 1px solid #E6E6E6" class="generalfont" cellspacing="0" rules="none">
-                                        <tr id="Tr2" runat="server" style="" class="ListViewHeader_Suave generalfont">
-                                            <th id="Th1" runat="server" class="padded" style="text-align: left; padding-bottom: 10px;">Cuenta<br />
-                                                contable</th>
-                                            <th id="Th2" runat="server" class="padded" style="text-align: left; padding-bottom: 10px;">Descripción</th>
-                                            <th id="Th3" runat="server" class="padded" style="text-align: right; padding-bottom: 10px;">Saldo<br />
-                                                anterior</th>
-                                            <th id="Th4" runat="server" class="padded" style="text-align: right; padding-bottom: 10px;">Debe</th>
-                                            <th id="Th5" runat="server" class="padded" style="text-align: right; padding-bottom: 10px;">Haber</th>
-                                            <th id="Th6" runat="server" class="padded" style="text-align: right; padding-bottom: 10px;">Saldo<br />
-                                                actual</th>
-                                            <th id="Th7" runat="server" class="padded" style="text-align: center; padding-bottom: 10px;">Cant<br />
-                                                movtos</th>
+                                    <table id="itemPlaceholderContainer" 
+                                        runat="server" 
+                                        border="0" 
+                                        style="border: 1px solid #E6E6E6" 
+                                        class="smallfont" 
+                                        cellspacing="0" 
+                                        rules="none">
+                                        <tr id="Tr2" runat="server" style="" class="ListViewHeader_Suave">
+                                            <th id="Th1" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; ">
+                                                Cuenta<br />contable
+                                            </th>
+                                            <th id="Th2" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; ">
+                                                Descripción
+                                            </th>
+                                            <th id="Th3" runat="server" class="padded" style="text-align: right; padding-bottom: 5px; padding-top: 5px; ">
+                                                Saldo<br />anterior
+                                            </th>
+                                            <th id="Th4" runat="server" class="padded" style="text-align: right; padding-bottom: 5px; padding-top: 5px; ">
+                                                Debe
+                                            </th>
+                                            <th id="Th5" runat="server" class="padded" style="text-align: right; padding-bottom: 5px; padding-top: 5px; ">
+                                                Haber
+                                            </th>
+                                            <th id="Th8" runat="server" class="padded" style="text-align: right; padding-bottom: 5px; padding-top: 5px; ">
+                                                Diferencia<br />(debe-haber)
+                                            </th>
+                                            <th id="Th6" runat="server" class="padded" style="text-align: right; padding-bottom: 5px; padding-top: 5px;">
+                                                Saldo<br />actual
+                                            </th>
+                                            <th id="Th7" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; ">
+                                                Cant<br />movtos
+                                            </th>
                                         </tr>
                                         <tr id="itemPlaceholder" runat="server">
                                         </tr>
@@ -264,6 +283,12 @@
                             <td class="padded" style="text-align: right;">
                                 <asp:Label ID="Label4" runat="server" Text='<%# Item.Haber != null ? Item.Haber.Value.ToString("N2") : "" %>' />
                             </td>
+
+                            <td class="padded" style="text-align: right;">
+                                <asp:Label ID="Label7" runat="server" 
+                                           Text='<%# (Item.Debe != null && Item.Haber != null) ? (Item.Debe.Value - Item.Haber.Value).ToString("N2") : "" %>' />
+                            </td>
+
                             <td class="padded" style="text-align: right;">
                                 <asp:Label ID="Label5" runat="server" Text='<%# Item.SaldoActual != null ? Item.SaldoActual.Value.ToString("N2") : "" %>' />
                             </td>
@@ -291,6 +316,12 @@
                             <td class="padded" style="text-align: right;">
                                 <asp:Label ID="Label4" runat="server" Text='<%# Item.Haber != null ? Item.Haber.Value.ToString("N2") : "" %>' />
                             </td>
+
+                            <td class="padded" style="text-align: right;">
+                                <asp:Label ID="Label7" runat="server" 
+                                           Text='<%# (Item.Debe != null && Item.Haber != null) ? (Item.Debe.Value - Item.Haber.Value).ToString("N2") : "" %>' />
+                            </td>
+
                             <td class="padded" style="text-align: right;">
                                 <asp:Label ID="Label5" runat="server" Text='<%# Item.SaldoActual != null ? Item.SaldoActual.Value.ToString("N2") : "" %>' />
                             </td>
