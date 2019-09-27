@@ -40,7 +40,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 this.Sql_CuentasContables_Grupo_Numeric.DataBind(); 
 
                 // intentamos recuperar el state de esta página; en general, lo intentamos con popups filtros
-
                 if (!(Membership.GetUser().UserName == null))
                 {
                     KeepPageState MyKeepPageState = new KeepPageState(Membership.GetUser().UserName, Page.GetType().Name);
@@ -105,7 +104,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             // ahora intentamos crear un filtro solo para la lectura de los movimientos en la tabla
             // dAsientos
 
-            MyConstruirCriterioSql = new BuildSqlCriteria("I", "Sql_Asientos_Moneda_Numeric, Sql_Asientos_MonedaOriginal_Numeric, Sql_dAsientos_Descripcion_String, Sql_dAsientos_Referencia_String, Sql_dAsientos_CentroCosto_Numeric, Sql_Asientos_Numero_Numeric, Sql_CuentasContables_Grupo_Numeric");
+            MyConstruirCriterioSql = new BuildSqlCriteria("I", "Sql_Asientos_Cia_Numeric, Sql_Asientos_Moneda_Numeric, Sql_Asientos_MonedaOriginal_Numeric, Sql_dAsientos_Descripcion_String, Sql_dAsientos_Referencia_String, Sql_dAsientos_CentroCosto_Numeric, Sql_Asientos_Numero_Numeric, Sql_CuentasContables_Grupo_Numeric");
             MyConstruirCriterioSql.ContruirFiltro(this.Controls);
             sSqlSelectString = MyConstruirCriterioSql.CriterioSql;
             MyConstruirCriterioSql = null;

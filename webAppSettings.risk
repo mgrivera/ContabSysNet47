@@ -1,6 +1,6 @@
 ﻿<appSettings>
   <add key="contabM_address" value="http://localhost:3020" />
-  <add key="contabm_mongodb_connectionString" value="mongodb://localhost:27017/contabm_risk" />
+  <add key="contabm_mongodb_connectionString" value="mongodb://contabm_user:risksolutions@contabmrisk-shard-00-00-dsd7c.mongodb.net:27017,contabmrisk-shard-00-01-dsd7c.mongodb.net:27017,contabmrisk-shard-00-02-dsd7c.mongodb.net:27017/contabm_risk?ssl=true&amp;replicaSet=contabmRisk-shard-0&amp;authSource=admin&amp;retryWrites=true" />
   <add key="contabM_mongodb_name" value="contabm_risk" />
   <add key="ValidationSettings:UnobtrusiveValidationMode" value="None" />
 </appSettings>
