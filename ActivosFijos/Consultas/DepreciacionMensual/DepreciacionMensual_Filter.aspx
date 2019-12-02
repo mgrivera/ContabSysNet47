@@ -120,7 +120,11 @@
                             F compra: 
                         </td>
                         <td style="padding-right:20px; ">
-                            <asp:TextBox ID="Sql_it_FechaCompra_Date" runat="server" />
+                            <asp:TextBox ID="fCompra_desde" runat="server" TextMode="Date" />/
+                            <asp:TextBox ID="fCompra_hasta" runat="server" TextMode="Date" />
+                            <asp:CompareValidator ID="CompareValidator3" runat="server" ControlToValidate="fCompra_hasta"
+                                CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El intervalo indicado no es válido."
+                                Operator="GreaterThanEqual" Type="Date" ControlToCompare="fCompra_desde" Style="color: red; ">*</asp:CompareValidator>
                         </td>
                     </tr>
                     <tr>
@@ -137,7 +141,11 @@
                         <td style="white-space: nowrap">F desincorporación: 
                         </td>
                         <td style="padding-right:20px; ">
-                            <asp:TextBox ID="Sql_it_FechaDesincorporacion_Date" runat="server" />
+                            <asp:TextBox ID="fDesincorporacion_desde" runat="server" TextMode="Date" />/
+                            <asp:TextBox ID="fDesincorporacion_hasta" runat="server" TextMode="Date" />
+                            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="fDesincorporacion_hasta"
+                                CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El intervalo indicado no es válido."
+                                Operator="GreaterThanEqual" Type="Date" ControlToCompare="fDesincorporacion_desde" Style="color: red; ">*</asp:CompareValidator>
                         </td>
                     </tr>
 
@@ -201,6 +209,12 @@
                             &nbsp;&nbsp;
                         </td>
                         <td class="ListViewHeader_Suave generalfont" style="text-align: center;">
+                            Monedas
+                        </td>
+                        <td>
+                            &nbsp;&nbsp;
+                        </td>
+                        <td class="ListViewHeader_Suave generalfont" style="text-align: center;">
                             Departamentos
                         </td>
                         <td>
@@ -214,7 +228,7 @@
                         <td>
                             <asp:ListBox ID="Sql_it_Cia_Numeric" 
                                 runat="server" 
-                                DataTextField="Nombre" DataValueField="Numero" 
+                                DataTextField="NombreCorto" DataValueField="Numero" 
                                 AutoPostBack="False" 
                                 SelectionMode="Single" 
                                 Rows="20"
@@ -234,6 +248,20 @@
                             &nbsp;&nbsp;
                         </td>
                         <td>
+                            <asp:ListBox ID="Sql_it_Moneda_Numeric" 
+                                runat="server" 
+                                DataSourceID="Monedas_SqlDataSource"
+                                DataTextField="Descripcion" 
+                                DataValueField="Moneda" 
+                                AutoPostBack="False" 
+                                SelectionMode="Multiple" 
+                                Rows="20">
+                            </asp:ListBox>
+                        </td>
+                        <td>
+                            &nbsp;&nbsp;
+                        </td>
+                        <td>
                             <asp:ListBox ID="Sql_it_Departamento_Numeric" 
                                 runat="server" 
                                 DataSourceID="Departamentos_SqlDataSource"
@@ -241,7 +269,7 @@
                                 SelectionMode="Multiple"
                                 Rows="20"
                                 AutoPostBack="False" >
-                                </asp:ListBox>
+                            </asp:ListBox>
                         </td>
                         <td>
                             &nbsp;&nbsp;
@@ -254,7 +282,7 @@
                                 SelectionMode="Multiple"
                                 Rows="20"
                                 AutoPostBack="False" >
-                                </asp:ListBox>
+                            </asp:ListBox>
                         </td>
 
                     </tr>
@@ -308,8 +336,7 @@
                                          DataValueField="Atributo" 
                                          AutoPostBack="False" 
                                          SelectionMode="Multiple" 
-                                         Rows="20"
-                                >
+                                         Rows="20">
                             </asp:ListBox>
                         </td>
                         <td>
@@ -324,6 +351,49 @@
 
             </ContentTemplate>
         </cc1:TabPanel>
+
+        <cc1:TabPanel HeaderText="Notas" runat="server" ID="TabPanel4" >
+
+            <ContentTemplate>
+                <div style="padding: 10px; ">
+                    <p>
+                        El usuario debe siempre seleccionar una compañía Contab. Además, solo podrá seleccionar una, y no varias. 
+                    </p>
+                    <p>
+                        La consulta siempre se obtiene para un mes y año. El usuario debe indicar siempre estos valores. El año debe tener 4 dígitos (ej: 2011).  
+                    </p>
+                    <p>
+                        El usuario puede aplicar las fechas en el filtro de esta forma: 
+                        <ul>
+                            <li>
+                                Si solo usa la fecha de inicio (desde), se seleccionarán registros que tengan esta fecha.  
+                            </li>
+                            <li>
+                                Si usa ambas fechas (desde, hasta), se seleccionarán registros que cumplan este período.  
+                            </li>
+                        </ul>
+                    </p>
+                    <p>
+                        En campos alfanuméricos, puede usar '*' para <em>generalizar</em>; ejemplos:   
+                        <ul>
+                            <li>
+                                <em>*casa*</em>: lo que contenga la palabra casa.  
+                            </li>
+                            <li>
+                                <em>casa*</em>: lo que empiece por la palabra casa. 
+                            </li>
+                            <li>
+                                <em>*casa</em>: lo que termine en la palabra casa. 
+                            </li>
+                            <li>
+                                <em>casa</em> (solo): para usar el valor exacto.  
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+            </ContentTemplate>
+        </cc1:TabPanel>
+
     </cc1:tabcontainer>
 </div>
 
@@ -361,6 +431,11 @@
 <asp:SqlDataSource ID="Atributos_SqlDataSource" runat="server" 
     ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>"
     SelectCommand="SELECT Atributo, Descripcion FROM Atributos Where Origen = 'ActFijo' ORDER BY Descripcion">
+</asp:SqlDataSource>
+
+<asp:SqlDataSource ID="Monedas_SqlDataSource" runat="server" 
+    ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>"
+    SelectCommand="SELECT Moneda, Descripcion FROM Monedas ORDER BY Descripcion">
 </asp:SqlDataSource>
                                   
 </asp:Content>

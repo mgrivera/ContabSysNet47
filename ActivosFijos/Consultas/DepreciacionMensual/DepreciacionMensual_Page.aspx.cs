@@ -24,10 +24,8 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
 
             if (!Page.IsPostBack)
             {
-
                 // Gets a reference to a Label control that is not in a
                 // ContentPlaceHolder control
-
                 HtmlContainerControl MyHtmlSpan;
 
                 MyHtmlSpan = (HtmlContainerControl)Master.FindControl("AppName_Span");
@@ -96,7 +94,7 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             DateTime fechaConsulta = new DateTime(anoConsulta, mesConsulta, 1).AddMonths(1).AddDays(-1);
             DateTime fechaInicioAno = new DateTime(anoConsulta, 1, 31);
 
-            dbContab_ActFijos_Entities actFij_Contex = new dbContab_ActFijos_Entities(); 
+            dbContab_ActFijos_Entities activosFijos_dbcontext = new dbContab_ActFijos_Entities(); 
 
             try
             {
@@ -104,11 +102,11 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                 // eliminamos los registros anteriores de la tabla 'temporal'
 
                 string sqlTransactCommand = "Delete From tTempActivosFijos_ConsultaDepreciacion Where NombreUsuario = {0}";
-                actFij_Contex.ExecuteStoreCommand(sqlTransactCommand, new object[] { User.Identity.Name }); 
+                activosFijos_dbcontext.ExecuteStoreCommand(sqlTransactCommand, new object[] { User.Identity.Name }); 
             }
             catch (Exception ex)
             {
-                actFij_Contex.Dispose();
+                activosFijos_dbcontext.Dispose();
 
                 ErrMessage_Span.InnerHtml = "Ha ocurrido un error al intentar ejecutar una operación de acceso a la base de datos. <br /> " + 
                     "El mensaje específico de error es: " + 
@@ -122,10 +120,11 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
 
             // nótese como seleccionamos solo los que se deprecien *luego* de la fecha de la consulta ... 
 
-            var query = from a in actFij_Contex.InventarioActivosFijos.
+            var query = from a in activosFijos_dbcontext.InventarioActivosFijos.
                             Include("Compania").
                             Include("tDepartamento").
                             Include("TiposDeProducto").
+                            Include("Moneda1").
                         Where(sqlServerWhereString)
                         // en escencia, eliminamos los que aún no se comienzan a depreciar ... 
                         where (a.DepreciarDesdeAno < anoConsulta) || 
@@ -316,14 +315,14 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                     continue; 
 
 
-                actFij_Contex.tTempActivosFijos_ConsultaDepreciacion.AddObject(infoDepreciacion);
+                activosFijos_dbcontext.tTempActivosFijos_ConsultaDepreciacion.AddObject(infoDepreciacion);
                 cantidadRegistrosAgregados++;
             }
 
 
             try
             {
-                actFij_Contex.SaveChanges();
+                activosFijos_dbcontext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -336,7 +335,7 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             }
             finally
             {
-                actFij_Contex.Dispose(); 
+                activosFijos_dbcontext.Dispose(); 
             }
         }
 

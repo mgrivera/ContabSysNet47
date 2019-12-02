@@ -130,13 +130,31 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
         protected global::System.Web.UI.WebControls.TextBox Sql_it_Modelo_String;
         
         /// <summary>
-        /// Sql_it_FechaCompra_Date control.
+        /// fCompra_desde control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Sql_it_FechaCompra_Date;
+        protected global::System.Web.UI.WebControls.TextBox fCompra_desde;
+        
+        /// <summary>
+        /// fCompra_hasta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox fCompra_hasta;
+        
+        /// <summary>
+        /// CompareValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator3;
         
         /// <summary>
         /// ckh_ExcluirDepreciadosAnosAnteriores control.
@@ -148,13 +166,31 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
         protected global::System.Web.UI.WebControls.CheckBox ckh_ExcluirDepreciadosAnosAnteriores;
         
         /// <summary>
-        /// Sql_it_FechaDesincorporacion_Date control.
+        /// fDesincorporacion_desde control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Sql_it_FechaDesincorporacion_Date;
+        protected global::System.Web.UI.WebControls.TextBox fDesincorporacion_desde;
+        
+        /// <summary>
+        /// fDesincorporacion_hasta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox fDesincorporacion_hasta;
+        
+        /// <summary>
+        /// CompareValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
         
         /// <summary>
         /// chk_AplicarInfoDesincorporacion control.
@@ -191,6 +227,15 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator CiaContab_RequiredFieldValidator;
+        
+        /// <summary>
+        /// Sql_it_Moneda_Numeric control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox Sql_it_Moneda_Numeric;
         
         /// <summary>
         /// Sql_it_Departamento_Numeric control.
@@ -236,6 +281,15 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox lst_Atributos;
+        
+        /// <summary>
+        /// TabPanel4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel TabPanel4;
         
         /// <summary>
         /// LimpiarFiltro_Button control.
@@ -290,5 +344,14 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource Atributos_SqlDataSource;
+        
+        /// <summary>
+        /// Monedas_SqlDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource Monedas_SqlDataSource;
     }
 }

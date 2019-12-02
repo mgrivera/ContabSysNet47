@@ -25,6 +25,18 @@
           <DataField>AbreviaturaCiaContab</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Moneda">
+          <DataField>Moneda</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DescripcionMoneda">
+          <DataField>DescripcionMoneda</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SimboloMoneda">
+          <DataField>SimboloMoneda</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="NombreDepartamento">
           <DataField>NombreDepartamento</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -120,9 +132,9 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ReporteDepreciacionMensual_DataSet</rd:DataSetName>
-        <rd:SchemaPath>C:\ContabSysNet40\ContabSysNet_Web\ActivosFijos\Consultas\DepreciacionMensual\ReporteDepreciacionMensual_DataSet.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\ContabSysNet47\ActivosFijos\Consultas\DepreciacionMensual\ReporteDepreciacionMensual_DataSet.xsd</rd:SchemaPath>
         <rd:TableName>vtTempActivosFijos_ConsultaDepreciacion</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
         <rd:TableAdapterName>vtTempActivosFijos_ConsultaDepreciacionTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
@@ -216,6 +228,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1012,14 +1025,14 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="NombreCiaContab1">
+                        <Textbox Name="Textbox48">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!NombreCiaContab.Value</Value>
+                                  <Value>=Fields!NombreCiaContab.Value + " - " + Fields!DescripcionMoneda.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1030,7 +1043,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>NombreCiaContab1</rd:DefaultName>
+                          <rd:DefaultName>Textbox48</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -2270,6 +2283,276 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox31">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="totales para " &amp; Fields!DescripcionMoneda.Value &amp; " (" &amp; Count(Fields!DescripcionMoneda.Value) &amp; "): "</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox31</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>10pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>9</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CostoTotal1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!CostoTotal.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>N2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CostoTotal1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="MontoADepreciar1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!MontoADepreciar.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>N2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>MontoADepreciar1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DepreciacionMensual1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!DepreciacionMensual.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>N2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DepreciacionMensual1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DepAcum_AnoActual1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!DepAcum_AnoActual.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>N2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DepAcum_AnoActual1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DepAcum_Total1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!DepAcum_Total.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>N2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DepAcum_Total1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="RestaPorDepreciar1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!RestaPorDepreciar.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>N2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>RestaPorDepreciar1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Textbox37">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2579,18 +2862,14 @@
                   </SortExpressions>
                   <TablixMembers>
                     <TablixMember>
-                      <KeepWithGroup>After</KeepWithGroup>
-                      <RepeatOnNewPage>true</RepeatOnNewPage>
-                    </TablixMember>
-                    <TablixMember>
-                      <Group Name="Departamento_Group">
+                      <Group Name="DescripcionMoneda">
                         <GroupExpressions>
-                          <GroupExpression>=Fields!NombreDepartamento.Value</GroupExpression>
+                          <GroupExpression>=Fields!DescripcionMoneda.Value</GroupExpression>
                         </GroupExpressions>
                       </Group>
                       <SortExpressions>
                         <SortExpression>
-                          <Value>=Fields!NombreDepartamento.Value</Value>
+                          <Value>=Fields!DescripcionMoneda.Value</Value>
                         </SortExpression>
                       </SortExpressions>
                       <TablixMembers>
@@ -2599,46 +2878,70 @@
                           <RepeatOnNewPage>true</RepeatOnNewPage>
                         </TablixMember>
                         <TablixMember>
-                          <Group Name="TipoProducto_Group">
+                          <Group Name="Departamento_Group">
                             <GroupExpressions>
-                              <GroupExpression>=Fields!NombreTipoProducto.Value</GroupExpression>
+                              <GroupExpression>=Fields!NombreDepartamento.Value</GroupExpression>
                             </GroupExpressions>
                           </Group>
                           <SortExpressions>
                             <SortExpression>
-                              <Value>=Fields!NombreTipoProducto.Value</Value>
+                              <Value>=Fields!NombreDepartamento.Value</Value>
                             </SortExpression>
                           </SortExpressions>
                           <TablixMembers>
                             <TablixMember>
-                              <Visibility>
-                                <Hidden>=cbool(Parameters!soloTotales.Value)</Hidden>
-                              </Visibility>
                               <KeepWithGroup>After</KeepWithGroup>
                               <RepeatOnNewPage>true</RepeatOnNewPage>
                             </TablixMember>
                             <TablixMember>
-                              <Group Name="Details" />
+                              <Group Name="TipoProducto_Group">
+                                <GroupExpressions>
+                                  <GroupExpression>=Fields!NombreTipoProducto.Value</GroupExpression>
+                                </GroupExpressions>
+                              </Group>
                               <SortExpressions>
-                                <SortExpression>
-                                  <Value>=Fields!NombreCiaContab.Value</Value>
-                                </SortExpression>
-                                <SortExpression>
-                                  <Value>=Fields!NombreDepartamento.Value</Value>
-                                </SortExpression>
                                 <SortExpression>
                                   <Value>=Fields!NombreTipoProducto.Value</Value>
                                 </SortExpression>
-                                <SortExpression>
-                                  <Value>=Fields!FechaCompra.Value</Value>
-                                </SortExpression>
-                                <SortExpression>
-                                  <Value>=Fields!Producto.Value</Value>
-                                </SortExpression>
                               </SortExpressions>
-                              <Visibility>
-                                <Hidden>=cbool(Parameters!soloTotales.Value)</Hidden>
-                              </Visibility>
+                              <TablixMembers>
+                                <TablixMember>
+                                  <Visibility>
+                                    <Hidden>=cbool(Parameters!soloTotales.Value)</Hidden>
+                                  </Visibility>
+                                  <KeepWithGroup>After</KeepWithGroup>
+                                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                                </TablixMember>
+                                <TablixMember>
+                                  <Group Name="Details" />
+                                  <SortExpressions>
+                                    <SortExpression>
+                                      <Value>=Fields!NombreCiaContab.Value</Value>
+                                    </SortExpression>
+                                    <SortExpression>
+                                      <Value>=Fields!DescripcionMoneda.Value</Value>
+                                    </SortExpression>
+                                    <SortExpression>
+                                      <Value>=Fields!NombreDepartamento.Value</Value>
+                                    </SortExpression>
+                                    <SortExpression>
+                                      <Value>=Fields!NombreTipoProducto.Value</Value>
+                                    </SortExpression>
+                                    <SortExpression>
+                                      <Value>=Fields!FechaCompra.Value</Value>
+                                    </SortExpression>
+                                    <SortExpression>
+                                      <Value>=Fields!Producto.Value</Value>
+                                    </SortExpression>
+                                  </SortExpressions>
+                                  <Visibility>
+                                    <Hidden>=cbool(Parameters!soloTotales.Value)</Hidden>
+                                  </Visibility>
+                                </TablixMember>
+                                <TablixMember>
+                                  <KeepWithGroup>Before</KeepWithGroup>
+                                </TablixMember>
+                              </TablixMembers>
                             </TablixMember>
                             <TablixMember>
                               <KeepWithGroup>Before</KeepWithGroup>
@@ -2650,9 +2953,7 @@
                         </TablixMember>
                       </TablixMembers>
                     </TablixMember>
-                    <TablixMember>
-                      <KeepWithGroup>Before</KeepWithGroup>
-                    </TablixMember>
+                    <TablixMember />
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
@@ -2660,8 +2961,8 @@
             <DataSetName>DataSet1</DataSetName>
             <Top>0.00045in</Top>
             <Left>0.04411cm</Left>
-            <Height>2.36571in</Height>
-            <Width>10.36154in</Width>
+            <Height>2.61571in</Height>
+            <Width>10.36155in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2669,10 +2970,10 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>2.42866in</Height>
+        <Height>2.65782in</Height>
         <Style />
       </Body>
-      <Width>10.37891in</Width>
+      <Width>10.37892in</Width>
       <Page>
         <PageHeader>
           <Height>0.41133in</Height>
@@ -2850,7 +3151,7 @@
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Line Name="line1">
-              <Top>0.17638cm</Top>
+              <Top>0.17636cm</Top>
               <Left>0.01735in</Left>
               <Height>0cm</Height>
               <Width>26.31834cm</Width>

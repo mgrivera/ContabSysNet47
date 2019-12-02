@@ -133,9 +133,8 @@ tr.ListViewAlternatingRow
 {
   background-color: #F4F4F4;
 }
-tr.ListViewSelectedRow
-{
-  background-color: #FFFFDF;
+tr.ListViewSelectedRow {
+    background-color: #D5DDF3;
 }
 th.ListViewColHeader
 {

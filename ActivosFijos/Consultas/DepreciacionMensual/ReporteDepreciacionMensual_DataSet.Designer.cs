@@ -283,6 +283,12 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
             
             private global::System.Data.DataColumn columnAbreviaturaCiaContab;
             
+            private global::System.Data.DataColumn columnMoneda;
+            
+            private global::System.Data.DataColumn columnDescripcionMoneda;
+            
+            private global::System.Data.DataColumn columnSimboloMoneda;
+            
             private global::System.Data.DataColumn columnNombreDepartamento;
             
             private global::System.Data.DataColumn columnNombreTipoProducto;
@@ -375,6 +381,30 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
             public global::System.Data.DataColumn AbreviaturaCiaContabColumn {
                 get {
                     return this.columnAbreviaturaCiaContab;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn MonedaColumn {
+                get {
+                    return this.columnMoneda;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DescripcionMonedaColumn {
+                get {
+                    return this.columnDescripcionMoneda;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn SimboloMonedaColumn {
+                get {
+                    return this.columnSimboloMoneda;
                 }
             }
             
@@ -602,6 +632,9 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
             public vtTempActivosFijos_ConsultaDepreciacionRow AddvtTempActivosFijos_ConsultaDepreciacionRow(
                         string NombreCiaContab, 
                         string AbreviaturaCiaContab, 
+                        int Moneda, 
+                        string DescripcionMoneda, 
+                        string SimboloMoneda, 
                         string NombreDepartamento, 
                         string NombreTipoProducto, 
                         string Producto, 
@@ -629,6 +662,9 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
                 object[] columnValuesArray = new object[] {
                         NombreCiaContab,
                         AbreviaturaCiaContab,
+                        Moneda,
+                        DescripcionMoneda,
+                        SimboloMoneda,
                         NombreDepartamento,
                         NombreTipoProducto,
                         Producto,
@@ -676,6 +712,9 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
             internal void InitVars() {
                 this.columnNombreCiaContab = base.Columns["NombreCiaContab"];
                 this.columnAbreviaturaCiaContab = base.Columns["AbreviaturaCiaContab"];
+                this.columnMoneda = base.Columns["Moneda"];
+                this.columnDescripcionMoneda = base.Columns["DescripcionMoneda"];
+                this.columnSimboloMoneda = base.Columns["SimboloMoneda"];
                 this.columnNombreDepartamento = base.Columns["NombreDepartamento"];
                 this.columnNombreTipoProducto = base.Columns["NombreTipoProducto"];
                 this.columnProducto = base.Columns["Producto"];
@@ -708,6 +747,12 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
                 base.Columns.Add(this.columnNombreCiaContab);
                 this.columnAbreviaturaCiaContab = new global::System.Data.DataColumn("AbreviaturaCiaContab", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAbreviaturaCiaContab);
+                this.columnMoneda = new global::System.Data.DataColumn("Moneda", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMoneda);
+                this.columnDescripcionMoneda = new global::System.Data.DataColumn("DescripcionMoneda", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDescripcionMoneda);
+                this.columnSimboloMoneda = new global::System.Data.DataColumn("SimboloMoneda", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSimboloMoneda);
                 this.columnNombreDepartamento = new global::System.Data.DataColumn("NombreDepartamento", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNombreDepartamento);
                 this.columnNombreTipoProducto = new global::System.Data.DataColumn("NombreTipoProducto", typeof(string), null, global::System.Data.MappingType.Element);
@@ -758,6 +803,8 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
                 this.columnNombreCiaContab.MaxLength = 50;
                 this.columnAbreviaturaCiaContab.AllowDBNull = false;
                 this.columnAbreviaturaCiaContab.MaxLength = 6;
+                this.columnDescripcionMoneda.MaxLength = 50;
+                this.columnSimboloMoneda.MaxLength = 6;
                 this.columnNombreDepartamento.MaxLength = 30;
                 this.columnNombreTipoProducto.MaxLength = 30;
                 this.columnProducto.AllowDBNull = false;
@@ -944,6 +991,57 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
                 }
                 set {
                     this[this.tablevtTempActivosFijos_ConsultaDepreciacion.AbreviaturaCiaContabColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Moneda {
+                get {
+                    try {
+                        return ((int)(this[this.tablevtTempActivosFijos_ConsultaDepreciacion.MonedaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Moneda\' in table \'vtTempActivosFijos_ConsultaDepreciacion\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablevtTempActivosFijos_ConsultaDepreciacion.MonedaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DescripcionMoneda {
+                get {
+                    try {
+                        return ((string)(this[this.tablevtTempActivosFijos_ConsultaDepreciacion.DescripcionMonedaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DescripcionMoneda\' in table \'vtTempActivosFijos_ConsultaDep" +
+                                "reciacion\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablevtTempActivosFijos_ConsultaDepreciacion.DescripcionMonedaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string SimboloMoneda {
+                get {
+                    try {
+                        return ((string)(this[this.tablevtTempActivosFijos_ConsultaDepreciacion.SimboloMonedaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SimboloMoneda\' in table \'vtTempActivosFijos_ConsultaDepreci" +
+                                "acion\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablevtTempActivosFijos_ConsultaDepreciacion.SimboloMonedaColumn] = value;
                 }
             }
             
@@ -1244,6 +1342,42 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMonedaNull() {
+                return this.IsNull(this.tablevtTempActivosFijos_ConsultaDepreciacion.MonedaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMonedaNull() {
+                this[this.tablevtTempActivosFijos_ConsultaDepreciacion.MonedaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDescripcionMonedaNull() {
+                return this.IsNull(this.tablevtTempActivosFijos_ConsultaDepreciacion.DescripcionMonedaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDescripcionMonedaNull() {
+                this[this.tablevtTempActivosFijos_ConsultaDepreciacion.DescripcionMonedaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsSimboloMonedaNull() {
+                return this.IsNull(this.tablevtTempActivosFijos_ConsultaDepreciacion.SimboloMonedaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetSimboloMonedaNull() {
+                this[this.tablevtTempActivosFijos_ConsultaDepreciacion.SimboloMonedaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsNombreDepartamentoNull() {
                 return this.IsNull(this.tablevtTempActivosFijos_ConsultaDepreciacion.NombreDepartamentoColumn);
             }
@@ -1499,7 +1633,7 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual.ReporteDep
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT NombreCiaContab, AbreviaturaCiaContab, NombreDepartamento, NombreTipoProducto, Producto, DescripcionProducto, FechaCompra, FechaDesincorporacion, DepreciarDesde, DepreciarDesdeMes, DepreciarDesdeAno, DepreciarHasta, DepreciarHastaMes, DepreciarHastaAno, CantidadMesesADepreciar, DepAcum_CantMeses, DepAcum_CantMeses_AnoActual, RestaPorDepreciar_Meses, CostoTotal, MontoADepreciar, DepreciacionMensual, DepAcum_AnoActual, DepAcum_Total, RestaPorDepreciar, NombreUsuario FROM dbo.vtTempActivosFijos_ConsultaDepreciacion";
+            this._commandCollection[0].CommandText = @"SELECT NombreCiaContab, AbreviaturaCiaContab, NombreDepartamento, NombreTipoProducto, Producto, DescripcionProducto, FechaCompra, FechaDesincorporacion, DepreciarDesde, DepreciarDesdeMes, DepreciarDesdeAno, DepreciarHasta, DepreciarHastaMes, DepreciarHastaAno, CantidadMesesADepreciar, DepAcum_CantMeses, DepAcum_CantMeses_AnoActual, RestaPorDepreciar_Meses, CostoTotal, MontoADepreciar, DepreciacionMensual, DepAcum_AnoActual, DepAcum_Total, RestaPorDepreciar, NombreUsuario FROM vtTempActivosFijos_ConsultaDepreciacion";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;

@@ -31,16 +31,20 @@
     
         <tr>
              <%--   column en la izquierda con links   --%>
-            <td style="border: 1px solid #C0C0C0; width: 10%; vertical-align: top; background-color: #F7F7F7; text-align: center; ">
+            <td style="border: 1px solid #C0C0C0; width: 10%; vertical-align: top; background-color: #F7F7F7; text-align: center; " class="notsosmallfont">
                 <br />
-                <i class="fa fa-filter"></i>
-                <a href="javascript:PopupWin('DepreciacionMensual_Filter.aspx', 1000, 600)">Definir y aplicar un filtro</a>
+                <br />
+                <a href="javascript:PopupWin('DepreciacionMensual_Filter.aspx', 1000, 680)">Definir y aplicar<br /> un filtro</a><br />
+                <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
+
                 <hr />
 
-                <i class="fa fa-print"></i>
-                <a href="javascript:PopupWin('DepreciacionMensual_OpcionesReportes.aspx', 1000, 600)">Reporte
-                </a>
+                <a href="javascript:PopupWin('DepreciacionMensual_OpcionesReportes.aspx', 1000, 680)" >Reporte</a><br />
+                <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
+
+                <hr />
             </td>
+
             <td style="vertical-align: top; ">
             
                 <cc1:UpdatePanelAnimationExtender ID="UpdatePanelAnimationExtender1" runat="server"
@@ -83,7 +87,7 @@
                                                     cellspacing="0" rules="none">
 
                                                 <tr id="Tr4" runat="server" class="ListViewHeader">
-                                                    <th id="Th9" runat="server" class="padded" style="text-align: left; background-color: transparent; " colspan="9" />
+                                                    <th id="Th9" runat="server" class="padded" style="text-align: left; background-color: transparent; " colspan="10" />
 
                                                     <th id="Th21" runat="server" 
                                                                   class="padded" 
@@ -111,6 +115,9 @@
                                                     <th class="padded" />
                                                     <th id="SaldoAnterior_ColumHeader" runat="server" class="padded" style="text-align: left;">
                                                         Cia contab
+                                                    </th>
+                                                    <th id="Th22" runat="server" class="padded" style="text-align: center;">
+                                                        Mon
                                                     </th>
                                                     <th id="Th5" runat="server" class="padded" style="text-align: left;">
                                                         Departamento
@@ -207,7 +214,10 @@
                                             ImageUrl="~/Pictures/SelectRecord.png" ToolTip="... click para seleccionar el registro" />
                                     </td>
                                     <td class="left padded">
-                                        <asp:Label ID="SaldoAnteriorLabel" runat="server" Text='<%# Eval("InventarioActivosFijo.Compania.Abreviatura") %>' />
+                                        <asp:Label ID="ciaContab" runat="server" Text='<%# Eval("InventarioActivosFijo.Compania.Abreviatura") %>' />
+                                    </td>
+                                    <td class="center padded">
+                                        <asp:Label ID="moneda" runat="server" Text='<%# Eval("InventarioActivosFijo.Moneda1.Simbolo") %>' />
                                     </td>
                                     <td class="left padded">
                                         <asp:Label ID="DebitosLabel" runat="server" 
@@ -290,7 +300,10 @@
                                             ImageUrl="~/Pictures/SelectRecord.png" ToolTip="... click para seleccionar el registro" />
                                     </td>
                                     <td class="left padded">
-                                        <asp:Label ID="SaldoAnteriorLabel" runat="server" Text='<%# Eval("InventarioActivosFijo.Compania.Abreviatura") %>' />
+                                        <asp:Label ID="ciaContab" runat="server" Text='<%# Eval("InventarioActivosFijo.Compania.Abreviatura") %>' />
+                                    </td>
+                                    <td class="center padded">
+                                        <asp:Label ID="moneda" runat="server" Text='<%# Eval("InventarioActivosFijo.Moneda1.Simbolo") %>' />
                                     </td>
                                     <td class="left padded">
                                         <asp:Label ID="DebitosLabel" runat="server" 
@@ -375,6 +388,9 @@
                                     <td class="left padded">
                                         <asp:Label ID="SaldoAnteriorLabel" runat="server" Text='<%# Eval("InventarioActivosFijo.Compania.Abreviatura") %>' />
                                     </td>
+                                    <td class="center padded">
+                                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("InventarioActivosFijo.Moneda1.Simbolo") %>' />
+                                    </td>
                                     <td class="left padded">
                                         <asp:Label ID="DebitosLabel" runat="server" 
                                         Text='<%# Eval("InventarioActivosFijo.tDepartamento.Descripcion").ToString().Length <= 10 ? 
@@ -429,7 +445,6 @@
                                         <asp:Label ID="Label12" runat="server"  
                                                     Text='<%# (short)Eval("CantidadMesesADepreciar") - (short)Eval("DepAcum_CantMeses") %>' />
                                     </td>
-
                                     <td class="right padded">
                                         <asp:Label ID="Label3" runat="server" Text='<%# Eval("InventarioActivosFijo.MontoADepreciar", "{0:N2}") %>' />
                                     </td>
@@ -476,14 +491,15 @@
                                      InventarioActivosFijo.Compania, 
                                      InventarioActivosFijo.Proveedore, 
                                      InventarioActivosFijo.TiposDeProducto, 
-                                     InventarioActivosFijo.tDepartamento"
+                                     InventarioActivosFijo.tDepartamento, 
+                                     InventarioActivosFijo.Moneda1"
                             EntitySetName="tTempActivosFijos_ConsultaDepreciacion"
                             Where="it.NombreUsuario = @NombreUsuario" 
                             OrderBy="it.InventarioActivosFijo.Compania.Nombre, 
                                      it.InventarioActivosFijo.tDepartamento.Descripcion, 
                                      it.InventarioActivosFijo.TiposDeProducto.Descripcion, 
-                                     it.InventarioActivosFijo.FechaCompra" ContextTypeName="ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.dbContab_ActFijos_Entities"
-                            >
+                                     it.InventarioActivosFijo.FechaCompra" 
+                            ContextTypeName="ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.dbContab_ActFijos_Entities">
                             <WhereParameters>
                                 <asp:Parameter Name="NombreUsuario" Type="String" />
                             </WhereParameters>

@@ -28,46 +28,46 @@
                         <br />
                         <table cellspacing="5">
                             <tr>
-                                <td align="right"><b>Producto:</b></td>
-                                <td align="left"><asp:Label id="ProductIDLabel" runat="server" Text='<%# Eval("Producto") %>' /></td>
+                                <td style="text-align: right; "><b>Moneda:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label20" runat="server" Text='<%# Eval("Moneda1.Simbolo") %>' /></td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td align="right"><b>Descripción:</b></td>
-                                <td align="left"><asp:Label id="Label1" runat="server" Text='<%# Eval("Descripcion") %>' /></td>
+                                <td style="text-align: right; "><b>Descripción:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label1" runat="server" Text='<%# Eval("Descripcion") %>' /></td>
                             </tr>
                             <tr>
-                                <td align="right"><b>Departamento:</b></td>
-                                <td align="left"><asp:Label id="Label2" runat="server" Text='<%# Eval("tDepartamento.Descripcion") %>' /></td>
+                                <td style="text-align: right; "><b>Producto:</b></td>
+                                <td style="text-align: left; "><asp:Label id="ProductIDLabel" runat="server" Text='<%# Eval("Producto") %>' /></td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td align="right"><b>Tipo:</b></td>
-                                <td align="left"><asp:Label id="Label3" runat="server" Text='<%# Eval("TiposDeProducto.Descripcion") %>' /></td>
+                                <td style="text-align: right; "><b>Tipo:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label3" runat="server" Text='<%# Eval("TiposDeProducto.Descripcion") %>' /></td>
                             </tr>
                             <tr>
-                                <td align="right"><b>Proveedor:</b></td>
-                                <td align="left"><asp:Label id="Label4" runat="server" Text='<%# Eval("Proveedore.Nombre") %>' /></td>
+                                <td style="text-align: right; "><b>Proveedor:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label4" runat="server" Text='<%# Eval("Proveedore.Nombre") %>' /></td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td align="right"><b>Serial:</b></td>
-                                <td align="left"><asp:Label id="Label5" runat="server" Text='<%# Eval("Serial") %>' /></td>
+                                <td style="text-align: right; "><b>Serial:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label5" runat="server" Text='<%# Eval("Serial") %>' /></td>
                             </tr>
                             <tr>
-                                <td align="right"><b>Modelo:</b></td>
-                                <td align="left"><asp:Label id="Label6" runat="server" Text='<%# Eval("Modelo") %>' /></td>
+                                <td style="text-align: right; "><b>Departamento:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label2" runat="server" Text='<%# Eval("tDepartamento.Descripcion") %>' /></td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td align="right"><b>Placa:</b></td>
-                                <td align="left"><asp:Label id="Label7" runat="server" Text='<%# Eval("Placa") %>' /></td>
+                                <td style="text-align: right; "><b>Placa:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label7" runat="server" Text='<%# Eval("Placa") %>' /></td>
                             </tr>
                             <tr>
-                                <td align="right"><b>Factura:</b></td>
-                                <td align="left"><asp:Label id="Label8" runat="server" Text='<%# Eval("Factura") %>' /></td>
+                                <td style="text-align: right; "><b>Modelo:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label6" runat="server" Text='<%# Eval("Modelo") %>' /></td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td align="right"><b>F compra:</b></td>
-                                <td align="left"><asp:Label id="Label9" runat="server" Text='<%# Eval("FechaCompra", "{0:dd-MMMM-yyyy}") %>' /></td>
+                                <td style="text-align: right; "><b>F compra:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label9" runat="server" Text='<%# Eval("FechaCompra", "{0:dd-MMMM-yyyy}") %>' /></td>
                             </tr>
                             <tr>
-                                <td>&nbsp;&nbsp;</td>
-                                <td>&nbsp;&nbsp;</td>
+                                <td style="text-align: right; "><b>Factura:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label8" runat="server" Text='<%# Eval("Factura") %>' /></td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td align="right"><b>Cia:</b></td>
-                                <td align="left"><asp:Label id="Label11" runat="server" Text='<%# Eval("Compania.Nombre") %>' /></td>
+                                <td style="text-align: right; "><b>Cia:</b></td>
+                                <td style="text-align: left; "><asp:Label id="Label11" runat="server" Text='<%# Eval("Compania.Nombre") %>' /></td>
                             </tr>
                             
                         </table>  
@@ -103,19 +103,19 @@
                             <legend>Desincorporación:</legend>
                             <table>
                                 <tr>
-                                    <td align="right"><b></b></td>
+                                    <td style="text-align: right; "><b></b></td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                     <td align="center"><b>Fecha</b></td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td align="left"><b>Autorizado por</b></td>
+                                    <td style="text-align: left; "><b>Autorizado por</b></td>
                                 </tr>
                                 <tr>
-                                    <td align="left"><asp:CheckBox id="Label24" runat="server" Checked=
+                                    <td style="text-align: left; "><asp:CheckBox id="Label24" runat="server" Checked=
                                         '<%# Eval("DesincorporadoFlag") == null ? false : Eval("DesincorporadoFlag") %>' /> Desincorporado</td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                     <td align="center"><asp:Label id="Label25" runat="server" Text='<%# Eval("FechaDesincorporacion", "{0:dd-MMM-yyyy}") %>' /></td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td align="left"><asp:Label id="Label27" runat="server" Text='<%# Eval("tEmpleado.Nombre") %>' /></td>
+                                    <td style="text-align: left; "><asp:Label id="Label27" runat="server" Text='<%# Eval("tEmpleado.Nombre") %>' /></td>
                                 </tr>
                             </table> 
                             <br />
@@ -143,30 +143,30 @@
                                         <table>
                                             <tr align="center">
                                                 <td>&nbsp;&nbsp;&nbsp;</td>
-                                                <td align="right"><b>Fecha compra: </b></td>
+                                                <td style="text-align: right; "><b>Fecha compra: </b></td>
                                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td align="left"><asp:Label id="Label10" runat="server" Text='<%# Eval("FechaCompra", "{0:dd-MMM-yyyy}") %>' /></td>
+                                                <td style="text-align: left; "><asp:Label id="Label10" runat="server" Text='<%# Eval("FechaCompra", "{0:dd-MMM-yyyy}") %>' /></td>
                                                 <td>&nbsp;&nbsp;&nbsp;</td>
                                             </tr>
                                             <tr align="center">
                                                 <td></td>
-                                                <td align="right"><b>Cant años:</b></td>
+                                                <td style="text-align: right; "><b>Cant años:</b></td>
                                                 <td>&nbsp;&nbsp;</td>
-                                                <td align="left"><asp:Label id="Label12" runat="server" Text='<%# Eval("NumeroDeAnos", "{0:N2}") %>' /></td>
+                                                <td style="text-align: left; "><asp:Label id="Label12" runat="server" Text='<%# Eval("NumeroDeAnos", "{0:N2}") %>' /></td>
                                                 <td></td>
                                             </tr>
                                             <tr align="center">
                                                 <td></td>
-                                                <td align="right"><b>Monto dep<br />mensual:</b></td>
+                                                <td style="text-align: right; "><b>Monto dep<br />mensual:</b></td>
                                                 <td>&nbsp;&nbsp;</td>
-                                                <td align="left"><asp:Label id="Label13" runat="server" Text='<%# Eval("MontoDepreciacionMensual", "{0:N2}") %>' /></td>
+                                                <td style="text-align: left; "><asp:Label id="Label13" runat="server" Text='<%# Eval("MontoDepreciacionMensual", "{0:N2}") %>' /></td>
                                                 <td></td>
                                             </tr>
                                             <tr align="center">
                                                 <td></td>
-                                                <td align="right"><b>Desde:</b></td>
+                                                <td style="text-align: right; "><b>Desde:</b></td>
                                                 <td>&nbsp;&nbsp;</td>
-                                                <td align="left"><asp:Label id="Label14" runat="server" Text='<%# Eval("DepreciarDesdeMes") %>' />
+                                                <td style="text-align: left; "><asp:Label id="Label14" runat="server" Text='<%# Eval("DepreciarDesdeMes") %>' />
                                                                  /
                                                                  <asp:Label id="Label17" runat="server" Text='<%# Eval("DepreciarDesdeAno") %>' />
                                                 </td>
@@ -174,9 +174,9 @@
                                             </tr>
                                             <tr align="center">
                                                 <td></td>
-                                                <td align="right"><b>Hasta:</b></td>
+                                                <td style="text-align: right; "><b>Hasta:</b></td>
                                                 <td>&nbsp;&nbsp;</td>
-                                                <td align="left"><asp:Label id="Label15" runat="server" Text='<%# Eval("DepreciarHastaMes") %>' />
+                                                <td style="text-align: left; "><asp:Label id="Label15" runat="server" Text='<%# Eval("DepreciarHastaMes") %>' />
                                                                  /
                                                                  <asp:Label id="Label18" runat="server" Text='<%# Eval("DepreciarHastaAno") %>' />
                                                 </td>
@@ -184,9 +184,9 @@
                                             </tr>
                                             <tr align="center">
                                                 <td></td>
-                                                <td align="right"><b>Cant meses:</b></td>
+                                                <td style="text-align: right; "><b>Cant meses:</b></td>
                                                 <td>&nbsp;&nbsp;</td>
-                                                <td align="left"><asp:Label id="Label16" runat="server" Text='<%# Eval("CantidadMesesADepreciar") %>' /></td>
+                                                <td style="text-align: left; "><asp:Label id="Label16" runat="server" Text='<%# Eval("CantidadMesesADepreciar") %>' /></td>
                                                 <td></td>
                                             </tr>
                                 
@@ -256,7 +256,7 @@
                           ConnectionString="name=dbContab_ActFijos_Entities" 
                           DefaultContainerName="dbContab_ActFijos_Entities" 
                           EnableFlattening="False" 
-                          Include="Compania, Proveedore, TiposDeProducto, tDepartamento, tEmpleado"
+                          Include="Compania, Proveedore, TiposDeProducto, tDepartamento, tEmpleado, Moneda1"
                           EntitySetName="InventarioActivosFijos"
                           Where="it.ClaveUnica = @ActivoFijoID" >
             <WhereParameters>

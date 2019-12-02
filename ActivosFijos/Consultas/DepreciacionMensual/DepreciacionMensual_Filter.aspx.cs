@@ -28,9 +28,10 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                  ConstruirListaCompaniasAsignadas listaCiasContabAsignadas = new ConstruirListaCompaniasAsignadas();
                  this.Sql_it_Cia_Numeric.DataSource = listaCiasContabAsignadas.GetListaCompaniasAsignadas();
 
-                 //  pareciera que si no hacemos el databind para los listboxes aqu�, la clase que regresa el state 
+                 //  pareciera que si no hacemos el databind para los listboxes aquí, la clase que regresa el state 
                  //  encuentra estos controles sin sus datos 
                  this.Sql_it_Cia_Numeric.DataBind();
+                this.Sql_it_Moneda_Numeric.DataBind(); 
                  this.Sql_it_Proveedor_Numeric.DataBind();
                  this.Sql_it_Departamento_Numeric.DataBind();
                  this.Sql_it_Tipo_Numeric.DataBind();
@@ -64,6 +65,38 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             MyConstruirCriterioSql.ContruirFiltro(this.Controls);
             string sSqlSelectString = MyConstruirCriterioSql.CriterioSql;
             MyConstruirCriterioSql = null;
+
+            // las fechas no tienen un nombre adecuado para que la clase anterior las incluya al filtro; preferimos hacerlo aquí, de esta forma
+            if (!String.IsNullOrEmpty(this.fCompra_desde.Text))
+            {
+                if (!String.IsNullOrEmpty(this.fCompra_hasta.Text))
+                {
+                    // el usuario usó ambas fechas para indicar un período 
+                    sSqlSelectString = sSqlSelectString + " And (it.FechaCompra Between DateTime'" + Convert.ToDateTime(this.fCompra_desde.Text).ToString("yyyy-MM-dd H:m:s") + "'";
+                    sSqlSelectString = sSqlSelectString + " And DateTime'" + Convert.ToDateTime(this.fCompra_hasta.Text).ToString("yyyy-MM-dd H:m:s") + "')";
+                }
+                else
+                {
+                    // el usuario usó solo la fecha de inicio para buscar solo para esa fecha 
+                    sSqlSelectString = sSqlSelectString + " And (it.FechaCompra = DateTime'" + Convert.ToDateTime(this.fCompra_desde.Text).ToString("yyyy-MM-dd H:m:s") + "'";
+                }
+            }
+
+            if (!String.IsNullOrEmpty(this.fDesincorporacion_desde.Text))
+            {
+                if (!String.IsNullOrEmpty(this.fDesincorporacion_hasta.Text))
+                {
+                    // el usuario usó ambas fechas para indicar un período 
+                    sSqlSelectString = sSqlSelectString + " And (it.FechaDesincorporacion Between DateTime'" + Convert.ToDateTime(this.fDesincorporacion_desde.Text).ToString("yyyy-MM-dd H:m:s") + "'";
+                    sSqlSelectString = sSqlSelectString + " And DateTime'" + Convert.ToDateTime(this.fDesincorporacion_hasta.Text).ToString("yyyy-MM-dd H:m:s") + "')";
+                }
+                else
+                {
+                    // el usuario usó solo la fecha de inicio para buscar solo para esa fecha 
+                    sSqlSelectString = sSqlSelectString + " And (it.FechaDesincorporacion = DateTime'" + Convert.ToDateTime(this.fDesincorporacion_desde.Text).ToString("yyyy-MM-dd H:m:s") + "'";
+                }
+            }
+
 
 
             // ---------------------------------------------------------------------------------------------------------------------

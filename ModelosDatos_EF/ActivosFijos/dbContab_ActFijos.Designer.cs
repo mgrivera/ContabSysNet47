@@ -19,19 +19,22 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Companias", "Companias", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Compania), "InventarioActivosFijos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
-[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Proveedores", "Proveedores", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Proveedore), "InventarioActivosFijos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
-[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.TiposDeProducto), "InventarioActivosFijos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
 [assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_Proveedores_TiposProveedor", "TiposProveedor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.TiposProveedor), "Proveedores", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Proveedore), true)]
-[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), "AtributosAsignado", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.AtributosAsignado), true)]
-[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tDepartamentos", "tDepartamento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.tDepartamento), "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
 [assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_AtributosAsignados_Atributos", "Atributo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Atributo), "AtributosAsignado", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.AtributosAsignado), true)]
-[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos", "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), "InventarioActivosFijos_AntesReconversionMonetaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijos_AntesReconversionMonetaria), true)]
-[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos", "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), "tTempActivosFijos_ConsultaDepreciacion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.tTempActivosFijos_ConsultaDepreciacion), true)]
 [assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_tEmpleados_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Compania), "tEmpleado", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.tEmpleado), true)]
-[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tEmpleados", "tEmpleado", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.tEmpleado), "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
 [assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_tEmpleados_tDepartamentos", "tDepartamento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.tDepartamento), "tEmpleado", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.tEmpleado), true)]
 [assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_MesesDelAnoFiscal_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Compania), "MesesDelAnoFiscal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.MesesDelAnoFiscal), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), "AtributosAsignado", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.AtributosAsignado), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Compania), "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos", "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), "InventarioActivosFijos_AntesReconversionMonetaria", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijos_AntesReconversionMonetaria), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Proveedores", "Proveedore", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Proveedore), "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tDepartamentos", "tDepartamento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.tDepartamento), "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tEmpleados", "tEmpleado", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.tEmpleado), "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.TiposDeProducto), "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_tTempActivosFijos_ConsultaDepreciacion_InventarioActivosFijos", "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), "tTempActivosFijos_ConsultaDepreciacion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.tTempActivosFijos_ConsultaDepreciacion), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_Companias_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Moneda), "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Compania), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Moneda), "InventarioActivosFijo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.InventarioActivosFijo), true)]
+[assembly: EdmRelationshipAttribute("dbContab_ActFijos_NS", "FK_Proveedores_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Moneda), "Proveedore", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.ActivosFijos.Proveedore), true)]
 
 #endregion
 
@@ -98,22 +101,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
             }
         }
         private ObjectSet<Compania> _Companias;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<InventarioActivosFijo> InventarioActivosFijos
-        {
-            get
-            {
-                if ((_InventarioActivosFijos == null))
-                {
-                    _InventarioActivosFijos = base.CreateObjectSet<InventarioActivosFijo>("InventarioActivosFijos");
-                }
-                return _InventarioActivosFijos;
-            }
-        }
-        private ObjectSet<InventarioActivosFijo> _InventarioActivosFijos;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -306,6 +293,38 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
             }
         }
         private ObjectSet<MesesDelAnoFiscal> _MesesDelAnoFiscals;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<InventarioActivosFijo> InventarioActivosFijos
+        {
+            get
+            {
+                if ((_InventarioActivosFijos == null))
+                {
+                    _InventarioActivosFijos = base.CreateObjectSet<InventarioActivosFijo>("InventarioActivosFijos");
+                }
+                return _InventarioActivosFijos;
+            }
+        }
+        private ObjectSet<InventarioActivosFijo> _InventarioActivosFijos;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Moneda> Monedas
+        {
+            get
+            {
+                if ((_Monedas == null))
+                {
+                    _Monedas = base.CreateObjectSet<Moneda>("Monedas");
+                }
+                return _Monedas;
+            }
+        }
+        private ObjectSet<Moneda> _Monedas;
 
         #endregion
 
@@ -317,14 +336,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         public void AddToCompanias(Compania compania)
         {
             base.AddObject("Companias", compania);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the InventarioActivosFijos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToInventarioActivosFijos(InventarioActivosFijo inventarioActivosFijo)
-        {
-            base.AddObject("InventarioActivosFijos", inventarioActivosFijo);
         }
     
         /// <summary>
@@ -421,6 +432,22 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         public void AddToMesesDelAnoFiscals(MesesDelAnoFiscal mesesDelAnoFiscal)
         {
             base.AddObject("MesesDelAnoFiscals", mesesDelAnoFiscal);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the InventarioActivosFijos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToInventarioActivosFijos(InventarioActivosFijo inventarioActivosFijo)
+        {
+            base.AddObject("InventarioActivosFijos", inventarioActivosFijo);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Monedas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMonedas(Moneda moneda)
+        {
+            base.AddObject("Monedas", moneda);
         }
 
         #endregion
@@ -677,44 +704,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo")]
-        public InventarioActivosFijo InventarioActivosFijo
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<InventarioActivosFijo> InventarioActivosFijoReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_AtributosAsignados_Atributos", "Atributo")]
         public Atributo Atributo
         {
@@ -743,6 +732,44 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Atributo>("dbContab_ActFijos_NS.FK_AtributosAsignados_Atributos", "Atributo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo")]
+        public InventarioActivosFijo InventarioActivosFijo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<InventarioActivosFijo> InventarioActivosFijoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos", "InventarioActivosFijo", value);
                 }
             }
         }
@@ -1216,32 +1243,34 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         private Nullable<global::System.Int32> _MonedaDefecto;
         partial void OnMonedaDefectoChanging(Nullable<global::System.Int32> value);
         partial void OnMonedaDefectoChanged();
-
-        #endregion
-
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Companias", "InventarioActivosFijos")]
-        public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
+        public Nullable<global::System.Boolean> SuspendidoFlag
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "InventarioActivosFijos");
+                return _SuspendidoFlag;
             }
             set
             {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "InventarioActivosFijos", value);
-                }
+                OnSuspendidoFlagChanging(value);
+                ReportPropertyChanging("SuspendidoFlag");
+                _SuspendidoFlag = StructuralObject.SetValidValue(value, "SuspendidoFlag");
+                ReportPropertyChanged("SuspendidoFlag");
+                OnSuspendidoFlagChanged();
             }
         }
+        private Nullable<global::System.Boolean> _SuspendidoFlag;
+        partial void OnSuspendidoFlagChanging(Nullable<global::System.Boolean> value);
+        partial void OnSuspendidoFlagChanged();
+
+        #endregion
+
+        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1286,6 +1315,66 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Companias", "InventarioActivosFijo")]
+        public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "InventarioActivosFijo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "InventarioActivosFijo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_Companias_Monedas", "Moneda")]
+        public Moneda Moneda
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_Companias_Monedas", "Moneda").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_Companias_Monedas", "Moneda").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Moneda> MonedaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_Companias_Monedas", "Moneda");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_Companias_Monedas", "Moneda", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -1305,8 +1394,11 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         /// Create a new InventarioActivosFijo object.
         /// </summary>
         /// <param name="claveUnica">Initial value of the ClaveUnica property.</param>
+        /// <param name="moneda">Initial value of the Moneda property.</param>
+        /// <param name="producto">Initial value of the Producto property.</param>
         /// <param name="tipo">Initial value of the Tipo property.</param>
         /// <param name="departamento">Initial value of the Departamento property.</param>
+        /// <param name="descripcion">Initial value of the Descripcion property.</param>
         /// <param name="fechaCompra">Initial value of the FechaCompra property.</param>
         /// <param name="costoTotal">Initial value of the CostoTotal property.</param>
         /// <param name="valorResidual">Initial value of the ValorResidual property.</param>
@@ -1320,13 +1412,17 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         /// <param name="montoDepreciacionMensual">Initial value of the MontoDepreciacionMensual property.</param>
         /// <param name="ingreso">Initial value of the Ingreso property.</param>
         /// <param name="ultAct">Initial value of the UltAct property.</param>
+        /// <param name="usuario">Initial value of the Usuario property.</param>
         /// <param name="cia">Initial value of the Cia property.</param>
-        public static InventarioActivosFijo CreateInventarioActivosFijo(global::System.Int32 claveUnica, global::System.Int32 tipo, global::System.Int32 departamento, global::System.DateTime fechaCompra, global::System.Decimal costoTotal, global::System.Decimal valorResidual, global::System.Decimal montoADepreciar, global::System.Decimal numeroDeAnos, global::System.Int16 depreciarDesdeMes, global::System.Int16 depreciarDesdeAno, global::System.Int16 depreciarHastaMes, global::System.Int16 depreciarHastaAno, global::System.Int16 cantidadMesesADepreciar, global::System.Decimal montoDepreciacionMensual, global::System.DateTime ingreso, global::System.DateTime ultAct, global::System.Int32 cia)
+        public static InventarioActivosFijo CreateInventarioActivosFijo(global::System.Int32 claveUnica, global::System.Int32 moneda, global::System.String producto, global::System.Int32 tipo, global::System.Int32 departamento, global::System.String descripcion, global::System.DateTime fechaCompra, global::System.Decimal costoTotal, global::System.Decimal valorResidual, global::System.Decimal montoADepreciar, global::System.Decimal numeroDeAnos, global::System.Int16 depreciarDesdeMes, global::System.Int16 depreciarDesdeAno, global::System.Int16 depreciarHastaMes, global::System.Int16 depreciarHastaAno, global::System.Int16 cantidadMesesADepreciar, global::System.Decimal montoDepreciacionMensual, global::System.DateTime ingreso, global::System.DateTime ultAct, global::System.String usuario, global::System.Int32 cia)
         {
             InventarioActivosFijo inventarioActivosFijo = new InventarioActivosFijo();
             inventarioActivosFijo.ClaveUnica = claveUnica;
+            inventarioActivosFijo.Moneda = moneda;
+            inventarioActivosFijo.Producto = producto;
             inventarioActivosFijo.Tipo = tipo;
             inventarioActivosFijo.Departamento = departamento;
+            inventarioActivosFijo.Descripcion = descripcion;
             inventarioActivosFijo.FechaCompra = fechaCompra;
             inventarioActivosFijo.CostoTotal = costoTotal;
             inventarioActivosFijo.ValorResidual = valorResidual;
@@ -1340,6 +1436,7 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
             inventarioActivosFijo.MontoDepreciacionMensual = montoDepreciacionMensual;
             inventarioActivosFijo.Ingreso = ingreso;
             inventarioActivosFijo.UltAct = ultAct;
+            inventarioActivosFijo.Usuario = usuario;
             inventarioActivosFijo.Cia = cia;
             return inventarioActivosFijo;
         }
@@ -1378,7 +1475,31 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Moneda
+        {
+            get
+            {
+                return _Moneda;
+            }
+            set
+            {
+                OnMonedaChanging(value);
+                ReportPropertyChanging("Moneda");
+                _Moneda = StructuralObject.SetValidValue(value, "Moneda");
+                ReportPropertyChanged("Moneda");
+                OnMonedaChanged();
+            }
+        }
+        private global::System.Int32 _Moneda;
+        partial void OnMonedaChanging(global::System.Int32 value);
+        partial void OnMonedaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Producto
         {
@@ -1390,7 +1511,7 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
             {
                 OnProductoChanging(value);
                 ReportPropertyChanging("Producto");
-                _Producto = StructuralObject.SetValidValue(value, true, "Producto");
+                _Producto = StructuralObject.SetValidValue(value, false, "Producto");
                 ReportPropertyChanged("Producto");
                 OnProductoChanged();
             }
@@ -1450,7 +1571,7 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Descripcion
         {
@@ -1462,7 +1583,7 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
             {
                 OnDescripcionChanging(value);
                 ReportPropertyChanging("Descripcion");
-                _Descripcion = StructuralObject.SetValidValue(value, true, "Descripcion");
+                _Descripcion = StructuralObject.SetValidValue(value, false, "Descripcion");
                 ReportPropertyChanged("Descripcion");
                 OnDescripcionChanged();
             }
@@ -2026,7 +2147,7 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Usuario
         {
@@ -2038,7 +2159,7 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
             {
                 OnUsuarioChanging(value);
                 ReportPropertyChanging("Usuario");
-                _Usuario = StructuralObject.SetValidValue(value, true, "Usuario");
+                _Usuario = StructuralObject.SetValidValue(value, false, "Usuario");
                 ReportPropertyChanged("Usuario");
                 OnUsuarioChanged();
             }
@@ -2081,120 +2202,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Companias", "Companias")]
-        public Compania Compania
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Compania>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "Companias").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Compania>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "Companias").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Compania> CompaniaReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Compania>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "Companias");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Compania>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "Companias", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Proveedores", "Proveedores")]
-        public Proveedore Proveedore
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Proveedore>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "Proveedores").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Proveedore>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "Proveedores").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Proveedore> ProveedoreReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Proveedore>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "Proveedores");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Proveedore>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "Proveedores", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto")]
-        public TiposDeProducto TiposDeProducto
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TiposDeProducto>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TiposDeProducto>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<TiposDeProducto> TiposDeProductoReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TiposDeProducto>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TiposDeProducto>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_AtributosAsignados_InventarioActivosFijos", "AtributosAsignado")]
         public EntityCollection<AtributosAsignado> AtributosAsignados
         {
@@ -2207,6 +2214,104 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AtributosAsignado>("dbContab_ActFijos_NS.FK_AtributosAsignados_InventarioActivosFijos", "AtributosAsignado", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Companias", "Compania")]
+        public Compania Compania
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Compania>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "Compania").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Compania>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "Compania").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Compania> CompaniaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Compania>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "Compania");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Compania>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Companias", "Compania", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos", "InventarioActivosFijos_AntesReconversionMonetaria")]
+        public EntityCollection<InventarioActivosFijos_AntesReconversionMonetaria> InventarioActivosFijos_AntesReconversionMonetaria
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijos_AntesReconversionMonetaria>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos", "InventarioActivosFijos_AntesReconversionMonetaria");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijos_AntesReconversionMonetaria>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos", "InventarioActivosFijos_AntesReconversionMonetaria", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Proveedores", "Proveedore")]
+        public Proveedore Proveedore
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Proveedore>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "Proveedore").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Proveedore>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "Proveedore").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Proveedore> ProveedoreReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Proveedore>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "Proveedore");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Proveedore>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "Proveedore", value);
                 }
             }
         }
@@ -2255,18 +2360,72 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos", "InventarioActivosFijos_AntesReconversionMonetaria")]
-        public EntityCollection<InventarioActivosFijos_AntesReconversionMonetaria> InventarioActivosFijos_AntesReconversionMonetaria
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tEmpleados", "tEmpleado")]
+        public tEmpleado tEmpleado
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijos_AntesReconversionMonetaria>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos", "InventarioActivosFijos_AntesReconversionMonetaria");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tEmpleado>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "tEmpleado").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tEmpleado>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "tEmpleado").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<tEmpleado> tEmpleadoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tEmpleado>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "tEmpleado");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijos_AntesReconversionMonetaria>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_AntesReconversionMonetaria_InventarioActivosFijos", "InventarioActivosFijos_AntesReconversionMonetaria", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tEmpleado>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "tEmpleado", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto")]
+        public TiposDeProducto TiposDeProducto
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TiposDeProducto>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TiposDeProducto>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TiposDeProducto> TiposDeProductoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TiposDeProducto>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TiposDeProducto>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "TiposDeProducto", value);
                 }
             }
         }
@@ -2299,16 +2458,16 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tEmpleados", "tEmpleado")]
-        public tEmpleado tEmpleado
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Monedas", "Moneda")]
+        public Moneda Moneda1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tEmpleado>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "tEmpleado").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Monedas", "Moneda").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tEmpleado>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "tEmpleado").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Monedas", "Moneda").Value = value;
             }
         }
         /// <summary>
@@ -2316,17 +2475,17 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<tEmpleado> tEmpleadoReference
+        public EntityReference<Moneda> Moneda1Reference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tEmpleado>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "tEmpleado");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Monedas", "Moneda");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tEmpleado>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "tEmpleado", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Monedas", "Moneda", value);
                 }
             }
         }
@@ -2783,6 +2942,236 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Compania>("dbContab_ActFijos_NS.FK_MesesDelAnoFiscal_Companias", "Compania", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="dbContab_ActFijos_NS", Name="Moneda")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Moneda : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Moneda object.
+        /// </summary>
+        /// <param name="moneda1">Initial value of the Moneda1 property.</param>
+        /// <param name="descripcion">Initial value of the Descripcion property.</param>
+        /// <param name="simbolo">Initial value of the Simbolo property.</param>
+        /// <param name="nacionalFlag">Initial value of the NacionalFlag property.</param>
+        /// <param name="defaultFlag">Initial value of the DefaultFlag property.</param>
+        public static Moneda CreateMoneda(global::System.Int32 moneda1, global::System.String descripcion, global::System.String simbolo, global::System.Boolean nacionalFlag, global::System.Boolean defaultFlag)
+        {
+            Moneda moneda = new Moneda();
+            moneda.Moneda1 = moneda1;
+            moneda.Descripcion = descripcion;
+            moneda.Simbolo = simbolo;
+            moneda.NacionalFlag = nacionalFlag;
+            moneda.DefaultFlag = defaultFlag;
+            return moneda;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Moneda1
+        {
+            get
+            {
+                return _Moneda1;
+            }
+            set
+            {
+                if (_Moneda1 != value)
+                {
+                    OnMoneda1Changing(value);
+                    ReportPropertyChanging("Moneda1");
+                    _Moneda1 = StructuralObject.SetValidValue(value, "Moneda1");
+                    ReportPropertyChanged("Moneda1");
+                    OnMoneda1Changed();
+                }
+            }
+        }
+        private global::System.Int32 _Moneda1;
+        partial void OnMoneda1Changing(global::System.Int32 value);
+        partial void OnMoneda1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Descripcion
+        {
+            get
+            {
+                return _Descripcion;
+            }
+            set
+            {
+                OnDescripcionChanging(value);
+                ReportPropertyChanging("Descripcion");
+                _Descripcion = StructuralObject.SetValidValue(value, false, "Descripcion");
+                ReportPropertyChanged("Descripcion");
+                OnDescripcionChanged();
+            }
+        }
+        private global::System.String _Descripcion;
+        partial void OnDescripcionChanging(global::System.String value);
+        partial void OnDescripcionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Simbolo
+        {
+            get
+            {
+                return _Simbolo;
+            }
+            set
+            {
+                OnSimboloChanging(value);
+                ReportPropertyChanging("Simbolo");
+                _Simbolo = StructuralObject.SetValidValue(value, false, "Simbolo");
+                ReportPropertyChanged("Simbolo");
+                OnSimboloChanged();
+            }
+        }
+        private global::System.String _Simbolo;
+        partial void OnSimboloChanging(global::System.String value);
+        partial void OnSimboloChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean NacionalFlag
+        {
+            get
+            {
+                return _NacionalFlag;
+            }
+            set
+            {
+                OnNacionalFlagChanging(value);
+                ReportPropertyChanging("NacionalFlag");
+                _NacionalFlag = StructuralObject.SetValidValue(value, "NacionalFlag");
+                ReportPropertyChanged("NacionalFlag");
+                OnNacionalFlagChanged();
+            }
+        }
+        private global::System.Boolean _NacionalFlag;
+        partial void OnNacionalFlagChanging(global::System.Boolean value);
+        partial void OnNacionalFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean DefaultFlag
+        {
+            get
+            {
+                return _DefaultFlag;
+            }
+            set
+            {
+                OnDefaultFlagChanging(value);
+                ReportPropertyChanging("DefaultFlag");
+                _DefaultFlag = StructuralObject.SetValidValue(value, "DefaultFlag");
+                ReportPropertyChanged("DefaultFlag");
+                OnDefaultFlagChanged();
+            }
+        }
+        private global::System.Boolean _DefaultFlag;
+        partial void OnDefaultFlagChanging(global::System.Boolean value);
+        partial void OnDefaultFlagChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_Companias_Monedas", "Compania")]
+        public EntityCollection<Compania> Companias
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Compania>("dbContab_ActFijos_NS.FK_Companias_Monedas", "Compania");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Compania>("dbContab_ActFijos_NS.FK_Companias_Monedas", "Compania", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Monedas", "InventarioActivosFijo")]
+        public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Monedas", "InventarioActivosFijo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Monedas", "InventarioActivosFijo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_Proveedores_Monedas", "Proveedore")]
+        public EntityCollection<Proveedore> Proveedores
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Proveedore>("dbContab_ActFijos_NS.FK_Proveedores_Monedas", "Proveedore");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Proveedore>("dbContab_ActFijos_NS.FK_Proveedores_Monedas", "Proveedore", value);
                 }
             }
         }
@@ -3696,32 +4085,58 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         private Nullable<global::System.Int16> _BaseRetencionISLR;
         partial void OnBaseRetencionISLRChanging(Nullable<global::System.Int16> value);
         partial void OnBaseRetencionISLRChanged();
-
-        #endregion
-
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Proveedores", "InventarioActivosFijos")]
-        public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
+        public Nullable<global::System.Boolean> ContribuyenteFlag
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "InventarioActivosFijos");
+                return _ContribuyenteFlag;
             }
             set
             {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "InventarioActivosFijos", value);
-                }
+                OnContribuyenteFlagChanging(value);
+                ReportPropertyChanging("ContribuyenteFlag");
+                _ContribuyenteFlag = StructuralObject.SetValidValue(value, "ContribuyenteFlag");
+                ReportPropertyChanged("ContribuyenteFlag");
+                OnContribuyenteFlagChanged();
             }
         }
+        private Nullable<global::System.Boolean> _ContribuyenteFlag;
+        partial void OnContribuyenteFlagChanging(Nullable<global::System.Boolean> value);
+        partial void OnContribuyenteFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Lote
+        {
+            get
+            {
+                return _Lote;
+            }
+            set
+            {
+                OnLoteChanging(value);
+                ReportPropertyChanging("Lote");
+                _Lote = StructuralObject.SetValidValue(value, true, "Lote");
+                ReportPropertyChanged("Lote");
+                OnLoteChanged();
+            }
+        }
+        private global::System.String _Lote;
+        partial void OnLoteChanging(global::System.String value);
+        partial void OnLoteChanged();
+
+        #endregion
+
+        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3757,6 +4172,66 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TiposProveedor>("dbContab_ActFijos_NS.FK_Proveedores_TiposProveedor", "TiposProveedor", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_Proveedores", "InventarioActivosFijo")]
+        public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "InventarioActivosFijo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_Proveedores", "InventarioActivosFijo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_Proveedores_Monedas", "Moneda")]
+        public Moneda Moneda
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_Proveedores_Monedas", "Moneda").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_Proveedores_Monedas", "Moneda").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Moneda> MonedaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_Proveedores_Monedas", "Moneda");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Moneda>("dbContab_ActFijos_NS.FK_Proveedores_Monedas", "Moneda", value);
                 }
             }
         }
@@ -3851,28 +4326,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tDepartamentos", "InventarioActivosFijo")]
-        public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tDepartamentos", "InventarioActivosFijo");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tDepartamentos", "InventarioActivosFijo", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_tEmpleados_tDepartamentos", "tEmpleado")]
         public EntityCollection<tEmpleado> tEmpleados
         {
@@ -3885,6 +4338,28 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tEmpleado>("dbContab_ActFijos_NS.FK_tEmpleados_tDepartamentos", "tEmpleado", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tDepartamentos", "InventarioActivosFijo")]
+        public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tDepartamentos", "InventarioActivosFijo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tDepartamentos", "InventarioActivosFijo", value);
                 }
             }
         }
@@ -4980,6 +5455,30 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         private global::System.Int32 _Cia;
         partial void OnCiaChanging(global::System.Int32 value);
         partial void OnCiaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> PrestacionesAgregarMontoCestaTicketsFlag
+        {
+            get
+            {
+                return _PrestacionesAgregarMontoCestaTicketsFlag;
+            }
+            set
+            {
+                OnPrestacionesAgregarMontoCestaTicketsFlagChanging(value);
+                ReportPropertyChanging("PrestacionesAgregarMontoCestaTicketsFlag");
+                _PrestacionesAgregarMontoCestaTicketsFlag = StructuralObject.SetValidValue(value, "PrestacionesAgregarMontoCestaTicketsFlag");
+                ReportPropertyChanged("PrestacionesAgregarMontoCestaTicketsFlag");
+                OnPrestacionesAgregarMontoCestaTicketsFlagChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _PrestacionesAgregarMontoCestaTicketsFlag;
+        partial void OnPrestacionesAgregarMontoCestaTicketsFlagChanging(Nullable<global::System.Boolean> value);
+        partial void OnPrestacionesAgregarMontoCestaTicketsFlagChanged();
 
         #endregion
 
@@ -5029,28 +5528,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tEmpleados", "InventarioActivosFijo")]
-        public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "InventarioActivosFijo");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "InventarioActivosFijo", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_tEmpleados_tDepartamentos", "tDepartamento")]
         public tDepartamento tDepartamento
         {
@@ -5079,6 +5556,28 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tDepartamento>("dbContab_ActFijos_NS.FK_tEmpleados_tDepartamentos", "tDepartamento", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_tEmpleados", "InventarioActivosFijo")]
+        public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "InventarioActivosFijo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_tEmpleados", "InventarioActivosFijo", value);
                 }
             }
         }
@@ -5173,18 +5672,18 @@ namespace ContabSysNet_Web.ModelosDatos_EF.ActivosFijos
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_TiposDeProducto", "InventarioActivosFijos")]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_ActFijos_NS", "FK_InventarioActivosFijos_TiposDeProducto", "InventarioActivosFijo")]
         public EntityCollection<InventarioActivosFijo> InventarioActivosFijos
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "InventarioActivosFijos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "InventarioActivosFijo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "InventarioActivosFijos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioActivosFijo>("dbContab_ActFijos_NS.FK_InventarioActivosFijos_TiposDeProducto", "InventarioActivosFijo", value);
                 }
             }
         }
