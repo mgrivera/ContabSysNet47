@@ -23,9 +23,10 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     MyHtmlH2.InnerHtml = "Consulta de Asientos Contables";
                 }
 
-                AsientosContables_SqlDataSource.SelectParameters["NumeroAutomatico"].DefaultValue = Page.Request.QueryString["NumeroAutomatico"];
-                Partidas_SqlDataSource.SelectParameters["NumeroAutomatico"].DefaultValue = Page.Request.QueryString["NumeroAutomatico"];
-                Asientos_Log_SqlDataSource.SelectParameters["NumeroAutomatico"].DefaultValue = Page.Request.QueryString["NumeroAutomatico"];
+                this.AsientosContables_SqlDataSource.SelectParameters["NumeroAutomatico"].DefaultValue = Page.Request.QueryString["NumeroAutomatico"];
+                this.Partidas_SqlDataSource.SelectParameters["NumeroAutomatico"].DefaultValue = Page.Request.QueryString["NumeroAutomatico"];
+                this.Asientos_Log_SqlDataSource.SelectParameters["NumeroAutomatico"].DefaultValue = Page.Request.QueryString["NumeroAutomatico"];
+                this.AsientosLinks_SqlDataSource.SelectParameters["NumeroAutomatico"].DefaultValue = Page.Request.QueryString["NumeroAutomatico"];
 
                 dbContabDataContext dbContab = new dbContabDataContext();
 

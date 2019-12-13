@@ -169,6 +169,9 @@
                                             <th id="Th11" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; ">
                                                 Cierre<br />anual
                                             </th>
+                                            <th id="Th13" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; ">
+                                                Cant<br />uploads
+                                            </th>
                                             <th id="Th10" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; ">
                                                 Usuario
                                             </th>
@@ -181,18 +184,12 @@
 
                                         <%--NOTA: aquí iría el footer !!! --%>
                                         <tr id="Tr4" runat="server" class="ListViewFooter smallfont">
-                                            <th id="Th19" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; "> 
-                                            </th>
-                                            <th id="Th20" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; ">
-                                            </th>
-                                            <th id="Th21" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; ">
-                                            </th>
-                                            <th id="Th22" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; ">
-                                            </th>
-                                            <th id="Th23" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; ">
-                                            </th>
-                                            <th id="Th24" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; ">
-                                            </th>
+                                            <th id="Th19" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; " /> 
+                                            <th id="Th20" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; " />
+                                            <th id="Th21" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; " />
+                                            <th id="Th22" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; " />
+                                            <th id="Th23" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; " />
+                                            <th id="Th24" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; " />
                                             <th id="Th25" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; "> 
                                                 (<asp:Label ID="numberOfRecords_label" runat="server" />)
                                             </th>
@@ -202,12 +199,10 @@
                                             <th id="Th27" runat="server" class="padded" style="text-align: right; padding-bottom: 5px; padding-top: 5px; ">
                                                 <asp:Label ID="SumOfHaber_Label" runat="server" />
                                             </th>
-                                            <th id="Th28" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; ">
-                                            </th>
-                                            <th id="Th29" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; ">  
-                                            </th>
-                                            <th id="Th30" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; ">
-                                            </th>
+                                            <th id="Th28" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; " />
+                                            <th id="Th14" runat="server" class="padded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; " />
+                                            <th id="Th29" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; " />  
+                                            <th id="Th30" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px; " />
                                         </tr>
                                     </table>
                                 </td>
@@ -265,6 +260,9 @@
                                 <asp:CheckBox ID="AsientoTipoCierreAnual_CheckBox" runat="server" 
                                     Checked='<%# Item.Asiento.AsientoTipoCierreAnualFlag != null ? Item.Asiento.AsientoTipoCierreAnualFlag.Value : false %>' />
                             </td>
+                            <td class="padded" style="text-align: center;">
+                                <asp:Label ID="Label3" runat="server" Text='<%# Item.NumUploads.ToString("#") %>' />
+                            </td>
                             <td class="padded" style="text-align: left;">
                                 <asp:Label ID="Label1" runat="server" Text='<%# Item.Asiento.Usuario %>' />
                             </td>
@@ -306,6 +304,9 @@
                             <td class="padded" style="text-align: center;">
                                 <asp:CheckBox ID="AsientoTipoCierreAnual_CheckBox" runat="server" 
                                     Checked='<%# Item.Asiento.AsientoTipoCierreAnualFlag != null ? Item.Asiento.AsientoTipoCierreAnualFlag.Value : false %>' />
+                            </td>
+                            <td class="padded" style="text-align: center;">
+                                <asp:Label ID="Label3" runat="server" Text='<%# Item.NumUploads.ToString("#") %>' />
                             </td>
                             <td class="padded" style="text-align: left;">
                                 <asp:Label ID="Label1" runat="server" Text='<%# Item.Asiento.Usuario %>' />

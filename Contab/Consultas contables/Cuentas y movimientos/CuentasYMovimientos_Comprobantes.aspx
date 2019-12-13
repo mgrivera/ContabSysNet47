@@ -29,13 +29,18 @@
                     </a>
                 </td>
                 <td style="width: auto; padding-left: 10px; ">
-                    <%--&nbsp;<asp:Button ID="btnShow" runat="server" Text="Modificaciones" CssClass="ButtonAsLink" />--%>
                     <a runat="server" id="anchorShowModal" href="#">Modificaciones</a>
+                </td>
+                <td style="width: auto; padding-left: 10px; ">
+                    <a runat="server" id="showModal_Uploads" href="#">Uploads (links)</a>
                 </td>
             </tr>
             <tr>
                 <td style="width: auto; padding-top: 5px; text-align: center; ">
                     <i class="fas fa-print"></i>
+                </td>
+                <td style="width: auto; padding-left: 10px; padding-top: 5px; text-align: center; ">
+                    <i class="fas fa-edit"></i>
                 </td>
                 <td style="width: auto; padding-left: 10px; padding-top: 5px; text-align: center; ">
                     <i class="fas fa-edit"></i>
@@ -183,7 +188,92 @@
         </div>
     </asp:Panel>
 
-    
+    <%--para mostrar un diálogo que permita al usuario continuar/cancelar--%>
+    <asp:Panel ID="uploads_popUp" runat="server" CssClass="modalpopup" Style="display: none">
+        <div class="popup_container" style="max-width: 500px;">
+            <div class="popup_form_header" style="overflow: hidden;">
+                <div id="uploads_popUp_title_div" style="width: 85%; margin-top: 5px; float: left;">
+                    <span runat="server" id="Span1" style="font-weight: bold;">
+                        Links para acceder a los anexos (uploads) registrados para el asiento
+                    </span>
+                </div>
+                <div style="width: 15%; float: right;">
+                    <asp:ImageButton ID="ImageButton2"
+                        runat="server"
+                        OnClientClick="$find('uploads_popup').hide(); return false;"
+                        ImageUrl="~/Pictures/PopupCloseButton.png" />
+                </div>
+            </div>
+            <div class="inner_container">
+                <div class="popup_form_content">
+                    <asp:ListView ID="ListView1" runat="server" DataSourceID="AsientosLinks_SqlDataSource">
+                        <LayoutTemplate>
+                            <table id="Table2" runat="server">
+                                <tr id="Tr1" runat="server">
+                                    <td id="Td1" runat="server">
+                                        <table id="itemPlaceholderContainer" runat="server" border="0" style="" class="smallfont" cellspacing="0">
+                                            <tr class="ListViewHeader_Suave smallfont">
+                                                <th class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px;">Links</th>
+                                            </tr>
+                                            <tr id="itemPlaceholder" runat="server" class="smallfont">
+                                            </tr>
+                                            <tr id="Tr3" runat="server" class="ListViewFooter smallfont">
+                                                <th id="Th13" runat="server" class="padded" style="text-align: left; padding-bottom: 5px; padding-top: 5px;"></th>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr id="Tr4" runat="server">
+                                    <td id="Td2" runat="server" style="text-align: left;" class="smallfont">
+                                        <hr />
+                                        <asp:DataPager ID="DataPager1" runat="server" PageSize="16">
+                                            <Fields>
+                                                <asp:NextPreviousPagerField ButtonType="Link" FirstPageImageUrl="../../../Pictures/first_16x16.gif"
+                                                    FirstPageText="&lt;&lt;" NextPageText="&gt;" PreviousPageImageUrl="../../../Pictures/left_16x16.gif"
+                                                    PreviousPageText="&lt;" ShowFirstPageButton="True" ShowNextPageButton="False"
+                                                    ShowPreviousPageButton="True" />
+                                                <asp:NumericPagerField />
+                                                <asp:NextPreviousPagerField ButtonType="Link" LastPageImageUrl="../../../Pictures/last_16x16.gif"
+                                                    LastPageText="&gt;&gt;" NextPageImageUrl="../../../Pictures/right_16x16.gif"
+                                                    NextPageText="&gt;" PreviousPageText="&lt;" ShowLastPageButton="True" ShowNextPageButton="True"
+                                                    ShowPreviousPageButton="False" />
+                                            </Fields>
+                                        </asp:DataPager>
+                                    </td>
+                                </tr>
+                            </table>
+                        </LayoutTemplate>
+                        <ItemTemplate>
+                            <tr class="smallfont">
+                                <td class="padded" style="text-align: left;">
+                                    <a href="<%# Eval("Link") %>" target="_blank"><%# Eval("Link") %></a>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                        <AlternatingItemTemplate>
+                            <tr class="ListViewAlternatingRow smallfont">
+                                <td class="padded" style="text-align: left;">
+                                    <a href="<%# Eval("Link") %>" target="_blank"><%# Eval("Link") %></a>
+                                </td>
+                            </tr>
+                        </AlternatingItemTemplate>
+                        <EmptyDataTemplate>
+                            <table id="Table3" runat="server" style="">
+                                <tr>
+                                    <td>Aparentemente, no se han registrado links (uploads) para el asiento ...</td>
+                                </tr>
+                            </table>
+                        </EmptyDataTemplate>
+                    </asp:ListView>
+                </div>
+                <div class="popup_form_footer">
+                    <%-- <asp:Button ID="btnOk" runat="server" Text="Continuar" OnClick="btnOk_Click" />--%>
+                    <asp:Button ID="Button1" runat="server" Text="Cerrar" OnClientClick="$find('uploads_popup').hide(); return false;" Width="80px" />
+                </div>
+            </div>
+        </div>
+    </asp:Panel>
+
 
     <ajaxtoolkit:modalpopupextender id="ModalPopupExtender1"
         runat="server"
@@ -192,6 +282,15 @@
         popupcontrolid="pnlPopup"
         backgroundcssclass="modalBackground"
         popupdraghandlecontrolid="ModalPopupTitle_div"
+        drag="True" />
+
+    <ajaxtoolkit:modalpopupextender id="ModalPopupExtender2"
+        runat="server"
+        behaviorid="uploads_popup"
+        targetcontrolid="showModal_Uploads"
+        popupcontrolid="uploads_popUp"
+        backgroundcssclass="modalBackground"
+        popupdraghandlecontrolid="uploads_popUp_title_div"
         drag="True" />
 
     <asp:ListView ID="AsientosContables_ListView" 
@@ -369,8 +468,7 @@
        
     </asp:ListView>
     <br /><br />
-    <asp:ListView ID="Partidas_ListView" runat="server" 
-        DataSourceID="Partidas_SqlDataSource">
+    <asp:ListView ID="Partidas_ListView" runat="server" DataSourceID="Partidas_SqlDataSource">
         <LayoutTemplate>
             <table id="Table2" runat="server">
                 <tr id="Tr1" runat="server">
@@ -560,6 +658,14 @@
             WHERE (Asientos_Log.NumeroAutomatico = @NumeroAutomatico)
             Order By Asientos_Log.FechaOperacion
             ">
+        <SelectParameters>
+            <asp:Parameter Name="NumeroAutomatico" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="AsientosLinks_SqlDataSource" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>" 
+        SelectCommand="Select Link From Asientos_Documentos_Links WHERE (NumeroAutomatico = @NumeroAutomatico)">
         <SelectParameters>
             <asp:Parameter Name="NumeroAutomatico" Type="Int32" />
         </SelectParameters>

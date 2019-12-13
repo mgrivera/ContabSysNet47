@@ -31,6 +31,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor anchorShowModal;
         
         /// <summary>
+        /// showModal_Uploads control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor showModal_Uploads;
+        
+        /// <summary>
         /// pnlPopup control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,51 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
+        /// uploads_popUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel uploads_popUp;
+        
+        /// <summary>
+        /// Span1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span1;
+        
+        /// <summary>
+        /// ImageButton2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
+        
+        /// <summary>
+        /// ListView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView ListView1;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
         /// ModalPopupExtender1 control.
         /// </summary>
         /// <remarks>
@@ -92,6 +146,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
+        
+        /// <summary>
+        /// ModalPopupExtender2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender2;
         
         /// <summary>
         /// AsientosContables_ListView control.
@@ -137,5 +200,14 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource Asientos_Log_SqlDataSource;
+        
+        /// <summary>
+        /// AsientosLinks_SqlDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource AsientosLinks_SqlDataSource;
     }
 }

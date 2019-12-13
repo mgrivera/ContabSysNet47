@@ -86,6 +86,21 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
             sSqlSelectString = sSqlSelectString + " And (Asientos.Fecha Between '" + Convert.ToDateTime(Desde_TextBox.Text).ToString("yyyyMMdd") + "'";
             sSqlSelectString = sSqlSelectString + " And '" + Convert.ToDateTime(Hasta_TextBox.Text).ToString("yyyyMMdd") + "')";
 
+            // las fechas no tienen un nombre adecuado para que la clase anterior las incluya al filtro; preferimos hacerlo aquí, de esta forma
+            if (!String.IsNullOrEmpty(this.Numero_Desde_TextBox.Text))
+            {
+                if (!String.IsNullOrEmpty(this.Numero_Hasta_TextBox.Text))
+                {
+                    // el usuario usó ambos números (desde/hasta) para indicar un rango de asientos 
+                    sSqlSelectString = sSqlSelectString + " And (Asientos.Numero Between " + this.Numero_Desde_TextBox.Text + " And " + this.Numero_Hasta_TextBox.Text + ")"; 
+                }
+                else
+                {
+                    // el usuario usó solo el número de asiento de inicio para buscar solo ese asiento 
+                    sSqlSelectString = sSqlSelectString + " And (Asientos.Numero = " + this.Numero_Desde_TextBox.Text + ")";
+                }
+            }
+
             if (this.ExcluirAsientosDeTipoCierreAnual_CheckBox.Checked)
             {
                 sSqlSelectString = sSqlSelectString + " And (Not (Asientos.MesFiscal = 13 Or " +
@@ -99,7 +114,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                                                       "(Asientos.AsientoTipoCierreAnualFlag Is Not Null And " +
                                                       "Asientos.AsientoTipoCierreAnualFlag = 1))";
             }
-
 
             // nota: construimos un filtro para ser aplicado como un subquery al select original; *solo* cuando el usuario usa los criterios: 
             // con más de 2 decimales o por cuenta contable ... 
@@ -136,6 +150,14 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
             {
                 Session["SoloAsientosDescuadrados"] = true;
             }
+
+            
+            Session["SoloAsientosConUploads_CheckBox"] = null;
+            if (this.SoloAsientosConUploads_CheckBox.Checked)
+            {
+                Session["SoloAsientosConUploads_CheckBox"] = true;
+            }
+
             // -------------------------------------------------------------------------------------------
             // para guardar el contenido de los controles de la página para recuperar el state cuando
             // se abra la proxima vez

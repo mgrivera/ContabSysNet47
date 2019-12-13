@@ -7,6 +7,7 @@
     <Schema Namespace="dbContab_Contab_NS.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="dbContab_Contab_NSStoreContainer">
           <EntitySet Name="Asientos" EntityType="dbContab_Contab_NS.Store.Asientos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Asientos_Documentos_Links" EntityType="dbContab_Contab_NS.Store.Asientos_Documentos_Links" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="AsientosId" EntityType="dbContab_Contab_NS.Store.AsientosId" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="AsientosIdPorGrupo" EntityType="dbContab_Contab_NS.Store.AsientosIdPorGrupo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CentrosCosto" EntityType="dbContab_Contab_NS.Store.CentrosCosto" store:Type="Tables" Schema="dbo" />
@@ -33,6 +34,10 @@
           <AssociationSet Name="FK_Asientos_Companias" Association="dbContab_Contab_NS.Store.FK_Asientos_Companias">
             <End Role="Companias" EntitySet="Companias" />
             <End Role="Asientos" EntitySet="Asientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asientos_Documentos_Links_Asientos" Association="dbContab_Contab_NS.Store.FK_Asientos_Documentos_Links_Asientos">
+            <End Role="Asientos" EntitySet="Asientos" />
+            <End Role="Asientos_Documentos_Links" EntitySet="Asientos_Documentos_Links" />
           </AssociationSet>
           <AssociationSet Name="FK_Asientos_Monedas" Association="dbContab_Contab_NS.Store.FK_Asientos_Monedas">
             <End Role="Monedas" EntitySet="Monedas" />
@@ -185,6 +190,14 @@
           <Property Name="Usuario" Type="nvarchar" Nullable="false" MaxLength="125" />
           <Property Name="Lote" Type="nvarchar" MaxLength="150" />
           <Property Name="Cia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Asientos_Documentos_Links">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroAutomatico" Type="int" Nullable="false" />
+          <Property Name="Link" Type="varchar" Nullable="false" MaxLength="350" />
         </EntityType>
         <EntityType Name="AsientosId">
           <Key>
@@ -562,6 +575,7 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NumeroAutomatico" Type="int" Nullable="false" />
           <Property Name="NumPartidas" Type="smallint" Nullable="false" />
+          <Property Name="NumUploads" Type="smallint" Nullable="false" />
           <Property Name="TotalDebe" Type="money" Nullable="false" />
           <Property Name="TotalHaber" Type="money" Nullable="false" />
           <Property Name="NombreUsuario" Type="nvarchar" Nullable="false" MaxLength="256" />
@@ -587,6 +601,20 @@
             </Principal>
             <Dependent Role="Asientos">
               <PropertyRef Name="Cia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asientos_Documentos_Links_Asientos">
+          <End Role="Asientos" Type="dbContab_Contab_NS.Store.Asientos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Asientos_Documentos_Links" Type="dbContab_Contab_NS.Store.Asientos_Documentos_Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asientos">
+              <PropertyRef Name="NumeroAutomatico" />
+            </Principal>
+            <Dependent Role="Asientos_Documentos_Links">
+              <PropertyRef Name="NumeroAutomatico" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1180,11 +1208,6 @@
             <End Role="CuentasContable" EntitySet="CuentasContables" />
             <End Role="Presupuesto_Codigos" EntitySet="Presupuesto_Codigos" />
           </AssociationSet>
-          <EntitySet Name="tTempWebReport_ConsultaComprobantesContables" EntityType="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables" />
-          <AssociationSet Name="FK_tTempWebReport_ConsultaComprobantesContables_Asientos" Association="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos">
-            <End Role="Asiento" EntitySet="Asientos" />
-            <End Role="tTempWebReport_ConsultaComprobantesContables" EntitySet="tTempWebReport_ConsultaComprobantesContables" />
-          </AssociationSet>
           <EntitySet Name="ParametrosContabs" EntityType="dbContab_Contab_NS.ParametrosContab" />
           <AssociationSet Name="FK_ParametrosContab_Companias" Association="dbContab_Contab_NS.FK_ParametrosContab_Companias">
             <End Role="Compania" EntitySet="Companias" />
@@ -1244,6 +1267,16 @@
             <Parameter Name="excluirAsientoTipoCierreAnual" Mode="In" Type="Boolean" />
             <Parameter Name="errorMessage" Mode="InOut" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Asientos_Documentos_Links" EntityType="dbContab_Contab_NS.Asientos_Documentos_Links" />
+          <EntitySet Name="tTempWebReport_ConsultaComprobantesContables" EntityType="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables" />
+          <AssociationSet Name="FK_Asientos_Documentos_Links_Asientos" Association="dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos">
+            <End Role="Asiento" EntitySet="Asientos" />
+            <End Role="Asientos_Documentos_Links" EntitySet="Asientos_Documentos_Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tTempWebReport_ConsultaComprobantesContables_Asientos" Association="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos">
+            <End Role="Asiento" EntitySet="Asientos" />
+            <End Role="tTempWebReport_ConsultaComprobantesContables" EntitySet="tTempWebReport_ConsultaComprobantesContables" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Asiento">
           <Key>
@@ -1276,6 +1309,7 @@
           <NavigationProperty Name="TiposDeAsiento" Relationship="dbContab_Contab_NS.FK_Asientos_TiposDeAsiento" FromRole="Asientos" ToRole="TiposDeAsiento" />
           <NavigationProperty Name="dAsientos" Relationship="dbContab_Contab_NS.FK_dAsientos_Asientos" FromRole="Asiento" ToRole="dAsiento" />
           <Property Type="String" Name="Lote" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Asientos_Documentos_Links" Relationship="dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos" FromRole="Asiento" ToRole="Asientos_Documentos_Links" />
           <NavigationProperty Name="tTempWebReport_ConsultaComprobantesContables" Relationship="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos" FromRole="Asiento" ToRole="tTempWebReport_ConsultaComprobantesContables" />
         </EntityType>
         <EntityType Name="Compania">
@@ -1901,33 +1935,6 @@
           <End Type="dbContab_Contab_NS.CuentasContable" Role="CuentasContable" Multiplicity="*" />
           <End Type="dbContab_Contab_NS.Presupuesto_Codigos" Role="Presupuesto_Codigos" Multiplicity="*" />
         </Association>
-        <EntityType Name="tTempWebReport_ConsultaComprobantesContables">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Type="Int32" Name="NumeroAutomatico" Nullable="false" />
-          <Property Type="Int16" Name="NumPartidas" Nullable="false" />
-          <Property Type="Decimal" Name="TotalDebe" Nullable="false" Precision="19" Scale="4" />
-          <Property Type="Decimal" Name="TotalHaber" Nullable="false" Precision="19" Scale="4" />
-          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Lote" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Asiento" Relationship="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos" FromRole="tTempWebReport_ConsultaComprobantesContables" ToRole="Asiento" />
-        </EntityType>
-        <Association Name="FK_tTempWebReport_ConsultaComprobantesContables_Asientos">
-          <End Type="dbContab_Contab_NS.Asiento" Role="Asiento" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables" Role="tTempWebReport_ConsultaComprobantesContables" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Asiento">
-              <PropertyRef Name="NumeroAutomatico" />
-            </Principal>
-            <Dependent Role="tTempWebReport_ConsultaComprobantesContables">
-              <PropertyRef Name="NumeroAutomatico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ParametrosContab">
           <Key>
             <PropertyRef Name="Cia" />
@@ -2111,6 +2118,57 @@
             </Principal>
             <Dependent Role="Contab_BalanceComprobacion">
               <PropertyRef Name="Moneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Asientos_Documentos_Links">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="NumeroAutomatico" Nullable="false" />
+          <Property Type="String" Name="Link" Nullable="false" MaxLength="350" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Asiento" Relationship="dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos" FromRole="Asientos_Documentos_Links" ToRole="Asiento" />
+        </EntityType>
+        <EntityType Name="tTempWebReport_ConsultaComprobantesContables">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="NumeroAutomatico" Nullable="false" />
+          <Property Type="Int16" Name="NumPartidas" Nullable="false" />
+          <Property Type="Int16" Name="NumUploads" Nullable="false" />
+          <Property Type="Decimal" Name="TotalDebe" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="TotalHaber" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Lote" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Asiento" Relationship="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos" FromRole="tTempWebReport_ConsultaComprobantesContables" ToRole="Asiento" />
+        </EntityType>
+        <Association Name="FK_Asientos_Documentos_Links_Asientos">
+          <End Type="dbContab_Contab_NS.Asiento" Role="Asiento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbContab_Contab_NS.Asientos_Documentos_Links" Role="Asientos_Documentos_Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiento">
+              <PropertyRef Name="NumeroAutomatico" />
+            </Principal>
+            <Dependent Role="Asientos_Documentos_Links">
+              <PropertyRef Name="NumeroAutomatico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tTempWebReport_ConsultaComprobantesContables_Asientos">
+          <End Type="dbContab_Contab_NS.Asiento" Role="Asiento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables" Role="tTempWebReport_ConsultaComprobantesContables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiento">
+              <PropertyRef Name="NumeroAutomatico" />
+            </Principal>
+            <Dependent Role="tTempWebReport_ConsultaComprobantesContables">
+              <PropertyRef Name="NumeroAutomatico" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2427,19 +2485,6 @@
               <ScalarProperty Name="ID" ColumnName="CuentaContableID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="tTempWebReport_ConsultaComprobantesContables">
-            <EntityTypeMapping TypeName="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables">
-              <MappingFragment StoreEntitySet="tTempWebReport_ConsultaComprobantesContables">
-                <ScalarProperty Name="Lote" ColumnName="Lote" />
-                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
-                <ScalarProperty Name="TotalHaber" ColumnName="TotalHaber" />
-                <ScalarProperty Name="TotalDebe" ColumnName="TotalDebe" />
-                <ScalarProperty Name="NumPartidas" ColumnName="NumPartidas" />
-                <ScalarProperty Name="NumeroAutomatico" ColumnName="NumeroAutomatico" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ParametrosContabs">
             <EntityTypeMapping TypeName="dbContab_Contab_NS.ParametrosContab">
               <MappingFragment StoreEntitySet="ParametrosContab">
@@ -2551,6 +2596,29 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spGetSaldoAnteriorDebeYHaber" FunctionName="dbContab_Contab_NS.Store.spGetSaldoAnteriorDebeYHaber" />
           <FunctionImportMapping FunctionImportName="spBalanceGeneral" FunctionName="dbContab_Contab_NS.Store.spBalanceGeneral" />
+          <EntitySetMapping Name="Asientos_Documentos_Links">
+            <EntityTypeMapping TypeName="dbContab_Contab_NS.Asientos_Documentos_Links">
+              <MappingFragment StoreEntitySet="Asientos_Documentos_Links">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="NumeroAutomatico" ColumnName="NumeroAutomatico" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tTempWebReport_ConsultaComprobantesContables">
+            <EntityTypeMapping TypeName="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables">
+              <MappingFragment StoreEntitySet="tTempWebReport_ConsultaComprobantesContables">
+                <ScalarProperty Name="Lote" ColumnName="Lote" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="TotalHaber" ColumnName="TotalHaber" />
+                <ScalarProperty Name="TotalDebe" ColumnName="TotalDebe" />
+                <ScalarProperty Name="NumUploads" ColumnName="NumUploads" />
+                <ScalarProperty Name="NumPartidas" ColumnName="NumPartidas" />
+                <ScalarProperty Name="NumeroAutomatico" ColumnName="NumeroAutomatico" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2649,8 +2717,6 @@
         <EntityTypeShape EntityType="dbContab_Contab_NS.Presupuesto_Codigos" Width="2.875" PointX="1" PointY="23.5" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Presupuesto_Codigos_Companias" />
         <AssociationConnector Association="dbContab_Contab_NS.Presupuesto_AsociacionCodigosCuentas" />
-        <EntityTypeShape EntityType="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables" Width="4.125" PointX="14.375" PointY="1" />
-        <AssociationConnector Association="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos" />
         <EntityTypeShape EntityType="dbContab_Contab_NS.ParametrosContab" Width="3" PointX="13.5" PointY="19.25" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_ParametrosContab_Companias" />
         <EntityTypeShape EntityType="dbContab_Contab_NS.Presupuesto_Montos" Width="3.25" PointX="4.625" PointY="23.5" />
@@ -2659,6 +2725,10 @@
         <EntityTypeShape EntityType="dbContab_Contab_NS.Contab_BalanceComprobacion" Width="3.375" PointX="19.5" PointY="1" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Contab_BalanceComprobacion_CuentasContables" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Contab_BalanceComprobacion_Monedas" />
+        <EntityTypeShape EntityType="dbContab_Contab_NS.Asientos_Documentos_Links" Width="2.5" PointX="13.75" PointY="8.375" />
+        <EntityTypeShape EntityType="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables" Width="3.625" PointX="14.375" PointY="1" />
+        <AssociationConnector Association="dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos" />
+        <AssociationConnector Association="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos" />
       </Diagram>
     </Diagrams>
   </Designer>

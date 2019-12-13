@@ -133,9 +133,9 @@
                             <tr>
                                 <td>Número</td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td><asp:TextBox ID="Sql_Asientos_Numero_Numeric" runat="server" /></td>
+                                <td><asp:TextBox ID="Numero_Desde_TextBox" runat="server" TextMode="Number" /></td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td></td>
+                                <td><asp:TextBox ID="Numero_Hasta_TextBox" runat="server" TextMode="Number" /></td>
                             </tr>
                             <tr>
                                 <td>Período:</td>
@@ -177,7 +177,7 @@
                         <br />
 
                         <fieldset>
-                            <legend>Asientos de tipo cierre anual: </legend>
+                            <legend>Opciones: </legend>
 
                             <asp:CheckBox ID="ExcluirAsientosDeTipoCierreAnual_CheckBox" 
                                           runat="server" 
@@ -199,6 +199,11 @@
                             <asp:CheckBox ID="SoloAsientosConMas2Decimales_CheckBox" 
                                           runat="server" 
                                           Text="Solo asientos con montos con más de dos decimales"
+                                          Checked="False" />
+                            <br />
+                            <asp:CheckBox ID="SoloAsientosConUploads_CheckBox" 
+                                          runat="server" 
+                                          Text="Solo asientos con anexos (uploads) registrados"
                                           Checked="False" />
             
                         </fieldset>

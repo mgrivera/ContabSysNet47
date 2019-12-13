@@ -58,13 +58,22 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes {
         protected global::AjaxControlToolkit.TabPanel TabPanel1;
         
         /// <summary>
-        /// Sql_Asientos_Numero_Numeric control.
+        /// Numero_Desde_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Sql_Asientos_Numero_Numeric;
+        protected global::System.Web.UI.WebControls.TextBox Numero_Desde_TextBox;
+        
+        /// <summary>
+        /// Numero_Hasta_TextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Numero_Hasta_TextBox;
         
         /// <summary>
         /// Desde_TextBox control.
@@ -155,6 +164,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox SoloAsientosConMas2Decimales_CheckBox;
+        
+        /// <summary>
+        /// SoloAsientosConUploads_CheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox SoloAsientosConUploads_CheckBox;
         
         /// <summary>
         /// TabPanel2 control.

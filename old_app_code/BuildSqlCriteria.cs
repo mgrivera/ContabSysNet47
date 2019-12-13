@@ -1,5 +1,6 @@
 ﻿using System.Web.UI;
-using System; 
+using System;
+using System.Text.RegularExpressions;
 
 public class BuildSqlCriteria {
     
@@ -59,14 +60,12 @@ public class BuildSqlCriteria {
                     switch (gsIncluirExcluirItems) 
                     {
                         case "I":
-                            //  el nombre del item no existe en la lista de items; 
-                            //  saltamos el item 
+                            //  el nombre del item no existe en la lista de items; saltamos el item 
                             if (gsNombreItemsIncluirExcluir.IndexOf(MyWebServerControl.ID.ToString()) == -1)   
                                 continue;
                             break; 
                         case "E":
-                            //  el nombre del item no existe en la lista de items; 
-                            //  saltamos el item 
+                            //  el nombre del item no existe en la lista de items; saltamos el item 
                             if (gsNombreItemsIncluirExcluir.IndexOf(MyWebServerControl.ID.ToString()) != -1)
                                 continue;
                             break; 
@@ -90,8 +89,7 @@ public class BuildSqlCriteria {
             }
         }
         if ((sFiltroForma != "")) {
-            //  m_sMyCriterioSql es la variable que pasamos cuando se pide el resultado
-            //  de la clase (propiedad CriterioSql)
+            //  m_sMyCriterioSql es la variable que pasamos cuando se pide el resultado de la clase (propiedad CriterioSql)
             if ((m_sMyCriterioSql == "")) {
                 m_sMyCriterioSql = sFiltroForma;
             }
@@ -143,9 +141,15 @@ public class BuildSqlCriteria {
 
         switch (MyWebServerControl.GetType().Name.ToString()) {
             case "TextBox":
-                System.Web.UI.WebControls.TextBox MyWebControlTextBox = 
-                    (System.Web.UI.WebControls.TextBox)MyWebServerControl;
-                if ((MyWebControlTextBox.Text != "")) {
+                System.Web.UI.WebControls.TextBox MyWebControlTextBox = (System.Web.UI.WebControls.TextBox)MyWebServerControl;
+
+                // eliminamos algún /r/n (new line) que a veces queda en el control 
+                string texto = MyWebControlTextBox.Text; 
+                texto = texto.Replace("\n", String.Empty);
+                texto = texto.Replace("\r", String.Empty);
+                texto = texto.Replace("\t", String.Empty);
+
+                if ((texto != "")) {
                     BuildCriteria(MyWebServerControl, sNombreItem, MyWebControlTextBox.Text, sTipoItem, ref sCriterioItemForma);
                 }
                 break;

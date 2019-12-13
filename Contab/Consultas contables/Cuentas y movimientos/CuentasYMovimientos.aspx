@@ -69,7 +69,7 @@
             // nótese como usamos Session("Progress_SelectedRecs") que trae un valor desde 
             // code behind
             document.getElementById("ProgressbarMessage_div").innerHTML = document.getElementById('<%=SelectedRecs_HiddenField.ClientID%>').value + " registros seleccionados";
-        document.getElementById("ProgressbarBorder_div").style.display = "none";
+            document.getElementById("ProgressbarBorder_div").style.display = "none";
         }
     </script>
 
@@ -109,7 +109,7 @@
         <%-- divs para mostrar el progress bar --%>
         <div id="Progressbar_div" style="visibility: hidden; height: 0px;">
             <div id="ProgressbarBorder_div" style="margin-left: 5px; margin-right: 5px; border: 1px solid #808080; height: 10px;">
-                <div id="ProgressbarProgress_div" style="background: url(../../../Pictures/safari.gif) 0% 0% repeat-x; height: 10px; width: 0%;">
+                <div id="ProgressbarProgress_div" style="background: url(../../../Pictures/safari.gif) 0% 0% repeat-x; height: 8px; width: 0%;">
                 </div>
             </div>
             <div id="ProgressbarMessage_div" style="text-align: center;">
@@ -117,7 +117,6 @@
             <hr />
         </div>
         <%-- --------------------------------- --%>
-
 
         <a href="javascript:PopupWin('CuentasYMovimientos_OpcionesReportes.aspx', 1000, 680)">Reporte</a><br />
         <i class="fas fa-print fa-2x" style="margin-top: 5px;"></i>
@@ -329,29 +328,18 @@
                                         <tr id="Tr5" runat="server">
                                             <td id="Td3" runat="server">
                                                 <table id="itemPlaceholderContainer" runat="server" border="0" class="ListView smallfont"
-                                                    style="background-color: #FFFFFF; padding: 10 5 10 5; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
+                                                    style="background-color: #FFFFFF; padding: 10px 5px 10px 5px; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
                                                     <tr id="Tr6" runat="server" style="" class="ListViewHeader smallfont">
-                                                        <%-- <th id="Th4" runat="server" class="padded" style="text-align: center;">
-                                                            #
-                                                        </th>--%>
-                                                        <th id="Th5" runat="server" class="padded" style="text-align: center;">Comp
-                                                        </th>
-                                                        <th id="Th6" runat="server" class="padded" style="text-align: center;">Fecha
-                                                        </th>
-                                                        <th id="Th7" runat="server" class="padded" style="text-align: center;">Centro<br />
-                                                            Costo
-                                                        </th>
-                                                        <th id="Th8" runat="server" class="padded" style="text-align: center;">Mon<br />
-                                                            orig
-                                                        </th>
-                                                        <th id="Th10" runat="server" class="padded" style="text-align: left;">Descripción
-                                                        </th>
-                                                        <th id="Th9" runat="server" class="padded" style="text-align: right;">Monto
-                                                        </th>
+                                                        <th id="Th5" runat="server" class="padded" style="text-align: center;">Comp</th>
+                                                        <th id="Th6" runat="server" class="padded" style="text-align: center;">Fecha</th>
+                                                        <th id="Th7" runat="server" class="padded" style="text-align: center;">Centro<br />Costo</th>
+                                                        <th id="Th8" runat="server" class="padded" style="text-align: center;">Mon<br />orig</th>
+                                                        <th id="Th10" runat="server" class="padded" style="text-align: left;">Descripción</th>
+                                                        <th id="Th9" runat="server" class="padded" style="text-align: right;">Monto</th>
+                                                        <th id="Th17" runat="server" class="padded" style="text-align: center;">Cant<br />uploads</th>
                                                     </tr>
                                                     <tr id="Tr1" runat="server" style="height: 5px;">
-                                                        <%-- <th>
-                                                        </th>--%>
+                                                        <th></th>
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
@@ -363,18 +351,15 @@
                                                     </tr>
 
                                                     <tr id="Tr8" runat="server" style="" class="ListViewFooter smallfont">
-                                                        <%-- <th id="Th4" runat="server" class="padded" style="text-align: center;">
-                                                            #
-                                                        </th>--%>
                                                         <th id="Th4" runat="server" class="padded" style="text-align: center;"></th>
                                                         <th id="Th13" runat="server" class="padded" style="text-align: center;"></th>
                                                         <th id="Th14" runat="server" class="padded" style="text-align: center;"></th>
                                                         <th id="Th15" runat="server" class="padded" style="text-align: center;"></th>
-                                                        <th id="Th16" runat="server" class="padded" style="text-align: left;">Saldo final de la cuenta contable: 
-                                                        </th>
+                                                        <th id="Th16" runat="server" class="padded" style="text-align: left;">Saldo final de la cuenta contable:</th>
                                                         <th id="SumOfMonto" runat="server" class="padded" style="text-align: right;">
                                                             <asp:Label ID="SumOfMonto_Label" runat="server" Text="Label"></asp:Label>
                                                         </th>
+                                                        <th id="Th18" runat="server" class="padded" style="text-align: center;"></th>
                                                     </tr>
 
                                                 </table>
@@ -401,9 +386,6 @@
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <tr style="" class="smallfont">
-                                        <%--<td class="padded" style="text-align: center;">
-                                            <asp:Label ID="CuentaLabel" runat="server" Text='<%# Eval("Comprobante") %>' />
-                                        </td>--%>
                                         <td class="padded" style="text-align: center;">
                                             <a href="javascript:PopupWin('CuentasYMovimientos_Comprobantes.aspx?NumeroAutomatico=' + <%# Eval("NumeroAutomatico") %>, 1000, 680)">
                                                 <%# Eval("Comprobante")%></a>
@@ -423,13 +405,13 @@
                                         <td class="padded" style="text-align: right; white-space: nowrap;">
                                             <asp:Label ID="Label3" runat="server" Text='<%# Eval("Monto", "{0:N2}") %>' />
                                         </td>
+                                        <td class="padded" style="text-align: right; white-space: nowrap;">
+                                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("NumLinks", "{0:#}") %>' />
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                                 <AlternatingItemTemplate>
                                     <tr style="" class="smallfont ListViewAlternatingRow">
-                                        <%--<td class="padded" style="text-align: center;">
-                                            <asp:Label ID="CuentaLabel" runat="server" Text='<%# Eval("Comprobante") %>' />
-                                        </td>--%>
                                         <td class="padded" style="text-align: center;">
                                             <a href="javascript:PopupWin('CuentasYMovimientos_Comprobantes.aspx?NumeroAutomatico=' + <%# Eval("NumeroAutomatico") %>, 1000, 680)">
                                                 <%# Eval("Comprobante")%></a>
@@ -448,6 +430,9 @@
                                         </td>
                                         <td class="padded" style="text-align: right; white-space: nowrap;">
                                             <asp:Label ID="Label3" runat="server" Text='<%# Eval("Monto", "{0:N2}") %>' />
+                                        </td>
+                                        <td class="padded" style="text-align: right; white-space: nowrap;">
+                                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("NumLinks", "{0:#}") %>' />
                                         </td>
                                     </tr>
                                 </AlternatingItemTemplate>
@@ -487,7 +472,8 @@
                 CentrosCosto.DescripcionCorta AS NombreCentroCosto, 
                 Monedas.Simbolo AS SimboloMonedaOriginal, 
                 Contab_ConsultaCuentasYMovimientos_Movimientos.Descripcion,
-                Contab_ConsultaCuentasYMovimientos_Movimientos.Monto
+                Contab_ConsultaCuentasYMovimientos_Movimientos.Monto, 
+                Count(Asientos_Documentos_Links.Id) as NumLinks
                 FROM 
                 Contab_ConsultaCuentasYMovimientos_Movimientos Inner Join Contab_ConsultaCuentasYMovimientos On 
                 Contab_ConsultaCuentasYMovimientos_Movimientos.ParentID = Contab_ConsultaCuentasYMovimientos.ID 
@@ -496,8 +482,13 @@
                 Contab_ConsultaCuentasYMovimientos_Movimientos.Partida = dAsientos.Partida
                 Left Outer JOIN Monedas ON Asientos.MonedaOriginal = Monedas.Moneda 
                 LEFT OUTER JOIN CentrosCosto ON dAsientos.CentroCosto = CentrosCosto.CentroCosto
+                LEFT OUTER JOIN Asientos_Documentos_Links ON Contab_ConsultaCuentasYMovimientos_Movimientos.AsientoID = Asientos_Documentos_Links.NumeroAutomatico 
                 WHERE (Contab_ConsultaCuentasYMovimientos_Movimientos.ParentID = @ParentID) 
-                Order By Contab_ConsultaCuentasYMovimientos_Movimientos.Secuencia ">
+                Group by Contab_ConsultaCuentasYMovimientos_Movimientos.Secuencia, Asientos.Numero, Asientos.NumeroAutomatico, Asientos.Fecha, 
+                CentrosCosto.DescripcionCorta, Monedas.Simbolo, Contab_ConsultaCuentasYMovimientos_Movimientos.Descripcion, 
+                Contab_ConsultaCuentasYMovimientos_Movimientos.Monto 
+                Order By Contab_ConsultaCuentasYMovimientos_Movimientos.Secuencia 
+                ">
 
             <SelectParameters>
                 <asp:Parameter Name="ParentID" />

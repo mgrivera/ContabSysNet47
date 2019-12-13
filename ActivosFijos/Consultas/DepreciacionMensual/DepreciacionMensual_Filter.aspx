@@ -357,7 +357,7 @@
             <ContentTemplate>
                 <div style="padding: 10px; ">
                     <p>
-                        El usuario debe siempre seleccionar una compañía Contab. Además, solo podrá seleccionar una, y no varias. 
+                        El usuario debe siempre seleccionar una compañía <em>Contab</em>. Además, solo podrá seleccionar una, y no varias. 
                     </p>
                     <p>
                         La consulta siempre se obtiene para un mes y año. El usuario debe indicar siempre estos valores. El año debe tener 4 dígitos (ej: 2011).  
@@ -366,10 +366,10 @@
                         El usuario puede aplicar las fechas en el filtro de esta forma: 
                         <ul>
                             <li>
-                                Si solo usa la fecha de inicio (desde), se seleccionarán registros que tengan esta fecha.  
+                                Si solo usa la fecha de inicio (<em>desde</em>), se seleccionarán registros para la fecha indicada.  
                             </li>
                             <li>
-                                Si usa ambas fechas (desde, hasta), se seleccionarán registros que cumplan este período.  
+                                Si usa ambas fechas (<em>desde</em>, <em>hasta</em>), se seleccionarán registros que cumplan este período.  
                             </li>
                         </ul>
                     </p>

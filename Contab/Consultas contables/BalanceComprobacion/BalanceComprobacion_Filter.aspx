@@ -163,7 +163,7 @@
                     </div>
                     <br /><br />
                     <fieldset style="text-align:left; " class="generalfont">
-                        <legend style="color: Navy; ">Cuentas contables sin movimientos en el período indicado:</legend>
+                        <legend style="color: Navy; ">Cuentas contables <em><b>sin</b></em> movimientos en el período indicado:</legend>
                         <asp:CheckBox ID="MostrarCuentasSinSaldoYSinMvtos_CheckBox" 
                                       cssclass="generalfont"
                                       runat="server" 

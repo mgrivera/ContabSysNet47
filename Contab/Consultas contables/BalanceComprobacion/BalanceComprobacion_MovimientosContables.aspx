@@ -32,7 +32,7 @@
        
     <asp:ListView ID="BalanceComprobacion_ListView" 
                     runat="server" 
-                    DataSourceID="MovimientosContables_LinqDataSource">
+                    DataSourceID="MovimientosContables_SqlDataSource">
            
         <LayoutTemplate>
             <table id="Table1" runat="server">
@@ -40,8 +40,11 @@
                     <td id="Td1" runat="server">
                         <table ID="itemPlaceholderContainer" runat="server" border="0" style="border: 1px solid #E6E6E6" class="smallfont" cellspacing="0" rules="none">
                             <tr id="Tr2" runat="server" style="" class="ListViewHeader_Suave">
+                                <th id="Th14" runat="server" class="padded" style="text-align: center; padding-bottom: 10px;">
+                                    #Partida
+                                </th>
                                 <th id="Th3" runat="server" class="padded" style="text-align: left; padding-bottom: 10px;">
-                                    Descripción asiento
+                                    Descripción partida
                                 </th>
                                 <th id="Th1" runat="server" class="padded" style="text-align: center; padding-bottom: 10px;">
                                     #Comp
@@ -64,6 +67,9 @@
                                 <th id="Th7" runat="server" class="padded" style="text-align: center; padding-bottom: 10px;">
                                     Mon<br />orig
                                 </th>
+                                <th id="Th21" runat="server" class="padded" style="text-align: center; padding-bottom: 10px;">
+                                    Cant<br />uploads
+                                </th>
                                 <th id="Th8" runat="server" class="padded" style="text-align: left; padding-bottom: 10px;">
                                     Compañía
                                 </th>
@@ -74,6 +80,7 @@
 
                             <tr id="Tr4" runat="server" style="" class="ListViewHeader_Suave">
                                 <th id="Th9" runat="server" class="padded" style="padding-top: 5px; padding-bottom: 5px;" />
+                                <th id="Th15" runat="server" class="padded" style="padding-top: 5px; padding-bottom: 5px;" />
                                 <th id="Th10" runat="server" class="padded" style="padding-top: 5px; padding-bottom: 5px;" />
                                 <th id="Th11" runat="server" class="padded" style="padding-top: 5px; padding-bottom: 5px;" />
                                 <th id="Th12"  runat="server" class="padded" style="padding-top: 5px; padding-bottom: 5px;" />
@@ -85,6 +92,7 @@
                                 </th>
                                 <th id="Th17" runat="server" class="padded" style="padding-top: 5px; padding-bottom: 5px;" />
                                 <th id="Th18" runat="server" class="padded" style="padding-top: 5px; padding-bottom: 5px;" />
+                                <th id="Th22" runat="server" class="padded" style="padding-top: 5px; padding-bottom: 5px;" />
                                 <th id="Th19" runat="server" class="padded" style="padding-top: 5px; padding-bottom: 5px;" />
                             </tr>
                         </table>
@@ -110,6 +118,9 @@
         </LayoutTemplate>
         <ItemTemplate>
             <tr style="">
+                <td class="padded" style="text-align: center; ">
+                    <asp:Label ID="Label10" runat="server" Text='<%# Eval("Partida") %>' />
+                </td>
                 <td class="padded" style="text-align: left; ">
                     <asp:Label ID="Label12" runat="server" Text='<%# Eval("DescripcionPartida") %>' />
                 </td>
@@ -138,8 +149,10 @@
                         Text='<%# Eval("SimboloMoneda") %>' />
                 </td>
                 <td class="padded" style="text-align: center;">
-                    <asp:Label ID="Label6"  runat="server" 
-                        Text='<%# Eval("SimboloMonedaOriginal") %>' />
+                    <asp:Label ID="Label6"  runat="server" Text='<%# Eval("SimboloMonedaOriginal") %>' />
+                </td>
+                <td class="padded" style="text-align: center;">
+                    <asp:Label ID="Label11"  runat="server" Text='<%# Eval("NumLinks", "{0:#}") %>' />
                 </td>
                 <td class="padded" style="text-align: left;">
                     <asp:Label ID="Label7"  runat="server" 
@@ -150,6 +163,9 @@
         <AlternatingItemTemplate>
                
             <tr style="" class="ListViewAlternatingRow">
+                <td class="padded" style="text-align: center; ">
+                    <asp:Label ID="Label10" runat="server" Text='<%# Eval("Partida") %>' />
+                </td>
                 <td class="padded" style="text-align: left; ">
                     <asp:Label ID="Label2" runat="server" Text='<%# Eval("DescripcionPartida") %>' />
                 </td>
@@ -181,6 +197,9 @@
                     <asp:Label ID="Label8"  runat="server" 
                         Text='<%# Eval("SimboloMonedaOriginal") %>' />
                 </td>
+                <td class="padded" style="text-align: center;">
+                    <asp:Label ID="Label11"  runat="server" Text='<%# Eval("NumLinks", "{0:#}") %>' />
+                </td>
                 <td class="padded" style="text-align: left;">
                     <asp:Label ID="Label9"  runat="server" 
                         Text='<%# Eval("NombreCiaContab") %>' />
@@ -205,23 +224,33 @@
     </ContentTemplate>
 </asp:UpdatePanel>
             
-<asp:LinqDataSource ID="MovimientosContables_LinqDataSource" runat="server" 
-        ContextTypeName="ContabSysNet_Web.ModelosDatos.dbContabDataContext" OrderBy="Asiento.Fecha, Asiento.Numero, Partida" 
-        Select="new (NumeroAutomatico, Asiento.Numero As NumeroComprobanteContable, Asiento.Fecha As Fecha, 
-        Descripcion As DescripcionPartida, Referencia, Debe, Haber,
-        CuentasContable.CuentaEditada As CuentaContableEditada, 
-        CuentasContable.Descripcion As NombreCuentaContable, Asiento.Compania_Contab.Abreviatura As NombreCiaContab,
-        Asiento.Moneda_Contab.Simbolo As SimboloMoneda, Asiento.Moneda_Contab1.Simbolo As SimboloMonedaOriginal)" 
-        TableName="dAsientos" 
-          
-    Where="CuentaContableID == @CuentaContableID &amp;&amp; Asiento.Moneda == @Moneda &amp;&amp; Asiento.Fecha &gt;= @FechaInicialPeriodo &amp;&amp; Asiento.Fecha &lt;= @FechaFinalPeriodo" 
-    EntityTypeName="">
-    <WhereParameters>
-        <asp:Parameter Name="CuentaContableID" Type="Int32" DefaultValue="-999" />
-        <asp:Parameter Name="Moneda" Type="Int32" DefaultValue="-999" />
-        <asp:Parameter Name="FechaInicialPeriodo" Type="DateTime" DefaultValue="1960-01-01" />
-        <asp:Parameter Name="FechaFinalPeriodo" Type="DateTime" DefaultValue="1960-01-01" />
-    </WhereParameters>
-</asp:LinqDataSource>
+<asp:SqlDataSource ID="MovimientosContables_SqlDataSource" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>"
+        SelectCommand="Select d.Partida, d.NumeroAutomatico, a.Numero As NumeroComprobanteContable, a.Fecha As Fecha, 
+        d.Descripcion As DescripcionPartida, d.Referencia, d.Debe, d.Haber, Count(l.Id) as NumLinks,  
+        co.Abreviatura As NombreCiaContab,
+        m.Simbolo As SimboloMoneda, mo.Simbolo As SimboloMonedaOriginal 
+        From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico 
+		Inner Join Monedas m on a.Moneda = m.Moneda 
+		Inner Join Monedas mo on a.MonedaOriginal = mo.Moneda 
+		Inner Join Companias co on a.Cia = co.Numero
+        Left Join Asientos_Documentos_Links l on a.NumeroAutomatico = l.NumeroAutomatico 
+        Where d.CuentaContableID = @CuentaContableID And a.Moneda = @Moneda And (a.Fecha &gt;= @FechaInicialPeriodo and Fecha &lt;= @FechaFinalPeriodo)
+        Group By d.Partida, d.NumeroAutomatico, a.Numero, a.Fecha, d.Descripcion, d.Referencia, d.Debe, d.Haber, co.Abreviatura, m.Simbolo, mo.Simbolo 
+        Order By a.Fecha, a.Numero, d.Partida">
+
+          <SelectParameters>
+            <asp:Parameter Name="CuentaContableID" Type="Int32" DefaultValue="-999" />
+            <asp:Parameter Name="Moneda" Type="Int32" DefaultValue="-999" />
+            <asp:Parameter Name="FechaInicialPeriodo" Type="DateTime" DefaultValue="1960-01-01" />
+            <asp:Parameter Name="FechaFinalPeriodo" Type="DateTime" DefaultValue="1960-01-01" />
+        </SelectParameters>
+</asp:SqlDataSource>
 
 </asp:Content>
+
+
+
+
+
+        

@@ -18,6 +18,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
             public int NumPartidas { get; set; }
             public decimal? TotalDebe { get; set; }
             public decimal? TotalHaber { get; set; }
+            public int NumLinks { get; set; }
             public string Lote { get; set; }
         }
 
@@ -129,36 +130,56 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                 return;
             }
 
+            // el usuario puede indicar que desea *solo* asientos con uploads 
+            string joinTableAsientosUploads = "Left Outer Join "; 
+            if (Session["SoloAsientosConUploads_CheckBox"] != null && Convert.ToBoolean(Session["SoloAsientosConUploads_CheckBox"]))
+            {
+                joinTableAsientosUploads = "Join ";
+            }
+
             // usamos el criterio que indico el usuario para leer las cuentas contables y grabarlas a una tabla en la base de datos temporal
 
             // NOTA: *solo* si el usuario usa algunos criterios en el filtro, usamos un subquery en el select a los asientos contables 
+
+            // nótese que el select a la tabla de links (asientos_documentos_links) se hace en un subquery; la idea es evitar que los counts se multipliquen 
+            // por la cantidad de registros en el primer join. cuando en sql se hacen counts, sum, etc., y hay más de dos tablas en el select, los montos 
+            // se desvirtúan. La solución es usar subqueries para las tablas que siguen a la segunda ... 
             string sSqlQueryString = "";
 
             if (Session["filtroForma_consultaAsientosContables_subQuery"] == null || Session["filtroForma_consultaAsientosContables_subQuery"].ToString() == "1 = 1")
             {
-                // el usuario no usó criterio por cuenta contable o más de 2 decimales; no usamos sub-query 
                 sSqlQueryString = "SELECT Asientos.NumeroAutomatico, " +
-                                "Count(dAsientos.Partida) As NumPartidas, Sum(dAsientos.Debe) As TotalDebe, Sum(dAsientos.Haber) AS TotalHaber, Lote As Lote " +
-                                "FROM Asientos " +
-                                "Left Outer Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
-                                // "Left Outer Join CuentasContables On CuentasContables.ID = dAsientos.CuentaContableID " +
+                                "Count(dAsientos.Partida) As NumPartidas, Sum(dAsientos.Debe) As TotalDebe, Sum(dAsientos.Haber) AS TotalHaber, " +
+                                "iif(links.NumLinks Is Not Null, links.NumLinks, 0) As NumLinks, Lote As Lote " +
+                                "FROM Asientos Left Outer Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
+                                joinTableAsientosUploads +      // 'join' o 'left join' dependiendo de si el usuario quiere *solo* asientos con uploads 
+                                "(SELECT Asientos_Documentos_Links.NumeroAutomatico, Count(Asientos_Documentos_Links.Id) as NumLinks " +
+                                "FROM Asientos_Documentos_Links " +
+                                "Group By Asientos_Documentos_Links.NumeroAutomatico) as links On Asientos.NumeroAutomatico = links.NumeroAutomatico " + 
                                 "Where " + Session["filtroForma_consultaAsientosContables"].ToString() + " " +
-                                "Group By Asientos.NumeroAutomatico, Asientos.Lote";
+                                "Group By Asientos.NumeroAutomatico, Asientos.Lote, links.NumLinks";
             } else
             {
                 // usamos un subquery para que solo asientos con ciertas cuentas *o* partidas con montos con más de 2 decimales sean seleccionados
                 sSqlQueryString = "SELECT Asientos.NumeroAutomatico, " +
-                                "Count(dAsientos.Partida) As NumPartidas, Sum(dAsientos.Debe) As TotalDebe, Sum(dAsientos.Haber) AS TotalHaber, Lote As Lote " +
+                                "Count(dAsientos.Partida) As NumPartidas, Sum(dAsientos.Debe) As TotalDebe, Sum(dAsientos.Haber) AS TotalHaber, " +
+                                "iif(links.NumLinks Is Not Null, links.NumLinks, 0) As NumLinks, Lote As Lote " +
                                 "FROM Asientos " +
                                 "Left Outer Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
                                 "Left Outer Join CuentasContables On CuentasContables.ID = dAsientos.CuentaContableID " +
-                                    "Where " + Session["filtroForma_consultaAsientosContables"].ToString() +
-                                    " And (Asientos.NumeroAutomatico In (SELECT Asientos.NumeroAutomatico FROM Asientos " +
+
+                                joinTableAsientosUploads +      // 'join' o 'left join' dependiendo de si el usuario quiere *solo* asientos con uploads 
+                                "(SELECT Asientos_Documentos_Links.NumeroAutomatico, Count(Asientos_Documentos_Links.Id) as NumLinks " +
+                                "FROM Asientos_Documentos_Links " +
+                                "Group By Asientos_Documentos_Links.NumeroAutomatico) as links On Asientos.NumeroAutomatico = links.NumeroAutomatico " +
+
+                                "Where " + Session["filtroForma_consultaAsientosContables"].ToString() +
+                                " And (Asientos.NumeroAutomatico In (SELECT Asientos.NumeroAutomatico FROM Asientos " +
                                 "Left Outer Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
                                 "Left Outer Join CuentasContables On CuentasContables.ID = dAsientos.CuentaContableID " +
-                                    "Where " + Session["filtroForma_consultaAsientosContables"].ToString() + " And " +
-                                    Session["filtroForma_consultaAsientosContables_subQuery"].ToString() + "))" +
-                                    "Group By Asientos.NumeroAutomatico, Asientos.Lote";
+                                "Where " + Session["filtroForma_consultaAsientosContables"].ToString() + " And " +
+                                Session["filtroForma_consultaAsientosContables_subQuery"].ToString() + "))" +
+                                "Group By Asientos.NumeroAutomatico, Asientos.Lote, links.NumLinks";
             }
 
             if (Session["SoloAsientosDescuadrados"] != null &&  Convert.ToBoolean(Session["SoloAsientosDescuadrados"]))
@@ -183,6 +204,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                 MyComprobantesContable.TotalDebe = a.TotalDebe != null ? a.TotalDebe.Value : 0;
                 MyComprobantesContable.TotalHaber = a.TotalHaber != null ? a.TotalHaber.Value : 0;
                 MyComprobantesContable.NombreUsuario = Membership.GetUser().UserName;
+                MyComprobantesContable.NumUploads = Convert.ToInt16(a.NumLinks);
                 MyComprobantesContable.Lote = a.Lote; 
 
                 context.tTempWebReport_ConsultaComprobantesContables.AddObject(MyComprobantesContable);

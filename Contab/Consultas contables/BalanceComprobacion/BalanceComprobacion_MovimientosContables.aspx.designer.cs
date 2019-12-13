@@ -58,12 +58,12 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion {
         protected global::System.Web.UI.WebControls.ListView BalanceComprobacion_ListView;
         
         /// <summary>
-        /// MovimientosContables_LinqDataSource control.
+        /// MovimientosContables_SqlDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource MovimientosContables_LinqDataSource;
+        protected global::System.Web.UI.WebControls.SqlDataSource MovimientosContables_SqlDataSource;
     }
 }

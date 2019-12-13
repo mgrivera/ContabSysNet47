@@ -44,12 +44,13 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos", "Contab_ConsultaCuentasYMovimientos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_ConsultaCuentasYMovimientos), "Contab_ConsultaCuentasYMovimientos_Movimientos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_ConsultaCuentasYMovimientos_Movimientos), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Presupuesto_Codigos_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Compania), "Presupuesto_Codigos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Presupuesto_Codigos), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "Presupuesto_AsociacionCodigosCuentas", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CuentasContable), "Presupuesto_Codigos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Presupuesto_Codigos))]
-[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_tTempWebReport_ConsultaComprobantesContables_Asientos", "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Asiento), "tTempWebReport_ConsultaComprobantesContables", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.tTempWebReport_ConsultaComprobantesContables), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_ParametrosContab_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Compania), "ParametrosContab", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.ParametrosContab), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Presupuesto_Montos_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Moneda), "Presupuesto_Montos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Presupuesto_Montos), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Presupuesto_Montos_Presupuesto_Codigos", "Presupuesto_Codigos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Presupuesto_Codigos), "Presupuesto_Montos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Presupuesto_Montos), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Contab_BalanceComprobacion_CuentasContables", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CuentasContable), "Contab_BalanceComprobacion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_BalanceComprobacion), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Contab_BalanceComprobacion_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Moneda), "Contab_BalanceComprobacion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_BalanceComprobacion), true)]
+[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Asientos_Documentos_Links_Asientos", "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Asiento), "Asientos_Documentos_Links", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Asientos_Documentos_Links), true)]
+[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_tTempWebReport_ConsultaComprobantesContables_Asientos", "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Asiento), "tTempWebReport_ConsultaComprobantesContables", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.tTempWebReport_ConsultaComprobantesContables), true)]
 
 #endregion
 
@@ -408,22 +409,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<tTempWebReport_ConsultaComprobantesContables> tTempWebReport_ConsultaComprobantesContables
-        {
-            get
-            {
-                if ((_tTempWebReport_ConsultaComprobantesContables == null))
-                {
-                    _tTempWebReport_ConsultaComprobantesContables = base.CreateObjectSet<tTempWebReport_ConsultaComprobantesContables>("tTempWebReport_ConsultaComprobantesContables");
-                }
-                return _tTempWebReport_ConsultaComprobantesContables;
-            }
-        }
-        private ObjectSet<tTempWebReport_ConsultaComprobantesContables> _tTempWebReport_ConsultaComprobantesContables;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<ParametrosContab> ParametrosContabs
         {
             get
@@ -468,6 +453,38 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
             }
         }
         private ObjectSet<Contab_BalanceComprobacion> _Contab_BalanceComprobacion;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Asientos_Documentos_Links> Asientos_Documentos_Links
+        {
+            get
+            {
+                if ((_Asientos_Documentos_Links == null))
+                {
+                    _Asientos_Documentos_Links = base.CreateObjectSet<Asientos_Documentos_Links>("Asientos_Documentos_Links");
+                }
+                return _Asientos_Documentos_Links;
+            }
+        }
+        private ObjectSet<Asientos_Documentos_Links> _Asientos_Documentos_Links;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<tTempWebReport_ConsultaComprobantesContables> tTempWebReport_ConsultaComprobantesContables
+        {
+            get
+            {
+                if ((_tTempWebReport_ConsultaComprobantesContables == null))
+                {
+                    _tTempWebReport_ConsultaComprobantesContables = base.CreateObjectSet<tTempWebReport_ConsultaComprobantesContables>("tTempWebReport_ConsultaComprobantesContables");
+                }
+                return _tTempWebReport_ConsultaComprobantesContables;
+            }
+        }
+        private ObjectSet<tTempWebReport_ConsultaComprobantesContables> _tTempWebReport_ConsultaComprobantesContables;
 
         #endregion
 
@@ -626,14 +643,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the tTempWebReport_ConsultaComprobantesContables EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotTempWebReport_ConsultaComprobantesContables(tTempWebReport_ConsultaComprobantesContables tTempWebReport_ConsultaComprobantesContables)
-        {
-            base.AddObject("tTempWebReport_ConsultaComprobantesContables", tTempWebReport_ConsultaComprobantesContables);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the ParametrosContabs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToParametrosContabs(ParametrosContab parametrosContab)
@@ -655,6 +664,22 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         public void AddToContab_BalanceComprobacion(Contab_BalanceComprobacion contab_BalanceComprobacion)
         {
             base.AddObject("Contab_BalanceComprobacion", contab_BalanceComprobacion);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Asientos_Documentos_Links EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAsientos_Documentos_Links(Asientos_Documentos_Links asientos_Documentos_Links)
+        {
+            base.AddObject("Asientos_Documentos_Links", asientos_Documentos_Links);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tTempWebReport_ConsultaComprobantesContables EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotTempWebReport_ConsultaComprobantesContables(tTempWebReport_ConsultaComprobantesContables tTempWebReport_ConsultaComprobantesContables)
+        {
+            base.AddObject("tTempWebReport_ConsultaComprobantesContables", tTempWebReport_ConsultaComprobantesContables);
         }
 
         #endregion
@@ -1729,6 +1754,28 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_Contab_NS", "FK_Asientos_Documentos_Links_Asientos", "Asientos_Documentos_Links")]
+        public EntityCollection<Asientos_Documentos_Links> Asientos_Documentos_Links
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Asientos_Documentos_Links>("dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos", "Asientos_Documentos_Links");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Asientos_Documentos_Links>("dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos", "Asientos_Documentos_Links", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("dbContab_Contab_NS", "FK_tTempWebReport_ConsultaComprobantesContables_Asientos", "tTempWebReport_ConsultaComprobantesContables")]
         public EntityCollection<tTempWebReport_ConsultaComprobantesContables> tTempWebReport_ConsultaComprobantesContables
         {
@@ -1741,6 +1788,156 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tTempWebReport_ConsultaComprobantesContables>("dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos", "tTempWebReport_ConsultaComprobantesContables", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="dbContab_Contab_NS", Name="Asientos_Documentos_Links")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Asientos_Documentos_Links : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Asientos_Documentos_Links object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="numeroAutomatico">Initial value of the NumeroAutomatico property.</param>
+        /// <param name="link">Initial value of the Link property.</param>
+        public static Asientos_Documentos_Links CreateAsientos_Documentos_Links(global::System.Int32 id, global::System.Int32 numeroAutomatico, global::System.String link)
+        {
+            Asientos_Documentos_Links asientos_Documentos_Links = new Asientos_Documentos_Links();
+            asientos_Documentos_Links.Id = id;
+            asientos_Documentos_Links.NumeroAutomatico = numeroAutomatico;
+            asientos_Documentos_Links.Link = link;
+            return asientos_Documentos_Links;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NumeroAutomatico
+        {
+            get
+            {
+                return _NumeroAutomatico;
+            }
+            set
+            {
+                OnNumeroAutomaticoChanging(value);
+                ReportPropertyChanging("NumeroAutomatico");
+                _NumeroAutomatico = StructuralObject.SetValidValue(value, "NumeroAutomatico");
+                ReportPropertyChanged("NumeroAutomatico");
+                OnNumeroAutomaticoChanged();
+            }
+        }
+        private global::System.Int32 _NumeroAutomatico;
+        partial void OnNumeroAutomaticoChanging(global::System.Int32 value);
+        partial void OnNumeroAutomaticoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Link
+        {
+            get
+            {
+                return _Link;
+            }
+            set
+            {
+                OnLinkChanging(value);
+                ReportPropertyChanging("Link");
+                _Link = StructuralObject.SetValidValue(value, false, "Link");
+                ReportPropertyChanged("Link");
+                OnLinkChanged();
+            }
+        }
+        private global::System.String _Link;
+        partial void OnLinkChanging(global::System.String value);
+        partial void OnLinkChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_Contab_NS", "FK_Asientos_Documentos_Links_Asientos", "Asiento")]
+        public Asiento Asiento
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asiento>("dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos", "Asiento").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asiento>("dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos", "Asiento").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Asiento> AsientoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Asiento>("dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos", "Asiento");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Asiento>("dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos", "Asiento", value);
                 }
             }
         }
@@ -10184,15 +10381,17 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="numeroAutomatico">Initial value of the NumeroAutomatico property.</param>
         /// <param name="numPartidas">Initial value of the NumPartidas property.</param>
+        /// <param name="numUploads">Initial value of the NumUploads property.</param>
         /// <param name="totalDebe">Initial value of the TotalDebe property.</param>
         /// <param name="totalHaber">Initial value of the TotalHaber property.</param>
         /// <param name="nombreUsuario">Initial value of the NombreUsuario property.</param>
-        public static tTempWebReport_ConsultaComprobantesContables CreatetTempWebReport_ConsultaComprobantesContables(global::System.Int32 id, global::System.Int32 numeroAutomatico, global::System.Int16 numPartidas, global::System.Decimal totalDebe, global::System.Decimal totalHaber, global::System.String nombreUsuario)
+        public static tTempWebReport_ConsultaComprobantesContables CreatetTempWebReport_ConsultaComprobantesContables(global::System.Int32 id, global::System.Int32 numeroAutomatico, global::System.Int16 numPartidas, global::System.Int16 numUploads, global::System.Decimal totalDebe, global::System.Decimal totalHaber, global::System.String nombreUsuario)
         {
             tTempWebReport_ConsultaComprobantesContables tTempWebReport_ConsultaComprobantesContables = new tTempWebReport_ConsultaComprobantesContables();
             tTempWebReport_ConsultaComprobantesContables.ID = id;
             tTempWebReport_ConsultaComprobantesContables.NumeroAutomatico = numeroAutomatico;
             tTempWebReport_ConsultaComprobantesContables.NumPartidas = numPartidas;
+            tTempWebReport_ConsultaComprobantesContables.NumUploads = numUploads;
             tTempWebReport_ConsultaComprobantesContables.TotalDebe = totalDebe;
             tTempWebReport_ConsultaComprobantesContables.TotalHaber = totalHaber;
             tTempWebReport_ConsultaComprobantesContables.NombreUsuario = nombreUsuario;
@@ -10277,6 +10476,30 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         private global::System.Int16 _NumPartidas;
         partial void OnNumPartidasChanging(global::System.Int16 value);
         partial void OnNumPartidasChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 NumUploads
+        {
+            get
+            {
+                return _NumUploads;
+            }
+            set
+            {
+                OnNumUploadsChanging(value);
+                ReportPropertyChanging("NumUploads");
+                _NumUploads = StructuralObject.SetValidValue(value, "NumUploads");
+                ReportPropertyChanged("NumUploads");
+                OnNumUploadsChanged();
+            }
+        }
+        private global::System.Int16 _NumUploads;
+        partial void OnNumUploadsChanging(global::System.Int16 value);
+        partial void OnNumUploadsChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

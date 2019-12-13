@@ -22,11 +22,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                     return; 
                 }
 
-                MovimientosContables_LinqDataSource.WhereParameters["CuentaContableID"].DefaultValue = Request.QueryString["cta"];
-                MovimientosContables_LinqDataSource.WhereParameters["Moneda"].DefaultValue = Request.QueryString["mon"];
+                this.MovimientosContables_SqlDataSource.SelectParameters["CuentaContableID"].DefaultValue = Request.QueryString["cta"];
+                this.MovimientosContables_SqlDataSource.SelectParameters["Moneda"].DefaultValue = Request.QueryString["mon"];
 
-                MovimientosContables_LinqDataSource.WhereParameters["FechaInicialPeriodo"].DefaultValue = Session["FechaInicialPeriodo"].ToString();
-                MovimientosContables_LinqDataSource.WhereParameters["FechaFinalPeriodo"].DefaultValue = Session["FechaFinalPeriodo"].ToString();
+                this.MovimientosContables_SqlDataSource.SelectParameters["FechaInicialPeriodo"].DefaultValue = Session["FechaInicialPeriodo"].ToString();
+                this.MovimientosContables_SqlDataSource.SelectParameters["FechaFinalPeriodo"].DefaultValue = Session["FechaFinalPeriodo"].ToString();
 
                 dbContabDataContext dbContab = new dbContabDataContext();
 
