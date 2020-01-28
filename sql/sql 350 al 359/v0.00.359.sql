@@ -1,0 +1,65 @@
+/*    Lunes, 7 de Octubre de 2.013 	-   v0.00.359.sql 
+
+	Agregamos el item AsientoContableID a la tabla NominaHeader
+*/
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.tNominaHeaders ADD
+	AsientoContableID int NULL
+GO
+ALTER TABLE dbo.tNominaHeaders SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Asientos SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.tNominaHeaders ADD CONSTRAINT
+	FK_tNominaHeaders_Asientos FOREIGN KEY
+	(
+	AsientoContableID
+	) REFERENCES dbo.Asientos
+	(
+	NumeroAutomatico
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.tNominaHeaders SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+--  ------------------------
+--  actualizamos la version 
+--  ------------------------
+
+Delete From tVersionWeb
+Insert Into tVersionWeb(VersionActual, Fecha) Values('v0.00.359', GetDate()) 

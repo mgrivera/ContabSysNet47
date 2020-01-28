@@ -2217,7 +2217,7 @@
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff2" />
-    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\Ris Solutions - 2.pubxml" />
     <None Include="Properties\PublishProfiles\Risk Solutions Settings.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Pictures\table_25x25.png" />
@@ -2629,6 +2629,9 @@
     <Content Include="webAppSettings.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="webAppSettings.gehInt">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="webAppSettings.geh">
       <SubType>Designer</SubType>
     </None>
@@ -2636,6 +2639,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="webAppSettings.arsa">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WebConnectionString.config.gehInt">
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.config.risk_smarterAspNet">
@@ -4037,24 +4043,24 @@
   <ItemGroup>
     <EmbeddedResource Include="ActivosFijos\Consultas\DepreciacionMensual\ConsultaDepreciacion.rdlc" />
     <EmbeddedResource Include="Areas\Contabilidad\Reports\CentrosCosto.rdlc" />
-    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\ComprobanteRetencionIva.rdlc" />
-    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_Generales.rdlc" />
-    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_Generales2.rdlc" />
-    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\FacturaClientesImpresa.rdlc" />
-    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas.rdlc">
+    <Content Include="Bancos\Consultas facturas\Facturas\ComprobanteRetencionIva.rdlc" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_Generales.rdlc" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_Generales2.rdlc" />
+    <Content Include="Bancos\Consultas facturas\Facturas\FacturaClientesImpresa.rdlc" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas.rdlc">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_LibroCompras.rdlc" />
-    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_LibroVentas.rdlc" />
-    <EmbeddedResource Include="Bancos\Consultas facturas\Facturas\Facturas_RetencionesIVA.rdlc" />
-    <EmbeddedResource Include="Bancos\Consultas facturas\Pagos\ConsultaPagos.rdlc" />
-    <EmbeddedResource Include="Bancos\Consultas facturas\VencimientoFacturas\VencimientoFacturas.rdlc" />
-    <EmbeddedResource Include="Bancos\ConsultasBancos\MovimientosBancarios\ConsultaMovimientosBancarios.rdlc" />
-    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad.rdlc" />
-    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad_Resumen.rdlc" />
-    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad_DosColumnas.rdlc" />
-    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad_DosColumnas2.rdlc" />
-    <EmbeddedResource Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos.rdlc" />
+    </Content>
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_LibroCompras.rdlc" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_LibroVentas.rdlc" />
+    <Content Include="Bancos\Consultas facturas\Facturas\Facturas_RetencionesIVA.rdlc" />
+    <Content Include="Bancos\Consultas facturas\Pagos\ConsultaPagos.rdlc" />
+    <Content Include="Bancos\Consultas facturas\VencimientoFacturas\VencimientoFacturas.rdlc" />
+    <Content Include="Bancos\ConsultasBancos\MovimientosBancarios\ConsultaMovimientosBancarios.rdlc" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad.rdlc" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad_Resumen.rdlc" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad_DosColumnas.rdlc" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\Bancos_Disponibilidad_DosColumnas2.rdlc" />
+    <Content Include="Bancos\Disponibilidad en bancos\Disponibilidad\MontosRestringidos.rdlc" />
     <Content Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion.rdlc" />
     <Content Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral.rdlc" />
     <Content Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_SoloSaldoFinal.rdlc" />

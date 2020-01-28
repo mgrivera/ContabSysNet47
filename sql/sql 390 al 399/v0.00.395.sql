@@ -1,0 +1,252 @@
+/*    
+	  Jueves, 25/May/2.017   -   v0.00.395.sql 
+
+	  Agregamos cascade delete a relaciones entre cuentas bancarias, chequeras y movimentos bancarios 
+*/
+
+/*
+   jueves, 25 de mayo de 201710:22:35 a.m.
+   User: sa
+   Server: .\SQLEXPRESS
+   Database: dbContabGeh
+   Application: 
+*/
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Chequeras
+	DROP CONSTRAINT FK_Chequeras_CuentasBancarias
+GO
+ALTER TABLE dbo.CuentasBancarias SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.MovimientosBancarios
+	DROP CONSTRAINT FK_MovimientosBancarios_Chequeras
+GO
+ALTER TABLE dbo.Chequeras WITH NOCHECK ADD CONSTRAINT
+	FK_Chequeras_CuentasBancarias FOREIGN KEY
+	(
+	NumeroCuenta
+	) REFERENCES dbo.CuentasBancarias
+	(
+	CuentaInterna
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.Chequeras SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.MovimientosBancarios ADD CONSTRAINT
+	FK_MovimientosBancarios_Chequeras FOREIGN KEY
+	(
+	ClaveUnicaChequera
+	) REFERENCES dbo.Chequeras
+	(
+	NumeroChequera
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.MovimientosBancarios SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CajaChica_RubrosCuentasContables
+	DROP CONSTRAINT FK_CajaChica_RubrosCuentasContables_CuentasContables1
+GO
+ALTER TABLE dbo.CuentasContables SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CajaChica_RubrosCuentasContables ADD CONSTRAINT
+	FK_CajaChica_RubrosCuentasContables_CuentasContables1 FOREIGN KEY
+	(
+	CuentaContableID
+	) REFERENCES dbo.CuentasContables
+	(
+	ID
+	) ON UPDATE  CASCADE 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.CajaChica_RubrosCuentasContables SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.dPagos
+	DROP CONSTRAINT FK_dPagos_CuotasFactura
+GO
+ALTER TABLE dbo.CuotasFactura SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.dPagos ADD CONSTRAINT
+	FK_dPagos_CuotasFactura FOREIGN KEY
+	(
+	ClaveUnicaCuotaFactura
+	) REFERENCES dbo.CuotasFactura
+	(
+	ClaveUnica
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.dPagos SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.InventarioActivosFijos
+	DROP CONSTRAINT FK_InventarioActivosFijos_tEmpleados
+GO
+ALTER TABLE dbo.tEmpleados SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.InventarioActivosFijos ADD CONSTRAINT
+	FK_InventarioActivosFijos_tEmpleados FOREIGN KEY
+	(
+	AutorizadoPor
+	) REFERENCES dbo.tEmpleados
+	(
+	Empleado
+	) ON UPDATE  CASCADE 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.InventarioActivosFijos SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.dAsientos
+	DROP CONSTRAINT FK_dAsientos_CuentasContables1
+GO
+ALTER TABLE dbo.CuentasContables SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.dAsientos ADD CONSTRAINT
+	FK_dAsientos_CuentasContables1 FOREIGN KEY
+	(
+	CuentaContableID
+	) REFERENCES dbo.CuentasContables
+	(
+	ID
+	) ON UPDATE  CASCADE 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.dAsientos SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.ConciliacionesBancarias
+	DROP CONSTRAINT FK_ConciliacionesBancarias_CuentasBancarias
+GO
+ALTER TABLE dbo.CuentasBancarias SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.ConciliacionesBancarias ADD CONSTRAINT
+	FK_ConciliacionesBancarias_CuentasBancarias FOREIGN KEY
+	(
+	CuentaBancaria
+	) REFERENCES dbo.CuentasBancarias
+	(
+	CuentaInterna
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.ConciliacionesBancarias SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+--  ------------------------
+--  actualizamos la version 
+--  ------------------------
+
+Delete From tVersionWeb
+Insert Into tVersionWeb(VersionActual, Fecha) Values('v0.00.395', GetDate()) 
