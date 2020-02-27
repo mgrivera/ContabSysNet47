@@ -1,0 +1,59 @@
+/*    Viernes, 31 de Octubre de 2.008   -   v0.00.223.sql 
+
+	Agregamos indices a las tablas: dAsientos y SaldosContables, a ver 
+	si la consulta Balance General Web se ejecuta más rápido 
+
+*/ 
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE NONCLUSTERED INDEX IX_SaldosContables ON dbo.SaldosContables
+	(
+	Cuenta,
+	Moneda,
+	Ano,
+	Cia
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+COMMIT
+
+
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE NONCLUSTERED INDEX IX_dAsientos_1 ON dbo.dAsientos
+	(
+	Cuenta,
+	Moneda,
+	Cia,
+	Fecha
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+COMMIT
+
+--  ------------------------
+--  actualizamos la version 
+--  ------------------------
+
+Delete From tVersionWeb 
+Insert Into tVersionWeb (VersionActual, Fecha) Values('v0.00.223', GetDate()) 
