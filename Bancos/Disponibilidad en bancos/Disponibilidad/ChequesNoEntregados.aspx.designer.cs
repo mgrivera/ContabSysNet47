@@ -21,15 +21,6 @@ public partial class Bancos_Disponibilidad_en_bancos_Disponibilidad_ChequesNoEnt
     protected global::System.Web.UI.WebControls.HiddenField RebindFlagHiddenField;
     
     /// <summary>
-    /// Filter_img control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Filter_img;
-    
-    /// <summary>
     /// ErrMessage_Span control.
     /// </summary>
     /// <remarks>

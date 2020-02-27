@@ -14,13 +14,13 @@
     <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0">
         <cc1:TabPanel ID="TabPanel1" runat="server" HeaderText="Generales" TabIndex="0">
             <ContentTemplate>
-                <table cellspacing="10px">
+                <table cellspacing="10px" class="notsosmallfont">
                     <tr>
                         <td>
                             Fecha:
                         </td>
                         <td>
-                            <asp:TextBox ID="Sql_MovimientosBancarios_Fecha_Date" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="Sql_MovimientosBancarios_Fecha_Date" runat="server" placeholder="ej: entre 1/1/17 y 31/1/17"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -28,7 +28,7 @@
                             Monto:
                         </td>
                         <td>
-                            <asp:TextBox ID="Sql_MovimientosBancarios_Monto_Numeric" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="Sql_MovimientosBancarios_Monto_Numeric" runat="server" placeholder="ej: entre -1000 y -350"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -38,19 +38,19 @@
             <ContentTemplate>
                 <table>
                     <tr>
-                        <td class="ListViewHeader_Suave generalfont">
+                        <td class="ListViewHeader_Suave smallfont2">
                             Compañías
                         </td>
                         <td>
                             &nbsp;&nbsp;
                         </td>
-                        <td class="ListViewHeader_Suave generalfont">
+                        <td class="ListViewHeader_Suave smallfont2">
                             Monedas
                         </td>
                         <td>
                             &nbsp;&nbsp;
                         </td>
-                        <td class="ListViewHeader_Suave generalfont">
+                        <td class="ListViewHeader_Suave smallfont2">
                             Cuentas
                         </td>
                         <td>
@@ -58,28 +58,42 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:ListBox ID="Sql_CuentasBancarias_Cia_Numeric" runat="server"
-                                DataTextField="NombreCorto" DataValueField="Numero"
-                                Height="193px" SelectionMode="Multiple" Width="200px" CssClass="notsosmallfont">
-                            </asp:ListBox>
+                            <asp:ListBox ID="Sql_CuentasBancarias_Cia_Numeric" 
+                                runat="server"
+                                DataTextField="NombreCorto" 
+                                DataValueField="Numero"
+                                Height="193px" 
+                                SelectionMode="Multiple" 
+                                Width="200px" 
+                                CssClass="smallfont2" />
                         </td>
                         <td>
                             &nbsp;&nbsp;
                         </td>
                         <td>
-                            <asp:ListBox ID="Sql_CuentasBancarias_Moneda_Numeric" runat="server"
-                                DataSourceID="Monedas_SqlDataSource" DataTextField="Descripcion" DataValueField="Moneda"
-                                Height="193px" SelectionMode="Multiple" Width="200px" CssClass="notsosmallfont">
-                            </asp:ListBox>
+                            <asp:ListBox ID="Sql_CuentasBancarias_Moneda_Numeric" 
+                                runat="server"
+                                DataSourceID="Monedas_SqlDataSource" 
+                                DataTextField="Descripcion" 
+                                DataValueField="Moneda"
+                                Height="193px" 
+                                SelectionMode="Multiple" 
+                                Width="200px" 
+                                CssClass="smallfont2" />
                         </td>
                         <td>
                             &nbsp;&nbsp;
                         </td>
                         <td>
-                            <asp:ListBox ID="Sql_Chequeras_NumeroCuenta_Numeric" runat="server"
-                                DataSourceID="CuentasBancarias_SqlDataSource" DataTextField="NombreCuentaBancaria"
-                                DataValueField="CuentaInterna" Height="193px" SelectionMode="Multiple" Width="300px"
-                                CssClass="notsosmallfont"></asp:ListBox>
+                            <asp:ListBox ID="Sql_Chequeras_NumeroCuenta_Numeric" 
+                                runat="server"
+                                DataSourceID="CuentasBancarias_SqlDataSource" 
+                                DataTextField="NombreCuentaBancaria"
+                                DataValueField="CuentaInterna" 
+                                Height="193px" 
+                                SelectionMode="Multiple" 
+                                Width="300px"
+                                CssClass="smallfont2" />
                         </td>
                         <td>
                         </td>

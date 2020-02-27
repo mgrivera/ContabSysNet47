@@ -166,24 +166,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         protected global::System.Web.UI.WebControls.TextBox Desde_TextBox;
         
         /// <summary>
-        /// Desde_TextBox_CalendarExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender Desde_TextBox_CalendarExtender;
-        
-        /// <summary>
-        /// DesdeCalendar_PopUpButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton DesdeCalendar_PopUpButton;
-        
-        /// <summary>
         /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
@@ -209,24 +191,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Hasta_TextBox;
-        
-        /// <summary>
-        /// Hasta_TextBox_CalendarExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender Hasta_TextBox_CalendarExtender;
-        
-        /// <summary>
-        /// HastaCalendar_PopUpButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton HastaCalendar_PopUpButton;
         
         /// <summary>
         /// RequiredFieldValidator2 control.

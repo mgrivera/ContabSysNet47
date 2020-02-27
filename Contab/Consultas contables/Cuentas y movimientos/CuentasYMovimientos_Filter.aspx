@@ -179,8 +179,7 @@
                                      DataValueField="Numero" 
                                      Height="193px" 
                                      SelectionMode="Multiple"
-                                     Width="100px" 
-                                     CssClass="smallfont, ciaListBox" />
+                                     CssClass="smallfont2" Width="100%" />
                     </td>
                     <td>&nbsp;&nbsp;</td>
                     <td>
@@ -191,8 +190,7 @@
                                      DataValueField="Moneda" 
                                      Height="193px" 
                                      SelectionMode="Multiple"
-                                     Width="70px" 
-                                     CssClass="smallfont" />
+                                     CssClass="smallfont2" Width="100%" />
                     </td>
                     <td>&nbsp;&nbsp;</td>
                     <td>
@@ -203,8 +201,7 @@
                                      DataValueField="Moneda" 
                                      Height="193px" 
                                      SelectionMode="Multiple"
-                                     Width="70px" 
-                                     CssClass="smallfont" />
+                                     CssClass="smallfont2" Width="100%" />
                     </td>
                     <td>&nbsp;&nbsp;</td>
                     <td>
@@ -216,7 +213,7 @@
                                      Height="193px"
                                      SelectionMode="Multiple" 
                                      Width="150px" 
-                                     CssClass="smallfont" />
+                                     CssClass="smallfont2" />
                     </td>
                     <td>&nbsp;&nbsp;</td>
                     <td>
@@ -228,7 +225,7 @@
                                      Height="193px"
                                      SelectionMode="Multiple" 
                                      Width="150px" 
-                                     CssClass="smallfont" />
+                                     CssClass="smallfont2" />
                     </td>
                     <td>&nbsp;&nbsp;</td>
                     <td style="vertical-align: top; text-align: left; ">
@@ -316,41 +313,56 @@
         <br />
         <div style="text-align: left;" class="generalfont">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Período: &nbsp;&nbsp;
-           <asp:TextBox ID="Desde_TextBox" runat="server" Width="105px"></asp:TextBox>
-                            <cc1:CalendarExtender ID="Desde_TextBox_CalendarExtender" runat="server" Enabled="True"
-                                Format="dd-MM-yy" PopupButtonID="DesdeCalendar_PopUpButton" CssClass="radcalendar"
-                                TargetControlID="Desde_TextBox">
-                            </cc1:CalendarExtender>
-                            <asp:ImageButton ID="DesdeCalendar_PopUpButton" runat="server" 
-                alt="" src="../../../Pictures/Calendar.png"
-                                CausesValidation="False" TabIndex="-1" />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
-                runat="server" ControlToValidate="Desde_TextBox"
-                                CssClass="errmessage generalfont" Display="Dynamic" 
-                ErrorMessage="Ud. debe indicar una fecha" ForeColor="Red">*</asp:RequiredFieldValidator>
-                            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="Desde_TextBox"
-                                CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
-                                Operator="DataTypeCheck" Type="Date">Red</asp:CompareValidator>
+            <asp:TextBox ID="Desde_TextBox" runat="server" TextMode="Date" Width="125px" />
+           
+                            
+
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
+                                        runat="server" 
+                                        ControlToValidate="Desde_TextBox"
+                                        CssClass="errmessage generalfont" 
+                                        Display="Dynamic" 
+                                        ErrorMessage="Ud. debe indicar una fecha" ForeColor="Red">*
+            </asp:RequiredFieldValidator>
+
+            <asp:CompareValidator ID="CompareValidator1" 
+                                  runat="server" 
+                                  ControlToValidate="Desde_TextBox"
+                                  CssClass="errmessage generalfont" 
+                                  Display="Dynamic" 
+                                  ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
+                                  Operator="DataTypeCheck" 
+                                  Type="Date">Red
+            </asp:CompareValidator>
+
             &nbsp;/&nbsp;&nbsp;
-             <asp:TextBox ID="Hasta_TextBox" runat="server" Width="105px"></asp:TextBox>
-                            <cc1:CalendarExtender ID="Hasta_TextBox_CalendarExtender" runat="server" Enabled="True"
-                                Format="dd-MM-yy" PopupButtonID="HastaCalendar_PopUpButton" CssClass="radcalendar"
-                                TargetControlID="Hasta_TextBox">
-                            </cc1:CalendarExtender>
-                            <asp:ImageButton ID="HastaCalendar_PopUpButton" runat="server" 
-                alt="" src="../../../Pictures/Calendar.png"
-                                CausesValidation="False" TabIndex="-1" />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" 
-                runat="server" ControlToValidate="Hasta_TextBox"
-                                CssClass="errmessage generalfont" Display="Dynamic" 
-                ErrorMessage="Ud. debe indicar una fecha" ForeColor="Red">*</asp:RequiredFieldValidator>
-                            <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="Hasta_TextBox"
-                                CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
-                                Operator="DataTypeCheck" Type="Date" ForeColor="Red">*</asp:CompareValidator>
-                            <asp:CompareValidator ID="CompareValidator3" runat="server" ControlToValidate="Hasta_TextBox"
+
+            <asp:TextBox ID="Hasta_TextBox" runat="server" TextMode="Date" Width="125px" />
+
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" 
+                                        runat="server" 
+                                        ControlToValidate="Hasta_TextBox"
+                                CssClass="errmessage generalfont" 
+                                        Display="Dynamic" 
+                                        ErrorMessage="Ud. debe indicar una fecha" 
+                                        ForeColor="Red">*
+            </asp:RequiredFieldValidator>
+
+            <asp:CompareValidator ID="CompareValidator2" runat="server" 
+                                  ControlToValidate="Hasta_TextBox"
+                                  CssClass="errmessage generalfont" 
+                                  Display="Dynamic" 
+                                  ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
+                                  Operator="DataTypeCheck" 
+                                  Type="Date" 
+                                  ForeColor="Red">*
+            </asp:CompareValidator>
+
+            <asp:CompareValidator ID="CompareValidator3" runat="server" ControlToValidate="Hasta_TextBox"
                                 CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El intervalo indicado no es válido."
                                 Operator="GreaterThanEqual" Type="Date" 
-                ControlToCompare="Desde_TextBox" ForeColor="Red">*</asp:CompareValidator>
+                ControlToCompare="Desde_TextBox" ForeColor="Red">*
+            </asp:CompareValidator>
 
              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -360,7 +372,7 @@
                           Checked="False" />
         </div>
 
-         <br />
+        <br />
          
         <div style="text-align: left;">
             <fieldset style="text-align: left; margin-left: 15px; ">

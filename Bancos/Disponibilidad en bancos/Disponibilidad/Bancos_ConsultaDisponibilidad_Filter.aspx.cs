@@ -106,14 +106,12 @@ public partial class Bancos_Disponibilidad_en_bancos_Disponibilidad_Bancos_Consu
     {
         // para mostrar en el listbox de cuentas bancarias solo las que corresponden a las cias contab 
         // o monedas seleccionadas  
-
         SeleccionarCuentasBancarias(); 
     }
     protected void Sql_CuentasBancarias_Moneda_Numeric_SelectedIndexChanged(object sender, EventArgs e)
     {
         // para mostrar en el listbox de cuentas bancarias solo las que corresponden a las cias contab 
         // o monedas seleccionadas  
-
         SeleccionarCuentasBancarias(); 
     }
 
@@ -121,7 +119,6 @@ public partial class Bancos_Disponibilidad_en_bancos_Disponibilidad_Bancos_Consu
     {
         // para mostrar en el ListBox de cuentas bancarias solo las que correspondan a las cias y monedas 
         // seleccionadas 
-
          String MyWhereString  = ""; 
 
         foreach (ListItem MyListItem in Sql_CuentasBancarias_Cia_Numeric.Items)

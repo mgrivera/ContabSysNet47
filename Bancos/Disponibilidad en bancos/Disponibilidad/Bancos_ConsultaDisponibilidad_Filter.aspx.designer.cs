@@ -57,24 +57,6 @@ public partial class Bancos_Disponibilidad_en_bancos_Disponibilidad_Bancos_Consu
     protected global::System.Web.UI.WebControls.TextBox FechaDisponibilidadAl_TextBox;
     
     /// <summary>
-    /// FechaDisponibilidadAl_TextBox_CalendarExtender control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::AjaxControlToolkit.CalendarExtender FechaDisponibilidadAl_TextBox_CalendarExtender;
-    
-    /// <summary>
-    /// Calendar_PopUpButton control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ImageButton Calendar_PopUpButton;
-    
-    /// <summary>
     /// RequiredFieldValidator1 control.
     /// </summary>
     /// <remarks>

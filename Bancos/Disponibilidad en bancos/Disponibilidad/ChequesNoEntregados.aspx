@@ -8,7 +8,9 @@
     <script type="text/javascript">
         function PopupWin(url, w, h) {
             ///Parameters url=page to open, w=width, h=height
-            window.open(url, "external2", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,top=10px,left=8px");
+            var left = parseInt((screen.availWidth / 2) - (w / 2));
+            var top = parseInt((screen.availHeight / 2) - (h / 2));
+            window.open(url, "external", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top);
         }
         function RefreshPage() {
             // nótese como usamos jquery para asignar el valor al field ... 
@@ -22,17 +24,21 @@
         <%-- clientIdMode 'static' para que el id permanezca hasta el cliente (browser) --%>
         <asp:HiddenField ID="RebindFlagHiddenField" runat="server" Value="0" ClientIDMode="Static" />
     </span>
+
     <%--  --%>
     <%-- div en la izquierda para mostrar funciones de la página --%>
     <%--  --%>
-    <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top;
-        background-color: #F7F7F7; float: left; text-align: center; ">
+
+    <div class="notsosmallfont" 
+         style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top;
+         background-color: #F7F7F7; float: left; text-align: center; ">
+
         <br />
         <br />
-        <img id="Filter_img" alt="Para definir y aplicar un filtro para seleccionar la información que desea consultar."
-            runat="server" src="~/Pictures/filter_16x16.gif" />
-        <a href="javascript:PopupWin('ChequesNoEntregados_Filter.aspx', 1000, 680)">Definir
-            y aplicar un filtro</a>
+
+        <a href="javascript:PopupWin('ChequesNoEntregados_Filter.aspx', 1200, 680)">Definir y aplicar<br />un filtro</a><br />
+        <i class="fas fa-filter fa-2x" style="margin-top: 5px;"></i>
+
         <hr />
         <br />
     </div>
@@ -42,10 +48,11 @@
             style="display: block;">
         </span>
         
-         <asp:ListView ID="ChequesNoEntregados_ListView" runat="server" 
-             DataKeyNames="ClaveUnica" 
-             DataSourceID="ChequesNoEntregados_SqlDataSource" 
-             onitemupdating="ChequesNoEntregados_ListView_ItemUpdating">
+         <asp:ListView ID="ChequesNoEntregados_ListView" 
+                       runat="server" 
+                       DataKeyNames="ClaveUnica" 
+                       DataSourceID="ChequesNoEntregados_SqlDataSource" 
+                       onitemupdating="ChequesNoEntregados_ListView_ItemUpdating">
              
               <LayoutTemplate>
                  <table runat="server">
@@ -176,15 +183,25 @@
                      </td>
                  </tr>
             </AlternatingItemTemplate>
+
             <EditItemTemplate>
-             <tr style="">
+                <tr style="">
                       <td>
-                        <asp:ImageButton ID="Update_Button" runat="server" CommandName="Update" Text="Update"
-                            ImageUrl="~/pictures/ListView_Buttons/ok_14x14.png" ValidationGroup="EditValGroup"
-                            ToolTip="Actualizar" />
-                        <asp:ImageButton ID="Cancel_Button" runat="server" CommandName="Cancel" Text="Clear"
-                            ImageUrl="~/pictures/ListView_Buttons/undo1_14x14.png" CausesValidation="False"
-                            ToolTip="Cancelar" />
+                        <asp:ImageButton ID="Update_Button" 
+                                         runat="server" 
+                                         CommandName="Update" 
+                                         Text="Update"
+                                         ImageUrl="~/pictures/ListView_Buttons/ok_14x14.png" 
+                                         ValidationGroup="EditValGroup"
+                                         ToolTip="Actualizar" />
+
+                        <asp:ImageButton ID="Cancel_Button" 
+                                         runat="server" 
+                                         CommandName="Cancel" 
+                                         Text="Clear"
+                                         ImageUrl="~/pictures/ListView_Buttons/undo1_14x14.png" 
+                                         CausesValidation="False"
+                                         ToolTip="Cancelar" />
                     </td>
                      <td class="padded" style="text-align: center;">
                          <asp:Label ID="NombreBancoLabel" runat="server" Text='<%# Eval("NombreBanco") %>' />
@@ -206,21 +223,18 @@
                      <td class="padded" style="text-align: right;">
                          <asp:Label ID="MontoLabel" runat="server" Text='<%# Eval("Monto", "{0:N2}") %>' />
                      </td>
-                     <td class="padded" style="text-align: center;">
-                         <asp:TextBox ID="FechaEntregadoTextBox" runat="server" Width="100px" Text='<%# Bind("FechaEntregado", "{0:dd-MMM-yy}") %>' />
-                         <cc1:CalendarExtender
-                            ID="FechaTextBox_CalendarExtender" runat="server" Enabled="True"
-                            Format="dd-MM-yy" CssClass="radcalendar"
-                            TargetControlID="FechaEntregadoTextBox">
-                        </cc1:CalendarExtender>
+                     <td>
+                         <asp:TextBox ID="FechaEntregadoTextBox" runat="server" Width="140px" TextMode="Date" Text='<%# Bind("FechaEntregado") %>' Height="25px" />
                      </td>
                  </tr>
             </EditItemTemplate>
+
              <EmptyDataTemplate>
                  <table runat="server" style="">
                      <tr>
                          <td>
-                             No hay información para mostrar. <br />Defina y aplique un filtro para mostrar información.</td>
+                             No hay información para mostrar. <br />Defina y aplique un filtro para mostrar información.
+                         </td>
                      </tr>
                  </table>
              </EmptyDataTemplate>
