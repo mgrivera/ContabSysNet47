@@ -179,7 +179,7 @@
                                      DataValueField="Numero" 
                                      Height="193px" 
                                      SelectionMode="Multiple"
-                                     CssClass="smallfont2" Width="100%" />
+                                     CssClass="smallfont2 ciaListBox" Width="100%" />
                     </td>
                     <td>&nbsp;&nbsp;</td>
                     <td>

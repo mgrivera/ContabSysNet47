@@ -1760,6 +1760,8 @@
     <Content Include="Otros\Control acceso\AsociarUsuariosCompanias.aspx" />
     <Content Include="Otros\reconversionMonetaria\reconversionMonetaria.aspx" />
     <Content Include="Otros\reconversionMonetaria\reconversionMonetaria_filter.aspx" />
+    <Content Include="Pictures\SelectedRecord.png" />
+    <Content Include="Pictures\SelectRecord.png" />
     <Content Include="ReportViewer4.aspx" />
     <Content Include="Scripts\bootstrap-4.0\css\bootstrap-grid.css" />
     <Content Include="Scripts\bootstrap-4.0\css\bootstrap-grid.min.css" />
@@ -4041,7 +4043,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ActivosFijos\Consultas\DepreciacionMensual\ConsultaDepreciacion.rdlc" />
+    <Content Include="ActivosFijos\Consultas\DepreciacionMensual\ConsultaDepreciacion.rdlc" />
     <EmbeddedResource Include="Areas\Contabilidad\Reports\CentrosCosto.rdlc" />
     <Content Include="Bancos\Consultas facturas\Facturas\ComprobanteRetencionIva.rdlc" />
     <Content Include="Bancos\Consultas facturas\Facturas\Facturas_Generales.rdlc" />

@@ -84,7 +84,7 @@
                                          DataValueField="Numero" 
                                          SelectionMode="Multiple"
                                          Height="193px"
-                                         Width="100px"
+                                         Width="100%"
                                          AutoPostBack="True" 
                                          CssClass="smallfont2"
                                          onselectedindexchanged="Sql_CuentasBancarias_Cia_Numeric_SelectedIndexChanged" />
@@ -98,7 +98,7 @@
                                          DataValueField="Moneda" 
                                          SelectionMode="Multiple"
                                          Height="193px"
-                                         Width="100px"
+                                         Width="100%"
                                          AutoPostBack="True" 
                                          CssClass="smallfont2"
                                          onselectedindexchanged="Sql_CuentasBancarias_Moneda_Numeric_SelectedIndexChanged" />
