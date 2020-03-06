@@ -40,6 +40,24 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorMessageDiv;
         
         /// <summary>
+        /// selectedRecs_div control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl selectedRecs_div;
+        
+        /// <summary>
+        /// selectedRecs_p control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl selectedRecs_p;
+        
+        /// <summary>
         /// UpdatePanelAnimationExtender1 control.
         /// </summary>
         /// <remarks>

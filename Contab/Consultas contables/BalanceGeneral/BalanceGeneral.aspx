@@ -41,6 +41,13 @@
 
         <hr />
 
+        <%-- para mostrar la cantidad de registros seleccinados --%>
+        <div id="selectedRecs_div" runat="server" style="display: none; ">
+            <p id="selectedRecs_p" style="text-align: center;" runat="server" />
+            <hr id="selectedRecs_hr" />
+        </div>
+        <%-- --------------------------------- --%>
+
         <a href="javascript:PopupWin('BalanceGeneral_OpcionesReportes.aspx', 1000, 600)">Reporte</a><br />
         <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
 

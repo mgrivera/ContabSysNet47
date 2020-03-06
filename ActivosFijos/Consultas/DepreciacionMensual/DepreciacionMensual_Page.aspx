@@ -31,13 +31,20 @@
     
         <tr>
              <%--   column en la izquierda con links   --%>
-            <td style="border: 1px solid #C0C0C0; width: 10%; vertical-align: top; background-color: #F7F7F7; text-align: center; " class="notsosmallfont">
+            <td style="border: 1px solid #C0C0C0; width: 10%; vertical-align: top; background-color: #F7F7F7; text-align: center; padding-left: 10px; padding-right: 10px; " class="notsosmallfont">
                 <br />
                 <br />
                 <a href="javascript:PopupWin('DepreciacionMensual_Filter.aspx', 1000, 680)">Definir y aplicar<br /> un filtro</a><br />
                 <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
 
                 <hr />
+
+                <%-- para mostrar la cantidad de registros seleccinados --%>
+                <div id="selectedRecs_div" style="display: none; " runat="server">
+                    <p id="selectedRecs_p" style="text-align: center;" runat="server" />
+                    <hr />
+                </div>
+                <%-- --------------------------------- --%>
 
                 <a href="javascript:PopupWin('DepreciacionMensual_OpcionesReportes.aspx', 1000, 680)" >Reporte</a><br />
                 <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
+using ContabSysNet_Web.ModelosDatos_EF.Contab;
 
 namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 {
@@ -41,16 +44,24 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 
                 // a veces no queremos mostrar todas las opciones que propone el control (user control) 
                 this.reportOptionsUserControl.MostrarSoloTotales = false;
-                this.reportOptionsUserControl.MostrarOrientation = false; 
+                this.reportOptionsUserControl.MostrarOrientation = false;
 
-                if (string.IsNullOrEmpty(this.reportOptionsUserControl.Titulo))
-                    if (_parametrosReporte.BalGen_GyP == "BG")
-                        this.reportOptionsUserControl.Titulo = "Balance General"; 
-                    else
-                        this.reportOptionsUserControl.Titulo = "Ganancias y Pérdidas";
+                if (_parametrosReporte.BalGen_GyP == "BG")
+                {
+                    string desde = _parametrosReporte.Desde.ToString("dd-MMM-yyyy");
+                    string hasta = _parametrosReporte.Hasta.ToString("dd-MMM-yyyy");
 
-                this.reportOptionsUserControl.SubTitulo = _parametrosReporte.Desde.ToString("dd-MMM-yyyy") + " al " + 
-                                                          _parametrosReporte.Hasta.ToString("dd-MMM-yyyy");
+                    this.reportOptionsUserControl.Titulo = "Balance General";
+                    this.reportOptionsUserControl.SubTitulo = $"Cifras al {hasta}";
+                }
+                else
+                {
+                    string desde = _parametrosReporte.Desde.ToString("dd-MMM-yyyy");
+                    string hasta = _parametrosReporte.Hasta.ToString("dd-MMM-yyyy");
+
+                    this.reportOptionsUserControl.Titulo = "Estado de Resultados";
+                    this.reportOptionsUserControl.SubTitulo = $"Desde {desde} hasta {hasta}";
+                }
             }
         }
 
@@ -63,8 +74,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             MyKeepPageState.SavePageStateInFile(this.Controls);
             MyKeepPageState = null;
             // ---------------------------------------------------------------------------------------------
-
-
+            var parametrosBalanceGeneral = _parametrosReporte = Session["BalanceGeneral_Parametros"] as BalanceGeneral_Parametros;
+          
+            // leemos la moneda seleccionada para obtener el símbolo y pasar al reporte 
             StringBuilder pageParams = new StringBuilder("rpt=balancegeneral");
 
             pageParams.Append("&tit=" + this.reportOptionsUserControl.Titulo);

@@ -3978,8 +3978,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>ContabSysNet 
-Contab</Value>
+                      <Value>ContabSysNet </Value>
                       <Style>
                         <FontStyle>Italic</FontStyle>
                         <FontFamily>= IIf(Parameters!simpleFont.Value, "Courier New", "Tahoma")</FontFamily>
@@ -3994,7 +3993,7 @@ Contab</Value>
                 </Paragraph>
               </Paragraphs>
               <Top>0.01167cm</Top>
-              <Height>1cm</Height>
+              <Height>0.38833cm</Height>
               <Width>2.75cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
@@ -4056,6 +4055,39 @@ Contab</Value>
               <ZIndex>4</ZIndex>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox8">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="(Cifras en " &amp; Parameters!simboloMoneda.Value &amp; ")"</Value>
+                      <Style>
+                        <FontFamily>=IIf(Parameters!simpleFont.Value, "Courier New", "Tahoma")</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <Color>=Iif(Parameters!color.Value, "Navy", "Black")</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox5</rd:DefaultName>
+              <Top>0.15887in</Top>
+              <Height>0.15748in</Height>
+              <Width>1.69667in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
           </ReportItems>
@@ -4126,11 +4158,15 @@ Contab</Value>
       <DataType>Boolean</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="simboloMoneda">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>4</NumberOfRows>
+      <NumberOfRows>5</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -4166,6 +4202,11 @@ Contab</Value>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>3</RowIndex>
           <ParameterName>noMostrarFechaDia</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>simboloMoneda</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

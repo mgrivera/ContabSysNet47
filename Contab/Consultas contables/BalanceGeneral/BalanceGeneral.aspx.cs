@@ -86,7 +86,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
                         return;
                     }
                 }
-
             }
         }
 
@@ -463,7 +462,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             this.MonedasFilter_DropDownList.DataBind();
             this.CompaniasFilter_DropDownList.DataBind(); 
 
-            this.BalanceGeneral_GridView.DataBind(); 
+            this.BalanceGeneral_GridView.DataBind();
+
+            // para mostrar la cantidad de registros seleccionados 
+            this.selectedRecs_p.InnerHtml = $"{cuentasContablesAgregadas.ToString()} registros seleccionados ..."; 
+            this.selectedRecs_div.Style["display"] = "block";
         }
 
         private void ConstruirFiltroBalGenGyP(BalanceGeneral_Parametros parametros,

@@ -335,7 +335,13 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             }
             finally
             {
-                activosFijos_dbcontext.Dispose(); 
+                // determinamos la cantidad de items agregados para el usuario 
+                Int32 numRecs = activosFijos_dbcontext.tTempActivosFijos_ConsultaDepreciacion.Count(u => u.NombreUsuario == User.Identity.Name); 
+                activosFijos_dbcontext.Dispose();
+
+                // para mostrar la cantidad de registros seleccionados 
+                this.selectedRecs_p.InnerHtml = $" {numRecs.ToString()} registros seleccionados ...";
+                this.selectedRecs_div.Style["display"] = "block";
             }
         }
 

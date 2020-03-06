@@ -2868,6 +2868,9 @@ namespace ContabSysNetWeb
                             if (Request.QueryString["cantNiveles"] != null)
                                 cantNiveles = Convert.ToInt16(Request.QueryString["cantNiveles"].ToString());
 
+                            if (Request.QueryString["simboloMoneda"] != null)
+                                cantNiveles = Convert.ToInt16(Request.QueryString["cantNiveles"].ToString());
+
                             dbContab_Contab_Entities db = new dbContab_Contab_Entities();
 
                             var query = db.Temp_Contab_Report_BalanceGeneral.Where("it.Usuario == '" + usuario + "'");
@@ -3383,6 +3386,7 @@ namespace ContabSysNetWeb
                             ReportParameter colorReportParameter = new ReportParameter("color", color);
                             ReportParameter simpleFontReportParameter = new ReportParameter("simpleFont", simpleFont);
                             ReportParameter soloTotalesReportParameter = new ReportParameter("soloTotales", soloTotales);
+                            ReportParameter simboloMonedaReportParameter = new ReportParameter("simboloMoneda", simboloMoneda);
 
                             ReportParameter tipoReporte_ReportParameter = new ReportParameter("TipoReporte", parametros.BalGen_GyP);
                             // -----------------------------------------------------------------------------------------------------
@@ -3417,7 +3421,8 @@ namespace ContabSysNetWeb
                                 simpleFontReportParameter, 
                                 soloTotalesReportParameter,
                                 tipoReporte_ReportParameter, 
-                                noMostrarFechaDia_ReportParameter
+                                noMostrarFechaDia_ReportParameter,
+                                simboloMonedaReportParameter
                             };
 
                             this.ReportViewer1.LocalReport.SetParameters(MyReportParameters);

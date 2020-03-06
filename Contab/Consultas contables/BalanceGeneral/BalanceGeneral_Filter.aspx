@@ -161,23 +161,11 @@
 
                             <ContentTemplate>
                                 <br />
-                                <asp:CalendarExtender ID="CalendarExtender1" 
-                                    runat="server" 
-                                    TodaysDateFormat="dd-MM-yyyy" 
-                                    TargetControlID="Desde_TextBox" 
-                                    Format="dd-MM-yyyy" Enabled="True" />
-
-                                <asp:CalendarExtender ID="CalendarExtender2" 
-                                    runat="server" 
-                                    TodaysDateFormat="dd-MM-yyyy" 
-                                    TargetControlID="Hasta_TextBox" 
-                                    Format="dd-MM-yyyy" Enabled="True" />
-
                                 Desde: 
-                                <asp:TextBox ID="Desde_TextBox" runat="server" />
+                                <asp:TextBox ID="Desde_TextBox" runat="server" TextMode="Date" />
                                 &nbsp;&nbsp;&nbsp; 
                                 Hasta: 
-                                <asp:TextBox ID="Hasta_TextBox" runat="server" />
+                                <asp:TextBox ID="Hasta_TextBox" runat="server" TextMode="Date" />
 
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Por favor indique un périodo válido." ControlToValidate="Desde_TextBox" Display="Dynamic" ForeColor="Red">*</asp:RequiredFieldValidator>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Por favor indique un périodo válido." ControlToValidate="Hasta_TextBox" Display="Dynamic" ForeColor="Red">*</asp:RequiredFieldValidator>

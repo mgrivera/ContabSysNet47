@@ -357,6 +357,9 @@
             <ContentTemplate>
                 <div style="padding: 10px; ">
                     <p>
+                        <b>Consideraciones con respecto al filtro:</b>
+                    </p>
+                    <p>
                         El usuario debe siempre seleccionar una compañía <em>Contab</em>. Además, solo podrá seleccionar una, y no varias. 
                     </p>
                     <p>
