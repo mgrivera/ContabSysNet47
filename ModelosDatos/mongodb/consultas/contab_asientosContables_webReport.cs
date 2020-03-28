@@ -54,6 +54,7 @@ namespace ContabSysNet_Web.ModelosDatos.mongodb.consultas
         public DateTime? fecha { get; set; }
         public bool saltoPaginaPorFecha { get; set; }
         public bool unaColumnaParaDebeYHaber { get; set; }
+        public bool versionPdf { get; set; }
         public string titulo { get; set; }
         public int ciaNumero { get; set; }
         public string ciaNombre { get; set; }
