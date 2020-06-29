@@ -318,7 +318,7 @@
                             </ContentTemplate>
                         </asp:TabPanel>
 
-                        <asp:TabPanel HeaderText="Lista (1)" runat="server" ID="TabPanel4" >
+                        <asp:TabPanel HeaderText="Notas" runat="server" ID="TabPanel4" >
                             <ContentTemplate>
                                 <h3>Asientos contables de tipo Cierre Anual</h3>
                                 <p>
