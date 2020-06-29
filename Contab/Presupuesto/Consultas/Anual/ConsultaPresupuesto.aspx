@@ -18,7 +18,9 @@
     <script type="text/javascript">
         function PopupWin(url, w, h) {
             ///Parameters url=page to open, w=width, h=height
-            window.open(url, "external2", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,top=10px,left=8px");
+            var left = parseInt((screen.availWidth / 2) - (w / 2));
+            var top = parseInt((screen.availHeight / 2) - (h / 2));
+            window.open(url, "external", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top);
         }
         function RefreshPage() {
             // nótese como usamos jquery para asignar el valor al field ... 
@@ -93,19 +95,25 @@ function showprogress_displayselectedrecs() {
     <%-- div en la izquierda para mostrar funciones de la página --%>
     <%--  --%>
     <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top; background-color: #F7F7F7; float: left; text-align: center;">
+        
         <br />
-        <img id="Filter_img" alt="Para definir y aplicar un filtro para seleccionar la información que desea consultar."
-            runat="server" src="~/Pictures/filter_16x16.gif" />
-        <a href="javascript:PopupWin('ConsultaPresupuesto_Filtro.aspx', 1000, 680)">Definir y aplicar un
-            filtro</a>
+        <br />
+
+        <a href="javascript:PopupWin('ConsultaPresupuesto_Filtro.aspx', 1000, 680)">Definir y aplicar<br /> un filtro</a><br />
+        <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
+
         <hr />
-        <img id="Img1" runat="server" alt="Reportes de presupuesto" src="~/Pictures/print_16x16.gif" />
-        <asp:HyperLink ID="ControlPresupuesto_Reportes_HyperLink"
-            runat="server"
-            CssClass="generalfont"
-            NavigateUrl="javascript:PopupWin('../../../../ReportViewer2.aspx?rpt=ptoconsanual&conv=0', 1000, 680)">
-            Consulta anualizada de presupuesto
-        </asp:HyperLink>
+
+        <asp:HyperLink ID="ControlPresupuesto_Reportes_HyperLink" 
+                       runat="server" 
+                       CssClass="generalfont"
+                       NavigateUrl="javascript:PopupWin('../../../../ReportViewer2.aspx?rpt=ptoconsanual&conv=0', 1000, 680)">
+            Reporte
+        </asp:HyperLink><br />
+        <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
+
+        <br /><br />
+
         Cant niveles:<br />
         <asp:DropDownList ID="CantNiveles_DropDownList"
             runat="server"
@@ -120,21 +128,25 @@ function showprogress_displayselectedrecs() {
             <asp:ListItem Text="5" Value="5" />
             <asp:ListItem Text="6" Value="6" />
         </asp:DropDownList>
+
         <hr />
-        <img id="Img4" alt="Consulta de cierres de compañías" src="../../../../Pictures/application_16x16.gif" />
-        <a href="javascript:PopupWin('../../../UltimoMesCerradoContable.aspx', 1000, 680)">Fechas de último cierre contable</a>
+
+        <a href="javascript:PopupWin('../../../UltimoMesCerradoContable.aspx', 1000, 680)">Fechas de último<br /> cierre contable</a><br />
+        <i class="fas fa-desktop fa-2x" style="margin-top: 5px; "></i>
+
         <br />
         <hr />
-        <img alt="Conversión de cifras de presupuesto" src="../../../../Pictures/application_16x16.gif" />
-        <asp:LinkButton ID="AplicarFactorConversion_LinkButton"
-            runat="server" OnClick="AplicarFactorConversion_LinkButton_Click">
-            Conversión de cifras de presupuesto usando factores de conversión registrados
-        </asp:LinkButton>
-        <hr />
-        <img id="Img2" alt="Consulta de factores de conversión aplicados" src="../../../../Pictures/application_16x16.gif" />
-        <a href="javascript:PopupWin('ConsultaPresupuesto_FactoresConversionAplicados.aspx', 1000, 680)">Consulta de factores de conversión aplicados</a>
+
+        <asp:LinkButton ID="LinkButton1"
+                        runat="server" 
+                        OnClick="AplicarFactorConversion_LinkButton_Click">
+                Conversión de cifras de presupuesto usando factores de conversión registrados
+        </asp:LinkButton><br /> 
+        <i class="fas fa-desktop fa-2x" style="margin-top: 5px; "></i>
+
         <br />
         <br />
+
         <%-- divs para mostrar el progress bar --%>
         <div id="Progressbar_div" style="visibility: hidden; height: 0px;">
             <div id="ProgressbarBorder_div" style="margin-left: 5px; margin-right: 5px; border: 1px solid #808080; height: 10px; text-align: left;">

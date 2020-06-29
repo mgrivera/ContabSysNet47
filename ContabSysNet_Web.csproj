@@ -2219,6 +2219,7 @@
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff2" />
+    <None Include="Properties\PublishProfiles\Geh Int.pubxml" />
     <None Include="Properties\PublishProfiles\Lockton Smarter asp.net Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Ris Solutions - 2.pubxml" />
     <None Include="Properties\PublishProfiles\Risk Solutions Settings.pubxml" />
@@ -2635,6 +2636,9 @@
     <None Include="webAppSettings.lockton">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="webAppSettings.xl.local">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="webAppSettings.risk.local">
       <SubType>Designer</SubType>
     </None>
@@ -2648,6 +2652,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="webAppSettings.arsa">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WebConnectionString.config.xl">
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.config.lockton_smarterAspNet">

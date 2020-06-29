@@ -3,10 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="PanelCentral_ContentPlaceHolder" Runat="Server">
 
     <script type="text/javascript">
-    function PopupWin(url,w,h){
-    ///Parameters url=page to open, w=width, h=height
-        window.open(url, "external", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,top=10px,left=8px");
-    }
+        function PopupWin(url, w, h) {
+            ///Parameters url=page to open, w=width, h=height
+            var left = parseInt((screen.availWidth / 2) - (w / 2));
+            var top = parseInt((screen.availHeight / 2) - (h / 2));
+            window.open(url, "external", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top);
+        }
 
     function PopupWinFullWidthAndHeight(url) {
         window.open(url, "external", "width=1024,height=768,resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,top=10px,left=8px");
@@ -45,36 +47,23 @@
     <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top;
         background-color: #F7F7F7; float: left; text-align: center; ">
         <br />
-       <img id="Img4" runat="server" alt="Registro y actualización de los códigos de presupuesto" src="~/Pictures/application_16x16.gif" />
-        <%-- <a href="javascript:PopupWin('Codigos de presupuesto/CodigosPresupuesto.aspx', 1000, 680)">Códigos de presupuesto</a> --%>
+        <br />
 
-        
-        <a href="javascript:PopupWin('<% = GetCodigosPresupuesto_UriAddress() %>', 1300, 680)">
-            Códigos de presupuesto</a>
-
-       <%-- <a href="javascript:PopupWin('/Presupuesto/CodigosPresupuesto/Index', 1300, 680)">
-            Códigos de presupuesto</a>--%>
+        <a href="javascript:PopupWin('<% = GetCodigosPresupuesto_UriAddress() %>', 1000, 680)">Códigos de presupuesto</a><br />
+        <i class="fas fa-desktop fa-2x" style="margin-top: 5px; "></i>
 
         <hr />
-       
-      <%-- <img id="Img1" runat="server" alt="Registro de asociación códigos-cuentas contables" src="~/Pictures/application_16x16.gif" />
-        <a href="javascript:PopupWin('Asociacion codigos cuentas/AsociacionCodigosCuentas.aspx', 1000, 680)">
-            Asociación códigos de presuesto-cuentas contables</a>
-        <hr />--%>
 
-        <img id="Img3" runat="server" alt="Registro de montos estimados de presupuesto por año" src="~/Pictures/application_16x16.gif" />
+        <a href="javascript:PopupWin('<% = GetMontosEstimados_UriAddress() %>', 1000, 680)">Registro de montos<br /> estimados por año</a><br />
+        <i class="fas fa-desktop fa-2x" style="margin-top: 5px; "></i>
 
-        <a href="javascript:PopupWin('<% = GetMontosEstimados_UriAddress() %>', 1300, 680)">
-            Registro de montos estimados por año</a>
         <hr />
-        <%--<a href="javascript:PopupWin('Montos estimados/Presupuesto_MontosEstimados.aspx', 1300, 680)">--%>
-        <%--<a href="javascript:PopupWinFullWidthAndHeight('Montos estimados/Presupuesto_MontosEstimados.aspx')">--%>
-            
 
-        <img id="Img2" runat="server" alt="Copia de información de configuración desde una compañía a otra" src="~/Pictures/application_16x16.gif" />
-        <a href="javascript:PopupWin('Copia codigos entre cias/CopiaCodigosPresupuesto.aspx', 1000, 680)">
-            Duplicación de información de configuración entre compañías</a>
+        <a href="javascript:PopupWin('Copia codigos entre cias/CopiaCodigosPresupuesto.aspx', 1000, 680)">Conversión de cifras de<br /> presupuesto usando factores de<br /> conversión registrados</a><br />
+        <i class="fas fa-desktop fa-2x" style="margin-top: 5px; "></i>
+
         <hr />
+        <br />
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Footer_ContentPlaceHolder" Runat="Server">

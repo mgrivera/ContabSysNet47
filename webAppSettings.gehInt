@@ -1,6 +1,6 @@
 ﻿<appSettings>
-  <add key="contabM_address" value="http://localhost:3020" />
-  <add key="contabm_mongodb_connectionString" value="mongodb://localhost:27017/contabm_gehInt" />
+  <add key="contabM_address" value="http://contabmgehint.meteorapp.com" />
+  <add key="contabm_mongodb_connectionString" value="mongodb+srv://contabm_user:risksolutions@contabmrisk-dsd7c.mongodb.net/contabm_gehInt?retryWrites=true&amp;w=majority" />
   <add key="contabM_mongodb_name" value="contabm_gehInt" />
   <add key="ValidationSettings:UnobtrusiveValidationMode" value="None" />
 </appSettings>

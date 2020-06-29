@@ -21,24 +21,6 @@ public partial class Contab_Presupuesto_Consultas_Montos_estimados_MontosEstimad
     protected global::System.Web.UI.WebControls.HiddenField RebindFlagHiddenField;
     
     /// <summary>
-    /// Filter_img control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Filter_img;
-    
-    /// <summary>
-    /// Img1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Img1;
-    
-    /// <summary>
     /// ControlPresupuesto_Reportes_HyperLink control.
     /// </summary>
     /// <remarks>

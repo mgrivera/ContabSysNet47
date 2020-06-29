@@ -184,6 +184,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         protected global::System.Web.UI.WebControls.CheckBox ExcluirCuentasSinMovimientos_CheckBox;
         
         /// <summary>
+        /// ExcluirAsientosContablesTipoCierreAnual_CheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ExcluirAsientosContablesTipoCierreAnual_CheckBox;
+        
+        /// <summary>
         /// TabPanel2 control.
         /// </summary>
         /// <remarks>
@@ -245,6 +254,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect select1;
+        
+        /// <summary>
+        /// TabPanel4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel TabPanel4;
         
         /// <summary>
         /// LimpiarFiltro_Button control.

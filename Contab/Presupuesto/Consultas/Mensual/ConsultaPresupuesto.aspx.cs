@@ -65,9 +65,6 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        ErrMessage_Span.InnerHtml = "";
-        ErrMessage_Span.Style["display"] = "none";
-
         if (!User.Identity.IsAuthenticated)
         {
             FormsAuthentication.SignOut();
@@ -107,6 +104,9 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
             MyHtmlHyperLink.HRef = "javascript:PopupWin('../../../Doc/Bancos/Facturas/Consulta facturas/consulta_general_de_facturas.htm', 1000, 680)";
 
             Session["FiltroForma"] = null;
+
+            ErrMessage_Span.InnerHtml = "";
+            ErrMessage_Span.Style["display"] = "none";
         }
         else
         {
@@ -151,9 +151,18 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                     TituloConsulta_H2.InnerHtml = "Consulta de presupuesto para el mes " + MySelectedMesAno.NombreMes + " - " + MySelectedMesAno.AnoFiscal.ToString();
                 else
                 {
-                    ErrMessage_Span.InnerHtml = "No existen registros que cumplan el criterio de selección " +
+                    // si se encontró algún error en el proceso, ErrMessage_Span contiene ya algún mensaje; nótese que siempre al comenzar este especio se pone 
+                    // en un empty string 
+
+                    // muchas veces se encontró algún error y la tabla que contiene los registros (Temp...) está vacía. La idea es que en este punto 
+                    // no se determine que el filtro seleccionó cero records; más bien, como ocurrió algún error, esta tabla puede estar vacía 
+                    if (ErrMessage_Span.InnerHtml == "")
+                    {
+                        ErrMessage_Span.InnerHtml = "No existen registros que cumplan el criterio de selección " +
                         "(filtro) que Ud. ha indicado. <br /> Para regresar registros, Ud. puede intentar " +
                         "un filtro diferente al que ha indicado.";
+                    }
+
                     ErrMessage_Span.Style["display"] = "block";
                 }
 
@@ -312,6 +321,10 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
             errorMessage = "Aparentemente, Ud. no ha indicado un filtro aún.<br />Por favor indique y aplique un filtro antes de " + 
                 "intentar mostrar el resultado de la consulta.";
 
+            // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
+            ErrMessage_Span.InnerHtml = errorMessage;
+            ErrMessage_Span.Style["display"] = "block";
+
             wsResult = new ContabSysNet_Web.WS_Result() {
                 Progress_SelectedRecs = 0,
                 Progress_Percentage = 0,
@@ -319,12 +332,16 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                 Progress_ErrorMessage = errorMessage
             };
 
+            errorMessage = ""; 
+
             serializedJsonObject = javaScriptSerializer.Serialize(wsResult);
             writeStringToFile.WriteToDisk(serializedJsonObject, out errorMessage);
 
-            // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
-            ErrMessage_Span.InnerHtml = errorMessage;
-            ErrMessage_Span.Style["display"] = "block";
+            if (!String.IsNullOrEmpty(errorMessage))
+            {
+                string errorMessage2 = ErrMessage_Span.InnerHtml + "<br />" + errorMessage; 
+                ErrMessage_Span.InnerHtml = errorMessage2;
+            }
 
             return; 
         }
@@ -354,7 +371,6 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
 
         // --------------------------------------------------------------------------------------------
         // eliminamos el contenido de la tabla temporal 
-
         dbContabDataContext dbContab = new dbContabDataContext(); 
 
         try
@@ -368,6 +384,10 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                 errorMessage = "Ha ocurrido un error al intentar ejecutar una operación de acceso a la base de datos. <br /> " + 
                     "El mensaje específico de error es: " + ex.Message + "<br /><br />";
 
+                // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
+                ErrMessage_Span.InnerHtml = errorMessage;
+                ErrMessage_Span.Style["display"] = "block";
+
                 wsResult = new ContabSysNet_Web.WS_Result()
                 {
                     Progress_SelectedRecs = 0,
@@ -376,18 +396,21 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                     Progress_ErrorMessage = errorMessage
                 };
 
+                errorMessage = "";
+
                 serializedJsonObject = javaScriptSerializer.Serialize(wsResult);
                 writeStringToFile.WriteToDisk(serializedJsonObject, out errorMessage);
 
-                // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
-                ErrMessage_Span.InnerHtml = errorMessage;
-                ErrMessage_Span.Style["display"] = "block";
+                if (!String.IsNullOrEmpty(errorMessage))
+                {
+                    string errorMessage2 = ErrMessage_Span.InnerHtml + "<br />" + errorMessage;
+                    ErrMessage_Span.InnerHtml = errorMessage2;
+                }
 
-                return; 
-            }
+            return;
+        }
             
         // leemos la tabla Presupuesto_Montos y construimos los registros en tTempWebReport... 
-
         IList<PresupuestoMontos> PresupuestoMontos_List = dbContab.ExecuteQuery<PresupuestoMontos>
             (@"Select CodigoPresupuesto, CiaContab, Moneda, Ano, " +  
             "IsNull(Mes01_Est, 0) As Mes01_Est, IsNull(Mes01_Eje, 0) As Mes01_Eje, " +   
@@ -412,6 +435,10 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
             errorMessage = "No existen registros que cumplan el criterio de selección (filtro) que Ud. ha indicado. <br /> " + 
                 "Para regresar registros, Ud. puede intentar un filtro diferente al que ha indicado.";
 
+            // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
+            ErrMessage_Span.InnerHtml = errorMessage;
+            ErrMessage_Span.Style["display"] = "block";
+
             wsResult = new ContabSysNet_Web.WS_Result()
             {
                 Progress_SelectedRecs = 0,
@@ -420,14 +447,18 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                 Progress_ErrorMessage = errorMessage
             };
 
+            errorMessage = "";
+
             serializedJsonObject = javaScriptSerializer.Serialize(wsResult);
             writeStringToFile.WriteToDisk(serializedJsonObject, out errorMessage);
 
-            // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
-            ErrMessage_Span.InnerHtml = errorMessage;
-            ErrMessage_Span.Style["display"] = "block";
+            if (!String.IsNullOrEmpty(errorMessage))
+            {
+                string errorMessage2 = ErrMessage_Span.InnerHtml + "<br />" + errorMessage;
+                ErrMessage_Span.InnerHtml = errorMessage2;
+            }
 
-            return; 
+            return;
         }
 
         int nCantidadRegistros = PresupuestoMontos_List.Count(); 
@@ -468,6 +499,10 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                         "Por favor revise esta situación. La tabla tabla <i>Meses del Año Fiscal<i/> " + 
                         "debe contener un registro cada una de las compañías registradas en <i>Contab<i/>.";
 
+                    // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
+                    ErrMessage_Span.InnerHtml = errorMessage;
+                    ErrMessage_Span.Style["display"] = "block";
+
                     wsResult = new ContabSysNet_Web.WS_Result()
                     {
                         Progress_SelectedRecs = 0,
@@ -476,14 +511,18 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                         Progress_ErrorMessage = errorMessage
                     };
 
+                    errorMessage = "";
+
                     serializedJsonObject = javaScriptSerializer.Serialize(wsResult);
                     writeStringToFile.WriteToDisk(serializedJsonObject, out errorMessage);
 
-                    // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
-                    ErrMessage_Span.InnerHtml = errorMessage;
-                    ErrMessage_Span.Style["display"] = "block";
+                    if (!String.IsNullOrEmpty(errorMessage))
+                    {
+                        string errorMessage2 = ErrMessage_Span.InnerHtml + "<br />" + errorMessage;
+                        ErrMessage_Span.InnerHtml = errorMessage2;
+                    }
 
-                    return; 
+                    return;
                 }
 
                 nCiaContab_Anterior = MyPresupuestoMontos.CiaContab; 
@@ -756,6 +795,10 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                     errorMessage = "El código de presupuesto : " + MyTempWebReportPresupuestoConsultaMensual.CodigoPresupuesto +
                         " no tiene un nivel (previo) que lo agrupe; los códigos de presupuesto deben tener al menos un nivel de agrupación.";
 
+                    // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
+                    ErrMessage_Span.InnerHtml = errorMessage;
+                    ErrMessage_Span.Style["display"] = "block";
+
                     wsResult = new ContabSysNet_Web.WS_Result()
                     {
                         Progress_SelectedRecs = 0,
@@ -764,12 +807,16 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                         Progress_ErrorMessage = errorMessage
                     };
 
+                    errorMessage = "";
+
                     serializedJsonObject = javaScriptSerializer.Serialize(wsResult);
                     writeStringToFile.WriteToDisk(serializedJsonObject, out errorMessage);
 
-                    // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
-                    ErrMessage_Span.InnerHtml = errorMessage;
-                    ErrMessage_Span.Style["display"] = "block";
+                    if (!String.IsNullOrEmpty(errorMessage))
+                    {
+                        string errorMessage2 = ErrMessage_Span.InnerHtml + "<br />" + errorMessage;
+                        ErrMessage_Span.InnerHtml = errorMessage2;
+                    }
 
                     return;
                 }
@@ -807,7 +854,6 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
 
                 // -------------------------------------------------------------------------------
                 // agregamos el registro a la lista 
-
                 MyTempWebRepotPresupuestoConsultaMensual_List.Add(MyTempWebReportPresupuestoConsultaMensual); 
 
                 // -------------------------------------------------------------------------------
@@ -838,6 +884,10 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                 errorMessage = "Ha ocurrido un error al intentar ejecutar una operación de acceso a la base de datos. <br /> " +
                     "El mensaje específico de error es: " + ex.Message + "<br />";
 
+                // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
+                ErrMessage_Span.InnerHtml = errorMessage;
+                ErrMessage_Span.Style["display"] = "block";
+
                 wsResult = new ContabSysNet_Web.WS_Result()
                 {
                     Progress_SelectedRecs = 0,
@@ -846,12 +896,16 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                     Progress_ErrorMessage = errorMessage
                 };
 
+                errorMessage = "";
+
                 serializedJsonObject = javaScriptSerializer.Serialize(wsResult);
                 writeStringToFile.WriteToDisk(serializedJsonObject, out errorMessage);
 
-                // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
-                ErrMessage_Span.InnerHtml = errorMessage;
-                ErrMessage_Span.Style["display"] = "block";
+                if (!String.IsNullOrEmpty(errorMessage))
+                {
+                    string errorMessage2 = ErrMessage_Span.InnerHtml + "<br />" + errorMessage;
+                    ErrMessage_Span.InnerHtml = errorMessage2;
+                }
 
                 return;
             }
@@ -882,6 +936,10 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
             errorMessage = "Ha ocurrido un error al intentar ejecutar una operación de acceso a la base de datos. <br /> " + 
                 "El mensaje específico de error es: " + ex.Message + "<br />";
 
+            // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
+            ErrMessage_Span.InnerHtml = errorMessage;
+            ErrMessage_Span.Style["display"] = "block";
+
             wsResult = new ContabSysNet_Web.WS_Result()
             {
                 Progress_SelectedRecs = 0,
@@ -890,12 +948,16 @@ public partial class Contab_Presupuesto_Consultas_Mensual_ConsultaPresupuesto : 
                 Progress_ErrorMessage = errorMessage
             };
 
+            errorMessage = "";
+
             serializedJsonObject = javaScriptSerializer.Serialize(wsResult);
             writeStringToFile.WriteToDisk(serializedJsonObject, out errorMessage);
 
-            // mientras esta función se ejecuta en forma simple; ie: no en un thread separado (para poder mostrar el progreso en el cliente) 
-            ErrMessage_Span.InnerHtml = errorMessage;
-            ErrMessage_Span.Style["display"] = "block";
+            if (!String.IsNullOrEmpty(errorMessage))
+            {
+                string errorMessage2 = ErrMessage_Span.InnerHtml + "<br />" + errorMessage;
+                ErrMessage_Span.InnerHtml = errorMessage2;
+            }
 
             return;
         }

@@ -48,24 +48,6 @@ public partial class Contab_Presupuesto_Consultas_Anual_ConsultaPresupuesto {
     protected global::System.Web.UI.WebControls.HiddenField SelectedRecs_HiddenField;
     
     /// <summary>
-    /// Filter_img control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Filter_img;
-    
-    /// <summary>
-    /// Img1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage Img1;
-    
-    /// <summary>
     /// ControlPresupuesto_Reportes_HyperLink control.
     /// </summary>
     /// <remarks>
@@ -84,13 +66,13 @@ public partial class Contab_Presupuesto_Consultas_Anual_ConsultaPresupuesto {
     protected global::System.Web.UI.WebControls.DropDownList CantNiveles_DropDownList;
     
     /// <summary>
-    /// AplicarFactorConversion_LinkButton control.
+    /// LinkButton1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton AplicarFactorConversion_LinkButton;
+    protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
     
     /// <summary>
     /// ErrMessage_Span control.

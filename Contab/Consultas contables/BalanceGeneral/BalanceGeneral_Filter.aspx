@@ -183,23 +183,26 @@
 
                                 <br />
 
-                                <ul>
-                                    <li  style="list-style: none;"> 
-                                        <asp:CheckBox ID="ExcluirCuentasSinSaldoNiMovtos_CheckBox" 
-                                                      runat="server" 
-                                                      Text="Excluir cuentas contables con saldo inicial, debe y haber en cero <br />&nbsp;&nbsp;&nbsp;&nbsp(para el período indicado)" />
-                                    </li>
-                                    <li  style="list-style: none;"> 
-                                        <asp:CheckBox ID="ExcluirCuentasConSaldoFinalCero_CheckBox" 
-                                                      runat="server" 
-                                                      Text="Excluir cuentas contables con saldo final en cero" />
-                                    </li>
-                                    <li  style="list-style: none;"> 
-                                        <asp:CheckBox ID="ExcluirCuentasSinMovimientos_CheckBox" 
-                                                      runat="server" 
-                                                      Text="Excluir cuentas contables sin movimientos en el período indicado" />
-                                    </li>
-                                </ul>
+                                <fieldset style="border: 1px solid #C0C0C0; padding: 10px; ">
+                                    <legend>Excluir: </legend>
+
+                                    <asp:CheckBox ID="ExcluirCuentasSinSaldoNiMovtos_CheckBox" 
+                                                    runat="server" 
+                                                    Text="Cuentas contables con saldo inicial, debe y haber en cero <br />&nbsp;&nbsp;&nbsp;&nbsp(para el período indicado)" />
+                                    <br />
+                                    <asp:CheckBox ID="ExcluirCuentasConSaldoFinalCero_CheckBox" 
+                                                    runat="server" 
+                                                    Text="Cuentas contables con saldo final en cero" />
+                                    <br />
+                                    <asp:CheckBox ID="ExcluirCuentasSinMovimientos_CheckBox" 
+                                                    runat="server" 
+                                                    Text="Cuentas contables sin movimientos en el período indicado" />
+                                    <br />
+                                    <asp:CheckBox ID="ExcluirAsientosContablesTipoCierreAnual_CheckBox" 
+                                                    runat="server" 
+                                                    Text="Asientos contables de tipo cierre anual (si existen)" />
+
+                                </fieldset>
                             </ContentTemplate>
 
                         </asp:TabPanel>
@@ -312,6 +315,29 @@
                                         </td>
                                     </tr>
                                 </table>
+                            </ContentTemplate>
+                        </asp:TabPanel>
+
+                        <asp:TabPanel HeaderText="Lista (1)" runat="server" ID="TabPanel4" >
+                            <ContentTemplate>
+                                <h3>Asientos contables de tipo Cierre Anual</h3>
+                                <p>
+                                    Los asientos contables de tipo <em>cierre anual</em> son agregados en forma automática por el programa, luego de efectuarse el cierre mensual 
+                                    del último mes del año fiscal. 
+                                </p>
+                                <p>
+                                    <b>Si se excluyen:</b> las cuentas de gastos e ingresos mantendrán sus saldos en el último mes del año; además, la cuenta de 
+                                    utilidades no reflejará la utilidad o pérdida. 
+                                </p>
+                                <p>
+                                    <b>Si no se excluyen:</b> las cuentas de gastos e ingresos cerrarán en cero y la cuenta de utilidades reflejará la pérdida o ganancia 
+                                    del año. 
+                                </p>
+                                <p>
+                                    <b>Nota:</b> el usuario también puede agregar asientos contables de tipo cierre anual, para alterar los saldos contables que existen 
+                                    luego de correr el cierre mensual para el último mes del año. Normalmente, los asientos contables de tipo cierre anual  
+                                    que pueda registrar el usuario, son siempre <b>posteriores</b> a los que el programa agrega de forma automática. 
+                                </p>
                             </ContentTemplate>
                         </asp:TabPanel>
 

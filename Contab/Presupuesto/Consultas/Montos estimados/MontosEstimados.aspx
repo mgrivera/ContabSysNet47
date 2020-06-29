@@ -18,7 +18,9 @@
     <script type="text/javascript">
         function PopupWin(url, w, h) {
             ///Parameters url=page to open, w=width, h=height
-            window.open(url, "external2", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,top=10px,left=8px");
+            var left = parseInt((screen.availWidth / 2) - (w / 2));
+            var top = parseInt((screen.availHeight / 2) - (h / 2));
+            window.open(url, "external", "width=" + w + ",height=" + h + ",resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top);
         }
         function RefreshPage() {
             // nótese como usamos jquery para asignar el valor al field ... 
@@ -38,24 +40,20 @@
     <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top; background-color: #F7F7F7; float: left; text-align: center;">
         <br />
         <br />
-        <img id="Filter_img"
-            alt="Para definir y aplicar un filtro para seleccionar la información que desea consultar."
-            runat="server"
-            src="~/Pictures/filter_16x16.gif" />
+        
+        <a href="javascript:PopupWin('MontosEstimados_Filter.aspx', 1000, 680)">Definir y aplicar<br /> un filtro</a><br />
+        <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
 
-        <a href="javascript:PopupWin('MontosEstimados_Filter.aspx', 1000, 680)">Definir y aplicar un
-            filtro</a>
         <hr />
-        <img id="Img1" runat="server"
-            alt="Reportes de presupuesto"
-            src="~/Pictures/print_16x16.gif" />
 
-        <asp:HyperLink ID="ControlPresupuesto_Reportes_HyperLink"
-            runat="server"
-            CssClass="generalfont"
-            NavigateUrl="javascript:PopupWin('../../../../ReportViewer2.aspx?rpt=ptomtosest', 1000, 680)">
-            Reporte de montos estimados
-        </asp:HyperLink>
+        <asp:HyperLink ID="ControlPresupuesto_Reportes_HyperLink" 
+                       runat="server" 
+                       CssClass="generalfont"
+                       NavigateUrl="javascript:PopupWin('../../../../ReportViewer2.aspx?rpt=ptomtosest', 1000, 680)">
+            Reporte
+        </asp:HyperLink><br />
+        <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
+
         <hr />
 
     </div>

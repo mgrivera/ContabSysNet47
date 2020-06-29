@@ -132,14 +132,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             parametros.ExcluirCuentasSaldoYMovtosCero = this.ExcluirCuentasSinSaldoNiMovtos_CheckBox.Checked;
             parametros.ExcluirCuentasSaldosFinalCero = this.ExcluirCuentasConSaldoFinalCero_CheckBox.Checked; 
             parametros.ExcluirCuentasSinMovimientos = this.ExcluirCuentasSinMovimientos_CheckBox.Checked;
-
-            // excluímos siempre estos asientos y dejamos de preguntar al usuario. Debemos quitar este parametro del sp y 
-            // también de la definición del sp en el Entity Framework; mientras tanto, debemos conformarnos con hacerlo así ... 
-            // POR AHORA, dejemos ésto así, pues tal vez haya que revisar esto en un futuro. Veamos si todo queda bien o hay \
-            // que revisar en un futuro. Este tema es algo complicado ... NOTESE que la idea es excluir *solo* los asientos 
-            // de cierre anual automáticos (mes 12) y no los que pueda agregar el usuario (mes 13). En otros meses del año fiscal 
-            // *no debe* haber asientos del tipo cierre anual
-            parametros.ExcluirAsientosContablesTipoCierreAnual = true; 
+            parametros.ExcluirAsientosContablesTipoCierreAnual = this.ExcluirAsientosContablesTipoCierreAnual_CheckBox.Checked; 
 
             parametros.Filtro = sSqlSelectString; 
 
