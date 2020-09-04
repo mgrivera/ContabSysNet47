@@ -2219,6 +2219,7 @@
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff2" />
+    <None Include="Properties\PublishProfiles\Arsa publish settings.pubxml" />
     <None Include="Properties\PublishProfiles\Geh Int.pubxml" />
     <None Include="Properties\PublishProfiles\Lockton Smarter asp.net Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Ris Solutions - 2.pubxml" />
@@ -2633,6 +2634,9 @@
     <Content Include="webAppSettings.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="webAppSettings.arsa.cloud.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="webAppSettings.lockton">
       <SubType>Designer</SubType>
     </None>
@@ -2651,7 +2655,7 @@
     <None Include="webAppSettings.risk">
       <SubType>Designer</SubType>
     </None>
-    <None Include="webAppSettings.arsa">
+    <None Include="WebConnectionString.arsa.cloud.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.config.xl">
@@ -2667,9 +2671,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.config.geh">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="WebConnectionString.config.arsa">
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.config.risk">

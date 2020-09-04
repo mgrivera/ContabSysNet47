@@ -120,7 +120,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
     protected void GenerarXMLFile_Button_Click(object sender, EventArgs e)
     {
-
         if (PeriodoSeleccion_TextBox.Text == "")
         {
             ErrMessage_Span.InnerHtml = "Ud. debe indicar un período de selección válido. <br /><br />" + 
@@ -151,7 +150,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
         }
 
         // si el combo no tiene registro seleccionado es porque no hay registros en la tabla
-
         if (CiaContab_DropDownList.SelectedIndex == -1)
         {
             ErrMessage_Span.InnerHtml = "No existe información para construir el archivo que Ud. ha requerido. <br /><br />" + 
@@ -197,7 +195,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
         // nótese como seleccionamos solo los registros que corresponden a la cia contab seleccinada; 
         // además, solo los que corresponden al usuario 
-
         XDocument xmldoc = new XDocument(
                         new XElement("RelacionRetencionesISLR",
                         new XAttribute("RifAgente", sRifCiaContab),
@@ -211,7 +208,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                             where f.NombreUsuario == User.Identity.Name &&
                                   f.CiaContab == ciaContab
                             select f;
-
 
         foreach (var f in facturasQuery)
         {
@@ -233,7 +229,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                 return;
             }
 
-     
             // ----------------------------------------------------------------------------------------------------------------------------------------------
             // ahora los impuestos y las retenciones se registran en forma separada en la tabla Facturas_Impuestos; el objetivo principal de este cambio fue, 
             // simplemente, poder registrar *más de una* retención de impuestos para una factura. Aunque no es un caso frecuente, existen proveedores que 
@@ -267,7 +262,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                     return;
                 }
 
-
                 // ------------------------------------------------------------------------------------------
                 // número control - intentamos quitar caracteres especiales y dejar solo números ... 
 
@@ -288,6 +282,11 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                 };
                 // ------------------------------------------------------------------------------------------
 
+                decimal montoOperacion = retencion.MontoBase != null ? retencion.MontoBase.Value : 0;
+                decimal porcentaje = retencion.Porcentaje != null ? retencion.Porcentaje.Value : 0;
+
+                montoOperacion = decimal.Round(montoOperacion, 2, MidpointRounding.AwayFromZero);
+                porcentaje = decimal.Round(porcentaje, 2, MidpointRounding.AwayFromZero);
 
                 XElement x = new XElement("DetalleRetencion",
                                    new XElement("RifRetenido", f.RifCompania.ToString().Replace("-", "")),
@@ -295,14 +294,8 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                                    new XElement("NumeroControl", sNumeroControlDefinitivo),
                                    new XElement("FechaOperacion", factura.FechaRecepcion.ToString("dd/MM/yyyy").Replace("-", "/")),
                                    new XElement("CodigoConcepto", codigoConceptoRetencion_islr),
-
-                                   new XElement("MontoOperacion", retencion.MontoBase != null ? 
-                                       retencion.MontoBase.Value.ToString("N2").Replace(".", "").Replace(",", ".") : 
-                                       "0.00"), 
-
-                                   new XElement("PorcentajeRetencion", retencion.Porcentaje != null ? 
-                                       retencion.Porcentaje.Value.ToString("N2").Replace(".", "").Replace(",", ".") : 
-                                       "0.00")
+                                   new XElement("MontoOperacion", montoOperacion.ToString()), 
+                                   new XElement("PorcentajeRetencion", porcentaje.ToString())
                                 );
 
                 xmldoc.Element("RelacionRetencionesISLR").Add(x);
@@ -313,19 +306,14 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             cantidadFacturas++; 
         }
 
-
         String fileName = @"ISLR_retenido_" + sNombreCiaContab + ".xml";
         String filePath = HttpContext.Current.Server.MapPath("~/Temp/" + fileName);
 
         // --------------------------------------------------------------------------------------------------
-        // --------------------------------------------------------------------------------------------------
-
         // si el usuario así lo indica, leemos retenciones desde la nómina de pago 
-
         if (!LeerNomina_CheckBox.Checked)
         {
             // Saving to a file, you can also save to streams
-
             xmldoc.Save(filePath);
 
             GeneralMessage_Span.InnerHtml = "<br />" + 
@@ -342,9 +330,8 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             return;
         }
 
-
+        // -----------------------------------------------------------------------------------------------
         // lo primero que hacemos es intentar generar fechas de inicio y fin usando el período indicado 
-
         int ano = Convert.ToInt32(PeriodoSeleccion_TextBox.Text.ToString().Substring(0, 4));
         int mes = Convert.ToInt32(PeriodoSeleccion_TextBox.Text.ToString().Substring(4, 2));
 
@@ -377,7 +364,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                                                                                      where c.Cia == ciaContab
                                                                                      select c).FirstOrDefault();
 
-
         if (parametrosNomina == null || string.IsNullOrEmpty(parametrosNomina.CodigoConceptoRetencionISLREmpleados))
         {
             ErrMessage_Span.InnerHtml = "Aparentemente, no se ha definido un código de retención ISLR para empleados en la tabla Parámetros Nómina. <br /><br /> " + 
@@ -388,32 +374,8 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             return;
         }
 
-
-        // registramos en una lista los rubros (normalmente solo uno) 'marcados' como ISLR en la maestra 
-        // de nómina
- 
-        // (nov 2013) Nota: dejamos de marcar en la maestra de rubros, la naturaleza del rubro; por ejemplo: antes se marcaban, 
-        // en la maestra de rubros, los rubros que correspondían a sso, vac, islr, etc. 
-
-        //int rubrosISLRCount = (from mr in nominaCtx.tMaestraRubros
-        //                       where mr.ISRFlag == true
-        //                       select mr.Rubro).Count();
-
-        //if (rubrosISLRCount == 0)
-        //{
-        //    ErrMessage_Span.InnerHtml = "Aparentemente, no se ha 'marcado' un rubro en la Maestra de Rubros (nómina) como ISLR. <br /><br /> Por favor abra la tabla mencionada y 'marque' el rubro usado para retener ISLR a empleados.";
-        //    ErrMessage_Span.Style["display"] = "block";
-
-        //    dbBancos = null;
-        //    return;
-        //}
-
-        //DeduccionesISLR deduccionISLR = nominaCtx.DeduccionesISLRs.OrderByDescending(i => i.Desde).FirstOrDefault();
-        //ContabSysNet_Web.ModelosDatos_EF.Nomina.tMaestraRubro maestraRubro =
-        //    nominaCtx.tMaestraRubros.Where(r => r.TipoRubro == 8).FirstOrDefault();         // rubro que corresponde al ISLR 
-
-        var rubroIslr = nominaCtx.tMaestraRubros.Select(r => new { r.Rubro, r.TipoRubro }).Where(r => r.TipoRubro == 8).FirstOrDefault();         // rubro que corresponde al ISLR 
-
+        // rubro que corresponde al ISLR 
+        var rubroIslr = nominaCtx.tMaestraRubros.Select(r => new { r.Rubro, r.TipoRubro }).Where(r => r.TipoRubro == 8).FirstOrDefault();         
 
         if (rubroIslr == null)
         {
@@ -426,13 +388,11 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             return;
         }
 
-
         // leemos la nómina de pago del mes y seleccionamos los rubros que corresponden a la retención de ISLR 
         // recuérdese que arriba validamos que existan rubros marcados como ISLR en la maestra; sin embargo, 
         // puede no haber de éstos en la nómina de pago ... 
 
         // además, leemos solo los empleados cuya propiedad EscribirArchivoXMLRetencionesISLR es true ... 
-
         var queryNominaPago = from n in nominaCtx.tNominas
                               where 
                               n.tNominaHeader.FechaNomina.Month == mes &&
@@ -493,7 +453,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             if (montoBase != 0)
                 islrPorc = montoISLR * 100 / montoBase;
 
-
             registroRetencionISLR = new RegistroRetencionISLR();
 
             registroRetencionISLR.RifRetenido = empleado.Rif;
@@ -502,13 +461,13 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             registroRetencionISLR.FechaOperacion = n.fechaNomina; 
             registroRetencionISLR.CodigoConcepto = parametrosNomina.CodigoConceptoRetencionISLREmpleados;
 
-            // nótese como convertimos los montos (ej: 1.250,50  -->  1250.50) 
+            // nos aseguramos que el monto tenga siempre 2 decimales
+            decimal montoOperacion = decimal.Round(montoBase, 2, MidpointRounding.AwayFromZero);
+            decimal porcentaje = decimal.Round(islrPorc, 2, MidpointRounding.AwayFromZero);
 
-            registroRetencionISLR.MontoOperacion = montoBase.ToString("N2").
-                ToString().Replace(".", "").Replace(",", ".");
-
-            registroRetencionISLR.PorcentajeRetencion = islrPorc.ToString("N2").
-                ToString().Replace(".", "").Replace(",", ".");
+            // al convertir el monto a string siempre queda así: 1500.35 
+            registroRetencionISLR.MontoOperacion = montoOperacion.ToString();
+            registroRetencionISLR.PorcentajeRetencion = porcentaje.ToString();
 
             registroRetencionISLR_List.Add(registroRetencionISLR);
 
@@ -517,7 +476,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
 
         // finalmente, agregamos cada item en la lista como un nodo al xml file 
-
         foreach (RegistroRetencionISLR r in registroRetencionISLR_List)
         {
             XElement x = new XElement("DetalleRetencion",
@@ -533,9 +491,7 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             xmldoc.Element("RelacionRetencionesISLR").Add(x);
         }
 
-
         // Saving to a file, you can also save to streams
-
         xmldoc.Save(filePath);
 
         GeneralMessage_Span.InnerHtml = "<br />" + 
@@ -548,14 +504,11 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
         DownloadFile_LinkButton.Visible = true;
         FileName_HiddenField.Value = filePath;
-
     }
-
 
     protected void GenerarArchivoRetencionesIva_Button_Click(object sender, EventArgs e)
     {
         // Create the CSV file on the server 
-
         String fileName = @"ImpuestoIvaRetenido_" + User.Identity.Name + ".txt";
         String filePath = HttpContext.Current.Server.MapPath("~/Temp/" + fileName);
 
@@ -644,8 +597,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
             cantidadLineas++;
         }
-
-
 
         BancosEntities context = new BancosEntities();
 
