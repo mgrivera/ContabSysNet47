@@ -331,7 +331,7 @@
                                                     style="background-color: #FFFFFF; padding: 10px 5px 10px 5px; border-collapse: collapse; border-color: #999999; border-style: none; border-width: 1px;">
                                                     <tr id="Tr6" runat="server" style="" class="ListViewHeader smallfont">
                                                         <th id="Th5" runat="server" class="padded" style="text-align: center;">Comp</th>
-                                                        <th id="Th6" runat="server" class="padded" style="text-align: center;">Fecha</th>
+                                                        <th id="Th6" runat="server" class="padded" style="text-align: center; white-space: nowrap; ">Fecha</th>
                                                         <th id="Th7" runat="server" class="padded" style="text-align: center;">Centro<br />Costo</th>
                                                         <th id="Th8" runat="server" class="padded" style="text-align: center;">Mon<br />orig</th>
                                                         <th id="Th10" runat="server" class="padded" style="text-align: left;">Descripción</th>
@@ -416,7 +416,7 @@
                                             <a href="javascript:PopupWin('CuentasYMovimientos_Comprobantes.aspx?NumeroAutomatico=' + <%# Eval("NumeroAutomatico") %>, 1000, 680)">
                                                 <%# Eval("Comprobante")%></a>
                                         </td>
-                                        <td class="padded" style="text-align: center;">
+                                        <td class="padded" style="text-align: center; white-space: nowrap; ">
                                             <asp:Label ID="Compania_ContabLabel" runat="server" Text='<%# Eval("Fecha", "{0:dd-MMM-yy}") %>' />
                                         </td>
                                         <td class="padded" style="text-align: center;">

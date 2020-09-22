@@ -2634,6 +2634,9 @@
     <Content Include="webAppSettings.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="webAppSettings.arsa.local.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="webAppSettings.arsa.cloud.config">
       <SubType>Designer</SubType>
     </None>
@@ -2656,6 +2659,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.arsa.cloud.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WebConnectionString.arsa.local.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.config.xl">

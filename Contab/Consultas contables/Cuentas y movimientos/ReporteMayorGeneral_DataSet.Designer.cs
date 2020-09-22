@@ -632,7 +632,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.Cuentas_y_movimientos {
                 this.columnSimboloMonedaOriginal.MaxLength = 6;
                 this.columnSecuencia.AllowDBNull = false;
                 this.columnDescripcion.AllowDBNull = false;
-                this.columnDescripcion.MaxLength = 75;
+                this.columnDescripcion.MaxLength = 300;
                 this.columnReferencia.MaxLength = 20;
                 this.columnDebe.ReadOnly = true;
                 this.columnHaber.ReadOnly = true;

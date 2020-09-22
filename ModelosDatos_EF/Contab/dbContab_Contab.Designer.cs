@@ -30,9 +30,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_SaldosContables_Monedas1", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Moneda), "SaldosContable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.SaldosContable), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_CuentasContables_tGruposContables", "tGruposContable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.tGruposContable), "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CuentasContable), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_CuentasContables_tGruposContables1", "tGruposContable", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.tGruposContable), "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CuentasContable), true)]
-[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_dAsientos_Asientos", "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Asiento), "dAsiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.dAsiento), true)]
-[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_dAsientos_CentrosCosto", "CentrosCosto", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CentrosCosto), "dAsiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.dAsiento), true)]
-[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_dAsientos_CuentasContables1", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CuentasContable), "dAsiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.dAsiento), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Temp_Contab_Report_BalanceGeneral_CuentasContables", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CuentasContable), "Temp_Contab_Report_BalanceGeneral", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Temp_Contab_Report_BalanceGeneral), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Temp_Contab_Report_BalanceGeneral_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Moneda), "Temp_Contab_Report_BalanceGeneral", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Temp_Contab_Report_BalanceGeneral), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_MesesDelAnoFiscal_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Compania), "MesesDelAnoFiscal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.MesesDelAnoFiscal), true)]
@@ -41,7 +38,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_tCiaSeleccionada_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Compania), "tCiaSeleccionada", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.tCiaSeleccionada), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Contab_ConsultaCuentasYMovimientos_CuentasContables", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CuentasContable), "Contab_ConsultaCuentasYMovimientos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_ConsultaCuentasYMovimientos), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Contab_ConsultaCuentasYMovimientos_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Moneda), "Contab_ConsultaCuentasYMovimientos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_ConsultaCuentasYMovimientos), true)]
-[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos", "Contab_ConsultaCuentasYMovimientos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_ConsultaCuentasYMovimientos), "Contab_ConsultaCuentasYMovimientos_Movimientos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_ConsultaCuentasYMovimientos_Movimientos), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Presupuesto_Codigos_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Compania), "Presupuesto_Codigos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Presupuesto_Codigos), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "Presupuesto_AsociacionCodigosCuentas", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CuentasContable), "Presupuesto_Codigos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Presupuesto_Codigos))]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_ParametrosContab_Companias", "Compania", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Compania), "ParametrosContab", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.ParametrosContab), true)]
@@ -51,6 +47,10 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Contab_BalanceComprobacion_Monedas", "Moneda", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Moneda), "Contab_BalanceComprobacion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_BalanceComprobacion), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Asientos_Documentos_Links_Asientos", "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Asiento), "Asientos_Documentos_Links", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Asientos_Documentos_Links), true)]
 [assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_tTempWebReport_ConsultaComprobantesContables_Asientos", "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Asiento), "tTempWebReport_ConsultaComprobantesContables", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.tTempWebReport_ConsultaComprobantesContables), true)]
+[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_dAsientos_Asientos", "Asiento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Asiento), "dAsiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.dAsiento), true)]
+[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_dAsientos_CentrosCosto", "CentrosCosto", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CentrosCosto), "dAsiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.dAsiento), true)]
+[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos", "Contab_ConsultaCuentasYMovimientos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_ConsultaCuentasYMovimientos), "Contab_ConsultaCuentasYMovimientos_Movimientos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_ConsultaCuentasYMovimientos_Movimientos), true)]
+[assembly: EdmRelationshipAttribute("dbContab_Contab_NS", "FK_dAsientos_CuentasContables1", "CuentasContable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.CuentasContable), "dAsiento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ContabSysNet_Web.ModelosDatos_EF.Contab.dAsiento), true)]
 
 #endregion
 
@@ -233,22 +233,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<dAsiento> dAsientos
-        {
-            get
-            {
-                if ((_dAsientos == null))
-                {
-                    _dAsientos = base.CreateObjectSet<dAsiento>("dAsientos");
-                }
-                return _dAsientos;
-            }
-        }
-        private ObjectSet<dAsiento> _dAsientos;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Temp_Contab_Report_BalanceGeneral> Temp_Contab_Report_BalanceGeneral
         {
             get
@@ -377,22 +361,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Contab_ConsultaCuentasYMovimientos_Movimientos> Contab_ConsultaCuentasYMovimientos_Movimientos
-        {
-            get
-            {
-                if ((_Contab_ConsultaCuentasYMovimientos_Movimientos == null))
-                {
-                    _Contab_ConsultaCuentasYMovimientos_Movimientos = base.CreateObjectSet<Contab_ConsultaCuentasYMovimientos_Movimientos>("Contab_ConsultaCuentasYMovimientos_Movimientos");
-                }
-                return _Contab_ConsultaCuentasYMovimientos_Movimientos;
-            }
-        }
-        private ObjectSet<Contab_ConsultaCuentasYMovimientos_Movimientos> _Contab_ConsultaCuentasYMovimientos_Movimientos;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Presupuesto_Codigos> Presupuesto_Codigos
         {
             get
@@ -485,6 +453,38 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
             }
         }
         private ObjectSet<tTempWebReport_ConsultaComprobantesContables> _tTempWebReport_ConsultaComprobantesContables;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Contab_ConsultaCuentasYMovimientos_Movimientos> Contab_ConsultaCuentasYMovimientos_Movimientos
+        {
+            get
+            {
+                if ((_Contab_ConsultaCuentasYMovimientos_Movimientos == null))
+                {
+                    _Contab_ConsultaCuentasYMovimientos_Movimientos = base.CreateObjectSet<Contab_ConsultaCuentasYMovimientos_Movimientos>("Contab_ConsultaCuentasYMovimientos_Movimientos");
+                }
+                return _Contab_ConsultaCuentasYMovimientos_Movimientos;
+            }
+        }
+        private ObjectSet<Contab_ConsultaCuentasYMovimientos_Movimientos> _Contab_ConsultaCuentasYMovimientos_Movimientos;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<dAsiento> dAsientos
+        {
+            get
+            {
+                if ((_dAsientos == null))
+                {
+                    _dAsientos = base.CreateObjectSet<dAsiento>("dAsientos");
+                }
+                return _dAsientos;
+            }
+        }
+        private ObjectSet<dAsiento> _dAsientos;
 
         #endregion
 
@@ -555,14 +555,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the dAsientos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTodAsientos(dAsiento dAsiento)
-        {
-            base.AddObject("dAsientos", dAsiento);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Temp_Contab_Report_BalanceGeneral EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToTemp_Contab_Report_BalanceGeneral(Temp_Contab_Report_BalanceGeneral temp_Contab_Report_BalanceGeneral)
@@ -627,14 +619,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Contab_ConsultaCuentasYMovimientos_Movimientos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToContab_ConsultaCuentasYMovimientos_Movimientos(Contab_ConsultaCuentasYMovimientos_Movimientos contab_ConsultaCuentasYMovimientos_Movimientos)
-        {
-            base.AddObject("Contab_ConsultaCuentasYMovimientos_Movimientos", contab_ConsultaCuentasYMovimientos_Movimientos);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Presupuesto_Codigos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToPresupuesto_Codigos(Presupuesto_Codigos presupuesto_Codigos)
@@ -680,6 +664,22 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         public void AddTotTempWebReport_ConsultaComprobantesContables(tTempWebReport_ConsultaComprobantesContables tTempWebReport_ConsultaComprobantesContables)
         {
             base.AddObject("tTempWebReport_ConsultaComprobantesContables", tTempWebReport_ConsultaComprobantesContables);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Contab_ConsultaCuentasYMovimientos_Movimientos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToContab_ConsultaCuentasYMovimientos_Movimientos(Contab_ConsultaCuentasYMovimientos_Movimientos contab_ConsultaCuentasYMovimientos_Movimientos)
+        {
+            base.AddObject("Contab_ConsultaCuentasYMovimientos_Movimientos", contab_ConsultaCuentasYMovimientos_Movimientos);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the dAsientos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTodAsientos(dAsiento dAsiento)
+        {
+            base.AddObject("dAsientos", dAsiento);
         }
 
         #endregion
@@ -1732,28 +1732,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_Contab_NS", "FK_dAsientos_Asientos", "dAsiento")]
-        public EntityCollection<dAsiento> dAsientos
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<dAsiento>("dbContab_Contab_NS.FK_dAsientos_Asientos", "dAsiento");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<dAsiento>("dbContab_Contab_NS.FK_dAsientos_Asientos", "dAsiento", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("dbContab_Contab_NS", "FK_Asientos_Documentos_Links_Asientos", "Asientos_Documentos_Links")]
         public EntityCollection<Asientos_Documentos_Links> Asientos_Documentos_Links
         {
@@ -1788,6 +1766,28 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tTempWebReport_ConsultaComprobantesContables>("dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos", "tTempWebReport_ConsultaComprobantesContables", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_Contab_NS", "FK_dAsientos_Asientos", "dAsiento")]
+        public EntityCollection<dAsiento> dAsientos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<dAsiento>("dbContab_Contab_NS.FK_dAsientos_Asientos", "dAsiento");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<dAsiento>("dbContab_Contab_NS.FK_dAsientos_Asientos", "dAsiento", value);
                 }
             }
         }
@@ -4919,28 +4919,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("dbContab_Contab_NS", "FK_dAsientos_CuentasContables1", "dAsiento")]
-        public EntityCollection<dAsiento> dAsientos
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<dAsiento>("dbContab_Contab_NS.FK_dAsientos_CuentasContables1", "dAsiento");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<dAsiento>("dbContab_Contab_NS.FK_dAsientos_CuentasContables1", "dAsiento", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("dbContab_Contab_NS", "FK_Temp_Contab_Report_BalanceGeneral_CuentasContables", "Temp_Contab_Report_BalanceGeneral")]
         public EntityCollection<Temp_Contab_Report_BalanceGeneral> Temp_Contab_Report_BalanceGeneral
         {
@@ -5019,6 +4997,28 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Contab_BalanceComprobacion>("dbContab_Contab_NS.FK_Contab_BalanceComprobacion_CuentasContables", "Contab_BalanceComprobacion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("dbContab_Contab_NS", "FK_dAsientos_CuentasContables1", "dAsiento")]
+        public EntityCollection<dAsiento> dAsientos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<dAsiento>("dbContab_Contab_NS.FK_dAsientos_CuentasContables1", "dAsiento");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<dAsiento>("dbContab_Contab_NS.FK_dAsientos_CuentasContables1", "dAsiento", value);
                 }
             }
         }
@@ -5652,7 +5652,8 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         /// <param name="simbolo">Initial value of the Simbolo property.</param>
         /// <param name="nacionalFlag">Initial value of the NacionalFlag property.</param>
         /// <param name="defaultFlag">Initial value of the DefaultFlag property.</param>
-        public static Moneda CreateMoneda(global::System.Int32 moneda1, global::System.String descripcion, global::System.String simbolo, global::System.Boolean nacionalFlag, global::System.Boolean defaultFlag)
+        /// <param name="convertir">Initial value of the Convertir property.</param>
+        public static Moneda CreateMoneda(global::System.Int32 moneda1, global::System.String descripcion, global::System.String simbolo, global::System.Boolean nacionalFlag, global::System.Boolean defaultFlag, global::System.Boolean convertir)
         {
             Moneda moneda = new Moneda();
             moneda.Moneda1 = moneda1;
@@ -5660,6 +5661,7 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
             moneda.Simbolo = simbolo;
             moneda.NacionalFlag = nacionalFlag;
             moneda.DefaultFlag = defaultFlag;
+            moneda.Convertir = convertir;
             return moneda;
         }
 
@@ -5789,6 +5791,30 @@ namespace ContabSysNet_Web.ModelosDatos_EF.Contab
         private global::System.Boolean _DefaultFlag;
         partial void OnDefaultFlagChanging(global::System.Boolean value);
         partial void OnDefaultFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Convertir
+        {
+            get
+            {
+                return _Convertir;
+            }
+            set
+            {
+                OnConvertirChanging(value);
+                ReportPropertyChanging("Convertir");
+                _Convertir = StructuralObject.SetValidValue(value, "Convertir");
+                ReportPropertyChanged("Convertir");
+                OnConvertirChanged();
+            }
+        }
+        private global::System.Boolean _Convertir;
+        partial void OnConvertirChanging(global::System.Boolean value);
+        partial void OnConvertirChanged();
 
         #endregion
 

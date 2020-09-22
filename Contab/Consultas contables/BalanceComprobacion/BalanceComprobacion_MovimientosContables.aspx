@@ -49,7 +49,7 @@
                                 <th id="Th1" runat="server" class="padded" style="text-align: center; padding-bottom: 10px;">
                                     #Comp
                                 </th>
-                                <th id="Th2" runat="server" class="padded" style="text-align: center; padding-bottom: 10px;">
+                                <th id="Th2" runat="server" class="padded" style="text-align: center; padding-bottom: 10px; white-space: nowrap; ">
                                     Fecha
                                 </th>
                                 <th id="Th20"  runat="server" class="padded" style="text-align: left; padding-bottom: 10px;">
@@ -128,9 +128,8 @@
                         <a href="javascript:PopupWin('../Cuentas y movimientos/CuentasYMovimientos_Comprobantes.aspx?NumeroAutomatico=' + <%# Eval("NumeroAutomatico") %>, 1000, 680)">
                                 <%#Eval("NumeroComprobanteContable")%></a>    
                 </td>
-                    <td class="padded" style="text-align: center;">
-                    <asp:Label ID="Label1"  runat="server" 
-                        Text='<%# Eval("Fecha", "{0:dd-MMM-yy}") %>' />
+                    <td class="padded" style="text-align: center; white-space: nowrap; ">
+                    <asp:Label ID="Label1"  runat="server" style="white-space: nowrap; " Text='<%# Eval("Fecha", "{0:dd-MMM-yy}") %>' />
                 </td>
                 <td class="padded" style="text-align: left;">
                     <asp:Label ID="Label2" runat="server" 
@@ -174,8 +173,7 @@
                                 <%#Eval("NumeroComprobanteContable")%></a>    
                 </td>
                     <td class="padded" style="text-align: center; white-space: nowrap; ">
-                    <asp:Label ID="Label3"  runat="server" 
-                        Text='<%# Eval("Fecha", "{0:dd-MMM-yy}") %>' />
+                    <asp:Label ID="Label3"  runat="server" style="white-space: nowrap; " Text='<%# Eval("Fecha", "{0:dd-MMM-yy}") %>' />
                 </td>
                 <td class="padded" style="text-align: left; ">
                     <asp:Label ID="Label4" runat="server" 

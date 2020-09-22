@@ -299,7 +299,7 @@
           <Property Name="CuentaContableID" Type="int" Nullable="false" />
           <Property Name="Partida" Type="smallint" />
           <Property Name="Referencia" Type="nvarchar" MaxLength="20" />
-          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="75" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="300" />
           <Property Name="Monto" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="CuentasContables">
@@ -336,7 +336,7 @@
           <Property Name="NumeroAutomatico" Type="int" Nullable="false" />
           <Property Name="Partida" Type="smallint" Nullable="false" />
           <Property Name="CuentaContableID" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="75" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="300" />
           <Property Name="Referencia" Type="nvarchar" MaxLength="20" />
           <Property Name="Debe" Type="money" Nullable="false" />
           <Property Name="Haber" Type="money" Nullable="false" />
@@ -363,6 +363,7 @@
           <Property Name="Simbolo" Type="nvarchar" Nullable="false" MaxLength="6" />
           <Property Name="NacionalFlag" Type="bit" Nullable="false" />
           <Property Name="DefaultFlag" Type="bit" Nullable="false" />
+          <Property Name="Convertir" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ParametrosContab">
           <Key>
@@ -556,7 +557,7 @@
           <Key>
             <PropertyRef Name="Grupo" />
           </Key>
-          <Property Name="Grupo" Type="int" Nullable="false" />
+          <Property Name="Grupo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="NumeroInicial" Type="int" Nullable="false" />
         </EntityType>
@@ -1133,19 +1134,6 @@
             <End Role="tGruposContable" EntitySet="tGruposContables" />
             <End Role="CuentasContable" EntitySet="CuentasContables" />
           </AssociationSet>
-          <EntitySet Name="dAsientos" EntityType="dbContab_Contab_NS.dAsiento" />
-          <AssociationSet Name="FK_dAsientos_Asientos" Association="dbContab_Contab_NS.FK_dAsientos_Asientos">
-            <End Role="Asiento" EntitySet="Asientos" />
-            <End Role="dAsiento" EntitySet="dAsientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dAsientos_CentrosCosto" Association="dbContab_Contab_NS.FK_dAsientos_CentrosCosto">
-            <End Role="CentrosCosto" EntitySet="CentrosCostoes" />
-            <End Role="dAsiento" EntitySet="dAsientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dAsientos_CuentasContables1" Association="dbContab_Contab_NS.FK_dAsientos_CuentasContables1">
-            <End Role="CuentasContable" EntitySet="CuentasContables" />
-            <End Role="dAsiento" EntitySet="dAsientos" />
-          </AssociationSet>
           <FunctionImport Name="spDeterminarMesFiscal">
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
             <Parameter Name="ciaContab" Mode="In" Type="Int32" />
@@ -1186,7 +1174,6 @@
             <End Role="tCiaSeleccionada" EntitySet="tCiaSeleccionadas" />
           </AssociationSet>
           <EntitySet Name="Contab_ConsultaCuentasYMovimientos" EntityType="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos" />
-          <EntitySet Name="Contab_ConsultaCuentasYMovimientos_Movimientos" EntityType="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos" />
           <AssociationSet Name="FK_Contab_ConsultaCuentasYMovimientos_CuentasContables" Association="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_CuentasContables">
             <End Role="CuentasContable" EntitySet="CuentasContables" />
             <End Role="Contab_ConsultaCuentasYMovimientos" EntitySet="Contab_ConsultaCuentasYMovimientos" />
@@ -1194,10 +1181,6 @@
           <AssociationSet Name="FK_Contab_ConsultaCuentasYMovimientos_Monedas" Association="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Monedas">
             <End Role="Moneda" EntitySet="Monedas" />
             <End Role="Contab_ConsultaCuentasYMovimientos" EntitySet="Contab_ConsultaCuentasYMovimientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos" Association="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos">
-            <End Role="Contab_ConsultaCuentasYMovimientos" EntitySet="Contab_ConsultaCuentasYMovimientos" />
-            <End Role="Contab_ConsultaCuentasYMovimientos_Movimientos" EntitySet="Contab_ConsultaCuentasYMovimientos_Movimientos" />
           </AssociationSet>
           <EntitySet Name="Presupuesto_Codigos" EntityType="dbContab_Contab_NS.Presupuesto_Codigos" />
           <AssociationSet Name="FK_Presupuesto_Codigos_Companias" Association="dbContab_Contab_NS.FK_Presupuesto_Codigos_Companias">
@@ -1277,6 +1260,24 @@
             <End Role="Asiento" EntitySet="Asientos" />
             <End Role="tTempWebReport_ConsultaComprobantesContables" EntitySet="tTempWebReport_ConsultaComprobantesContables" />
           </AssociationSet>
+          <EntitySet Name="Contab_ConsultaCuentasYMovimientos_Movimientos" EntityType="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos" />
+          <EntitySet Name="dAsientos" EntityType="dbContab_Contab_NS.dAsiento" />
+          <AssociationSet Name="FK_dAsientos_Asientos" Association="dbContab_Contab_NS.FK_dAsientos_Asientos">
+            <End Role="Asiento" EntitySet="Asientos" />
+            <End Role="dAsiento" EntitySet="dAsientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dAsientos_CentrosCosto" Association="dbContab_Contab_NS.FK_dAsientos_CentrosCosto">
+            <End Role="CentrosCosto" EntitySet="CentrosCostoes" />
+            <End Role="dAsiento" EntitySet="dAsientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos" Association="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos">
+            <End Role="Contab_ConsultaCuentasYMovimientos" EntitySet="Contab_ConsultaCuentasYMovimientos" />
+            <End Role="Contab_ConsultaCuentasYMovimientos_Movimientos" EntitySet="Contab_ConsultaCuentasYMovimientos_Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dAsientos_CuentasContables1" Association="dbContab_Contab_NS.FK_dAsientos_CuentasContables1">
+            <End Role="CuentasContable" EntitySet="CuentasContables" />
+            <End Role="dAsiento" EntitySet="dAsientos" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Asiento">
           <Key>
@@ -1307,10 +1308,10 @@
           <NavigationProperty Name="Moneda1" Relationship="dbContab_Contab_NS.FK_Asientos_Monedas" FromRole="Asientos" ToRole="Monedas" />
           <NavigationProperty Name="Moneda2" Relationship="dbContab_Contab_NS.FK_Asientos_Monedas1" FromRole="Asientos" ToRole="Monedas" />
           <NavigationProperty Name="TiposDeAsiento" Relationship="dbContab_Contab_NS.FK_Asientos_TiposDeAsiento" FromRole="Asientos" ToRole="TiposDeAsiento" />
-          <NavigationProperty Name="dAsientos" Relationship="dbContab_Contab_NS.FK_dAsientos_Asientos" FromRole="Asiento" ToRole="dAsiento" />
           <Property Type="String" Name="Lote" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Asientos_Documentos_Links" Relationship="dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos" FromRole="Asiento" ToRole="Asientos_Documentos_Links" />
           <NavigationProperty Name="tTempWebReport_ConsultaComprobantesContables" Relationship="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos" FromRole="Asiento" ToRole="tTempWebReport_ConsultaComprobantesContables" />
+          <NavigationProperty Name="dAsientos" Relationship="dbContab_Contab_NS.FK_dAsientos_Asientos" FromRole="Asiento" ToRole="dAsiento" />
         </EntityType>
         <EntityType Name="Compania">
           <Key>
@@ -1373,11 +1374,11 @@
           <NavigationProperty Name="SaldosContables" Relationship="dbContab_Contab_NS.FK_SaldosContables_CuentasContables1" FromRole="CuentasContable" ToRole="SaldosContable" />
           <NavigationProperty Name="tGruposContable" Relationship="dbContab_Contab_NS.FK_CuentasContables_tGruposContables" FromRole="CuentasContable" ToRole="tGruposContable" />
           <NavigationProperty Name="tGruposContable1" Relationship="dbContab_Contab_NS.FK_CuentasContables_tGruposContables1" FromRole="CuentasContable" ToRole="tGruposContable" />
-          <NavigationProperty Name="dAsientos" Relationship="dbContab_Contab_NS.FK_dAsientos_CuentasContables1" FromRole="CuentasContable" ToRole="dAsiento" />
           <NavigationProperty Name="Temp_Contab_Report_BalanceGeneral" Relationship="dbContab_Contab_NS.FK_Temp_Contab_Report_BalanceGeneral_CuentasContables" FromRole="CuentasContable" ToRole="Temp_Contab_Report_BalanceGeneral" />
           <NavigationProperty Name="Contab_ConsultaCuentasYMovimientos" Relationship="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_CuentasContables" FromRole="CuentasContable" ToRole="Contab_ConsultaCuentasYMovimientos" />
           <NavigationProperty Name="Presupuesto_Codigos" Relationship="dbContab_Contab_NS.Presupuesto_AsociacionCodigosCuentas" FromRole="CuentasContable" ToRole="Presupuesto_Codigos" />
           <NavigationProperty Name="Contab_BalanceComprobacion" Relationship="dbContab_Contab_NS.FK_Contab_BalanceComprobacion_CuentasContables" FromRole="CuentasContable" ToRole="Contab_BalanceComprobacion" />
+          <NavigationProperty Name="dAsientos" Relationship="dbContab_Contab_NS.FK_dAsientos_CuentasContables1" FromRole="CuentasContable" ToRole="dAsiento" />
         </EntityType>
         <EntityType Name="Moneda">
           <Key>
@@ -1397,6 +1398,7 @@
           <NavigationProperty Name="Contab_ConsultaCuentasYMovimientos" Relationship="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Monedas" FromRole="Moneda" ToRole="Contab_ConsultaCuentasYMovimientos" />
           <NavigationProperty Name="Presupuesto_Montos" Relationship="dbContab_Contab_NS.FK_Presupuesto_Montos_Monedas" FromRole="Moneda" ToRole="Presupuesto_Montos" />
           <NavigationProperty Name="Contab_BalanceComprobacion" Relationship="dbContab_Contab_NS.FK_Contab_BalanceComprobacion_Monedas" FromRole="Moneda" ToRole="Contab_BalanceComprobacion" />
+          <Property Type="Boolean" Name="Convertir" Nullable="false" />
         </EntityType>
         <EntityType Name="TiposDeAsiento">
           <Key>
@@ -1555,8 +1557,8 @@
           <Property Type="Int32" Name="CentroCosto" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="DescripcionCorta" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="dAsientos" Relationship="dbContab_Contab_NS.FK_dAsientos_CentrosCosto" FromRole="CentrosCosto" ToRole="dAsiento" />
           <Property Type="Boolean" Name="Suspendido" />
+          <NavigationProperty Name="dAsientos" Relationship="dbContab_Contab_NS.FK_dAsientos_CentrosCosto" FromRole="CentrosCosto" ToRole="dAsiento" />
         </EntityType>
         <EntityType Name="tGruposContable">
           <Key>
@@ -1589,62 +1591,6 @@
             </Principal>
             <Dependent Role="CuentasContable">
               <PropertyRef Name="GrupoNivelAgrupacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="dAsiento">
-          <Key>
-            <PropertyRef Name="NumeroAutomatico" />
-            <PropertyRef Name="Partida" />
-          </Key>
-          <Property Type="Int32" Name="NumeroAutomatico" Nullable="false" />
-          <Property Type="Int16" Name="Partida" Nullable="false" />
-          <Property Type="Int32" Name="CuentaContableID" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Referencia" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="Debe" Nullable="false" Precision="19" Scale="4" />
-          <Property Type="Decimal" Name="Haber" Nullable="false" Precision="19" Scale="4" />
-          <Property Type="Int32" Name="CentroCosto" />
-          <Property Type="Int32" Name="ConciliacionMovimientoID" />
-          <NavigationProperty Name="Asiento" Relationship="dbContab_Contab_NS.FK_dAsientos_Asientos" FromRole="dAsiento" ToRole="Asiento" />
-          <NavigationProperty Name="CentrosCosto" Relationship="dbContab_Contab_NS.FK_dAsientos_CentrosCosto" FromRole="dAsiento" ToRole="CentrosCosto" />
-          <NavigationProperty Name="CuentasContable" Relationship="dbContab_Contab_NS.FK_dAsientos_CuentasContables1" FromRole="dAsiento" ToRole="CuentasContable" />
-        </EntityType>
-        <Association Name="FK_dAsientos_Asientos">
-          <End Type="dbContab_Contab_NS.Asiento" Role="Asiento" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="dbContab_Contab_NS.dAsiento" Role="dAsiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Asiento">
-              <PropertyRef Name="NumeroAutomatico" />
-            </Principal>
-            <Dependent Role="dAsiento">
-              <PropertyRef Name="NumeroAutomatico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dAsientos_CentrosCosto">
-          <End Type="dbContab_Contab_NS.CentrosCosto" Role="CentrosCosto" Multiplicity="0..1" />
-          <End Type="dbContab_Contab_NS.dAsiento" Role="dAsiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CentrosCosto">
-              <PropertyRef Name="CentroCosto" />
-            </Principal>
-            <Dependent Role="dAsiento">
-              <PropertyRef Name="CentroCosto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dAsientos_CuentasContables1">
-          <End Type="dbContab_Contab_NS.CuentasContable" Role="CuentasContable" Multiplicity="1" />
-          <End Type="dbContab_Contab_NS.dAsiento" Role="dAsiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CuentasContable">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="dAsiento">
-              <PropertyRef Name="CuentaContableID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1845,21 +1791,6 @@
           <NavigationProperty Name="Moneda1" Relationship="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Monedas" FromRole="Contab_ConsultaCuentasYMovimientos" ToRole="Moneda" />
           <NavigationProperty Name="Contab_ConsultaCuentasYMovimientos_Movimientos" Relationship="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos" FromRole="Contab_ConsultaCuentasYMovimientos" ToRole="Contab_ConsultaCuentasYMovimientos_Movimientos" />
         </EntityType>
-        <EntityType Name="Contab_ConsultaCuentasYMovimientos_Movimientos">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Type="Int32" Name="ParentID" Nullable="false" />
-          <Property Type="Int16" Name="Secuencia" Nullable="false" />
-          <Property Type="Int32" Name="AsientoID" Nullable="false" />
-          <Property Type="Int32" Name="CuentaContableID" Nullable="false" />
-          <Property Type="Int16" Name="Partida" />
-          <Property Type="String" Name="Referencia" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="Monto" Nullable="false" Precision="19" Scale="4" />
-          <NavigationProperty Name="Contab_ConsultaCuentasYMovimientos" Relationship="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos" FromRole="Contab_ConsultaCuentasYMovimientos_Movimientos" ToRole="Contab_ConsultaCuentasYMovimientos" />
-        </EntityType>
         <Association Name="FK_Contab_ConsultaCuentasYMovimientos_CuentasContables">
           <End Type="dbContab_Contab_NS.CuentasContable" Role="CuentasContable" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1885,20 +1816,6 @@
             </Principal>
             <Dependent Role="Contab_ConsultaCuentasYMovimientos">
               <PropertyRef Name="Moneda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos">
-          <End Type="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos" Role="Contab_ConsultaCuentasYMovimientos" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos" Role="Contab_ConsultaCuentasYMovimientos_Movimientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contab_ConsultaCuentasYMovimientos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Contab_ConsultaCuentasYMovimientos_Movimientos">
-              <PropertyRef Name="ParentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2172,6 +2089,91 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Contab_ConsultaCuentasYMovimientos_Movimientos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="ParentID" Nullable="false" />
+          <Property Type="Int16" Name="Secuencia" Nullable="false" />
+          <Property Type="Int32" Name="AsientoID" Nullable="false" />
+          <Property Type="Int32" Name="CuentaContableID" Nullable="false" />
+          <Property Type="Int16" Name="Partida" />
+          <Property Type="String" Name="Referencia" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Monto" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Contab_ConsultaCuentasYMovimientos" Relationship="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos" FromRole="Contab_ConsultaCuentasYMovimientos_Movimientos" ToRole="Contab_ConsultaCuentasYMovimientos" />
+        </EntityType>
+        <EntityType Name="dAsiento">
+          <Key>
+            <PropertyRef Name="NumeroAutomatico" />
+            <PropertyRef Name="Partida" />
+          </Key>
+          <Property Type="Int32" Name="NumeroAutomatico" Nullable="false" />
+          <Property Type="Int16" Name="Partida" Nullable="false" />
+          <Property Type="Int32" Name="CuentaContableID" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Referencia" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Debe" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Haber" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="CentroCosto" />
+          <Property Type="Int32" Name="ConciliacionMovimientoID" />
+          <NavigationProperty Name="Asiento" Relationship="dbContab_Contab_NS.FK_dAsientos_Asientos" FromRole="dAsiento" ToRole="Asiento" />
+          <NavigationProperty Name="CentrosCosto" Relationship="dbContab_Contab_NS.FK_dAsientos_CentrosCosto" FromRole="dAsiento" ToRole="CentrosCosto" />
+          <NavigationProperty Name="CuentasContable" Relationship="dbContab_Contab_NS.FK_dAsientos_CuentasContables1" FromRole="dAsiento" ToRole="CuentasContable" />
+        </EntityType>
+        <Association Name="FK_dAsientos_Asientos">
+          <End Type="dbContab_Contab_NS.Asiento" Role="Asiento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbContab_Contab_NS.dAsiento" Role="dAsiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiento">
+              <PropertyRef Name="NumeroAutomatico" />
+            </Principal>
+            <Dependent Role="dAsiento">
+              <PropertyRef Name="NumeroAutomatico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dAsientos_CentrosCosto">
+          <End Type="dbContab_Contab_NS.CentrosCosto" Role="CentrosCosto" Multiplicity="0..1" />
+          <End Type="dbContab_Contab_NS.dAsiento" Role="dAsiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentrosCosto">
+              <PropertyRef Name="CentroCosto" />
+            </Principal>
+            <Dependent Role="dAsiento">
+              <PropertyRef Name="CentroCosto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos">
+          <End Type="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos" Role="Contab_ConsultaCuentasYMovimientos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos" Role="Contab_ConsultaCuentasYMovimientos_Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contab_ConsultaCuentasYMovimientos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contab_ConsultaCuentasYMovimientos_Movimientos">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dAsientos_CuentasContables1">
+          <End Type="dbContab_Contab_NS.CuentasContable" Role="CuentasContable" Multiplicity="1" />
+          <End Type="dbContab_Contab_NS.dAsiento" Role="dAsiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuentasContable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="dAsiento">
+              <PropertyRef Name="CuentaContableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2261,6 +2263,7 @@
           <EntitySetMapping Name="Monedas">
             <EntityTypeMapping TypeName="dbContab_Contab_NS.Moneda">
               <MappingFragment StoreEntitySet="Monedas">
+                <ScalarProperty Name="Convertir" ColumnName="Convertir" />
                 <ScalarProperty Name="Moneda1" ColumnName="Moneda" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Simbolo" ColumnName="Simbolo" />
@@ -2321,21 +2324,6 @@
                 <ScalarProperty Name="OrdenBalanceGeneral" ColumnName="OrdenBalanceGeneral" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Grupo" ColumnName="Grupo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dAsientos">
-            <EntityTypeMapping TypeName="dbContab_Contab_NS.dAsiento">
-              <MappingFragment StoreEntitySet="dAsientos">
-                <ScalarProperty Name="ConciliacionMovimientoID" ColumnName="ConciliacionMovimientoID" />
-                <ScalarProperty Name="CentroCosto" ColumnName="CentroCosto" />
-                <ScalarProperty Name="Haber" ColumnName="Haber" />
-                <ScalarProperty Name="Debe" ColumnName="Debe" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="CuentaContableID" ColumnName="CuentaContableID" />
-                <ScalarProperty Name="Partida" ColumnName="Partida" />
-                <ScalarProperty Name="NumeroAutomatico" ColumnName="NumeroAutomatico" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2445,21 +2433,6 @@
                 <ScalarProperty Name="CantMovtos" ColumnName="CantMovtos" />
                 <ScalarProperty Name="Moneda" ColumnName="Moneda" />
                 <ScalarProperty Name="CuentaContableID" ColumnName="CuentaContableID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contab_ConsultaCuentasYMovimientos_Movimientos">
-            <EntityTypeMapping TypeName="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos">
-              <MappingFragment StoreEntitySet="Contab_ConsultaCuentasYMovimientos_Movimientos">
-                <ScalarProperty Name="Monto" ColumnName="Monto" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Partida" ColumnName="Partida" />
-                <ScalarProperty Name="CuentaContableID" ColumnName="CuentaContableID" />
-                <ScalarProperty Name="AsientoID" ColumnName="AsientoID" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2619,6 +2592,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Contab_ConsultaCuentasYMovimientos_Movimientos">
+            <EntityTypeMapping TypeName="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos">
+              <MappingFragment StoreEntitySet="Contab_ConsultaCuentasYMovimientos_Movimientos">
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Partida" ColumnName="Partida" />
+                <ScalarProperty Name="CuentaContableID" ColumnName="CuentaContableID" />
+                <ScalarProperty Name="AsientoID" ColumnName="AsientoID" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dAsientos">
+            <EntityTypeMapping TypeName="dbContab_Contab_NS.dAsiento">
+              <MappingFragment StoreEntitySet="dAsientos">
+                <ScalarProperty Name="ConciliacionMovimientoID" ColumnName="ConciliacionMovimientoID" />
+                <ScalarProperty Name="CentroCosto" ColumnName="CentroCosto" />
+                <ScalarProperty Name="Haber" ColumnName="Haber" />
+                <ScalarProperty Name="Debe" ColumnName="Debe" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CuentaContableID" ColumnName="CuentaContableID" />
+                <ScalarProperty Name="Partida" ColumnName="Partida" />
+                <ScalarProperty Name="NumeroAutomatico" ColumnName="NumeroAutomatico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2692,10 +2695,6 @@
         <EntityTypeShape EntityType="dbContab_Contab_NS.tGruposContable" Width="2.25" PointX="13.375" PointY="11.875" IsExpanded="false" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_CuentasContables_tGruposContables" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_CuentasContables_tGruposContables1" />
-        <EntityTypeShape EntityType="dbContab_Contab_NS.dAsiento" Width="2.25" PointX="9.5" PointY="5.625" />
-        <AssociationConnector Association="dbContab_Contab_NS.FK_dAsientos_Asientos" />
-        <AssociationConnector Association="dbContab_Contab_NS.FK_dAsientos_CentrosCosto" />
-        <AssociationConnector Association="dbContab_Contab_NS.FK_dAsientos_CuentasContables1" />
         <EntityTypeShape EntityType="dbContab_Contab_NS.Temp_Contab_Report_BalanceGeneral" Width="4" PointX="8.375" PointY="19.25" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Temp_Contab_Report_BalanceGeneral_CuentasContables" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Temp_Contab_Report_BalanceGeneral_Monedas" />
@@ -2710,10 +2709,8 @@
         <EntityTypeShape EntityType="dbContab_Contab_NS.tCiaSeleccionada" Width="2.125" PointX="1" PointY="19.25" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_tCiaSeleccionada_Companias" />
         <EntityTypeShape EntityType="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos" Width="3.125" PointX="4.625" PointY="1.375" />
-        <EntityTypeShape EntityType="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos" Width="3.875" PointX="9.375" PointY="1.125" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_CuentasContables" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Monedas" />
-        <AssociationConnector Association="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos" />
         <EntityTypeShape EntityType="dbContab_Contab_NS.Presupuesto_Codigos" Width="2.875" PointX="1" PointY="23.5" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Presupuesto_Codigos_Companias" />
         <AssociationConnector Association="dbContab_Contab_NS.Presupuesto_AsociacionCodigosCuentas" />
@@ -2729,6 +2726,12 @@
         <EntityTypeShape EntityType="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables" Width="3.625" PointX="14.375" PointY="1" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos" />
+        <EntityTypeShape EntityType="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos" Width="1.5" PointX="5.4715018186119861" PointY="11.448250030841795" />
+        <EntityTypeShape EntityType="dbContab_Contab_NS.dAsiento" Width="1.5" PointX="0.62972369074342938" PointY="31.352705791291179" />
+        <AssociationConnector Association="dbContab_Contab_NS.FK_dAsientos_Asientos" />
+        <AssociationConnector Association="dbContab_Contab_NS.FK_dAsientos_CentrosCosto" />
+        <AssociationConnector Association="dbContab_Contab_NS.FK_Contab_ConsultaCuentasYMovimientos_Movimientos_Contab_ConsultaCuentasYMovimientos" />
+        <AssociationConnector Association="dbContab_Contab_NS.FK_dAsientos_CuentasContables1" />
       </Diagram>
     </Diagrams>
   </Designer>

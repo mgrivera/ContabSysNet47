@@ -58,7 +58,7 @@ Where (NombreUsuario = @NombreUsuario) </CommandText>
   <xs:element name="ReporteMayorGeneral_DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="ReporteMayorGeneral_DataSet" msprop:Generator_UserDSName="ReporteMayorGeneral_DataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="vContab_ConsultaCuentasYMovimientos" msprop:Generator_TableClassName="vContab_ConsultaCuentasYMovimientosDataTable" msprop:Generator_TableVarName="tablevContab_ConsultaCuentasYMovimientos" msprop:Generator_TablePropName="vContab_ConsultaCuentasYMovimientos" msprop:Generator_RowDeletingName="vContab_ConsultaCuentasYMovimientosRowDeleting" msprop:Generator_RowChangingName="vContab_ConsultaCuentasYMovimientosRowChanging" msprop:Generator_RowEvHandlerName="vContab_ConsultaCuentasYMovimientosRowChangeEventHandler" msprop:Generator_RowDeletedName="vContab_ConsultaCuentasYMovimientosRowDeleted" msprop:Generator_UserTableName="vContab_ConsultaCuentasYMovimientos" msprop:Generator_RowChangedName="vContab_ConsultaCuentasYMovimientosRowChanged" msprop:Generator_RowEvArgName="vContab_ConsultaCuentasYMovimientosRowChangeEvent" msprop:Generator_RowClassName="vContab_ConsultaCuentasYMovimientosRow">
+        <xs:element name="vContab_ConsultaCuentasYMovimientos" msprop:Generator_TableClassName="vContab_ConsultaCuentasYMovimientosDataTable" msprop:Generator_TableVarName="tablevContab_ConsultaCuentasYMovimientos" msprop:Generator_RowChangedName="vContab_ConsultaCuentasYMovimientosRowChanged" msprop:Generator_TablePropName="vContab_ConsultaCuentasYMovimientos" msprop:Generator_RowDeletingName="vContab_ConsultaCuentasYMovimientosRowDeleting" msprop:Generator_RowChangingName="vContab_ConsultaCuentasYMovimientosRowChanging" msprop:Generator_RowEvHandlerName="vContab_ConsultaCuentasYMovimientosRowChangeEventHandler" msprop:Generator_RowDeletedName="vContab_ConsultaCuentasYMovimientosRowDeleted" msprop:Generator_RowClassName="vContab_ConsultaCuentasYMovimientosRow" msprop:Generator_UserTableName="vContab_ConsultaCuentasYMovimientos" msprop:Generator_RowEvArgName="vContab_ConsultaCuentasYMovimientosRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NombreCiaContab" msprop:Generator_ColumnVarNameInTable="columnNombreCiaContab" msprop:Generator_ColumnPropNameInRow="NombreCiaContab" msprop:Generator_ColumnPropNameInTable="NombreCiaContabColumn" msprop:Generator_UserColumnName="NombreCiaContab">
@@ -110,7 +110,7 @@ Where (NombreUsuario = @NombreUsuario) </CommandText>
               <xs:element name="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_UserColumnName="Descripcion">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="75" />
+                    <xs:maxLength value="300" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
