@@ -180,6 +180,16 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
                     query = query.Where(c => c.CentrosCosto.DescripcionCorta.Contains(miniFilter));
             }
 
+            // aplicamos el período que el usuario indicó al filtro 
+            if (Session["FechaInicialPeriodo"] != null && Session["FechaFinalPeriodo"] != null)
+            {
+                var fechaInicialPeriodo = (DateTime)Session["FechaInicialPeriodo"];
+                var fechaFinalPeriodo = (DateTime)Session["FechaFinalPeriodo"];
+
+                query = query.Where(c => c.Asiento.Fecha >= fechaInicialPeriodo);
+                query = query.Where(c => c.Asiento.Fecha <= fechaFinalPeriodo);
+            }
+            
             query = query.OrderBy(d => d.Asiento.Fecha).ThenBy(d => d.Asiento.Numero); 
 
             return query; 

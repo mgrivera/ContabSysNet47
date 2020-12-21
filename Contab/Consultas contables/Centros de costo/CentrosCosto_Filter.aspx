@@ -43,22 +43,80 @@
 
                     <tr>
                         <td>
-                            Fecha: 
+                            Período: 
                         </td>
 
                         <td>
-                            <asp:TextBox ID="Sql_it_Asiento_Fecha_Date" runat="server" />
+                            
+                            <asp:TextBox ID="Desde_TextBox" runat="server" TextMode="Date" Width="125px" />
+           
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
+                                                        runat="server" 
+                                                        ControlToValidate="Desde_TextBox"
+                                                        CssClass="errmessage generalfont" 
+                                                        Display="Dynamic" 
+                                                        ErrorMessage="Ud. debe indicar una fecha" 
+                                                        ForeColor="Red">
+                                *
+                            </asp:RequiredFieldValidator>
+
+                            <asp:CompareValidator ID="CompareValidator1" 
+                                                  runat="server" 
+                                                  ControlToValidate="Desde_TextBox"
+                                                  CssClass="errmessage generalfont" 
+                                                  Display="Dynamic" 
+                                                  ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
+                                                  Operator="DataTypeCheck" 
+                                                  Type="Date" 
+                                                  ForeColor="Red">
+                            </asp:CompareValidator>
+
+                            &nbsp;/&nbsp;&nbsp;
+
+                            <asp:TextBox ID="Hasta_TextBox" runat="server" TextMode="Date" Width="125px" />
+
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" 
+                                                        runat="server" 
+                                                        ControlToValidate="Hasta_TextBox"
+                                                        CssClass="errmessage generalfont" 
+                                                        Display="Dynamic" 
+                                                        ErrorMessage="Ud. debe indicar una fecha" 
+                                                        ForeColor="Red">
+                                *
+                            </asp:RequiredFieldValidator>
+
+                            <asp:CompareValidator ID="CompareValidator2" runat="server" 
+                                                  ControlToValidate="Hasta_TextBox"
+                                                  CssClass="errmessage generalfont" 
+                                                  Display="Dynamic" 
+                                                  ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
+                                                  Operator="DataTypeCheck" 
+                                                  Type="Date" 
+                                                  ForeColor="Red">
+                                *
+                            </asp:CompareValidator>
+
+                            <asp:CompareValidator ID="CompareValidator3" 
+                                                  runat="server" 
+                                                  ControlToValidate="Hasta_TextBox"
+                                                  CssClass="errmessage generalfont" 
+                                                  Display="Dynamic" 
+                                                  ErrorMessage="El intervalo indicado no es válido."
+                                                  Operator="GreaterThanEqual" 
+                                                  Type="Date" 
+                                                  ControlToCompare="Desde_TextBox" 
+                                                  ForeColor="Red">
+                                *
+                            </asp:CompareValidator>
                         </td>
                        
                         <td />
                         <td />
 
                         <td>
-                            Debe: 
                         </td>
                        
                         <td />
-                            <asp:TextBox ID="Sql_it_Debe_Numeric" runat="server" />
                         <td />
                     </tr>
 
@@ -73,22 +131,40 @@
                         <td />
 
                         <td>
-                            Haber: 
                         </td>
                        
                         <td />
-                            <asp:TextBox ID="Sql_it_Haber_Numeric" runat="server" />
                         <td />
                     </tr>
 
                      <tr>
-                        <td colspan="5">
-                         <asp:CheckBox ID="ConCentroCostoAsignado_CheckBox" 
-                             runat="server" 
-                             Checked="true" 
-                             Text="Solo movimientos contables con centro de costo asignado" 
-                             ToolTip="Si este campo no es marcado, serán seleccionados también movimientos contables a los cuales el usuario no ha asignado un centro de costo" />
+                        <td colspan="3">
+                            <br /><br />
+                            <fieldset style="text-align: left; margin-left: 15px; vertical-align: top; ">
+                                <legend>Centro de costo:</legend>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <asp:RadioButton ID="ConCentroCosto_RadioButton" runat="server" GroupName="CentroCostoAsignado" Text="Con centro de costo asignado" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:RadioButton ID="SinCentroCosto_RadioButton" runat="server" GroupName="CentroCostoAsignado" Text="Sin centro de costo asignado" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:RadioButton ID="Todos_RadioButton" runat="server" GroupName="CentroCostoAsignado" Text="Todos" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
                         <td />
+
+                        <td></td>
+                        <td></td>
                     </tr>
 
                 </table>

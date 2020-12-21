@@ -2778,6 +2778,13 @@ namespace ContabSysNetWeb
                                 return;
                             }
 
+                            if (Session["FechaInicialPeriodo"] == null || Session["FechaFinalPeriodo"] == null)
+                            {
+                                ErrMessage_Cell.InnerHtml = "No existe información para mostrar el reporte que Ud. ha requerido. <br /><br />" +
+                                    "Probablemente Ud. no ha aplicado un filtro aún, o la sesión ha caducado.";
+                                return;
+                            }
+
                             // leemos los parámetros del querystring 
 
                             string tituloReporte = "";
@@ -2811,6 +2818,8 @@ namespace ContabSysNetWeb
 
                             string sqlFilter = Session["FiltroForma"].ToString();
 
+                            var fechaInicialPeriodo = (DateTime)Session["FechaInicialPeriodo"];
+                            var fechaFinalPeriodo = (DateTime)Session["FechaFinalPeriodo"];
 
                             dbContab_Contab_Entities db = new dbContab_Contab_Entities();
 
@@ -2820,7 +2829,9 @@ namespace ContabSysNetWeb
                                                      Include("CentrosCosto").
                                                      Include("CuentasContable").
                                                      Include("CuentasContable.tGruposContable").
-                                                     Where(Session["FiltroForma"].ToString());
+                                                     Where(Session["FiltroForma"].ToString()).
+                                                     Where(x => x.Asiento.Fecha >= fechaInicialPeriodo).
+                                                     Where(x => x.Asiento.Fecha <= fechaFinalPeriodo);
 
                             // ahora preparamos una lista para usarla como DataSource del report ... 
 

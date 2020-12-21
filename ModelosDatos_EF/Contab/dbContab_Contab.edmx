@@ -2646,7 +2646,7 @@
         <EntityTypeShape EntityType="dbContab_Contab_NS.Asiento" Width="1.875" PointX="4.375" PointY="5.625" Height="6.0186165364583317" IsExpanded="true" />
         <EntityTypeShape EntityType="dbContab_Contab_NS.Compania" Width="2.5" PointX="1.375" PointY="6.25" Height="5.0571093750000014" IsExpanded="true" />
         <EntityTypeShape EntityType="dbContab_Contab_NS.CuentasContable" Width="2.75" PointX="9.25" PointY="10.375" Height="5.4417122395833317" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbContab_Contab_NS.Moneda" Width="1.5" PointX="0.5" PointY="5.5" Height="2.5571907552083317" IsExpanded="false" />
+        <EntityTypeShape EntityType="dbContab_Contab_NS.Moneda" Width="1.5" PointX="0.5" PointY="5.5" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="dbContab_Contab_NS.TiposDeAsiento" Width="1.5" PointX="7" PointY="8.625" Height="1.7879850260416674" IsExpanded="false" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Asientos_Companias" ManuallyRouted="false">
           <ConnectorPoint PointX="3.75" PointY="10.759308268229166" />

@@ -80,10 +80,16 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
             string sSqlSelectString = MyConstruirCriterioSql.CriterioSql;
             MyConstruirCriterioSql = null;
 
-            if (this.ConCentroCostoAsignado_CheckBox.Checked)
-                sSqlSelectString += " And (it.CentroCosto Is Not Null)"; 
+            if (this.ConCentroCosto_RadioButton.Checked)
+                sSqlSelectString += " And (it.CentroCosto Is Not Null)";
+
+            if (this.SinCentroCosto_RadioButton.Checked)
+                sSqlSelectString += " And (it.CentroCosto Is Null)";
 
             Session["FiltroForma"] = sSqlSelectString;
+
+            Session["FechaInicialPeriodo"] = Convert.ToDateTime(Desde_TextBox.Text);
+            Session["FechaFinalPeriodo"] = Convert.ToDateTime(Hasta_TextBox.Text);
 
             // -------------------------------------------------------------------------------------------------------------------------
             // para guardar el contenido de los controles de la página para recuperar el state cuando se abra la proxima vez 

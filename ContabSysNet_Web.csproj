@@ -3919,7 +3919,6 @@
     </EntityDeploy>
     <EntityDeploy Include="ModelosDatos_EF\Contab\dbContab_Contab.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbContab_Contab.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <EntityDeploy Include="ModelosDatos_EF\Bancos\BancosEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

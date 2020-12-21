@@ -195,6 +195,11 @@
                                     <ItemStyle HorizontalAlign="Center" Wrap="False" />
                                 </asp:boundfield>
 
+                                <asp:boundfield datafield="Asiento.Moneda1.Simbolo" headertext="Mon" htmlencode="false">      
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" Wrap="False" />
+                                </asp:boundfield>
+
                                 <asp:boundfield datafield="CuentasContable.Descripcion" headertext="Nombre<br/>cuenta" HtmlEncode="False">      
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
@@ -263,4 +268,3 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Footer_ContentPlaceHolder" Runat="Server">
     <br />
 </asp:Content>
-
