@@ -61,19 +61,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
         protected void AplicarFiltro_Button_Click(object sender, EventArgs e)
         {
-            // GET SELECTED ITEMS
-            //List<string> myList = new List<string>(); 
-
-            //for (int i = 0; i <= select1.Items.Count - 1; i++)
-            //{
-            //    if (select1.Items[i].Selected)
-            //        myList.Add(select1.Items[i].Text + " | " + select1.Items[i].Value); 
-            //}
-
-            // SET SELECTED ITEMS
-            //select1.Items[2].Selected = true;
-            //select1.Items[4].Selected = true;
-
             if (Sql_Asientos_Cia_Numeric.SelectedIndex == -1)
             {
                 // el usuario debe siempre seleccionar, al menos, una compañía en la lista 
@@ -125,9 +112,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
             Session["ExcluirCuentasConSaldosInicialFinalCero"] = ExcluirCuentasConSaldosInicialFinalCero_CheckBox.Checked;
             Session["ExcluirCuentasConSaldoFinalCero"] = ExcluirCuentasConSaldoFinalCero_CheckBox.Checked;
- 
-            // guardamos en un session el valor de un parámetro que usará el reporte 
 
+            Session["SoloMovimientosConCentroCostoAsignado"] = this.SoloMovimientosConCentroCostoAsignado_CheckBox.Checked;
+            Session["SoloMovimientosSinCentroCostoAsignado"] = this.SoloMovimientosSinCentroCostoAsignado_CheckBox.Checked;
+
+            // guardamos en un session el valor de un parámetro que usará el reporte 
             DateTime desde; 
             DateTime hasta;
 

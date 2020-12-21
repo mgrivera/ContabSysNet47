@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace ContabSysNet_Web.Contab.Consultas_contables.Cuentas_y_movimientos
 {
@@ -44,7 +42,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.Cuentas_y_movimientos
         }
     }
 
-
     public class Asiento2_Report
     {
         public string NombreMoneda { get; set; }
@@ -68,6 +65,33 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.Cuentas_y_movimientos
         public List<Asiento2_Report> GetAsientos_Report()
         {
             List<Asiento2_Report> list = new List<Asiento2_Report>();
+            return list;
+        }
+    }
+
+    public class CuentasYMovimientos_Report
+    {
+        public string NombreCiaContab { get; set; }
+        public string NombreMoneda { get; set; }
+        public string SimboloMoneda { get; set; }
+        public string CuentaContableEditada { get; set; }
+        public string NombreCuentaContable { get; set; }
+        public int? NumeroComprobante { get; set; }
+        public DateTime? Fecha { get; set; }
+        public string SimboloMonedaOriginal { get; set; }
+        public int Secuencia { get; set; }
+        public short? Partida { get; set; }
+        public string Descripcion { get; set; }
+        public string Referencia { get; set; }
+        public decimal Debe { get; set; }
+        public decimal Haber { get; set; }
+        public decimal Total { get; set; }
+        public string CentroCostoAbreviatura { get; set; }
+        public string NombreUsuario { get; set; }
+
+        public List<CuentasYMovimientos_Report> GetCuentasYMovimientos_Report()
+        {
+            List<CuentasYMovimientos_Report> list = new List<CuentasYMovimientos_Report>();
             return list;
         }
     }

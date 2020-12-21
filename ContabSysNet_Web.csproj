@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -32,6 +33,8 @@
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,8 +73,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="JuiceUI">
       <HintPath>packages\JuiceUI.1.1.1\lib\net40\JuiceUI.dll</HintPath>
@@ -2658,10 +2664,16 @@
     <None Include="webAppSettings.risk">
       <SubType>Designer</SubType>
     </None>
+    <None Include="webAppSettings.smr.local.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="WebConnectionString.arsa.cloud.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.arsa.local.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WebConnectionString.smr.local.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.config.xl">
@@ -3448,6 +3460,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ControlCajaChicaModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ModelosDatos_EF\code_first\contab\Asientos.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\CentrosCosto.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\Companias.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\ContabContext.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\ConsultaCuentasYMovimientos.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\ConsultaCuentasYMovimientos_Movimientos.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\CuentasContables.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\dAsientos.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\Monedas.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\ParametrosContab.cs" />
     <Compile Include="ModelosDatos_EF\Contab\dbContab_Contab.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4149,6 +4171,14 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

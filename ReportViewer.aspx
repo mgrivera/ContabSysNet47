@@ -8,6 +8,7 @@
     <head runat="server">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
         <title>ContabSysNet - Reportes</title>
+        <link href="general.css" rel="stylesheet" type="text/css" />
 
         <style>
             html,body,form,#div1 {

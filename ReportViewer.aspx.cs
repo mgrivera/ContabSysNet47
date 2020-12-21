@@ -25,6 +25,7 @@ using ContabSysNet_Web.Clases;
 using System.Text;
 using ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion;
 using ContabSysNet_Web.Bancos.Disponibilidad_en_bancos.Disponibilidad;
+using ContabSysNet_Web.ModelosDatos_EF.code_first.contab;
 
 namespace ContabSysNetWeb
 {
@@ -432,13 +433,72 @@ namespace ContabSysNetWeb
                                             simpleFont = Request.QueryString["simpleFont"].ToString();
 
 
-                                        ReporteMayorGeneral_DataSet MyReportDataSet = new ReporteMayorGeneral_DataSet();
-                                        vContab_ConsultaCuentasYMovimientosTableAdapter MyReportTableAdapter =
-                                            new vContab_ConsultaCuentasYMovimientosTableAdapter();
+                                        //ReporteMayorGeneral_DataSet MyReportDataSet = new ReporteMayorGeneral_DataSet();
+                                        //vContab_ConsultaCuentasYMovimientosTableAdapter MyReportTableAdapter = new vContab_ConsultaCuentasYMovimientosTableAdapter();
 
-                                        MyReportTableAdapter.FillByNombreUsuario(MyReportDataSet.vContab_ConsultaCuentasYMovimientos, User.Identity.Name);
+                                        //MyReportTableAdapter.FillByNombreUsuario(MyReportDataSet.vContab_ConsultaCuentasYMovimientos, User.Identity.Name);
 
-                                        if (MyReportDataSet.vContab_ConsultaCuentasYMovimientos.Rows.Count == 0)
+
+
+
+
+                                        var contabContext = new ContabContext();
+
+                                        var cuentasYMovimientos = contabContext.ConsultaCuentasYMovimientos
+                                                                               .Where(x => x.NombreUsuario == User.Identity.Name)
+                                                                               .Select(x => x)
+                                                                               .ToList(); 
+
+                                        CuentasYMovimientos_Report reportItem;
+                                        List<CuentasYMovimientos_Report> reportItem_list = new List<CuentasYMovimientos_Report>(); 
+
+                                        foreach (var item in cuentasYMovimientos)
+                                        {
+                                            var companiaContab = contabContext.ConsultaCuentasYMovimientos.Where(x => x.ID == item.ID)
+                                                                                                           .Select(x => new { x.CuentasContables.Companias.Nombre })
+                                                                                                           .FirstOrDefault();
+
+                                            foreach (var movimiento in item.ConsultaCuentasYMovimientos_Movimientos)
+                                            {
+                                                var asiento = contabContext.Asientos.Where(x => x.NumeroAutomatico == movimiento.AsientoID)
+                                                                                    .Select(x => new {
+                                                                                        numeroComprobante = x.Numero, 
+                                                                                        fechaComprobante = x.Fecha, 
+                                                                                        simboloMonedaOriginal = x.Monedas1.Simbolo
+                                                                                    })
+                                                                                    .FirstOrDefault(); 
+
+                                                // TODO2: cómo calcular el total??? 
+                                                reportItem = new CuentasYMovimientos_Report() {
+                                                    NombreCiaContab = companiaContab.Nombre,
+                                                    NombreMoneda = movimiento.ConsultaCuentasYMovimientos.Monedas.Descripcion,
+                                                    SimboloMoneda = movimiento.ConsultaCuentasYMovimientos.Monedas.Simbolo,
+                                                    CuentaContableEditada = movimiento.ConsultaCuentasYMovimientos.CuentasContables.CuentaEditada,
+                                                    NombreCuentaContable = movimiento.ConsultaCuentasYMovimientos.CuentasContables.Descripcion
+                                                };
+
+                                                if (asiento != null)
+                                                {
+                                                    reportItem.NumeroComprobante = asiento.numeroComprobante;
+                                                    reportItem.Fecha = asiento.fechaComprobante;
+                                                    reportItem.SimboloMonedaOriginal = asiento.simboloMonedaOriginal;
+                                                }
+       
+                                                reportItem.Secuencia = movimiento.Secuencia; 
+                                                reportItem.Partida = movimiento.Partida;
+                                                reportItem.Descripcion = movimiento.Descripcion;
+                                                reportItem.Referencia = movimiento.Referencia;
+                                                reportItem.Debe = movimiento.Monto >= 0 ? movimiento.Monto : 0;
+                                                reportItem.Haber = movimiento.Monto < 0 ? Math.Abs(movimiento.Monto) : 0;
+                                                reportItem.Total = movimiento.Monto;
+                                                reportItem.CentroCostoAbreviatura = movimiento.CentroCostoAbreviatura; 
+                                                reportItem.NombreUsuario = User.Identity.Name; 
+
+                                                reportItem_list.Add(reportItem);
+                                            }
+                                        }
+
+                                        if (reportItem_list.Count == 0)
                                         {
                                             ErrMessage_Cell.InnerHtml = "No existe información para mostrar el reporte que Ud. ha requerido. <br /><br />" + 
                                                 "Probablemente Ud. no ha aplicado un filtro y seleccionado información aún.";
@@ -446,16 +506,14 @@ namespace ContabSysNetWeb
                                         }
 
                                         if (orientation == "v") 
-                                            this.ReportViewer1.LocalReport.ReportPath = 
-                                                "Contab/Consultas contables/Cuentas y movimientos/CuentasYMovimientos_Portrait.rdlc";
+                                            this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/Cuentas y movimientos/CuentasYMovimientos_Portrait.rdlc";
                                         else
-                                            this.ReportViewer1.LocalReport.ReportPath = 
-                                                "Contab/Consultas contables/Cuentas y movimientos/CuentasYMovimientos_Landscape.rdlc";
+                                            this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/Cuentas y movimientos/CuentasYMovimientos_Landscape.rdlc";
 
                                         ReportDataSource myReportDataSource = new ReportDataSource();
 
                                         myReportDataSource.Name = "DataSet1";
-                                        myReportDataSource.Value = MyReportDataSet.vContab_ConsultaCuentasYMovimientos;
+                                        myReportDataSource.Value = reportItem_list;
 
                                         this.ReportViewer1.LocalReport.DataSources.Add(myReportDataSource);
 
@@ -477,16 +535,16 @@ namespace ContabSysNetWeb
                                         // leemos un 'flag' en la tabla Parametros, que permite al usuario indicar si quiere mostrar o 
                                         // no la fecha del día en los reportes de contabilidad ... 
 
-                                        string nombreCiaContab = MyReportDataSet.vContab_ConsultaCuentasYMovimientos[0].NombreCiaContab; 
+                                        //string nombreCiaContab = MyReportDataSet.vContab_ConsultaCuentasYMovimientos[0].NombreCiaContab; 
 
-                                        dbContab_Contab_Entities contabContex = new dbContab_Contab_Entities(); 
+                                        //dbContab_Contab_Entities contabContex = new dbContab_Contab_Entities(); 
 
-                                        int? ciaContab = contabContex.Companias.Where(c => c.Nombre == nombreCiaContab).Select(c => c.Numero).FirstOrDefault(); 
+                                        int? ciaContab = contabContext.Companias.Where(c => c.Nombre == "G.E.H. Asesores, C.A.").Select(c => c.Numero).FirstOrDefault(); 
 
-                                        bool? noMostrarFechaEnReportesContab = false;
+                                        bool ? noMostrarFechaEnReportesContab = false;
 
                                         if (ciaContab != null)
-                                            noMostrarFechaEnReportesContab = contabContex.ParametrosContabs.Where(p => p.Cia == ciaContab.Value).
+                                            noMostrarFechaEnReportesContab = contabContext.ParametrosContab.Where(p => p.Cia == ciaContab.Value).
                                                                                                             Select(p => p.ReportesContab_NoMostrarFechaDia).
                                                                                                             FirstOrDefault();
 
@@ -1838,8 +1896,22 @@ namespace ContabSysNetWeb
                                                 infoCompra.Iva = compra.Iva_Reducido != null ? compra.Iva_Reducido.Value : 0;
                                                 infoCompra.RetencionIva = compra.ImpuestoRetenido_Reducido != null ? compra.ImpuestoRetenido_Reducido.Value : 0;
 
-                                                infoCompra.IvaPorc = Math.Abs(Math.Round((infoCompra.Iva * 100) / infoCompra.MontoImponible, 0));
-                                                infoCompra.RetencionIvaPorc = Math.Abs(Math.Round((infoCompra.RetencionIva * 100) / infoCompra.Iva, 0));
+                                                try
+                                                {
+                                                    infoCompra.IvaPorc = Math.Abs(Math.Round((infoCompra.Iva * 100) / infoCompra.MontoImponible, 0));
+                                                    infoCompra.RetencionIvaPorc = Math.Abs(Math.Round((infoCompra.RetencionIva * 100) / infoCompra.Iva, 0));
+                                                } catch
+                                                {
+                                                    // prevenimos contra una posible división por cero 
+                                                    var message = $"Error: por favor revise la factura número: <em>{infoCompra.NumeroDocumento}</em>, " +
+                                                                  $"que corresponde a la compañía: <em>{infoCompra.Compania_Nombre}</em>.<br /> " +
+                                                                  $"Es probable que, aunque la misma corresponda a una factura con monto de impuestos Iva, no tenga " +
+                                                                  $"todos sus datos inicializados en forma correcta.<br />" +
+                                                                  $"Por ejemplo, tal vez la factura no tenga un monto de impuestos Iva o, aunque tenga un porcentaje de retención de " +
+                                                                  $"impuestos, no tenga el monto que corresponde al mismo, etc.";
+                                                    this.ErrMessage_Cell.InnerHtml = message;
+                                                    return; 
+                                                }
 
                                                 myList.Add(infoCompra);
                                                 agregueUnRegistroALaLista = true; 
@@ -1903,8 +1975,23 @@ namespace ContabSysNetWeb
                                                 infoCompra.Iva = compra.Iva_General != null ? compra.Iva_General.Value : 0;
                                                 infoCompra.RetencionIva = compra.ImpuestoRetenido_General != null ? compra.ImpuestoRetenido_General.Value : 0;
 
-                                                infoCompra.IvaPorc = Math.Abs(Math.Round((infoCompra.Iva * 100) / infoCompra.MontoImponible, 0));
-                                                infoCompra.RetencionIvaPorc = Math.Abs(Math.Round((infoCompra.RetencionIva * 100) / infoCompra.Iva, 0));
+                                                try
+                                                {
+                                                    infoCompra.IvaPorc = Math.Abs(Math.Round((infoCompra.Iva * 100) / infoCompra.MontoImponible, 0));
+                                                    infoCompra.RetencionIvaPorc = Math.Abs(Math.Round((infoCompra.RetencionIva * 100) / infoCompra.Iva, 0));
+                                                }
+                                                catch
+                                                {
+                                                    // prevenimos contra una posible división por cero 
+                                                    var message = $"Error: por favor revise la factura número: <em>{infoCompra.NumeroDocumento}</em>, " +
+                                                                  $"que corresponde a la compañía: <em>{infoCompra.Compania_Nombre}</em>.<br /> " +
+                                                                  $"Es probable que, aunque la misma corresponda a una factura con monto de impuestos Iva, no tenga " +
+                                                                  $"todos sus datos inicializados en forma correcta.<br />" +
+                                                                  $"Por ejemplo, tal vez la factura no tenga un monto de impuestos Iva o, aunque tenga un porcentaje de retención de " +
+                                                                  $"impuestos, no tenga el monto que corresponde al mismo, etc.";
+                                                    this.ErrMessage_Cell.InnerHtml = message;
+                                                    return;
+                                                }
 
                                                 myList.Add(infoCompra);
                                                 agregueUnRegistroALaLista = true;
@@ -1968,8 +2055,23 @@ namespace ContabSysNetWeb
                                                 infoCompra.Iva = compra.Iva_Adicional != null ? compra.Iva_Adicional.Value : 0;
                                                 infoCompra.RetencionIva = compra.ImpuestoRetenido_Adicional != null ? compra.ImpuestoRetenido_Adicional.Value : 0;
 
-                                                infoCompra.IvaPorc = Math.Abs(Math.Round((infoCompra.Iva * 100) / infoCompra.MontoImponible, 0));
-                                                infoCompra.RetencionIvaPorc = Math.Abs(Math.Round((infoCompra.RetencionIva * 100) / infoCompra.Iva, 0));
+                                                try
+                                                {
+                                                    infoCompra.IvaPorc = Math.Abs(Math.Round((infoCompra.Iva * 100) / infoCompra.MontoImponible, 0));
+                                                    infoCompra.RetencionIvaPorc = Math.Abs(Math.Round((infoCompra.RetencionIva * 100) / infoCompra.Iva, 0));
+                                                }
+                                                catch
+                                                {
+                                                    // prevenimos contra una posible división por cero 
+                                                    var message = $"Error: por favor revise la factura número: <em>{infoCompra.NumeroDocumento}</em>, " +
+                                                                  $"que corresponde a la compañía: <em>{infoCompra.Compania_Nombre}</em>.<br /> " +
+                                                                  $"Es probable que, aunque la misma corresponda a una factura con monto de impuestos Iva, no tenga " +
+                                                                  $"todos sus datos inicializados en forma correcta.<br />" +
+                                                                  $"Por ejemplo, tal vez la factura no tenga un monto de impuestos Iva o, aunque tenga un porcentaje de retención de " +
+                                                                  $"impuestos, no tenga el monto que corresponde al mismo, etc.";
+                                                    this.ErrMessage_Cell.InnerHtml = message;
+                                                    return;
+                                                }
 
                                                 myList.Add(infoCompra);
                                                 agregueUnRegistroALaLista = true; 
@@ -2055,8 +2157,6 @@ namespace ContabSysNetWeb
                                             myList.Add(infoCompra);
                                         }
 
-                                        
-
                                         this.ReportViewer1.LocalReport.ReportPath = "Bancos/Consultas facturas/Facturas/Facturas_LibroCompras.rdlc";
 
                                         ReportDataSource myReportDataSource = new ReportDataSource();
@@ -2090,8 +2190,6 @@ namespace ContabSysNetWeb
 
                                         if (Request.QueryString["per"] != null)
                                             periodo = Request.QueryString["per"].ToString();
-
-
 
                                         ReportParameter titulo_ReportParameter = new ReportParameter("Titulo", titulo);
                                         ReportParameter subTitulo_ReportParameter = new ReportParameter("Subtitulo", subTitulo);
@@ -3458,9 +3556,9 @@ namespace ContabSysNetWeb
             // cuentas de gastos e ingresos (gyp) ... 
 
             errorMessage = "";
-            List<int> list = new List<int>(); 
+            List<int> list = new List<int>();
 
-            ParametrosContab parametrosContab = dbContab.ParametrosContabs.Where(p => p.Cia == ciaContab).FirstOrDefault();
+            ContabSysNet_Web.ModelosDatos_EF.Contab.ParametrosContab parametrosContab = dbContab.ParametrosContabs.Where(p => p.Cia == ciaContab).FirstOrDefault();
 
             if (parametrosContab == null)
             {

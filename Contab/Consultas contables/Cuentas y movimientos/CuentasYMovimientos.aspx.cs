@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,38 +12,39 @@ using System.Threading;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
-using ContabSysNet_Web.ModelosDatos_EF.Contab;
+//using ContabSysNet_Web.ModelosDatos_EF.Contab;
 
 using MongoDB.Driver;
-// using MongoDB.Driver.Builders;
 
 using ContabSysNet_Web.Areas.Contabilidad.Models.mongodb;
-
+using ContabSysNet_Web.ModelosDatos_EF.code_first.contab;
+using System.Reflection;
 
 namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 {
-    class MyCuentaContable_object
+    public class MyCuentaContable_object
     {
-        public int CuentaContableID;  
-        public string CuentaContable;
-        public string NombreCuentaContable;
-        public string CuentaContableEditada;  
-        public int Moneda;
-        public string NombreMoneda;
-        public string SimboloMoneda;  
-        public int NumeroCiaContab;
-        public string NombreCiaContab;  
+        public int CuentaContableID { get; set; }  
+        public string CuentaContable { get; set; }
+        public string NombreCuentaContable { get; set; }
+        public string CuentaContableEditada { get; set; }  
+        public int Moneda { get; set; }
+        public string NombreMoneda { get; set; }
+        public string SimboloMoneda { get; set; }  
+        public int NumeroCiaContab { get; set; }
+        public string NombreCiaContab { get; set; }  
     }
 
-    class MyCuentaContable_Movimientos_object
+    public class MyCuentaContable_Movimientos_object
     {
-        public int NumeroAutomatico;
-        public int CuentaContableID;
-        public Int16 Partida;
-        public string Descripcion;
-        public string Referencia; 
-        public decimal Debe;
-        public decimal Haber;
+        public int NumeroAutomatico { get; set; }
+        public int CuentaContableID { get; set; }
+        public Int16 Partida { get; set; }
+        public string Descripcion { get; set; }
+        public string Referencia { get; set; } 
+        public decimal Debe { get; set; }
+        public decimal Haber { get; set; }
+        public string CentroCostoAbreviatura { get; set; }
     }
 
     public partial class CuentasYMovimientos : System.Web.UI.Page
@@ -103,20 +104,17 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 {
                     // cuando este html item es 1, ejecutamos el thread que construye la selección y la graba 
                     // a una tabla en la base de datos  
-
                     ExecuteThread_HiddenField.Value = "0";
 
                     // nótese como ejecutamos el sub que sigue en un thread diferente 
 
                     // ------------------------------------------------------------------------------
                     // inicializamos antes las variables que indican que debemos mostrar el progreso 
-
                     Session["Progress_Completed"] = 0;
                     Session["Progress_Percentage"] = 0;
                     Session["Progress_SelectedRecs"] = 0;
 
                     // para que el thread regrese algún mensaje de error ... 
-
                     Session["Thread_ErrorMessage"] = "";
                     // ------------------------------------------------------------------------------
 
@@ -125,7 +123,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     MyThread.Start();
 
                     // ejecutamos javascript para que lea la variable session y muestre el progreso 
-
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
                     sb.Append("<script language='javascript'>");
                     sb.Append("showprogress();");
@@ -133,17 +130,14 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
                     ClientScript.RegisterStartupScript(this.GetType(), "onLoad", sb.ToString());
                 }
-
                 else
                 {
 
                     if (RebindPage_HiddenField.Value == "1")
                     {
-
                         // cuando este html item es 1 terminó el thread que construye la selección. Entonces 
                         // se hace un refresh de la página y ejecutamos aquí el procedimiento que hace el 
                         // databind a los controles para que muestren los datos al usuario 
-
                         RebindPage_HiddenField.Value = "0";
                         SelectedRecs_HiddenField.Value = Session["Progress_SelectedRecs"].ToString();
 
@@ -175,10 +169,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             }
         }
 
-
         private void RefreshAndBindInfo()
         {
-
             if (this.User != null && this.User.Identity != null && !User.Identity.IsAuthenticated)
             {
                 FormsAuthentication.SignOut();
@@ -200,34 +192,24 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             Session["Progress_Percentage"] = 0;
 
             // parte del filtro que usa el usuario para seleccionar sus registros
-
             bool bExcluirCuentasSinMovimientos = (bool)Session["ExcluirCuentasSinMovimientos"];
             bool bExcluirCuentasConSaldoCeroYSinMovtos = (bool)Session["ExcluirCuentasConSaldoCeroYSinMovtos"];
             bool excluirMovimientosDeAsientosDeTipoCierreAnual = (bool)Session["ExcluirMovimientosDeAsientosDeTipoCierreAnual"]; 
 
-            // estas son dos nuevas opciones que agregamos al reporte que permiten excluir cuentas contables cuyos 
-            // saldos estén en cero 
-
+            // estas son dos nuevas opciones que agregamos al reporte que permiten excluir cuentas contables cuyos saldos estén en cero 
             bool bExcluirCuentasConSaldosInicialFinalCero = (bool)Session["ExcluirCuentasConSaldosInicialFinalCero"];
-            bool bExcluirCuentasConSaldoFinalCero = (bool)Session["ExcluirCuentasConSaldoFinalCero"]; 
+            bool bExcluirCuentasConSaldoFinalCero = (bool)Session["ExcluirCuentasConSaldoFinalCero"];
 
-            // --------------------------------------------------------------------------------------------
-            // determinamos el mes y año fiscales, para usarlos como criterio para buscar el saldo en la tabla
-            // SaldosContables. En esta table, los saldos están para el mes fiscal y no para el mes calendario.
-            // Los meses solo varían cuando el año fiscal no es igual al año calendario
-
-            // --------------------------------------------------------------------------------------------
-            // eliminamos el contenido de la tabla temporal
-
-            dbContabDataContext dbContab = new dbContabDataContext();
+            var contabContext = new ContabContext(); 
 
             try
             {
-                dbContab.ExecuteCommand("Delete From Contab_ConsultaCuentasYMovimientos Where NombreUsuario = {0}", Membership.GetUser().UserName);
+                // eliminamos el contenido de la tabla temporal
+                int noOfRowDeleted = contabContext.Database.ExecuteSqlCommand("Delete From Contab_ConsultaCuentasYMovimientos Where NombreUsuario = {0}", Membership.GetUser().UserName);
             }
             catch (Exception ex)
             {
-                dbContab.Dispose();
+                //dbContab.Dispose();
 
                 string errMessage = "Ha ocurrido un error al intentar ejecutar una operación de acceso a la " + 
                     "base de datos. <br /> El mensaje específico de error es: " + ex.Message + "<br /><br />";
@@ -237,7 +219,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
                 return;
             }
-
 
             // el usuario puede ahora filtrar por código 'condi' 
             string sql_filtroCuentasContables_desdeCondi = "(1 = 1)";
@@ -282,15 +263,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 Session["FiltroForma"].ToString() + " And " + sql_filtroCuentasContables_desdeCondi +  " " +   
                 "Order by Companias.Numero, Asientos.Moneda, CuentasContables.Cuenta ";
 
-            var query = dbContab.ExecuteQuery<MyCuentaContable_object>(sSqlQueryString).ToList();
-
-            List<Contab_ConsultaCuentasYMovimiento> MyMovimientos_Cuentas = 
-                new List<Contab_ConsultaCuentasYMovimiento>();
-            Contab_ConsultaCuentasYMovimiento MyMovimiento_Cuenta;
-
-            List<Contab_ConsultaCuentasYMovimientos_Movimiento> MyMovimientos_Cuentas_Movimientos = 
-                new List<Contab_ConsultaCuentasYMovimientos_Movimiento>();
-            Contab_ConsultaCuentasYMovimientos_Movimiento MyMovimiento_Cuenta_Movimiento;
+            var query = contabContext.Database.SqlQuery<MyCuentaContable_object>(sSqlQueryString).ToList<MyCuentaContable_object>();
 
             int nNumeroCompaniaAnterior = -99999;
 
@@ -322,11 +295,46 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             if (Convert.ToBoolean(Session["ctasYMovtos_SinSaldoInicialCuentasContables"]))
                 sinSaldoIncialPeriodo = true;
 
+            bool soloMovimientosConCentroCostoAsignado = false;
+            bool soloMovimientosSinCentroCostoAsignado = false;
+
+            if (Convert.ToBoolean(Session["SoloMovimientosConCentroCostoAsignado"]))
+                soloMovimientosConCentroCostoAsignado = true;
+
+            if (Convert.ToBoolean(Session["SoloMovimientosSinCentroCostoAsignado"]))
+                soloMovimientosSinCentroCostoAsignado = true;
+
+            // preparamos el fitro para seleccionar los movimientos para cada cuenta
+            // nótese como creamos un criterio para seleccionar o no los movimientos que corresponden 
+            // a asientos del tipo cierre anual ... 
+            string criterioAsientoTipoCierreAnual = "(1 = 1)";
+
+            if (excluirMovimientosDeAsientosDeTipoCierreAnual)
+                criterioAsientoTipoCierreAnual = "(Not (Asientos.MesFiscal = 13 Or " +
+                                                 "(Asientos.AsientoTipoCierreAnualFlag Is Not Null And " +
+                                                 "Asientos.AsientoTipoCierreAnualFlag = 1)))";
+
+            // el usuario puede indicar que desea *solo* movimientos con/sin centro de costo asignado 
+            string criterioMovimientosConSinCentroCostoAsignado = "(1 = 1)";
+
+            if (soloMovimientosConCentroCostoAsignado)
+                criterioMovimientosConSinCentroCostoAsignado += " And (dAsientos.centroCosto Is Not Null)";
+
+            if (soloMovimientosSinCentroCostoAsignado)
+                criterioMovimientosConSinCentroCostoAsignado += " And (dAsientos.centroCosto Is Null)";
+
+            ConsultaCuentasYMovimientos MyMovimiento_Cuenta;
+            ConsultaCuentasYMovimientos_Movimientos MyMovimiento_Cuenta_Movimiento;
+
             foreach (MyCuentaContable_object MyCuentaContable in query)
             {
                 // leemos el mes y año fiscal SOLO cuando cambia la compañía
                 if (MyCuentaContable.NumeroCiaContab != nNumeroCompaniaAnterior)
                 {
+                    // determinamos el mes y año fiscales, para usarlos como criterio para buscar el saldo en la tabla
+                    // SaldosContables. En esta table, los saldos están para el mes fiscal y no para el mes calendario.
+                    // Los meses solo varían cuando el año fiscal no es igual al año calendario
+
                     // obtenemos el mes y año fiscal del mes anterior, para luego leer los saldos anteriores de las cuentas 
                     if (!ObtenerMesFiscal(dFechaInicialPeriodo, MyCuentaContable.NumeroCiaContab, out nMesFiscal, out nAnoFiscal))
                     {
@@ -335,8 +343,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     nNumeroCompaniaAnterior = MyCuentaContable.NumeroCiaContab;
                 }
 
-                MyMovimiento_Cuenta = new Contab_ConsultaCuentasYMovimiento();
+                MyMovimiento_Cuenta = new ConsultaCuentasYMovimientos();
 
+                MyMovimiento_Cuenta.ID = 0; 
                 MyMovimiento_Cuenta.CuentaContableID = MyCuentaContable.CuentaContableID; 
                 MyMovimiento_Cuenta.Moneda = MyCuentaContable.Moneda;
                 MyMovimiento_Cuenta.CantMovtos = 0;         // luego vamos a actualizar con la cantida correcta de movimientos (partidas de asiento) 
@@ -354,15 +363,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     monedaOriginalFilter, 
                     ref nSaldoAnteriorCuentaContable))
                 {
-                    dbContab.Dispose();
                     return;
                 }
 
                 short nCantidadTotalMovimientos = 0;
-                short movimientoSecuencia = 0; 
+                short movimientoSecuencia = 0;
 
-                MyMovimiento_Cuenta_Movimiento = new Contab_ConsultaCuentasYMovimientos_Movimiento();
+                MyMovimiento_Cuenta_Movimiento = new ConsultaCuentasYMovimientos_Movimientos();
 
+                MyMovimiento_Cuenta_Movimiento.ID = 0; 
                 MyMovimiento_Cuenta_Movimiento.AsientoID = 0;
                 MyMovimiento_Cuenta_Movimiento.CuentaContableID = MyCuentaContable.CuentaContableID;
                 MyMovimiento_Cuenta_Movimiento.Secuencia = movimientoSecuencia; 
@@ -375,11 +384,10 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 // el usuario puede indicar que *no desea* el saldo inicial (del período) de las cuentas en la consulta ... 
                 if (!sinSaldoIncialPeriodo)
                 {
-                    MyMovimiento_Cuenta.Contab_ConsultaCuentasYMovimientos_Movimientos.Add(MyMovimiento_Cuenta_Movimiento);
+                    MyMovimiento_Cuenta.ConsultaCuentasYMovimientos_Movimientos.Add(MyMovimiento_Cuenta_Movimiento);
                     nCantidadTotalMovimientos += 1;
                 }
                 
-
                 // ---------------------------------------------------------------------------------------------
                 // SOLO si la fecha inicial es diferente a un 1ro. de mes, determinamos el monto en movimientos
                 // que va desde el 1ro. hasta un dia antes de la fecha inicial del período (ejemplo: si el usuario
@@ -410,11 +418,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                                                                                                dFechaInicialPeriodo.Month,
                                                                                                dFechaInicialPeriodo.AddDays(-1).Day);
 
+                    MyMovimiento_Cuenta_Movimiento = new ConsultaCuentasYMovimientos_Movimientos();
 
-                    MyMovimiento_Cuenta_Movimiento = new Contab_ConsultaCuentasYMovimientos_Movimiento();
+                    movimientoSecuencia++;
 
-                    movimientoSecuencia++; 
-
+                    MyMovimiento_Cuenta_Movimiento.ID = 0; 
                     MyMovimiento_Cuenta_Movimiento.AsientoID = 0;
                     MyMovimiento_Cuenta_Movimiento.CuentaContableID = MyCuentaContable.CuentaContableID;
                     MyMovimiento_Cuenta_Movimiento.Secuencia = movimientoSecuencia;
@@ -427,7 +435,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
                     MyMovimiento_Cuenta_Movimiento.Monto = nMontoMovimientosDiasIniciales;
 
-                    MyMovimiento_Cuenta.Contab_ConsultaCuentasYMovimientos_Movimientos.Add(MyMovimiento_Cuenta_Movimiento);
+                    MyMovimiento_Cuenta.ConsultaCuentasYMovimientos_Movimientos.Add(MyMovimiento_Cuenta_Movimiento);
 
                     nCantidadTotalMovimientos += 1;
 
@@ -439,40 +447,31 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 // movimientos (asientos) a otra tabla temporal; nótese que el filtro fue construído en la
                 // página ...Filter.aspx y es usado además de la cuenta y cia que viene con este registro
 
-                // nótese como creamos un criterio para seleccionar o no los movimientos que corresponden 
-                // a asientos del tipo cierre anual ... 
-
-                string criterioAsientoTipoCierreAnual = "(1 = 1)"; 
-
-                if (excluirMovimientosDeAsientosDeTipoCierreAnual) 
-                    criterioAsientoTipoCierreAnual = "(Not (Asientos.MesFiscal = 13 Or " + 
-                                                     "(Asientos.AsientoTipoCierreAnualFlag Is Not Null And " + 
-                                                     "Asientos.AsientoTipoCierreAnualFlag = 1)))";
-
-
                 string sSqlQueryString2 = "SELECT dAsientos.NumeroAutomatico, dAsientos.CuentaContableID, dAsientos.Partida, " + 
-                    "dAsientos.Descripcion, dAsientos.Referencia, dAsientos.Debe, dAsientos.Haber " + 
-                    "FROM dAsientos INNER JOIN " + 
-                    "Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico " +
-                    "Inner JOin CuentasContables On dAsientos.CuentaContableID = CuentasContables.ID " + 
+                    "dAsientos.Descripcion, dAsientos.Referencia, dAsientos.Debe, dAsientos.Haber, CentrosCosto.DescripcionCorta as CentroCostoAbreviatura " + 
+                    "FROM dAsientos Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico " +
+                    "Inner Join CuentasContables On dAsientos.CuentaContableID = CuentasContables.ID " + 
+                    "Left Outer Join CentrosCosto On dAsientos.CentroCosto = CentrosCosto.CentroCosto " + 
                     "Where " + Session["FiltroForma_Movimientos"].ToString() + " And dAsientos.CuentaContableID = " +
                     MyCuentaContable.CuentaContableID.ToString() + " " + 
-                    "And Asientos.Moneda = " + MyCuentaContable.Moneda.ToString() + 
-                    " And " + criterioAsientoTipoCierreAnual + " " + 
-                    "Order by Asientos.Fecha, Asientos.Numero, dAsientos.Partida";
+                    "And Asientos.Moneda = " + MyCuentaContable.Moneda.ToString() +
+                    " And " + criterioAsientoTipoCierreAnual + 
+                    " And " + criterioMovimientosConSinCentroCostoAsignado + 
+                    " Order by Asientos.Fecha, Asientos.Numero, dAsientos.Partida";
 
+                var query2 = contabContext.Database.SqlQuery<MyCuentaContable_Movimientos_object>(sSqlQueryString2).ToList<MyCuentaContable_Movimientos_object>();
 
-                var query2 = dbContab.ExecuteQuery<MyCuentaContable_Movimientos_object>(sSqlQueryString2);
                 decimal nSaldoActualCuentaContable = nSaldoAnteriorCuentaContable;
 
                 Int16 nCantidadMovimientos = 0;
 
                 foreach (MyCuentaContable_Movimientos_object MyCuentaContable_Movimiento in query2)
                 {
-                    MyMovimiento_Cuenta_Movimiento = new Contab_ConsultaCuentasYMovimientos_Movimiento();
+                    MyMovimiento_Cuenta_Movimiento = new ConsultaCuentasYMovimientos_Movimientos();
 
-                    movimientoSecuencia++; 
+                    movimientoSecuencia++;
 
+                    MyMovimiento_Cuenta_Movimiento.ID = 0; 
                     MyMovimiento_Cuenta_Movimiento.AsientoID = MyCuentaContable_Movimiento.NumeroAutomatico;
                     MyMovimiento_Cuenta_Movimiento.CuentaContableID = MyCuentaContable_Movimiento.CuentaContableID;
                     MyMovimiento_Cuenta_Movimiento.Secuencia = movimientoSecuencia; 
@@ -480,8 +479,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     MyMovimiento_Cuenta_Movimiento.Descripcion = MyCuentaContable_Movimiento.Descripcion;
                     MyMovimiento_Cuenta_Movimiento.Referencia = MyCuentaContable_Movimiento.Referencia; 
                     MyMovimiento_Cuenta_Movimiento.Monto = MyCuentaContable_Movimiento.Debe - MyCuentaContable_Movimiento.Haber;
+                    MyMovimiento_Cuenta_Movimiento.CentroCostoAbreviatura = MyCuentaContable_Movimiento.CentroCostoAbreviatura; 
 
-                    MyMovimiento_Cuenta.Contab_ConsultaCuentasYMovimientos_Movimientos.Add(MyMovimiento_Cuenta_Movimiento);
+                    MyMovimiento_Cuenta.ConsultaCuentasYMovimientos_Movimientos.Add(MyMovimiento_Cuenta_Movimiento);
 
                     nSaldoActualCuentaContable += MyCuentaContable_Movimiento.Debe - MyCuentaContable_Movimiento.Haber;
 
@@ -492,14 +492,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
                     // también contamos la cantidad total de movimientos agregados (incluyendo los registros
                     // de saldo inicial y final)
-
                     nCantidadTotalMovimientos += 1;
-
                 }
 
                 // -----------------------------------------------------------------------------------------
                 // el usuario puede establecer criterios para excluir cuentas contables de la consulta 
-
                 if (bExcluirCuentasSinMovimientos && nCantidadMovimientos == 0)
                 {
                     nRegistroActual += 1;
@@ -511,10 +508,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     continue; 
                 }
                     
-
-                if (bExcluirCuentasConSaldoCeroYSinMovtos &&
-                    nCantidadMovimientos == 0 &&
-                    nSaldoActualCuentaContable == 0)
+                if (bExcluirCuentasConSaldoCeroYSinMovtos && nCantidadMovimientos == 0 && nSaldoActualCuentaContable == 0)
                 {
                     nRegistroActual += 1;
                     nProgreesPercentaje = nRegistroActual * 100 / nCantidadRegistros;
@@ -524,7 +518,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
                     continue;
                 }
-
 
                 if (bExcluirCuentasConSaldosInicialFinalCero && nSaldoAnteriorCuentaContable == 0 && nSaldoActualCuentaContable == 0)
                 {
@@ -537,7 +530,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     continue;
                 }
 
-
                 if (bExcluirCuentasConSaldoFinalCero && nSaldoActualCuentaContable == 0)
                 {
                     nRegistroActual += 1;
@@ -549,19 +541,18 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     continue;
                 }
 
-
                 // -----------------------------------------------------------------------------------------
                 // agregamos la cuenta contable y sus movimientos a la lista que será posteriormente agregada a la tabla
                 // nótese que, si llegamos aquí, es porqué no aplicó algúna eliminación que indicó el usuario en el filtro 
                 // (excluir movimientos con saldos cero, etc) 
+                MyMovimiento_Cuenta.CantMovtos = nCantidadMovimientos;
 
-                MyMovimiento_Cuenta.CantMovtos = nCantidadMovimientos; 
-                MyMovimientos_Cuentas.Add(MyMovimiento_Cuenta);
+                // agregamos la cuenta leída y sus movimientos al dbContext 
+                contabContext.ConsultaCuentasYMovimientos.Add(MyMovimiento_Cuenta); 
 
                 // --------------------------------------------------------------------------------------
                 // ... para reportar el progreso al usuario; la página ejecuta un ws que lee el valor de
                 // estas session variables
-
                 nRegistroActual += 1;
                 nProgreesPercentaje = nRegistroActual * 100 / nCantidadRegistros;
 
@@ -569,19 +560,19 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 Session["Progress_SelectedRecs"] = (int)Session["Progress_SelectedRecs"] + 1;
             }
 
-            dbContab.Contab_ConsultaCuentasYMovimientos.InsertAllOnSubmit(MyMovimientos_Cuentas);
-            //dbContab.Contab_ConsultaCuentasYMovimientos_Movimientos.InsertAllOnSubmit(MyMovimientos_Cuentas_Movimientos);
-
             try
             {
-                dbContab.SubmitChanges();
+                contabContext.SaveChanges(); 
             }
             catch (Exception ex)
             {
-                dbContab.Dispose();
+                var message = ex.Message;
+
+                if (ex.InnerException != null)
+                    message += $"<br />{ex.InnerException.Message}";
 
                 string errMessage = "Ha ocurrido un error al intentar ejecutar una operación de acceso a la " + 
-                    "base de datos. <br /> El mensaje específico de error es: " + ex.Message + "<br /><br />";
+                    "base de datos. <br /> El mensaje específico de error es: " + message + "<br /><br />";
 
                 Session["Thread_ErrorMessage"] = errMessage;
                 Session["Progress_Completed"] = 1;
@@ -589,16 +580,12 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 return;
             }
 
-            dbContab.Dispose();
-
-
             // -----------------------------------------------------
             // por último, inicializamos las variables que se usan
             // para mostrar el progreso de la tarea
             Session["Progress_Completed"] = 1;
             Session["Progress_Percentage"] = 0;
             // -----------------------------------------------------
-
         }
 
         private bool prepararSubQueryPorCodigoCondi(string codigosCondi_lista, int ciaContabSeleccionada, out string sql_filtroCuentasContables_desdeCondi, out string message)
@@ -727,11 +714,17 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             // cuando el usuario selecciona una cuenta contable para mostrar sus movimientos, leemos el total 
             // del modelo y lo mostramos en la linea (row) de totales ... 
 
-            dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
+            //dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
 
-            decimal? saldoFinalCuentaContable = (from c in contabContext.Contab_ConsultaCuentasYMovimientos_Movimientos
-                                                where c.ParentID == recordID
-                                                select (decimal?) c.Monto).Sum();
+            //decimal? saldoFinalCuentaContable = (from c in contabContext.Contab_ConsultaCuentasYMovimientos_Movimientos
+            //                                    where c.ParentID == recordID
+            //                                    select (decimal?) c.Monto).Sum();
+
+            var contabContext = new ContabContext();
+
+            decimal? saldoFinalCuentaContable = (from c in contabContext.ConsultaCuentasYMovimientos_Movimientos
+                                                 where c.ParentID == recordID
+                                                 select (decimal?)c.Monto).Sum();
 
             if (saldoFinalCuentaContable == null)
                 saldoFinalCuentaContable = 0;
@@ -741,8 +734,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             if (MySumOfMonto_Label != null) 
                 MySumOfMonto_Label.Text = saldoFinalCuentaContable.Value.ToString("#,##0.00");
         }
-
-
 
         private bool ObtenerMesFiscal(System.DateTime dFechaInicialPeriodo, int nCiaContab, 
             out int nMesFiscal, out int nAnoFiscal) 
@@ -964,11 +955,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
         //     out int totalRowCount
         //     string sortByExpression
 
-        public IQueryable<Contab_ConsultaCuentasYMovimientos> CuentasContables_ListView_GetData()
+        public IQueryable<ContabSysNet_Web.ModelosDatos_EF.Contab.Contab_ConsultaCuentasYMovimientos> CuentasContables_ListView_GetData()
         {
             string userName = Membership.GetUser().UserName;
 
-            dbContab_Contab_Entities context = new dbContab_Contab_Entities(); 
+            ContabSysNet_Web.ModelosDatos_EF.Contab.dbContab_Contab_Entities context = new ContabSysNet_Web.ModelosDatos_EF.Contab.dbContab_Contab_Entities(); 
 
             var query = context.Contab_ConsultaCuentasYMovimientos.Include("CuentasContable").Include("Moneda1").Where(c => c.NombreUsuario == userName);
 
@@ -999,8 +990,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     query = query.Where(c => c.CuentasContable.Cuenta.Contains(filter));
             }
 
-
-
             if (!string.IsNullOrEmpty(this.CuentaContableDescripcionFilter_TextBox.Text))
             {
                 string filter = this.CuentaContableDescripcionFilter_TextBox.Text.ToString().Replace("*", ""); 
@@ -1016,28 +1005,27 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     query = query.Where(c => c.CuentasContable.Descripcion.Contains(filter));
             }
 
-
             query = query.OrderBy(c => c.CuentasContable.Cuenta);
 
             return query;
         }
 
-        public IQueryable<Compania> Companias_DropBox_GetData()
+        public IQueryable<ContabSysNet_Web.ModelosDatos_EF.Contab.Compania> Companias_DropBox_GetData()
         {
             string userName = Membership.GetUser().UserName;
 
-            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
+            ContabSysNet_Web.ModelosDatos_EF.Contab.dbContab_Contab_Entities context = new ContabSysNet_Web.ModelosDatos_EF.Contab.dbContab_Contab_Entities();
 
             var query = context.Companias.Where(c => c.CuentasContables.Where(ct => ct.Contab_ConsultaCuentasYMovimientos.Where(m => m.NombreUsuario == userName).Any()).Any()).Select(c => c); 
             query = query.OrderBy(c => c.Nombre);
             return query;
         }
 
-        public IQueryable<Moneda> Monedas_DropBox_GetData()
+        public IQueryable<ContabSysNet_Web.ModelosDatos_EF.Contab.Moneda> Monedas_DropBox_GetData()
         {
             string userName = Membership.GetUser().UserName;
 
-            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
+            ContabSysNet_Web.ModelosDatos_EF.Contab.dbContab_Contab_Entities context = new ContabSysNet_Web.ModelosDatos_EF.Contab.dbContab_Contab_Entities();
 
             var query = context.Monedas.Where(m => m.Contab_ConsultaCuentasYMovimientos.Where(c => c.NombreUsuario == userName).Any()).Select(c => c); 
             query = query.OrderBy(c => c.Descripcion);
@@ -1051,13 +1039,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             if (pgr != null)
                 pgr.SetPageProperties(0, pgr.MaximumRows, false);
 
-
             this.CuentasContables_ListView.DataBind();
             CuentasContables_ListView.SelectedIndex = -1;
 
             // para oculatar la lista de movimientos para una cuenta, si ya estaba mostrada en la página ... 
             UnBindMovimientosListView();
         }
-
     }
 }

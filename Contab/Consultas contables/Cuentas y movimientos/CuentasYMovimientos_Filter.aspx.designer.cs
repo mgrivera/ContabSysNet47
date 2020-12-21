@@ -274,6 +274,24 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         protected global::System.Web.UI.WebControls.CheckBox ExcluirMovimientosDeAsientosDeTipoCierreAnual_CheckBox;
         
         /// <summary>
+        /// SoloMovimientosConCentroCostoAsignado_CheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox SoloMovimientosConCentroCostoAsignado_CheckBox;
+        
+        /// <summary>
+        /// SoloMovimientosSinCentroCostoAsignado_CheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox SoloMovimientosSinCentroCostoAsignado_CheckBox;
+        
+        /// <summary>
         /// LimpiarFiltro_Button control.
         /// </summary>
         /// <remarks>

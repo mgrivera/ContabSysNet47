@@ -374,49 +374,86 @@
 
         <br />
          
-        <div style="text-align: left;">
-            <fieldset style="text-align: left; margin-left: 15px; ">
-                <legend>Excluir cuentas contables:</legend>
+        <div style="text-align: left; ">
 
-                <table>
-                    <tr >
-                        <td style="width:50%; ">
-                            <asp:CheckBox ID="ExcluirCuentasSinMovimientos_CheckBox" 
-                                          runat="server" 
-                                          Text="Sin movimientos en el período de selección"
-                                          Checked="False" />
-                        </td>
-                        <td style="width:50%; ">
-                            <asp:CheckBox ID="ExcluirCuentasConSaldosInicialFinalCero_CheckBox" 
-                                          runat="server" 
-                                          Text="Con saldos (inicial y final) en cero"
-                                          Checked="False" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%; ">
-                            <asp:CheckBox ID="ExcluirCuentasSinSaldoYSinMovtos_CheckBox" 
-                                          runat="server" 
-                                          Text="Con saldo cero y sin movimientos"
-                                          Checked="False" />
-                        </td>
-                        <td style="width:50%; ">
-                            <asp:CheckBox ID="ExcluirCuentasConSaldoFinalCero_CheckBox" 
-                                          runat="server" 
-                                          Text="Con saldo final en cero"
-                                          Checked="False" />
-                        </td>
-                    </tr>
-                     <tr>
-                        <td style="width:50%; " colspan="2">
-                            <asp:CheckBox ID="ExcluirMovimientosDeAsientosDeTipoCierreAnual_CheckBox" 
-                                          runat="server" 
-                                          Text="Excluir movimientos que correspondan a asientos de tipo Cierre Anual"
-                                          Checked="False" />
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
+            <table style="width: 100%; ">
+                <tr>
+                    <td style="width: 50%; ">
+                        <fieldset style="text-align: left; margin-left: 15px;">
+                            <legend>Excluir cuentas contables:</legend>
+
+                            <table>
+                                <tr>
+                                    <td style="width: 50%;">
+                                        <asp:CheckBox ID="ExcluirCuentasSinMovimientos_CheckBox"
+                                            runat="server"
+                                            Text="Sin movimientos en el período de selección"
+                                            Checked="False" />
+                                    </td>
+                                    <td style="width: 50%;">
+                                        <asp:CheckBox ID="ExcluirCuentasConSaldosInicialFinalCero_CheckBox"
+                                            runat="server"
+                                            Text="Con saldos (inicial y final) en cero"
+                                            Checked="False" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%;">
+                                        <asp:CheckBox ID="ExcluirCuentasSinSaldoYSinMovtos_CheckBox"
+                                            runat="server"
+                                            Text="Con saldo cero y sin movimientos"
+                                            Checked="False" />
+                                    </td>
+                                    <td style="width: 50%;">
+                                        <asp:CheckBox ID="ExcluirCuentasConSaldoFinalCero_CheckBox"
+                                            runat="server"
+                                            Text="Con saldo final en cero"
+                                            Checked="False" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%;" colspan="2">
+                                        <asp:CheckBox ID="ExcluirMovimientosDeAsientosDeTipoCierreAnual_CheckBox"
+                                            runat="server"
+                                            Text="Excluir movimientos que correspondan a asientos de tipo Cierre Anual"
+                                            Checked="False" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </td>
+                    <td style="width: 50%; ">
+                        <fieldset style="text-align: left; margin-left: 15px; vertical-align: top; ">
+                            <legend>Otras opciones:</legend>
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="SoloMovimientosConCentroCostoAsignado_CheckBox" 
+                                                      runat="server" 
+                                                      Text="Solo movimientos con centro de costo asignado" 
+                                                      Checked="False" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="SoloMovimientosSinCentroCostoAsignado_CheckBox" 
+                                                      runat="server" 
+                                                      Text="Solo movimientos sin centro de costo asignado" 
+                                                      Checked="False" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <br /><br /> 
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </td>
+                </tr>
+            </table>
+
             <br />
         </div>
          
