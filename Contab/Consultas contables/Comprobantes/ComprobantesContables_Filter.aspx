@@ -236,7 +236,8 @@
                                 <asp:ListBox ID="Sql_Asientos_Cia_Numeric" 
                                              runat="server" 
                                              DataTextField="Nombre" 
-                                             DataValueField="Numero" Height="193px" 
+                                             DataValueField="Numero" 
+                                             Height="193px" 
                                              SelectionMode="Multiple"
                                              Width="300px" 
                                              CssClass="notsosmallfont ciaListBox" />

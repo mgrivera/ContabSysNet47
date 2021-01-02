@@ -166,49 +166,22 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo {
         protected global::AjaxControlToolkit.TabPanel TabPanel2;
         
         /// <summary>
-        /// CuentasContablesFilter_TextBox control.
+        /// Sql_Asientos_Cia_Numeric control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CuentasContablesFilter_TextBox;
+        protected global::System.Web.UI.WebControls.ListBox Sql_Asientos_Cia_Numeric;
         
         /// <summary>
-        /// TextBoxWaterMarkExtender1 control.
+        /// Sql_Asientos_Moneda_Numeric control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWaterMarkExtender1;
-        
-        /// <summary>
-        /// Sql_it_Asiento_Cia_Numeric control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_it_Asiento_Cia_Numeric;
-        
-        /// <summary>
-        /// Sql_it_Asiento_Moneda_Numeric control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_it_Asiento_Moneda_Numeric;
-        
-        /// <summary>
-        /// Sql_it_CuentasContable_Cuenta_String control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_it_CuentasContable_Cuenta_String;
+        protected global::System.Web.UI.WebControls.ListBox Sql_Asientos_Moneda_Numeric;
         
         /// <summary>
         /// TabPanel3 control.
@@ -220,31 +193,58 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo {
         protected global::AjaxControlToolkit.TabPanel TabPanel3;
         
         /// <summary>
-        /// Sql_it_CuentasContable_Grupo_Numeric control.
+        /// Sql_CuentasContables_Grupo_Numeric control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_it_CuentasContable_Grupo_Numeric;
+        protected global::System.Web.UI.WebControls.ListBox Sql_CuentasContables_Grupo_Numeric;
         
         /// <summary>
-        /// Sql_it_CentroCosto_Numeric control.
+        /// Sql_dAsientos_CentroCosto_Numeric control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_it_CentroCosto_Numeric;
+        protected global::System.Web.UI.WebControls.ListBox Sql_dAsientos_CentroCosto_Numeric;
         
         /// <summary>
-        /// Sql_it_Asiento_ProvieneDe_String control.
+        /// Sql_Asientos_ProvieneDe_String control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_it_Asiento_ProvieneDe_String;
+        protected global::System.Web.UI.WebControls.ListBox Sql_Asientos_ProvieneDe_String;
+        
+        /// <summary>
+        /// TabPanel5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel TabPanel5;
+        
+        /// <summary>
+        /// Sql_CuentasContables_Cuenta_String control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Sql_CuentasContables_Cuenta_String;
+        
+        /// <summary>
+        /// select1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect select1;
         
         /// <summary>
         /// TabPanel4 control.
@@ -256,13 +256,13 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo {
         protected global::AjaxControlToolkit.TabPanel TabPanel4;
         
         /// <summary>
-        /// Sql_it_Asiento_Usuario_String control.
+        /// Sql_Asientos_Usuario_String control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Sql_it_Asiento_Usuario_String;
+        protected global::System.Web.UI.WebControls.ListBox Sql_Asientos_Usuario_String;
         
         /// <summary>
         /// LimpiarFiltro_Button control.

@@ -41,7 +41,6 @@
             <siteMapNode url="~/Contab/Consultas contables/Comprobantes/ComprobantesContables.aspx" title="Comprobantes contables"  description="Consulta de comprobantes contables" roles="Contab" />
             <siteMapNode url="~/Contab/Consultas contables/BalanceComprobacion/BalanceComprobacion.aspx" title="Balance de comprobación"  description="Balance de comprobación" roles="Contab" />
             <siteMapNode url="~/Contab/Consultas contables/Centros de costo/CentrosCosto.aspx" title="Centros de costo"  description="Consulta de movimientos contables por centro de costo" roles="Contab" />
-            <siteMapNode url="~/Contabilidad/CentrosCostoConsulta" title="Centros de costo (2)"  description="Consulta de saldos y movimientos por centros de costo" roles="Contab" />
             <siteMapNode url="~/Contab/Consultas contables/BalanceGeneral/BalanceGeneral.aspx" title="Balance General y GyP"  description="Para obtener las consultas balance general y ganancias y pérdidas" roles="Contab" />
         </siteMapNode>
 

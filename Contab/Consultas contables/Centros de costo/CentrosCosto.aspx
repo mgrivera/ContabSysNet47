@@ -23,43 +23,31 @@
     <span id="RebindFlagSpan">
         <asp:HiddenField ID="RebindFlagHiddenField" runat="server" Value="0" ClientIDMode="Static" />
     </span>
+
     <%--  --%>
     <%-- div en la izquierda para mostrar funciones de la página --%>
     <%--  --%>
-    <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top;
-        background-color: #F7F7F7; float: left; text-align: center; ">
+    <div class="notsosmallfont" style="width: 10%; border: 1px solid #C0C0C0; vertical-align: top; background-color: #F7F7F7; float: left; text-align: center; ">
         <br />
- 
-        <a runat="server" 
-            id="filterLink"
-            href="javascript:PopupWin('CentrosCosto_Filter.aspx', 1000, 600)">
-                <img id="Img3" 
-                        border="0" 
-                        runat="server"
-                        alt="Para definir y aplicar un filtro que regrese los registros que se desea consultar" 
-                        src="~/Pictures/filter_25x25.png" />
-        </a>
         <br />
-        <a href="javascript:PopupWin('CentrosCosto_Filter.aspx', 1000, 600)">Definir y aplicar<br />un filtro</a>
+
+        <a href="javascript:PopupWin('CentrosCosto_Filter.aspx', 1000, 680)">Definir y aplicar<br /> un filtro</a><br />
+        <i class="fas fa-filter fa-2x" style="margin-top: 5px; "></i>
 
         <hr />
 
-            <a runat="server" 
-            id="reportLink"
-            href="javascript:PopupWin('CentrosCosto_OpcionesReportes.aspx', 1000, 600)">
-                <img id="Img4" 
-                        runat="server"
-                        border="0" 
-                        alt="Para obtener un reporte que muestre los registros seleccionados" 
-                        src="~/Pictures/print_25x25.png" />
-        </a>
-        <br />
-        <a href="javascript:PopupWin('CentrosCosto_OpcionesReportes.aspx', 1000, 600)">Reporte</a>
+        <a href="javascript:PopupWin('CentrosCosto_OpcionesReportes.aspx', 1000, 680)" >Reporte</a><br />
+        <i class="fas fa-print fa-2x" style="margin-top: 5px; "></i>
+
+        <hr />
+
+        <a href="javascript:PopupWin('../../UltimoMesCerradoContable.aspx', 1000, 680)">Fechas de último<br /> cierre contable</a><br />
+        <i class="fas fa-desktop fa-2x" style="margin-top: 5px; "></i>
 
         <hr />
         <br />
     </div>
-    
+
     <div style="text-align: left; float: right; width: 88%;">
 
         <ajaxToolkit:UpdatePanelAnimationExtender ID="UpdatePanelAnimationExtender1" 
@@ -100,7 +88,7 @@
                             <span class="smallfont">Compañías:&nbsp;
                                 <asp:DropDownList ID="CompaniasFilter_DropDownList" 
                                                   runat="server" 
-                                                  ItemType="ContabSysNet_Web.ModelosDatos_EF.Contab.Compania"
+                                                  ItemType="ContabSysNet_Web.ModelosDatos_EF.code_first.contab.Companias" 
                                                   DataTextField="NombreCorto" 
                                                   DataValueField="Numero" 
                                                   AutoPostBack="True"
@@ -115,9 +103,9 @@
                             <span class="smallfont">Monedas:&nbsp;
                                 <asp:DropDownList ID="MonedasFilter_DropDownList" 
                                                   runat="server" 
-                                                  ItemType="ContabSysNet_Web.ModelosDatos_EF.Contab.Moneda"
+                                                  ItemType="ContabSysNet_Web.ModelosDatos_EF.code_first.contab.Monedas" 
                                                   DataTextField="Descripcion" 
-                                                  DataValueField="Moneda1" 
+                                                  DataValueField="Moneda" 
                                                   AutoPostBack="True"
                                                   CssClass="smallfont" 
                                                   SelectMethod="MonedasFilter_DropDownList_SelectMethod"
@@ -156,7 +144,7 @@
                     <tr>
                         <td style="text-align: right; ">
                             <span class="smallfont">
-                                (<b>10:</b> todo lo que contenga 10; <b>10*:</b> todo lo que comience por 10; <b>*10:</b> todo lo que termine en 10) 
+                                (<em>gasto:</em> todo lo que contenga <em>gasto:</em>) 
                             </span>
                         </td>
                     </tr>
@@ -164,7 +152,7 @@
 
                 <asp:GridView runat="server" 
                               ID="MovimientosContables_GridView"
-                              ItemType="ContabSysNet_Web.ModelosDatos_EF.Contab.dAsiento" 
+                              ItemType="ContabSysNet_Web.ModelosDatos_EF.code_first.contab.dAsientos" 
                               DataKeyNames="NumeroAutomatico,Partida" 
                               SelectMethod="MovimientosContables_GridView_GetData"  
                               OnPageIndexChanged="MovimientosContables_GridView_PageIndexChanged"
@@ -175,32 +163,32 @@
                             <Columns>
                                 <asp:buttonfield CommandName="Select" Text="Select"/>
 
-                               <%-- <asp:boundfield DataField="Asiento.Moneda1.Simbolo" HeaderText="Moneda" >
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:boundfield>--%>
-                                
                                 <asp:boundfield datafield="CentrosCosto.DescripcionCorta" headertext="Centro<br/>costo" HtmlEncode="False"> 
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:boundfield>
 
-                                <asp:boundfield datafield="CuentasContable.Cuenta" headertext="Cuenta<br/>contable" HtmlEncode="False">      
+                                <asp:boundfield datafield="CuentasContables.Cuenta" headertext="Cuenta<br/>contable" HtmlEncode="False">      
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:boundfield>
 
-                                <asp:boundfield datafield="Asiento.Fecha" headertext="Fecha" dataformatstring="{0:dd-MM-yy}" htmlencode="false">      
+                                <asp:boundfield datafield="Asientos.Fecha" headertext="Fecha" dataformatstring="{0:dd-MM-yy}" htmlencode="false">      
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" Wrap="False" />
                                 </asp:boundfield>
 
-                                <asp:boundfield datafield="Asiento.Moneda1.Simbolo" headertext="Mon" htmlencode="false">      
+                                <asp:boundfield datafield="Asientos.Monedas.Simbolo" headertext="Mon" htmlencode="false">      
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" Wrap="False" />
                                 </asp:boundfield>
 
-                                <asp:boundfield datafield="CuentasContable.Descripcion" headertext="Nombre<br/>cuenta" HtmlEncode="False">      
+                                <asp:boundfield datafield="Asientos.Monedas1.Simbolo" headertext="Mon<br />orig" htmlencode="false">      
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" Wrap="False" />
+                                </asp:boundfield>
+
+                                <asp:boundfield datafield="CuentasContables.Descripcion" headertext="Nombre<br/>cuenta" HtmlEncode="False">      
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:boundfield>
@@ -210,17 +198,20 @@
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:DynamicField>
 
-                                <asp:boundfield datafield="Asiento.Numero" headertext="Comprobante">
-                                    <HeaderStyle HorizontalAlign="Left" />
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:boundfield>
+                                <asp:TemplateField HeaderText="#Com<br />prob">
+                                    <ItemTemplate>
+                                        <a href="javascript:PopupWin('../Cuentas y movimientos/CuentasYMovimientos_Comprobantes.aspx?NumeroAutomatico=' + <%# Eval("Asientos.NumeroAutomatico") %>, 1000, 680)"><%#Eval("Asientos.Numero")%> </a>     
+                                    </ItemTemplate>
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
 
                                 <asp:boundfield datafield="Referencia" headertext="Referencia">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:boundfield>
 
-                                <asp:boundfield datafield="Asiento.ProvieneDe" headertext="Proviene<br/>de" HtmlEncode="False">
+                                <asp:boundfield datafield="Asientos.ProvieneDe" headertext="Proviene<br/>de" HtmlEncode="False">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:boundfield>
@@ -233,10 +224,15 @@
                                     <ItemStyle Wrap="False" />
                                 </asp:TemplateField>
 
-                               <%-- <asp:boundfield datafield="Asiento.Compania.Abreviatura" headertext="Cia<br/>contab" HtmlEncode="False">
+                                <asp:boundfield datafield="Asientos.Usuario" headertext="Usuario" HtmlEncode="False">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
-                                </asp:boundfield>--%>
+                                </asp:boundfield>
+
+                                <asp:boundfield datafield="Asientos.Companias.Abreviatura" headertext="Cia<br/>contab" HtmlEncode="False">
+                                    <HeaderStyle HorizontalAlign="Left" />
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:boundfield>
 
                             </Columns>
 

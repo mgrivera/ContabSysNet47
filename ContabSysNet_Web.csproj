@@ -2069,7 +2069,6 @@
     <Content Include="Areas\Contabilidad\Views\web.config" />
     <Content Include="Areas\Contabilidad\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Contabilidad\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Contabilidad\Views\CentrosCostoConsulta\Index.cshtml" />
     <Content Include="Generales\web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2805,9 +2804,6 @@
     <Compile Include="Areas\CajaChica\Controllers\ReposicionesCajaChicaController.cs" />
     <Compile Include="Areas\CajaChica\Models\FiltroConsultaReposiciones.cs" />
     <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
-    <Compile Include="Areas\Contabilidad\Controllers\CentrosCostoConsultaController.cs" />
-    <Compile Include="Areas\Contabilidad\Controllers\CentrosCostoConsultaWebApiController.cs" />
-    <Compile Include="Areas\Contabilidad\Models\CentrosCostoConsulta\jqGridData.cs" />
     <Compile Include="Areas\Contabilidad\Models\mongodb\CodificacionesContables.cs" />
     <Compile Include="Areas\Contabilidad\Models\mongodb\dbContab\Temp_CentrosCosto_Consulta.cs" />
     <Compile Include="Areas\Contabilidad\Models\ProgresoTareaEnCurso.cs" />
@@ -3470,6 +3466,7 @@
     <Compile Include="ModelosDatos_EF\code_first\contab\dAsientos.cs" />
     <Compile Include="ModelosDatos_EF\code_first\contab\Monedas.cs" />
     <Compile Include="ModelosDatos_EF\code_first\contab\ParametrosContab.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\contab\GruposContables.cs" />
     <Compile Include="ModelosDatos_EF\Contab\dbContab_Contab.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3867,6 +3864,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Contabilidad\Controllers\" />
     <Folder Include="Areas\Main\Models\" />
     <Folder Include="DynamicData\PageTemplates\" />
     <Folder Include="keepstatefiles\" />

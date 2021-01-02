@@ -1,6 +1,122 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage_Simple.master" CodeBehind="CentrosCosto_Filter.aspx.cs" Inherits="ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo.CentrosCosto_Filter" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <link href="../../../radcalendar.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../Scripts/select2-4.0.8/select2.min.css" />
+
+    <script type="text/javascript">
+        // todas las funciones en este script, corresponden a la funcionalidad necesaria para agregar el select2 
+        // para la selección de cuentas contables ... 
+        function formatState(state) {
+            if (state.id && state.text) {
+                return state.id + " - " + state.text; 
+            } else {
+                return null; 
+            }
+        }
+
+        $(document).ready(function () { 
+            $(".select2-input").select2({
+                minimumInputLength: 3,                              // minimumInputLength for sending ajax request to server
+                width: 'resolve',                                   // to use the width set in the style clause in the select, if one exists  
+                closeOnSelect: false, 
+                params: {
+                    contentType: 'application/json; charset=utf-8'
+                },
+                templateResult: formatState,                        // para cambiar lo que se muestra en la lista; el default es text ... 
+                templateSelection: formatState,                     // para cambiar lo que se muestra en la selección; el default es text ... 
+                ajax: {
+                    url: "../../../webServices/Select2_GetData.asmx/AccessRemoteData",        // Webservice  - WCSelect2 and WebMethod -AccessRemoteData
+                    dataType: 'json', 
+                    method: "get",
+                    data: function (params) {
+
+                        // antes de que el control ejecute su busqueda en el server, intentamos obtener un referencia al control que contiene 
+                        // la lista de companias. La idea es asegurarnos que el usuario haya seleccioanado una ... 
+                        var selected = []; 
+                        
+                        $('.ciaListBox').children('option:selected').each(function () {
+                            var $this = $(this);
+                            selected.push(parseInt( $this.val() )); 
+                        });
+
+                        if (selected.length != 1) {
+                            alert("Por favor seleccione una compañía Contab, y solo una, antes de intentar buscar sus cuentas contables."); 
+                            return; 
+                        }
+
+                        var query = {
+                            search: params.term,
+                            page: params.page || 1, 
+                            cia: selected.length == 1 ? selected[0] : -999
+                        }
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        return query;
+                    }, 
+                    processResults: function (result) {
+                        // desde el web service recibimos el object result con sus propiedades como siguen ... 
+                        return {
+                                results: result.items,
+                                pagination: {
+                                    more: (result.resultParams.page * 20) < result.resultParams.count_filtered
+                                    }
+                                };
+                    },
+                    delay: 250, // wait 250 milliseconds before triggering the request
+                    cache: true
+                }, 
+                debug: true, 
+                placeholder: "Busqueda de cuentas contables ..."
+            })
+
+            $('.select2-input').on('select2:select', function (e) {
+                // cuando el usuario selecciona una opción en select2
+                // en data tenemos la opción seleccionada 
+                var data = e.params.data;
+
+                // intentamos agregar la cuenta seleccionada al textbox de cuentas contables 
+                var textbox = $('.cuentas-contables-text-area');
+
+                var text = textbox.val();       // contenido del textbox 
+
+                if (text.indexOf(data.id) == -1) {
+                    // ok, la cuenta *no* existe en el textbox; la agregamos 
+                    if (!text) {
+                        text = data.id;
+                    } else {
+                        text = text + ", " + data.id;
+                    }
+
+                    textbox.val(text);
+                }
+            })
+
+            $('.select2-input').on('select2:unselect', function (e) {
+                // cuando el usuario de-selecciona una opción en select2 
+                var data = e.params.data;
+
+                // intentamos quitar la cuenta seleccionada del textbox de cuentas contables 
+                var textbox = $('.cuentas-contables-text-area');
+
+                var text = textbox.val();       // contenido del textbox 
+
+                if (text.indexOf(data.id) != -1) {
+                    // ok, la cuenta *existe* en el textbox; la quitamos 
+                    text = text.replace(", " + data.id, "");
+                    text = text.replace(data.id, "");
+
+                    textbox.val(text);
+                }
+            })
+
+            // para asignar una clase a la lista del select ... 
+            $("#select1").select2({ dropdownCssClass: "smallfont" });
+        })
+    </script>
+</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
 <div style="text-align: left; padding: 0px 20px 0px 20px;">
@@ -34,9 +150,7 @@
     <span id="ErrMessage_Span" runat="server" class="errmessage errmessage_background generalfont" style="display: block;" />
 
     <cc1:tabcontainer id="TabContainer1" runat="server" activetabindex="0">
-
         <cc1:TabPanel HeaderText="Generales" runat="server" ID="TabPanel1" >
-
             <ContentTemplate>
 
                 <table style="font-size: x-small; ">
@@ -168,17 +282,12 @@
                     </tr>
 
                 </table>
-
             </ContentTemplate>
+        </cc1:TabPanel>
 
-            </cc1:TabPanel>
-
-
-        <cc1:TabPanel HeaderText="Lista (1)" runat="server" ID="TabPanel2" >
-
+        <cc1:TabPanel HeaderText="Cias, Monedas" runat="server" ID="TabPanel2" >
             <ContentTemplate>
-
-                <table style="width: 100%; height: 100%;">
+                <table style="width: auto; height: 100%;">
                     <tr>
                         <td class="ListViewHeader_Suave smallfont2" style="text-align: center;">
                             Cias contab
@@ -189,48 +298,24 @@
                         <td class="ListViewHeader_Suave smallfont2" style="text-align: center;">
                             Monedas
                         </td>
-                        <td>
-                            &nbsp;&nbsp;
-                        </td>
-                        <td class="ListViewHeader_Suave smallfont2">
-                            <table style="width:100%; ">
-                                <tr>
-                                    <td>
-                                        Cuentas contables&nbsp;&nbsp;
-                                    </td>
-                                    <td style="text-align: right; ">
-                                        <asp:TextBox ID="CuentasContablesFilter_TextBox"
-                                                     CssClass="smallfont"
-                                                     runat="server" 
-                                                     AutoPostBack="True" 
-                                                     ontextchanged="CuentasContablesFilter_TextBox_TextChanged" 
-                                                     style="width: 150px; margin-right: 10px; " />
-
-                                        <cc1:TextBoxWaterMarkExtender ID="TextBoxWaterMarkExtender1" 
-                                                                      runat="server" 
-                                                                      WatermarkText="Escriba (y Enter) para buscar ..." 
-                                                                      TargetControlID="CuentasContablesFilter_TextBox" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
                     </tr>
                     <tr>
                         <td>
-                            <asp:ListBox ID="Sql_it_Asiento_Cia_Numeric" 
+                            <asp:ListBox ID="Sql_Asientos_Cia_Numeric" 
+                                            Width="200px"
                                             runat="server" 
-                                            DataTextField="Nombre" DataValueField="Numero" 
-                                            AutoPostBack="true" 
+                                            DataTextField="Nombre" 
+                                            DataValueField="Numero" 
+                                            AutoPostBack="false" 
                                             SelectionMode="Multiple" 
-                                            onselectedindexchanged="Sql_Asientos_Cia_Numeric_SelectedIndexChanged" 
                                             Rows="20" 
-                                            CssClass="smallfont" />
+                                            CssClass="smallfont ciaListBox" />
                         </td>
                         <td>
                             &nbsp;&nbsp;
                         </td>
                         <td>
-                             <asp:ListBox ID="Sql_it_Asiento_Moneda_Numeric" 
+                             <asp:ListBox ID="Sql_Asientos_Moneda_Numeric" 
                                              Width="200px"
                                              runat="server" 
                                              DataSourceID="Monedas_SqlDataSource"
@@ -241,28 +326,13 @@
                                              Rows="20" 
                                              CssClass="smallfont" />
                         </td>
-                        <td>
-                            &nbsp;&nbsp;
-                        </td>
-                        <td>
-                            <asp:ListBox ID="Sql_it_CuentasContable_Cuenta_String" 
-                                        runat="server" 
-                                        DataSourceID="CuentasContables_SqlDataSource"
-                                        DataTextField="CuentaContableYNombre" 
-                                        DataValueField="Cuenta" 
-                                        SelectionMode="Multiple" 
-                                        Width="350px" 
-                                        Rows="20"
-                                        CssClass="smallfont" />
-                        </td>
-
                     </tr>
                 </table>
 
             </ContentTemplate>
         </cc1:TabPanel>
 
-         <cc1:TabPanel HeaderText="Lista (2)" runat="server" ID="TabPanel3" >
+         <cc1:TabPanel HeaderText="Grupos, Centros de costo, Proviene de" runat="server" ID="TabPanel3" >
             <ContentTemplate>
                     <table style="width: auto; height: 100%;">
                         <tr>
@@ -284,7 +354,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:ListBox ID="Sql_it_CuentasContable_Grupo_Numeric" 
+                                <asp:ListBox ID="Sql_CuentasContables_Grupo_Numeric" 
                                              Width="200px" 
                                              runat="server" 
                                              DataSourceID="GruposContables_SqlDataSource"
@@ -298,7 +368,7 @@
                                 &nbsp;&nbsp;
                             </td>
                              <td>
-                               <asp:ListBox ID="Sql_it_CentroCosto_Numeric" 
+                               <asp:ListBox ID="Sql_dAsientos_CentroCosto_Numeric" 
                                              Width="200px" 
                                              runat="server" 
                                              DataSourceID="CentrosCosto_SqlDataSource"
@@ -312,7 +382,7 @@
                                 &nbsp;&nbsp;
                             </td>
                              <td>
-                               <asp:ListBox ID="Sql_it_Asiento_ProvieneDe_String" 
+                               <asp:ListBox ID="Sql_Asientos_ProvieneDe_String" 
                                              Width="200px" 
                                              runat="server" 
                                              DataSourceID="ProvieneDe_SqlDataSource"
@@ -327,30 +397,58 @@
                 </ContentTemplate>
             </cc1:TabPanel>
 
+            <cc1:TabPanel HeaderText="Cuentas contables" runat="server" ID="TabPanel5">
+                <ContentTemplate>
+                    <table style="min-width: 700px; ">
+                        <tr>
+                            <td class="ListViewHeader_Suave generalfont" style="width: 49%; ">
+                                Cuentas contables 
+                            </td>
+                            <td style="width: 2%; ">
+                            </td>
+                            <td class="ListViewHeader_Suave generalfont" style="width: 49%; ">
+                                Cuentas contables 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; vertical-align: top; " class="generalfont">
+                                <asp:TextBox ID="Sql_CuentasContables_Cuenta_String" 
+                                             runat="server" 
+                                             width="98%"
+                                             Rows="2" 
+                                             TextMode="MultiLine" 
+                                             CssClass="cuentas-contables-text-area"
+                                             placeholder="(Separe varias cuentas así: 5010202, 5010203, 5010204; además use * para generalizar: 203*; también: 206*, 4021300, 301*)">
+                                </asp:TextBox>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                Typee para iniciar una búsqueda de cuentas contables<br /> 
+                                <select id="select1"
+                                    name="select1"
+                                    runat="server"
+                                    multiple="true"
+                                    class="select2-input"
+                                    style="width: 99%; ">
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </ContentTemplate>
+            </cc1:TabPanel>
 
-            <cc1:TabPanel HeaderText="Lista (3)" runat="server" ID="TabPanel4" >
+            <cc1:TabPanel HeaderText="Usuarios" runat="server" ID="TabPanel4" >
                 <ContentTemplate>
                     <table style="width: auto; height: 100%;">
                         <tr>
                             <td class="ListViewHeader_Suave smallfont2" style="text-align: center;">
                                 Usuarios
                             </td>
-                            <td>
-                                &nbsp;&nbsp;
-                            </td>
-                             <td>
- 
-                            </td>
-                             <td>
-                                &nbsp;&nbsp;
-                            </td>
-                             <td>
- 
-                            </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:ListBox ID="Sql_it_Asiento_Usuario_String" 
+                                <asp:ListBox ID="Sql_Asientos_Usuario_String" 
                                              Width="200px" 
                                              runat="server" 
                                              DataSourceID="Usuarios_SqlDataSource"
@@ -359,18 +457,6 @@
                                              AutoPostBack="False" 
                                              SelectionMode="Multiple" 
                                              Rows="20" CssClass="smallfont" />
-                            </td>
-                            <td>
-                                &nbsp;&nbsp;
-                            </td>
-                             <td>
- 
-                            </td>
-                            <td>
-                                &nbsp;&nbsp;
-                            </td>
-                             <td>
-                               
                             </td>
                         </tr>
                     </table>

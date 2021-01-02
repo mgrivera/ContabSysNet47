@@ -131,8 +131,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                                             "(((abs(dAsientos.Haber) * 100) - CONVERT(bigint, (abs(dAsientos.Haber) * 100))) <> 0))";
             }
 
-            
-
             MyConstruirCriterioSql = null;
             MyConstruirCriterioSql_subQuery = null; 
 
@@ -151,7 +149,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                 Session["SoloAsientosDescuadrados"] = true;
             }
 
-            
             Session["SoloAsientosConUploads_CheckBox"] = null;
             if (this.SoloAsientosConUploads_CheckBox.Checked)
             {

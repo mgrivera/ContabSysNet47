@@ -78,6 +78,7 @@ namespace ContabSysNet_Web.ModelosDatos_EF.code_first.contab
         public int Cia { get; set; }
 
         public virtual Companias Companias { get; set; }
+        public virtual GruposContables GruposContables { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConsultaCuentasYMovimientos> ConsultaCuentasYMovimientos { get; set; }

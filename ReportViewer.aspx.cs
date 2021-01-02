@@ -2778,15 +2778,7 @@ namespace ContabSysNetWeb
                                 return;
                             }
 
-                            if (Session["FechaInicialPeriodo"] == null || Session["FechaFinalPeriodo"] == null)
-                            {
-                                ErrMessage_Cell.InnerHtml = "No existe información para mostrar el reporte que Ud. ha requerido. <br /><br />" +
-                                    "Probablemente Ud. no ha aplicado un filtro aún, o la sesión ha caducado.";
-                                return;
-                            }
-
                             // leemos los parámetros del querystring 
-
                             string tituloReporte = "";
                             string subtituloReporte = "";
                             string color = "";
@@ -2816,50 +2808,55 @@ namespace ContabSysNetWeb
                             if (Request.QueryString["st"] != null && !string.IsNullOrEmpty(Request.QueryString["st"].ToString()))
                                 soloTotales = Request.QueryString["st"].ToString();
 
-                            string sqlFilter = Session["FiltroForma"].ToString();
+                            //string sqlFilter = Session["FiltroForma"].ToString();
 
-                            var fechaInicialPeriodo = (DateTime)Session["FechaInicialPeriodo"];
-                            var fechaFinalPeriodo = (DateTime)Session["FechaFinalPeriodo"];
+                            //dbContab_Contab_Entities db = new dbContab_Contab_Entities();
 
-                            dbContab_Contab_Entities db = new dbContab_Contab_Entities();
+                            //var query = db.dAsientos.Include("Asiento").
+                            //                         Include("Asiento.Moneda1").
+                            //                         Include("Asiento.Compania").
+                            //                         Include("CentrosCosto").
+                            //                         Include("CuentasContable").
+                            //                         Include("CuentasContable.tGruposContable").
+                            //                         Where(sqlFilter);
 
-                            var query = db.dAsientos.Include("Asiento").
-                                                     Include("Asiento.Moneda1").
-                                                     Include("Asiento.Compania").
-                                                     Include("CentrosCosto").
-                                                     Include("CuentasContable").
-                                                     Include("CuentasContable.tGruposContable").
-                                                     Where(Session["FiltroForma"].ToString()).
-                                                     Where(x => x.Asiento.Fecha >= fechaInicialPeriodo).
-                                                     Where(x => x.Asiento.Fecha <= fechaFinalPeriodo);
+                            string filter = Session["FiltroForma"].ToString();
+
+                            //var query = contabContext.dAsientos.Select(a => a);
+                            var query = "Select dAsientos.* From dAsientos " +
+                                        "Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico " +
+                                        "Inner Join CuentasContables On dAsientos.CuentaContableID = CuentasContables.ID " +
+                                       $"Where {filter}";
+
+                            ContabContext contabContext = new ContabContext();
+                            var partidas = contabContext.dAsientos.SqlQuery(query);
 
                             // ahora preparamos una lista para usarla como DataSource del report ... 
-
                             List<Contab_Report_ConsultaCentrosCosto> myList = new List<Contab_Report_ConsultaCentrosCosto>();
                             Contab_Report_ConsultaCentrosCosto infoCentroCosto;
 
                             int cantidadRegistros = 0;
 
-                            foreach (var centroCosto in query)
+                            foreach (var partida in partidas)
                             {
                                 infoCentroCosto = new Contab_Report_ConsultaCentrosCosto();
 
-                                infoCentroCosto.Moneda = centroCosto.Asiento.Moneda1.Simbolo;
-                                infoCentroCosto.CiaContab = centroCosto.Asiento.Compania.Nombre;
-                                infoCentroCosto.CentroCosto = centroCosto.CentrosCosto != null ? centroCosto.CentrosCosto.Descripcion : " Sin centro de costo asignado";
-                                infoCentroCosto.GrupoContable = centroCosto.CuentasContable.tGruposContable.Descripcion;
-                                infoCentroCosto.CuentaContable = centroCosto.CuentasContable.CuentaEditada;
-                                infoCentroCosto.Fecha = centroCosto.Asiento.Fecha;
-                                infoCentroCosto.NombreCuentaContable = centroCosto.CuentasContable.Descripcion;
-                                infoCentroCosto.DescripcionPartidaAsiento = centroCosto.Descripcion;
+                                infoCentroCosto.Moneda = partida.Asientos.Monedas1.Simbolo;
+                                infoCentroCosto.CiaContab = partida.Asientos.Companias.Nombre;
+                                infoCentroCosto.CentroCosto = partida.CentrosCosto != null ? partida.CentrosCosto.Descripcion : " Sin centro de costo asignado";
+                                infoCentroCosto.GrupoContable = partida.CuentasContables.GruposContables.Descripcion;
+                                infoCentroCosto.CuentaContable = partida.CuentasContables.CuentaEditada;
+                                infoCentroCosto.Fecha = partida.Asientos.Fecha;
+                                infoCentroCosto.NombreCuentaContable = partida.CuentasContables.Descripcion;
+                                infoCentroCosto.DescripcionPartidaAsiento = partida.Descripcion;
 
-                                infoCentroCosto.NumeroComprobante = centroCosto.Asiento.Numero;
+                                infoCentroCosto.NumeroComprobante = partida.Asientos.Numero;
 
-                                infoCentroCosto.Referencia = centroCosto.Referencia;
-                                infoCentroCosto.ProvieneDe = centroCosto.Asiento.ProvieneDe;
-                                infoCentroCosto.Debe = centroCosto.Debe;
-                                infoCentroCosto.Haber = centroCosto.Haber;
-                                infoCentroCosto.Saldo = centroCosto.Debe - centroCosto.Haber;
+                                infoCentroCosto.Referencia = partida.Referencia;
+                                infoCentroCosto.ProvieneDe = partida.Asientos.ProvieneDe;
+                                infoCentroCosto.Debe = partida.Debe;
+                                infoCentroCosto.Haber = partida.Haber;
+                                infoCentroCosto.Saldo = partida.Debe - partida.Haber;
 
                                 myList.Add(infoCentroCosto);
                                 cantidadRegistros++;
@@ -2868,11 +2865,9 @@ namespace ContabSysNetWeb
                             if (cantidadRegistros == 0)
                             {
                                 ErrMessage_Cell.InnerHtml = "No existe información para mostrar el reporte " +
-                                    "que Ud. ha requerido. <br /><br /> Probablemente Ud. no ha aplicado un " +
-                                    "filtro y seleccionado información aún.";
+                                                            "que Ud. ha requerido. <br /><br /> Probablemente Ud. no ha aplicado un filtro y seleccionado información aún.";
                                 return;
                             }
-
 
                             if (orientation == "v")
                                 this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/Centros de costo/CentrosCosto_Portrait.rdlc";

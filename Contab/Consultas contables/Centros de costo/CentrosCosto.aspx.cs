@@ -9,7 +9,7 @@ using System.Linq;
 //using ContabSysNet_Web.old_app_code;
 using ContabSysNet_Web.ModelosDatos_EF.Contab;
 using System.Web.UI.WebControls;
-
+using ContabSysNet_Web.ModelosDatos_EF.code_first.contab;
 
 namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
 {
@@ -17,22 +17,17 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!User.Identity.IsAuthenticated)
             {
                 FormsAuthentication.SignOut();
                 return;
             }
 
-            // -----------------------------------------------------------------------------------------
-
             Master.Page.Title = "Consulta de movimientos contables por centro de costo";
 
             if (!Page.IsPostBack)
             {
-                //Gets a reference to a Label control that is not in a 
-                //ContentPlaceHolder control
-
+                //Gets a reference to a Label control that is not in a ContentPlaceHolder control
                 HtmlContainerControl MyHtmlSpan;
 
                 MyHtmlSpan = (HtmlContainerControl)(Master.FindControl("AppName_Span"));
@@ -47,7 +42,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
 
                 //--------------------------------------------------------------------------------------------
                 //para asignar la página que corresponde al help de la página 
-
                 HtmlAnchor MyHtmlHyperLink;
                 MyHtmlHyperLink = (HtmlAnchor)Master.FindControl("Help_HyperLink");
 
@@ -57,30 +51,22 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
             }
             else
             {
-                //-------------------------------------------------------------------------
-                // la página puede ser 'refrescada' por el popup; en ese caso, ejeucutamos  
-                // una función que efectúa alguna funcionalidad y rebind la información 
-
+                // la página puede ser 'refrescada' por el popup; en ese caso, ejeucutamos una función que efectúa alguna funcionalidad y rebind la información 
                 if (this.RebindFlagHiddenField.Value == "1")
                 {
                     RebindFlagHiddenField.Value = "0";
                     RefreshAndBindInfo();
                 }
-
-
-                // -------------------------------------------------------------------------
             }
         }
 
         private void RefreshAndBindInfo()
         {
-
             if (!User.Identity.IsAuthenticated)
             {
                 FormsAuthentication.SignOut();
                 return;
             }
-
 
             if (Session["FiltroForma"] == null)
             {
@@ -112,87 +98,57 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
         //     out int totalRowCount
         //     string sortByExpression
 
-        public IQueryable<dAsiento> MovimientosContables_GridView_GetData()
+        public IQueryable<dAsientos> MovimientosContables_GridView_GetData()
         {
-            dbContab_Contab_Entities db = new dbContab_Contab_Entities();
+            ContabContext contabContext = new ContabContext();
 
             if (Session["FiltroForma"] == null)
                 return null; 
 
             string filter = Session["FiltroForma"].ToString();
 
-            var query = db.dAsientos.Where(filter).Select(a => a);
-
-            if (this.CompaniasFilter_DropDownList.SelectedIndex != -1)
-            {
-                int selectedValue = Convert.ToInt32(this.CompaniasFilter_DropDownList.SelectedValue);
-                query = query.Where(d => d.Asiento.Cia == selectedValue);
-            }
-
-            if (this.MonedasFilter_DropDownList.SelectedIndex != -1)
-            {
-                int selectedValue = Convert.ToInt32(this.MonedasFilter_DropDownList.SelectedValue);
-                query = query.Where(d => d.Asiento.Moneda == selectedValue);
-            }
-
+            // aplicamos los minifilters; el usuario puede seleccionar cia y moneda desde ddl en el tope de la página 
             if (!string.IsNullOrEmpty(this.CuentaContableFilter_TextBox.Text))
             {
                 string miniFilter = this.CuentaContableFilter_TextBox.Text.ToString().Replace("*", "");
-
-                // nótese como el usuario puede o no usar '*' para el mini filtro; de usarlo, la busqueda es más precisa ... 
-                if (this.CuentaContableFilter_TextBox.Text.ToString().Trim().StartsWith("*") && this.CuentaContableFilter_TextBox.Text.Trim().EndsWith("*"))
-                    query = query.Where(c => c.CuentasContable.Cuenta.Contains(miniFilter));
-                else if (this.CuentaContableFilter_TextBox.Text.ToString().Trim().StartsWith("*"))
-                    query = query.Where(c => c.CuentasContable.Cuenta.EndsWith(miniFilter));
-                else if (this.CuentaContableFilter_TextBox.Text.Trim().EndsWith("*"))
-                    query = query.Where(c => c.CuentasContable.Cuenta.StartsWith(miniFilter));
-                else
-                    query = query.Where(c => c.CuentasContable.Cuenta.Contains(miniFilter));
+                filter += $" And (CuentasContables.Cuenta Like '%{miniFilter}%')"; 
             }
 
             if (!string.IsNullOrEmpty(this.CuentaContableDescripcionFilter_TextBox.Text))
             {
                 string miniFilter = this.CuentaContableDescripcionFilter_TextBox.Text.ToString().Replace("*", "");
-
-                // nótese como el usuario puede o no usar '*' para el mini filtro; de usarlo, la busqueda es más precisa ... 
-                if (this.CuentaContableDescripcionFilter_TextBox.Text.ToString().Trim().StartsWith("*") && this.CuentaContableDescripcionFilter_TextBox.Text.Trim().EndsWith("*"))
-                    query = query.Where(c => c.CuentasContable.Descripcion.Contains(miniFilter));
-                else if (this.CuentaContableDescripcionFilter_TextBox.Text.ToString().Trim().StartsWith("*"))
-                    query = query.Where(c => c.CuentasContable.Descripcion.EndsWith(miniFilter));
-                else if (this.CuentaContableDescripcionFilter_TextBox.Text.Trim().EndsWith("*"))
-                    query = query.Where(c => c.CuentasContable.Descripcion.StartsWith(miniFilter));
-                else
-                    query = query.Where(c => c.CuentasContable.Descripcion.Contains(miniFilter));
+                filter += $" And (CuentasContables.Descripcion Like '%{miniFilter}%')";
             }
 
             if (!string.IsNullOrEmpty(this.CentroCostoFilter_TextBox.Text))
             {
                 string miniFilter = this.CentroCostoFilter_TextBox.Text.ToString().Replace("*", "");
-
-                // nótese como el usuario puede o no usar '*' para el mini filtro; de usarlo, la busqueda es más precisa ... 
-                if (this.CentroCostoFilter_TextBox.Text.ToString().Trim().StartsWith("*") && this.CuentaContableDescripcionFilter_TextBox.Text.Trim().EndsWith("*"))
-                    query = query.Where(c => c.CentrosCosto.DescripcionCorta.Contains(miniFilter));
-                else if (this.CentroCostoFilter_TextBox.Text.ToString().Trim().StartsWith("*"))
-                    query = query.Where(c => c.CentrosCosto.DescripcionCorta.EndsWith(miniFilter));
-                else if (this.CentroCostoFilter_TextBox.Text.Trim().EndsWith("*"))
-                    query = query.Where(c => c.CentrosCosto.DescripcionCorta.StartsWith(miniFilter));
-                else
-                    query = query.Where(c => c.CentrosCosto.DescripcionCorta.Contains(miniFilter));
+                filter += $" And (CentrosCosto.DescripcionCorta Like '%{miniFilter}%')";
             }
 
-            // aplicamos el período que el usuario indicó al filtro 
-            if (Session["FechaInicialPeriodo"] != null && Session["FechaFinalPeriodo"] != null)
+            // aplicamos los minifilters; el usuario puede seleccionar cia y moneda desde ddl en el tope de la página 
+            if (this.CompaniasFilter_DropDownList.SelectedIndex != -1)
             {
-                var fechaInicialPeriodo = (DateTime)Session["FechaInicialPeriodo"];
-                var fechaFinalPeriodo = (DateTime)Session["FechaFinalPeriodo"];
-
-                query = query.Where(c => c.Asiento.Fecha >= fechaInicialPeriodo);
-                query = query.Where(c => c.Asiento.Fecha <= fechaFinalPeriodo);
+                int selectedValue = Convert.ToInt32(this.CompaniasFilter_DropDownList.SelectedValue);
+                filter += $" And (Asientos.Cia In ({selectedValue}))"; 
             }
-            
-            query = query.OrderBy(d => d.Asiento.Fecha).ThenBy(d => d.Asiento.Numero); 
 
-            return query; 
+            if (this.MonedasFilter_DropDownList.SelectedIndex != -1)
+            {
+                int selectedValue = Convert.ToInt32(this.MonedasFilter_DropDownList.SelectedValue);
+                filter += $" And (Asientos.Moneda In ({selectedValue}))";
+            }
+
+            var query = "Select dAsientos.* From dAsientos " +
+                        "Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico " +
+                        "Inner Join CuentasContables On dAsientos.CuentaContableID = CuentasContables.ID " +
+                        "Left Outer Join CentrosCosto On dAsientos.CentroCosto = CentrosCosto.CentroCosto " + 
+                       $"Where {filter} " +
+                        "Order By Asientos.Fecha, Asientos.Numero";
+
+            var partidas = contabContext.dAsientos.SqlQuery(query);
+
+            return partidas.AsQueryable(); 
         }
 
 
@@ -213,40 +169,52 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
             gv.SelectedIndex = -1; 
         }
 
-        public IQueryable<Compania> CompaniasFilter_DropDownList_SelectMethod()
+        public IQueryable<Companias> CompaniasFilter_DropDownList_SelectMethod()
         {
+            // ponemos el en ddl las compañías seleccionadas en el filtro; la idea es que el usuario pueda seleccionar cualquiera de ellas 
+            // para mostrarlas, separadamente, en la lista 
             if (Session["FiltroForma"] == null)
                 return null;
 
+            ContabContext contabContext = new ContabContext();
+
             string filter = Session["FiltroForma"].ToString();
 
-            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
+            var sqlQuery = "Select Asientos.Cia From dAsientos " +
+                        "Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico " +
+                        "Inner Join CuentasContables On dAsientos.CuentaContableID = CuentasContables.ID " +
+                       $"Where {filter} " +
+                        "Group By Asientos.Cia";
 
-            // nótese el subquery: solo monedas que existen en el 1er. query ... 
+            List<int> ciasContab = contabContext.Database.SqlQuery<int>(sqlQuery).ToList();
 
-            var query1 = context.dAsientos.Where(filter).Select(d => d.Asiento.Cia);
-            var query2 = from c in context.Companias where query1.Contains(c.Numero) select c;
-            query2 = query2.OrderBy(c => c.Nombre);
+            var query = contabContext.Companias.Where(x => ciasContab.Contains(x.Numero)).Select(x => x).AsQueryable(); 
 
-            return query2; 
+            return query; 
         }
 
-        public IQueryable<Moneda> MonedasFilter_DropDownList_SelectMethod()
+        public IQueryable<Monedas> MonedasFilter_DropDownList_SelectMethod()
         {
+            // ponemos el en ddl las compañías seleccionadas en el filtro; la idea es que el usuario pueda seleccionar cualquiera de ellas 
+            // para mostrarlas, separadamente, en la lista 
             if (Session["FiltroForma"] == null)
                 return null;
 
+            ContabContext contabContext = new ContabContext();
+
             string filter = Session["FiltroForma"].ToString();
 
-            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
+            var sqlQuery = "Select Asientos.Moneda From dAsientos " +
+                        "Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico " +
+                        "Inner Join CuentasContables On dAsientos.CuentaContableID = CuentasContables.ID " +
+                       $"Where {filter} " +
+                        "Group By Asientos.Moneda";
 
-            // nótese el subquery: solo monedas que existen en el 1er. query ... 
+            List<int> monedas = contabContext.Database.SqlQuery<int>(sqlQuery).ToList();
 
-            var query1 = context.dAsientos.Where(filter).Select(d => d.Asiento.Moneda);
-            var query2 = from m in context.Monedas where query1.Contains(m.Moneda1) select m;
-            query2 = query2.OrderBy(m => m.Descripcion);
+            var query = contabContext.Monedas.Where(x => monedas.Contains(x.Moneda)).Select(x => x).AsQueryable();
 
-            return query2; 
+            return query;
         }
 
         protected void AplicarMiniFiltro(object sender, EventArgs e)

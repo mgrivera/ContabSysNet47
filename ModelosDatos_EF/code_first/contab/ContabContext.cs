@@ -46,6 +46,12 @@ namespace ContabSysNet_Web.ModelosDatos_EF.code_first.contab
                 .HasForeignKey(e => e.Cia)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<GruposContables>()
+                .HasMany(e => e.CuentasContables)
+                .WithRequired(e => e.GruposContables)
+                .HasForeignKey(e => e.Grupo)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Companias>()
                 .HasOptional(e => e.ParametrosContab)
                 .WithRequired(e => e.Companias)
