@@ -4,10 +4,7 @@ using System.Web.UI;
 using System.Web.Security;
 using System.Xml.Linq;
 using System.IO;
-//using ContabSysNetWeb.Old_App_Code;
 using System.Linq;
-//using ContabSysNet_Web.old_app_code;
-//using ContabSysNet_Web.ModelosDatos_EF;
 using System.Collections.Generic;
 using System.Web.UI.HtmlControls;
 using ContabSysNet_Web.ModelosDatos_EF.Bancos;
@@ -55,7 +52,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
             // leemos la cia contab seleccionada; nótese que solo es importante cuando la opción seleccionada por 
             // el usuario es la 'obtención de relación de pagos para el banco" ... 
-
             int ciaContabSeleccionada = 0;
             string nombreCiaContabSeleccionada = ""; 
             string errorMessage = "";
@@ -64,7 +60,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             {
                 // nótese que el mensaje de error que sigue solo se muestra si el usuario selecciona, en el dropdownlist, 
                 // opción "relación de pagos para el banco" ... 
-
                 ErrMessage_RelacionPagosBanco_Span.InnerHtml = errorMessage;
                 ErrMessage_RelacionPagosBanco_Span.Style["display"] = "block";
             }
@@ -74,7 +69,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                 GeneralMessage_RelacionPagosBanco_Span.Style["display"] = "block";
             }
 
-
             CiasContab_SqlDataSource.SelectParameters["NombreUsuario"].DefaultValue = User.Identity.Name;
             CuentasBancarias_SqlDataSource.SelectParameters["Cia"].DefaultValue = ciaContabSeleccionada.ToString();
 
@@ -82,7 +76,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             this.OpcionesRetencionesIslr_Fieldset.Visible = false;
             this.RelacionMontosAPagar_Fieldset.Visible = false; 
         }
-
 
         DownloadFile_LinkButton.Visible = false;
     }
@@ -264,7 +257,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
                 // ------------------------------------------------------------------------------------------
                 // número control - intentamos quitar caracteres especiales y dejar solo números ... 
-
                 string sNumeroControlDefinitivo = factura.NumeroControl;
 
                 if (string.IsNullOrEmpty(sNumeroControlDefinitivo))
@@ -294,8 +286,9 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                                    new XElement("NumeroControl", sNumeroControlDefinitivo),
                                    new XElement("FechaOperacion", factura.FechaRecepcion.ToString("dd/MM/yyyy").Replace("-", "/")),
                                    new XElement("CodigoConcepto", codigoConceptoRetencion_islr),
-                                   new XElement("MontoOperacion", montoOperacion.ToString()), 
-                                   new XElement("PorcentajeRetencion", porcentaje.ToString())
+                                   // siempre nos aseguramos que el signo decimal en los montos sea '.' y no ',' 
+                                   new XElement("MontoOperacion", montoOperacion.ToString().Replace(",", ".")), 
+                                   new XElement("PorcentajeRetencion", porcentaje.ToString().Replace(",", "."))
                                 );
 
                 xmldoc.Element("RelacionRetencionesISLR").Add(x);
@@ -410,9 +403,7 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                                   montoBase = g.Sum(m => m.MontoBase)
                               };
 
-
         int empleadosAgregadosISLRFile = 0;
-
 
         RegistroRetencionISLR registroRetencionISLR;
         List<RegistroRetencionISLR> registroRetencionISLR_List = new List<RegistroRetencionISLR>();
@@ -473,7 +464,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
             empleadosAgregadosISLRFile++;
         }
-
 
         // finalmente, agregamos cada item en la lista como un nodo al xml file 
         foreach (RegistroRetencionISLR r in registroRetencionISLR_List)
@@ -652,7 +642,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                 numeroDocumento = impuesto.Factura.NumeroFactura;
 
             // ahora escribimos una linea al archivo de texto, separado por tabs 
-
             sb = new StringBuilder();
 
             // nuestro rif 
@@ -676,7 +665,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                 sb.Append(impuesto.Factura.FechaRecepcion.ToString("yyyy-MM-dd"));
                 sb.Append("\t");
             }
-            
 
             // tipo operación (siempre C) 
             sb.Append("C");
@@ -699,7 +687,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             // número documento 
             sb.Append(numeroDocumento);
             sb.Append("\t");
-
 
             // -----------------------------------------------------------------------------------------
             // número control 
@@ -741,8 +728,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             }
 
             totalFactura = montoNoImponible + montoImponible + montoIva; 
-                
-
 
             sb.Append(sNumeroControlDefinitivo);
             sb.Append("\t");
@@ -815,7 +800,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             return;
         }
 
-
         GeneralMessage_Span.InnerHtml = "Ok, el archivo de texto ha sido generado en forma satisfactoria. <br />" +
         "La cantidad de facturas que se han grabado al archivo es: " + cantidadLineas.ToString() + ". <br />" +
         "El nombre del archivo es: " + filePath + ".<br /><br />";
@@ -826,7 +810,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
         return;
     }
-
 
     protected void DownloadFile_LinkButton_Click(object sender, EventArgs e)
     {
@@ -840,7 +823,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
 
             return; 
         }
-
         
         FileStream liveStream = new FileStream(FileName_HiddenField.Value, FileMode.Open, FileAccess.Read);
 
@@ -855,10 +837,8 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
                            FileName_HiddenField.Value);
         Response.BinaryWrite(buffer);
         Response.End();
-        
     }
 
-    
     private bool CiaContabSeleccionada(out int ciaContabSeleccionada, out string nombreCiaContabSeleccionada, out string errorMessage)
     {
         ciaContabSeleccionada = 0;
@@ -905,9 +885,6 @@ public partial class Bancos_Consultas_facturas_Facturas_Facturas_ObtencionXMLFil
             }
         }
     }
-    
-    
-    
     
     // -------------------------------------------------------------------------------------------------
     // para crear una lista con los registros de islr retenido para agregarlos luego al xml file ... 
