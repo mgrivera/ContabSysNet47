@@ -3,7 +3,7 @@
 
 # As we use git for deployment, we don't want these files to be replaced in client directory 
 WebAppSettings.* 
-WebConnectionString.config.* 
+WebConnectionString.* 
 
 # User-specific files
 *.suo
