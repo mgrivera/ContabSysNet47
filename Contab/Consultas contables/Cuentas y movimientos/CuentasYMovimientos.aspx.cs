@@ -290,10 +290,10 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             if (Session["ctasYMovtos_MonOrig_Filter"] != null)
                 monedaOriginalFilter = Convert.ToInt32(Session["ctasYMovtos_MonOrig_Filter"].ToString());
 
-            bool sinSaldoIncialPeriodo = false; 
+            bool sinSaldoInicialPeriodo = false; 
 
             if (Convert.ToBoolean(Session["ctasYMovtos_SinSaldoInicialCuentasContables"]))
-                sinSaldoIncialPeriodo = true;
+                sinSaldoInicialPeriodo = true;
 
             bool soloMovimientosConCentroCostoAsignado = false;
             bool soloMovimientosSinCentroCostoAsignado = false;
@@ -382,7 +382,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 MyMovimiento_Cuenta_Movimiento.Monto = nSaldoAnteriorCuentaContable;
 
                 // el usuario puede indicar que *no desea* el saldo inicial (del período) de las cuentas en la consulta ... 
-                if (!sinSaldoIncialPeriodo)
+                if (!sinSaldoInicialPeriodo)
                 {
                     MyMovimiento_Cuenta.ConsultaCuentasYMovimientos_Movimientos.Add(MyMovimiento_Cuenta_Movimiento);
                     nCantidadTotalMovimientos += 1;
@@ -395,7 +395,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 // que va desde el 1ro de mayo hasta el 14 de mayo y lo agregamos como un movimiento más a la
                 // cuenta
 
-                if (dFechaInicialPeriodo.Day > 1)
+                if (dFechaInicialPeriodo.Day > 1 && !sinSaldoInicialPeriodo)
                 {
                     decimal nMontoMovimientosDiasIniciales = 0; 
                     errorMessage = "";
