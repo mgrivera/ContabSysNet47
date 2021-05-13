@@ -208,7 +208,7 @@
                         <asp:ListBox ID="Sql_dAsientos_CentroCosto_Numeric" 
                                      runat="server" 
                                      DataSourceID="CentrosCosto_SqlDataSource"
-                                     DataTextField="DescripcionCorta" 
+                                     DataTextField="DescripcionCorta2" 
                                      DataValueField="CentroCosto" 
                                      Height="193px"
                                      SelectionMode="Multiple" 
@@ -486,7 +486,11 @@
         </asp:SqlDataSource>
 
         <asp:SqlDataSource ID="CentrosCosto_SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>"
-            SelectCommand="SELECT DISTINCT CentrosCosto.CentroCosto, CentrosCosto.DescripcionCorta FROM CentrosCosto INNER JOIN dAsientos ON CentrosCosto.CentroCosto = dAsientos.CentroCosto ORDER BY CentrosCosto.DescripcionCorta">
+            SelectCommand="SELECT DISTINCT CentrosCosto.CentroCosto, 
+                           CentrosCosto.DescripcionCorta, Case (Suspendido) When 1 Then (CentrosCosto.DescripcionCorta + ' (susp)') 
+                           Else CentrosCosto.DescripcionCorta End As DescripcionCorta2 
+                           FROM CentrosCosto INNER JOIN dAsientos ON CentrosCosto.CentroCosto = dAsientos.CentroCosto 
+                           ORDER BY CentrosCosto.DescripcionCorta">
         </asp:SqlDataSource>
 
         <asp:SqlDataSource ID="GruposContables_SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>"

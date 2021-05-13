@@ -502,7 +502,10 @@
 
 <asp:SqlDataSource ID="CentrosCosto_SqlDataSource" runat="server" 
     ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>"
-        SelectCommand="SELECT Descripcion + ' (' + DescripcionCorta + ')' AS NombreCentroCosto, CentroCosto FROM CentrosCosto ORDER BY Descripcion">
+        SelectCommand="SELECT CentroCosto, 
+    Case (Suspendido) When 1 Then Descripcion + ' - ' + + DescripcionCorta + ' (Susp)' Else Descripcion + ' - ' + + DescripcionCorta End As NombreCentroCosto  
+    FROM CentrosCosto 
+    ORDER BY Descripcion">
 </asp:SqlDataSource>
 
 <asp:SqlDataSource ID="ProvieneDe_SqlDataSource" runat="server" 
