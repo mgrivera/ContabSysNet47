@@ -116,6 +116,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             Session["SoloMovimientosConCentroCostoAsignado"] = this.SoloMovimientosConCentroCostoAsignado_CheckBox.Checked;
             Session["SoloMovimientosSinCentroCostoAsignado"] = this.SoloMovimientosSinCentroCostoAsignado_CheckBox.Checked;
 
+            Session["ReconvertirCifrasAntes_01Oct2021"] = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
+            Session["ExcluirAsientosReconversion_01Oct2021_CheckBox"] = this.ExcluirAsientosReconversion_01Oct2021_CheckBox.Checked;
+
             // guardamos en un session el valor de un parámetro que usará el reporte 
             DateTime desde; 
             DateTime hasta;

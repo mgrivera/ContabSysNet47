@@ -292,6 +292,24 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
         protected global::System.Web.UI.WebControls.CheckBox SoloMovimientosSinCentroCostoAsignado_CheckBox;
         
         /// <summary>
+        /// ReconvertirCifrasAntes_01Oct2021_CheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ReconvertirCifrasAntes_01Oct2021_CheckBox;
+        
+        /// <summary>
+        /// ExcluirAsientosReconversion_01Oct2021_CheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ExcluirAsientosReconversion_01Oct2021_CheckBox;
+        
+        /// <summary>
         /// LimpiarFiltro_Button control.
         /// </summary>
         /// <remarks>

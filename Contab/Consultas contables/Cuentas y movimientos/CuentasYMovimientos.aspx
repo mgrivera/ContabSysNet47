@@ -335,10 +335,12 @@
                                                         <th id="Th7" runat="server" class="padded" style="text-align: center;">Centro<br />Costo</th>
                                                         <th id="Th8" runat="server" class="padded" style="text-align: center;">Mon<br />orig</th>
                                                         <th id="Th10" runat="server" class="padded" style="text-align: left;">Descripción</th>
+                                                        <th id="Th19" runat="server" class="padded" style="text-align: left;">Referencia</th>
                                                         <th id="Th9" runat="server" class="padded" style="text-align: right;">Monto</th>
                                                         <th id="Th17" runat="server" class="padded" style="text-align: center;">Cant<br />uploads</th>
                                                     </tr>
                                                     <tr id="Tr1" runat="server" style="height: 5px;">
+                                                        <th></th>
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
@@ -356,6 +358,7 @@
                                                         <th id="Th14" runat="server" class="padded" style="text-align: center;"></th>
                                                         <th id="Th15" runat="server" class="padded" style="text-align: center;"></th>
                                                         <th id="Th16" runat="server" class="padded" style="text-align: left;">Saldo final de la cuenta contable:</th>
+                                                        <th id="Th20" runat="server" class="padded" style="text-align: center;"></th>
                                                         <th id="SumOfMonto" runat="server" class="padded" style="text-align: right;">
                                                             <asp:Label ID="SumOfMonto_Label" runat="server" Text="Label"></asp:Label>
                                                         </th>
@@ -402,6 +405,9 @@
                                         <td class="padded" style="text-align: left;">
                                             <asp:Label ID="Label4" runat="server" Text='<%# Eval("Descripcion") %>' />
                                         </td>
+                                        <td class="padded" style="text-align: left;">
+                                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("Referencia") %>' />
+                                        </td>
                                         <td class="padded" style="text-align: right; white-space: nowrap;">
                                             <asp:Label ID="Label3" runat="server" Text='<%# Eval("Monto", "{0:N2}") %>' />
                                         </td>
@@ -427,6 +433,9 @@
                                         </td>
                                         <td class="padded" style="text-align: left;">
                                             <asp:Label ID="Label4" runat="server" Text='<%# Eval("Descripcion") %>' />
+                                        </td>
+                                        <td class="padded" style="text-align: left;">
+                                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("Referencia") %>' />
                                         </td>
                                         <td class="padded" style="text-align: right; white-space: nowrap;">
                                             <asp:Label ID="Label3" runat="server" Text='<%# Eval("Monto", "{0:N2}") %>' />
@@ -472,6 +481,7 @@
                 CentrosCosto.DescripcionCorta AS NombreCentroCosto, 
                 Monedas.Simbolo AS SimboloMonedaOriginal, 
                 Contab_ConsultaCuentasYMovimientos_Movimientos.Descripcion,
+                Contab_ConsultaCuentasYMovimientos_Movimientos.Referencia,
                 Contab_ConsultaCuentasYMovimientos_Movimientos.Monto, 
                 Count(Asientos_Documentos_Links.Id) as NumLinks
                 FROM 
@@ -486,7 +496,7 @@
                 WHERE (Contab_ConsultaCuentasYMovimientos_Movimientos.ParentID = @ParentID) 
                 Group by Contab_ConsultaCuentasYMovimientos_Movimientos.Secuencia, Asientos.Numero, Asientos.NumeroAutomatico, Asientos.Fecha, 
                 CentrosCosto.DescripcionCorta, Monedas.Simbolo, Contab_ConsultaCuentasYMovimientos_Movimientos.Descripcion, 
-                Contab_ConsultaCuentasYMovimientos_Movimientos.Monto 
+                Contab_ConsultaCuentasYMovimientos_Movimientos.Referencia, Contab_ConsultaCuentasYMovimientos_Movimientos.Monto 
                 Order By Contab_ConsultaCuentasYMovimientos_Movimientos.Secuencia 
                 ">
 

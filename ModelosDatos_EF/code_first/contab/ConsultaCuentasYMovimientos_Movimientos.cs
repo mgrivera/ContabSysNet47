@@ -21,6 +21,10 @@ namespace ContabSysNet_Web.ModelosDatos_EF.code_first.contab
 
         public short? Partida { get; set; }
 
+        [Required]
+        [Column(TypeName = "date")]
+        public DateTime Fecha { get; set; }
+
         [StringLength(20)]
         public string Referencia { get; set; }
 

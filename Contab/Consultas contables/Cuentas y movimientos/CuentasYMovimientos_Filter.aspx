@@ -378,19 +378,21 @@
 
             <table style="width: 100%; ">
                 <tr>
-                    <td style="width: 50%; ">
+                    <td style="width: 33%; ">
                         <fieldset style="text-align: left; margin-left: 15px;">
                             <legend>Excluir cuentas contables:</legend>
 
                             <table>
                                 <tr>
-                                    <td style="width: 50%;">
+                                    <td style="width: 100%;">
                                         <asp:CheckBox ID="ExcluirCuentasSinMovimientos_CheckBox"
                                             runat="server"
                                             Text="Sin movimientos en el período de selección"
                                             Checked="False" />
                                     </td>
-                                    <td style="width: 50%;">
+                                </tr>
+                                <tr>
+                                    <td style="width: 100%;">
                                         <asp:CheckBox ID="ExcluirCuentasConSaldosInicialFinalCero_CheckBox"
                                             runat="server"
                                             Text="Con saldos (inicial y final) en cero"
@@ -398,13 +400,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 50%;">
+                                    <td style="width: 100%;">
                                         <asp:CheckBox ID="ExcluirCuentasSinSaldoYSinMovtos_CheckBox"
                                             runat="server"
                                             Text="Con saldo cero y sin movimientos"
                                             Checked="False" />
                                     </td>
-                                    <td style="width: 50%;">
+                                </tr>
+                                <tr>
+                                    <td style="width: 100%;">
                                         <asp:CheckBox ID="ExcluirCuentasConSaldoFinalCero_CheckBox"
                                             runat="server"
                                             Text="Con saldo final en cero"
@@ -412,7 +416,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 50%;" colspan="2">
+                                    <td style="width: 100%;" colspan="2">
                                         <asp:CheckBox ID="ExcluirMovimientosDeAsientosDeTipoCierreAnual_CheckBox"
                                             runat="server"
                                             Text="Excluir movimientos que correspondan a asientos de tipo Cierre Anual"
@@ -422,7 +426,8 @@
                             </table>
                         </fieldset>
                     </td>
-                    <td style="width: 50%; ">
+
+                    <td style="width: 33%; vertical-align: top; ">
                         <fieldset style="text-align: left; margin-left: 15px; vertical-align: top; ">
                             <legend>Otras opciones:</legend>
 
@@ -443,14 +448,36 @@
                                                       Checked="False" />
                                     </td>
                                 </tr>
+                            </table>
+                        </fieldset>
+                    </td>
+
+                    <td style="width: 33%; vertical-align: top; ">
+                        <fieldset style="text-align: left; margin-left: 15px; vertical-align: top; ">
+                            <legend>Reconversión 2021:</legend>
+
+                            <table>
+
                                 <tr>
                                     <td>
-                                        <br /><br /> 
+                                        <asp:CheckBox ID="ReconvertirCifrasAntes_01Oct2021_CheckBox" 
+                                                      runat="server" 
+                                                      Text="Reconvertir cifras anteriores al 1/Oct/21" 
+                                                      Checked="False" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="ExcluirAsientosReconversion_01Oct2021_CheckBox" 
+                                                      runat="server" 
+                                                      Text="Excluir asientos de reconversión" 
+                                                      Checked="False" />
                                     </td>
                                 </tr>
                             </table>
                         </fieldset>
                     </td>
+
                 </tr>
             </table>
 
