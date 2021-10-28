@@ -55,7 +55,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 
             // --------------------------------------------------------------------------------------------------------------------------
             // para guardar el contenido de los controles de la página para recuperar el state cuando se abra la proxima vez
-
             KeepPageState MyKeepPageState = new KeepPageState(Membership.GetUser().UserName, Page.GetType().Name);
             MyKeepPageState.SavePageStateInFile(this.Controls);
             MyKeepPageState = null;
@@ -104,6 +103,13 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 
             if (this.orderByNumero_RadioButton.Checked)
                 pageParams.Append("&orderBy=comprobante");
+
+            // agregamos este flag luego de la reconversión del 1-Oct-21 
+            // la idea es que el usuario pueda decidir si reconvertir montos
+            bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
+
+            if (bReconvertirCifrasAntes_01Oct2021)
+                pageParams.Append("&reconvertir2021=si");
 
             Response.Redirect("~/ReportViewer.aspx?" + pageParams.ToString());
         }

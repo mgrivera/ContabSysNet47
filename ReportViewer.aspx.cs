@@ -33,6 +33,7 @@ namespace ContabSysNetWeb
     {
         private class AsientoContable_Report_Item
         {
+            public int Moneda { get; set; }
             public string NombreMoneda { get; set; }
             public string NombreCiaContab { get; set; }
             public DateTime Fecha { get; set; }
@@ -675,14 +676,37 @@ namespace ContabSysNetWeb
                                 }
                             }
 
+                            // -------------------------------------------------------------------------------------------------------------
+                            // el usuario puede indicar que desea reconvertir asientos anteriores al 1-oct-2021 
+                            bool reconvertir2021 = false; 
+
+                            if (Request.QueryString["reconvertir2021"] != null && !string.IsNullOrEmpty(Request.QueryString["reconvertir2021"].ToString()))
+                                if (Request.QueryString["reconvertir2021"] == "si")
+                                    reconvertir2021 = true;
+                            // -------------------------------------------------------------------------------------------------------------
+
+                            // ----------------------------------------------------------------------------------------------------------------------
+                            // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
+                            // *solo* a esta moneda 
+                            var monedaNacional_return = Reconversion.Get_MonedaNacional();
+
+                            if (monedaNacional_return.error)
+                            {
+                                ErrMessage_Cell.InnerHtml = monedaNacional_return.message;
+                                return;
+                            }
+
+                            Monedas monedaNacional = monedaNacional_return.moneda;
+                            // ----------------------------------------------------------------------------------------------------------------------
+
                             string sSqlQueryString = "";
                             string sSqlQueryString_subquery_soloAsientosDescuadrados = ""; 
 
                             if (Session["filtroForma_consultaAsientosContables_subQuery"] == null || Session["filtroForma_consultaAsientosContables_subQuery"].ToString() == "1 = 1")
                             {
                                 // el usuario no usó criterio por cuenta contable o más de 2 decimales; no usamos sub-query 
-                                sSqlQueryString = "SELECT Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, Asientos.Fecha, Asientos.NumeroAutomatico, " +
-                                                  "Asientos.Numero, " +
+                                sSqlQueryString = "SELECT Asientos.Moneda, Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, " +
+                                                  "Asientos.Fecha, Asientos.NumeroAutomatico, Asientos.Numero, " +
                                                   "TiposDeAsiento.Descripcion AS NombreTipo, Monedas_1.Simbolo AS SimboloMonedaOriginal, dAsientos.Partida, " +
                                                   "CuentasContables.CuentaEditada AS CuentaContableEditada, CuentasContables.Descripcion AS NombreCuentaContable, " +
                                                   "dAsientos.Descripcion as DescripcionPartida, dAsientos.Referencia as ReferenciaPartida, " +
@@ -712,8 +736,8 @@ namespace ContabSysNetWeb
                             else
                             {
                                 // usamos un subquery para que *solo* asientos con ciertas cuentas *o* partidas con montos con más de 2 decimales sean seleccionados
-                                sSqlQueryString = "SELECT Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, Asientos.Fecha, Asientos.NumeroAutomatico, " +
-                                                  "Asientos.Numero, " +
+                                sSqlQueryString = "SELECT Asientos.Moneda, Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, " +
+                                                  "Asientos.Fecha, Asientos.NumeroAutomatico, Asientos.Numero, " +
                                                   "TiposDeAsiento.Descripcion AS NombreTipo, Monedas_1.Simbolo AS SimboloMonedaOriginal, dAsientos.Partida, " +
                                                   "CuentasContables.CuentaEditada AS CuentaContableEditada, CuentasContables.Descripcion AS NombreCuentaContable, " +
                                                   "dAsientos.Descripcion as DescripcionPartida, dAsientos.Referencia as ReferenciaPartida, " +
@@ -780,8 +804,18 @@ namespace ContabSysNetWeb
                                     asiento.NombreCuentaContable = partida.NombreCuentaContable;
                                     asiento.Descripcion = partida.DescripcionPartida;
                                     asiento.Referencia = partida.ReferenciaPartida;
-                                    asiento.Debe = partida.Debe;
-                                    asiento.Haber = partida.Haber; 
+
+                                    // el usuario indica en el filtro si desea reconvertir cifras *anteriores* a la fecha: 1-oct-2021 
+                                    if (reconvertir2021 && asiento.Fecha < new DateTime(2021, 10, 1) && partida.Moneda == monedaNacional.Moneda) 
+                                    {
+                                        asiento.Debe = Math.Round(partida.Debe / 1000000, 2);
+                                        asiento.Haber = Math.Round(partida.Haber / 1000000, 2);
+                                    } else
+                                    {
+                                        asiento.Debe = partida.Debe;
+                                        asiento.Haber = partida.Haber;
+                                    }
+                                    
                                     asiento.ProvieneDe = partida.ProvieneDe;
                                     asiento.DescripcionGeneralAsientoContable = partida.DescripcionAsiento;
 
@@ -917,77 +951,113 @@ namespace ContabSysNetWeb
                                 return;
                             }
 
-                            List<Asiento2_Report> list = new List<Asiento2_Report>();
+                            // agregamos este flag luego de la reconversión del 1-Oct-21 
+                            // la idea es que el usuario pueda decidir si reconvertir montos
+                            bool bReconvertirCifrasAntes_01Oct2021 = false;
 
-                            string sqlSelect =
-                                  "SELECT Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, Asientos.Fecha, Asientos.NumeroAutomatico, Asientos.Numero, " +
-                                  "TiposDeAsiento.Descripcion AS NombreTipo, Monedas_1.Simbolo AS SimboloMonedaOriginal, dAsientos.Partida, " +
-                                  "CuentasContables.CuentaEditada AS CuentaContableEditada, CuentasContables.Descripcion AS NombreCuentaContable, dAsientos.Descripcion, dAsientos.Referencia, " +
-                                  "dAsientos.Debe, dAsientos.Haber, Asientos.ProvieneDe, Asientos.Descripcion " +
-                                  "FROM Asientos " +
-                                  "INNER JOIN Companias ON Asientos.Cia = Companias.Numero " +
-                                  "INNER JOIN dAsientos ON Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
-                                  "INNER JOIN CuentasContables ON dAsientos.CuentaContableID = CuentasContables.ID " +
-                                  "INNER JOIN Monedas ON Asientos.Moneda = Monedas.Moneda " +
-                                  "INNER JOIN TiposDeAsiento ON Asientos.Tipo = TiposDeAsiento.Tipo " +
-                                  "INNER JOIN Monedas AS Monedas_1 ON Asientos.MonedaOriginal = Monedas_1.Moneda " +
-                                  "Where Asientos.NumeroAutomatico = " + numeroAutomaticoAsientoContable.ToString();
-
-                            SqlConnection connection = new SqlConnection();
-                            connection.ConnectionString = ConfigurationManager.ConnectionStrings["dbContabConnectionString"].ConnectionString;
-
-                            using (connection)
+                            if (Session["ReconvertirCifrasAntes_01Oct2021"] != null && Convert.ToBoolean(Session["ReconvertirCifrasAntes_01Oct2021"]))
                             {
-                                SqlCommand command = new SqlCommand(sqlSelect, connection);
-                                connection.Open();
-
-                                SqlDataReader reader = command.ExecuteReader();
-
-                                Asiento2_Report asiento;
-
-                                while (reader.Read())
-                                {
-                                    asiento = new Asiento2_Report();
-
-                                    asiento.NombreMoneda = reader.GetString(0);
-                                    asiento.NombreCiaContab = reader.GetString(1);
-                                    asiento.Fecha = reader.GetDateTime(2);
-                                    asiento.NumeroAutomatico = reader.GetInt32(3);
-                                    asiento.Numero = reader.GetInt16(4);
-                                    asiento.NombreTipo = reader.GetString(5);
-                                    asiento.SimboloMonedaOriginal = reader.GetString(6);
-
-                                    asiento.Partida = reader.GetInt16(7);
-                                    asiento.CuentaContableEditada = reader.GetString(8);
-                                    asiento.NombreCuentaContable = reader.GetString(9);
-                                    asiento.Descripcion = reader.GetString(10);
-                                    asiento.Referencia = reader.IsDBNull(11) ? string.Empty : reader.GetString(11);
-                                    asiento.Debe = reader.GetDecimal(12);
-                                    asiento.Haber = reader.GetDecimal(13);
-
-                                    asiento.ProvieneDe = reader.IsDBNull(14) ? string.Empty : reader.GetString(14);
-                                    asiento.DescripcionGeneralAsientoContable = reader.IsDBNull(15) ? string.Empty : reader.GetString(15);
-
-                                    list.Add(asiento);
-                                }
-
-                                reader.Close();
+                                bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
                             }
 
-                            if (list.Count == 0)
+                            if (bReconvertirCifrasAntes_01Oct2021)
+                            {
+                                if (bReconvertirCifrasAntes_01Oct2021)
+                                {
+                                    using (var contabContext = new dbContab_Contab_Entities())
+                                    {
+                                        var asiento = contabContext.Asientos.Where(x => x.NumeroAutomatico == numeroAutomaticoAsientoContable)
+                                                                            .Select(x => new { moneda = x.Moneda, fecha = x.Fecha })
+                                                                            .First();
+
+                                        if (asiento.fecha >= new DateTime(2021, 10, 1))
+                                        {
+                                            bReconvertirCifrasAntes_01Oct2021 = false;
+                                        }
+                                        else
+                                        {
+                                            // ----------------------------------------------------------------------------------------------------------------------
+                                            // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
+                                            // *solo* a esta moneda 
+                                            var monedaNacional_return = Reconversion.Get_MonedaNacional();
+
+                                            if (monedaNacional_return.error)
+                                            {
+                                                ErrMessage_Cell.InnerHtml = monedaNacional_return.message;
+                                                return;
+                                            }
+
+                                            Monedas monedaNacional = monedaNacional_return.moneda;
+                                            // ----------------------------------------------------------------------------------------------------------------------
+
+                                            if (asiento.moneda != monedaNacional.Moneda)
+                                            {
+                                                bReconvertirCifrasAntes_01Oct2021 = false;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
+                            List<Asiento2_Report> asientosContables_list; 
+
+                            using (var contabContext = new dbContab_Contab_Entities())
+                            {
+                                string query; 
+
+                                if (bReconvertirCifrasAntes_01Oct2021)
+                                {
+                                    // reconvertimos el debe y el haber 
+                                    query = "SELECT Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, Asientos.Fecha, Asientos.NumeroAutomatico, Asientos.Numero, " +
+                                              "TiposDeAsiento.Descripcion AS NombreTipo, Monedas_1.Simbolo AS SimboloMonedaOriginal, dAsientos.Partida, " +
+                                              "CuentasContables.CuentaEditada AS CuentaContableEditada, CuentasContables.Descripcion AS NombreCuentaContable, " +
+                                              "dAsientos.Descripcion, dAsientos.Referencia, " +
+                                              "Round((dAsientos.Debe / 1000000), 2) As Debe, Round((dAsientos.Haber / 1000000), 2) As Haber, " +
+                                              "Asientos.ProvieneDe, Asientos.Descripcion " +
+                                              "FROM Asientos " +
+                                              "INNER JOIN Companias ON Asientos.Cia = Companias.Numero " +
+                                              "INNER JOIN dAsientos ON Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
+                                              "INNER JOIN CuentasContables ON dAsientos.CuentaContableID = CuentasContables.ID " +
+                                              "INNER JOIN Monedas ON Asientos.Moneda = Monedas.Moneda " +
+                                              "INNER JOIN TiposDeAsiento ON Asientos.Tipo = TiposDeAsiento.Tipo " +
+                                              "INNER JOIN Monedas AS Monedas_1 ON Asientos.MonedaOriginal = Monedas_1.Moneda " +
+                                              "Where Asientos.NumeroAutomatico = " + numeroAutomaticoAsientoContable.ToString();
+                                }   
+                                else
+                                {
+                                    query = "SELECT Monedas.Descripcion AS NombreMoneda, Companias.Nombre AS NombreCiaContab, Asientos.Fecha, Asientos.NumeroAutomatico, Asientos.Numero, " +
+                                              "TiposDeAsiento.Descripcion AS NombreTipo, Monedas_1.Simbolo AS SimboloMonedaOriginal, dAsientos.Partida, " +
+                                              "CuentasContables.CuentaEditada AS CuentaContableEditada, CuentasContables.Descripcion AS NombreCuentaContable, " +
+                                              "dAsientos.Descripcion, dAsientos.Referencia, " +
+                                              "dAsientos.Debe, dAsientos.Haber, " +
+                                              "Asientos.ProvieneDe, Asientos.Descripcion " +
+                                              "FROM Asientos " +
+                                              "INNER JOIN Companias ON Asientos.Cia = Companias.Numero " +
+                                              "INNER JOIN dAsientos ON Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
+                                              "INNER JOIN CuentasContables ON dAsientos.CuentaContableID = CuentasContables.ID " +
+                                              "INNER JOIN Monedas ON Asientos.Moneda = Monedas.Moneda " +
+                                              "INNER JOIN TiposDeAsiento ON Asientos.Tipo = TiposDeAsiento.Tipo " +
+                                              "INNER JOIN Monedas AS Monedas_1 ON Asientos.MonedaOriginal = Monedas_1.Moneda " +
+                                              "Where Asientos.NumeroAutomatico = " + numeroAutomaticoAsientoContable.ToString();
+                                }
+                                    
+                                asientosContables_list = contabContext.ExecuteStoreQuery<Asiento2_Report>(query).ToList();
+                            }
+
+                            if (asientosContables_list.Count == 0)
                             {
                                 ErrMessage_Cell.InnerHtml = "No existe información para mostrar el reporte que Ud. ha requerido. <br /><br />" +
-                                    "Probablemente Ud. no ha aplicado un filtro y seleccionado información aún.";
+                                                            "Probablemente Ud. no ha aplicado un filtro y seleccionado información aún.";
                                 return;
                             }
-
 
                             this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/Comprobantes/ComprobantesContables_Portrait_debeHaber.rdlc";
 
                             ReportDataSource myReportDataSource = new ReportDataSource();
 
                             myReportDataSource.Name = "DataSet1";
-                            myReportDataSource.Value = list;
+                            myReportDataSource.Value = asientosContables_list;
 
                             this.ReportViewer1.LocalReport.DataSources.Add(myReportDataSource);
 
@@ -1006,7 +1076,7 @@ namespace ContabSysNetWeb
                             // leemos un 'flag' en la tabla Parametros, que permite al usuario indicar si quiere mostrar o 
                             // no la fecha del día en los reportes de contabilidad ... 
 
-                            string nombreCiaContab = list[0].NombreCiaContab;
+                            string nombreCiaContab = asientosContables_list[0].NombreCiaContab;
 
                             dbContab_Contab_Entities contabContex = new dbContab_Contab_Entities();
 
@@ -1038,7 +1108,6 @@ namespace ContabSysNetWeb
                                 tituloReportParameter,
                                 colorReportParameter,
                                 simpleFontReportParameter, 
-                                // noMostrarFechaDia_ReportParameter, 
                                 fechaReporteReportParameter, 
                                 saltoPagina_ReportParameter
                             };

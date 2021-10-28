@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Web.UI.HtmlControls;
 using ContabSysNet_Web.ModelosDatos_EF.Contab;
+using ContabSysNet_Web.ModelosDatos_EF.code_first.contab;
+using ContabSysNet_Web.Clases;
 
 namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 {
@@ -15,6 +17,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
         private class ComprobanteContable_Object
         {
             public int NumeroAutomatico { get; set; }
+            public int Moneda { get; set; }
+            public DateTime Fecha { get; set; } 
             public int NumPartidas { get; set; }
             public decimal? TotalDebe { get; set; }
             public decimal? TotalHaber { get; set; }
@@ -130,6 +134,26 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                 return;
             }
 
+            // ----------------------------------------------------------------------------------------------------------------------
+            // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
+            // *solo* a esta moneda 
+            var monedaNacional_return = Reconversion.Get_MonedaNacional(); 
+
+            if (monedaNacional_return.error)
+            {
+                ErrMessage_Span.InnerHtml = monedaNacional_return.message; 
+                ErrMessage_Span.Style["display"] = "block";
+
+                return;
+            }
+
+            Monedas monedaNacional = monedaNacional_return.moneda; 
+            // ----------------------------------------------------------------------------------------------------------------------
+
+            // agregamos este flag luego de la reconversión del 1-Oct-21 
+            // la idea es que el usuario pueda decidir si reconvertir montos
+            bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
+
             // el usuario puede indicar que desea *solo* asientos con uploads 
             string joinTableAsientosUploads = "Left Outer Join "; 
             if (Session["SoloAsientosConUploads_CheckBox"] != null && Convert.ToBoolean(Session["SoloAsientosConUploads_CheckBox"]))
@@ -148,7 +172,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 
             if (Session["filtroForma_consultaAsientosContables_subQuery"] == null || Session["filtroForma_consultaAsientosContables_subQuery"].ToString() == "1 = 1")
             {
-                sSqlQueryString = "SELECT Asientos.NumeroAutomatico, " +
+                sSqlQueryString = "SELECT Asientos.NumeroAutomatico, Asientos.Moneda, Asientos.Fecha, " +
                                 "Count(dAsientos.Partida) As NumPartidas, Sum(dAsientos.Debe) As TotalDebe, Sum(dAsientos.Haber) AS TotalHaber, " +
                                 "iif(links.NumLinks Is Not Null, links.NumLinks, 0) As NumLinks, Lote As Lote " +
                                 "FROM Asientos Left Outer Join dAsientos On Asientos.NumeroAutomatico = dAsientos.NumeroAutomatico " +
@@ -157,11 +181,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                                 "FROM Asientos_Documentos_Links " +
                                 "Group By Asientos_Documentos_Links.NumeroAutomatico) as links On Asientos.NumeroAutomatico = links.NumeroAutomatico " + 
                                 "Where " + Session["filtroForma_consultaAsientosContables"].ToString() + " " +
-                                "Group By Asientos.NumeroAutomatico, Asientos.Lote, links.NumLinks";
+                                "Group By Asientos.NumeroAutomatico, Asientos.Moneda, Asientos.Fecha, Asientos.Lote, links.NumLinks";
             } else
             {
                 // usamos un subquery para que solo asientos con ciertas cuentas *o* partidas con montos con más de 2 decimales sean seleccionados
-                sSqlQueryString = "SELECT Asientos.NumeroAutomatico, " +
+                sSqlQueryString = "SELECT Asientos.NumeroAutomatico, Asientos.Moneda, Asientos.Fecha, " +
                                 "Count(dAsientos.Partida) As NumPartidas, Sum(dAsientos.Debe) As TotalDebe, Sum(dAsientos.Haber) AS TotalHaber, " +
                                 "iif(links.NumLinks Is Not Null, links.NumLinks, 0) As NumLinks, Lote As Lote " +
                                 "FROM Asientos " +
@@ -179,7 +203,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                                 "Left Outer Join CuentasContables On CuentasContables.ID = dAsientos.CuentaContableID " +
                                 "Where " + Session["filtroForma_consultaAsientosContables"].ToString() + " And " +
                                 Session["filtroForma_consultaAsientosContables_subQuery"].ToString() + "))" +
-                                "Group By Asientos.NumeroAutomatico, Asientos.Lote, links.NumLinks";
+                                "Group By Asientos.NumeroAutomatico, Asientos.Moneda, Asientos.Fecha, Asientos.Lote, links.NumLinks";
             }
 
             if (Session["SoloAsientosDescuadrados"] != null &&  Convert.ToBoolean(Session["SoloAsientosDescuadrados"]))
@@ -193,24 +217,39 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 
             decimal nTotalDebe = 0;
             decimal nTotalHaber = 0;
-            int cantidadRegistros = 0; 
+            int cantidadRegistros = 0;
+
+            DateTime fechaReconversion2021 = new DateTime(2021, 10, 1);
 
             foreach (ComprobanteContable_Object a in query)
             {
+                decimal totalDebe = a.TotalDebe != null ? a.TotalDebe.Value : 0;
+                decimal totalHaber = a.TotalHaber != null ? a.TotalHaber.Value : 0;
+                // -----------------------------------------------------------------------------------------
+                // el usuario puede indicar que quiere reconvertir cifras anteriores al 31/Oct/21 
+                if (bReconvertirCifrasAntes_01Oct2021 && (a.Moneda == monedaNacional.Moneda) && (a.Fecha < fechaReconversion2021))
+                {
+                    totalDebe /= 1000000;
+                    totalDebe = Math.Round(totalDebe, 2);
+
+                    totalHaber /= 1000000;
+                    totalHaber = Math.Round(totalHaber, 2);
+                }
+
                 MyComprobantesContable = new tTempWebReport_ConsultaComprobantesContables();
 
                 MyComprobantesContable.NumeroAutomatico = a.NumeroAutomatico;
                 MyComprobantesContable.NumPartidas = Convert.ToInt16(a.NumPartidas);
-                MyComprobantesContable.TotalDebe = a.TotalDebe != null ? a.TotalDebe.Value : 0;
-                MyComprobantesContable.TotalHaber = a.TotalHaber != null ? a.TotalHaber.Value : 0;
+                MyComprobantesContable.TotalDebe = totalDebe;
+                MyComprobantesContable.TotalHaber = totalHaber;
                 MyComprobantesContable.NombreUsuario = Membership.GetUser().UserName;
                 MyComprobantesContable.NumUploads = Convert.ToInt16(a.NumLinks);
                 MyComprobantesContable.Lote = a.Lote; 
 
                 context.tTempWebReport_ConsultaComprobantesContables.AddObject(MyComprobantesContable);
 
-                nTotalDebe += a.TotalDebe != null ? a.TotalDebe.Value : 0;
-                nTotalHaber += a.TotalHaber != null ? a.TotalHaber.Value : 0;
+                nTotalDebe += totalDebe;
+                nTotalHaber += totalHaber; 
                 cantidadRegistros++; 
             }
 
@@ -251,7 +290,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 
             if (MySumOfHaber_Label != null)
                 MySumOfHaber_Label.Text = nTotalHaber.ToString("#,##0.000");
-
         }
 
         protected void ComprobantesContables_ListView_PagePropertiesChanged(object sender, EventArgs e)

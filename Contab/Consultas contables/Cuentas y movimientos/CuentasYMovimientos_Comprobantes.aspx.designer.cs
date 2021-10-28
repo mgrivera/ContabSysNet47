@@ -13,6 +13,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos {
     public partial class CuentasYMovimientos_Comprobantes {
         
         /// <summary>
+        /// ErrMessage_Span control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ErrMessage_Span;
+        
+        /// <summary>
         /// ImprimirAsientoContable_HyperLink control.
         /// </summary>
         /// <remarks>

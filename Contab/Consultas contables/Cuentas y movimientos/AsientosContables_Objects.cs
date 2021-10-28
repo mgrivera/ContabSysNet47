@@ -48,7 +48,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.Cuentas_y_movimientos
         public string NombreCiaContab { get; set; }
         public DateTime Fecha { get; set; }
         public int NumeroAutomatico { get; set; }
-        public int Numero { get; set; }
+        public short Numero { get; set; }
         public string NombreTipo { get; set; }
         public string SimboloMonedaOriginal { get; set; }
         public string DescripcionGeneralAsientoContable { get; set; }

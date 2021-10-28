@@ -3060,6 +3060,7 @@
     <Compile Include="Clases\PowerTools\PtUtil.cs" />
     <Compile Include="Clases\PowerTools\RevisionAccepter.cs" />
     <Compile Include="Clases\PowerTools\TextReplacer.cs" />
+    <Compile Include="Clases\reconversion.cs" />
     <Compile Include="Clases\SendEmail.cs" />
     <Compile Include="Clases\WriteStringToFile.cs" />
     <Compile Include="Contab\Consultas contables\BalanceComprobacion\BalanceComprobacion.aspx.cs">
@@ -3091,6 +3092,7 @@
       <DependentUpon>BalanceComprobacion_OpcionesReportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contab\Consultas contables\BalanceComprobacion\Contab_Report_ConsultaBalanceComprobacion.cs" />
+    <Compile Include="Contab\Consultas contables\BalanceComprobacion\DeterminarMovimientoCuentaContable.cs" />
     <Compile Include="Contab\Consultas contables\BalanceGeneral\BalanceGeneral_OpcionesReportes.aspx.cs">
       <DependentUpon>BalanceGeneral_OpcionesReportes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

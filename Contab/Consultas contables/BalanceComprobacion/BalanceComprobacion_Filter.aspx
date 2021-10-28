@@ -159,7 +159,6 @@
                             CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El intervalo indicado no es válido."
                             Operator="GreaterThanEqual" Type="Date" ControlToCompare="Desde_TextBox">*</asp:CompareValidator>
                             
-                            
                     </div>
                     <br /><br />
                     <fieldset style="text-align:left; " class="generalfont">
@@ -197,6 +196,33 @@
                                       Checked="True" 
                                       Text="Excluir asientos de tipo 'cierre anual' " />
                     </div>
+
+                    <br />
+                    <br />
+
+                    <fieldset style="text-align: left; margin-left: 15px; vertical-align: top; " class="generalfont">
+
+                            <legend style="color: Navy; ">Reconvesión 2021: </legend>
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="ReconvertirCifrasAntes_01Oct2021_CheckBox" 
+                                                      runat="server" 
+                                                      Text="Reconvertir cifras anteriores al 1/Oct/21" 
+                                                      Checked="False" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="ExcluirAsientosReconversion_01Oct2021_CheckBox" 
+                                                      runat="server" 
+                                                      Text="Excluir asientos de reconversión" 
+                                                      Checked="False" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
                             
                 </ContentTemplate>
             </cc1:TabPanel>

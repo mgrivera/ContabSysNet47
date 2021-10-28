@@ -50,6 +50,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                 Session["filtroForma_consultaAsientosContables"] = null;
                 Session["filtroForma_consultaAsientosContables_subQuery"] = null;
 
+                Session["ReconvertirCifrasAntes_01Oct2021"] = false;
+
                 Session["FechaInicial"] = null;
                 Session["FechaFinal"] = null;
                 Session["CiaContabSeleccionada"] = null;
@@ -154,6 +156,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
             {
                 Session["SoloAsientosConUploads_CheckBox"] = true;
             }
+
+            Session["ReconvertirCifrasAntes_01Oct2021"] = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
 
             // -------------------------------------------------------------------------------------------
             // para guardar el contenido de los controles de la página para recuperar el state cuando

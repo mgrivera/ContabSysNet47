@@ -21,6 +21,7 @@
     </script>
 
     <div style="text-align: right; padding: 0 16px 10px 10px; ">
+        <span id="ErrMessage_Span" runat="server" class="errmessage errmessage_background generalfont" style="display: block;" />
         <table style="width: auto; margin-right: 0px; margin-left: auto; " class="notsosmallfont">
             <tr>
                 <td style="width: auto; text-align: center; ">
@@ -638,7 +639,9 @@
         ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>" 
         SelectCommand="
             SELECT dAsientos.Partida, CuentasContables.CuentaEditada, CuentasContables.Descripcion AS NombreCuenta, 
-            dAsientos.Descripcion AS DescripcionPartida, dAsientos.Referencia, dAsientos.Debe, dAsientos.Haber, 
+            dAsientos.Descripcion AS DescripcionPartida, dAsientos.Referencia, 
+            Case @Reconversion_2021 When 'si' Then Round((dAsientos.Debe / 1000000), 2) Else dAsientos.Debe End As Debe, 
+            Case @Reconversion_2021 When 'si' Then Round((dAsientos.Haber / 1000000), 2) Else dAsientos.Haber End As Haber, 
             CentrosCosto.DescripcionCorta AS NombreCentroCosto 
             FROM dAsientos INNER JOIN CuentasContables ON dAsientos.CuentaContableID = CuentasContables.ID 
             LEFT OUTER JOIN CentrosCosto ON dAsientos.CentroCosto = CentrosCosto.CentroCosto 
@@ -647,6 +650,7 @@
             ">
         <SelectParameters>
             <asp:Parameter Name="NumeroAutomatico" Type="Int32" />
+            <asp:Parameter Name="Reconversion_2021" Type="String" DefaultValue="no" />
         </SelectParameters>
     </asp:SqlDataSource>
 

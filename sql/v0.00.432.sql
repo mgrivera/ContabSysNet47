@@ -35,7 +35,7 @@ CREATE TABLE dbo.Tmp_Contab_ConsultaCuentasYMovimientos_Movimientos
 	AsientoID int NOT NULL,
 	CuentaContableID int NOT NULL,
 	Partida smallint NULL,
-	Fecha date NOT NULL,
+	Fecha date NULL,
 	Referencia nvarchar(20) NULL,
 	Descripcion nvarchar(300) NOT NULL,
 	Monto money NOT NULL,

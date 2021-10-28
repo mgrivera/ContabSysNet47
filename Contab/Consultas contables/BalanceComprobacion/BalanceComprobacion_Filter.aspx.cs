@@ -99,6 +99,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
             Session["MostrarCuentasSaldoFinalEnCero"] = MostrarCuentasConSaldoFinalEnCero_CheckBox.Checked;
             Session["ExcluirAsientosTipoCierreAnual"] = ExcluirAsientosTipoCierreAnual_CheckBox.Checked;
 
+            Session["ReconvertirCifrasAntes_01Oct2021"] = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
+            Session["ExcluirAsientosReconversion_01Oct2021"] = this.ExcluirAsientosReconversion_01Oct2021_CheckBox.Checked;
+
             Session["CiaContabSeleccionada"] = this.Sql_CuentasContables_Cia_Numeric.SelectedValue; 
             // -------------------------------------------------------------------------------------------
             // para guardar el contenido de los controles de la página para recuperar el state cuando

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage_1.master" AutoEventWireup="true" CodeBehind="BalanceComprobacion.aspx.cs" Inherits="ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion.BalanceComprobacion" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage_1.master" AutoEventWireup="true" CodeBehind="BalanceComprobacion.aspx.cs" Inherits="ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion.BalanceComprobacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PanelCentral_ContentPlaceHolder" Runat="Server">
 

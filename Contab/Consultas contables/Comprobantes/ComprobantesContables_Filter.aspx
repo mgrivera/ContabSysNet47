@@ -208,6 +208,24 @@
             
                         </fieldset>
 
+                        <br />
+
+                        <fieldset>
+                            <legend>Reconversión 2021: </legend>
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="ReconvertirCifrasAntes_01Oct2021_CheckBox" 
+                                                      runat="server" 
+                                                      Text="Reconvertir cifras anteriores al 1/Oct/21" 
+                                                      Checked="False" />
+                                    </td>
+                                </tr>
+                            </table>
+            
+                        </fieldset>
+
                     </div>
                 </ContentTemplate>
             </asp:TabPanel>

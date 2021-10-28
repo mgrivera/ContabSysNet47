@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion {
+namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion {
     
     
     public partial class BalanceComprobacion {
