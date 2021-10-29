@@ -19,6 +19,7 @@ using MongoDB.Driver;
 using ContabSysNet_Web.Areas.Contabilidad.Models.mongodb;
 using ContabSysNet_Web.ModelosDatos_EF.code_first.contab;
 using System.Reflection;
+using ContabSysNet_Web.Clases;
 
 namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 {
@@ -65,10 +66,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
             if (!Page.IsPostBack)
             {
-
                 // Gets a reference to a Label control that is not in a
                 // ContentPlaceHolder control
-
                 HtmlContainerControl MyHtmlSpan;
 
                 MyHtmlSpan = (HtmlContainerControl)Master.FindControl("AppName_Span");
@@ -100,7 +99,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 // -------------------------------------------------------------------------
                 // la página puede ser 'refrescada' por el popup; en ese caso, ejeucutamos  
                 // una función que efectúa alguna funcionalidad y rebind la información 
-
                 if (ExecuteThread_HiddenField.Value == "1")
                 {
                     // cuando este html item es 1, ejecutamos el thread que construye la selección y la graba 
@@ -133,7 +131,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 }
                 else
                 {
-
                     if (RebindPage_HiddenField.Value == "1")
                     {
                         // cuando este html item es 1 terminó el thread que construye la selección. Entonces 
@@ -204,7 +201,23 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             // agregamos este flag luego de la reconversión del 1-Oct-21 
             // la idea es que el usuario pueda decidir si reconvertir montos
             bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"]; 
-            bool bExcluirAsientosReconversion_01Oct2021 = (bool)Session["ExcluirAsientosReconversion_01Oct2021_CheckBox"]; 
+            bool bExcluirAsientosReconversion_01Oct2021 = (bool)Session["ExcluirAsientosReconversion_01Oct2021"];
+
+            // ----------------------------------------------------------------------------------------------------------------------
+            // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
+            // *solo* a esta moneda 
+            var monedaNacional_result = Reconversion.Get_MonedaNacional();
+
+            if (monedaNacional_result.error)
+            {
+                Session["Thread_ErrorMessage"] = monedaNacional_result.message;
+                Session["Progress_Completed"] = 1;
+
+                return;
+            }
+
+            Monedas monedaNacional = monedaNacional_result.moneda;
+            // ----------------------------------------------------------------------------------------------------------------------
 
             var contabContext = new ContabContext(); 
 
@@ -458,7 +471,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 String filtroExcluirAsientosReconversion = "(1 = 1)";
                 if (bExcluirAsientosReconversion_01Oct2021)
                 {
-                    filtroExcluirAsientosReconversion = "(dAsientos.Referencia <> 'Reconversión 2021')";
+                    filtroExcluirAsientosReconversion = "(dAsientos.Referencia <> 'Reconversión 2021' Or dAsientos.Referencia Is Null Or Rtrim(Ltrim(dAsientos.Referencia)) = '')";
                 }
 
                 string sSqlQueryString2 = "SELECT dAsientos.NumeroAutomatico, dAsientos.CuentaContableID, dAsientos.Partida, Asientos.Fecha, " +
@@ -500,9 +513,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
                     nSaldoActualCuentaContable += MyCuentaContable_Movimiento.Debe - MyCuentaContable_Movimiento.Haber;
 
-                    // nótese como solo contamos los movimientos 'reales' (partidas de asientos) y no los
-                    // que construimos para el saldo inicial y final
-
+                    // nótese como solo contamos los movimientos 'reales' (partidas de asientos) y no los que construimos para el saldo inicial y final
                     nCantidadMovimientos += 1;
 
                     // también contamos la cantidad total de movimientos agregados (incluyendo los registros
@@ -558,9 +569,10 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
                 // -----------------------------------------------------------------------------------------
                 // el usuario puede indicar que quiere reconvertir cifras anteriores al 31/Oct/21 
-                if (bReconvertirCifrasAntes_01Oct2021)
+                if (bReconvertirCifrasAntes_01Oct2021 && MyMovimiento_Cuenta.Moneda == monedaNacional.Moneda)
                 {
-                    foreach (var movimiento in MyMovimiento_Cuenta.ConsultaCuentasYMovimientos_Movimientos.Where(x => x.Fecha < new DateTime(2021, 10, 1)))
+                    var movimientos = MyMovimiento_Cuenta.ConsultaCuentasYMovimientos_Movimientos.Where(x => (x.Fecha < new DateTime(2021, 10, 1))).ToList(); 
+                    foreach (var movimiento in movimientos)
                     {
                         movimiento.Monto /= 1000000;
                         movimiento.Monto = Math.Round(movimiento.Monto, 2); 

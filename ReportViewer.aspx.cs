@@ -404,7 +404,6 @@ namespace ContabSysNetWeb
                         {
                             switch (Request.QueryString["opc"])
                             {
-
                                 case "0":
                                     {
                                         string tituloReporte = "";
@@ -432,16 +431,6 @@ namespace ContabSysNetWeb
 
                                         if (Request.QueryString["simpleFont"] != null && !string.IsNullOrEmpty(Request.QueryString["simpleFont"].ToString()))
                                             simpleFont = Request.QueryString["simpleFont"].ToString();
-
-
-                                        //ReporteMayorGeneral_DataSet MyReportDataSet = new ReporteMayorGeneral_DataSet();
-                                        //vContab_ConsultaCuentasYMovimientosTableAdapter MyReportTableAdapter = new vContab_ConsultaCuentasYMovimientosTableAdapter();
-
-                                        //MyReportTableAdapter.FillByNombreUsuario(MyReportDataSet.vContab_ConsultaCuentasYMovimientos, User.Identity.Name);
-
-
-
-
 
                                         var contabContext = new ContabContext();
 
@@ -535,11 +524,6 @@ namespace ContabSysNetWeb
                                         // -----------------------------------------------------------------------------------------------------
                                         // leemos un 'flag' en la tabla Parametros, que permite al usuario indicar si quiere mostrar o 
                                         // no la fecha del día en los reportes de contabilidad ... 
-
-                                        //string nombreCiaContab = MyReportDataSet.vContab_ConsultaCuentasYMovimientos[0].NombreCiaContab; 
-
-                                        //dbContab_Contab_Entities contabContex = new dbContab_Contab_Entities(); 
-
                                         int? ciaContab = contabContext.Companias.Where(c => c.Nombre == "G.E.H. Asesores, C.A.").Select(c => c.Numero).FirstOrDefault(); 
 
                                         bool ? noMostrarFechaEnReportesContab = false;
@@ -688,15 +672,15 @@ namespace ContabSysNetWeb
                             // ----------------------------------------------------------------------------------------------------------------------
                             // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
                             // *solo* a esta moneda 
-                            var monedaNacional_return = Reconversion.Get_MonedaNacional();
+                            var monedaNacional_result = Reconversion.Get_MonedaNacional();
 
-                            if (monedaNacional_return.error)
+                            if (monedaNacional_result.error)
                             {
-                                ErrMessage_Cell.InnerHtml = monedaNacional_return.message;
+                                ErrMessage_Cell.InnerHtml = monedaNacional_result.message;
                                 return;
                             }
 
-                            Monedas monedaNacional = monedaNacional_return.moneda;
+                            Monedas monedaNacional = monedaNacional_result.moneda;
                             // ----------------------------------------------------------------------------------------------------------------------
 
                             string sSqlQueryString = "";
@@ -979,15 +963,15 @@ namespace ContabSysNetWeb
                                             // ----------------------------------------------------------------------------------------------------------------------
                                             // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
                                             // *solo* a esta moneda 
-                                            var monedaNacional_return = Reconversion.Get_MonedaNacional();
+                                            var monedaNacional_result = Reconversion.Get_MonedaNacional();
 
-                                            if (monedaNacional_return.error)
+                                            if (monedaNacional_result.error)
                                             {
-                                                ErrMessage_Cell.InnerHtml = monedaNacional_return.message;
+                                                ErrMessage_Cell.InnerHtml = monedaNacional_result.message;
                                                 return;
                                             }
 
-                                            Monedas monedaNacional = monedaNacional_return.moneda;
+                                            Monedas monedaNacional = monedaNacional_result.moneda;
                                             // ----------------------------------------------------------------------------------------------------------------------
 
                                             if (asiento.moneda != monedaNacional.Moneda)

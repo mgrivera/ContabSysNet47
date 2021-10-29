@@ -50,6 +50,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                 Session["filtroForma_consultaAsientosContables"] = null;
                 Session["filtroForma_consultaAsientosContables_subQuery"] = null;
 
+                // reconversión Oct/2021 
                 Session["ReconvertirCifrasAntes_01Oct2021"] = false;
 
                 Session["FechaInicial"] = null;
