@@ -57,10 +57,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
             // ------------------------------------------------------------------------------------
             // restituímos los defaults en opciones que no forman parte del filto Sql, pero que
             // representan opciones de ejecución para el listado y tienen valores por defecto
-
             MostrarCuentasSinSaldoYSinMvtos_CheckBox.Checked = false;
             MostrarCuentasConSaldoYSinMvtos_CheckBox.Checked = true;
 
+            this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked = false;
+            this.ExcluirAsientosReconversion_01Oct2021_CheckBox.Checked = false;
         }
 
         protected void AplicarFiltro_Button_Click(object sender, EventArgs e)

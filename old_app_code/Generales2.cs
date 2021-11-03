@@ -7,7 +7,6 @@ using System.Data;
 
 public class GetMesFiscalContable
 {
-
     private DateTime m_FechaInicialPeriodo;
     private int m_CiaContab;
     private int m_MesFiscal;
@@ -83,28 +82,10 @@ public class GetMesFiscalContable
 
     public bool DeterminarMesFiscal(ref string sErrorMessage)
     {
-        //DeterminarMesFiscal = false;
-
         m_MesCalendario = m_FechaInicialPeriodo.Month;
         m_AnoCalendario = m_FechaInicialPeriodo.Year;
 
-        //switch (m_MesCalendario)
-        //{
-        //    case 1:
-        //        m_MesCalendario = 12;
-        //        m_AnoCalendario = (m_AnoCalendario - 1);
-        //        break;
-        //    default:
-        //        m_MesCalendario = (m_MesCalendario - 1);
-        //        break;
-        //}
-
         int nMesCalendario2 = m_MesCalendario;
-
-        //Dim query = (From m In m_dbContabDataContext.MesesDelAnoFiscals _
-        //            Where m.Mes = nMesCalendario2 And m.Cia = m_CiaContab _
-        //            Select m.MesFiscal, m.Ano, m.NombreMes).First
-
 
         var query = (from m in m_dbContabDataContext.MesesDelAnoFiscals
                      where m.Mes == nMesCalendario2 && m.Cia == m_CiaContab
@@ -118,8 +99,6 @@ public class GetMesFiscalContable
             // TODO: Exit Function: Warning!!! Need to return the value
             return false;
         }
-
-
 
         m_MesFiscal = query.MesFiscal; 
 
@@ -199,12 +178,18 @@ public class GetSaldoContable
     private int ciaContab;
     private Decimal saldoAnterior;
 
+    // a partir de la reconversión de Oct/2021, el usuario puede indicar que se reconviertan montos *anteriores* al 1-oct-21 
+    private bool bReconvertirCifrasAntes_01Oct2021;
+    private int monedaNacional; 
+
     public GetSaldoContable(int CuentaContableID, 
                             int MesFiscal, 
                             int AnoFiscal, 
                             DateTime FechaInicialPeriodo, 
                             int Moneda, 
-                            int CiaContab)
+                            int CiaContab, 
+                            bool ReconvertirCifrasAntes_01Oct2021, 
+                            int MonedaNacional)
     {
         cuentaContableID = CuentaContableID;
         mesFiscal = MesFiscal;
@@ -212,6 +197,8 @@ public class GetSaldoContable
         fechaInicialPeriodo = FechaInicialPeriodo;
         moneda = Moneda;
         ciaContab = CiaContab;
+        bReconvertirCifrasAntes_01Oct2021 = ReconvertirCifrasAntes_01Oct2021;
+        monedaNacional = MonedaNacional; 
     }
 
     public Decimal SaldoAnterior
@@ -224,10 +211,8 @@ public class GetSaldoContable
 
     public bool bLeerSaldoCuenta() 
     {
-
-        //  leemos el saldo de la cuenta para la moneda y lo regresamos; n�tese como puede haber m�s de un registro, 
-        //  cuando la compa��a es multimoneda (ie: la moneda original puede tener varios valores) 
-
+        //  leemos el saldo de la cuenta para la moneda y lo regresamos; nótese como puede haber más de un registro, 
+        //  cuando la compañía es multimoneda (ie: la moneda original puede tener varios valores) 
         saldoAnterior = 0;
         decimal? q = null;
 
@@ -303,11 +288,14 @@ public class GetSaldoContable
             if (q != null)
                 saldoAnterior = q.Value;
 
-
+            // -----------------------------------------------------------------------------------------------------------
+            // reconvertimos *solo* cuando el saldo es *anterior* a Oct/2021 
+            if (bReconvertirCifrasAntes_01Oct2021 && fechaInicialPeriodo < new DateTime(2021, 10, 2) && moneda == monedaNacional)
+                saldoAnterior = Math.Round((saldoAnterior / 1000000), 2); 
+            
             //  solo si la fecha inicial del per�do no comienza en el 1er. d�a del mes, leemos y agregamos al 
             //  saldo los movimientos que pueda tener la cuenta para los d�as que van desde el 1ro. hasta el 
             //  d�a anterior a la fecha incial del per�odo. 
-
             if (fechaInicialPeriodo.Day > 1)
             {
                 DateTime dFecha1erDiaMes = new DateTime(fechaInicialPeriodo.Year, fechaInicialPeriodo.Month, 1);
@@ -345,6 +333,12 @@ public class GetSaldoContable
 
                     if (!reader.IsDBNull(1))
                         montoHaber = reader.GetDecimal(1);
+                }
+
+                if (bReconvertirCifrasAntes_01Oct2021 && fechaInicialPeriodo < new DateTime(2021, 10, 2) && moneda == monedaNacional)
+                {
+                    montoDebe = Math.Round((montoDebe / 1000000), 2);
+                    montoHaber = Math.Round((montoHaber / 1000000), 2);
                 }
 
                 saldoAnterior += montoDebe;

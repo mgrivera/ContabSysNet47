@@ -1,50 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 {
     public class DeterminarMovimientoCuentaContable
     {
-        private SqlConnection _sql_connection; 
+        private SqlConnection _sqlConnection; 
         private bool _excluirAsientosTipoCierreAnual;
         private bool _excluirAsientosReconversion_01Oct2021;
+        private bool _bReconvertirCifrasAntes_01Oct2021; 
         private DateTime _fechaInicialPeriodoIndicado;
         private DateTime _fechaFinalPeriodoIndicado;
+        private int _monedaNacional; 
 
-        // estas son las variables de la clase que contedrán el resultado y que regresará la clase 
-        Decimal _sumDebe = 0;
-        Decimal _sumHaber = 0;
-        int _recCount = 0;
-
-        public DeterminarMovimientoCuentaContable(SqlConnection sql_connection,
+        public DeterminarMovimientoCuentaContable(SqlConnection sqlConnection,
                                                  bool excluirAsientosTipoCierreAnual, 
                                                  bool excluirAsientosReconversion_01Oct2021, 
+                                                 bool bReconvertirCifrasAntes_01Oct2021, 
                                                  DateTime fechaInicialPeriodoIndicado, 
-                                                 DateTime fechaFinalPeriodoIndicado)
+                                                 DateTime fechaFinalPeriodoIndicado, 
+                                                 int monedaNacional)
         {
-            _sql_connection = sql_connection;
+            _sqlConnection = sqlConnection;
             _excluirAsientosTipoCierreAnual = excluirAsientosTipoCierreAnual;
-            _excluirAsientosReconversion_01Oct2021 = excluirAsientosReconversion_01Oct2021; 
+            _excluirAsientosReconversion_01Oct2021 = excluirAsientosReconversion_01Oct2021;
+            _bReconvertirCifrasAntes_01Oct2021 = bReconvertirCifrasAntes_01Oct2021; 
             _fechaInicialPeriodoIndicado = fechaInicialPeriodoIndicado;
-            _fechaFinalPeriodoIndicado = fechaFinalPeriodoIndicado; 
+            _fechaFinalPeriodoIndicado = fechaFinalPeriodoIndicado;
+            _monedaNacional = monedaNacional; 
         }
 
-        public Decimal SumDebe { get { return _sumDebe; } }
-        public Decimal SumHaber { get { return _sumHaber; } }
-        public int RecCount { get { return _recCount; } }
+        public struct DeterminarMovimientoCuentaContable_result
+        {
+            public decimal sumDebe;
+            public decimal sumHaber;
+            public int recCount;
 
-        public bool leerMovimientoCuentaContable(int cuentaContableID, int moneda)
+            public bool error;
+            public string message;
+
+            public DeterminarMovimientoCuentaContable_result(decimal sumDebe, decimal sumHaber, int recCount, bool error, string message)
+            {
+                this.sumDebe = sumDebe;
+                this.sumHaber = sumHaber;
+                this.recCount = recCount;
+
+                this.error = error;
+                this.message = message;
+            }
+        };
+
+        public DeterminarMovimientoCuentaContable_result leerMovimientoCuentaContable(int cuentaContableID, int moneda)
         {
             // -----------------------------------------------------------------------------------------------------------------
             // nótese que el usuario puede indicar que se excluya asientos del tipo cierre anual; la razón 
             // es que este asiento, cuando existe, pone los saldos de cuentas nóminales en cero ... 
             string filtroExcluirAsientosTipoCierreAnual = "(1 = 1)";
 
-            if (_excluirAsientosTipoCierreAnual)
+            if (_excluirAsientosTipoCierreAnual && moneda == _monedaNacional)
             {
                 filtroExcluirAsientosTipoCierreAnual = "(a.MesFiscal <> 13) And Not (a.AsientoTipoCierreAnualFlag Is Not Null And a.AsientoTipoCierreAnualFlag = 1)";
             }
@@ -60,14 +75,27 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
             string selectMontoDebeHaber = "";
 
-            selectMontoDebeHaber = "Select Sum(Debe) As SumDebe, Sum(Haber) As SumHaber, Count(*) As ContaAsientos " +
-                "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
-                "Where d.CuentaContableID = @cuentaContableID And " +
-                "a.Moneda = @moneda And " +
-                "a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo And " +
-                filtroExcluirAsientosTipoCierreAnual + " And " + filtroExcluirAsientosReconversion_01Oct2201;
+            // si el usuario quiere reconvertir montos antes de la reconversión del 2021, usamos una 'expression' en el Sum() ... 
+            if (_bReconvertirCifrasAntes_01Oct2021 && moneda == _monedaNacional)
+            {
+                selectMontoDebeHaber = "Select Sum(Case When (a.Fecha < '2021-10-1') Then Round((d.Debe / 1000000), 2) Else d.Debe End) As SumDebe, " +
+                                        "Sum(Case When (a.Fecha < '2021-10-1') Then Round((d.Haber / 1000000), 2) Else d.Haber End) As SumHaber, " +
+                                        "Count(*) As ContaAsientos " +
+                                        "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
+                                        "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " + 
+                                        "a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo And " +
+                                        filtroExcluirAsientosTipoCierreAnual + " And " + filtroExcluirAsientosReconversion_01Oct2201;
+            }
+            else
+            {
+                selectMontoDebeHaber = "Select Sum(Debe) As SumDebe, Sum(Haber) As SumHaber, Count(*) As ContaAsientos " +
+                                        "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
+                                        "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " + 
+                                        "a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo And " +
+                                        filtroExcluirAsientosTipoCierreAnual + " And " + filtroExcluirAsientosReconversion_01Oct2201;
+            }
 
-            SqlCommand commandDebeHaber = new SqlCommand(selectMontoDebeHaber, _sql_connection);
+            SqlCommand commandDebeHaber = new SqlCommand(selectMontoDebeHaber, _sqlConnection);
 
             commandDebeHaber.Parameters.Add("@cuentaContableID", SqlDbType.Int);
             commandDebeHaber.Parameters["@cuentaContableID"].Value = cuentaContableID;
@@ -81,22 +109,28 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             commandDebeHaber.Parameters.Add("@fechaFinalPeriodo", SqlDbType.DateTime);
             commandDebeHaber.Parameters["@fechaFinalPeriodo"].Value = _fechaFinalPeriodoIndicado;
 
+            decimal sumOfDebe = 0;
+            decimal sumOfHaber = 0;
+            int recCount = 0;
+
             SqlDataReader reader = commandDebeHaber.ExecuteReader();
             if (reader.Read())
             {
                 if (!reader.IsDBNull(0))
-                    _sumDebe = reader.GetDecimal(0);
+                    sumOfDebe = reader.GetDecimal(0);
 
                 if (!reader.IsDBNull(1))
-                    _sumHaber = reader.GetDecimal(1);
+                    sumOfHaber = reader.GetDecimal(1);
 
                 if (!reader.IsDBNull(2))
-                    _recCount = reader.GetInt32(2);
+                    recCount = reader.GetInt32(2);
             }
 
             reader.Close();
 
-            return true; 
+            var result = new DeterminarMovimientoCuentaContable_result(sumOfDebe, sumOfHaber, recCount, false, "");
+
+            return result; 
         }
     }
 }

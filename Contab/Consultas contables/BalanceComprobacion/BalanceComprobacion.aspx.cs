@@ -233,14 +233,14 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
             // --------------------------------------------------------------------------------------------
             // eliminamos el contenido de la tabla temporal
-            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
+            dbContab_Contab_Entities dbContext = new dbContab_Contab_Entities();
 
             try 
             {
-                int cantRegistrosEliminados = context.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where NombreUsuario = {0}", Membership.GetUser().UserName);
+                int cantRegistrosEliminados = dbContext.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where NombreUsuario = {0}", Membership.GetUser().UserName);
             }
             catch (Exception ex) {
-                context.Dispose();
+                dbContext.Dispose();
 
                 Session["Thread_ErrorMessage"] = "Ha ocurrido un error al intentar ejecutar una operación de " + 
                     "acceso a la base de datos. <br /> El mensaje específico de error es: " + ex.Message + 
@@ -276,7 +276,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                 "(Select CuentaContableID From SaldosContables Inner Join CuentasContables On SaldosContables.CuentaContableID = CuentasContables.ID " +
                 "Where " + filtroFormaParaSaldosContables + ")";
 
-            int nCuentasSinSaldo = context.ExecuteStoreQuery<int>(sSqlQueryString).Count();
+            int nCuentasSinSaldo = dbContext.ExecuteStoreQuery<int>(sSqlQueryString).Count();
 
             if (nCuentasSinSaldo > 0)
             {
@@ -305,7 +305,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                                     filtroFormParaAsientos +
                                     " And CuentasContables.TotDet <> 'D'";
 
-            List<string> query0 = context.ExecuteStoreQuery<string>(sSqlQueryString).ToList();
+            List<string> query0 = dbContext.ExecuteStoreQuery<string>(sSqlQueryString).ToList();
 
             errorMessage = "";
 
@@ -376,17 +376,18 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
             // ------------------------------------------------------------------------------------------------------------------------------
             // como vamos a usar esta conexión mientras se ejecute el ciclo que viene, la abrimos aquí y la cerramos al final ... 
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = ConfigurationManager.ConnectionStrings["dbContabConnectionString"].ConnectionString;
-            connection.Open();
+            SqlConnection sqlConnection = new SqlConnection();
+            sqlConnection.ConnectionString = ConfigurationManager.ConnectionStrings["dbContabConnectionString"].ConnectionString;
+            sqlConnection.Open();
 
             // -----------------------------------------------------------------------------------------------------
             // usamos esta clase para leer los movimientos (debe, haber) para cada cuenta contable y moneda 
-            DeterminarMovimientoCuentaContable determinarMovimientoCuentaContable = new DeterminarMovimientoCuentaContable(connection, 
+            DeterminarMovimientoCuentaContable determinarMovimientoCuentaContable = new DeterminarMovimientoCuentaContable(sqlConnection, 
                                                                                                                            bExcluirAsientosTipoCierreAnual,  
-                                                                                                                           bExcluirAsientosReconversion_01Oct2021, 
+                                                                                                                           bExcluirAsientosReconversion_01Oct2021,
+                                                                                                                           bReconvertirCifrasAntes_01Oct2021, 
                                                                                                                            dFechaInicialPeriodoIndicado, 
-                                                                                                                           dFechaFinalPeriodoIndicado); 
+                                                                                                                           dFechaFinalPeriodoIndicado, monedaNacional.Moneda); 
 
             // -----------------------------------------------------------------------------------------------------
             // primero determinamos la cantidad de registros, para mostrar progreso al usuario
@@ -436,7 +437,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                 anoFiscalCiaSeleccionada.ToString() +
                 " And " + Session["FiltroForma"].ToString() + " Order by CuentasContables.Cia";
 
-            List<CuentaContable_Object> query = context.ExecuteStoreQuery<CuentaContable_Object>(sSqlQueryString).ToList();
+            List<CuentaContable_Object> query = dbContext.ExecuteStoreQuery<CuentaContable_Object>(sSqlQueryString).ToList();
 
             if (query.Count() == 0)
             {
@@ -457,6 +458,8 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
             int nRegistroActual = 0;
             int nProgreesPercentaje = 0;
+
+            string nombreUsuario = Membership.GetUser().UserName;
 
             Session["Progress_SelectedRecs"] = 0;
             // ---------------------------------------------------------------------------------------------
@@ -580,7 +583,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                                                                             nAnoFiscal, 
                                                                             dFechaInicialPeriodoIndicado, 
                                                                             MyBalanceComprobacion_Record2.Moneda, 
-                                                                            MyBalanceComprobacion_Record2.Cia);
+                                                                            MyBalanceComprobacion_Record2.Cia, bReconvertirCifrasAntes_01Oct2021, monedaNacional.Moneda);
 
                 MyGetSaldoContable.bLeerSaldoCuenta(); 
 
@@ -588,89 +591,29 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
                 MyBalanceComprobacion_Record2.SaldoAnterior = nSaldoAnteriorContable;
 
-                //// --------------------------------------------------------------------------------------------------------
-                //// leemos también el total debe y haber en la tabla de asientos. Además, totalizamos la
-                //// cantidad de movimientos para saber luego si la cuenta tuvo o no movimientos en el perído
-                //Decimal nSumDebe = 0; 
-                //Decimal nSumHaber = 0; 
-                //int nRecCount = 0;
-
-                //// -----------------------------------------------------------------------------------------------------------------
-                //// nótese que el usuario puede indicar que se excluya asientos del tipo cierre anual; la razón 
-                //// es que este asiento, cuando existe, pone los saldos de cuentas nóminales en cero ... 
-                //string filtroExcluirAsientosTipoCierreAnual = "(1 = 1)"; 
-
-                //if (!bExcluirAsientosTipoCierreAnual)
-                //{
-                //    filtroExcluirAsientosTipoCierreAnual = "(a.MesFiscal <> 13) And Not (a.AsientoTipoCierreAnualFlag Is Not Null And a.AsientoTipoCierreAnualFlag = 1)"; 
-                //}
-
-                //// -----------------------------------------------------------------------------------------------------------------
-                //// el usuario puede indicar que no quiere el (los) asientos de reconversión (2021) en la consulta 
-                //string filtroExcluirAsientosReconversion_01Oct2201 = "(1 = 1)";
-
-                //if (bExcluirAsientosReconversion_01Oct2021)
-                //{
-                //    filtroExcluirAsientosReconversion_01Oct2201 = "(d.Referencia <> 'Reconversión 2021')"; 
-                //}
-
-                //string selectMontoDebeHaber = ""; 
-
-                //selectMontoDebeHaber = "Select Sum(Debe) As SumDebe, Sum(Haber) As SumHaber, Count(*) As ContaAsientos " +
-                //    "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
-                //    "Where d.CuentaContableID = @cuentaContableID And " +
-                //    "a.Moneda = @moneda And " +
-                //    "a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo And " +
-                //    filtroExcluirAsientosTipoCierreAnual + " And " + filtroExcluirAsientosReconversion_01Oct2201;
-
-                //SqlCommand commandDebeHaber = new SqlCommand(selectMontoDebeHaber, connection);
-
-                //commandDebeHaber.Parameters.Add("@cuentaContableID", SqlDbType.Int);
-                //commandDebeHaber.Parameters["@cuentaContableID"].Value = MyBalanceComprobacion_Record2.CuentaContableID;
-
-                //commandDebeHaber.Parameters.Add("@moneda", SqlDbType.Int);
-                //commandDebeHaber.Parameters["@moneda"].Value = MyBalanceComprobacion_Record2.Moneda;
-
-                //commandDebeHaber.Parameters.Add("@fechaInicialPeriodo", SqlDbType.DateTime);
-                //commandDebeHaber.Parameters["@fechaInicialPeriodo"].Value = dFechaInicialPeriodoIndicado;
-
-                //commandDebeHaber.Parameters.Add("@fechaFinalPeriodo", SqlDbType.DateTime);
-                //commandDebeHaber.Parameters["@fechaFinalPeriodo"].Value = dFechaFinalPeriodoIndicado;
-
-                //SqlDataReader reader = commandDebeHaber.ExecuteReader();
-                //if (reader.Read())
-                //{
-                //    if (!reader.IsDBNull(0))
-                //        nSumDebe = reader.GetDecimal(0);
-
-                //    if (!reader.IsDBNull(1))
-                //        nSumHaber = reader.GetDecimal(1);
-
-                //    if (!reader.IsDBNull(2))
-                //        nRecCount = reader.GetInt32(2);
-                //}
-
-                //reader.Close(); 
-
+                // este método lee los movimientos para la cuenta, la moneda y el período 
                 var result = determinarMovimientoCuentaContable.leerMovimientoCuentaContable(MyBalanceComprobacion_Record2.CuentaContableID, MyBalanceComprobacion_Record2.Moneda); 
 
-                MyBalanceComprobacion_Record2.Debe = determinarMovimientoCuentaContable.SumDebe;
-                MyBalanceComprobacion_Record2.Haber = determinarMovimientoCuentaContable.SumHaber;
-                MyBalanceComprobacion_Record2.CantidadMovimientos = determinarMovimientoCuentaContable.RecCount;
+                MyBalanceComprobacion_Record2.Debe = result.sumDebe;
+                MyBalanceComprobacion_Record2.Haber = result.sumHaber;
+                MyBalanceComprobacion_Record2.CantidadMovimientos = result.recCount;
 
                 // --------------------------------------------------------------------------------------------------------------------
                 // por último, leemos la descripción del 'nivel previo' de la cuenta
-                string selectDescripcionNivelPrevio = "Select Descripcion From CuentasContables Where Cuenta = @cuentaContableNivelPrevio And Cia = @ciaContab";
+                string selectDescripcionNivelPrevio = "Select Descripcion From CuentasContables Where Cuenta = {0} And Cia = {1}";
 
-                SqlCommand commandDescripcionNivelPrevio = new SqlCommand(selectDescripcionNivelPrevio, connection);
+                // SqlCommand commandDescripcionNivelPrevio = new SqlCommand(selectDescripcionNivelPrevio, sqlConnection);
 
-                commandDescripcionNivelPrevio.Parameters.Add("@cuentaContableNivelPrevio", SqlDbType.NVarChar, 25);
-                commandDescripcionNivelPrevio.Parameters["@cuentaContableNivelPrevio"].Value = MyBalanceComprobacion_Record2.NivelPrevioCuentaContable;
+                //commandDescripcionNivelPrevio.Parameters.Add("@cuentaContableNivelPrevio", SqlDbType.NVarChar, 25);
+                //commandDescripcionNivelPrevio.Parameters["@cuentaContableNivelPrevio"].Value = MyBalanceComprobacion_Record2.NivelPrevioCuentaContable;
 
-                commandDescripcionNivelPrevio.Parameters.Add("@ciaContab", SqlDbType.Int);
-                commandDescripcionNivelPrevio.Parameters["@ciaContab"].Value = MyBalanceComprobacion_Record2.Cia;
+                //commandDescripcionNivelPrevio.Parameters.Add("@ciaContab", SqlDbType.Int);
+                //commandDescripcionNivelPrevio.Parameters["@ciaContab"].Value = MyBalanceComprobacion_Record2.Cia;
 
-                string sCuentaContable_NivelPrevio_Descripcion = (string)commandDescripcionNivelPrevio.ExecuteScalar();
+                // string sCuentaContable_NivelPrevio_Descripcion = (string)commandDescripcionNivelPrevio.ExecuteScalar();
+
+                object[] parameters = { MyBalanceComprobacion_Record2.NivelPrevioCuentaContable, MyBalanceComprobacion_Record2.Cia };
+                string sCuentaContable_NivelPrevio_Descripcion = dbContext.ExecuteStoreQuery<string>(selectDescripcionNivelPrevio, parameters).FirstOrDefault();
 
                 MyBalanceComprobacion_Record2.NivelPrevioCuentaContable_Nombre = sCuentaContable_NivelPrevio_Descripcion;
                 MyBalanceComprobacion_Record2.SaldoActual = MyBalanceComprobacion_Record2.SaldoAnterior + MyBalanceComprobacion_Record2.Debe - MyBalanceComprobacion_Record2.Haber;
@@ -690,8 +633,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
             int ciaContabSeleccionada = Convert.ToInt32(Session["CiaContabSeleccionada"]);
 
-            var queryCuentasContables = context.CuentasContables.Where(c => c.TotDet == "T" && c.Cia == ciaContabSeleccionada).
-                                                                 Select(c => new { c.Cuenta, c.Descripcion });
+            var queryCuentasContables = dbContext.CuentasContables.Where(c => c.TotDet == "T" && c.Cia == ciaContabSeleccionada).Select(c => new { c.Cuenta, c.Descripcion });
             List<Cuenta_Nombre> listaCuentasYNombres = new List<Cuenta_Nombre>();
 
             foreach (var cuenta in queryCuentasContables)
@@ -729,9 +671,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             }
 
             // agregamos el contenido de la lista a la tabla 
-
             Contab_BalanceComprobacion contabBalanceComprobacionItem;
-            string nombreUsuario = Membership.GetUser().UserName; 
 
             foreach (BalanceComprobacion_Item item in MyBalanceComprobacion_Lista)
             {
@@ -755,12 +695,12 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                     NombreUsuario = nombreUsuario
                 };
 
-                context.Contab_BalanceComprobacion.AddObject(contabBalanceComprobacionItem); 
+                dbContext.Contab_BalanceComprobacion.AddObject(contabBalanceComprobacionItem); 
             }
 
             try 
             {
-                context.SaveChanges();
+                dbContext.SaveChanges();
             }
             catch (Exception ex) 
             {
@@ -780,23 +720,19 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
             // ------------------------------------------------------------------------------------------
             // por último, eliminamos las cuentas seleccionadas de acuerdo al criterio indicado en las opciones
-
             if (!(bool)Session["MostrarCuentasSinSaldoYSinMvtos"]) 
-                context.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where SaldoAnterior = 0 And CantidadMovimientos = 0 And NombreUsuario = {0}", 
-                    Membership.GetUser().UserName);
+                dbContext.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where SaldoAnterior = 0 And CantidadMovimientos = 0 And NombreUsuario = {0}", nombreUsuario);
 
             if (!(bool)Session["MostrarCuentasConSaldoYSinMvtos"])
-                context.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where SaldoAnterior <> 0 And CantidadMovimientos = 0 And NombreUsuario = {0}", 
-                    Membership.GetUser().UserName);
+                dbContext.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where SaldoAnterior <> 0 And CantidadMovimientos = 0 And NombreUsuario = {0}", nombreUsuario);
 
             if (!(bool)Session["MostrarCuentasSaldosEnCero"])
-                context.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where SaldoAnterior = 0 And SaldoActual = 0 And NombreUsuario = {0}", 
-                    Membership.GetUser().UserName);
+                dbContext.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where SaldoAnterior = 0 And SaldoActual = 0 And NombreUsuario = {0}", nombreUsuario);
 
             if (!(bool)Session["MostrarCuentasSaldoFinalEnCero"])
-                context.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where SaldoActual = 0 And NombreUsuario = {0}", Membership.GetUser().UserName);
+                dbContext.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where SaldoActual = 0 And NombreUsuario = {0}", nombreUsuario);
 
-            context.Dispose();
+            dbContext.Dispose();
 
             // -----------------------------------------------------
             // por último, inicializamos las variables que se usan
@@ -836,9 +772,9 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
         {
             string userName = Membership.GetUser().UserName;
 
-            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
+            dbContab_Contab_Entities dbContext = new dbContab_Contab_Entities();
 
-            var query = context.Contab_BalanceComprobacion.Include("CuentasContable").Where(c => c.NombreUsuario == userName);
+            var query = dbContext.Contab_BalanceComprobacion.Include("CuentasContable").Where(c => c.NombreUsuario == userName);
 
             if (this.CompaniasFilter_DropDownList.SelectedIndex != -1)
             {
@@ -893,9 +829,9 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
         {
             string userName = Membership.GetUser().UserName;
 
-            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
+            dbContab_Contab_Entities dbContext = new dbContab_Contab_Entities();
 
-            var query = context.Companias.Where(c => c.CuentasContables.
+            var query = dbContext.Companias.Where(c => c.CuentasContables.
                                           Where(ct => ct.Contab_BalanceComprobacion.
                                           Where(m => m.NombreUsuario == userName).Any()).Any()).Select(c => c);
             query = query.OrderBy(c => c.Nombre);
@@ -906,9 +842,9 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
         {
             string userName = Membership.GetUser().UserName;
 
-            dbContab_Contab_Entities context = new dbContab_Contab_Entities();
+            dbContab_Contab_Entities dbContext = new dbContab_Contab_Entities();
 
-            var query = context.Monedas.Where(m => m.Contab_BalanceComprobacion.Where(c => c.NombreUsuario == userName).Any()).Select(c => c);
+            var query = dbContext.Monedas.Where(m => m.Contab_BalanceComprobacion.Where(c => c.NombreUsuario == userName).Any()).Select(c => c);
             query = query.OrderBy(c => c.Descripcion);
             return query;
         }
