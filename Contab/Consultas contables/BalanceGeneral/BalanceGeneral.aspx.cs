@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.Security;
 using ContabSysNet_Web.ModelosDatos_EF.Contab;
 using System.Data.Objects;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 {
@@ -44,9 +44,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             if (!Page.IsPostBack)
             {
 
-                // Gets a reference to a Label control that is not in a
-                // ContentPlaceHolder control
-
+                // Gets a reference to a Label control that is not in a ContentPlaceHolder control
                 HtmlContainerControl MyHtmlSpan;
 
                 MyHtmlSpan = (HtmlContainerControl)Master.FindControl("AppName_Span");
@@ -109,83 +107,51 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 
             BalanceGeneral_Parametros parametros = Session["BalanceGeneral_Parametros"] as BalanceGeneral_Parametros;
 
-            dbContab_Contab_Entities dbContab = new dbContab_Contab_Entities();
-
-            var mesFiscal_ObjectParmeter = new ObjectParameter("mesFiscal", typeof(short));
-            var anoFiscal_ObjectParmeter = new ObjectParameter("anoFiscal", typeof(short));
-            var nombreMes_ObjectParmeter = new ObjectParameter("nombreMes", typeof(string));
-            var errorMessage_ObjectParmeter = new ObjectParameter("errorMessage", typeof(string));
-
-            // nótese como obtenemos el mes fiscal para el mes *anterior* al mes de inicio del período; la idea es obtener (luego) los saldos del mes 
-            // *anterior* al inicio del período; por ejemplo: si el usuario intenta obtener la consulta para Abril, debemos obtener los saldos para 
-            // Marzo, que serán los iniciales para Abril .... 
-
-            int result = dbContab.spDeterminarMesFiscal(
-                parametros.Desde.AddMonths(-1), 
-                parametros.CiaContab, 
-                mesFiscal_ObjectParmeter, 
-                anoFiscal_ObjectParmeter, 
-                nombreMes_ObjectParmeter, 
-                errorMessage_ObjectParmeter);
-
-            if (!string.IsNullOrEmpty(errorMessage_ObjectParmeter.Value.ToString()))
-            {
-                string functionErrorMessage = errorMessage_ObjectParmeter.Value.ToString(); 
-                errorMessage = "Hemos obtenido un error, al intentar obtener obtener el mes y año fiscal para la fecha indicada como criterio de ejecución.<br /> " +
-                     "A continuación, mostramos el mensaje específico de error:<br /> " + functionErrorMessage;
-                return;
-            }
-
-            short mesFiscal = Convert.ToInt16(mesFiscal_ObjectParmeter.Value);
-            short anoFiscal = Convert.ToInt16(anoFiscal_ObjectParmeter.Value);
-            string nombreMes = nombreMes_ObjectParmeter.Value.ToString();
-
-
             // --------------------------------------------------------------------------------------------------------------------------------
             // determinamos si el mes que corresponde al inicio del período está cerrado; debe estarlo para que la información regresada por esta 
             // consulta sea confiable; de no ser así, indicamos pero permitimos continuar ... 
 
             // nótese como usamos un modelo de datos LinqToSql (no EF), pues el código en la clase AsientosContables lo usa así y fue 
             // escrito hace bastante tiempo ... 
-
             ContabSysNet_Web.ModelosDatos.dbContabDataContext contabLinqToSqlContex = new ContabSysNet_Web.ModelosDatos.dbContabDataContext();
             FuncionesContab funcionesContab = new FuncionesContab(parametros.CiaContab, parametros.Moneda, contabLinqToSqlContex);
 
             bool mesAnteriorCerradoEnContab = true;
             string popupMessage = ""; 
 
-            if (funcionesContab.ValidarUltimoMesCerradoContab(parametros.Desde.AddMonths(-1), mesFiscal, anoFiscal, parametros.CiaContab, out errorMessage))
+            if (funcionesContab.ValidarUltimoMesCerradoContab(parametros.Desde.AddMonths(-1), parametros.CiaContab, out errorMessage))
             {
-                popupMessage = "El mes anterior al mes indicado para esta consulta, no está cerrado. <br /> " +
-                            "Aunque Ud. puede continuar e intentar obtener esta consulta, las cifras determinadas y " + 
-                            "mostradas no serán del todo confiables.<br /><br />" +
-                            "Aún así, desea continuar con la ejecución de esta consulta?";
+                // NOTA: el mes *anterior* a la fecha de inicio DEBE estar cerrado (o uno posterior)
+                // la función regresa False si el mes está cerrado
+                // si la función regresa True es que NO está cerrado y eso no debe ocurrir en este contexto 
+                popupMessage = "El mes anterior al mes indicado para esta consulta, <b>no</b> está cerrado. <br /> " +
+                               "Aunque Ud. puede continuar e intentar obtener esta consulta, las cifras determinadas y " + 
+                               "mostradas no serán del todo confiables.<br /><br />" +
+                               "Aún así, desea continuar con la ejecución de esta consulta?";
 
                 mesAnteriorCerradoEnContab = false; 
             }
 
+            dbContab_Contab_Entities dbContab = new dbContab_Contab_Entities();
             ParametrosContab parametrosContab = dbContab.ParametrosContabs.Where(p => p.Cia == parametros.CiaContab).FirstOrDefault();
 
             if (parametrosContab == null)
             {
                 errorMessage = "Aparentemente, la tabla de parámetros (Contab) no ha sido inicializada. " +
-                    "Por favor inicialize esta tabla con los valores que sean adecuados, para la Cia Contab seleccionada para esta consulta.";
+                               "Por favor inicialize esta tabla con los valores que sean adecuados, para la Cia Contab seleccionada para esta consulta.";
 
                 return;
             }
-
 
             // ----------------------------------------------------------------------------------------------------------------------------
             // construimos el filtro de las cuentas contables, en base al contenido de la tabla ParametrosContab; en esta tabla el usuario indica 
             // cuales cuentas contables corresponden a: activo, pasivo, capital, etc. Para BG, solo cuentas reales son leídas; para GyP solo cuentas 
             // nominales son leídas ... 
-
             string filtroBalGen_GyP = "";
 
             ConstruirFiltroBalGenGyP(parametros, parametrosContab, dbContab, out filtroBalGen_GyP);
 
             string filtroConsulta = parametros.Filtro + filtroBalGen_GyP;
-
 
             // ----------------------------------------------------------------------------------------------------------------------------
             // hacemos una validación: intentamos encontrar cuentas contables de tipo detalle, que tengan movimientos en el período indicado, pero que no tengan 
@@ -195,16 +161,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 
             DateTime fecha1erDiaMes = new DateTime(parametros.Desde.Year, parametros.Desde.Month, 1);
 
-            //var query = dbContab.CuentasContables.Where(filtroConsulta).
-            //                                      Where(c => c.TotDet == "D" && c.dAsientos.Any(d => d.Asiento.Fecha >= fecha1erDiaMes) &&
-            //                                                                    c.dAsientos.Any(d => d.Asiento.Fecha <= parametros.Hasta)).
-            //                                      Where(c => !c.SaldosContables.Any());
-
-            //CuentasContable cuentaSinSaldoYConMovimientos = query.FirstOrDefault();
-
             // nótese como no aplicamos el filtro específico a esta consulta, pues resulta complicado. Sin embargo, al no hacerlo, validamos 
             // esta situación para todas las cuentas de la compañía, en vez de solo para las que cumplen el filtro ... 
-
             string commandString = "Select c.Cuenta As CuentaContable, c.Descripcion " +
                                    "From CuentasContables c Inner Join dAsientos d On c.ID = d.CuentaContableID " +
                                    "Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
@@ -213,14 +171,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
                                    "And c.ID Not In (Select s.CuentaContableID From SaldosContables s Where " +
                                    "s.Cia = {2})";
 
-            CuentaContableItem cuentasTipoDetalleSinRegistroDeSaldos =
-                dbContab.ExecuteStoreQuery<CuentaContableItem>(commandString,
-                                                               fecha1erDiaMes.ToString("yyyy-MM-dd"),
-                                                               parametros.Hasta.ToString("yyyy-MM-dd"), 
-                                                               parametros.CiaContab).
-                                                               FirstOrDefault();
-
-
+            CuentaContableItem cuentasTipoDetalleSinRegistroDeSaldos = dbContab.ExecuteStoreQuery<CuentaContableItem>(commandString,
+                                                                                                                      fecha1erDiaMes.ToString("yyyy-MM-dd"),
+                                                                                                                      parametros.Hasta.ToString("yyyy-MM-dd"), 
+                                                                                                                      parametros.CiaContab).
+                                                                                                                      FirstOrDefault();
 
             if (cuentasTipoDetalleSinRegistroDeSaldos != null)
             {
@@ -238,7 +193,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
                 return;
             }
 
-
             // ----------------------------------------------------------------------------------------------------------------------------
             // por último, determinamos si existen cuentas contables de tipo total y que tengan movimientos contables asociados para el período indicado. 
             // esta situación puede ocurrir si el usuario cambia el tipo de una cuenta de detalle a total, para una cuenta que tenga asientos (el registro de 
@@ -246,43 +200,30 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 
             // nótese como buscamos aquí sin usar el filtro que aplica a esta consulta; esto nos permite reportar esta situación tan grave, 
             // independientemente del filtro que haya indicado el usuario ... 
-
-            //var query2 = dbContab.CuentasContables.
-            //    Where(c => c.Cia == parametros.CiaContab && 
-            //               c.TotDet == "T" && 
-            //              (c.dAsientos.Any(d => d.Asiento.Fecha >= fecha1erDiaMes) && c.dAsientos.Any(d => d.Asiento.Fecha <= parametros.Hasta)));
-
-            //cuentaSinSaldoYConMovimientos = query2.FirstOrDefault();
-
-            commandString = "Select c.Cuenta As CuentaContable, c.Descripcion " + 
-                            "From CuentasContables c Inner Join dAsientos d On c.ID = d.CuentaContableID " + 
+            commandString = "Select c.Cuenta As CuentaContable, c.Descripcion From CuentasContables c Inner Join dAsientos d On c.ID = d.CuentaContableID " + 
                             "Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " + 
-                            "Where c.Cia = {0} And c.TotDet = 'T' And " + 
-                            "a.Fecha Between {1} And {2}"; 
+                            "Where c.Cia = {0} And c.TotDet = 'T' And a.Fecha Between {1} And {2}"; 
 
-            CuentaContableItem cuentasTipoTotalConMovimientos =
-                dbContab.ExecuteStoreQuery<CuentaContableItem>(commandString, 
-                                                               parametros.CiaContab, 
-                                                               fecha1erDiaMes.ToString("yyyy-MM-dd"), 
-                                                               parametros.Hasta.ToString("yyyy-MM-dd")).
-                                                               FirstOrDefault();
-
+            CuentaContableItem cuentasTipoTotalConMovimientos = dbContab.ExecuteStoreQuery<CuentaContableItem>(commandString, 
+                                                                                                               parametros.CiaContab, 
+                                                                                                               fecha1erDiaMes.ToString("yyyy-MM-dd"), 
+                                                                                                               parametros.Hasta.ToString("yyyy-MM-dd")).
+                                                                                                               FirstOrDefault();
 
             if (cuentasTipoTotalConMovimientos != null)
             {
                 errorMessage = "Hemos encontrado que existen cuentas contables de tipo total, por ejemplo '<b><en>" +
-                    (cuentasTipoTotalConMovimientos.CuentaContable != null ? cuentasTipoTotalConMovimientos.CuentaContable.Trim() :
-                     "'cuenta contable sin número asignado - número en blanco'") +
-                    " - " +
-                    (cuentasTipoTotalConMovimientos.Descripcion != null ? cuentasTipoTotalConMovimientos.Descripcion.Trim() :
-                     "'cuenta contable sin descripción asignada - descripción en blanco'") + 
-                    "</en></b>', con asientos registrados en el período indicado. " +
-                    "Una cuenta contable de tipo total no puede recibir asientos contables. " +
-                    "Por favor revise y corrija esta situación. Luego regrese a continuar con este proceso.";
+                                (cuentasTipoTotalConMovimientos.CuentaContable != null ? cuentasTipoTotalConMovimientos.CuentaContable.Trim() :
+                                 "'cuenta contable sin número asignado - número en blanco'") +
+                                " - " +
+                                (cuentasTipoTotalConMovimientos.Descripcion != null ? cuentasTipoTotalConMovimientos.Descripcion.Trim() :
+                                 "'cuenta contable sin descripción asignada - descripción en blanco'") + 
+                                "</en></b>', con asientos registrados en el período indicado. " +
+                                "Una cuenta contable de tipo total no puede recibir asientos contables. " +
+                                "Por favor revise y corrija esta situación. Luego regrese a continuar con este proceso.";
 
                 return;
             }
-
 
             if (!mesAnteriorCerradoEnContab)
             {
@@ -311,7 +252,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
         protected void btnOk_Click(object sender, EventArgs e)
         {
             // alguna validación falló (por ejemplo el mes cerrado) *pero* el usuario decide continuar .... 
-
             string errorMessage; 
             ConstruirConsulta(out errorMessage);
 
@@ -347,19 +287,18 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             dbContab_Contab_Entities dbContab = new dbContab_Contab_Entities();
 
             // leemos la tabla de parámetros para omitir del query las cuentas que no correspondan, dependiendo del tipo de reporte (BG / GyP) 
-
-            ParametrosContab parametrosContab = dbContab.ParametrosContabs.Where(p => p.Cia == parametros.CiaContab).FirstOrDefault();
+            // nótese que la clase ParametrosContab existe en varios name spaces 
+            ContabSysNet_Web.ModelosDatos_EF.Contab.ParametrosContab parametrosContab = dbContab.ParametrosContabs.Where(p => p.Cia == parametros.CiaContab).FirstOrDefault();
 
             if (parametrosContab == null)
             {
                 errorMessage = "Aparentemente, la tabla de parámetros (Contab) no ha sido inicializada. " + 
-                    "Por favor inicialize esta tabla con los valores que sean adecuados, para la Cia Contab seleccionada para esta consulta.";
+                               "Por favor inicialize esta tabla con los valores que sean adecuados, para la Cia Contab seleccionada para esta consulta.";
 
                 return;
             }
 
             // ahora modificamos el filtro para incluir/excluir las cuentas del tipo GyP ... 
-
             string filtroBalGen_GyP = ""; 
 
             ConstruirFiltroBalGenGyP(parametros, parametrosContab, dbContab, out filtroBalGen_GyP);
@@ -367,70 +306,93 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             string filtroConsulta = parametros.Filtro + filtroBalGen_GyP;
 
             // ejecutamos un sp que regresa el mes fiscal para el período indicado 
-
-            var mesFiscal_ObjectParmeter = new ObjectParameter("mesFiscal", typeof(short));
-            var anoFiscal_ObjectParmeter = new ObjectParameter("anoFiscal", typeof(short));
-            var nombreMes_ObjectParmeter = new ObjectParameter("nombreMes", typeof(string));
-            var errorMessage_ObjectParmeter = new ObjectParameter("errorMessage", typeof(string));
+            //var mesFiscal_ObjectParmeter = new ObjectParameter("mesFiscal", typeof(short));
+            //var anoFiscal_ObjectParmeter = new ObjectParameter("anoFiscal", typeof(short));
+            //var nombreMes_ObjectParmeter = new ObjectParameter("nombreMes", typeof(string));
+            //var errorMessage_ObjectParmeter = new ObjectParameter("errorMessage", typeof(string));
 
             // obtenemos el mes y año fiscal que corresponde al mes de la consulta; la función que determina el saldo anterior para cada cuenta contable, 
             // en realidad lee el saldo para el mes fiscal *anterior* al de la consulta; una consulta para Marzo, necesita como saldos anteriores los del mes Febrero ... 
+            var fecha_SqlParam = new SqlParameter("@fecha", parametros.Desde);
+            var ciaContab_SqlParam = new SqlParameter("@ciaContab", parametros.CiaContab);
+            var mesFiscal_SqlParam = new SqlParameter("@mesFiscal", System.Data.SqlDbType.SmallInt);
+            var anoFiscal_SqlParam = new SqlParameter("@anoFiscal", System.Data.SqlDbType.SmallInt);
+            var nombreMes_SqlParam = new SqlParameter("@nombreMes", System.Data.SqlDbType.NVarChar, 50);
+            var errorMessage_SqlParam = new SqlParameter("@errorMessage", System.Data.SqlDbType.NVarChar, 500);
 
-            int? result = dbContab.spDeterminarMesFiscal(
-                parametros.Desde,
-                parametros.CiaContab,
-                mesFiscal_ObjectParmeter,
-                anoFiscal_ObjectParmeter,
-                nombreMes_ObjectParmeter,
-                errorMessage_ObjectParmeter);
+            mesFiscal_SqlParam.Direction = ParameterDirection.Output;
+            anoFiscal_SqlParam.Direction = ParameterDirection.Output;
+            nombreMes_SqlParam.Direction = ParameterDirection.Output;
+            errorMessage_SqlParam.Direction = ParameterDirection.Output;
 
-            if (!string.IsNullOrEmpty(errorMessage_ObjectParmeter.Value.ToString()))
+            var contabDbContext = new ContabSysNet_Web.ModelosDatos_EF.code_first.contab.ContabContext();
+            var result = contabDbContext.Database.SqlQuery<int?>("dbo.spDeterminarMesFiscal @fecha, @ciaContab, @mesFiscal OUT, @anoFiscal OUT, @nombreMes OUT, @errorMessage OUT",
+                                                                  fecha_SqlParam, ciaContab_SqlParam, mesFiscal_SqlParam, anoFiscal_SqlParam, nombreMes_SqlParam, errorMessage_SqlParam)
+                                                                  .FirstOrDefault();
+
+            if (!string.IsNullOrEmpty(errorMessage_SqlParam.Value.ToString()))
             {
-                string functionErrorMessage = errorMessage_ObjectParmeter.Value.ToString();
+                string functionErrorMessage = errorMessage_SqlParam.Value.ToString();
                 errorMessage = "Hemos obtenido un error, al intentar obtener obtener el mes y año fiscal para la fecha indicada como criterio de ejecución.<br /> " +
-                     "A continuación, mostramos el mensaje específico de error:<br /> " + functionErrorMessage;
+                               "A continuación, mostramos el mensaje específico de error:<br /> " + functionErrorMessage;
 
                 return;
             }
 
-            short mesFiscal = Convert.ToInt16(mesFiscal_ObjectParmeter.Value);
-            short anoFiscal = Convert.ToInt16(anoFiscal_ObjectParmeter.Value);
-            string nombreMes = nombreMes_ObjectParmeter.Value.ToString(); 
+            short mesFiscal = Convert.ToInt16(mesFiscal_SqlParam.Value);
+            short anoFiscal = Convert.ToInt16(anoFiscal_SqlParam.Value);
+            string nombreMes = (nombreMes_SqlParam.Value).ToString(); 
 
-            // TODO: refinar el filtro para, por ejemplo, GyP: leer solo gastos/ingresos; BG: no leer gastos/ingresos (depende de opción, etc.) 
-
-            //InfoCuentaContable infoCuentaContable;
-            //List<InfoCuentaContable> list = new List<InfoCuentaContable>();
-
+            // refinar el filtro para, por ejemplo, GyP: leer solo gastos/ingresos; BG: no leer gastos/ingresos (depende de opción, etc.) 
             // antes eliminamos los registros que puedan existir 
-
-            int cantRegistrosEliminados =
-            dbContab.ExecuteStoreCommand("Delete From Temp_Contab_Report_BalanceGeneral Where Usuario = {0}", usuario);
+            int cantRegistrosEliminados = dbContab.ExecuteStoreCommand("Delete From Temp_Contab_Report_BalanceGeneral Where Usuario = {0}", usuario);
 
             // nótese como leemos *solo* cuentas contables que tengan registros de saldo contable agregado ... 
             var query = dbContab.CuentasContables.Where(filtroConsulta).Where(c => c.TotDet == "D").Where(c => c.SaldosContables.Any()).Select(c => c.ID);
 
             int cuentasContablesAgregadas = 0;
 
+            //var cuentaContableID_sqlParameter = new SqlParameter("@cuentaContableID", 0);
+            //var mesFiscal_sqlParameter = new SqlParameter("@mesFiscal", mesFiscal);
+            //var anoFiscal_sqlParameter = new SqlParameter("@anoFiscal", anoFiscal);
+            //var desde_sqlParameter = new SqlParameter("@desde", parametros.Desde);
+            //var hasta_sqlParameter = new SqlParameter("@hasta", parametros.Hasta);
+            //var moneda_sqlParameter = new SqlParameter("@moneda", parametros.Moneda);
+            //var monedaOriginal_sqlParameter = new SqlParameter("@monedaOriginal", parametros.MonedaOriginal);
+            //var nombreUsuario_sqlParameter = new SqlParameter("@nombreUsuario", usuario);
+
+            //var excluirSaldoInicialDebeHaberCero_sqlParameter = new SqlParameter("@@excluirSaldoInicialDebeHaberCero", parametros.ExcluirCuentasSaldoYMovtosCero);
+            //var excluirSaldoFinalCero_sqlParameter = new SqlParameter("@@excluirSaldoFinalCero", parametros.ExcluirCuentasSaldosFinalCero);
+            //var excluirSinMovimientosPeriodo_sqlParameter = new SqlParameter("@excluirSinMovimientosPeriodo", parametros.ExcluirCuentasSinMovimientos);
+            //var excluirAsientoTipoCierreAnual_sqlParameter = new SqlParameter("@excluirAsientoTipoCierreAnual", parametros.ExcluirAsientosContablesTipoCierreAnual);
+            //var reconvertirCifrasAntes_01Oct2021_sqlParameter = new SqlParameter("@reconvertirCifrasAntes_01Oct2021", parametros.reconvertirCifrasAntes_01Oct2021);
+            //var excluirAsientosReconversion_01Oct2021_sqlParameter = new SqlParameter("@excluirAsientosReconversion_01Oct2021", parametros.excluirAsientosReconversion_01Oct2021);
+            //var errorMessage_sqlParameter = new SqlParameter("@errorMessage", "");
+
+            var errorMessage_ObjectParmeter = new ObjectParameter("errorMessage", typeof(string));
+
             foreach (int cuentaContableID in query)
             {
                 // nótese como obtenemos el mes fiscal para el mes *anterior* al mes de inicio del período; la idea es obtener (luego) los saldos del mes 
                 // *anterior* al inicio del período; por ejemplo: si el usuario intenta obtener la consulta para Abril, debemos obtener los saldos para 
                 // Marzo, que serán los iniciales para Abril .... 
-                var resultadoFuncion = dbContab.spBalanceGeneral(
-                    cuentaContableID, 
-                    mesFiscal, 
-                    anoFiscal, 
-                    parametros.Desde, 
-                    parametros.Hasta, 
-                    parametros.Moneda, 
-                    parametros.MonedaOriginal,
-                    usuario, 
-                    parametros.ExcluirCuentasSaldoYMovtosCero, 
-                    parametros.ExcluirCuentasSaldosFinalCero, 
-                    parametros.ExcluirCuentasSinMovimientos, 
-                    parametros.ExcluirAsientosContablesTipoCierreAnual, 
-                    errorMessage_ObjectParmeter);
+                //cuentaContableID_sqlParameter.Value = cuentaContableID;
+
+                var resultadoFuncion = dbContab.spBalanceGeneral(cuentaContableID,
+                                                                 mesFiscal,
+                                                                 anoFiscal,
+                                                                 parametros.Desde,
+                                                                 parametros.Hasta,
+                                                                 parametros.Moneda,
+                                                                 parametros.MonedaOriginal,
+                                                                 usuario,
+                                                                 parametros.ExcluirCuentasSaldoYMovtosCero,
+                                                                 parametros.ExcluirCuentasSaldosFinalCero,
+                                                                 parametros.ExcluirCuentasSinMovimientos,
+                                                                 parametros.ExcluirAsientosContablesTipoCierreAnual,
+                                                                 //parametros.reconvertirCifrasAntes_01Oct2021,
+                                                                 //parametros.excluirAsientosReconversion_01Oct2021,
+                                                                 errorMessage_ObjectParmeter).FirstOrDefault();
 
                 if (!string.IsNullOrEmpty(errorMessage_ObjectParmeter.Value.ToString()))
                 {
@@ -439,17 +401,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
                 }
 
                 // la función regresa la cantidad de registros agregadados (1 o 0) ... 
-
-                if (resultadoFuncion.First().Value == 1) 
-                    cuentasContablesAgregadas++; 
+                if (resultadoFuncion != null && resultadoFuncion.Value == 1) 
+                    cuentasContablesAgregadas++;
             }
-
 
             string ajaxPopUpMessage = "";
 
             ajaxPopUpMessage = "<br /><b>Ok, el proceso de lectura de cuentas, movimientos y saldos contables ha finalizado.</b><br /><br />" +
-                "En total, fueron leídos (y registrados en la base de datos): <br /><br />" +
-                "*) " + cuentasContablesAgregadas.ToString() + " cuentas contables, sus saldos del mes anterior y movimiento en el período. <br />";
+                               "En total, fueron leídos (y registrados en la base de datos): <br /><br />" +
+                               "*) " + cuentasContablesAgregadas.ToString() + " cuentas contables, sus saldos del mes anterior y movimiento en el período. <br />";
 
             this.ModalPopupTitle_span.InnerHtml = "... Ok, el proceso ha finalizado.";
             this.ModalPopupBody_span.InnerHtml = ajaxPopUpMessage; 
@@ -698,7 +658,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             if (filtroConsulta == "")
                 filtroConsulta = " And (1 == 1)";
         }
-
 
         public IQueryable<ContabSysNet_Web.ModelosDatos_EF.Contab.Temp_Contab_Report_BalanceGeneral> BalanceGeneral_GridView_GetData()
         {

@@ -50,6 +50,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             LimpiarFiltro MyLimpiarFiltro = new LimpiarFiltro(this);
             MyLimpiarFiltro.LimpiarControlesPagina();
             MyLimpiarFiltro = null;
+
+            this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked = false;
+            this.ExcluirAsientosReconversion_01Oct2021_CheckBox.Checked = false;
         }
 
         protected void AplicarFiltro_Button_Click(object sender, EventArgs e)
@@ -132,12 +135,14 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             parametros.ExcluirCuentasSaldoYMovtosCero = this.ExcluirCuentasSinSaldoNiMovtos_CheckBox.Checked;
             parametros.ExcluirCuentasSaldosFinalCero = this.ExcluirCuentasConSaldoFinalCero_CheckBox.Checked; 
             parametros.ExcluirCuentasSinMovimientos = this.ExcluirCuentasSinMovimientos_CheckBox.Checked;
-            parametros.ExcluirAsientosContablesTipoCierreAnual = this.ExcluirAsientosContablesTipoCierreAnual_CheckBox.Checked; 
+            parametros.ExcluirAsientosContablesTipoCierreAnual = this.ExcluirAsientosContablesTipoCierreAnual_CheckBox.Checked;
+
+            parametros.reconvertirCifrasAntes_01Oct2021 = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
+            parametros.excluirAsientosReconversion_01Oct2021 = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
 
             parametros.Filtro = sSqlSelectString; 
 
             Session["BalanceGeneral_Parametros"] = parametros; 
-
 
             // la página que muestra los movimientos contables para una cuenta (seleccionada en la lista) 
             // corresponde al proceso que permite obtener el balance de comprobación; esta página usa 

@@ -2645,9 +2645,6 @@
     <None Include="webAppSettings.arsa.cloud.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="webAppSettings.lockton">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="webAppSettings.xl.local">
       <SubType>Designer</SubType>
     </Content>

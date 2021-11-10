@@ -144,10 +144,8 @@ public class FuncionesContab
         // asiento que puede inclumplir muchas validaciones, lo valida y regresa el error en un 
         // string si existe 
 
-
         // ---------------------------------------------------
         // validamos que exista la CiaContab 
-
         int nRecCount = (from c in _dbContab.Compania_Contabs
                          where c.Numero == AsientoContable.CiaContab
                          select c).Count();
@@ -157,7 +155,6 @@ public class FuncionesContab
             sErrMessage = "La compañía indicada para el asiento contable no fue encontrada en Contab.";
             return false;
         }
-
 
         // ---------------------------------------------------
         // validamos que exista la moneda 
@@ -177,15 +174,11 @@ public class FuncionesContab
         // es separada por tipo de asiento, que este mecanismo esté correctamente configurado en la 
         // compañía para el tipo de asiento indicado 
 
-        if (!ValidarObtenerNumeroContab(AsientoContable.Fecha, AsientoContable.CiaContab,
-            AsientoContable.Tipo, out sErrMessage))
+        if (!ValidarObtenerNumeroContab(AsientoContable.Fecha, AsientoContable.CiaContab, AsientoContable.Tipo, out sErrMessage))
             return false; 
         
-
-
         // asignamos un factor de cambio al asiento contable
         // leemos el factor de cambio más próximo a la fecha de la reposición 
-
         decimal? nFactorCambio = (from fc in _dbContab.CambiosMonedas
                                   where fc.Fecha <= AsientoContable.Fecha
                                   orderby fc.Fecha descending
@@ -196,25 +189,19 @@ public class FuncionesContab
 
         AsientoContable.FactorCambio = nFactorCambio;
 
-
         // determina mes y año fiscal 
-
         Int16 nMesFiscal = 0;
         Int16 nAnoFiscal = 0;
 
-        if (!DeterminarMesFiscal(AsientoContable.Fecha, AsientoContable.CiaContab,
-            out sErrMessage, out nMesFiscal, out nAnoFiscal))
+        if (!DeterminarMesFiscal(AsientoContable.Fecha, AsientoContable.CiaContab, out sErrMessage, out nMesFiscal, out nAnoFiscal))
             return false;
 
         AsientoContable.MesFiscal = nMesFiscal;
         AsientoContable.AnoFiscal = nAnoFiscal; 
 
         // validar mes cerrado en Contab 
-
-        if (!ValidarUltimoMesCerradoContab(AsientoContable.Fecha, nMesFiscal, nAnoFiscal,
-            AsientoContable.CiaContab, out sErrMessage))
+        if (!ValidarUltimoMesCerradoContab(AsientoContable.Fecha, AsientoContable.CiaContab, out sErrMessage))
             return false;
-
 
         // ahora validamos que las cuentas contables que vienen con cada asiento existan en Contab para 
         // la compañía específica y sean del tipo detalle. 
@@ -243,7 +230,6 @@ public class FuncionesContab
             }
         }
         
-
         return true; 
     }
 
@@ -524,6 +510,8 @@ public class FuncionesContab
     }
 
 
+    // esta función recibe una fecha y una cia contab. 
+    // determina y regresa el mes y año fiscal para esa fecha y cia 
     public bool DeterminarMesFiscal(DateTime dFecha, int nCiaContab, out string sMensajeError, out Int16 nMesFiscal, out Int16 nAnoFiscal)
     {
         nMesFiscal = 0;
@@ -551,11 +539,18 @@ public class FuncionesContab
         return true;
     }
 
-    public bool ValidarUltimoMesCerradoContab(DateTime dFechaAsiento, Int16 nMesFiscal, Int16 nAnoFiscal,
-       int nCiaContab, out string sMensajeError)
+
+    // esta función recibe un mes fiscal, año fiscal y fecha 
+    // determina el último mes cerrado para esa fecha 
+    // Nótese que *antes* se debe tener a mano el mes y año *fiscales* para la fecha 
+
+    // NOTA: esta función regresa False si el mes está cerrado 
+    public bool ValidarUltimoMesCerradoContab(DateTime dFechaAsiento, int nCiaContab, out string sMensajeError)
     {
         sMensajeError = "";
 
+        // -------------------------------------------------------------------------------------------------
+        // primero leemos el Ultimo Mes Cerrado para la cia contab 
         var UltimoMesCerrado = (from umc in _dbContab.UltimoMesCerradoContabs
                                 where umc.Cia == nCiaContab
                                 select new { umc.Mes, umc.Ano }).FirstOrDefault();
@@ -569,6 +564,29 @@ public class FuncionesContab
             return false;
         }
 
+        // -------------------------------------------------------------------------------------------------
+        // ahora determinamos el mes y año fiscal para la fecha 
+        short nMesFiscal = 0;
+        short nAnoFiscal = 0;
+        string mensajeError = ""; 
+
+        var result = this.DeterminarMesFiscal(dFechaAsiento, nCiaContab, out mensajeError, out nMesFiscal, out nAnoFiscal);
+
+        if (!result)
+        {
+            sMensajeError = " ... hemos encontrado un error al intentar determinar el mes y año fiscal para la fecha indicada (" + 
+                            dFechaAsiento.ToString("dd-MMM-yyyy") + "). <br />" +
+                            "El mensaje de error obtenido es: <br />" + sMensajeError;
+
+            return false;
+        }
+
+        // -------------------------------------------------------------------------------------------------
+        // finalmente determinamos si el año y mes (fiscal) para la fecha indicada está cerrado en Contab 
+        // Nota: normalmente, tal como se usa esta función en el programa, si el mes está cerrado es un error, 
+        // pues se intenta, por ejemplo, editar un asiento que corresponde a un mes cerrado. 
+
+        // en todo caso, esta función solo determina si la fecha pasada corresponde a un mes cerrado en Contab 
         if ((nAnoFiscal < UltimoMesCerrado.Ano) || (nAnoFiscal == UltimoMesCerrado.Ano & nMesFiscal <= UltimoMesCerrado.Mes))
         {
             sMensajeError = " ... la fecha ('" + dFechaAsiento.ToString("dd-MMM-yyyy") + "') del asiento " +

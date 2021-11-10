@@ -17,6 +17,10 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
         public bool ExcluirCuentasSaldosFinalCero { get; set; }
         public bool ExcluirCuentasSinMovimientos { get; set; }
         public bool ExcluirAsientosContablesTipoCierreAnual { get; set; }
+
+        public bool reconvertirCifrasAntes_01Oct2021 { get; set; }
+        public bool excluirAsientosReconversion_01Oct2021 { get; set; }
+
         public string Filtro { get; set; }
     }
 

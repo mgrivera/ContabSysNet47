@@ -203,6 +203,23 @@
                                                     Text="Asientos contables de tipo cierre anual (si existen)" />
 
                                 </fieldset>
+
+                                <br /> 
+
+                                <fieldset style="border: 1px solid #C0C0C0; padding: 10px; ">
+                                    <legend>Reconversión 2021: </legend>
+
+                                    <asp:CheckBox ID="ReconvertirCifrasAntes_01Oct2021_CheckBox" 
+                                                  runat="server" 
+                                                  Text="Reconvertir cifras anteriores al 1/Oct/21" 
+                                                  Checked="False" />
+                                    <br />
+                                    <asp:CheckBox ID="ExcluirAsientosReconversion_01Oct2021_CheckBox" 
+                                                  runat="server" 
+                                                  Text="Excluir asientos de reconversión" 
+                                                  Checked="False" />
+                                    <br />
+                                </fieldset>
                             </ContentTemplate>
 
                         </asp:TabPanel>
