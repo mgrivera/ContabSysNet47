@@ -46,7 +46,10 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                      MyKeepPageState = null;
                  }
 
-                 this.AplicarFiltro_Button.Focus(); 
+                // reconversión Oct/2021 
+                Session["ReconvertirCifrasAntes_01Oct2021"] = false;
+
+                this.AplicarFiltro_Button.Focus(); 
              }
         }
 
@@ -96,8 +99,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                     sSqlSelectString = sSqlSelectString + " And (it.FechaDesincorporacion = DateTime'" + Convert.ToDateTime(this.fDesincorporacion_desde.Text).ToString("yyyy-MM-dd H:m:s") + "'";
                 }
             }
-
-
 
             // ---------------------------------------------------------------------------------------------------------------------
             // si el usuario seleccionó uno o varios atributos, agregamos el criterio en forma separada aquí ... 
@@ -151,7 +152,9 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             Session["ActFijos_AplicarInfoDesincorporacion"] = Convert.ToBoolean(this.chk_AplicarInfoDesincorporacion.Checked);
 
             // mostramos el nombre del mes de la consulta en el encabezado de la lista que ve el usuario 
-            Session["ActFijos_Consulta_NombreMes"] = this.drpdwn_MesConsulta.SelectedItem.Text; 
+            Session["ActFijos_Consulta_NombreMes"] = this.drpdwn_MesConsulta.SelectedItem.Text;
+
+            Session["ReconvertirCifrasAntes_01Oct2021"] = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
 
             // -------------------------------------------------------------------------------------------------------------------------
             // para guardar el contenido de los controles de la página para recuperar el state cuando se abra la proxima vez 

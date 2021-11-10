@@ -39,7 +39,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
         {
             // -------------------------------------------------------------------------------------------------------------------------
             // para guardar el contenido de los controles de la página para recuperar el state cuando se abra la proxima vez 
-
             KeepPageState MyKeepPageState = new KeepPageState(Membership.GetUser().UserName, this.GetType().Name.ToString());
             MyKeepPageState.SavePageStateInFile(this.Controls);
             MyKeepPageState = null;
@@ -47,10 +46,8 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             // -----------------------------------------------------------------------------------------------------------
             // obtenemos en este momento el string que muestra la cantidad de meses transcurridos, desde el inicio del mes 
             // fiscal hasta la fecha de la consulta; por ejemplo: Mar-Ago ... 
-
             string construirPeriodoTranscurridoAnoFiscal = ConstruirPeriodoTranscurridoAnoFiscal();
             // -----------------------------------------------------------------------------------------------------------
-
 
             short mesConsulta = (short)Session["ActFijos_Consulta_Mes"];
             short anoConsulta = (short)Session["ActFijos_Consulta_Ano"];

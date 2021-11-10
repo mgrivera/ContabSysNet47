@@ -10,6 +10,8 @@ using System.Web.Security;
 using ContabSysNet_Web.ModelosDatos_EF;
 using ContabSysNet_Web.ModelosDatos_EF.ActivosFijos;
 using ContabSysNet_Web.ModelosDatos_EF.Contab;
+using ContabSysNet_Web.Clases;
+using ContabSysNet_Web.ModelosDatos_EF.code_first.contab;
 
 namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
 {
@@ -57,11 +59,17 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                     bool excluirActivosTotalmenteDepreciadosAnosAnteiores = (bool)Session["ActFijos_ExcluirDepreciadosAnosAnteriores"];
                     bool aplicarInfoDesincorporados = (bool)Session["ActFijos_AplicarInfoDesincorporacion"];
 
+                    // ----------------------------------------------------------------------------------------------------------------------
+                    // agregamos este flag luego de la reconversión del 1-Oct-21 
+                    // la idea es que el usuario pueda decidir si reconvertir montos
+                    bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
+
                     CrearInfoReport(sqlServerWhereString, 
                                     mesConsulta, 
                                     anoConsulta, 
                                     excluirActivosTotalmenteDepreciadosAnosAnteiores, 
-                                    aplicarInfoDesincorporados);
+                                    aplicarInfoDesincorporados, 
+                                    bReconvertirCifrasAntes_01Oct2021);
 
                     // ------------------------------------------------------------------------------------------------
                     // por último, refrescamos el ListView con la información preparada por la consulta ... 
@@ -78,7 +86,8 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             short mesConsulta, 
             short anoConsulta, 
             bool excluirDepAnosAnteriores, 
-            bool aplicarInfoDesincorporados)
+            bool aplicarInfoDesincorporados, 
+            bool bReconvertirCifrasAntes_01Oct2021)
         {
             // en este Sub agregamos los registros a la tabla 'temporal' en la base de datos para que la
             // página que sigue los muestre al usuario en un DataGridView
@@ -90,7 +99,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             }
 
             // convertimos el mes y año de la consulta en una fecha (siempre último de cada mes) 
-
             DateTime fechaConsulta = new DateTime(anoConsulta, mesConsulta, 1).AddMonths(1).AddDays(-1);
             DateTime fechaInicioAno = new DateTime(anoConsulta, 1, 31);
 
@@ -115,11 +123,26 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                 return;
             }
 
+            // ----------------------------------------------------------------------------------------------------------------------
+            // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
+            // *solo* a esta moneda 
+            var monedaNacional_return = Reconversion.Get_MonedaNacional();
+
+            if (monedaNacional_return.error)
+            {
+                ErrMessage_Span.InnerHtml = monedaNacional_return.message;
+                ErrMessage_Span.Style["display"] = "block";
+
+                return;
+            }
+
+            Monedas monedaNacional = monedaNacional_return.moneda;
+            // ----------------------------------------------------------------------------------------------------------------------
+
 
             int cantidadRegistrosAgregados = 0; 
 
             // nótese como seleccionamos solo los que se deprecien *luego* de la fecha de la consulta ... 
-
             var query = from a in activosFijos_dbcontext.InventarioActivosFijos.
                             Include("Compania").
                             Include("tDepartamento").
@@ -135,15 +158,14 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             tTempActivosFijos_ConsultaDepreciacion infoDepreciacion; 
 
             // para cada activo leído, convertimos su inicio y fin de depreciación en fechas (siempre último de cada mes) 
-
             DateTime fechaInicioDepreciacion;
             DateTime fechaFinDepreciacion; 
 
             // solo para activos fijos *desincorporados* y cuando el usuario *marca* la opción que permite aplicar este mecanismo, 
             // recalculamos los valores para: vida útil en meses del activo (CantidadMesesADepreciar) y monto total a depreciar (MontoADepreciar) 
-
             short cantidadMesesADepreciar = 0;
-            decimal montoADepreciar = 0; 
+            decimal montoADepreciar = 0;
+            decimal montoDepreciacionMensual = 0; 
 
             int ciaContabAnterior = -99999;
 
@@ -154,22 +176,20 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             {
                 cantidadMesesADepreciar = a.CantidadMesesADepreciar;            // nóta: hemos encontrado que el usuario puede equivocarse aquí; mejor calculamos
                 montoADepreciar = a.MontoADepreciar;
-                //fechaCompraActivoFijo = a.FechaCompra; 
+                montoDepreciacionMensual = a.MontoDepreciacionMensual;
 
-                // para que el cálculo de cantidad de meses entre fechas se haga de manera uniforme, nos aseguramos de llevar la fecha 
-                // compra al último día del mes; por ejemplo: fecha compra -> 15-4-2014 --> llevamos a --> 30-4-2014 
-                // la razón es que las fechas en el programa siempre se calculan al último mes del año .... 
-
-                //fechaCompraActivoFijo = new DateTime(fechaCompraActivoFijo.Year, fechaCompraActivoFijo.Month, 1).AddMonths(1).AddDays(-1); 
-
-
+                // --------------------------------------------------------------------------------------------------------------------------------------
+                // si el usuario indica que quiere reconvertir activos anteriores al mes Oct/2.021, aplicamos la reconversión 
+                if (bReconvertirCifrasAntes_01Oct2021 && (a.FechaCompra < new DateTime(2021, 10, 1)) && (a.Moneda1.Moneda1 == monedaNacional.Moneda))
+                {
+                    montoADepreciar = Math.Round((montoADepreciar / 1000000), 2);
+                    montoDepreciacionMensual = Math.Round((montoDepreciacionMensual / 1000000), 2);
+                }
+                    
                 try
                 {
-                    //fechaInicioDepreciacion = new DateTime(a.DepreciarDesdeAno, a.DepreciarDesdeMes, 1).AddMonths(1).AddDays(-1);
-
                     // determinamos la fecha de inicio de depreciación, como el 1er. día del mes 'a depreciar'; de esta forma, parece que los 
                     // activos cuya depreciación se inicia en el año de la consulta, se calcula de forma correcta ... 
-
                     fechaInicioDepreciacion = new DateTime(a.DepreciarDesdeAno, a.DepreciarDesdeMes, 1);    
                     fechaFinDepreciacion = new DateTime(a.DepreciarHastaAno, a.DepreciarHastaMes, 1).AddMonths(1).AddDays(-1);
                     cantidadMesesADepreciar = CantidadMesesEntreFechas(fechaInicioDepreciacion, fechaFinDepreciacion);  // nótese que aquí recalculamos ... 
@@ -190,7 +210,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                         return;
                 }
                 
-
                 if (aplicarInfoDesincorporados)
                     if (a.DesincorporadoFlag != null && a.DesincorporadoFlag.Value)
                         // cuando un activo es desincorporado, debe ser depreciado hasta el mes anterior a la desincorporación ... 
@@ -213,17 +232,13 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                                 montoADepreciar = cantidadMesesADepreciar * a.MontoDepreciacionMensual; 
                             }
 
-
                 // en lo sucesivo, calculamos cantidades de meses ... 
-
                 int cantidadMesesAcumulados;
                 int cantidadMesesEnElAno;
-
 
                 // calculamos la cantidad de meses de vida del activo; 
                 // si el activo ha culminado su vida útil, la cantidad de meses de vida es su vida completa; 
                 // de otra forma, calculamos la cantidad de meses desde su inicio hasta la fecha de consulta ... 
-
                 if (fechaFinDepreciacion < fechaConsulta)
                     cantidadMesesAcumulados = CantidadMesesEntreFechas(fechaInicioDepreciacion, fechaFinDepreciacion); 
                 else
@@ -255,7 +270,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                 // TODO: sustituir ahora fechaInicioAno por fechaInicioAnoFiscal
                 // nota: recuérdese que, al determinar la fecha de inicio del año fiscal, nos aseguramos que fuera siempre 
                 // *anterior* a la fecha de la consulta ... 
-
                 DateTime fechaInicioAnoFiscal1erDiaMes = new DateTime(fechaInicioAnoFiscal.Year, fechaInicioAnoFiscal.Month, 1); // porque se calculó el 31 ... 
 
                 if (fechaFinDepreciacion < fechaInicioAnoFiscal1erDiaMes)
@@ -298,14 +312,13 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                 if (fechaFinDepreciacion < fechaConsulta)
                     infoDepreciacion.DepreciacionMensual = 0; 
                 else
-                    infoDepreciacion.DepreciacionMensual = a.MontoDepreciacionMensual;
-
+                    infoDepreciacion.DepreciacionMensual = montoDepreciacionMensual;
 
                 infoDepreciacion.DepAcum_CantMeses = Convert.ToInt16(cantidadMesesAcumulados);
                 infoDepreciacion.DepAcum_CantMeses_AnoActual = Convert.ToInt16(cantidadMesesEnElAno);
 
-                infoDepreciacion.DepAcum_AnoActual = a.MontoDepreciacionMensual * cantidadMesesEnElAno;
-                infoDepreciacion.DepAcum_Total = a.MontoDepreciacionMensual * cantidadMesesAcumulados;
+                infoDepreciacion.DepAcum_AnoActual = montoDepreciacionMensual * cantidadMesesEnElAno;
+                infoDepreciacion.DepAcum_Total = montoDepreciacionMensual * cantidadMesesAcumulados;
 
                 infoDepreciacion.NombreUsuario = User.Identity.Name;
 
@@ -314,11 +327,9 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                 if (excluirDepAnosAnteriores && cantidadMesesEnElAno == 0)
                     continue; 
 
-
                 activosFijos_dbcontext.tTempActivosFijos_ConsultaDepreciacion.AddObject(infoDepreciacion);
                 cantidadRegistrosAgregados++;
             }
-
 
             try
             {
@@ -372,7 +383,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
 
         protected string FormatColorRow(string theData)
         {
-
             switch (theData)
             {
                 case "IN":
@@ -387,7 +397,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                 default:
                     return null;
             }
-
         }
 
         protected void ConsultaDepreciacion_ListView_PagePropertiesChanged(object sender, EventArgs e)
@@ -401,7 +410,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                                                  out string errorMessage)
         {
             // regresamos el 1er. día del mes inicial del año fiscal. Esta fecha debe siempre ser *anterior* a la fecha indicada a la consulta 
-
             fechaInicioAnoFiscal = new DateTime(); 
             errorMessage = "";
 
@@ -421,13 +429,11 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
             }
 
             // el inicio del año fiscal que regrese esta función, debe ser siempre anterior a la fecha de la consulta 
-
             if (fechaInicioAnoFiscal > fechaConsulta)
                 fechaInicioAnoFiscal = fechaInicioAnoFiscal.AddYears(-1); 
 
             // por alguna razón determinada en su momento, el inicio del año para estos cálculos se toma como el fin del mes 
             // y no el inicio; por ejemplo: si el inicio del año fiscal es el 1-mar-13, esta función regresa: 31-mar-13 ... 
-
             fechaInicioAnoFiscal = fechaInicioAnoFiscal.AddMonths(1).AddDays(-1); 
 
             return true; 
@@ -440,7 +446,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
 
             // nótese lo que hacemos para obtener la compañía seleccionada para la consulta; no podemos recibir este valor desde el asp.net control, pues 
             // estamos en el encabezado de la tabla y no en un row ... 
-
             string nombre1erMesAnoFiscal; 
             string nombreMesConsulta; 
 
@@ -454,7 +459,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                     return ""; 
 
                 // leemos el mes calendario que corresponde al 1er. mes fiscal de la compañía 
-
                 nombre1erMesAnoFiscal = ctx.MesesDelAnoFiscals.Where(m => m.Cia == ciaContabSeleccionada && m.MesFiscal == 1).
                                                                Select(m => m.NombreMes).
                                                                FirstOrDefault();
@@ -463,7 +467,6 @@ namespace ContabSysNet_Web.ActivosFijos.Consultas.DepreciacionMensual
                     return ""; 
 
                 // aquí debe venir el nombre del mes de la consulta (que indicó el usuario en el filtro) 
-
                 if (Session["ActFijos_Consulta_NombreMes"] == null)
                     return ""; 
 

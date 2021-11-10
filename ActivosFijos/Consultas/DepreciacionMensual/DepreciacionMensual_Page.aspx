@@ -282,7 +282,7 @@
                                     </td>
 
                                     <td class="right padded">
-                                        <asp:Label ID="Label3" runat="server" Text='<%# Eval("InventarioActivosFijo.MontoADepreciar", "{0:N2}") %>' />
+                                        <asp:Label ID="Label3" runat="server" Text='<%# Eval("MontoADepreciar", "{0:N2}") %>' />
                                     </td>
                                     <td class="right padded">
                                         <asp:Label ID="Label4" runat="server" Text='<%# Eval("DepreciacionMensual", "{0:N2}") %>' />
@@ -368,7 +368,7 @@
                                     </td>
 
                                     <td class="right padded">
-                                        <asp:Label ID="Label3" runat="server" Text='<%# Eval("InventarioActivosFijo.MontoADepreciar", "{0:N2}") %>' />
+                                        <asp:Label ID="Label3" runat="server" Text='<%# Eval("MontoADepreciar", "{0:N2}") %>' />
                                     </td>
                                     <td class="right padded">
                                         <asp:Label ID="Label4" runat="server" Text='<%# Eval("DepreciacionMensual", "{0:N2}") %>' />
@@ -453,7 +453,7 @@
                                                     Text='<%# (short)Eval("CantidadMesesADepreciar") - (short)Eval("DepAcum_CantMeses") %>' />
                                     </td>
                                     <td class="right padded">
-                                        <asp:Label ID="Label3" runat="server" Text='<%# Eval("InventarioActivosFijo.MontoADepreciar", "{0:N2}") %>' />
+                                        <asp:Label ID="Label3" runat="server" Text='<%# Eval("MontoADepreciar", "{0:N2}") %>' />
                                     </td>
                                     <td class="right padded">
                                         <asp:Label ID="Label4" runat="server" Text='<%# Eval("DepreciacionMensual", "{0:N2}") %>' />

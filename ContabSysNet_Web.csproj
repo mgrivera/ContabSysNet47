@@ -2737,6 +2737,7 @@
     <Compile Include="ActivosFijos\Consultas\ConsultaActivosFijos\ActivoFijo_page.aspx.designer.cs">
       <DependentUpon>ActivoFijo_page.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\ActivosFijos_Report_ConsultaDepreciacion.cs" />
     <Compile Include="ActivosFijos\Consultas\DepreciacionMensual\DepreciacionMensual_OpcionesReportes.aspx.cs">
       <DependentUpon>DepreciacionMensual_OpcionesReportes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -167,6 +167,20 @@
                         <td>
                             &nbsp;
                         </td>
+                        <td style="padding-right:20px; ">         
+                            <asp:CheckBox ID="ReconvertirCifrasAntes_01Oct2021_CheckBox" 
+                                                      runat="server" 
+                                                      Text="" />
+                            <b>Reconversión:</b> reconvertir cifras<br />anteriores al 1/Oct/21
+                        </td>
+                        <td />
+                        <td />
+                    </tr>
+
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
                         <td />
                         <td />
                         <td />
