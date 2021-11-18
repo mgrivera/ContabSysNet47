@@ -52,7 +52,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             MyLimpiarFiltro = null;
 
             this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked = false;
-            this.ExcluirAsientosReconversion_01Oct2021_CheckBox.Checked = false;
         }
 
         protected void AplicarFiltro_Button_Click(object sender, EventArgs e)
@@ -138,7 +137,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             parametros.ExcluirAsientosContablesTipoCierreAnual = this.ExcluirAsientosContablesTipoCierreAnual_CheckBox.Checked;
 
             parametros.reconvertirCifrasAntes_01Oct2021 = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
-            parametros.excluirAsientosReconversion_01Oct2021 = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
 
             parametros.Filtro = sSqlSelectString; 
 
@@ -149,6 +147,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             // estas session variables para delimitar el período; por lo tanto, las inicializamos también aquí ... 
             Session["FechaInicialPeriodo"] = Convert.ToDateTime(Desde_TextBox.Text);
             Session["FechaFinalPeriodo"] = Convert.ToDateTime(Hasta_TextBox.Text);
+
+            // esta session debe existir pues es leído por la página que muestra los movimientos para una cuenta contable en el balance 
+            Session["ReconvertirCifrasAntes_01Oct2021"] = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
 
             // ---------------------------------------------------------------------------------------------
             // lo que sigue son instrucciones para ejecutar una función javascript en el parent page. La

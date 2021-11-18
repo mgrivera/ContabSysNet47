@@ -214,11 +214,6 @@
                                                   Text="Reconvertir cifras anteriores al 1/Oct/21" 
                                                   Checked="False" />
                                     <br />
-                                    <asp:CheckBox ID="ExcluirAsientosReconversion_01Oct2021_CheckBox" 
-                                                  runat="server" 
-                                                  Text="Excluir asientos de reconversión" 
-                                                  Checked="False" />
-                                    <br />
                                 </fieldset>
                             </ContentTemplate>
 

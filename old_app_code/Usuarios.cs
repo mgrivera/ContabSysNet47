@@ -6,7 +6,6 @@ using System.Web.Security;
 // </summary>
 public class Usuarios
 {
-
     public MembershipUserCollection GetUsers()
     {
         return Membership.GetAllUsers();

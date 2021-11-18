@@ -61,7 +61,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
             MostrarCuentasConSaldoYSinMvtos_CheckBox.Checked = true;
 
             this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked = false;
-            this.ExcluirAsientosReconversion_01Oct2021_CheckBox.Checked = false;
         }
 
         protected void AplicarFiltro_Button_Click(object sender, EventArgs e)
@@ -101,7 +100,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
             Session["ExcluirAsientosTipoCierreAnual"] = ExcluirAsientosTipoCierreAnual_CheckBox.Checked;
 
             Session["ReconvertirCifrasAntes_01Oct2021"] = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
-            Session["ExcluirAsientosReconversion_01Oct2021"] = this.ExcluirAsientosReconversion_01Oct2021_CheckBox.Checked;
 
             Session["CiaContabSeleccionada"] = this.Sql_CuentasContables_Cia_Numeric.SelectedValue; 
             // -------------------------------------------------------------------------------------------

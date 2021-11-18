@@ -162,11 +162,9 @@
 
                                 <asp:TemplateField HeaderText="Cuenta contable">
                                     <ItemTemplate>
-
-                                        <a runat="server" 
-                                           href='<%# GetDireccionWindowCuentasContables(Item.CuentaContableID, Item.Moneda, Item.CuentasContable.Cia) %>'>
-                                        <%# Item.CuentasContable.Cuenta %></a>
-
+                                        <a runat="server" href='<%# GetDireccionWindowCuentasContables(Item.CuentaContableID, Item.Moneda, Item.CuentasContable.Cia) %>'>
+                                           <%# Item.CuentasContable.Cuenta %>
+                                        </a>
                                     </ItemTemplate>
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />

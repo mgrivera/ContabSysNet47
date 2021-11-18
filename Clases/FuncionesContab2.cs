@@ -397,10 +397,6 @@ namespace ContabSysNet_Web.Clases
             return true;
         }
 
-
-
-
-
         public bool ValidarMesCerradoEnContab(DateTime fechaAsiento,
                                               int ciaAsiento,
                                               out short mesFiscalAsientoContable,
@@ -457,9 +453,7 @@ namespace ContabSysNet_Web.Clases
                 return true;
             }
 
-
             // en adelante en este código, el mes cerrado (fiscal) es 12 o 13 ... 
-
             if (mesCerradoContab_Fiscal == 13)
             {
                 // en la contabilidad, para la cia del asiento, se hizo el cierre anual *más no* el traspaso de saldos 
@@ -474,8 +468,6 @@ namespace ContabSysNet_Web.Clases
                 }
                 return true;
             }
-
-
 
             if (mesCerradoContab_Fiscal == 12)
             {
@@ -498,10 +490,8 @@ namespace ContabSysNet_Web.Clases
                     return false;
                 }
 
-
                 // los asientos que llegan aquí son del mes fiscal 12 (y el mes cerrado es 12) 
                 // impedimos continuar ... 
-
                 errMessage = "<b>Error:</b> el mes fiscal cerrado ahora en Contab es 12; " +
                 "bajo tales circunstancias, Ud. solo puede agregar, mediante Contab, asientos de tipo Cierre Anual.";
 
@@ -635,10 +625,7 @@ namespace ContabSysNet_Web.Clases
             else
             {
                 // leemos el grupo de la tabla TiposDeAsiento 
-
-
                 // leemos el número del asiento de la tabla AsientosIdPorGrupo
-
                 TiposDeAsiento tipoAsientoContable = (from t in context.TiposDeAsientoes
                                                       where t.Tipo == tipoAsiento
                                                       select t).FirstOrDefault();
@@ -655,8 +642,6 @@ namespace ContabSysNet_Web.Clases
 
                     return false;
                 }
-
-
 
                 AsientosIdPorGrupo MyAsientosIdPorGrupo = (from aidg in context.AsientosIdPorGrupoes
                                                            where aidg.Mes == nMesCalendario &&
@@ -710,7 +695,6 @@ namespace ContabSysNet_Web.Clases
                     MyAsientosIdPorGrupo.Numero += 1;
                 }
             }
-
 
             try
             {

@@ -9,7 +9,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
     {
         private SqlConnection _sqlConnection; 
         private bool _excluirAsientosTipoCierreAnual;
-        private bool _excluirAsientosReconversion_01Oct2021;
         private bool _bReconvertirCifrasAntes_01Oct2021; 
         private DateTime _fechaInicialPeriodoIndicado;
         private DateTime _fechaFinalPeriodoIndicado;
@@ -17,7 +16,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
         public DeterminarMovimientoCuentaContable(SqlConnection sqlConnection,
                                                  bool excluirAsientosTipoCierreAnual, 
-                                                 bool excluirAsientosReconversion_01Oct2021, 
                                                  bool bReconvertirCifrasAntes_01Oct2021, 
                                                  DateTime fechaInicialPeriodoIndicado, 
                                                  DateTime fechaFinalPeriodoIndicado, 
@@ -25,7 +23,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
         {
             _sqlConnection = sqlConnection;
             _excluirAsientosTipoCierreAnual = excluirAsientosTipoCierreAnual;
-            _excluirAsientosReconversion_01Oct2021 = excluirAsientosReconversion_01Oct2021;
             _bReconvertirCifrasAntes_01Oct2021 = bReconvertirCifrasAntes_01Oct2021; 
             _fechaInicialPeriodoIndicado = fechaInicialPeriodoIndicado;
             _fechaFinalPeriodoIndicado = fechaFinalPeriodoIndicado;
@@ -64,35 +61,34 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                 filtroExcluirAsientosTipoCierreAnual = "(a.MesFiscal <> 13) And Not (a.AsientoTipoCierreAnualFlag Is Not Null And a.AsientoTipoCierreAnualFlag = 1)";
             }
 
-            // -----------------------------------------------------------------------------------------------------------------
-            // el usuario puede indicar que no quiere el (los) asientos de reconversión (2021) en la consulta 
-            string filtroExcluirAsientosReconversion_01Oct2201 = "(1 = 1)";
-
-            if (_excluirAsientosReconversion_01Oct2021)
-            {
-                filtroExcluirAsientosReconversion_01Oct2201 = "(d.Referencia <> 'Reconversión 2021')";
-            }
-
             string selectMontoDebeHaber = "";
 
             // si el usuario quiere reconvertir montos antes de la reconversión del 2021, usamos una 'expression' en el Sum() ... 
             if (_bReconvertirCifrasAntes_01Oct2021 && moneda == _monedaNacional)
             {
-                selectMontoDebeHaber = "Select Sum(Case When (a.Fecha < '2021-10-1') Then Round((d.Debe / 1000000), 2) Else d.Debe End) As SumDebe, " +
-                                        "Sum(Case When (a.Fecha < '2021-10-1') Then Round((d.Haber / 1000000), 2) Else d.Haber End) As SumHaber, " +
-                                        "Count(*) As ContaAsientos " +
-                                        "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
-                                        "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " + 
-                                        "a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo And " +
-                                        filtroExcluirAsientosTipoCierreAnual + " And " + filtroExcluirAsientosReconversion_01Oct2201;
+                // con el Union logramos: reconvertir hasta el 1/Sept/21; no reconvertir desde el 1/Oct/21 
+                // Nota: este Select, con el Union, regresará 2 rows 
+                selectMontoDebeHaber = "Select Sum(Round((d.Debe / 1000000), 2)) As SumDebe, Sum(Round((d.Haber / 1000000), 2)) As SumHaber, Count(*) As ContaAsientos " +
+                                              "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
+                                              "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
+                                              "(a.Fecha Between @fechaInicialPeriodo And '2021-09-30') And " +
+                                              filtroExcluirAsientosTipoCierreAnual + " And  (d.Referencia <> 'Reconversión 2021') " + 
+
+                                              "Union " + 
+
+                                        "Select Sum(d.Debe) As SumDebe, Sum(d.Haber) As SumHaber, Count(*) As ContaAsientos " +
+                                              "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
+                                              "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
+                                              "(a.Fecha Between '2021-10-1' And @fechaFinalPeriodo) And " +
+                                              filtroExcluirAsientosTipoCierreAnual + " And  (d.Referencia <> 'Reconversión 2021')";
             }
             else
             {
                 selectMontoDebeHaber = "Select Sum(Debe) As SumDebe, Sum(Haber) As SumHaber, Count(*) As ContaAsientos " +
                                         "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
-                                        "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " + 
-                                        "a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo And " +
-                                        filtroExcluirAsientosTipoCierreAnual + " And " + filtroExcluirAsientosReconversion_01Oct2201;
+                                        "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
+                                        "a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo And (d.Referencia <> 'Reconversión 2021') And " +
+                                        filtroExcluirAsientosTipoCierreAnual;
             }
 
             SqlCommand commandDebeHaber = new SqlCommand(selectMontoDebeHaber, _sqlConnection);
@@ -114,23 +110,23 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             int recCount = 0;
 
             SqlDataReader reader = commandDebeHaber.ExecuteReader();
-            if (reader.Read())
+            while (reader.Read())
             {
                 if (!reader.IsDBNull(0))
-                    sumOfDebe = reader.GetDecimal(0);
+                    sumOfDebe += reader.GetDecimal(0);
 
                 if (!reader.IsDBNull(1))
-                    sumOfHaber = reader.GetDecimal(1);
+                    sumOfHaber += reader.GetDecimal(1);
 
                 if (!reader.IsDBNull(2))
-                    recCount = reader.GetInt32(2);
+                    recCount += reader.GetInt32(2);
             }
 
             reader.Close();
 
             var result = new DeterminarMovimientoCuentaContable_result(sumOfDebe, sumOfHaber, recCount, false, "");
 
-            return result; 
+            return result;
         }
     }
 }

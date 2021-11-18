@@ -8,6 +8,7 @@ using ContabSysNet_Web.ModelosDatos_EF.Contab;
 using System.Data.Objects;
 using System.Data.SqlClient;
 using System.Data;
+using ContabSysNet_Web.Clases;
 
 namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 {
@@ -200,7 +201,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 
             // nótese como buscamos aquí sin usar el filtro que aplica a esta consulta; esto nos permite reportar esta situación tan grave, 
             // independientemente del filtro que haya indicado el usuario ... 
-            commandString = "Select c.Cuenta As CuentaContable, c.Descripcion From CuentasContables c Inner Join dAsientos d On c.ID = d.CuentaContableID " + 
+            commandString = "Select c.Cuenta As CuentaContable, c.Descripcion " +
+                            "From CuentasContables c Inner Join dAsientos d On c.ID = d.CuentaContableID " + 
                             "Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " + 
                             "Where c.Cia = {0} And c.TotDet = 'T' And a.Fecha Between {1} And {2}"; 
 
@@ -305,43 +307,36 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 
             string filtroConsulta = parametros.Filtro + filtroBalGen_GyP;
 
-            // ejecutamos un sp que regresa el mes fiscal para el período indicado 
-            //var mesFiscal_ObjectParmeter = new ObjectParameter("mesFiscal", typeof(short));
-            //var anoFiscal_ObjectParmeter = new ObjectParameter("anoFiscal", typeof(short));
-            //var nombreMes_ObjectParmeter = new ObjectParameter("nombreMes", typeof(string));
-            //var errorMessage_ObjectParmeter = new ObjectParameter("errorMessage", typeof(string));
-
             // obtenemos el mes y año fiscal que corresponde al mes de la consulta; la función que determina el saldo anterior para cada cuenta contable, 
             // en realidad lee el saldo para el mes fiscal *anterior* al de la consulta; una consulta para Marzo, necesita como saldos anteriores los del mes Febrero ... 
-            var fecha_SqlParam = new SqlParameter("@fecha", parametros.Desde);
-            var ciaContab_SqlParam = new SqlParameter("@ciaContab", parametros.CiaContab);
-            var mesFiscal_SqlParam = new SqlParameter("@mesFiscal", System.Data.SqlDbType.SmallInt);
-            var anoFiscal_SqlParam = new SqlParameter("@anoFiscal", System.Data.SqlDbType.SmallInt);
-            var nombreMes_SqlParam = new SqlParameter("@nombreMes", System.Data.SqlDbType.NVarChar, 50);
-            var errorMessage_SqlParam = new SqlParameter("@errorMessage", System.Data.SqlDbType.NVarChar, 500);
+            var fecha_sqlParam = new SqlParameter("@fecha", parametros.Desde);
+            var ciaContab_sqlParam = new SqlParameter("@ciaContab", parametros.CiaContab);
+            var mesFiscal_sqlParam = new SqlParameter("@mesFiscal", System.Data.SqlDbType.SmallInt);
+            var anoFiscal_sqlParam = new SqlParameter("@anoFiscal", System.Data.SqlDbType.SmallInt);
+            var nombreMes_sqlParam = new SqlParameter("@nombreMes", System.Data.SqlDbType.NVarChar, 50);
+            var errorMessage_sqlParam = new SqlParameter("@errorMessage", System.Data.SqlDbType.NVarChar, 500);
 
-            mesFiscal_SqlParam.Direction = ParameterDirection.Output;
-            anoFiscal_SqlParam.Direction = ParameterDirection.Output;
-            nombreMes_SqlParam.Direction = ParameterDirection.Output;
-            errorMessage_SqlParam.Direction = ParameterDirection.Output;
+            mesFiscal_sqlParam.Direction = ParameterDirection.Output;
+            anoFiscal_sqlParam.Direction = ParameterDirection.Output;
+            nombreMes_sqlParam.Direction = ParameterDirection.Output;
+            errorMessage_sqlParam.Direction = ParameterDirection.Output;
 
             var contabDbContext = new ContabSysNet_Web.ModelosDatos_EF.code_first.contab.ContabContext();
             var result = contabDbContext.Database.SqlQuery<int?>("dbo.spDeterminarMesFiscal @fecha, @ciaContab, @mesFiscal OUT, @anoFiscal OUT, @nombreMes OUT, @errorMessage OUT",
-                                                                  fecha_SqlParam, ciaContab_SqlParam, mesFiscal_SqlParam, anoFiscal_SqlParam, nombreMes_SqlParam, errorMessage_SqlParam)
+                                                                  fecha_sqlParam, ciaContab_sqlParam, mesFiscal_sqlParam, anoFiscal_sqlParam, nombreMes_sqlParam, errorMessage_sqlParam)
                                                                   .FirstOrDefault();
 
-            if (!string.IsNullOrEmpty(errorMessage_SqlParam.Value.ToString()))
+            if (!string.IsNullOrEmpty(errorMessage_sqlParam.Value.ToString()))
             {
-                string functionErrorMessage = errorMessage_SqlParam.Value.ToString();
+                string functionErrorMessage = errorMessage_sqlParam.Value.ToString();
                 errorMessage = "Hemos obtenido un error, al intentar obtener obtener el mes y año fiscal para la fecha indicada como criterio de ejecución.<br /> " +
                                "A continuación, mostramos el mensaje específico de error:<br /> " + functionErrorMessage;
-
                 return;
             }
 
-            short mesFiscal = Convert.ToInt16(mesFiscal_SqlParam.Value);
-            short anoFiscal = Convert.ToInt16(anoFiscal_SqlParam.Value);
-            string nombreMes = (nombreMes_SqlParam.Value).ToString(); 
+            short mesFiscal = Convert.ToInt16(mesFiscal_sqlParam.Value);
+            short anoFiscal = Convert.ToInt16(anoFiscal_sqlParam.Value);
+            string nombreMes = (nombreMes_sqlParam.Value).ToString(); 
 
             // refinar el filtro para, por ejemplo, GyP: leer solo gastos/ingresos; BG: no leer gastos/ingresos (depende de opción, etc.) 
             // antes eliminamos los registros que puedan existir 
@@ -350,53 +345,73 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
             // nótese como leemos *solo* cuentas contables que tengan registros de saldo contable agregado ... 
             var query = dbContab.CuentasContables.Where(filtroConsulta).Where(c => c.TotDet == "D").Where(c => c.SaldosContables.Any()).Select(c => c.ID);
 
+            // ----------------------------------------------------------------------------------------------------------------------
+            // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
+            // *solo* a esta moneda 
+            var monedaNacional_return = Reconversion.Get_MonedaNacional();
+
+            if (monedaNacional_return.error)
+            {
+                errorMessage = monedaNacional_return.message; ;
+                return;
+            }
+
+            ContabSysNet_Web.ModelosDatos_EF.code_first.contab.Monedas monedaNacional = monedaNacional_return.moneda;
+
+            // ponemos la moneda nacional en un session pues la usa el popup que muestra los movimientos; así no la tiene que leer cada vez 
+            Session["monedaNacional"] = monedaNacional.Moneda;
+            // ----------------------------------------------------------------------------------------------------------------------
+
             int cuentasContablesAgregadas = 0;
-
-            //var cuentaContableID_sqlParameter = new SqlParameter("@cuentaContableID", 0);
-            //var mesFiscal_sqlParameter = new SqlParameter("@mesFiscal", mesFiscal);
-            //var anoFiscal_sqlParameter = new SqlParameter("@anoFiscal", anoFiscal);
-            //var desde_sqlParameter = new SqlParameter("@desde", parametros.Desde);
-            //var hasta_sqlParameter = new SqlParameter("@hasta", parametros.Hasta);
-            //var moneda_sqlParameter = new SqlParameter("@moneda", parametros.Moneda);
-            //var monedaOriginal_sqlParameter = new SqlParameter("@monedaOriginal", parametros.MonedaOriginal);
-            //var nombreUsuario_sqlParameter = new SqlParameter("@nombreUsuario", usuario);
-
-            //var excluirSaldoInicialDebeHaberCero_sqlParameter = new SqlParameter("@@excluirSaldoInicialDebeHaberCero", parametros.ExcluirCuentasSaldoYMovtosCero);
-            //var excluirSaldoFinalCero_sqlParameter = new SqlParameter("@@excluirSaldoFinalCero", parametros.ExcluirCuentasSaldosFinalCero);
-            //var excluirSinMovimientosPeriodo_sqlParameter = new SqlParameter("@excluirSinMovimientosPeriodo", parametros.ExcluirCuentasSinMovimientos);
-            //var excluirAsientoTipoCierreAnual_sqlParameter = new SqlParameter("@excluirAsientoTipoCierreAnual", parametros.ExcluirAsientosContablesTipoCierreAnual);
-            //var reconvertirCifrasAntes_01Oct2021_sqlParameter = new SqlParameter("@reconvertirCifrasAntes_01Oct2021", parametros.reconvertirCifrasAntes_01Oct2021);
-            //var excluirAsientosReconversion_01Oct2021_sqlParameter = new SqlParameter("@excluirAsientosReconversion_01Oct2021", parametros.excluirAsientosReconversion_01Oct2021);
-            //var errorMessage_sqlParameter = new SqlParameter("@errorMessage", "");
-
-            var errorMessage_ObjectParmeter = new ObjectParameter("errorMessage", typeof(string));
 
             foreach (int cuentaContableID in query)
             {
                 // nótese como obtenemos el mes fiscal para el mes *anterior* al mes de inicio del período; la idea es obtener (luego) los saldos del mes 
                 // *anterior* al inicio del período; por ejemplo: si el usuario intenta obtener la consulta para Abril, debemos obtener los saldos para 
                 // Marzo, que serán los iniciales para Abril .... 
-                //cuentaContableID_sqlParameter.Value = cuentaContableID;
 
-                var resultadoFuncion = dbContab.spBalanceGeneral(cuentaContableID,
-                                                                 mesFiscal,
-                                                                 anoFiscal,
-                                                                 parametros.Desde,
-                                                                 parametros.Hasta,
-                                                                 parametros.Moneda,
-                                                                 parametros.MonedaOriginal,
-                                                                 usuario,
-                                                                 parametros.ExcluirCuentasSaldoYMovtosCero,
-                                                                 parametros.ExcluirCuentasSaldosFinalCero,
-                                                                 parametros.ExcluirCuentasSinMovimientos,
-                                                                 parametros.ExcluirAsientosContablesTipoCierreAnual,
-                                                                 //parametros.reconvertirCifrasAntes_01Oct2021,
-                                                                 //parametros.excluirAsientosReconversion_01Oct2021,
-                                                                 errorMessage_ObjectParmeter).FirstOrDefault();
+                var cuentaContableID_sqlParam = new SqlParameter("@cuentaContableID", cuentaContableID);
+                var mesFiscal2_sqlParam = new SqlParameter("@mesFiscal", mesFiscal);
+                var anoFiscal2_sqlParam = new SqlParameter("@anoFiscal", anoFiscal);
+                var desde_sqlParam = new SqlParameter("@desde", parametros.Desde);
+                var hasta_sqlParam = new SqlParameter("@hasta", parametros.Hasta);
+                var moneda_sqlParam = new SqlParameter("@moneda", parametros.Moneda);
+                var monedaNacional_sqlParam = new SqlParameter("@monedaNacional", monedaNacional.Moneda);
 
-                if (!string.IsNullOrEmpty(errorMessage_ObjectParmeter.Value.ToString()))
+                var monedaOriginal_sqlParam = new SqlParameter("@monedaOriginal", System.Data.SqlDbType.Int);
+
+                // el valor de este parámetro puede ser null 
+                if (parametros.MonedaOriginal == null)
+                    monedaOriginal_sqlParam.Value = DBNull.Value;
+                else
+                    monedaOriginal_sqlParam.Value = parametros.MonedaOriginal;
+
+                var nombreUsuario_sqlParam = new SqlParameter("@nombreUsuario", usuario);
+
+                var excluirCuentasSaldoYMovtosCero_sqlParam = new SqlParameter("@excluirSaldoInicialDebeHaberCero", parametros.ExcluirCuentasSaldoYMovtosCero);
+                var excluirCuentasSaldosFinalCero_sqlParam = new SqlParameter("@excluirSaldoFinalCero", parametros.ExcluirCuentasSaldosFinalCero);
+                var excluirCuentasSinMovimientos_sqlParam = new SqlParameter("@excluirSinMovimientosPeriodo", parametros.ExcluirCuentasSinMovimientos);
+                var excluirAsientosContablesTipoCierreAnual_sqlParam = new SqlParameter("@excluirAsientoTipoCierreAnual", parametros.ExcluirAsientosContablesTipoCierreAnual);
+                var reconvertirCifrasAntes_01Oct2021_sqlParam = new SqlParameter("@reconvertirCifrasAntes_01Oct2021", parametros.reconvertirCifrasAntes_01Oct2021);
+                var errorMessage2_sqlParam = new SqlParameter("@errorMessage", "");
+
+                errorMessage2_sqlParam.Direction = ParameterDirection.Output;
+
+                var resultadoFuncion = contabDbContext.Database.SqlQuery<int?>("dbo.spBalanceGeneral " +
+                                                                             "@cuentaContableID, @mesFiscal, @anoFiscal, @desde, @hasta, " +
+                                                                             "@moneda, @MonedaNacional, @monedaOriginal, @nombreUsuario, @excluirSaldoInicialDebeHaberCero, " +
+                                                                             "@excluirSaldoFinalCero, @excluirSinMovimientosPeriodo, @excluirAsientoTipoCierreAnual, " +
+                                                                             "@reconvertirCifrasAntes_01Oct2021, @errorMessage OUT",
+                                                                             cuentaContableID_sqlParam, mesFiscal2_sqlParam, anoFiscal2_sqlParam, desde_sqlParam, hasta_sqlParam, 
+                                                                             moneda_sqlParam, monedaNacional_sqlParam, monedaOriginal_sqlParam, nombreUsuario_sqlParam, 
+                                                                             excluirCuentasSaldoYMovtosCero_sqlParam, excluirCuentasSaldosFinalCero_sqlParam, 
+                                                                             excluirCuentasSinMovimientos_sqlParam, excluirAsientosContablesTipoCierreAnual_sqlParam,
+                                                                             reconvertirCifrasAntes_01Oct2021_sqlParam, errorMessage2_sqlParam)
+                                                                             .FirstOrDefault();
+
+                if (!string.IsNullOrEmpty(errorMessage_sqlParam.Value.ToString()))
                 {
-                    errorMessage = errorMessage_ObjectParmeter.Value.ToString();
+                    errorMessage = errorMessage_sqlParam.Value.ToString();
                     return;
                 }
 
@@ -746,12 +761,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
         {
             string window = "";
 
-            window = "javascript:PopupWin('../BalanceComprobacion/BalanceComprobacion_MovimientosContables.aspx?cta=" + 
-                cuentaContableID.ToString() + 
-                "&mon=" + 
-                moneda.ToString() + 
-                "&cia=" + 
-                ciaContab.ToString() + 
+            window = "javascript:PopupWin('../BalanceComprobacion/BalanceComprobacion_MovimientosContables.aspx?cta=" + cuentaContableID.ToString() +
+                "&mon=" + moneda.ToString() +
+                "&cia=" + ciaContab.ToString() + 
                 "', 1000, 680)"; 
 
             return window; 

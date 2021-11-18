@@ -130,26 +130,17 @@
                 <ContentTemplate>
                     <div style="text-align: left;" class="generalfont">
                         &nbsp;&nbsp;Período: &nbsp;&nbsp;
-                        <asp:TextBox ID="Desde_TextBox" runat="server" Width="105px"></asp:TextBox>
-                        <cc1:CalendarExtender ID="Desde_TextBox_CalendarExtender" runat="server" Enabled="True"
-                            Format="dd-MM-yy" PopupButtonID="DesdeCalendar_PopUpButton" CssClass="radcalendar"
-                            TargetControlID="Desde_TextBox">
-                        </cc1:CalendarExtender>
-                        <asp:ImageButton ID="DesdeCalendar_PopUpButton" runat="server" alt="" src="../../../Pictures/Calendar.png"
-                            CausesValidation="False" TabIndex="-1" />
+                        <asp:TextBox ID="Desde_TextBox" runat="server" TextMode="Date"></asp:TextBox>
+                        
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Desde_TextBox"
                             CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="Ud. debe indicar una fecha">*</asp:RequiredFieldValidator>
                         <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="Desde_TextBox"
                             CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El valor indicado no es válido. Debe ser una fecha."
                             Operator="DataTypeCheck" Type="Date">*</asp:CompareValidator>
                         &nbsp;&nbsp;/&nbsp;&nbsp;
-                        <asp:TextBox ID="Hasta_TextBox" runat="server" Width="105px"></asp:TextBox>
-                        <cc1:CalendarExtender ID="Hasta_TextBox_CalendarExtender" runat="server" Enabled="True"
-                            Format="dd-MM-yy" PopupButtonID="HastaCalendar_PopUpButton" CssClass="radcalendar"
-                            TargetControlID="Hasta_TextBox">
-                        </cc1:CalendarExtender>
-                        <asp:ImageButton ID="HastaCalendar_PopUpButton" runat="server" alt="" src="../../../Pictures/Calendar.png"
-                            CausesValidation="False" TabIndex="-1" />
+
+                        <asp:TextBox ID="Hasta_TextBox" runat="server" TextMode="Date"></asp:TextBox>
+                        
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Hasta_TextBox"
                             CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="Ud. debe indicar una fecha">*</asp:RequiredFieldValidator>
                         <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="Hasta_TextBox"
@@ -158,7 +149,6 @@
                         <asp:CompareValidator ID="CompareValidator3" runat="server" ControlToValidate="Hasta_TextBox"
                             CssClass="errmessage generalfont" Display="Dynamic" ErrorMessage="El intervalo indicado no es válido."
                             Operator="GreaterThanEqual" Type="Date" ControlToCompare="Desde_TextBox">*</asp:CompareValidator>
-                            
                     </div>
                     <br /><br />
                     <fieldset style="text-align:left; " class="generalfont">
@@ -210,14 +200,6 @@
                                         <asp:CheckBox ID="ReconvertirCifrasAntes_01Oct2021_CheckBox" 
                                                       runat="server" 
                                                       Text="Reconvertir cifras anteriores al 1/Oct/21" 
-                                                      Checked="False" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:CheckBox ID="ExcluirAsientosReconversion_01Oct2021_CheckBox" 
-                                                      runat="server" 
-                                                      Text="Excluir asientos de reconversión" 
                                                       Checked="False" />
                                     </td>
                                 </tr>

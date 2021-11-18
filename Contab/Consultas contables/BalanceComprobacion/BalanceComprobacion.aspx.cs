@@ -12,8 +12,6 @@ using ContabSysNet_Web.ModelosDatos_EF.Contab;
 using System.Web.UI.WebControls;
 using ContabSysNet_Web.Clases;
 using ContabSysNet_Web.ModelosDatos_EF.code_first.contab;
-//using ContabSysNet_Web.Clases; 
-
 
 namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 {
@@ -98,9 +96,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             if (!Page.IsPostBack)
             {
 
-                // Gets a reference to a Label control that is not in a 
-                // ContentPlaceHolder control
-
+                // Gets a reference to a Label control that is not in a ContentPlaceHolder control
                 HtmlContainerControl MyHtmlSpan;
 
                 MyHtmlSpan = (HtmlContainerControl)Master.FindControl("AppName_Span");
@@ -133,7 +129,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                 // -------------------------------------------------------------------------
                 // la página puede ser 'refrescada' por el popup; en ese caso, ejeucutamos  
                 // una función que efectúa alguna funcionalidad y rebind la información 
-
                 if (ExecuteThread_HiddenField.Value == "1")
                 {
                     // cuando este html item es 1, ejecutamos el thread que construye la selección y la graba 
@@ -144,7 +139,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
                     // ------------------------------------------------------------------------------
                     // inicializamos antes las variables que indican que debemos mostrar el progreso 
-
                     Session["Progress_Completed"] = 0;
                     Session["Progress_Percentage"] = 0;
                     Session["Progress_SelectedRecs"] = 0;
@@ -215,6 +209,32 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             Session["Progress_Percentage"] = 0;
             string errorMessage = "";
 
+            // nota importante: esta consulta (y otras?) deben, al menos por ahora, ser pedidas para una CiaContab 
+            // en particular, pues los años fiscales para las Cias Contab pueden variar entre ellas ... 
+            if (Session["CiaContabSeleccionada"] == null)
+            {
+                // el usuario debe seleccionar una cia contab en particular, pues los saldos contables se leen 
+                // de acuerdo al año fiscal de la misma ... 
+
+                Session["Thread_ErrorMessage"] = "Aparentemente, no se ha seleccionado una Cia Contab.<br /> " +
+                    "Por favor seleccione una Cia Contab al establecer el filtro a usar para esta consulta.";
+
+                Session["Progress_SelectedRecs"] = 0;
+                Session["Progress_Completed"] = 1;
+                Session["Progress_Percentage"] = 0;
+
+                return;
+            }
+
+            var ciaContabSeleccionada = Convert.ToInt32(Session["CiaContabSeleccionada"].ToString());
+
+            var dFechaInicialPeriodoIndicado = (System.DateTime)Session["FechaInicialPeriodo"];
+            var dFechaFinalPeriodoIndicado = (System.DateTime)Session["FechaFinalPeriodo"];
+
+            bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
+
+            bool bExcluirAsientosTipoCierreAnual = (bool)Session["ExcluirAsientosTipoCierreAnual"];
+
             // ----------------------------------------------------------------------------------------------------------------------
             // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
             // *solo* a esta moneda 
@@ -234,7 +254,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             // --------------------------------------------------------------------------------------------
             // eliminamos el contenido de la tabla temporal
             dbContab_Contab_Entities dbContext = new dbContab_Contab_Entities();
-
             try 
             {
                 int cantRegistrosEliminados = dbContext.ExecuteStoreCommand("Delete From Contab_BalanceComprobacion Where NombreUsuario = {0}", Membership.GetUser().UserName);
@@ -247,14 +266,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                     "<br /><br />";
                 return;
             }
-
-            System.DateTime dFechaInicialPeriodoIndicado = (System.DateTime)Session["FechaInicialPeriodo"];
-            System.DateTime dFechaFinalPeriodoIndicado = (System.DateTime)Session["FechaFinalPeriodo"];
-
-            bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
-            bool bExcluirAsientosReconversion_01Oct2021 = (bool)Session["ExcluirAsientosReconversion_01Oct2021"];
-
-            bool bExcluirAsientosTipoCierreAnual = (bool)Session["ExcluirAsientosTipoCierreAnual"]; 
 
             // -----------------------------------------------------------------------------------------------
             // para evitar que el reporte se genere en forma incompleta, intentamos buscar cuentas que tengan 
@@ -334,27 +345,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             // para leer los saldos, debemos determinar el año fiscal de la Cia Contab; un año calendario puede ser 
             // 2013 y el año fiscal 2012. Los saldos contables se registran para el año fiscal. Por esta razón, 
             // debemos obtenerlo *antes* de hacer el select que sigue
-
-            // nota importante: esta consulta (y otras?) deben, al menos por ahora, ser pedidas para una CiaContab 
-            // en particular, pues los años fiscales para las Cias Contab pueden variar entre ellas ... 
-
-            if (Session["CiaContabSeleccionada"] == null)
-            {
-                // el usuario debe seleccionar una cia contab en particular, pues los saldos contables se leen 
-                // de acuerdo al año fiscal de la misma ... 
-
-                Session["Thread_ErrorMessage"] = "Aparentemente, no se ha seleccionado una Cia Contab.<br /> " +
-                    "Por favor seleccione una Cia Contab al establecer el filtro a usar para esta consulta.";
-
-                Session["Progress_SelectedRecs"] = 0;
-                Session["Progress_Completed"] = 1;
-                Session["Progress_Percentage"] = 0;
-
-                return;
-            }
-
-            GetMesFiscalContable MyGetMesFiscalContable = 
-                new GetMesFiscalContable((System.DateTime)Session["FechaInicialPeriodo"], Convert.ToInt32(Session["CiaContabSeleccionada"].ToString()));
+            GetMesFiscalContable MyGetMesFiscalContable = new GetMesFiscalContable(dFechaInicialPeriodoIndicado, ciaContabSeleccionada);
 
             string sErrorMessage = "";
 
@@ -384,7 +375,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             // usamos esta clase para leer los movimientos (debe, haber) para cada cuenta contable y moneda 
             DeterminarMovimientoCuentaContable determinarMovimientoCuentaContable = new DeterminarMovimientoCuentaContable(sqlConnection, 
                                                                                                                            bExcluirAsientosTipoCierreAnual,  
-                                                                                                                           bExcluirAsientosReconversion_01Oct2021,
                                                                                                                            bReconvertirCifrasAntes_01Oct2021, 
                                                                                                                            dFechaInicialPeriodoIndicado, 
                                                                                                                            dFechaFinalPeriodoIndicado, monedaNacional.Moneda); 
@@ -553,7 +543,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                 if (MyBalanceComprobacion_Record2.Cia != nCiaContabAnterior) 
                 {
                     // buscamos el mes y año fiscal solo cuando cambian las compañías
-                    MyGetMesFiscalContable = new GetMesFiscalContable((System.DateTime)Session["FechaInicialPeriodo"], MyBalanceComprobacion_Record2.Cia);
+                    MyGetMesFiscalContable = new GetMesFiscalContable(dFechaInicialPeriodoIndicado, MyBalanceComprobacion_Record2.Cia);
 
                     sErrorMessage = "";
                     MyGetMesFiscalContable.dbContabDataContext = ContabDB;
@@ -602,16 +592,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                 // por último, leemos la descripción del 'nivel previo' de la cuenta
                 string selectDescripcionNivelPrevio = "Select Descripcion From CuentasContables Where Cuenta = {0} And Cia = {1}";
 
-                // SqlCommand commandDescripcionNivelPrevio = new SqlCommand(selectDescripcionNivelPrevio, sqlConnection);
-
-                //commandDescripcionNivelPrevio.Parameters.Add("@cuentaContableNivelPrevio", SqlDbType.NVarChar, 25);
-                //commandDescripcionNivelPrevio.Parameters["@cuentaContableNivelPrevio"].Value = MyBalanceComprobacion_Record2.NivelPrevioCuentaContable;
-
-                //commandDescripcionNivelPrevio.Parameters.Add("@ciaContab", SqlDbType.Int);
-                //commandDescripcionNivelPrevio.Parameters["@ciaContab"].Value = MyBalanceComprobacion_Record2.Cia;
-
-                // string sCuentaContable_NivelPrevio_Descripcion = (string)commandDescripcionNivelPrevio.ExecuteScalar();
-
                 object[] parameters = { MyBalanceComprobacion_Record2.NivelPrevioCuentaContable, MyBalanceComprobacion_Record2.Cia };
                 string sCuentaContable_NivelPrevio_Descripcion = dbContext.ExecuteStoreQuery<string>(selectDescripcionNivelPrevio, parameters).FirstOrDefault();
 
@@ -630,8 +610,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
             // tenemos los niveles 'previos' de cada cuenta; vamos a crear una lista con las descripciones de cada cuenta, para luego 
             // leer las mismas y completar los niveles previos en la lista. Para cada nivel, ej: 0101002, quedará así: 0101002 - <su descripción> ... 
-
-            int ciaContabSeleccionada = Convert.ToInt32(Session["CiaContabSeleccionada"]);
 
             var queryCuentasContables = dbContext.CuentasContables.Where(c => c.TotDet == "T" && c.Cia == ciaContabSeleccionada).Select(c => new { c.Cuenta, c.Descripcion });
             List<Cuenta_Nombre> listaCuentasYNombres = new List<Cuenta_Nombre>();
