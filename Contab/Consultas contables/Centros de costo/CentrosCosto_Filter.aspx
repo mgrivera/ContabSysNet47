@@ -154,14 +154,12 @@
             <ContentTemplate>
 
                 <table style="font-size: x-small; ">
-
                     <tr>
                         <td>
                             Período: 
                         </td>
 
                         <td>
-                            
                             <asp:TextBox ID="Desde_TextBox" runat="server" TextMode="Date" Width="125px" />
            
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
@@ -250,9 +248,11 @@
                         <td />
                         <td />
                     </tr>
+                </table>
 
+                <table style="font-size: x-small; ">
                      <tr>
-                        <td colspan="3">
+                        <td style="width: 48%; ">
                             <br /><br />
                             <fieldset style="text-align: left; margin-left: 15px; vertical-align: top; ">
                                 <legend>Centro de costo:</legend>
@@ -277,8 +277,23 @@
                             </fieldset>
                         <td />
 
-                        <td></td>
-                        <td></td>
+                        <td style="width: 4%; " />
+                        <td style="width: 48%; vertical-align: top; ">
+                            <br /><br />
+                            <fieldset style="text-align: left; margin-left: 15px; vertical-align: top; ">
+                                <legend>Reconversión 2.021:</legend>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <asp:CheckBox ID="ReconvertirCifrasAntes_01Oct2021_CheckBox" 
+                                                      runat="server" 
+                                                      Text="Reconvertir cifras anteriores al 1/Oct/21" 
+                                                      Checked="False" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                        </td>
                     </tr>
 
                 </table>
@@ -322,7 +337,7 @@
                                              DataTextField="Descripcion" 
                                              DataValueField="Moneda" 
                                              AutoPostBack="False" 
-                                             SelectionMode="Multiple" 
+                                             SelectionMode="Single" 
                                              Rows="20" 
                                              CssClass="smallfont" />
                         </td>

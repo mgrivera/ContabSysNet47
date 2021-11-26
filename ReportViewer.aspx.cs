@@ -2838,7 +2838,7 @@ namespace ContabSysNetWeb
                             string format = "";
                             string orientation = "";
                             string simpleFont = "";
-                            string soloTotales = ""; 
+                            string soloTotales = "";
 
                             if (Request.QueryString["tit"] != null && !string.IsNullOrEmpty(Request.QueryString["tit"].ToString()))
                                 tituloReporte = Request.QueryString["tit"].ToString();
@@ -2861,25 +2861,38 @@ namespace ContabSysNetWeb
                             if (Request.QueryString["st"] != null && !string.IsNullOrEmpty(Request.QueryString["st"].ToString()))
                                 soloTotales = Request.QueryString["st"].ToString();
 
-                            //string sqlFilter = Session["FiltroForma"].ToString();
+                            // el usuario indica *en el filtro* si desea reconvertir cifras anteriores al 1/Oct/2.021 
+                            bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
+                            int moneda = (int)Session["monedaSeleccionada"];
 
-                            //dbContab_Contab_Entities db = new dbContab_Contab_Entities();
 
-                            //var query = db.dAsientos.Include("Asiento").
-                            //                         Include("Asiento.Moneda1").
-                            //                         Include("Asiento.Compania").
-                            //                         Include("CentrosCosto").
-                            //                         Include("CuentasContable").
-                            //                         Include("CuentasContable.tGruposContable").
-                            //                         Where(sqlFilter);
+                            // las fechas vienen como Dates en el Session; en realidad como Objects; por eso se deben convertir a Dates 
+                            DateTime fechaInicialPeriodo = (DateTime)Session["fechaInicialPeriodo"];
+                            DateTime fechaFinalPeriodo = (DateTime)Session["fechaFinalPeriodo"];
+
+                            string sFechaInicialPeriodo = fechaInicialPeriodo.ToString("yyyy-MM-dd");
+                            string sFechaFinalPeriodo = fechaFinalPeriodo.ToString("yyyy-MM-dd");
+
+                            // ---------------------------------------------------------------------------------------------------------------------------------------------
+                            // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión *solo* a esta moneda 
+                            var monedaNacional_result = Reconversion.Get_MonedaNacional();
+
+                            if (monedaNacional_result.error)
+                            {
+                                ErrMessage_Cell.InnerHtml = monedaNacional_result.message;
+                                return;
+                            }
+
+                            Monedas monedaNacional = monedaNacional_result.moneda;
+                            // ---------------------------------------------------------------------------------------------------------------------------------------------
 
                             string filter = Session["FiltroForma"].ToString();
 
-                            //var query = contabContext.dAsientos.Select(a => a);
                             var query = "Select dAsientos.* From dAsientos " +
                                         "Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico " +
                                         "Inner Join CuentasContables On dAsientos.CuentaContableID = CuentasContables.ID " +
-                                       $"Where {filter}";
+                                       $"Where {filter} And (dAsientos.Referencia <> 'Reconversión 2021') " +
+                                       $"And (Asientos.Fecha Between '{sFechaInicialPeriodo}' And '{sFechaFinalPeriodo}')";
 
                             ContabContext contabContext = new ContabContext();
                             var partidas = contabContext.dAsientos.SqlQuery(query);
@@ -2921,6 +2934,20 @@ namespace ContabSysNetWeb
                                                             "que Ud. ha requerido. <br /><br /> Probablemente Ud. no ha aplicado un filtro y seleccionado información aún.";
                                 return;
                             }
+
+                            // -------------------------------------------------------------------------------------------------------------------------------------
+                            // aplicamos la reconversión *solo* cuando: el usuario lo indicó, la moneda es Bs y la la fecha de inicio es anterior al 1/Oct
+                            if (bReconvertirCifrasAntes_01Oct2021 && (moneda == monedaNacional.Moneda) && fechaInicialPeriodo < new DateTime(2021, 10, 1))
+                            {
+                                // solo reconvertimos movimientos *anteriores* al 1/Oct/2.021 
+                                foreach (var item in myList.Where(x => x.Fecha < new DateTime(2021, 10, 1)))
+                                {
+                                    item.Debe = Math.Round((item.Debe / 1000000), 2);
+                                    item.Haber = Math.Round((item.Haber / 1000000), 2);
+                                    item.Saldo = item.Debe - item.Haber;
+                                }
+                            }
+                            // -------------------------------------------------------------------------------------------------------------------------------------
 
                             if (orientation == "v")
                                 this.ReportViewer1.LocalReport.ReportPath = "Contab/Consultas contables/Centros de costo/CentrosCosto_Portrait.rdlc";

@@ -60,6 +60,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
             LimpiarFiltro MyLimpiarFiltro = new LimpiarFiltro(this);
             MyLimpiarFiltro.LimpiarControlesPagina();
             MyLimpiarFiltro = null;
+
+            this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked = false;
         }
 
         protected void AplicarFiltro_Button_Click(object sender, EventArgs e)
@@ -73,14 +75,23 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
                 return;
             }
 
+            if (this.Sql_Asientos_Moneda_Numeric.SelectedIndex == -1)
+            {
+                // el usuario debe siempre seleccionar, al menos, una moneda en la lista 
+                ErrMessage_Span.InnerHtml = "Ud. debe seleccionar una moneda de la lista.";
+                ErrMessage_Span.Style["display"] = "block";
+
+                return;
+            }
+
             BuildSqlCriteria MyConstruirCriterioSql = new BuildSqlCriteria();
             //MyConstruirCriterioSql.LinqToEntities = true;       // para que regrese un filtro apropiado para linq to entities ... 
             MyConstruirCriterioSql.ContruirFiltro(this.Controls);
             string sSqlSelectString = MyConstruirCriterioSql.CriterioSql;
             MyConstruirCriterioSql = null;
 
-            sSqlSelectString = sSqlSelectString + " And (Asientos.Fecha Between '" + Convert.ToDateTime(Desde_TextBox.Text).ToString("yyyy-MM-dd") + "'";
-            sSqlSelectString = sSqlSelectString + " And '" + Convert.ToDateTime(Hasta_TextBox.Text).ToString("yyyy-MM-dd") + "')";
+            //sSqlSelectString = sSqlSelectString + " And (Asientos.Fecha Between '" + Convert.ToDateTime(Desde_TextBox.Text).ToString("yyyy-MM-dd") + "'";
+            //sSqlSelectString = sSqlSelectString + " And '" + Convert.ToDateTime(Hasta_TextBox.Text).ToString("yyyy-MM-dd") + "')";
 
             if (this.ConCentroCosto_RadioButton.Checked)
                 sSqlSelectString += " And (dAsientos.CentroCosto Is Not Null)";
@@ -89,6 +100,13 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo
                 sSqlSelectString += " And (dAsientos.CentroCosto Is Null)";
 
             Session["FiltroForma"] = sSqlSelectString;
+
+            // nótese que las fechas van en variables session como dates 
+            Session["fechaInicialPeriodo"] = Convert.ToDateTime(Desde_TextBox.Text);
+            Session["fechaFinalPeriodo"] = Convert.ToDateTime(Hasta_TextBox.Text);
+            Session["monedaSeleccionada"] = Convert.ToInt32(this.Sql_Asientos_Moneda_Numeric.SelectedValue);
+
+            Session["ReconvertirCifrasAntes_01Oct2021"] = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
 
             // -------------------------------------------------------------------------------------------------------------------------
             // para guardar el contenido de los controles de la página para recuperar el state cuando se abra la proxima vez 

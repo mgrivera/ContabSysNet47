@@ -157,6 +157,15 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Centros_de_costo {
         protected global::System.Web.UI.WebControls.RadioButton Todos_RadioButton;
         
         /// <summary>
+        /// ReconvertirCifrasAntes_01Oct2021_CheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ReconvertirCifrasAntes_01Oct2021_CheckBox;
+        
+        /// <summary>
         /// TabPanel2 control.
         /// </summary>
         /// <remarks>

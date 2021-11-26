@@ -203,9 +203,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"]; 
             bool bExcluirAsientosReconversion_01Oct2021 = (bool)Session["ExcluirAsientosReconversion_01Oct2021"];
 
-            // ----------------------------------------------------------------------------------------------------------------------
-            // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
-            // *solo* a esta moneda 
+            // ---------------------------------------------------------------------------------------------------------------------------------------------
+            // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión *solo* a esta moneda 
             var monedaNacional_result = Reconversion.Get_MonedaNacional();
 
             if (monedaNacional_result.error)
@@ -217,7 +216,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
             }
 
             Monedas monedaNacional = monedaNacional_result.moneda;
-            // ----------------------------------------------------------------------------------------------------------------------
+            // ---------------------------------------------------------------------------------------------------------------------------------------------
 
             var contabContext = new ContabContext(); 
 
