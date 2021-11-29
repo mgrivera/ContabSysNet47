@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Web;
 using System.Web.UI;
 using System.Web.Security;
-using System.Xml.Linq;
 using System.IO;
-//using ContabSysNetWeb.Old_App_Code;
-using System.Linq;
-//using ContabSysNet_Web.old_app_code;
-using ContabSysNet_Web.ModelosDatos_EF;
-using System.Collections.Generic;
 using System.Web.UI.HtmlControls;
-using ContabSysNet_Web.ModelosDatos_EF.Bancos;
-using System.Text;
-using System.Globalization;
 using ContabSysNet_Web.Clases;
+using ContabSysNet_Web.ModelosDatos_EF.Contab;
 
 namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 {
@@ -47,12 +38,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 
                 this.AsientosContables_Copiar_Fieldset.Visible = false;
                 this.AsientosContables_Exportar_Fieldset.Visible = false;
-
-                //string errorMessage = "Aparentemente, el criterio de ejecucción de esta conciliación no está correctamente establecido.<br /> " +
-                //            "Por favor, intente establecer un criterio de ejecución para esta conciliación bancaria.";
-
-                //CustomValidator1.IsValid = false;
-                //CustomValidator1.ErrorMessage = errorMessage;
             }
         }
 
@@ -107,7 +92,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                 return;
             }
 
-            FuncionesContab2 funcionesContab = new FuncionesContab2();
+            dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
+            FuncionesContab2 funcionesContab = new FuncionesContab2(contabContext);
             int cantidadAsientosCopiados = 0;
             string resultMessage = "";
 
@@ -140,8 +126,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
             return;
         }
 
-
-
         protected void AsientosContables_Exportar_Button_Click(object sender, EventArgs e)
         {
             string ajaxPopUpMessage = "";
@@ -162,7 +146,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
                 return;
             }
 
-            FuncionesContab2 funcionesContab = new FuncionesContab2();
+            dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
+            FuncionesContab2 funcionesContab = new FuncionesContab2(contabContext);
             int cantidadPartidasLeidas = 0;
             string resultMessage = "";
             string filePath = ""; 
@@ -198,10 +183,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
             return;
         }
 
-
         protected void btnOk_Click(object sender, EventArgs e)
         {
-
         }
 
         protected void DownloadFile_LinkButton_Click(object sender, EventArgs e)
@@ -221,7 +204,6 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Comprobantes
 
                 return;
             }
-
 
             FileStream liveStream = new FileStream(FileName_HiddenField.Value, FileMode.Open, FileAccess.Read);
 

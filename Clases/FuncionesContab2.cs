@@ -16,9 +16,9 @@ namespace ContabSysNet_Web.Clases
     {
         dbContab_Contab_Entities _context;
 
-        public FuncionesContab2()
+        public FuncionesContab2(dbContab_Contab_Entities context)
         {
-            _context = new dbContab_Contab_Entities(); 
+            _context = context; 
         }
 
         public bool CopiarAsientosContables(string filter, string filter_subQuery, 

@@ -114,26 +114,34 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceGeneral
 
             // nótese como usamos un modelo de datos LinqToSql (no EF), pues el código en la clase AsientosContables lo usa así y fue 
             // escrito hace bastante tiempo ... 
-            ContabSysNet_Web.ModelosDatos.dbContabDataContext contabLinqToSqlContex = new ContabSysNet_Web.ModelosDatos.dbContabDataContext();
-            FuncionesContab funcionesContab = new FuncionesContab(parametros.CiaContab, parametros.Moneda, contabLinqToSqlContex);
+            //ContabSysNet_Web.ModelosDatos.dbContabDataContext contabLinqToSqlContex = new ContabSysNet_Web.ModelosDatos.dbContabDataContext();
+
+            dbContab_Contab_Entities dbContab = new dbContab_Contab_Entities();
+
+            //FuncionesContab funcionesContab = new FuncionesContab(parametros.CiaContab, parametros.Moneda, contabLinqToSqlContex);
+            FuncionesContab2 funcionesContab2 = new FuncionesContab2(dbContab);
 
             bool mesAnteriorCerradoEnContab = true;
-            string popupMessage = ""; 
+            string popupMessage = "";
 
-            if (funcionesContab.ValidarUltimoMesCerradoContab(parametros.Desde.AddMonths(-1), parametros.CiaContab, out errorMessage))
+            short mesFiscal;
+            short anoFiscal; 
+
+            // el mes *anterior* al período de la consulta debe estar cerrado. La función regresa False cuando el mes está cerrado
+            // por eso fallamos si el mes *anterior* no está cerrado; es decir, cuando la función regresa True ... 
+            if (funcionesContab2.ValidarMesCerradoEnContab(parametros.Desde.AddMonths(-1), parametros.CiaContab, out mesFiscal, out anoFiscal, out errorMessage))
             {
                 // NOTA: el mes *anterior* a la fecha de inicio DEBE estar cerrado (o uno posterior)
                 // la función regresa False si el mes está cerrado
                 // si la función regresa True es que NO está cerrado y eso no debe ocurrir en este contexto 
                 popupMessage = "El mes anterior al mes indicado para esta consulta, <b>no</b> está cerrado. <br /> " +
-                               "Aunque Ud. puede continuar e intentar obtener esta consulta, las cifras determinadas y " + 
+                               "Aunque Ud. puede continuar e intentar obtener esta consulta, las cifras determinadas y " +
                                "mostradas no serán del todo confiables.<br /><br />" +
                                "Aún así, desea continuar con la ejecución de esta consulta?";
 
-                mesAnteriorCerradoEnContab = false; 
+                mesAnteriorCerradoEnContab = false;
             }
 
-            dbContab_Contab_Entities dbContab = new dbContab_Contab_Entities();
             ParametrosContab parametrosContab = dbContab.ParametrosContabs.Where(p => p.Cia == parametros.CiaContab).FirstOrDefault();
 
             if (parametrosContab == null)

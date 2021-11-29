@@ -528,7 +528,6 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
 
                 facturaNueva.CuotasFacturas.Add(cuota);
 
-
                 // -----------------------------------------------------------------------------------------------------------------------------
                 // para cada factura que intentamos registrar, debemos revisar que exista una cuenta contable de compras (CxC); de otra manera, 
                 // este error podría surgir luego que las facturas fueron agregadas y cuando el usuario intente registrar sus asientos contables 
@@ -614,43 +613,6 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             }
         }
 
-
-
-        //[HttpGet]
-        //public HttpResponseMessage LeerCatalogosGrabarAsientosContables(int ciaContabSeleccionadaID)
-        //{
-        //    if (!User.Identity.IsAuthenticated)
-        //    {
-        //        var errorResult = new
-        //        {
-        //            ErrorFlag = true,
-        //            ErrorMessage = "Error: por favor haga un login a esta aplicación, y luego regrese a ejecutar esta función."
-        //        };
-
-        //        return Request.CreateResponse(HttpStatusCode.OK, errorResult);
-        //    }
-
-        //    dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
-
-        //    var cuentasContables = contabContext.CuentasContables.Where(c => c.TotDet == "D" && c.ActSusp == "A" && c.Cia == ciaContabSeleccionadaID).
-        //                                                          OrderBy(c => c.Cuenta).
-        //                                                          Select(c => new { cuenta = c.ID, descripcion = c.Cuenta + " - " + c.Descripcion });
-
-        //    var tiposAsiento = contabContext.Asientos.Where(a => a.Cia == ciaContabSeleccionadaID).OrderBy(a => a.Tipo).Select(a => a.Tipo).Distinct();
-
-        //    var result = new
-        //    {
-        //        ErrorFlag = false,
-        //        ErrorMessage = "",
-        //        ResultMessage = "Ok, los catálogos necesarios para efectuar el registro de los asientos contables, han sido cargados.",
-        //        CuentasContables = cuentasContables.ToList(),
-        //        TiposAsiento = tiposAsiento.ToList()
-        //    };
-
-        //    return Request.CreateResponse(HttpStatusCode.OK, result);
-        //}
-
-
         [HttpPost]
         public HttpResponseMessage GrabarAsientosContables(string numeroLote,
                                                            decimal factorCambio, 
@@ -686,8 +648,8 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
                                                        Where(f => f.Lote == numeroLote);
 
             // funciones genéricas en Contab (ej: validar mes cerrado en Contab) 
-
-            FuncionesContab2 funcionesContab = new FuncionesContab2();
+            dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
+            FuncionesContab2 funcionesContab = new FuncionesContab2(contabContext);
 
 
             // para asegurarnos que el Ingreso y UltAct en todos los asientos será el mismo 
@@ -794,7 +756,6 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK, result0);
             }
         }
-
 
         private bool AgregarAsientoContableParaFactura(BancosEntities bancosContext, 
                                                         Factura factura,
@@ -950,8 +911,6 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             asientoContable.dAsientos.Add(partida);
             diferenciaAsiento -= partida.Haber;
 
-
-
             // --------------------------------------------------------------------------------------------
             // 3) impuestos Iva 
 
@@ -1017,13 +976,13 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
                     partidaCxC.Debe += Math.Abs(diferenciaAsiento);
             }
 
-
             // -----------------------------------------------------------------------------------------------------------------------------------
             // finalmente, obtenemos un número para el asiento contable ... nótese como usamos una función definida antes ... 
 
             short numeroAsientoContable;
 
-            FuncionesContab2 funcionesContab = new FuncionesContab2();
+            dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
+            FuncionesContab2 funcionesContab = new FuncionesContab2(contabContext);
 
             if (!funcionesContab.ObtenerNumeroAsientoContab(asientoContable.Fecha, factura.Cia, asientoContable.Tipo, out numeroAsientoContable, out errorMessage))
                 return false;
@@ -1119,9 +1078,7 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
                 return false;
             }
 
-
             // validamos que existan cuentas contables definidas para el registro de impuestos Iva 
-
             cuentaContableDefinidaID = 0;
             conceptoDefinicionCuentaContable = 0;
 
@@ -1154,7 +1111,6 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
 
             return true; 
         }
-
 
         private int LeerCuentaContableDefinida(BancosEntities bancosContext,
                                                int concepto,

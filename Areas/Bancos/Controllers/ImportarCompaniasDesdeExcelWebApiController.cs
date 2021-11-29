@@ -1043,11 +1043,11 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             // TODO: leer usando executeQueryStore ... 
 
             string sqlString = "Select * From Facturas Where Lote = {0} And Cia = {1}"; 
-            var queryFacturas = bancosContext.ExecuteStoreQuery<Factura>(sqlString, new object [] { numeroLote, ciaContabSeleccionada }); 
+            var queryFacturas = bancosContext.ExecuteStoreQuery<Factura>(sqlString, new object [] { numeroLote, ciaContabSeleccionada });
 
             // funciones genéricas en Contab (ej: validar mes cerrado en Contab) 
-
-            FuncionesContab2 funcionesContab = new FuncionesContab2();
+            dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
+            FuncionesContab2 funcionesContab = new FuncionesContab2(contabContext);
 
 
             // para asegurarnos que el Ingreso y UltAct en todos los asientos será el mismo 
@@ -1291,7 +1291,6 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
 
             // ----------------------------------------------------------
             // ahora agregamos las partidas del asiento ... 
-
             ContabSysNet_Web.ModelosDatos_EF.Bancos.dAsiento partida;
 
             short numeroPartida = 0;
@@ -1351,7 +1350,6 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
             }
 
             // 3) impuestos Iva 
-
             if (membresiaIva != 0 || arysVialIva != 0)
             {
                 numeroPartida = Convert.ToInt16(numeroPartida + 10);
@@ -1390,7 +1388,8 @@ namespace ContabSysNet_Web.Areas.Bancos.Controllers
 
             short numeroAsientoContable;
 
-            FuncionesContab2 funcionesContab = new FuncionesContab2();
+            dbContab_Contab_Entities contabContext = new dbContab_Contab_Entities();
+            FuncionesContab2 funcionesContab = new FuncionesContab2(contabContext);
 
             if (!funcionesContab.ObtenerNumeroAsientoContab(asientoContable.Fecha, factura.Cia, asientoContable.Tipo, out numeroAsientoContable, out errorMessage))
                 return false;
