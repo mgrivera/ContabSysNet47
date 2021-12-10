@@ -78,6 +78,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                 decimal? nTotalDebe = 0;
                 decimal? nTotalHaber = 0;
 
+                DateTime fechaInicialPeriodo = Convert.ToDateTime(Session["FechaInicialPeriodo"].ToString());
+                DateTime fechaFinalPeriodo = Convert.ToDateTime(Session["FechaFinalPeriodo"].ToString());
+
                 // ahora sumarizamos el debe y el haber para la cuenta y período indicados ... 
                 if (bReconvertirCifrasAntes_01Oct2021 && (moneda == monedaNacional))
                 {
@@ -85,34 +88,32 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                     nTotalDebe = (from d in dbContab.dAsientos
                                       where d.CuentaContableID == Convert.ToInt32(Request.QueryString["cta"].ToString()) &&
                                             d.Asiento.Moneda == Convert.ToInt32(Request.QueryString["mon"]) &&
-                                            d.Asiento.Fecha >= Convert.ToDateTime(Session["FechaInicialPeriodo"].ToString()) &&
-                                            d.Asiento.Fecha < new DateTime(2021, 10, 1) && 
-                                            d.Referencia != "Reconversión 2021"
+                                            (d.Asiento.Fecha >= fechaInicialPeriodo && d.Asiento.Fecha < new DateTime(2021, 10, 1)) && 
+                                            (d.Referencia == null || d.Referencia != "Reconversión 2021")
                                   select (decimal?)d.Debe).Sum();
 
                     nTotalHaber = (from d in dbContab.dAsientos
                                        where d.CuentaContableID == Convert.ToInt32(Request.QueryString["cta"].ToString()) &&
                                              d.Asiento.Moneda == Convert.ToInt32(Request.QueryString["mon"]) &&
-                                             d.Asiento.Fecha >= Convert.ToDateTime(Session["FechaInicialPeriodo"].ToString()) &&
-                                             d.Asiento.Fecha < new DateTime(2021, 10, 1) &&
-                                             d.Referencia != "Reconversión 2021"
+                                             (d.Asiento.Fecha >= fechaInicialPeriodo && d.Asiento.Fecha < new DateTime(2021, 10, 1)) &&
+                                             (d.Referencia == null || d.Referencia != "Reconversión 2021")
                                    select (decimal?)d.Haber).Sum();
 
                     // luego leemos valores *posteriores* a 1/Oct/21 y *no* reconvertimos 
                     var nTotalDebe2 = (from d in dbContab.dAsientos
                                       where d.CuentaContableID == Convert.ToInt32(Request.QueryString["cta"].ToString()) &&
                                             d.Asiento.Moneda == Convert.ToInt32(Request.QueryString["mon"]) &&
-                                            d.Asiento.Fecha >= new DateTime(2021, 10, 1) && 
-                                            d.Asiento.Fecha <= Convert.ToDateTime(Session["FechaFinalPeriodo"].ToString()) &&
-                                            d.Referencia != "Reconversión 2021"
+                                            (d.Asiento.Fecha >= fechaInicialPeriodo && d.Asiento.Fecha <= fechaFinalPeriodo) &&
+                                            d.Asiento.Fecha >= new DateTime(2021, 10, 1) &&
+                                            (d.Referencia == null || d.Referencia != "Reconversión 2021")
                                        select (decimal?)d.Debe).Sum();
 
                     var nTotalHaber2 = (from d in dbContab.dAsientos
                                        where d.CuentaContableID == Convert.ToInt32(Request.QueryString["cta"].ToString()) &&
                                              d.Asiento.Moneda == Convert.ToInt32(Request.QueryString["mon"]) &&
+                                             (d.Asiento.Fecha >= fechaInicialPeriodo && d.Asiento.Fecha <= fechaFinalPeriodo) &&
                                              d.Asiento.Fecha >= new DateTime(2021, 10, 1) &&
-                                             d.Asiento.Fecha <= Convert.ToDateTime(Session["FechaFinalPeriodo"].ToString()) &&
-                                             d.Referencia != "Reconversión 2021"
+                                             (d.Referencia == null || d.Referencia != "Reconversión 2021")
                                         select (decimal?)d.Haber).Sum();
 
                     nTotalDebe = nTotalDebe.HasValue ? nTotalDebe.Value : 0;
@@ -131,17 +132,17 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                     nTotalDebe = (from d in dbContab.dAsientos
                                       where d.CuentaContableID == Convert.ToInt32(Request.QueryString["cta"].ToString()) &&
                                             d.Asiento.Moneda == Convert.ToInt32(Request.QueryString["mon"]) &&
-                                            d.Asiento.Fecha >= Convert.ToDateTime(Session["FechaInicialPeriodo"].ToString()) &&
-                                            d.Asiento.Fecha <= Convert.ToDateTime(Session["FechaFinalPeriodo"].ToString()) &&
-                                            d.Referencia != "Reconversión 2021"
+                                            d.Asiento.Fecha >= fechaInicialPeriodo &&
+                                            d.Asiento.Fecha <= fechaFinalPeriodo &&
+                                            (d.Referencia == null || d.Referencia != "Reconversión 2021")
                                   select (decimal?)d.Debe).Sum();
 
                     nTotalHaber = (from d in dbContab.dAsientos
                                        where d.CuentaContableID == Convert.ToInt32(Request.QueryString["cta"].ToString()) &&
                                              d.Asiento.Moneda == Convert.ToInt32(Request.QueryString["mon"]) &&
-                                             d.Asiento.Fecha >= Convert.ToDateTime(Session["FechaInicialPeriodo"].ToString()) &&
-                                             d.Asiento.Fecha <= Convert.ToDateTime(Session["FechaFinalPeriodo"].ToString()) &&
-                                             d.Referencia != "Reconversión 2021"
+                                             d.Asiento.Fecha >= fechaInicialPeriodo &&
+                                             d.Asiento.Fecha <= fechaFinalPeriodo &&
+                                             (d.Referencia == null || d.Referencia != "Reconversión 2021")
                                    select (decimal?)d.Haber).Sum();
                 }
 
@@ -172,8 +173,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                         "Inner Join Monedas mo on a.MonedaOriginal = mo.Moneda Inner Join Companias co on a.Cia = co.Numero " +
                         "Left Join Asientos_Documentos_Links l on a.NumeroAutomatico = l.NumeroAutomatico " +
 
-                        "Where d.CuentaContableID = @CuentaContableID And a.Moneda = @Moneda And (a.Fecha >= @FechaInicialPeriodo and Fecha < '2021-10-1') And " +
-                        "(d.Referencia <> 'Reconversión 2021') " + 
+                        "Where (d.CuentaContableID = @CuentaContableID) And (a.Moneda = @Moneda) And (a.Fecha >= @FechaInicialPeriodo and a.Fecha < @FechaFinalPeriodo) And " +
+                        "(a.Fecha < '2021-10-1') And (d.Referencia Is Null Or d.Referencia <> 'Reconversión 2021') " +
 
                         "Group By d.Partida, d.NumeroAutomatico, a.Numero, a.Fecha, d.Descripcion, d.Referencia, d.Debe, d.Haber, co.Abreviatura, m.Simbolo, mo.Simbolo " +
 
@@ -188,8 +189,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                         "Inner Join Monedas mo on a.MonedaOriginal = mo.Moneda Inner Join Companias co on a.Cia = co.Numero " +
                         "Left Join Asientos_Documentos_Links l on a.NumeroAutomatico = l.NumeroAutomatico " +
 
-                        "Where d.CuentaContableID = @CuentaContableID And a.Moneda = @Moneda And (a.Fecha >= '2021-10-1' and Fecha <= @FechaFinalPeriodo) And " +
-                        "(d.Referencia <> 'Reconversión 2021') " +
+                        "Where (d.CuentaContableID = @CuentaContableID) And (a.Moneda = @Moneda) And (a.Fecha >= @FechaInicialPeriodo and a.Fecha <= @FechaFinalPeriodo) And " +
+                        "(a.Fecha >= '2021-10-1') And (d.Referencia Is Null Or d.Referencia <> 'Reconversión 2021') " +
 
                         "Group By d.Partida, d.NumeroAutomatico, a.Numero, a.Fecha, d.Descripcion, d.Referencia, d.Debe, d.Haber, co.Abreviatura, m.Simbolo, mo.Simbolo " +
 

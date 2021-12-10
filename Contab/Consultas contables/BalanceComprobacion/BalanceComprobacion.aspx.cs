@@ -249,6 +249,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             }
 
             Monedas monedaNacional = monedaNacional_return.moneda;
+            Session["monedaNacional"] = monedaNacional.Moneda; 
             // ----------------------------------------------------------------------------------------------------------------------
 
             // --------------------------------------------------------------------------------------------
@@ -620,7 +621,6 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             }
 
             // ahora recorremos la lista y buscamos la descripción de cada cuenta contable 
-
             foreach (BalanceComprobacion_Item item in MyBalanceComprobacion_Lista)
             {
                 if (item.nivel1 != null)

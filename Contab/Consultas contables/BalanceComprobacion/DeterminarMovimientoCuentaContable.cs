@@ -71,23 +71,28 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                 selectMontoDebeHaber = "Select Sum(Round((d.Debe / 1000000), 2)) As SumDebe, Sum(Round((d.Haber / 1000000), 2)) As SumHaber, Count(*) As ContaAsientos " +
                                               "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
                                               "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
-                                              "(a.Fecha Between @fechaInicialPeriodo And '2021-09-30') And " +
-                                              filtroExcluirAsientosTipoCierreAnual + " And  (d.Referencia <> 'Reconversión 2021') " + 
+                                              "(a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo) And " +
+                                              "(a.Fecha <= '2021-09-30') And " +
+                                              filtroExcluirAsientosTipoCierreAnual +
+                                              " And  (d.Referencia Is Null Or d.Referencia <> 'Reconversión 2021') " +
 
-                                              "Union " + 
+                                              "Union " +
 
                                         "Select Sum(d.Debe) As SumDebe, Sum(d.Haber) As SumHaber, Count(*) As ContaAsientos " +
                                               "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
                                               "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
-                                              "(a.Fecha Between '2021-10-1' And @fechaFinalPeriodo) And " +
-                                              filtroExcluirAsientosTipoCierreAnual + " And  (d.Referencia <> 'Reconversión 2021')";
+                                              "(a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo) And " +
+                                              "(a.Fecha >= '2021-10-1') And " +
+                                              filtroExcluirAsientosTipoCierreAnual +
+                                              " And  (d.Referencia Is Null Or d.Referencia <> 'Reconversión 2021') "; 
             }
             else
             {
                 selectMontoDebeHaber = "Select Sum(Debe) As SumDebe, Sum(Haber) As SumHaber, Count(*) As ContaAsientos " +
                                         "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
                                         "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
-                                        "a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo And (d.Referencia <> 'Reconversión 2021') And " +
+                                        "(a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo) " +
+                                        "And (d.Referencia Is Null Or d.Referencia <> 'Reconversión 2021') And " +
                                         filtroExcluirAsientosTipoCierreAnual;
             }
 
