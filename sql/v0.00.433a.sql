@@ -17,6 +17,7 @@ Create PROCEDURE [dbo].[spBalanceGeneral_leerMovimientos]
 	@moneda int,
 	@monedaOriginal int = Null, 
 	@excluirAsientoTipoCierreAnual bit, 
+	@reconvertirCifrasAntes_01Oct2021 bit, 
 	@debe money out, 
 	@haber money out, 
 	@cantidadMovimientos smallint out, 
@@ -33,27 +34,55 @@ BEGIN
 	set @cantidadMovimientos = 0; 
 	
 	/* nótese que recibimos como parámetro si debemos o no leer asientos de tipo cierre anual */
-	/* nótese que *siempre* excluimos asientos de reconversión */ 
 	if (@excluirAsientoTipoCierreAnual = 1) 
 		begin 
-			select @debe = sum(debe), @haber = SUM(haber), @cantidadMovimientos = COUNT(*) 	
-				   from dAsientos Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico 
-				   where (dAsientos.CuentaContableID = @cuentaContableID) and (Asientos.Fecha between @desde and @hasta) and (Asientos.Moneda = @moneda) and 
-						 (@monedaOriginal Is Null or Asientos.MonedaOriginal = @monedaOriginal) and 
-						 (not (Asientos.AsientoTipoCierreAnualFlag Is Not Null And 
-							   Asientos.AsientoTipoCierreAnualFlag = 1 And 
-							   Asientos.MesFiscal <> 13)) And 
-						 (not (dAsientos.Referencia = 'Reconversión 2021'));		 
+			if (@reconvertirCifrasAntes_01Oct2021 = 0) 
+				begin 
+					-- cuando el usuario NO reconvierte, leemos el asiento de reconversión 
+					select @debe = sum(debe), @haber = SUM(haber), @cantidadMovimientos = COUNT(*) 	
+					   from dAsientos Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico 
+					   where (dAsientos.CuentaContableID = @cuentaContableID) and (Asientos.Fecha between @desde and @hasta) and (Asientos.Moneda = @moneda) and 
+							 (@monedaOriginal Is Null or Asientos.MonedaOriginal = @monedaOriginal) and 
+							 (not (Asientos.AsientoTipoCierreAnualFlag Is Not Null And 
+								   Asientos.AsientoTipoCierreAnualFlag = 1 And 
+								   Asientos.MesFiscal <> 13));
+				end 
+			else 
+				begin 
+					-- cuando el usuario reconvierte, NO leemos el asiento de reconversión 
+					select @debe = sum(debe), @haber = SUM(haber), @cantidadMovimientos = COUNT(*) 	
+					   from dAsientos Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico 
+					   where (dAsientos.CuentaContableID = @cuentaContableID) and (Asientos.Fecha between @desde and @hasta) and (Asientos.Moneda = @moneda) and 
+							 (@monedaOriginal Is Null or Asientos.MonedaOriginal = @monedaOriginal) and 
+							 (not (Asientos.AsientoTipoCierreAnualFlag Is Not Null And 
+								   Asientos.AsientoTipoCierreAnualFlag = 1 And 
+								   Asientos.MesFiscal <> 13)) And 
+								  (dAsientos.Referencia Is Null Or dAsientos.Referencia <> 'Reconversión 2021');
+				end 		 
 		end 
 	else 
 		begin 
-			select @debe = sum(debe), 
+			if (@reconvertirCifrasAntes_01Oct2021 = 0) 
+				begin 
+					-- cuando el usuario NO reconvierte, leemos el asiento de reconversión 
+					select @debe = sum(debe), 
+				   @haber = SUM(haber), 
+				   @cantidadMovimientos = COUNT(*) 	
+				   from dAsientos Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico 
+				   where dAsientos.CuentaContableID = @cuentaContableID and (Asientos.Fecha between @desde and @hasta) and (Asientos.Moneda = @moneda) and 
+						 (@monedaOriginal Is Null or Asientos.MonedaOriginal = @monedaOriginal);
+				end 
+			else 
+				begin 
+					-- cuando el usuario reconvierte, NO leemos el asiento de reconversión 
+					select @debe = sum(debe), 
 				   @haber = SUM(haber), 
 				   @cantidadMovimientos = COUNT(*) 	
 				   from dAsientos Inner Join Asientos On dAsientos.NumeroAutomatico = Asientos.NumeroAutomatico 
 				   where dAsientos.CuentaContableID = @cuentaContableID and (Asientos.Fecha between @desde and @hasta) and (Asientos.Moneda = @moneda) and 
 						 (@monedaOriginal Is Null or Asientos.MonedaOriginal = @monedaOriginal) And 
-						 (not (dAsientos.Referencia = 'Reconversión 2021'));
+						 (dAsientos.Referencia Is Null Or dAsientos.Referencia <> 'Reconversión 2021');
+				end 
 		end 
 	         
 	if (@debe Is Null) set @debe = 0; 

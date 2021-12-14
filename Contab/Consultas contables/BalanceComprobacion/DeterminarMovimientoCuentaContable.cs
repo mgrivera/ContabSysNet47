@@ -68,6 +68,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             {
                 // con el Union logramos: reconvertir hasta el 1/Sept/21; no reconvertir desde el 1/Oct/21 
                 // Nota: este Select, con el Union, regresará 2 rows 
+                // Nota: cuando el usuario quiere reconvertir, *excluimos* el asiento de reconversión 
                 selectMontoDebeHaber = "Select Sum(Round((d.Debe / 1000000), 2)) As SumDebe, Sum(Round((d.Haber / 1000000), 2)) As SumHaber, Count(*) As ContaAsientos " +
                                               "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
                                               "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
@@ -88,11 +89,11 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             }
             else
             {
+                // Nota: cuando el usuario *no* quiere reconvertir, leemos el asiento de reconversión 
                 selectMontoDebeHaber = "Select Sum(Debe) As SumDebe, Sum(Haber) As SumHaber, Count(*) As ContaAsientos " +
                                         "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
                                         "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
-                                        "(a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo) " +
-                                        "And (d.Referencia Is Null Or d.Referencia <> 'Reconversión 2021') And " +
+                                        "(a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo) And " +
                                         filtroExcluirAsientosTipoCierreAnual;
             }
 

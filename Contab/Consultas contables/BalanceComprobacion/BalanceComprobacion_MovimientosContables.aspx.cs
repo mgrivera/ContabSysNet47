@@ -84,6 +84,7 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                 // ahora sumarizamos el debe y el haber para la cuenta y período indicados ... 
                 if (bReconvertirCifrasAntes_01Oct2021 && (moneda == monedaNacional))
                 {
+                    // Nota: cuando el usuario quiere reconvertir, excluimos el asiento de reconversión 
                     // primero leemos valores *anteriores* a 1/Oct/21 y reconvertimos 
                     nTotalDebe = (from d in dbContab.dAsientos
                                       where d.CuentaContableID == Convert.ToInt32(Request.QueryString["cta"].ToString()) &&
@@ -129,20 +130,19 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                     nTotalHaber += nTotalHaber2; 
                 } else
                 {
+                    // Nota: cuando el usuario no quiere reconvertir, mantenemos el asiento de reconversión 
                     nTotalDebe = (from d in dbContab.dAsientos
                                       where d.CuentaContableID == Convert.ToInt32(Request.QueryString["cta"].ToString()) &&
                                             d.Asiento.Moneda == Convert.ToInt32(Request.QueryString["mon"]) &&
                                             d.Asiento.Fecha >= fechaInicialPeriodo &&
-                                            d.Asiento.Fecha <= fechaFinalPeriodo &&
-                                            (d.Referencia == null || d.Referencia != "Reconversión 2021")
+                                            d.Asiento.Fecha <= fechaFinalPeriodo 
                                   select (decimal?)d.Debe).Sum();
 
                     nTotalHaber = (from d in dbContab.dAsientos
                                        where d.CuentaContableID == Convert.ToInt32(Request.QueryString["cta"].ToString()) &&
                                              d.Asiento.Moneda == Convert.ToInt32(Request.QueryString["mon"]) &&
                                              d.Asiento.Fecha >= fechaInicialPeriodo &&
-                                             d.Asiento.Fecha <= fechaFinalPeriodo &&
-                                             (d.Referencia == null || d.Referencia != "Reconversión 2021")
+                                             d.Asiento.Fecha <= fechaFinalPeriodo 
                                    select (decimal?)d.Haber).Sum();
                 }
 
@@ -161,6 +161,8 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.BalanceComprobacion
                 {
                     // Ok, el usuario quiere reconvertir. Reconvertimos solo cifras anteriores a Oct/2.021 y en moneda nacional 
                     // hacemos un Union en el Select para aplicar la reconversión *solo* a movimientos anteriores al 1/Oct/2021 
+
+                    // Nota: cuando el usuario quiere reconvertir, excluimos el asiento de reconversion 
                     this.MovimientosContables_SqlDataSource.SelectCommand = 
                     
                     // el 1er Select lee debe y haber *anterioes* al 1/Oct/21; reconvierte 

@@ -235,8 +235,7 @@
 		Inner Join Monedas mo on a.MonedaOriginal = mo.Moneda 
 		Inner Join Companias co on a.Cia = co.Numero
         Left Join Asientos_Documentos_Links l on a.NumeroAutomatico = l.NumeroAutomatico 
-        Where d.CuentaContableID = @CuentaContableID And a.Moneda = @Moneda And (a.Fecha &gt;= @FechaInicialPeriodo and Fecha &lt;= @FechaFinalPeriodo) And 
-        (d.Referencia Is Null Or d.Referencia &lt;&gt; 'Reconversión 2021') 
+        Where d.CuentaContableID = @CuentaContableID And a.Moneda = @Moneda And (a.Fecha &gt;= @FechaInicialPeriodo and Fecha &lt;= @FechaFinalPeriodo)
         Group By d.Partida, d.NumeroAutomatico, a.Numero, a.Fecha, d.Descripcion, d.Referencia, d.Debe, d.Haber, co.Abreviatura, m.Simbolo, mo.Simbolo 
         Order By a.Fecha, a.Numero, d.Partida">
 

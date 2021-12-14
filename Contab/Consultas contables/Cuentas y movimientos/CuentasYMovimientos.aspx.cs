@@ -399,6 +399,16 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                     new DateTime(dFechaInicialPeriodo.Year, dFechaInicialPeriodo.Month, 1).ToString("d-MMM-yy");
                 MyMovimiento_Cuenta_Movimiento.Monto = nSaldoAnteriorCuentaContable;
 
+                // ------------------------------------------------------------------------------------------------------------------------------------------------------------
+                // reconvertimos *solo* el saldo inicial del mes Oct/2021; este movimiento no se reconvierte abajo pues corresponde al 
+                // mes Octubre; los movimientos del mes Oct/21 no se reconvierten; sin embargo, debe hacerse pues no es un movimiento normal; es el saldo incial del mes 
+                if (bReconvertirCifrasAntes_01Oct2021 && MyMovimiento_Cuenta.Moneda == monedaNacional.Moneda && MyMovimiento_Cuenta_Movimiento.Descripcion == "Saldo inicial al 1-Oct-21")
+                {
+                    MyMovimiento_Cuenta_Movimiento.Monto /= 1000000;
+                    MyMovimiento_Cuenta_Movimiento.Monto = Math.Round(MyMovimiento_Cuenta_Movimiento.Monto, 2);
+                }
+
+                // ---------------------------------------------------------------------------------------------------------
                 // el usuario puede indicar que *no desea* el saldo inicial (del período) de las cuentas en la consulta ... 
                 if (!sinSaldoInicialPeriodo)
                 {
@@ -570,11 +580,11 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
                 // el usuario puede indicar que quiere reconvertir cifras anteriores al 31/Oct/21 
                 if (bReconvertirCifrasAntes_01Oct2021 && MyMovimiento_Cuenta.Moneda == monedaNacional.Moneda)
                 {
-                    var movimientos = MyMovimiento_Cuenta.ConsultaCuentasYMovimientos_Movimientos.Where(x => (x.Fecha < new DateTime(2021, 10, 1))).ToList(); 
+                    var movimientos = MyMovimiento_Cuenta.ConsultaCuentasYMovimientos_Movimientos.Where(x => (x.Fecha < new DateTime(2021, 10, 1))).ToList();
                     foreach (var movimiento in movimientos)
                     {
                         movimiento.Monto /= 1000000;
-                        movimiento.Monto = Math.Round(movimiento.Monto, 2); 
+                        movimiento.Monto = Math.Round(movimiento.Monto, 2);
                     }
                 }
 
