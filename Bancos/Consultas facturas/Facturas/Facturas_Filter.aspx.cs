@@ -66,14 +66,9 @@ public partial class Bancos_Facturas_Facturas_Filter : System.Web.UI.Page
     {
         LimpiarFiltro  MyLimpiarFiltro = new LimpiarFiltro(this); 
         MyLimpiarFiltro.LimpiarControlesPagina(); 
-        MyLimpiarFiltro = null; 
+        MyLimpiarFiltro = null;
 
-        // ------------------------------------------------------------------------------------
-        // restituímos los defaults en opciones que no forman parte del filto Sql, pero que 
-        // representan opciones de ejecución para el listado y tienen valores por defecto 
-
-        //MostrarCuentasSinSaldoYSinMvtos_CheckBox.Checked = false;
-        //MostrarCuentasConSaldoYSinMvtos_CheckBox.Checked = true; 
+        this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked = false;
     }
     protected void AplicarFiltro_Button_Click(object sender, EventArgs e)
     {
@@ -141,9 +136,9 @@ public partial class Bancos_Facturas_Facturas_Filter : System.Web.UI.Page
                 sSqlSelectString2 + ")"; 
 
         Session["FiltroForma"] = sSqlSelectString;
-        Session["Report_SubTitle"] = Report_SubTitle_TextBox.Text; 
+        Session["Report_SubTitle"] = Report_SubTitle_TextBox.Text;
 
-
+        Session["ReconvertirCifrasAntes_01Oct2021"] = this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked;
         // ------------------------------------------------------------------------------------------- 
         // si el usuario quiere incluir facturas desde el CCCh, debe indicar un período en el item 
         // FPago 

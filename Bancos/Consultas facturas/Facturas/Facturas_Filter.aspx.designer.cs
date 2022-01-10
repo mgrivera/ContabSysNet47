@@ -210,6 +210,15 @@ public partial class Bancos_Facturas_Facturas_Filter {
     protected global::System.Web.UI.WebControls.CheckBox LeerSoloFacturasControlCajaChica_CheckBox;
     
     /// <summary>
+    /// ReconvertirCifrasAntes_01Oct2021_CheckBox control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CheckBox ReconvertirCifrasAntes_01Oct2021_CheckBox;
+    
+    /// <summary>
     /// TabPanel2 control.
     /// </summary>
     /// <remarks>

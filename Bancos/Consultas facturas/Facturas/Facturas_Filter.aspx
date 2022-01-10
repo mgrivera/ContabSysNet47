@@ -115,6 +115,8 @@
 
                     </table>
 
+                    <br /><br />
+
                     <div style="margin-bottom: 20px; ">
                         <fieldset style="text-align: left; width: 70%;">
                             <legend>Solo facturas con:</legend>
@@ -126,25 +128,46 @@
                             <br />
                             <asp:CheckBox ID="AfectaLibroCompras_CheckBox" runat="server" Text="Aplican al libro de compras (en Proveedores)" Checked="False" />
                         </fieldset>
+
                         <br /><br />
-                        <div style="margin-left: 15px; ">
+
+                        <div style="margin-left: 0; text-align: left; ">
                             Título para el reporte (opcional):&nbsp;
                             <asp:TextBox ID="Report_SubTitle_TextBox" runat="server"></asp:TextBox>
                         </div>
-                        <fieldset style="text-align: left; width: 75%;">
-                            <legend>Control de caja chica:</legend>
-                            <asp:CheckBox ID="LeerFacturasControlCajaChica_CheckBox" 
-                                runat="server" 
-                                Text="Leer y mostrar facturas marcadas para que aparezcan en el libro de compras"
-                                Checked="False" />
-                            <br />
-                            <div  style="margin-left: 15px; ">
-                                <asp:CheckBox ID="LeerSoloFacturasControlCajaChica_CheckBox" 
-                                    runat="server" 
-                                    Text="Leer y mostrar SOLO estas facturas en la consulta"
-                                    Checked="False" />
+
+                        <br /><br />
+
+                        <div style="width: 100%; ">
+                            <div style="text-align: left; width: 48%; float: left; ">
+                                <fieldset>
+                                    <legend>Control de caja chica:</legend>
+                                    <asp:CheckBox ID="LeerFacturasControlCajaChica_CheckBox" 
+                                        runat="server" 
+                                        Text="Leer y mostrar facturas marcadas para que aparezcan en el libro de compras"
+                                        Checked="False" />
+                                    <br />
+                                    <div  style="margin-left: 15px; ">
+                                        <asp:CheckBox ID="LeerSoloFacturasControlCajaChica_CheckBox" 
+                                            runat="server" 
+                                            Text="Leer y mostrar SOLO estas facturas en la consulta"
+                                            Checked="False" />
+                                    </div>
+                                </fieldset>
                             </div>
-                        </fieldset>
+
+                            <div style="text-align: left; width: 48%; float: right;">
+                                <fieldset>
+                                    <legend>Reconversión (2021):</legend>
+                                    <asp:CheckBox ID="ReconvertirCifrasAntes_01Oct2021_CheckBox" 
+                                                  runat="server" 
+                                                  Text="Reconvertir cifras anteriores al 1/Oct/21" 
+                                                  Checked="False" />
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                        </div>
                         
                     </div>
                 </ContentTemplate>

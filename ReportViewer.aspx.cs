@@ -1580,21 +1580,6 @@ namespace ContabSysNetWeb
                                 case "1":
                                     {
                                         // retenciones iva
-
-                                        //ReporteFacturas_DataSet MyReportDataSet = new ReporteFacturas_DataSet();
-                                        //Facturas_RetencionIVATableAdapter MyReportTableAdapter =
-                                        //    new Facturas_RetencionIVATableAdapter();
-
-                                        //MyReportTableAdapter.FillByNombreUsuario(MyReportDataSet.Facturas_RetencionIVA, Membership.GetUser().UserName);
-
-                                        //if (MyReportDataSet.Facturas_RetencionIVA.Rows.Count == 0)
-                                        //{
-                                        //    ErrMessage_Cell.InnerHtml = "No existe información para mostrar el reporte que Ud. ha requerido.<br /><br />" + 
-                                        //        "Probablemente Ud. no ha aplicado un filtro y seleccionado información aún.";
-                                        //    return;
-                                        //}
-
-
                                         BancosEntities bancosContext = new BancosEntities();
 
                                         var query = bancosContext.tTempWebReport_ConsultaFacturas.Where("it.NombreUsuario == '" + User.Identity.Name + "'");

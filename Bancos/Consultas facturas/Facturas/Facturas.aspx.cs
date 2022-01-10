@@ -11,8 +11,8 @@ using ContabSysNet_Web.old_app_code;
 using MongoDB.Driver;
 using ContabSysNet_Web.Areas.Bancos.Models.mongodb;
 using ContabSysNet_Web.ModelosDatos_EF.Bancos;
-using ContabSysNet_Web.ModelosDatos_EF.CajaChica; 
-
+using ContabSysNet_Web.ModelosDatos_EF.CajaChica;
+using ContabSysNet_Web.Clases;
 
 public partial class Bancos_Facturas_Facturas : System.Web.UI.Page
 {
@@ -214,6 +214,8 @@ private class Facturas_Object
             return;
         }
 
+        bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
+
         // usamos el criterio que indico el usuario para leer las facturas de proveedores y grabarlas a una tabla 
         // en la base de datos temporal (tTempWebReport_ConsultaFacturas)
 
@@ -275,7 +277,6 @@ private class Facturas_Object
 
         DateTime fechaMin_sqlServer = new DateTime(1753, 1, 1);
         DateTime fechaMax_sqlServer = new DateTime(9999, 12, 31); 
-
 
         try
         {
@@ -603,7 +604,6 @@ private class Facturas_Object
             return;
         }
 
-
         // ---------------------------------------------------------------------------------------
         // si el usuario indico que deseaba incluir facturas desde el control de caja chica, 
         // intentamos agregarlas ahora 
@@ -633,9 +633,7 @@ private class Facturas_Object
             "CajaChica_Reposiciones.EstadoActual <> 'AN'"
             );
 
-        // las reposiciones de caja chica no tienen moneda; asumimos que la 'moneda local' debe 
-        // ser usada  
-
+        // las reposiciones de caja chica no tienen moneda; asumimos que la 'moneda local' debe ser usada  
          Moneda monedaLocal = (from m in BancosDB.Monedas
                                where m.NacionalFlag == true
                                select m).FirstOrDefault();
@@ -904,12 +902,25 @@ private class Facturas_Object
              }
          }
 
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        string resulMessage = "";
+        string userName = Membership.GetUser().UserName;
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        // el usuario puede indicar que desea reconvertir montos anteriores a Oct/2021 
+        if (bReconvertirCifrasAntes_01Oct2021)
+        {
+            if (!reconvertirMontosAnteriores_a_Oct2021(BancosDB, userName, out resulMessage))
+            {
+                ErrMessage_Span.InnerHtml = resulMessage;
+                ErrMessage_Span.Style["display"] = "block";
+
+                return;
+            }
+        }
 
          // --------------------------------------------------------------------------------------------------------------------------------------
          // ahora que grabamos las facturas a sql server, las grabamos a mongo, pues, en adelante, muchas funciones (consultas) leerán de allí ... 
-         string resulMessage = "";
-         string userName = Membership.GetUser().UserName;
-
          if (!GrabarFacturasSeleccionadasMongo(BancosDB, userName, out resulMessage))
          {
              ErrMessage_Span.InnerHtml = resulMessage;
@@ -1075,9 +1086,8 @@ private class Facturas_Object
             resultMessage = "Se producido un error al intentar ejecutar una operación en mongodb.<br />" +
                                "El mensaje específico del error es:<br />" + message;
 
-            return false;       
+            return false;
         }
-
 
         // leemos las facturas que, recientemente, se han registrado para el usuario en sql server y las grabamos a mongo ... 
         var query = bancosContext.tTempWebReport_ConsultaFacturas.Where(f => f.NombreUsuario == userName);
@@ -1095,7 +1105,7 @@ private class Facturas_Object
                 facturaMongo.MonedaDescripcion = factura.MonedaDescripcion;
 
                 facturaMongo.CiaContab = factura.CiaContab;
-                facturaMongo.CiaContabCiudad = factura.CiaContabCiudad; 
+                facturaMongo.CiaContabCiudad = factura.CiaContabCiudad;
                 facturaMongo.CiaContabNombre = factura.CiaContabNombre;
                 facturaMongo.CiaContabDireccion = factura.CiaContabDireccion;
                 facturaMongo.CiaContabRif = factura.CiaContabRif;
@@ -1112,7 +1122,7 @@ private class Facturas_Object
                 facturaMongo.CompaniaDomicilio = factura.CompaniaDomicilio;
                 facturaMongo.CompaniaTelefono = factura.CompaniaTelefono;
                 facturaMongo.CompaniaCiudad = factura.CompaniaCiudad;
-                facturaMongo.ContribuyenteFlag = factura.ContribuyenteFlag; 
+                facturaMongo.ContribuyenteFlag = factura.ContribuyenteFlag;
 
                 facturaMongo.NumeroFactura = factura.NumeroFactura;
                 facturaMongo.NumeroControl = factura.NumeroControl;
@@ -1120,7 +1130,7 @@ private class Facturas_Object
                 facturaMongo.ClaveUnicaFactura = factura.ClaveUnicaFactura;
                 facturaMongo.ImportacionFlag = factura.ImportacionFlag.HasValue ? factura.ImportacionFlag.Value : false;
                 facturaMongo.Importacion_CompraNacional = factura.Importacion_CompraNacional;
-                facturaMongo.NumeroPlanillaImportacion = factura.NumeroPlanillaImportacion; 
+                facturaMongo.NumeroPlanillaImportacion = factura.NumeroPlanillaImportacion;
 
                 facturaMongo.NcNdFlag = factura.NcNdFlag;
                 facturaMongo.Compra_NotaCredito = factura.Compra_NotaCredito;
@@ -1137,11 +1147,11 @@ private class Facturas_Object
                 facturaMongo.Concepto = factura.Concepto;
                 facturaMongo.NotasFactura1 = factura.NotasFactura1;
                 facturaMongo.NotasFactura2 = factura.NotasFactura2;
-                facturaMongo.NotasFactura3 = factura.NotasFactura3; 
+                facturaMongo.NotasFactura3 = factura.NotasFactura3;
 
                 facturaMongo.MontoFacturaSinIva = factura.MontoFacturaSinIva;
                 facturaMongo.MontoFacturaConIva = factura.MontoFacturaConIva;
-                facturaMongo.MontoTotalFactura = factura.MontoTotalFactura; 
+                facturaMongo.MontoTotalFactura = factura.MontoTotalFactura;
 
                 facturaMongo.TipoAlicuota = !string.IsNullOrEmpty(factura.TipoAlicuota) ? factura.TipoAlicuota.ToString() : "";
 
@@ -1164,7 +1174,6 @@ private class Facturas_Object
 
                 // se lee arriba desde el proveedor (bueno, si se asoció uno a la factua de caja chica) 
 
-                
                 facturaMongo.MontoSujetoARetencion = factura.MontoSujetoARetencion;
 
                 facturaMongo.ImpuestoRetenidoISLRAntesSustraendo = factura.ImpuestoRetenidoISLRAntesSustraendo;
@@ -1205,7 +1214,7 @@ private class Facturas_Object
                 facturasMongoCollection.InsertOneAsync(facturaMongo);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             string message = ex.Message;
             if (ex.InnerException != null)
@@ -1214,7 +1223,119 @@ private class Facturas_Object
             resultMessage = "Se producido un error al intentar ejecutar una operación en mongodb.<br />" +
                                "El mensaje específico del error es:<br />" + message;
 
-            return false;       
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool reconvertirMontosAnteriores_a_Oct2021(BancosEntities bancosContext, string userName, out string resultMessage)
+    {
+        // el usuario indicó que deseaba reconvertir montos anteriores a Oct/2021 
+
+        resultMessage = "";
+
+        // ----------------------------------------------------------------------------------------------------------------------
+        // leemos la tabla de monedas para 'saber' cual es la moneda Bs. Nota: la idea es aplicar las opciones de reconversión 
+        // *solo* a esta moneda 
+        var monedaNacional_return = Reconversion.Get_MonedaNacional();
+
+        if (monedaNacional_return.error)
+        {
+            string message = monedaNacional_return.message;
+            resultMessage = "Se producido un error al intentar ejecutar una operación en mongodb.<br />" +
+                               "El mensaje específico del error es:<br />" + message;
+
+            return false;
+        }
+
+        int monedaNacional = monedaNacional_return.moneda.Moneda;
+        // ----------------------------------------------------------------------------------------------------------------------
+
+        // leemos las facturas que, recientemente, se han registrado para el usuario en sql server y las grabamos a mongo ... 
+        var query = bancosContext.tTempWebReport_ConsultaFacturas.Where(f => f.NombreUsuario == userName);
+
+        try
+        {
+            foreach (tTempWebReport_ConsultaFacturas factura in query)
+            {
+                // usamos una fecha en relación al valor del flag 
+                var fechaFactura = factura.FechaRecepcion; 
+
+                if (factura.CxCCxPFlag == 2)
+                    fechaFactura = factura.FechaEmision; 
+
+                if (factura.Moneda != monedaNacional || fechaFactura >= new DateTime(2021, 10, 1))
+                    // la factura no debe ser reconvertida 
+                    continue; 
+
+                factura.MontoFacturaSinIva = (factura.MontoFacturaSinIva.HasValue) ? Math.Round(factura.MontoFacturaSinIva.Value / 1000000, 2) : factura.MontoFacturaSinIva;
+                 factura.MontoFacturaConIva = (factura.MontoFacturaConIva.HasValue) ? Math.Round(factura.MontoFacturaConIva.Value / 1000000, 2) : factura.MontoFacturaConIva;
+                 factura.MontoTotalFactura = Math.Round(factura.MontoTotalFactura / 1000000, 2);
+
+                 factura.BaseImponible_General = (factura.BaseImponible_General.HasValue) ? Math.Round(factura.BaseImponible_General.Value / 1000000, 2) : factura.BaseImponible_General;
+                 factura.BaseImponible_Adicional = (factura.BaseImponible_Adicional.HasValue) ? Math.Round(factura.BaseImponible_Adicional.Value / 1000000, 2) : factura.BaseImponible_Adicional;
+                factura.BaseImponible_Reducido = (factura.BaseImponible_Reducido.HasValue) ? Math.Round(factura.BaseImponible_Reducido.Value / 1000000, 2) : factura.BaseImponible_Reducido;
+
+                factura.Iva_Reducido = (factura.Iva_Reducido.HasValue) ? Math.Round(factura.Iva_Reducido.Value / 1000000, 2) : factura.Iva_Reducido;
+                 factura.Iva_General = (factura.Iva_General.HasValue) ? Math.Round(factura.Iva_General.Value / 1000000, 2) : factura.Iva_General;
+                 factura.Iva_Adicional = (factura.Iva_Adicional.HasValue) ? Math.Round(factura.Iva_Adicional.Value / 1000000, 2) : factura.Iva_Adicional;
+
+                 factura.ImpuestoRetenido_General = (factura.ImpuestoRetenido_General.HasValue) ? Math.Round(factura.ImpuestoRetenido_General.Value / 1000000, 2) : factura.ImpuestoRetenido_General;
+                 factura.Iva = (factura.Iva.HasValue) ? Math.Round(factura.Iva.Value / 1000000, 2) : factura.Iva;
+                 factura.TotalFactura = Math.Round(factura.TotalFactura / 1000000, 2);
+
+                 factura.MontoSujetoARetencion = (factura.MontoSujetoARetencion.HasValue) ? Math.Round(factura.MontoSujetoARetencion.Value / 1000000, 2) : factura.MontoSujetoARetencion;
+
+                 factura.ImpuestoRetenidoISLRAntesSustraendo = (factura.ImpuestoRetenidoISLRAntesSustraendo.HasValue) ? Math.Round(factura.ImpuestoRetenidoISLRAntesSustraendo.Value / 1000000, 2) : factura.ImpuestoRetenidoISLRAntesSustraendo;
+                 factura.ImpuestoRetenidoISLRSustraendo = (factura.ImpuestoRetenidoISLRSustraendo.HasValue) ? Math.Round(factura.ImpuestoRetenidoISLRSustraendo.Value / 1000000, 2) : factura.ImpuestoRetenidoISLRSustraendo;
+                 factura.ImpuestoRetenido_Reducido = (factura.ImpuestoRetenido_Reducido.HasValue) ? Math.Round(factura.ImpuestoRetenido_Reducido.Value / 1000000, 2) : factura.ImpuestoRetenido_Reducido;
+                 factura.ImpuestoRetenido_General = (factura.ImpuestoRetenido_General.HasValue) ? Math.Round(factura.ImpuestoRetenido_General.Value / 1000000, 2) : factura.ImpuestoRetenido_General;
+                 factura.ImpuestoRetenido_Adicional = (factura.ImpuestoRetenido_Adicional.HasValue) ? Math.Round(factura.ImpuestoRetenido_Adicional.Value / 1000000, 2) : factura.ImpuestoRetenido_Adicional;
+
+                 factura.ImpuestoRetenido = (factura.ImpuestoRetenido.HasValue) ? Math.Round(factura.ImpuestoRetenido.Value / 1000000, 2) : factura.ImpuestoRetenido;
+                 
+                 factura.RetencionSobreIva = (factura.RetencionSobreIva.HasValue) ? Math.Round(factura.RetencionSobreIva.Value / 1000000, 2) : factura.RetencionSobreIva;
+
+                 factura.ImpuestosVarios = (factura.ImpuestosVarios.HasValue) ? Math.Round(factura.ImpuestosVarios.Value / 1000000, 2) : factura.ImpuestosVarios;
+                 factura.RetencionesVarias = (factura.RetencionesVarias.HasValue) ? Math.Round(factura.RetencionesVarias.Value / 1000000, 2) : factura.RetencionesVarias;
+
+                 factura.TotalAPagar = Math.Round(factura.TotalAPagar / 1000000, 2);
+                 factura.Anticipo = (factura.Anticipo.HasValue) ? Math.Round(factura.Anticipo.Value / 1000000, 2) : factura.Anticipo;
+
+                 factura.Saldo = Math.Round(factura.Saldo / 1000000, 2);
+                 factura.MontoPagado = (factura.MontoPagado.HasValue) ? Math.Round(factura.MontoPagado.Value / 1000000, 2) : factura.MontoPagado;
+            }
+        }
+        catch (Exception ex)
+        {
+            string message = ex.Message;
+            if (ex.InnerException != null)
+                message += "<br />" + ex.InnerException.Message;
+
+            resultMessage = "Se producido un error al intentar ejecutar una operación en mongodb.<br />" +
+                               "El mensaje específico del error es:<br />" + message;
+
+            return false;
+        }
+
+        try
+        {
+            bancosContext.SaveChanges();
+        }
+
+        catch (Exception ex)
+        {
+            bancosContext.Dispose();
+
+            string message = ex.Message;
+            if (ex.InnerException != null)
+                message += "<br />" + ex.InnerException.Message;
+
+            resultMessage = "Se producido un error al intentar ejecutar una operación en mongodb.<br />" +
+                               "El mensaje específico del error es:<br />" + message;
+
+            return false;
         }
 
         return true;
