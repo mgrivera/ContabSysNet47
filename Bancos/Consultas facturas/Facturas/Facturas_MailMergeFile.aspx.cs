@@ -179,9 +179,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
 
             foreach (var f in facturasQuery)
             {
-                //sw.Write(",");
-                //sw.Write(sw.NewLine);
-
                 sb = new StringBuilder();
 
                 if (f.CiaContabNombre != null)
@@ -247,9 +244,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                 if (f.MontoFacturaConIva != null)
                     sb.Append("\"" + f.MontoFacturaConIva.Value.ToString("N2") + "\"");
                 sb.Append("\t");
-
-
-
 
                 if (f.Iva != null && f.Iva != 0)
                 {
@@ -340,7 +334,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             StringBuilder sb;
 
             // Create the CSV file on the server 
-
             String fileName = @"CartaImpuestosRetenidos_" + User.Identity.Name + ".txt";
             String filePath = HttpContext.Current.Server.MapPath("~/Temp/" + fileName);
 
@@ -805,16 +798,13 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             sw.Write(sb.ToString());
             sw.Write(sw.NewLine);
 
-
             // ------------------------------------------------------------------------------------------------------------
             // construimos aquí la fecha del documento y el período de retención, para usarlo más adelante ... 
-
             DateTime fechaConsulta = DateTime.Today;
 
             if (!string.IsNullOrEmpty(this.FechaConsulta_TextBox.Text))
                 if (!DateTime.TryParse(this.FechaConsulta_TextBox.Text, out fechaConsulta))
                     fechaConsulta = DateTime.Today;
-
 
             DateTime periodoRetencionDesde = DateTime.Now;
             DateTime periodoRetencionHasta = DateTime.Now;
@@ -822,15 +812,12 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             DateTime.TryParse(this.PeriodoRetencion_Desde_TextBox.Text, out periodoRetencionDesde);
             DateTime.TryParse(this.PeriodoRetencion_Hasta_TextBox.Text, out periodoRetencionHasta);
             // ------------------------------------------------------------------------------------------------------------
-
-
-
             // Now write all the rows.
 
             // declaramos el EF context ... 
             BancosEntities bancosContext = new BancosEntities(); 
 
-            // leemos las facturas filtradas por el usuario desde la tabla tTempWebReport_ConsultaFacturas
+            // leemos las facturas que produjo el filtro; ahora están en la tabla tTempWebReport_ConsultaFacturas
             var facturasPorProveedorQuery = from f in bancosContext.tTempWebReport_ConsultaFacturas
                                             where f.NombreUsuario == User.Identity.Name
                                             orderby f.NombreCompania, f.FechaRecepcion, f.NumeroFactura
@@ -924,7 +911,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
 
                 // ----------------------------------------------------------------------------
                 // cantidades y montos totales para cada proveedor ... 
-
                 int cantidadPaginas = 0;
 
                 decimal p = f.Total_CantidadDocumentos / 12M;
@@ -945,8 +931,7 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                 sb.Append("\"" + (f.Total_ImpuestoISLRRetenido == null ? "0" : f.Total_ImpuestoISLRRetenido.Value.ToString("N2")) + "\"" + "\t");
 
                 // -----------------------------------------------------------------------------------------------------------------------
-                // ahora siguen los datos básicos para *cada* factura ... nótese que para cada página, registramos hasta 10 facturas ... 
-
+                // ahora siguen los datos básicos para *cada* factura ... nótese que para cada página, registramos hasta 12 facturas ... 
                 int cantidadFacturasPorProveedor = 0;
 
                 foreach (var factura in f.Value.OrderBy(x => x.FechaRecepcion).ThenBy(x => x.NumeroFactura))
@@ -977,17 +962,25 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                         if (f.Key.NombreCompania != null)
                             sb.Append("\"" + f.Key.NombreCompania + "\"");
                         sb.Append("\t");
+
                         if (f.Key.RifCompania != null)
                             sb.Append("\"" + f.Key.RifCompania + "\"");
                         sb.Append("\t");
+
                         if (f.Key.NitCompania != null)
                             sb.Append("\"" + f.Key.NitCompania + "\"");
                         sb.Append("\t");
+
                         if (f.Key.CompaniaDomicilio != null)
                             sb.Append("\"" + f.Key.CompaniaDomicilio + "\"");
                         sb.Append("\t");
+
                         if (f.Key.CompaniaCiudad != null)
                             sb.Append("\"" + f.Key.CompaniaCiudad + "\"");
+                        sb.Append("\t");
+
+                        if (f.Key.NatJurFlagDescripcion != null)
+                            sb.Append("\"" + f.Key.NatJurFlagDescripcion + "\"");
                         sb.Append("\t");
 
                         // -------------------------------------------------------------------------------
@@ -995,18 +988,20 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                         if (f.Key.CiaContabNombre != null)
                             sb.Append("\"" + f.Key.CiaContabNombre + "\"");
                         sb.Append("\t");
+
                         if (f.Key.CiaContabRif != null)
                             sb.Append("\"" + f.Key.CiaContabRif + "\"");
                         sb.Append("\t");
+
                         if (f.Key.CiaContabDireccion != null)
                             sb.Append("\"" + f.Key.CiaContabDireccion + "\"");
                         sb.Append("\t");
+
                         if (f.Key.CiaContabCiudad != null)
                             sb.Append("\"" + f.Key.CiaContabCiudad + "\"");
                         sb.Append("\t");
 
                         // período de retención ... 
-
                         sb.Append("\"" + string.Format("{0} al {1}", periodoRetencionDesde.ToString("dd-MMM-yyyy"), periodoRetencionHasta.ToString("dd-MMM-yyyy"))
                                 + "\"");
                         sb.Append("\t");
@@ -1032,6 +1027,7 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                     if (factura.FechaEmision != null)
                         sb.Append("\"" + factura.FechaEmision.ToString("dd-MM-yy") + "\"");
                     sb.Append("\t");
+
                     if (factura.FechaRecepcion != null)
                         sb.Append("\"" + factura.FechaRecepcion.ToString("dd-MM-yy") + "\"");
                     sb.Append("\t");
@@ -1120,9 +1116,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                 sw.Write(sw.NewLine);
             }
 
-
-
-
             // finally close the file 
             sw.Close();
 
@@ -1136,8 +1129,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                 return;
             }
 
-
-
             bancosContext = null;
 
             GeneralMessage_Span.InnerHtml = "Ok, el archivo requerido ha sido generado en forma satisfactoria. <br />" +
@@ -1146,40 +1137,11 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
             GeneralMessage_Span.Style["display"] = "block";
 
             Session["FileToDownload"] = filePath; 
-
-            //DownloadFile_LinkButton.Visible = true;
-            //FileName_HiddenField.Value = filePath;
         }
 
 
         protected void DownloadFile_LinkButton_Click(object sender, EventArgs e)
         {
-            // hacemos un download del archivo recién generado para que pueda ser copiado al disco duro 
-            // local por del usuario 
-
-            //if (FileName_HiddenField.Value == null || FileName_HiddenField.Value == "")
-            //{
-            //    ErrMessage_Span.InnerHtml = "No se ha podido obtener el nombre del archivo generado. <br /><br />" + 
-            //        "Genere el archivo nuevamente y luego intente copiarlo a su disco usando esta función.";
-            //    ErrMessage_Span.Style["display"] = "block";
-
-            //    return;
-            //}
-
-
-            //FileStream liveStream = new FileStream(FileName_HiddenField.Value, FileMode.Open, FileAccess.Read);
-
-            //byte[] buffer = new byte[(int)liveStream.Length];
-            //liveStream.Read(buffer, 0, (int)liveStream.Length);
-            //liveStream.Close();
-
-            //Response.Clear();
-            //Response.ContentType = "application/octet-stream";
-            //Response.AddHeader("Content-Length", buffer.Length.ToString());
-            //Response.AddHeader("Content-Disposition", "attachment; filename=" +
-            //                   FileName_HiddenField.Value);
-            //Response.BinaryWrite(buffer);
-            //Response.End();
         }
 
         protected void OpcionesMailMerge_DropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -1218,7 +1180,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                     {
                         // eliminamos los archivos que pudieron haber sido agregados, cuando este proceso fue ejecutado antes ... 
                         // (si el proceso anterior falló, por alguna razón, estos archivos temporales pudieron haber quedado) 
-
                         string path = Server.MapPath("~/Temp/Facturas_CartasGenericas/");
                         string path_archivosObtenidos = Server.MapPath("~/Temp/Facturas_CartasGenericas/Temp");
                         string userName = Membership.GetUser().UserName;
@@ -1245,7 +1206,6 @@ namespace ContabSysNet_Web.Bancos.Consultas_facturas.Facturas
                                 {
                                     errorMessage += "<br />" + ex.InnerException.Message;
                                 }
-                                    
 
                             ErrMessage_Span.InnerHtml = errorMessage;
                             ErrMessage_Span.Style["display"] = "block";
