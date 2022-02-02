@@ -232,6 +232,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             var dFechaFinalPeriodoIndicado = (System.DateTime)Session["FechaFinalPeriodo"];
 
             bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
+            bool bExcluirAsientosReconversion_01Oct2021 = (bool)Session["ExcluirAsientosReconversion_01Oct2021"];
 
             bool bExcluirAsientosTipoCierreAnual = (bool)Session["ExcluirAsientosTipoCierreAnual"];
 
@@ -376,7 +377,8 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             // usamos esta clase para leer los movimientos (debe, haber) para cada cuenta contable y moneda 
             DeterminarMovimientoCuentaContable determinarMovimientoCuentaContable = new DeterminarMovimientoCuentaContable(sqlConnection, 
                                                                                                                            bExcluirAsientosTipoCierreAnual,  
-                                                                                                                           bReconvertirCifrasAntes_01Oct2021, 
+                                                                                                                           bReconvertirCifrasAntes_01Oct2021,
+                                                                                                                           bExcluirAsientosReconversion_01Oct2021, 
                                                                                                                            dFechaInicialPeriodoIndicado, 
                                                                                                                            dFechaFinalPeriodoIndicado, monedaNacional.Moneda); 
 

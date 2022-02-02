@@ -203,6 +203,14 @@
                                                       Checked="False" />
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="ExcluirAsientosReconversion_01Oct2021_CheckBox" 
+                                                      runat="server" 
+                                                      Text="Excluir asientos de reconversión" 
+                                                      Checked="False" />
+                                    </td>
+                                </tr>
                             </table>
                         </fieldset>
                             

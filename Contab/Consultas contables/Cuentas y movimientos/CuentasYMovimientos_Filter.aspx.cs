@@ -58,6 +58,9 @@ namespace ContabSysNetWeb.Contab.Consultas_contables.Cuentas_y_movimientos
 
         protected void LimpiarFiltro_Button_Click(object sender, EventArgs e)
         {
+            this.ReconvertirCifrasAntes_01Oct2021_CheckBox.Checked = false;
+            this.ExcluirAsientosReconversion_01Oct2021_CheckBox.Checked = false;
+
             LimpiarFiltro MyLimpiarFiltro = new LimpiarFiltro(this);
             MyLimpiarFiltro.LimpiarControlesPagina();
             MyLimpiarFiltro = null;

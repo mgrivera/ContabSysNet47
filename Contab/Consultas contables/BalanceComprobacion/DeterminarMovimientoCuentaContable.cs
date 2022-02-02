@@ -9,7 +9,8 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
     {
         private SqlConnection _sqlConnection; 
         private bool _excluirAsientosTipoCierreAnual;
-        private bool _bReconvertirCifrasAntes_01Oct2021; 
+        private bool _bReconvertirCifrasAntes_01Oct2021;
+        private bool _bExcluirAsientosReconversion_01Oct2021; 
         private DateTime _fechaInicialPeriodoIndicado;
         private DateTime _fechaFinalPeriodoIndicado;
         private int _monedaNacional; 
@@ -17,13 +18,15 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
         public DeterminarMovimientoCuentaContable(SqlConnection sqlConnection,
                                                  bool excluirAsientosTipoCierreAnual, 
                                                  bool bReconvertirCifrasAntes_01Oct2021, 
+                                                 bool bExcluirAsientosReconversion_01Oct2021, 
                                                  DateTime fechaInicialPeriodoIndicado, 
                                                  DateTime fechaFinalPeriodoIndicado, 
                                                  int monedaNacional)
         {
             _sqlConnection = sqlConnection;
             _excluirAsientosTipoCierreAnual = excluirAsientosTipoCierreAnual;
-            _bReconvertirCifrasAntes_01Oct2021 = bReconvertirCifrasAntes_01Oct2021; 
+            _bReconvertirCifrasAntes_01Oct2021 = bReconvertirCifrasAntes_01Oct2021;
+            _bExcluirAsientosReconversion_01Oct2021 = bExcluirAsientosReconversion_01Oct2021; 
             _fechaInicialPeriodoIndicado = fechaInicialPeriodoIndicado;
             _fechaFinalPeriodoIndicado = fechaFinalPeriodoIndicado;
             _monedaNacional = monedaNacional; 
@@ -56,9 +59,19 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             // es que este asiento, cuando existe, pone los saldos de cuentas nóminales en cero ... 
             string filtroExcluirAsientosTipoCierreAnual = "(1 = 1)";
 
-            if (_excluirAsientosTipoCierreAnual && moneda == _monedaNacional)
+            // ------------------------------------------------------------------------------------------------
+            // preparamos un filtro que permite excluir/incluir el asiento de reconversión (Oct/2021) 
+            string filtroExcluirAsientoReconversion2021 = "(1 = 1)"; 
+
+
+            if (_excluirAsientosTipoCierreAnual)
             {
                 filtroExcluirAsientosTipoCierreAnual = "(a.MesFiscal <> 13) And Not (a.AsientoTipoCierreAnualFlag Is Not Null And a.AsientoTipoCierreAnualFlag = 1)";
+            }
+
+            if (_bExcluirAsientosReconversion_01Oct2021)
+            {
+                filtroExcluirAsientoReconversion2021 = "(d.Referencia Is Null Or d.Referencia <> 'Reconversión 2021')"; 
             }
 
             string selectMontoDebeHaber = "";
@@ -74,8 +87,7 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                                               "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
                                               "(a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo) And " +
                                               "(a.Fecha <= '2021-09-30') And " +
-                                              filtroExcluirAsientosTipoCierreAnual +
-                                              " And  (d.Referencia Is Null Or d.Referencia <> 'Reconversión 2021') " +
+                                              filtroExcluirAsientosTipoCierreAnual + " And " + filtroExcluirAsientoReconversion2021 +
 
                                               "Union " +
 
@@ -84,17 +96,15 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                                               "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
                                               "(a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo) And " +
                                               "(a.Fecha >= '2021-10-1') And " +
-                                              filtroExcluirAsientosTipoCierreAnual +
-                                              " And  (d.Referencia Is Null Or d.Referencia <> 'Reconversión 2021') "; 
+                                              filtroExcluirAsientosTipoCierreAnual + " And " + filtroExcluirAsientoReconversion2021; 
             }
             else
             {
-                // Nota: cuando el usuario *no* quiere reconvertir, leemos el asiento de reconversión 
                 selectMontoDebeHaber = "Select Sum(Debe) As SumDebe, Sum(Haber) As SumHaber, Count(*) As ContaAsientos " +
                                         "From dAsientos d Inner Join Asientos a On d.NumeroAutomatico = a.NumeroAutomatico " +
                                         "Where d.CuentaContableID = @cuentaContableID And a.Moneda = @moneda And " +
                                         "(a.Fecha Between @fechaInicialPeriodo And @fechaFinalPeriodo) And " +
-                                        filtroExcluirAsientosTipoCierreAnual;
+                                        filtroExcluirAsientosTipoCierreAnual + " And " + filtroExcluirAsientoReconversion2021;
             }
 
             SqlCommand commandDebeHaber = new SqlCommand(selectMontoDebeHaber, _sqlConnection);
