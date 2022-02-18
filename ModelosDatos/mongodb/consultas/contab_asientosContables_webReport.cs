@@ -29,6 +29,10 @@ namespace ContabSysNet_Web.ModelosDatos.mongodb.consultas
         [BsonRepresentation(BsonType.Double, AllowTruncation = true)]
         public decimal monto { get; set; }
 
+        public string tipo { get; set; }
+        public string provieneDe { get; set; }
+        public decimal factorCambio { get; set; }
+
         public string user { get; set; }
 
         // aparentemente, un método como éste es necesario para que el report (ssrs) lo pueda 'ver' como un datasource ... 
