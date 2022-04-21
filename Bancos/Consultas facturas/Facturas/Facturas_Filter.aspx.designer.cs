@@ -111,40 +111,40 @@ public partial class Bancos_Facturas_Facturas_Filter {
     protected global::System.Web.UI.WebControls.TextBox Sql_Facturas_Lote_String;
     
     /// <summary>
-    /// Sql_Facturas_FRecepcionRetencionISLR_Date control.
+    /// Sql_FacturasImpuestos_FRecepcionRetencionISLR_Date control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox Sql_Facturas_FRecepcionRetencionISLR_Date;
+    protected global::System.Web.UI.WebControls.TextBox Sql_FacturasImpuestos_FRecepcionRetencionISLR_Date;
     
     /// <summary>
-    /// Sql_Facturas_FRecepcionRetencionIVA_Date control.
+    /// Sql_FacturasImpuestos_FRecepcionRetencionIVA_Date control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox Sql_Facturas_FRecepcionRetencionIVA_Date;
+    protected global::System.Web.UI.WebControls.TextBox Sql_FacturasImpuestos_FRecepcionRetencionIVA_Date;
     
     /// <summary>
-    /// Sql_Facturas_ImpuestoRetenido_Numeric control.
+    /// Sql_FacturasImpuestos_ImpuestoRetenido_Numeric control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox Sql_Facturas_ImpuestoRetenido_Numeric;
+    protected global::System.Web.UI.WebControls.TextBox Sql_FacturasImpuestos_ImpuestoRetenido_Numeric;
     
     /// <summary>
-    /// Sql_Facturas_RetencionSobreIva_Numeric control.
+    /// Sql_FacturasImpuestos_RetencionSobreIva_Numeric control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox Sql_Facturas_RetencionSobreIva_Numeric;
+    protected global::System.Web.UI.WebControls.TextBox Sql_FacturasImpuestos_RetencionSobreIva_Numeric;
     
     /// <summary>
     /// MostrarSoloFacturasRetencionISLR_CheckBox control.

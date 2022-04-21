@@ -91,7 +91,7 @@ public partial class Bancos_Facturas_Facturas_Filter : System.Web.UI.Page
             this.Sql_Proveedores_Nombre_String.Text = "*" + this.Sql_Proveedores_Nombre_String.Text.Trim() + "*"; 
         }
 
-        BuildSqlCriteria MyConstruirCriterioSql = new BuildSqlCriteria("E", "Sql_pg_Fecha_Date");
+        BuildSqlCriteria MyConstruirCriterioSql = new BuildSqlCriteria("E", "Sql_pg_Fecha_Date, Sql_FacturasImpuestos_FRecepcionRetencionISLR_Date, Sql_FacturasImpuestos_FRecepcionRetencionIVA_Date, Sql_FacturasImpuestos_ImpuestoRetenido_Numeric, Sql_FacturasImpuestos_RetencionSobreIva_Numeric");
         MyConstruirCriterioSql.ContruirFiltro(this.Controls);
         string sSqlSelectString = MyConstruirCriterioSql.CriterioSql;
         MyConstruirCriterioSql = null;
@@ -172,8 +172,64 @@ public partial class Bancos_Facturas_Facturas_Filter : System.Web.UI.Page
 
         // ------------------------------------------------------------------------------------------- 
 
+        // -----------------------------------------------------------------------------------------------------------------------------------------------
+        // si el usuario indica un criterio para impuestos/retenciones iva/islr, todo es un poco más complicado, pues se deben usar 
+        // las tablas: Facturas_Impuestos y ImpuestosRetencionesDefinicion 
+        Session["FiltroForma_LeerTablasDeImpRet"] = null;
+        string criterio_otras_retenciones_impuestos = "(1 = 1)";
 
-        
+        if (!String.IsNullOrEmpty(this.Sql_FacturasImpuestos_FRecepcionRetencionIVA_Date.Text))
+        {
+            MyConstruirCriterioSql = new BuildSqlCriteria("I", "Sql_FacturasImpuestos_FRecepcionRetencionIVA_Date");
+            MyConstruirCriterioSql.ContruirFiltro(this.Controls);
+            string criterio = MyConstruirCriterioSql.CriterioSql;
+            MyConstruirCriterioSql = null;
+
+            criterio = criterio.Replace("FacturasImpuestos", "Facturas_Impuestos").Replace("FRecepcionRetencionIVA", "FechaRecepcionPlanilla"); 
+            criterio_otras_retenciones_impuestos += " And " + criterio;
+            criterio_otras_retenciones_impuestos += " And (ImpuestosRetencionesDefinicion.Predefinido = 2)"; // para que lea retenciones Iva 
+        }
+
+        if (!String.IsNullOrEmpty(this.Sql_FacturasImpuestos_FRecepcionRetencionISLR_Date.Text))
+        {
+            MyConstruirCriterioSql = new BuildSqlCriteria("I", "Sql_FacturasImpuestos_FRecepcionRetencionISLR_Date");
+            MyConstruirCriterioSql.ContruirFiltro(this.Controls);
+            string criterio = MyConstruirCriterioSql.CriterioSql;
+            MyConstruirCriterioSql = null;
+
+            criterio = criterio.Replace("FacturasImpuestos", "Facturas_Impuestos").Replace("FRecepcionRetencionISLR", "FechaRecepcionPlanilla");
+            criterio_otras_retenciones_impuestos += " And " + criterio;
+            criterio_otras_retenciones_impuestos += " And (ImpuestosRetencionesDefinicion.Predefinido = 3)"; // para que lea retenciones Iva 
+        }
+
+        if (!String.IsNullOrEmpty(this.Sql_FacturasImpuestos_RetencionSobreIva_Numeric.Text))
+        {
+            MyConstruirCriterioSql = new BuildSqlCriteria("I", "Sql_FacturasImpuestos_RetencionSobreIva_Numeric");
+            MyConstruirCriterioSql.ContruirFiltro(this.Controls);
+            string criterio = MyConstruirCriterioSql.CriterioSql;
+            MyConstruirCriterioSql = null;
+
+            criterio = criterio.Replace("FacturasImpuestos", "Facturas_Impuestos").Replace("RetencionSobreIva", "Monto");
+            criterio_otras_retenciones_impuestos += " And " + criterio;
+            criterio_otras_retenciones_impuestos += " And (ImpuestosRetencionesDefinicion.Predefinido = 2)"; // para que lea retenciones Iva 
+        }
+
+        if (!String.IsNullOrEmpty(this.Sql_FacturasImpuestos_ImpuestoRetenido_Numeric.Text))
+        {
+            MyConstruirCriterioSql = new BuildSqlCriteria("I", "Sql_FacturasImpuestos_ImpuestoRetenido_Numeric");
+            MyConstruirCriterioSql.ContruirFiltro(this.Controls);
+            string criterio = MyConstruirCriterioSql.CriterioSql;
+            MyConstruirCriterioSql = null;
+
+            criterio = criterio.Replace("FacturasImpuestos", "Facturas_Impuestos").Replace("ImpuestoRetenido", "Monto");
+            criterio_otras_retenciones_impuestos += " And " + criterio;
+            criterio_otras_retenciones_impuestos += " And (ImpuestosRetencionesDefinicion.Predefinido = 3)"; // para que lea retenciones Iva 
+        }
+
+        // finalmente inicializamos la sesion variable con el criterio que indicó el usuario 
+        Session["FiltroForma_LeerTablasDeImpRet"] = criterio_otras_retenciones_impuestos != "(1 = 1)" ? criterio_otras_retenciones_impuestos : null;
+        // -----------------------------------------------------------------------------------------------------------------------------------------------
+
         // -------------------------------------------------------------------------------------------
         // para guardar el contenido de los controles de la página para recuperar el state cuando 
         // se abra la proxima vez 

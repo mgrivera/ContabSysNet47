@@ -76,20 +76,21 @@
                         <tr>
                             <td style="text-align: left; color: #0046D5;" colspan="5">
                             <br />
-                            Fechas de recepción de planillas de retención de impuestos: 
+                            Fechas de recepción de planillas de retención de impuestos: <br />
+                            (Use un solo tipo de retención (Iva o Islr) 
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: left; ">Islr: 
                             </td>
-                            <td><asp:TextBox ID="Sql_Facturas_FRecepcionRetencionISLR_Date" runat="server" 
+                            <td><asp:TextBox ID="Sql_FacturasImpuestos_FRecepcionRetencionISLR_Date" runat="server" 
                                             Width="105px"></asp:TextBox>
                             </td>
                             <td>
                             </td>
                             <td>Iva: 
                             </td>
-                            <td><asp:TextBox ID="Sql_Facturas_FRecepcionRetencionIVA_Date" runat="server" 
+                            <td><asp:TextBox ID="Sql_FacturasImpuestos_FRecepcionRetencionIVA_Date" runat="server" 
                                             Width="105px"></asp:TextBox>
                             </td>
                         </tr>
@@ -101,14 +102,14 @@
                         <tr>
                             <td style="text-align: left; ">Islr: 
                             </td>
-                            <td><asp:TextBox ID="Sql_Facturas_ImpuestoRetenido_Numeric" runat="server" 
+                            <td><asp:TextBox ID="Sql_FacturasImpuestos_ImpuestoRetenido_Numeric" runat="server" 
                                             Width="105px"></asp:TextBox>
                             </td>
                             <td>
                             </td>
                             <td>Iva: 
                             </td>
-                            <td><asp:TextBox ID="Sql_Facturas_RetencionSobreIva_Numeric" runat="server" 
+                            <td><asp:TextBox ID="Sql_FacturasImpuestos_RetencionSobreIva_Numeric" runat="server" 
                                             Width="105px"></asp:TextBox>
                             </td>
                         </tr>

@@ -216,6 +216,18 @@ private class Facturas_Object
 
         bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
 
+        // el usuario puede indicar un criterio para seleccionar facturas con retenciones para un período o de un monto dado 
+        string innerJoin_Facturas_Impuestos = "";
+        string where_Facturas_Impuestos = "";
+
+        if (Session["FiltroForma_LeerTablasDeImpRet"] != null)
+        {
+            innerJoin_Facturas_Impuestos = "Inner Join Facturas_Impuestos On Facturas.ClaveUnica = Facturas_Impuestos.FacturaID " + 
+                                           "Inner Join ImpuestosRetencionesDefinicion On Facturas_Impuestos.ImpRetID = ImpuestosRetencionesDefinicion.ID ";
+
+            where_Facturas_Impuestos = " And " + Session["FiltroForma_LeerTablasDeImpRet"].ToString(); 
+        }
+        
         // usamos el criterio que indico el usuario para leer las facturas de proveedores y grabarlas a una tabla 
         // en la base de datos temporal (tTempWebReport_ConsultaFacturas)
 
@@ -245,16 +257,16 @@ private class Facturas_Object
             "Facturas.Tipo, TiposProveedor.Descripcion As NombreTipo, " + 
             "CondicionesDePago, " +
  
-            "FormasDePago.Descripcion As CondicionesDePagoNombre, " + 
+            "FormasDePago.Descripcion As CondicionesDePagoNombre, " +
 
-            "FechaEmision, FechaRecepcion, Facturas.Concepto, " +
+            "Facturas.FechaEmision, Facturas.FechaRecepcion, Facturas.Concepto, " +
 
             "ParametrosBancos.FooterFacturaImpresa_L1 As NotasFactura1, " +
             "ParametrosBancos.FooterFacturaImpresa_L2 As NotasFactura2, " +
             "ParametrosBancos.FooterFacturaImpresa_L3 As NotasFactura3, " + 
             
-            "MontoFacturaSinIva, MontoFacturaConIva, (IsNull(MontoFacturaSinIva, 0) + IsNull(MontoFacturaConIva, 0)) As MontoTotalFactura, " + 
-            "TipoAlicuota, IvaPorc, Iva, TotalFactura, " + 
+            "MontoFacturaSinIva, MontoFacturaConIva, (IsNull(MontoFacturaSinIva, 0) + IsNull(MontoFacturaConIva, 0)) As MontoTotalFactura, " +
+            "Facturas.TipoAlicuota, Facturas.IvaPorc, Facturas.Iva, Facturas.TotalFactura, " + 
             "Facturas.CodigoConceptoRetencion, " + 
             "MontoSujetoARetencion, ImpuestoRetenidoPorc, ImpuestoRetenidoISLRAntesSustraendo, ImpuestoRetenidoISLRSustraendo, ImpuestoRetenido, FRecepcionRetencionISLR, " + 
             "Facturas.RetencionSobreIvaPorc, RetencionSobreIva, FRecepcionRetencionIVA, " + 
@@ -269,8 +281,9 @@ private class Facturas_Object
             "Inner Join Monedas On Facturas.Moneda = Monedas.Moneda " + 
             "Inner Join tCiudades On Proveedores.Ciudad = tCiudades.Ciudad " + 
             "Inner Join FormasDePago On Facturas.CondicionesDePago = FormasDePago.FormaDePago " + 
-            "Inner Join ParametrosBancos On Facturas.Cia = ParametrosBancos.Cia " + 
-            "Where " + Session["FiltroForma"].ToString();
+            "Inner Join ParametrosBancos On Facturas.Cia = ParametrosBancos.Cia " +
+            innerJoin_Facturas_Impuestos + 
+            "Where " + Session["FiltroForma"].ToString() + where_Facturas_Impuestos;
 
         List<tTempWebReport_ConsultaFacturas> MyFacturas_List = new List<tTempWebReport_ConsultaFacturas>();
         tTempWebReport_ConsultaFacturas MyFactura;
@@ -607,7 +620,6 @@ private class Facturas_Object
         // ---------------------------------------------------------------------------------------
         // si el usuario indico que deseaba incluir facturas desde el control de caja chica, 
         // intentamos agregarlas ahora 
-
         MyFacturas_List.Clear(); 
 
         if (Session["FiltroForma_LeerFacturasCCCh"].ToString() == "")
