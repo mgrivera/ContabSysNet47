@@ -40,14 +40,10 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
             Usuarios_ListBox.DataBind(); 
 
         }
-        else
-        {
-        }
     }
     protected void LeerUsuarios_LinkButton_Click(object sender, EventArgs e)
     {
         // nos aseguramos que se haya seleccionado solo un rol 
-
         Int16 nItemsSelectedCount = 0; 
 
         foreach (ListItem MyItem in Roles_ListBox.Items)
@@ -73,7 +69,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
         }
 
         // obtenemos los usuarios asociados al rol y los seleccionamos en el listbox de usuarios 
-
         String sRolSeleccionado = Roles_ListBox.SelectedValue;
 
         String[] sUsersInRole = Roles.GetUsersInRole(sRolSeleccionado);
@@ -91,8 +86,8 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
             foreach (ListItem MyItem in Usuarios_ListBox.Items)
                 if (MyItem.Text == MyUser)
                     MyItem.Selected = true; 
-
     }
+
     protected void LeerRoles_LinkButton_Click(object sender, EventArgs e)
     {
         // nos aseguramos que se haya seleccionado solo un usuario 
@@ -120,9 +115,7 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
                 return;
         }
 
-
         // obtenemos los roles asociados al usuario y los seleccionamos en el listbox de roles 
-
         String sUsuarioSeleccionado = Usuarios_ListBox.SelectedValue;
 
         String[] sRolesForUser = Roles.GetRolesForUser(sUsuarioSeleccionado);
@@ -144,11 +137,8 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
     }
     protected void AsociarUsuriosARolSeleccionado_Button_Click(object sender, EventArgs e)
     {
-
         // asociamos uno o varios usuarios seleccionados a un rol seleccionado 
-
         // debe haber un rol (solo uno) seleccionado 
-
         Int16 nItemsSelectedCount = 0;
 
         foreach (ListItem MyItem in Roles_ListBox.Items)
@@ -174,7 +164,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
         }
 
         // debe haber al menos un usuario seleccionado; aprovechamos para contar los items seleccinados 
-        
         nItemsSelectedCount = 0;
        
         foreach (ListItem MyItem in Usuarios_ListBox.Items)
@@ -185,7 +174,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
             }
         }
 
-
         if (nItemsSelectedCount == 0)
         {
             ErrMessage_Span.InnerHtml = "Ud. debe seleccionar al menos un usuario de la lista de usuarios.";
@@ -195,7 +183,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
         }
 
         // agregamos los usuarios seleccionados en un array, para asociarlos más abajo al role seleccionado 
-
         String[] UsersNames = new String[nItemsSelectedCount];
         nItemsSelectedCount = 0;
 
@@ -209,7 +196,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
         }
 
         // primero eliminamos los usuarios del rol (antes de agregar los seleccionados) 
-
         foreach (String UserName in Roles.GetUsersInRole(Roles_ListBox.SelectedValue))
         {
             try
@@ -224,7 +210,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
                 return;
             }
         }
-
 
         // por último, asociamos los usuarios seleccionados al rol seleccionado 
 
@@ -246,7 +231,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
     protected void AsociarRolesAUsurioSeleccionado_Button_Click(object sender, EventArgs e)
     {
         // asociamos uno o varios roles seleccionados a un usuario seleccionado 
-
         // debe haber un usuario (solo uno) seleccionado 
 
         // nos aseguramos que se haya seleccionado solo un usuario 
@@ -275,7 +259,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
         }
 
         // debe haber al menos u rol seleccionado 
-
         nItemsSelectedCount = 0;
 
         foreach (ListItem MyItem in Roles_ListBox.Items)
@@ -284,7 +267,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
                 nItemsSelectedCount++;
         }
 
-        
         if (nItemsSelectedCount == 0) 
         {
             ErrMessage_Span.InnerHtml = "Ud. debe seleccionar al menos un rol de la lista de roles.";
@@ -294,7 +276,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
         }
 
         // determinamos los roles a los cuales corresponde el usuario y eliminamos la asociación 
-
         foreach (String RoleName in Roles.GetRolesForUser(Usuarios_ListBox.SelectedValue))
         {
             try
@@ -310,9 +291,7 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
             }
         }
 
-
         // agregamos los roles seleccionados en un array, para asociarlos más abajo al usuario seleccionado 
-
         String[] RolesNames = new String[nItemsSelectedCount];
         nItemsSelectedCount = 0;
 
@@ -326,7 +305,6 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
         }
 
         // eliminamos la asociación para cada rol antes de crearla nuevamente (puede existir!) 
-
         foreach (String RoleName in RolesNames)
         {
             try
@@ -335,7 +313,10 @@ public partial class Otros_Control_acceso_AsociarRolesUsuarios : System.Web.UI.P
             }
             catch (Exception ex)
             {
-                // si el usuario no existe en el rol se genera un exception; esperado; lo ignoramos y continuamos
+                ErrMessage_Span.InnerHtml = "Hemos obtenido un error al intentar asociar los roles seleccionados al usuario seleccionado.<br />El mensaje específico de error es: " + ex.Message;
+                ErrMessage_Span.Style["display"] = "block";
+
+                return;
             }
         }
 

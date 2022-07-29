@@ -50,5 +50,20 @@ namespace ContabSysNet_Web
 
         }
 
+        void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+            if (Request.IsAuthenticated)
+            {
+                // Get the role from the ticket  
+                string[] role = new string[1];
+                role[0] = ((FormsIdentity)Context.User.Identity).Ticket.UserData;
+
+                // Create a new GenericPrincipal with the role information  
+                System.Security.Principal.GenericPrincipal newPrincipal = new System.Security.Principal.GenericPrincipal(Context.User.Identity, role);
+
+                // Add the principal to the security context, which replaces the current GenericPrincipal  
+                Context.User = newPrincipal;
+            }
+        }
     }
 }
