@@ -2225,8 +2225,11 @@
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff2" />
     <None Include="Properties\PublishProfiles\Arsa publish settings.pubxml" />
+    <None Include="Properties\PublishProfiles\Geh Int - 2.pubxml" />
+    <None Include="Properties\PublishProfiles\Geh Int - 3.pubxml" />
     <None Include="Properties\PublishProfiles\Geh Int.pubxml" />
     <None Include="Properties\PublishProfiles\Lockton Smarter asp.net Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\manuelgr-001-site4 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Ris Solutions - 2.pubxml" />
     <None Include="Properties\PublishProfiles\Risk Solutions Settings.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
@@ -2663,6 +2666,9 @@
     <None Include="webAppSettings.smr.local.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="webAppSettings.GehInt.local">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="WebConnectionString.arsa.cloud.config">
       <SubType>Designer</SubType>
     </None>
@@ -3456,6 +3462,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ControlCajaChicaModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ModelosDatos_EF\code_first\bancos\BancosContext.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\bancos\Factura.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\bancos\Facturas_Impuestos.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\bancos\Moneda.cs" />
+    <Compile Include="ModelosDatos_EF\code_first\bancos\tTempWebReport_ConsultaFacturas.cs" />
     <Compile Include="ModelosDatos_EF\code_first\contab\Asientos.cs" />
     <Compile Include="ModelosDatos_EF\code_first\contab\CentrosCosto.cs" />
     <Compile Include="ModelosDatos_EF\code_first\contab\Companias.cs" />
@@ -4134,6 +4145,7 @@
     </None>
     <None Include="old_app_code\dbBancos.dbml.layout">
       <DependentUpon>dbBancos.dbml</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="ModelosDatos\dbContab.dbml.layout">
       <DependentUpon>dbContab.dbml</DependentUpon>

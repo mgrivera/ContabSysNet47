@@ -164,18 +164,16 @@
                                                   runat="server" 
                                                   Text="Reconvertir cifras anteriores al 1/Oct/21" 
                                                   Checked="False" />
-                                    </div>
                                 </fieldset>
                             </div>
-
                         </div>
-                        
                     </div>
                 </ContentTemplate>
             </cc1:TabPanel>
+
             <cc1:TabPanel HeaderText="Compañías Contab, monedas" runat="server" ID="TabPanel2">
                 <ContentTemplate>
-                <table>
+                    <table>
                         <tr>
                             <td class="ListViewHeader_Suave generalfont">
                                 Cias contab
@@ -211,19 +209,19 @@
                     </table>
                 </ContentTemplate>
             </cc1:TabPanel>
+     
             <cc1:TabPanel HeaderText="Proveedores y clientes" runat="server" ID="TabPanel3">
                 <ContentTemplate>
-                <table>
+                    <table>
                         <tr>
-                            <td>
-                                <div class="ListViewHeader_Suave generalfont" style="width: 420px; ">
+                            <td style="width: 300px; ">
+                                <div class="ListViewHeader_Suave generalfont">
                                     Proveedores y clientes
                                 </div>
-                                
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="width: 300px; ">
                                 <asp:ListBox ID="Sql_Facturas_Proveedor_String" 
                                              runat="server" 
                                              DataSourceID="Companias_SqlDataSource"
@@ -231,7 +229,6 @@
                                              DataValueField="Proveedor" 
                                              Height="193px"
                                              SelectionMode="Multiple" 
-                                             Width="420" 
                                              CssClass="generalfont" />
 
 
@@ -258,7 +255,59 @@
                     </table>
                 </ContentTemplate>
             </cc1:TabPanel>
-            <cc1:TabPanel HeaderText="Tipos, condiciones de pago, estados" runat="server" ID="TabPanel4">
+
+            <cc1:TabPanel HeaderText="Conversión de montos a moneda nacional" runat="server" ID="TabPanel4">
+                <ContentTemplate>
+                    <table>
+                        <tr>
+                            <td>
+                                <div style="text-align: left; ">
+                                    <fieldset>
+                                        <legend>Conversión de montos a moneda nacional:</legend>
+                                        <asp:CheckBox ID="ConvertirMontosAMonedaNacional_CheckBox" 
+                                            runat="server" 
+                                            Text="Convertir facturas expresadas en otras monedas, cuando exista una tasa de cambio registrada"
+                                            Checked="False" />
+                                        <br />
+                                        <div  style="margin-left: 15px; ">
+                                            <asp:CheckBox ID="SeleccionarSoloConTasaRegistrada_CheckBox" 
+                                                runat="server" 
+                                                Text="Leer solo facturas con tasa registrada"
+                                                Checked="False" />
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td>
+                                <div style="width: 100%; ">
+                                    <div style="text-align: left; " class="generalfont">
+                                        <p><b>Notas: </b></p>
+                                        <ul>
+                                            <li>
+                                                <p>Solo facturas expresadas en moneda extranjera serán convertidas.</p>
+                                            </li>
+                                            <li>
+                                                <p>En la tabla <em>Monedas</em> se debe haber indicado cual es la moneda nacional.</p>
+                                            </li>
+                                            <li>
+                                                <p>Las facturas expresadas en moneda nacional <em>no serán convertidas</em>, aunque exista para estas una tasa registrada.</p>
+                                            </li>
+                                            <li>
+                                                <p>Según el punto indicado justo arriba, la tasa en facturas registradas para la moneda nacional, será ignorada, aunque si será mostrada en la lista.</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </ContentTemplate>
+            </cc1:TabPanel>
+
+            <cc1:TabPanel HeaderText="Tipos, condiciones de pago, estados" runat="server" ID="TabPanel5">
                 <ContentTemplate>
                 
                     <table>
@@ -321,6 +370,7 @@
                 </ContentTemplate>
             </cc1:TabPanel>
         </cc1:tabcontainer>
+
         <br />
         
         <div style="text-align: right;">
@@ -341,7 +391,8 @@
 
        <%-- <asp:SqlDataSource ID="CiasContab_SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>"
             SelectCommand="SELECT NombreCorto, Numero FROM Companias ORDER BY NombreCorto">
-        </asp:SqlDataSource>--%>
+        </asp:SqlDataSource>
+        --%>
 
         <asp:SqlDataSource ID="Monedas_SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:dbContabConnectionString %>"
             SelectCommand="SELECT Descripcion, Moneda FROM Monedas ORDER BY Descripcion">
@@ -368,4 +419,3 @@
         
     </div>
 </asp:Content>
-

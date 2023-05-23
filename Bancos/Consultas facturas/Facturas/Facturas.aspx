@@ -122,6 +122,14 @@
                                             <th runat="server" class="padded" style="text-align: left; padding-bottom: 8px; padding-top: 8px;">
                                                 Concepto
                                             </th>
+                                            <th id="Th12" runat="server" class="padded" style="text-align: right; white-space: nowrap;
+                                                padding-bottom: 8px; padding-top: 8px;">
+                                                Tasa<br />cambio
+                                            </th>
+                                            <th id="Th15" runat="server" class="padded" style="text-align: center; white-space: nowrap;
+                                                padding-bottom: 8px; padding-top: 8px;">
+                                                Convertido<br />(según tasa)
+                                            </th>
                                             <th id="Th3" runat="server" class="padded" style="text-align: right; white-space: nowrap;
                                                 padding-bottom: 8px; padding-top: 8px;">
                                                 Monto<br />(Imp+NoImp)
@@ -145,10 +153,6 @@
                                              <th id="Th7" runat="server" class="padded" style="text-align: right; padding-bottom: 8px;
                                                 padding-top: 8px;">
                                                 Retención<br />Iva
-                                            </th>
-                                            <th id="Th12" runat="server" class="padded" style="text-align: right; padding-bottom: 8px;
-                                                padding-top: 8px;">
-                                                Retenciones<br />(varias)
                                             </th>
                                             <th id="Th6" runat="server" class="padded" style="text-align: right; padding-bottom: 8px;
                                                 padding-top: 8px;">
@@ -237,6 +241,16 @@
                                             </td>
 
                                             <td class="padded" style="text-align: right; white-space:nowrap; ">
+                                                <asp:Label ID="TasaLabel" runat="server" Text='<%# Eval("Tasa", "{0:N5}") %>' />
+                                            </td>
+
+                                            <td class="padded" style="text-align: center; white-space:nowrap; ">
+                                                <asp:Label ID="ConvertidoSegunTasaFlagLabel" 
+                                                           runat="server" 
+                                                           Text='<%# ( ((bool)Eval("ConvertidoSegunTasaFlag")) ? "Si" : "" ) %>' />
+                                            </td>
+
+                                            <td class="padded" style="text-align: right; white-space:nowrap; ">
                                                 <asp:Label ID="TotalFacturaLabel" runat="server" Text='<%# Eval("MontoTotalFactura", "{0:N2}") %>' />
                                             </td>
                                             <td class="padded" style="text-align: right;">
@@ -255,10 +269,6 @@
                                             <td class="padded" style="text-align: right; white-space:nowrap; ">
                                                 <asp:Label ID="Label3" runat="server" Text='<%# Eval("RetencionSobreIva", "{0:N2}") %>' />
                                             </td>
-                                            <td class="padded" style="text-align: right; white-space:nowrap; ">
-                                                <asp:Label ID="Label6" runat="server" Text='<%# Eval("RetencionesVarias", "{0:N2}") %>' />
-                                            </td>
-
                                             <td class="padded" style="text-align: right; white-space:nowrap; ">
                                                 <asp:Label ID="AnticipoLabel" runat="server" Text='<%# Eval("Anticipo", "{0:N2}") %>' />
                                             </td>
@@ -294,6 +304,16 @@
                                             </td>
 
                                             <td class="padded" style="text-align: right; white-space:nowrap; ">
+                                                <asp:Label ID="TasaLabel" runat="server" Text='<%# Eval("Tasa", "{0:N5}") %>' />
+                                            </td>
+
+                                            <td class="padded" style="text-align: center; white-space:nowrap; ">
+                                                <asp:Label ID="ConvertidoSegunTasaFlagLabel" 
+                                                           runat="server" 
+                                                           Text='<%# ( ((bool)Eval("ConvertidoSegunTasaFlag")) ? "Si" : "" ) %>' />
+                                            </td>
+
+                                            <td class="padded" style="text-align: right; white-space:nowrap; ">
                                                 <asp:Label ID="TotalFacturaLabel" runat="server" Text='<%# Eval("MontoTotalFactura", "{0:N2}") %>' />
                                             </td>
                                             <td class="padded" style="text-align: right;">
@@ -312,10 +332,6 @@
                                             <td class="padded" style="text-align: right; white-space:nowrap; ">
                                                 <asp:Label ID="Label3" runat="server" Text='<%# Eval("RetencionSobreIva", "{0:N2}") %>' />
                                             </td>
-                                            <td class="padded" style="text-align: right; white-space:nowrap; ">
-                                                <asp:Label ID="Label6" runat="server" Text='<%# Eval("RetencionesVarias", "{0:N2}") %>' />
-                                            </td>
-
                                             <td class="padded" style="text-align: right; white-space:nowrap; ">
                                                 <asp:Label ID="AnticipoLabel" runat="server" Text='<%# Eval("Anticipo", "{0:N2}") %>' />
                                             </td>
@@ -352,7 +368,6 @@
                         
                     </ItemTemplate>
 
-                    
                 </asp:ListView>
 
             </ContentTemplate>

@@ -8044,10 +8044,14 @@ namespace ContabSysNetWeb.Old_App_Code
 		private string _Concepto;
 		
 		private System.Nullable<decimal> _MontoFacturaSinIva;
-		
-		private System.Nullable<decimal> _MontoFacturaConIva;
-		
-		private System.Nullable<char> _TipoAlicuota;
+
+        private System.Nullable<decimal> _MontoFacturaConIva;
+
+        private System.Nullable<decimal> _Tasa;
+
+        private System.Nullable<bool> _ConvertidoSegunTasaFlag;
+
+        private System.Nullable<char> _TipoAlicuota;
 		
 		private System.Nullable<decimal> _IvaPorc;
 		
@@ -8153,6 +8157,10 @@ namespace ContabSysNetWeb.Old_App_Code
     partial void OnMontoFacturaSinIvaChanged();
     partial void OnMontoFacturaConIvaChanging(System.Nullable<decimal> value);
     partial void OnMontoFacturaConIvaChanged();
+    partial void OnTasaChanging(System.Nullable<decimal> value);
+    partial void OnTasaChanged();
+    partial void OnConvertidoSegunTasaFlagChanging(System.Nullable<bool> value);
+    partial void OnConvertidoSegunTasaFlagChanged();
     partial void OnTipoAlicuotaChanging(System.Nullable<char> value);
     partial void OnTipoAlicuotaChanged();
     partial void OnIvaPorcChanging(System.Nullable<decimal> value);
@@ -8549,28 +8557,68 @@ namespace ContabSysNetWeb.Old_App_Code
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MontoFacturaConIva", DbType="Money")]
-		public System.Nullable<decimal> MontoFacturaConIva
-		{
-			get
-			{
-				return this._MontoFacturaConIva;
-			}
-			set
-			{
-				if ((this._MontoFacturaConIva != value))
-				{
-					this.OnMontoFacturaConIvaChanging(value);
-					this.SendPropertyChanging();
-					this._MontoFacturaConIva = value;
-					this.SendPropertyChanged("MontoFacturaConIva");
-					this.OnMontoFacturaConIvaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoAlicuota", DbType="Char(1)")]
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_MontoFacturaConIva", DbType = "Money")]
+        public System.Nullable<decimal> MontoFacturaConIva
+        {
+            get
+            {
+                return this._MontoFacturaConIva;
+            }
+            set
+            {
+                if ((this._MontoFacturaConIva != value))
+                {
+                    this.OnMontoFacturaConIvaChanging(value);
+                    this.SendPropertyChanging();
+                    this._MontoFacturaConIva = value;
+                    this.SendPropertyChanged("MontoFacturaConIva");
+                    this.OnMontoFacturaConIvaChanged();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Tasa", DbType = "Money")]
+        public System.Nullable<decimal> Tasa
+        {
+            get
+            {
+                return this._Tasa;
+            }
+            set
+            {
+                if ((this._Tasa != value))
+                {
+                    this.OnTasaChanging(value);
+                    this.SendPropertyChanging();
+                    this._Tasa = value;
+                    this.SendPropertyChanged("Tasa");
+                    this.OnTasaChanged();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_ConvertidoSegunTasaFlag", DbType = "Bit")]
+        public System.Nullable<bool> ConvertidoSegunTasaFlag
+        {
+            get
+            {
+                return this._ConvertidoSegunTasaFlag;
+            }
+            set
+            {
+                if ((this._ConvertidoSegunTasaFlag != value))
+                {
+                    this.OnConvertidoSegunTasaFlagChanging(value);
+                    this.SendPropertyChanging();
+                    this._ConvertidoSegunTasaFlag = value;
+                    this.SendPropertyChanged("ConvertidoSegunTasaFlag");
+                    this.OnConvertidoSegunTasaFlagChanged();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoAlicuota", DbType="Char(1)")]
 		public System.Nullable<char> TipoAlicuota
 		{
 			get
@@ -11788,8 +11836,12 @@ namespace ContabSysNetWeb.Old_App_Code
 		private System.Nullable<decimal> _MontoFacturaConIva;
 		
 		private decimal _MontoTotalFactura;
-		
-		private System.Nullable<decimal> _BaseImponible_Reducido;
+
+        private System.Nullable<decimal> _Tasa; 
+
+        private System.Nullable<bool> _ConvertidoSegunTasaFlag;
+
+        private System.Nullable<decimal> _BaseImponible_Reducido;
 		
 		private System.Nullable<decimal> _BaseImponible_General;
 		
@@ -11959,6 +12011,10 @@ namespace ContabSysNetWeb.Old_App_Code
     partial void OnMontoFacturaConIvaChanged();
     partial void OnMontoTotalFacturaChanging(decimal value);
     partial void OnMontoTotalFacturaChanged();
+    partial void OnTasaChanging(System.Nullable<decimal> value);
+    partial void OnTasaChanged();
+    partial void OnConvertidoSegunTasaFlagChanging(System.Nullable<bool> value);
+    partial void OnConvertidoSegunTasaFlagChanged();
     partial void OnBaseImponible_ReducidoChanging(System.Nullable<decimal> value);
     partial void OnBaseImponible_ReducidoChanged();
     partial void OnBaseImponible_GeneralChanging(System.Nullable<decimal> value);
@@ -12901,28 +12957,68 @@ namespace ContabSysNetWeb.Old_App_Code
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MontoFacturaConIva", DbType="Money")]
-		public System.Nullable<decimal> MontoFacturaConIva
-		{
-			get
-			{
-				return this._MontoFacturaConIva;
-			}
-			set
-			{
-				if ((this._MontoFacturaConIva != value))
-				{
-					this.OnMontoFacturaConIvaChanging(value);
-					this.SendPropertyChanging();
-					this._MontoFacturaConIva = value;
-					this.SendPropertyChanged("MontoFacturaConIva");
-					this.OnMontoFacturaConIvaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MontoTotalFactura", DbType="Money NOT NULL")]
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_MontoFacturaConIva", DbType = "Money")]
+        public System.Nullable<decimal> MontoFacturaConIva
+        {
+            get
+            {
+                return this._MontoFacturaConIva;
+            }
+            set
+            {
+                if ((this._MontoFacturaConIva != value))
+                {
+                    this.OnMontoFacturaConIvaChanging(value);
+                    this.SendPropertyChanging();
+                    this._MontoFacturaConIva = value;
+                    this.SendPropertyChanged("MontoFacturaConIva");
+                    this.OnMontoFacturaConIvaChanged();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Tasa", DbType = "Money")]
+        public System.Nullable<decimal> Tasa
+        {
+            get
+            {
+                return this._Tasa;
+            }
+            set
+            {
+                if ((this._Tasa != value))
+                {
+                    this.OnTasaChanging(value);
+                    this.SendPropertyChanging();
+                    this._Tasa = value;
+                    this.SendPropertyChanged("Tasa");
+                    this.OnTasaChanged();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_ConvertidoSegunTasaFlag", DbType = "Bit")]
+        public System.Nullable<bool> ConvertidoSegunTasaFlag
+        {
+            get
+            {
+                return this._ConvertidoSegunTasaFlag;
+            }
+            set
+            {
+                if ((this._ConvertidoSegunTasaFlag != value))
+                {
+                    this.OnConvertidoSegunTasaFlagChanging(value);
+                    this.SendPropertyChanging();
+                    this._ConvertidoSegunTasaFlag = value;
+                    this.SendPropertyChanged("ConvertidoSegunTasaFlag");
+                    this.OnConvertidoSegunTasaFlagChanged();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MontoTotalFactura", DbType="Money NOT NULL")]
 		public decimal MontoTotalFactura
 		{
 			get

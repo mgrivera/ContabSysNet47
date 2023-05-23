@@ -291,6 +291,33 @@ public partial class Bancos_Facturas_Facturas_Filter {
     protected global::AjaxControlToolkit.TabPanel TabPanel4;
     
     /// <summary>
+    /// ConvertirMontosAMonedaNacional_CheckBox control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CheckBox ConvertirMontosAMonedaNacional_CheckBox;
+    
+    /// <summary>
+    /// SeleccionarSoloConTasaRegistrada_CheckBox control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CheckBox SeleccionarSoloConTasaRegistrada_CheckBox;
+    
+    /// <summary>
+    /// TabPanel5 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::AjaxControlToolkit.TabPanel TabPanel5;
+    
+    /// <summary>
     /// Sql_Facturas_Tipo_Numeric control.
     /// </summary>
     /// <remarks>

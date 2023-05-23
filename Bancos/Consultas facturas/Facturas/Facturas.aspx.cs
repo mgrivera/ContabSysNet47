@@ -19,94 +19,95 @@ public partial class Bancos_Facturas_Facturas : System.Web.UI.Page
 
 private class Facturas_Object
     {
-    public int Moneda { get; set; }
-    public string MonedaSimbolo { get; set; }
-    public string MonedaNombre { get; set; }
+        public int Moneda { get; set; }
+        public string MonedaSimbolo { get; set; }
+        public string MonedaNombre { get; set; }
+        
+        public int CiaContab { get; set; }
+        public string CiaContabNombre { get; set; }
+        public string CiaContabDireccion { get; set; }
+        public string CiaContabCiudad { get; set; } 
+        public string CiaContabRif { get; set; }
+        public string CiaContabTelefono1 { get; set; }
+        public string CiaContabTelefono2 { get; set; }
+        public string CiaContabFax { get; set; }
 
-    public int CiaContab { get; set; }
-    public string CiaContabNombre { get; set; }
-    public string CiaContabDireccion { get; set; }
-    public string CiaContabCiudad { get; set; } 
-    public string CiaContabRif { get; set; }
-    public string CiaContabTelefono1 { get; set; }
-    public string CiaContabTelefono2 { get; set; }
-    public string CiaContabFax { get; set; }
+        public int Compania { get; set; }
 
-    public int Compania { get; set; }
+        public string CompaniaDomicilio { get; set; }
+        public string CompaniaTelefono { get; set; }
+        public string CompaniaFax { get; set; }
+        public string CompaniaCiudad { get; set; }
+        public short CompaniaNatJurFlag { get; set; }
 
-    public string CompaniaDomicilio { get; set; }
-    public string CompaniaTelefono { get; set; }
-    public string CompaniaFax { get; set; }
-    public string CompaniaCiudad { get; set; }
-    public short CompaniaNatJurFlag { get; set; }
+        public string NombreCompania { get; set; }
+        public string AbreviaturaCompania { get; set; }
+        public string RifCompania { get; set; }
+        public string NitCompania { get; set; }
+        public bool? ContribuyenteFlag { get; set; }
+        public string NumeroFactura { get; set; }
+        public string NumeroControl { get; set; } 
+        public int ClaveUnica { get; set; }
+        public bool ImportacionFlag { get; set; }
+        public string NumeroPlanillaImportacion { get; set; }
+        public String NcNdFlag { get; set; } 
+        public string NumeroFacturaAfectada { get; set; } 
+        public string NumeroComprobante { get; set; } 
+        public Nullable<short> NumeroOperacion { get; set; } 
+        public int Tipo { get; set; }
+        public string NombreTipo { get; set; }
+        public int CondicionesDePago { get; set; }
 
-    public string NombreCompania { get; set; }
-    public string AbreviaturaCompania { get; set; }
-    public string RifCompania { get; set; }
-    public string NitCompania { get; set; }
-    public bool? ContribuyenteFlag { get; set; }
-    public string NumeroFactura { get; set; }
-    public string NumeroControl { get; set; } 
-    public int ClaveUnica { get; set; }
-    public bool ImportacionFlag { get; set; }
-    public string NumeroPlanillaImportacion { get; set; }
-    public String NcNdFlag { get; set; } 
-    public string NumeroFacturaAfectada { get; set; } 
-    public string NumeroComprobante { get; set; } 
-    public Nullable<short> NumeroOperacion { get; set; } 
-    public int Tipo { get; set; }
-    public string NombreTipo { get; set; }
-    public int CondicionesDePago { get; set; }
+        public string CondicionesDePagoNombre { get; set; } 
 
-    public string CondicionesDePagoNombre { get; set; } 
+        public DateTime FechaEmision { get; set; } 
+        public DateTime FechaRecepcion { get; set; }
+        public string Concepto { get; set; }
 
-    public DateTime FechaEmision { get; set; } 
-    public DateTime FechaRecepcion { get; set; }
-    public string Concepto { get; set; }
+        public string NotasFactura1 { get; set; }
+        public string NotasFactura2 { get; set; }
+        public string NotasFactura3 { get; set; } 
 
-    public string NotasFactura1 { get; set; }
-    public string NotasFactura2 { get; set; }
-    public string NotasFactura3 { get; set; } 
+        public Nullable<decimal> MontoFacturaSinIva { get; set; }
+        public Nullable<decimal> MontoFacturaConIva { get; set; }
+        public Nullable<decimal> Tasa { get; set; }
 
-    public Nullable<decimal> MontoFacturaSinIva { get; set; }
-    public Nullable<decimal> MontoFacturaConIva { get; set; }
+        public decimal MontoTotalFactura { get; set; }
 
-    public decimal MontoTotalFactura { get; set; }
+        public Nullable<char> TipoAlicuota { get; set; } 
+        public Nullable<decimal> IvaPorc { get; set; }
+        public Nullable<decimal> Iva { get; set; } 
+        public decimal TotalFactura { get; set; }
+        public string CodigoConceptoRetencion { get; set; } 
+        public Nullable<decimal> MontoSujetoARetencion { get; set; }
+        public Nullable<decimal> ImpuestoRetenidoPorc { get; set; }
 
-    public Nullable<char> TipoAlicuota { get; set; } 
-    public Nullable<decimal> IvaPorc { get; set; }
-    public Nullable<decimal> Iva { get; set; } 
-    public decimal TotalFactura { get; set; }
-    public string CodigoConceptoRetencion { get; set; } 
-    public Nullable<decimal> MontoSujetoARetencion { get; set; }
-    public Nullable<decimal> ImpuestoRetenidoPorc { get; set; }
+        public Nullable<decimal> ImpuestoRetenidoISLRAntesSustraendo { get; set; }
+        public Nullable<decimal> ImpuestoRetenidoISLRSustraendo { get; set; }
 
-    public Nullable<decimal> ImpuestoRetenidoISLRAntesSustraendo { get; set; }
-    public Nullable<decimal> ImpuestoRetenidoISLRSustraendo { get; set; }
+        public Nullable<decimal> ImpuestoRetenido { get; set; }
+        public Nullable<DateTime> FRecepcionRetencionISLR { get; set; }
+        public Nullable<decimal> RetencionSobreIvaPorc { get; set; }
+        public Nullable<decimal> RetencionSobreIva { get; set; }
+        public Nullable<DateTime> FRecepcionRetencionIVA { get; set; }
 
-    public Nullable<decimal> ImpuestoRetenido { get; set; }
-    public Nullable<DateTime> FRecepcionRetencionISLR { get; set; }
-    public Nullable<decimal> RetencionSobreIvaPorc { get; set; }
-    public Nullable<decimal> RetencionSobreIva { get; set; }
-    public Nullable<DateTime> FRecepcionRetencionIVA { get; set; }
+        public Nullable<decimal> OtrosImpuestos { get; set; }
+        public Nullable<decimal> OtrasRetenciones { get; set; }
 
-    public Nullable<decimal> OtrosImpuestos { get; set; }
-    public Nullable<decimal> OtrasRetenciones { get; set; }
+        public decimal TotalAPagar { get; set; }
+        public Nullable<decimal> Anticipo { get; set; } 
+        public decimal Saldo { get; set; }
+        public short Estado { get; set; } 
+        public string NombreEstado { get; set; }
 
-    public decimal TotalAPagar { get; set; }
-    public Nullable<decimal> Anticipo { get; set; } 
-    public decimal Saldo { get; set; }
-    public short Estado { get; set; } 
-    public string NombreEstado { get; set; }
+        // estas dos propiedades (columnas) ya no existen en la tabla en el db ... 
 
-    // estas dos propiedades (columnas) ya no existen en la tabla en el db ... 
+        //public Nullable<Int16> NumeroDeCuotas { get; set; }
+        //public Nullable<DateTime> FechaUltimoVencimiento { get; set; } 
 
-    //public Nullable<Int16> NumeroDeCuotas { get; set; }
-    //public Nullable<DateTime> FechaUltimoVencimiento { get; set; } 
-
-    public short CxCCxPFlag { get; set; } 
-    public string NombreCxCCxPFlag { get; set; }
-    public Nullable<int> Comprobante { get; set; } 
+        public short CxCCxPFlag { get; set; } 
+        public string NombreCxCCxPFlag { get; set; }
+        public Nullable<int> Comprobante { get; set; } 
     }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -188,7 +189,23 @@ private class Facturas_Object
         this.cantRegistrosSeleccionados_Label.Text = ""; 
 
         //dbBancosDataContext BancosDB = new dbBancosDataContext();
-        BancosEntities BancosDB = new BancosEntities(); 
+        BancosEntities BancosDB = new BancosEntities();
+
+        // ------------------------------------------------------------------------------------------------------------
+        // leemos en la tabla de monedas cual es la moneda nacional 
+        var BancosContext = new ContabSysNet_Web.ModelosDatos_EF.code_first.bancos.BancosContext(); 
+        var monedaNacional = BancosContext.Monedas.Where(x => x.NacionalFlag).FirstOrDefault();
+
+        if (monedaNacional == null)
+        {
+            BancosContext.Dispose();
+
+            ErrMessage_Span.InnerHtml = "Error: no hay una moneda definida como <em>'moneda nacional'</em>. <br />" +
+                                        "Ud. debe definir, en el catálogo <em>Monedas</em>, una moneda como 'nacional'.";
+            ErrMessage_Span.Style["display"] = "block";
+
+            return;
+        }
 
         // --------------------------------------------------------------------------------------------
         // determinamos el mes y año fiscales, para usarlos como criterio para buscar el saldo en la tabla 
@@ -200,11 +217,11 @@ private class Facturas_Object
 
         try
         {
-            BancosDB.ExecuteStoreCommand("Delete From tTempWebReport_ConsultaFacturas Where NombreUsuario = {0}", Membership.GetUser().UserName);
+            BancosContext.Database.ExecuteSqlCommand("Delete From tTempWebReport_ConsultaFacturas Where NombreUsuario = {0}", Membership.GetUser().UserName);
         }
         catch (Exception ex)
         {
-            BancosDB.Dispose();
+            BancosContext.Dispose();
 
             ErrMessage_Span.InnerHtml = "Ha ocurrido un error al intentar ejecutar una operación de acceso a la base de datos. <br />" + 
                 "El mensaje específico de error es: " + 
@@ -215,6 +232,10 @@ private class Facturas_Object
         }
 
         bool bReconvertirCifrasAntes_01Oct2021 = (bool)Session["ReconvertirCifrasAntes_01Oct2021"];
+
+        // para convertir facturas registradas en monedas diferentes a la nacional 
+        bool bConvertirMontosAMonedaNacional = (bool)Session["ConvertirMontosAMonedaNacional"];
+        bool bSeleccionarSoloFacturasConTasaRegistrada = (bool)Session["SeleccionarSoloFacturasConTasaRegistrada"];
 
         // el usuario puede indicar un criterio para seleccionar facturas con retenciones para un período o de un monto dado 
         string innerJoin_Facturas_Impuestos = "";
@@ -227,10 +248,17 @@ private class Facturas_Object
 
             where_Facturas_Impuestos = " And " + Session["FiltroForma_LeerTablasDeImpRet"].ToString(); 
         }
-        
+
+        // si el usuario quiere *solo* facturas con tasa registrada, afectamos el Where del select que viene 
+        string where_facturas_tasaRegistrada = "";
+        if (bSeleccionarSoloFacturasConTasaRegistrada)
+        {
+            where_facturas_tasaRegistrada = " And (Facturas.Tasa Is Not Null)";
+        }
+
+        // ------------------------------------------------------------------------------------------------------------
         // usamos el criterio que indico el usuario para leer las facturas de proveedores y grabarlas a una tabla 
         // en la base de datos temporal (tTempWebReport_ConsultaFacturas)
-
         string sSqlQueryString = "SELECT Facturas.Moneda, Monedas.Simbolo As MonedaSimbolo, Monedas.Descripcion As MonedaNombre, " + 
             "Facturas.Cia AS CiaContab, " +
             "Companias.Nombre As CiaContabNombre, " + 
@@ -263,9 +291,10 @@ private class Facturas_Object
 
             "ParametrosBancos.FooterFacturaImpresa_L1 As NotasFactura1, " +
             "ParametrosBancos.FooterFacturaImpresa_L2 As NotasFactura2, " +
-            "ParametrosBancos.FooterFacturaImpresa_L3 As NotasFactura3, " + 
-            
-            "MontoFacturaSinIva, MontoFacturaConIva, (IsNull(MontoFacturaSinIva, 0) + IsNull(MontoFacturaConIva, 0)) As MontoTotalFactura, " +
+            "ParametrosBancos.FooterFacturaImpresa_L3 As NotasFactura3, " +
+
+            "MontoFacturaSinIva, MontoFacturaConIva, Facturas.Tasa, " +
+            "(IsNull(MontoFacturaSinIva, 0) + IsNull(MontoFacturaConIva, 0)) As MontoTotalFactura, " +
             "Facturas.TipoAlicuota, Facturas.IvaPorc, Facturas.Iva, Facturas.TotalFactura, " + 
             "Facturas.CodigoConceptoRetencion, " + 
             "MontoSujetoARetencion, ImpuestoRetenidoPorc, ImpuestoRetenidoISLRAntesSustraendo, ImpuestoRetenidoISLRSustraendo, ImpuestoRetenido, FRecepcionRetencionISLR, " + 
@@ -283,21 +312,21 @@ private class Facturas_Object
             "Inner Join FormasDePago On Facturas.CondicionesDePago = FormasDePago.FormaDePago " + 
             "Inner Join ParametrosBancos On Facturas.Cia = ParametrosBancos.Cia " +
             innerJoin_Facturas_Impuestos + 
-            "Where " + Session["FiltroForma"].ToString() + where_Facturas_Impuestos;
+            "Where " + Session["FiltroForma"].ToString() + where_Facturas_Impuestos + where_facturas_tasaRegistrada;
 
-        List<tTempWebReport_ConsultaFacturas> MyFacturas_List = new List<tTempWebReport_ConsultaFacturas>();
-        tTempWebReport_ConsultaFacturas MyFactura;
+        List<ContabSysNet_Web.ModelosDatos_EF.code_first.bancos.tTempWebReport_ConsultaFacturas> MyFacturas_List = new List<ContabSysNet_Web.ModelosDatos_EF.code_first.bancos.tTempWebReport_ConsultaFacturas>();
+        ContabSysNet_Web.ModelosDatos_EF.code_first.bancos.tTempWebReport_ConsultaFacturas MyFactura;
 
         DateTime fechaMin_sqlServer = new DateTime(1753, 1, 1);
         DateTime fechaMax_sqlServer = new DateTime(9999, 12, 31); 
 
         try
         {
-            var query = BancosDB.ExecuteStoreQuery<Facturas_Object>(sSqlQueryString);
+            var query = BancosContext.Database.SqlQuery<Facturas_Object>(sSqlQueryString);
 
             foreach (Facturas_Object MyFactura_Object in query)
             {
-                MyFactura = new tTempWebReport_ConsultaFacturas();
+                MyFactura = new ContabSysNet_Web.ModelosDatos_EF.code_first.bancos.tTempWebReport_ConsultaFacturas();
 
                 MyFactura.Moneda = MyFactura_Object.Moneda;
                 MyFactura.MonedaSimbolo = MyFactura_Object.MonedaSimbolo;
@@ -392,6 +421,8 @@ private class Facturas_Object
 
                 MyFactura.MontoFacturaSinIva = MyFactura_Object.MontoFacturaSinIva.HasValue ? MyFactura_Object.MontoFacturaSinIva : 0;
                 MyFactura.MontoFacturaConIva = MyFactura_Object.MontoFacturaConIva.HasValue ? MyFactura_Object.MontoFacturaConIva : 0;
+                MyFactura.Tasa = MyFactura_Object.Tasa;
+                MyFactura.ConvertidoSegunTasaFlag = false; 
 
                 MyFactura.MontoTotalFactura = MyFactura_Object.MontoTotalFactura;
 
@@ -510,8 +541,7 @@ private class Facturas_Object
                     MyFactura.ImpuestoRetenido = 0;
                     MyFactura.FRecepcionRetencionISLR = null; 
 
-                    var retencionIslr_query = BancosDB.Facturas_Impuestos.
-                        Where(i => i.FacturaID == MyFactura_Object.ClaveUnica && i.ImpuestosRetencionesDefinicion.Predefinido == 3); 
+                    var retencionIslr_query = BancosDB.Facturas_Impuestos.Where(i => i.FacturaID == MyFactura_Object.ClaveUnica && i.ImpuestosRetencionesDefinicion.Predefinido == 3); 
 
                     foreach(var retIslr in retencionIslr_query) 
                     {
@@ -579,29 +609,42 @@ private class Facturas_Object
                     MyFactura.MontoPagado = nMontoPagado;
                 // -----------------------------------------------------------------------------
 
-                MyFacturas_List.Add(MyFactura);
+                // el usuario puede indicar, como parte del filtro, que desea convertir montos registrados en facturas para otras monedas
+                if (bConvertirMontosAMonedaNacional && MyFactura.Moneda != monedaNacional.Moneda1 && MyFactura.Tasa != null)
+                {
+                    string resultMessage = "";
+                    if (!convertirFacturaAMonedaNacional(MyFactura, out resultMessage))
+                    {
+                        ErrMessage_Span.InnerHtml = resultMessage;
+                        ErrMessage_Span.Style["display"] = "block";
 
+                        return;
+                    }
+                }
+
+                MyFacturas_List.Add(MyFactura);
             }
 
             // agregamos todos los registros leídos y que están ahora en la lista 
             foreach (var f in MyFacturas_List)
             {
-                BancosDB.tTempWebReport_ConsultaFacturas.AddObject(f);
+                BancosContext.tTempWebReport_ConsultaFacturas.Add(f);
             }
         }
         catch (Exception ex) 
         {
             BancosDB.Dispose();
+            BancosContext.Dispose(); 
 
             ErrMessage_Span.InnerHtml = "Ha ocurrido un error al intentar ejecutar una operación de acceso a la base de datos. <br /> Es probable que el filtro que Ud. ha indicado no esté bien formado. Por favor revise el filtro indicado a ver si está correctamente construido. <br />El mensaje específico de error es: " + ex.Message + "<br /><br />";
             ErrMessage_Span.Style["display"] = "block";
             return;
         }
 
-
         try
         {
-            BancosDB.SaveChanges();
+            //BancosDB.SaveChanges();
+            BancosContext.SaveChanges(); 
         }
 
         catch (Exception ex)
@@ -618,8 +661,7 @@ private class Facturas_Object
         }
 
         // ---------------------------------------------------------------------------------------
-        // si el usuario indico que deseaba incluir facturas desde el control de caja chica, 
-        // intentamos agregarlas ahora 
+        // si el usuario indico que deseaba incluir facturas desde el control de caja chica, intentamos agregarlas ahora 
         MyFacturas_List.Clear(); 
 
         if (Session["FiltroForma_LeerFacturasCCCh"].ToString() == "")
@@ -689,7 +731,7 @@ private class Facturas_Object
 
                  return;
              }
-             MyFactura = new tTempWebReport_ConsultaFacturas();
+             MyFactura = new ContabSysNet_Web.ModelosDatos_EF.code_first.bancos.tTempWebReport_ConsultaFacturas();
 
              MyFactura.Moneda = monedaLocal.Moneda1;
              MyFactura.MonedaSimbolo = monedaLocal.Simbolo;
@@ -854,12 +896,13 @@ private class Facturas_Object
          {
             foreach (var f in MyFacturas_List)
             {
-                BancosDB.tTempWebReport_ConsultaFacturas.AddObject(f);
+                BancosContext.tTempWebReport_ConsultaFacturas.Add(f);
             }
 
              try
              {
-                 BancosDB.SaveChanges();
+                BancosDB.SaveChanges();
+                BancosContext.SaveChanges(); 
              }
 
              catch (Exception ex)
@@ -876,7 +919,6 @@ private class Facturas_Object
                      "su número en blanco. <br /><br /> " +
                      "El mensaje específico de error es: " + ex.Message + "<br /><br />";
 
-
                  // intentamos determinar facturas con problemas; deben estar en la lista con números repetidos o con su número en blanco ... 
                  string errorMessage2 = ""; 
 
@@ -888,7 +930,6 @@ private class Facturas_Object
                                               group f by new { f.Moneda, f.CiaContab, f.Compania, f.NumeroFactura, f.NombreUsuario } 
                                               into g 
                                               select g; 
-
 
                  foreach (var f in queryFacturasRepetidas)
                  {
@@ -906,7 +947,6 @@ private class Facturas_Object
 
                  if (errorMessage2 != "")
                      errorMessage2 += ".<br />";
-
 
                  ErrMessage_Span.InnerHtml = errorMessage1 + errorMessage2; 
                  ErrMessage_Span.Style["display"] = "block";
@@ -1050,7 +1090,6 @@ private class Facturas_Object
     public string FacturaCajaChica(int tipo, string nombreTipo) 
     {
         // para mostrar en la lista (ListView) si la factura viene o no del control de caja chica ... 
-
         if (tipo != 0)
             return ""; 
 
@@ -1272,51 +1311,51 @@ private class Facturas_Object
             foreach (tTempWebReport_ConsultaFacturas factura in query)
             {
                 // usamos una fecha en relación al valor del flag 
-                var fechaFactura = factura.FechaRecepcion; 
+                var fechaFactura = factura.FechaRecepcion;
 
                 if (factura.CxCCxPFlag == 2)
-                    fechaFactura = factura.FechaEmision; 
+                    fechaFactura = factura.FechaEmision;
 
                 if (factura.Moneda != monedaNacional || fechaFactura >= new DateTime(2021, 10, 1))
                     // la factura no debe ser reconvertida 
-                    continue; 
+                    continue;
 
                 factura.MontoFacturaSinIva = (factura.MontoFacturaSinIva.HasValue) ? Math.Round(factura.MontoFacturaSinIva.Value / 1000000, 2) : factura.MontoFacturaSinIva;
-                 factura.MontoFacturaConIva = (factura.MontoFacturaConIva.HasValue) ? Math.Round(factura.MontoFacturaConIva.Value / 1000000, 2) : factura.MontoFacturaConIva;
-                 factura.MontoTotalFactura = Math.Round(factura.MontoTotalFactura / 1000000, 2);
+                factura.MontoFacturaConIva = (factura.MontoFacturaConIva.HasValue) ? Math.Round(factura.MontoFacturaConIva.Value / 1000000, 2) : factura.MontoFacturaConIva;
+                factura.MontoTotalFactura = Math.Round(factura.MontoTotalFactura / 1000000, 2);
 
-                 factura.BaseImponible_General = (factura.BaseImponible_General.HasValue) ? Math.Round(factura.BaseImponible_General.Value / 1000000, 2) : factura.BaseImponible_General;
-                 factura.BaseImponible_Adicional = (factura.BaseImponible_Adicional.HasValue) ? Math.Round(factura.BaseImponible_Adicional.Value / 1000000, 2) : factura.BaseImponible_Adicional;
+                factura.BaseImponible_General = (factura.BaseImponible_General.HasValue) ? Math.Round(factura.BaseImponible_General.Value / 1000000, 2) : factura.BaseImponible_General;
+                factura.BaseImponible_Adicional = (factura.BaseImponible_Adicional.HasValue) ? Math.Round(factura.BaseImponible_Adicional.Value / 1000000, 2) : factura.BaseImponible_Adicional;
                 factura.BaseImponible_Reducido = (factura.BaseImponible_Reducido.HasValue) ? Math.Round(factura.BaseImponible_Reducido.Value / 1000000, 2) : factura.BaseImponible_Reducido;
 
                 factura.Iva_Reducido = (factura.Iva_Reducido.HasValue) ? Math.Round(factura.Iva_Reducido.Value / 1000000, 2) : factura.Iva_Reducido;
-                 factura.Iva_General = (factura.Iva_General.HasValue) ? Math.Round(factura.Iva_General.Value / 1000000, 2) : factura.Iva_General;
-                 factura.Iva_Adicional = (factura.Iva_Adicional.HasValue) ? Math.Round(factura.Iva_Adicional.Value / 1000000, 2) : factura.Iva_Adicional;
+                factura.Iva_General = (factura.Iva_General.HasValue) ? Math.Round(factura.Iva_General.Value / 1000000, 2) : factura.Iva_General;
+                factura.Iva_Adicional = (factura.Iva_Adicional.HasValue) ? Math.Round(factura.Iva_Adicional.Value / 1000000, 2) : factura.Iva_Adicional;
 
-                 factura.ImpuestoRetenido_General = (factura.ImpuestoRetenido_General.HasValue) ? Math.Round(factura.ImpuestoRetenido_General.Value / 1000000, 2) : factura.ImpuestoRetenido_General;
-                 factura.Iva = (factura.Iva.HasValue) ? Math.Round(factura.Iva.Value / 1000000, 2) : factura.Iva;
-                 factura.TotalFactura = Math.Round(factura.TotalFactura / 1000000, 2);
+                factura.ImpuestoRetenido_General = (factura.ImpuestoRetenido_General.HasValue) ? Math.Round(factura.ImpuestoRetenido_General.Value / 1000000, 2) : factura.ImpuestoRetenido_General;
+                factura.Iva = (factura.Iva.HasValue) ? Math.Round(factura.Iva.Value / 1000000, 2) : factura.Iva;
+                factura.TotalFactura = Math.Round(factura.TotalFactura / 1000000, 2);
 
-                 factura.MontoSujetoARetencion = (factura.MontoSujetoARetencion.HasValue) ? Math.Round(factura.MontoSujetoARetencion.Value / 1000000, 2) : factura.MontoSujetoARetencion;
+                factura.MontoSujetoARetencion = (factura.MontoSujetoARetencion.HasValue) ? Math.Round(factura.MontoSujetoARetencion.Value / 1000000, 2) : factura.MontoSujetoARetencion;
 
-                 factura.ImpuestoRetenidoISLRAntesSustraendo = (factura.ImpuestoRetenidoISLRAntesSustraendo.HasValue) ? Math.Round(factura.ImpuestoRetenidoISLRAntesSustraendo.Value / 1000000, 2) : factura.ImpuestoRetenidoISLRAntesSustraendo;
-                 factura.ImpuestoRetenidoISLRSustraendo = (factura.ImpuestoRetenidoISLRSustraendo.HasValue) ? Math.Round(factura.ImpuestoRetenidoISLRSustraendo.Value / 1000000, 2) : factura.ImpuestoRetenidoISLRSustraendo;
-                 factura.ImpuestoRetenido_Reducido = (factura.ImpuestoRetenido_Reducido.HasValue) ? Math.Round(factura.ImpuestoRetenido_Reducido.Value / 1000000, 2) : factura.ImpuestoRetenido_Reducido;
-                 factura.ImpuestoRetenido_General = (factura.ImpuestoRetenido_General.HasValue) ? Math.Round(factura.ImpuestoRetenido_General.Value / 1000000, 2) : factura.ImpuestoRetenido_General;
-                 factura.ImpuestoRetenido_Adicional = (factura.ImpuestoRetenido_Adicional.HasValue) ? Math.Round(factura.ImpuestoRetenido_Adicional.Value / 1000000, 2) : factura.ImpuestoRetenido_Adicional;
+                factura.ImpuestoRetenidoISLRAntesSustraendo = (factura.ImpuestoRetenidoISLRAntesSustraendo.HasValue) ? Math.Round(factura.ImpuestoRetenidoISLRAntesSustraendo.Value / 1000000, 2) : factura.ImpuestoRetenidoISLRAntesSustraendo;
+                factura.ImpuestoRetenidoISLRSustraendo = (factura.ImpuestoRetenidoISLRSustraendo.HasValue) ? Math.Round(factura.ImpuestoRetenidoISLRSustraendo.Value / 1000000, 2) : factura.ImpuestoRetenidoISLRSustraendo;
+                factura.ImpuestoRetenido_Reducido = (factura.ImpuestoRetenido_Reducido.HasValue) ? Math.Round(factura.ImpuestoRetenido_Reducido.Value / 1000000, 2) : factura.ImpuestoRetenido_Reducido;
+                factura.ImpuestoRetenido_General = (factura.ImpuestoRetenido_General.HasValue) ? Math.Round(factura.ImpuestoRetenido_General.Value / 1000000, 2) : factura.ImpuestoRetenido_General;
+                factura.ImpuestoRetenido_Adicional = (factura.ImpuestoRetenido_Adicional.HasValue) ? Math.Round(factura.ImpuestoRetenido_Adicional.Value / 1000000, 2) : factura.ImpuestoRetenido_Adicional;
 
-                 factura.ImpuestoRetenido = (factura.ImpuestoRetenido.HasValue) ? Math.Round(factura.ImpuestoRetenido.Value / 1000000, 2) : factura.ImpuestoRetenido;
-                 
-                 factura.RetencionSobreIva = (factura.RetencionSobreIva.HasValue) ? Math.Round(factura.RetencionSobreIva.Value / 1000000, 2) : factura.RetencionSobreIva;
+                factura.ImpuestoRetenido = (factura.ImpuestoRetenido.HasValue) ? Math.Round(factura.ImpuestoRetenido.Value / 1000000, 2) : factura.ImpuestoRetenido;
 
-                 factura.ImpuestosVarios = (factura.ImpuestosVarios.HasValue) ? Math.Round(factura.ImpuestosVarios.Value / 1000000, 2) : factura.ImpuestosVarios;
-                 factura.RetencionesVarias = (factura.RetencionesVarias.HasValue) ? Math.Round(factura.RetencionesVarias.Value / 1000000, 2) : factura.RetencionesVarias;
+                factura.RetencionSobreIva = (factura.RetencionSobreIva.HasValue) ? Math.Round(factura.RetencionSobreIva.Value / 1000000, 2) : factura.RetencionSobreIva;
 
-                 factura.TotalAPagar = Math.Round(factura.TotalAPagar / 1000000, 2);
-                 factura.Anticipo = (factura.Anticipo.HasValue) ? Math.Round(factura.Anticipo.Value / 1000000, 2) : factura.Anticipo;
+                factura.ImpuestosVarios = (factura.ImpuestosVarios.HasValue) ? Math.Round(factura.ImpuestosVarios.Value / 1000000, 2) : factura.ImpuestosVarios;
+                factura.RetencionesVarias = (factura.RetencionesVarias.HasValue) ? Math.Round(factura.RetencionesVarias.Value / 1000000, 2) : factura.RetencionesVarias;
 
-                 factura.Saldo = Math.Round(factura.Saldo / 1000000, 2);
-                 factura.MontoPagado = (factura.MontoPagado.HasValue) ? Math.Round(factura.MontoPagado.Value / 1000000, 2) : factura.MontoPagado;
+                factura.TotalAPagar = Math.Round(factura.TotalAPagar / 1000000, 2);
+                factura.Anticipo = (factura.Anticipo.HasValue) ? Math.Round(factura.Anticipo.Value / 1000000, 2) : factura.Anticipo;
+
+                factura.Saldo = Math.Round(factura.Saldo / 1000000, 2);
+                factura.MontoPagado = (factura.MontoPagado.HasValue) ? Math.Round(factura.MontoPagado.Value / 1000000, 2) : factura.MontoPagado;
             }
         }
         catch (Exception ex)
@@ -1345,6 +1384,137 @@ private class Facturas_Object
                 message += "<br />" + ex.InnerException.Message;
 
             resultMessage = "Se producido un error al intentar ejecutar una operación en mongodb.<br />" +
+                               "El mensaje específico del error es:<br />" + message;
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool convertirFacturaAMonedaNacional(ContabSysNet_Web.ModelosDatos_EF.code_first.bancos.tTempWebReport_ConsultaFacturas factura, out string resultMessage)
+    {
+        // el usuario indicó que quería convertir facturas en moneda extranjera a montos en moneda nacional. 
+        // para hacerlo, usamos la tasa registrada en la factura 
+
+        resultMessage = "";
+
+        // nota: ya sabemos que la factura tiene una tasa; también sabemos que la factura está expresada en moneda extranjera y que
+        // el usuario quiere reconvertir 
+        decimal tasa = factura.Tasa.Value;
+
+        try
+        {
+            factura.MontoFacturaSinIva = factura.MontoFacturaSinIva * tasa;
+            factura.MontoFacturaConIva = factura.MontoFacturaConIva * tasa;
+            factura.ConvertidoSegunTasaFlag = true;
+
+            factura.MontoTotalFactura = factura.MontoFacturaSinIva.Value + factura.MontoFacturaConIva.Value;
+
+            switch (factura.TipoAlicuota)
+            {
+                case "R":
+                    factura.BaseImponible_Reducido = factura.BaseImponible_Reducido * tasa;
+                    factura.Iva_Reducido = factura.Iva_Reducido * tasa;
+   
+                    break;
+                case "G":
+                    factura.BaseImponible_General = factura.BaseImponible_General * tasa;
+                    factura.Iva_General = factura.Iva_General * tasa;
+ 
+                    break;
+                case "A":
+                    factura.BaseImponible_Adicional = factura.BaseImponible_Adicional * tasa;
+                    factura.Iva_Adicional = factura.Iva_Adicional * tasa;
+  
+                    break;
+            }
+                    
+            factura.ImpuestoRetenido_Reducido = factura.ImpuestoRetenido_Reducido.HasValue ? factura.ImpuestoRetenido_Reducido * tasa : 0;                   
+            factura.ImpuestoRetenido_General = factura.ImpuestoRetenido_General.HasValue ? factura.ImpuestoRetenido_General * tasa : 0;
+            factura.ImpuestoRetenido_Adicional = factura.ImpuestoRetenido_Adicional.HasValue ? factura.ImpuestoRetenido_Adicional * tasa : 0;
+
+            factura.Iva = factura.Iva * tasa;
+
+            factura.TotalFactura = factura.TotalFactura * tasa;
+
+            // datos que corresonden a la retención del islr ... NOTA: si existe una retención (islr) debemos leerla en Facturas_Impuestos ... 
+            factura.MontoSujetoARetencion = factura.MontoSujetoARetencion.HasValue ? factura.MontoSujetoARetencion * tasa : 0;
+            factura.ImpuestoRetenidoPorc = factura.ImpuestoRetenidoPorc.HasValue ? factura.ImpuestoRetenidoPorc * tasa : 0;
+            factura.ImpuestoRetenidoISLRAntesSustraendo = factura.ImpuestoRetenidoISLRAntesSustraendo.HasValue ? factura.ImpuestoRetenidoISLRAntesSustraendo * tasa : 0;
+            factura.ImpuestoRetenidoISLRSustraendo = factura.ImpuestoRetenidoISLRSustraendo.HasValue ? factura.ImpuestoRetenidoISLRSustraendo * tasa : 0;
+            factura.ImpuestoRetenido = factura.ImpuestoRetenido.HasValue ? factura.ImpuestoRetenido * tasa : 0;
+
+            factura.RetencionSobreIva = factura.RetencionSobreIva.HasValue ? factura.RetencionSobreIva * tasa : 0;
+
+            factura.ImpuestosVarios = factura.ImpuestosVarios.HasValue ? factura.ImpuestosVarios * tasa : 0;
+            factura.RetencionesVarias = factura.RetencionesVarias.HasValue ? factura.RetencionesVarias * tasa : 0;
+
+            factura.TotalAPagar = factura.TotalAPagar * tasa;
+            factura.Anticipo = factura.Anticipo.HasValue ? factura.Anticipo * tasa : 0;
+            factura.Saldo = factura.Saldo * tasa;
+
+            factura.MontoPagado = factura.MontoPagado.HasValue ? factura.MontoPagado * tasa : 0;
+
+            // =========================================================================================================
+            // ahora nos aseguramos que todos los montos contengan un máximo de 2 decimales 
+            factura.MontoFacturaSinIva = Math.Round(factura.MontoFacturaSinIva.Value, 2, MidpointRounding.AwayFromZero);
+            factura.MontoFacturaConIva = Math.Round(factura.MontoFacturaConIva.Value, 2, MidpointRounding.AwayFromZero);
+
+            factura.MontoTotalFactura = Math.Round(factura.MontoTotalFactura, 2, MidpointRounding.AwayFromZero);
+
+            switch (factura.TipoAlicuota)
+            {
+                case "R":
+                    factura.BaseImponible_Reducido = Math.Round(factura.BaseImponible_Reducido.Value, 2, MidpointRounding.AwayFromZero);
+                    factura.Iva_Reducido = Math.Round(factura.Iva_Reducido.Value, 2, MidpointRounding.AwayFromZero);
+
+                    break;
+                case "G":
+                    factura.BaseImponible_General = Math.Round(factura.BaseImponible_General.Value, 2, MidpointRounding.AwayFromZero);
+                    factura.Iva_General = Math.Round(factura.Iva_General.Value, 2, MidpointRounding.AwayFromZero);
+
+                    break;
+                case "A":
+                    factura.BaseImponible_Adicional = Math.Round(factura.BaseImponible_Adicional.Value, 2, MidpointRounding.AwayFromZero);
+                    factura.Iva_Adicional = Math.Round(factura.Iva_Adicional.Value, 2, MidpointRounding.AwayFromZero);
+
+                    break;
+            }
+
+            factura.ImpuestoRetenido_Reducido = Math.Round(factura.ImpuestoRetenido_Reducido.Value, 2, MidpointRounding.AwayFromZero);
+            factura.ImpuestoRetenido_General = Math.Round(factura.ImpuestoRetenido_General.Value, 2, MidpointRounding.AwayFromZero);
+            factura.ImpuestoRetenido_Adicional = Math.Round(factura.ImpuestoRetenido_Adicional.Value, 2, MidpointRounding.AwayFromZero);
+
+            factura.Iva = Math.Round(factura.Iva.Value, 2, MidpointRounding.AwayFromZero);
+
+            factura.TotalFactura = Math.Round(factura.TotalFactura, 2, MidpointRounding.AwayFromZero);
+
+            // datos que corresonden a la retención del islr ... NOTA: si existe una retención (islr) debemos leerla en Facturas_Impuestos ... 
+            factura.MontoSujetoARetencion = Math.Round(factura.MontoSujetoARetencion.Value, 2, MidpointRounding.AwayFromZero);
+            factura.ImpuestoRetenidoPorc = Math.Round(factura.ImpuestoRetenidoPorc.Value, 2, MidpointRounding.AwayFromZero);
+            factura.ImpuestoRetenidoISLRAntesSustraendo = Math.Round(factura.ImpuestoRetenidoISLRAntesSustraendo.Value, 2, MidpointRounding.AwayFromZero);
+            factura.ImpuestoRetenidoISLRSustraendo = Math.Round(factura.ImpuestoRetenidoISLRSustraendo.Value, 2, MidpointRounding.AwayFromZero);
+            factura.ImpuestoRetenido = Math.Round(factura.ImpuestoRetenido.Value, 2, MidpointRounding.AwayFromZero);
+
+            factura.RetencionSobreIva = Math.Round(factura.RetencionSobreIva.Value, 2, MidpointRounding.AwayFromZero);
+
+            factura.ImpuestosVarios = Math.Round(factura.ImpuestosVarios.Value, 2, MidpointRounding.AwayFromZero);
+            factura.RetencionesVarias = Math.Round(factura.RetencionesVarias.Value, 2, MidpointRounding.AwayFromZero);
+
+            factura.TotalAPagar = Math.Round(factura.TotalAPagar, 2, MidpointRounding.AwayFromZero);
+            factura.Anticipo = Math.Round(factura.Anticipo.Value, 2, MidpointRounding.AwayFromZero);
+            factura.Saldo = Math.Round(factura.Saldo, 2, MidpointRounding.AwayFromZero);
+
+            factura.MontoPagado = Math.Round(factura.MontoPagado.Value, 2, MidpointRounding.AwayFromZero);
+        }
+        catch (Exception ex)
+        {
+            string message = ex.Message;
+            if (ex.InnerException != null)
+                message += "<br />" + ex.InnerException.Message;
+
+            resultMessage = "Se producido un error al intentar convertir los montos en la fatura a moneda nacional.<br />" +
                                "El mensaje específico del error es:<br />" + message;
 
             return false;

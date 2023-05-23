@@ -4,7 +4,6 @@ namespace ContabSysNet_Web.ModelosDatos_EF.code_first.contab
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     public partial class Asientos
     {

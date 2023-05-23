@@ -88,7 +88,7 @@ public partial class Bancos_Facturas_Facturas_Filter : System.Web.UI.Page
         if (!string.IsNullOrEmpty(this.Sql_Proveedores_Nombre_String.Text))
         {
             this.Sql_Proveedores_Nombre_String.Text = this.Sql_Proveedores_Nombre_String.Text.Replace("*", "");
-            this.Sql_Proveedores_Nombre_String.Text = "*" + this.Sql_Proveedores_Nombre_String.Text.Trim() + "*"; 
+            this.Sql_Proveedores_Nombre_String.Text = "*" + this.Sql_Proveedores_Nombre_String.Text.Trim() + "*";
         }
 
         BuildSqlCriteria MyConstruirCriterioSql = new BuildSqlCriteria("E", "Sql_pg_Fecha_Date, Sql_FacturasImpuestos_FRecepcionRetencionISLR_Date, Sql_FacturasImpuestos_FRecepcionRetencionIVA_Date, Sql_FacturasImpuestos_ImpuestoRetenido_Numeric, Sql_FacturasImpuestos_RetencionSobreIva_Numeric");
@@ -229,6 +229,10 @@ public partial class Bancos_Facturas_Facturas_Filter : System.Web.UI.Page
         // finalmente inicializamos la sesion variable con el criterio que indicó el usuario 
         Session["FiltroForma_LeerTablasDeImpRet"] = criterio_otras_retenciones_impuestos != "(1 = 1)" ? criterio_otras_retenciones_impuestos : null;
         // -----------------------------------------------------------------------------------------------------------------------------------------------
+
+        // este criterio es usado para convertir los montos en moneda no nacional, según la tasa que el usuario indica en la factura 
+        Session["ConvertirMontosAMonedaNacional"] = this.ConvertirMontosAMonedaNacional_CheckBox.Checked;
+        Session["SeleccionarSoloFacturasConTasaRegistrada"] = this.SeleccionarSoloConTasaRegistrada_CheckBox.Checked;
 
         // -------------------------------------------------------------------------------------------
         // para guardar el contenido de los controles de la página para recuperar el state cuando 
