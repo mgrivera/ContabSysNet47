@@ -2225,6 +2225,8 @@
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff2" />
     <None Include="Properties\PublishProfiles\Arsa publish settings.pubxml" />
+    <None Include="Properties\PublishProfiles\Arys - Smarter.pubxml" />
+    <None Include="Properties\PublishProfiles\arysuser-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Geh Int - 2.pubxml" />
     <None Include="Properties\PublishProfiles\Geh Int - 3.pubxml" />
     <None Include="Properties\PublishProfiles\Geh Int.pubxml" />
@@ -2642,6 +2644,9 @@
     <Content Include="webAppSettings.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="webAppSettings.arys.cloud.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="webAppSettings.arsa.local.config">
       <SubType>Designer</SubType>
     </None>
@@ -2667,6 +2672,9 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="webAppSettings.GehInt.local">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WebConnectionString.arys.cloud.config">
       <SubType>Designer</SubType>
     </Content>
     <None Include="WebConnectionString.arsa.cloud.config">
