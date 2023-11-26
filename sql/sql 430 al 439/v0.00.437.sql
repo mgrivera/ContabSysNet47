@@ -1,7 +1,7 @@
 ﻿/*    
 	  Viernes, 2 de Agosto de 2.022  -   v0.00.437.sql 
 	  
-	  Tmp_tTempWebReport_ConsultaFacturas: agregamos la columna Tasa, para registrar la tasa que pueda tener la factura asociada 
+	  tTempWebReport_ConsultaFacturas: agregamos la columna Tasa, para registrar la tasa que pueda tener la factura asociada 
 	  Esta tabla se usa en la consulta de facturas desde ContabSysNet y con la tasa allí podemos convertir fácilmente las 
 	  cifras a la moneda local. 
 */

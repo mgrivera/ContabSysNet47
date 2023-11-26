@@ -57,25 +57,6 @@ GO
 COMMIT
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 BEGIN TRANSACTION
 SET QUOTED_IDENTIFIER ON
 SET ARITHABORT ON
