@@ -31,6 +31,7 @@ CREATE TABLE dbo.tmp_bancos_cuentasBancarias_edosCuenta
 	(
 	id int NOT NULL IDENTITY (1, 1),
 	cuentaBancaria int NOT NULL,
+	movimientoBancarioId int Null, 
 	numero smallint NOT NULL,
 	fecha datetime NOT NULL,
 	referencia bigint NOT NULL,
@@ -76,12 +77,15 @@ GO
 
 Create View dbo.v_bancos_cuentasBancarias_edosCuenta  As 
   
-Select t.id, cb.CuentaInterna as cuentaBancariaId, cb.CuentaBancaria as cuentaBancaria, 
+Select t.id, b.Nombre as bancoNombre, b.Abreviatura as bancoAbreviatura, b.NombreCorto as bancoNombreCorto, 
+cb.CuentaInterna as cuentaBancariaId, cb.CuentaBancaria as cuentaBancaria, 
 m.Moneda as monedaId, m.Descripcion as monedaDescripcion, m.Simbolo as monedaSimbolo, 
-t.numero, t.fecha, t.referencia, t.descripcion, t.debe, t.haber, t.saldo, t.usuario, 
+t.numero, t.movimientoBancarioId, t.fecha, t.referencia, t.descripcion, t.debe, t.haber, t.saldo, t.usuario, 
 c.Numero as ciaContabId, c.Nombre as ciaContabNombre, c.Abreviatura as ciaContabAbreviatura  
 From tmp_bancos_cuentasBancarias_edosCuenta t 
 Inner Join CuentasBancarias cb On t.cuentaBancaria = cb.CuentaInterna 
+Inner Join Agencias a On cb.Agencia = a.Agencia 
+Inner Join Bancos b On a.Banco = b.Banco 
 Inner Join Monedas m On cb.Moneda = m.Moneda 
 Inner Join Companias c On cb.Cia = c.Numero 
 
