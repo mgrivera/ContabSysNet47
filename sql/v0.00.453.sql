@@ -3,10 +3,11 @@
 	  
 	  Agregamos la columna UltMod a la tabla: CuentasContables 
 	  
+	  ==============================================================================================================
 	  Nota importante: ejecutar con cuidado (por partes?), pues elimina/crea muchas estructuras (constraints) 
 	  y mejor tener cuidado al ejecutarlo. 
+	  ==============================================================================================================
 */
-
 
 BEGIN TRANSACTION
 SET QUOTED_IDENTIFIER ON
