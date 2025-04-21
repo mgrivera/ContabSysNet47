@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ContabSysNet_Web</RootNamespace>
     <AssemblyName>ContabSysNet_Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <SilverlightApplicationList>
     </SilverlightApplicationList>
     <UseIISExpress>false</UseIISExpress>
@@ -2226,12 +2226,12 @@
     <Content Include="Content\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.woff2" />
     <None Include="Properties\PublishProfiles\Arsa publish settings.pubxml" />
     <None Include="Properties\PublishProfiles\Arys - Smarter.pubxml" />
-    <None Include="Properties\PublishProfiles\arysuser-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Geh - Smarter.pubxml" />
     <None Include="Properties\PublishProfiles\Geh Int - 2.pubxml" />
     <None Include="Properties\PublishProfiles\Geh Int - 3.pubxml" />
     <None Include="Properties\PublishProfiles\Geh Int.pubxml" />
+    <None Include="Properties\PublishProfiles\Geh Smarter 2.pubxml" />
     <None Include="Properties\PublishProfiles\Lockton Smarter asp.net Settings.pubxml" />
-    <None Include="Properties\PublishProfiles\manuelgr-001-site4 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Ris Solutions - 2.pubxml" />
     <None Include="Properties\PublishProfiles\Risk Solutions Settings.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
@@ -2656,6 +2656,9 @@
     <Content Include="webAppSettings.xl.local">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="webAppSettings.Geh.Smarter.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="webAppSettings.risk.local">
       <SubType>Designer</SubType>
     </None>
@@ -2683,6 +2686,9 @@
     <None Include="WebConnectionString.arsa.local.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="WebConnectionString.Geh.Smarter.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="WebConnectionString.smr.local.config">
       <SubType>Designer</SubType>
     </None>
@@ -3486,7 +3492,7 @@
     <Compile Include="ModelosDatos_EF\code_first\contab\Monedas.cs" />
     <Compile Include="ModelosDatos_EF\code_first\contab\ParametrosContab.cs" />
     <Compile Include="ModelosDatos_EF\code_first\contab\GruposContables.cs" />
-    <Compile Include="ModelosDatos_EF\Contab\dbContab_Contab.Designer.cs">
+    <Compile Include="ModelosDatos_EF\Contab\dbContab_Contab1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dbContab_Contab.edmx</DependentUpon>
@@ -3936,6 +3942,7 @@
     </EntityDeploy>
     <EntityDeploy Include="ModelosDatos_EF\Contab\dbContab_Contab.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbContab_Contab1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <EntityDeploy Include="ModelosDatos_EF\Bancos\BancosEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
