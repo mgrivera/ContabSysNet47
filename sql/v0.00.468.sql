@@ -2,6 +2,8 @@
 	  Miércoles, 23 de Julio de 2.025  -   v0.00.468.sql 
 	  
 	  Agregamos las tablas: TasasCambio y UnidadTributaria 
+	  (Nota: revisar si ya existen estas tablas. En algunos 
+	   casos, las agregamos en forma 'manual') 
 
 */
 
