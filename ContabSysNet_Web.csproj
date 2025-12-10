@@ -2778,9 +2778,6 @@
     <None Include="WebConnectionString.config.xl">
       <SubType>Designer</SubType>
     </None>
-    <None Include="WebConnectionString.config.lockton_smarterAspNet">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="WebConnectionString.config.gehInt">
       <SubType>Designer</SubType>
     </None>
