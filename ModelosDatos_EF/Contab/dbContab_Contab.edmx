@@ -2726,7 +2726,7 @@
         <EntityTypeShape EntityType="dbContab_Contab_NS.tTempWebReport_ConsultaComprobantesContables" Width="3.625" PointX="14.375" PointY="1" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_Asientos_Documentos_Links_Asientos" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_tTempWebReport_ConsultaComprobantesContables_Asientos" />
-        <EntityTypeShape EntityType="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos" Width="1.5" PointX="5.4715018186119861" PointY="11.448250030841795" />
+        <EntityTypeShape EntityType="dbContab_Contab_NS.Contab_ConsultaCuentasYMovimientos_Movimientos" Width="3" PointX="5.5" PointY="11.5" />
         <EntityTypeShape EntityType="dbContab_Contab_NS.dAsiento" Width="1.5" PointX="0.62972369074342938" PointY="31.352705791291179" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_dAsientos_Asientos" />
         <AssociationConnector Association="dbContab_Contab_NS.FK_dAsientos_CentrosCosto" />

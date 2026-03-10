@@ -1,6 +1,7 @@
 ﻿<appSettings>
-  <add key="contabM_address" value="http://localhost:3020" />
-  <add key="contabm_mongodb_connectionString" value="mongodb://localhost:27017/contabm_geh" />
-  <add key="contabM_mongodb_name" value="contabm_geh" />
-  <add key="ValidationSettings:UnobtrusiveValidationMode" value="None" />
+	<add key="contabM_address" value="http://contabmprc.meteorapp.com/" />
+	<add key="contab_blazor" value="http://scrwebmarsaprc-001-site5.ctempurl.com/" />
+	<add key="contabm_mongodb_connectionString" value="mongodb+srv://scrwebm_admin:isabel@cluster0-lwzxe.mongodb.net/contabm?retryWrites=true&amp;w=majority" />
+	<add key="contabM_mongodb_name" value="contabm" />
+	<add key="ValidationSettings:UnobtrusiveValidationMode" value="None" />
 </appSettings>

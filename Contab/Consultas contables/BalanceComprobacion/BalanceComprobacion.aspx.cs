@@ -40,6 +40,10 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             public string Nivel4 { get; set; }
             public string Nivel5 { get; set; }
             public string Nivel6 { get; set; }
+            public string Nivel7 { get; set; }
+            public string Nivel8 { get; set; }
+            public string Nivel9 { get; set; }
+            public string Nivel10 { get; set; }
 
             public byte NumNiveles { get; set; }
         }
@@ -56,6 +60,10 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
             public string nivel4 { get; set; }
             public string nivel5 { get; set; }
             public string nivel6 { get; set; }
+            public string nivel7 { get; set; }
+            public string nivel8 { get; set; }
+            public string nivel9 { get; set; }
+            public string nivel10 { get; set; }
             public decimal SaldoAnterior { get; set; }
             public decimal Debe { get; set; }
             public decimal Haber { get; set; }
@@ -415,12 +423,20 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                 "CuentasContables.Cia As CiaContab, Companias.NombreCorto As NombreCiaContab, " +
                 "CuentaEditada As CuentaContableEditada, Monedas.Moneda, Monedas.Descripcion As " +
                 "NombreMoneda, " + "Monedas.Simbolo As SimboloMoneda, " +
-                "Case NumNiveles When 2 Then Nivel1 When 3 Then Nivel1 + Nivel2 When 4 Then Nivel1 + " +
-                "Nivel2 + Nivel3 " + "When 5 Then Nivel1 + Nivel2 + Nivel3 + Nivel4 When 6 Then Nivel1 + " +
-                "Nivel2 + Nivel3 + Nivel4 + Nivel5 " +
-                "When 7 Then Nivel1 + Nivel2 + Nivel3 + Nivel4 + Nivel5 + Nivel6 End AS " +
-                "CuentaContable_NivelPrevio, " + 
-                "Nivel1, Nivel2, Nivel3, Nivel4, Nivel5, Nivel6, NumNiveles " +
+
+                "Case NumNiveles " +
+                "When 2 Then Nivel1 " +
+                "When 3 Then Nivel1 + Nivel2 " +
+                "When 4 Then Nivel1 + Nivel2 + Nivel3 " + 
+                "When 5 Then Nivel1 + Nivel2 + Nivel3 + Nivel4 " +
+                "When 6 Then Nivel1 + Nivel2 + Nivel3 + Nivel4 + Nivel5 " +
+                "When 7 Then Nivel1 + Nivel2 + Nivel3 + Nivel4 + Nivel5 + Nivel6 " +
+                "When 8 Then Nivel1 + Nivel2 + Nivel3 + Nivel4 + Nivel5 + Nivel6 + Nivel7 " +
+                "When 9 Then Nivel1 + Nivel2 + Nivel3 + Nivel4 + Nivel5 + Nivel6 + Nivel7 + Nivel8 " +
+                "When 10 Then Nivel1 + Nivel2 + Nivel3 + Nivel4 + Nivel5 + Nivel6 + Nivel7 + Nivel8 + Nivel9 " +
+                "End AS CuentaContable_NivelPrevio, " +
+
+                "Nivel1, Nivel2, Nivel3, Nivel4, Nivel5, Nivel6, Nivel7, Nivel8, Nivel9, Nivel10, NumNiveles " +
                 "From CuentasContables " +
                 "Inner Join Companias On CuentasContables.Cia = Companias.Numero " +
                 "Inner Join SaldosContables On CuentasContables.ID = SaldosContables.CuentaContableID " +
@@ -504,7 +520,37 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                         MyBalanceComprobacion_Record.nivel4 = MyBalanceComprobacion_Record.nivel3 + MyComprobanteContable_Query.Nivel4;
                         MyBalanceComprobacion_Record.nivel5 = MyBalanceComprobacion_Record.nivel4 + MyComprobanteContable_Query.Nivel5;
                         MyBalanceComprobacion_Record.nivel6 = MyBalanceComprobacion_Record.nivel5 + MyComprobanteContable_Query.Nivel6;
-                        break; 
+                        break;
+                    case 8:
+                        MyBalanceComprobacion_Record.nivel1 = MyComprobanteContable_Query.Nivel1;
+                        MyBalanceComprobacion_Record.nivel2 = MyBalanceComprobacion_Record.nivel1 + MyComprobanteContable_Query.Nivel2;
+                        MyBalanceComprobacion_Record.nivel3 = MyBalanceComprobacion_Record.nivel2 + MyComprobanteContable_Query.Nivel3;
+                        MyBalanceComprobacion_Record.nivel4 = MyBalanceComprobacion_Record.nivel3 + MyComprobanteContable_Query.Nivel4;
+                        MyBalanceComprobacion_Record.nivel5 = MyBalanceComprobacion_Record.nivel4 + MyComprobanteContable_Query.Nivel5;
+                        MyBalanceComprobacion_Record.nivel6 = MyBalanceComprobacion_Record.nivel5 + MyComprobanteContable_Query.Nivel6;
+                        MyBalanceComprobacion_Record.nivel7 = MyBalanceComprobacion_Record.nivel6 + MyComprobanteContable_Query.Nivel7;
+                        break;
+                    case 9:
+                        MyBalanceComprobacion_Record.nivel1 = MyComprobanteContable_Query.Nivel1;
+                        MyBalanceComprobacion_Record.nivel2 = MyBalanceComprobacion_Record.nivel1 + MyComprobanteContable_Query.Nivel2;
+                        MyBalanceComprobacion_Record.nivel3 = MyBalanceComprobacion_Record.nivel2 + MyComprobanteContable_Query.Nivel3;
+                        MyBalanceComprobacion_Record.nivel4 = MyBalanceComprobacion_Record.nivel3 + MyComprobanteContable_Query.Nivel4;
+                        MyBalanceComprobacion_Record.nivel5 = MyBalanceComprobacion_Record.nivel4 + MyComprobanteContable_Query.Nivel5;
+                        MyBalanceComprobacion_Record.nivel6 = MyBalanceComprobacion_Record.nivel5 + MyComprobanteContable_Query.Nivel6;
+                        MyBalanceComprobacion_Record.nivel7 = MyBalanceComprobacion_Record.nivel6 + MyComprobanteContable_Query.Nivel7;
+                        MyBalanceComprobacion_Record.nivel8 = MyBalanceComprobacion_Record.nivel7 + MyComprobanteContable_Query.Nivel8;
+                        break;
+                    case 10:
+                        MyBalanceComprobacion_Record.nivel1 = MyComprobanteContable_Query.Nivel1;
+                        MyBalanceComprobacion_Record.nivel2 = MyBalanceComprobacion_Record.nivel1 + MyComprobanteContable_Query.Nivel2;
+                        MyBalanceComprobacion_Record.nivel3 = MyBalanceComprobacion_Record.nivel2 + MyComprobanteContable_Query.Nivel3;
+                        MyBalanceComprobacion_Record.nivel4 = MyBalanceComprobacion_Record.nivel3 + MyComprobanteContable_Query.Nivel4;
+                        MyBalanceComprobacion_Record.nivel5 = MyBalanceComprobacion_Record.nivel4 + MyComprobanteContable_Query.Nivel5;
+                        MyBalanceComprobacion_Record.nivel6 = MyBalanceComprobacion_Record.nivel5 + MyComprobanteContable_Query.Nivel6;
+                        MyBalanceComprobacion_Record.nivel7 = MyBalanceComprobacion_Record.nivel6 + MyComprobanteContable_Query.Nivel7;
+                        MyBalanceComprobacion_Record.nivel8 = MyBalanceComprobacion_Record.nivel7 + MyComprobanteContable_Query.Nivel8;
+                        MyBalanceComprobacion_Record.nivel9 = MyBalanceComprobacion_Record.nivel8 + MyComprobanteContable_Query.Nivel9;
+                        break;
                 }
              
                 MyBalanceComprobacion_Lista.Add(MyBalanceComprobacion_Record);
@@ -647,7 +693,23 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
 
                 if (item.nivel6 != null)
                     if (listaCuentasYNombres.Where(c => c.cuenta == item.nivel6).Count() > 0)
-                        item.nivel6 += " - " + listaCuentasYNombres.Where(c => c.cuenta == item.nivel6).First().descripcion; 
+                        item.nivel6 += " - " + listaCuentasYNombres.Where(c => c.cuenta == item.nivel6).First().descripcion;
+
+                if (item.nivel7 != null)
+                    if (listaCuentasYNombres.Where(c => c.cuenta == item.nivel7).Count() > 0)
+                        item.nivel7 += " - " + listaCuentasYNombres.Where(c => c.cuenta == item.nivel7).First().descripcion;
+
+                if (item.nivel8 != null)
+                    if (listaCuentasYNombres.Where(c => c.cuenta == item.nivel8).Count() > 0)
+                        item.nivel8 += " - " + listaCuentasYNombres.Where(c => c.cuenta == item.nivel8).First().descripcion;
+
+                if (item.nivel9 != null)
+                    if (listaCuentasYNombres.Where(c => c.cuenta == item.nivel9).Count() > 0)
+                        item.nivel9 += " - " + listaCuentasYNombres.Where(c => c.cuenta == item.nivel9).First().descripcion;
+
+                if (item.nivel10 != null)
+                    if (listaCuentasYNombres.Where(c => c.cuenta == item.nivel10).Count() > 0)
+                        item.nivel10 += " - " + listaCuentasYNombres.Where(c => c.cuenta == item.nivel10).First().descripcion;
             }
 
             // agregamos el contenido de la lista a la tabla 
@@ -661,12 +723,14 @@ namespace ContabSysNet_Web.Contab.Consultas_contables.BalanceComprobacion
                     Moneda = item.Moneda, 
                     CuentaContable_NivelPrevio = item.NivelPrevioCuentaContable,
                     CuentaContable_NivelPrevio_Descripcion = item.NivelPrevioCuentaContable_Nombre,
+
                     nivel1 = item.nivel1,
                     nivel2 = item.nivel2,
                     nivel3 = item.nivel3,
                     nivel4 = item.nivel4,
                     nivel5 = item.nivel5,
-                    nivel6 = item.nivel6, 
+                    nivel6 = item.nivel6,
+
                     SaldoAnterior = item.SaldoAnterior,
                     Debe = item.Debe,
                     Haber = item.Haber,
