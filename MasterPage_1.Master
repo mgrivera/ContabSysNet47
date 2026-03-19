@@ -195,7 +195,7 @@
     <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>--%>
 
-    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+    <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Scripts>
          <%--   <asp:ScriptReference Name="jquery" Path="~/Scripts/jquery/jquery-1.10.2.js"/>
             <asp:ScriptReference Path="~/Scripts/jquery/jquery-ui-1.10.4.min.js"/>
@@ -204,7 +204,7 @@
         <Services>
             <asp:ServiceReference Path="~/MostrarProgreso_1.asmx" />
         </Services>
-    </asp:ToolkitScriptManager>
+    </asp:ScriptManager>
 
      <div id="header" style="border-bottom-style: solid; border-bottom: 1px #36c; background-color: #d5ddf3; padding-left: 10px; padding-right: 10px; ">
             <table style="width: 100%;">

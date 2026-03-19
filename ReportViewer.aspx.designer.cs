@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ContabSysNetWeb {
-    
-    
-    public partial class ReportViewer {
-        
+namespace ContabSysNetWeb
+{
+
+
+    public partial class ReportViewer
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// ErrMessage_Cell control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableCell ErrMessage_Cell;
-        
+
         /// <summary>
         /// ReportViewer1 control.
         /// </summary>

@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ContabSysNetWeb {
-    
-    
-    public partial class MasterPage_Simple_WithBootStrap {
-        
+namespace ContabSysNetWeb
+{
+
+
+    public partial class MasterPage_Simple_WithBootStrap
+    {
+
         /// <summary>
         /// head control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
-        
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// ToolkitScriptManager1 control.
         /// </summary>
@@ -37,8 +39,8 @@ namespace ContabSysNetWeb {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ToolkitScriptManager ToolkitScriptManager1;
-        
+        protected global::System.Web.UI.ScriptManager ToolkitScriptManager1;
+
         /// <summary>
         /// PageTitle_TableCell control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PageTitle_TableCell;
-        
+
         /// <summary>
         /// UpdateProgress1 control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// ContentPlaceHolder1 control.
         /// </summary>

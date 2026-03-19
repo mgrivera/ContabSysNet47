@@ -22,8 +22,8 @@
     <div class="container">
         <form id="form1" runat="server" method="post" enctype="multipart/form-data">
 
-            <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
-            </asp:ToolkitScriptManager>
+            <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
+            </asp:ScriptManager>
 
             <div style="text-align: center;">
                 <!-- 

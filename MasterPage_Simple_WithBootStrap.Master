@@ -29,8 +29,8 @@
 <body>
     <form id="form1" runat="server">
     
-        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
-        </asp:ToolkitScriptManager>
+        <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
+        </asp:ScriptManager>
 
         <div style="padding: 15px; text-align: center; ">
             <!-- nótese como ajustamos el div (que sigue) al contenido usando 'display: inline-block'; 

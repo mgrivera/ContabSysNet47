@@ -24,8 +24,8 @@
         <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>--%>
 
-        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
-        </asp:ToolkitScriptManager>
+        <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
+        </asp:ScriptManager>
 
         <div style="text-align:center; ">
             <table style="border: 1px solid #A2A2A2" >

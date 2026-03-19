@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ContabSysNetWeb {
-    
-    
-    public partial class MasterPage_1 {
-        
+namespace ContabSysNetWeb
+{
+
+
+    public partial class MasterPage_1
+    {
+
         /// <summary>
         /// Title1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTitle Title1;
-        
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// ToolkitScriptManager1 control.
         /// </summary>
@@ -37,8 +39,8 @@ namespace ContabSysNetWeb {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ToolkitScriptManager ToolkitScriptManager1;
-        
+        protected global::System.Web.UI.ScriptManager ToolkitScriptManager1;
+
         /// <summary>
         /// AppName_Span control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl AppName_Span;
-        
+
         /// <summary>
         /// PageTitle_TableCell control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PageTitle_TableCell;
-        
+
         /// <summary>
         /// PageSubTitle_Span control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PageSubTitle_Span;
-        
+
         /// <summary>
         /// UpdateProgress1 control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// A1 control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
-        
+
         /// <summary>
         /// Img2 control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage Img2;
-        
+
         /// <summary>
         /// Img3 control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage Img3;
-        
+
         /// <summary>
         /// Help_HyperLink control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Help_HyperLink;
-        
+
         /// <summary>
         /// Img1 control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage Img1;
-        
+
         /// <summary>
         /// PanelCentral_ContentPlaceHolder control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace ContabSysNetWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder PanelCentral_ContentPlaceHolder;
-        
+
         /// <summary>
         /// Footer_ContentPlaceHolder control.
         /// </summary>

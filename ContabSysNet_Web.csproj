@@ -56,8 +56,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit">
-      <HintPath>..\..\Ajax Control Toolkit Net4\AjaxControlToolkit.dll</HintPath>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="ClosedXML, Version=0.75.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -212,16 +212,16 @@
       <HintPath>packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.DomainServices.EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.ServiceModel.DomainServices.Server, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel.DomainServices.EntityFramework">
+      <HintPath>_Dependencies\System.ServiceModel.DomainServices.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.DomainServices.Hosting">
+      <HintPath>_Dependencies\System.ServiceModel.DomainServices.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.DomainServices.Server">
+      <HintPath>_Dependencies\System.ServiceModel.DomainServices.Server.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Text.Encoding.CodePages, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Text.Encoding.CodePages.5.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
@@ -2156,6 +2156,7 @@
     <Content Include="Areas\CajaChica\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CajaChica\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\CajaChica\Views\ReposicionesCajaChica\Index_old.cshtml" />
+    <None Include="Properties\PublishProfiles\Publish to folder.pubxml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -2754,7 +2755,10 @@
     <None Include="webAppSettings.risk">
       <SubType>Designer</SubType>
     </None>
-    <None Include="webAppSettings.smr.local.config">
+    <Content Include="webAppSettings.Smr.Smarter.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="webAppSettings.Smr.local.config">
       <SubType>Designer</SubType>
     </None>
     <Content Include="webAppSettings.GehInt.local">
@@ -2772,7 +2776,10 @@
     <Content Include="WebConnectionString.Geh.Smarter.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="WebConnectionString.smr.local.config">
+    <Content Include="WebConnectionString.Smr.Smarter.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="WebConnectionString.Smr.local.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="WebConnectionString.config.xl">
@@ -3976,6 +3983,7 @@
     <Folder Include="Pictures\GEH\" />
     <Folder Include="Scripts\BackUp\" />
     <Folder Include="Temp\Uploaded_Catalogos\" />
+    <Folder Include="_Dependencies\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
